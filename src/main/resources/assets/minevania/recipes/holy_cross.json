@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+          [
+            "ILI",
+            "LEL",
+            "ILI"
+          ],
+
+  "key":
+  {
+    "I":
+    {
+      "item": "minecraft:iron_ingot"
+    },
+
+    "L":
+    {
+      "item": "minecraft:dye",
+      "data": 4
+    },
+    "E":
+    {
+      "item": "minecraft:emerald"
+    }
+  },
+
+  "result":
+  {
+    "item": "minevania:holy_cross",
+    "count": 1
+  }
+}

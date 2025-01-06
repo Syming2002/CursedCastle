@@ -1,0 +1,6 @@
+{
+  "parent": "minevania:item/bullet_soul",
+  "textures": {
+    "layer0": "minevania:items/souls/bullets/bullet_soul.zombie_soul"
+  }
+}

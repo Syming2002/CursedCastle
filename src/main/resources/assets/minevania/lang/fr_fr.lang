@@ -1,0 +1,164 @@
+# Armors
+
+item.dracula_tunic.name=Tunique de Dracula
+
+item.juste_belmont_boots.name=Bottes de Juste Belmont
+item.juste_belmont_chest.name=Plastron de Juste Belmont
+item.juste_belmont_leggings.name=Pantalon de Juste Belmont
+
+item.richter_belmont_boots.name=Bottes de Richter Belmont
+item.richter_belmont_chest.name=Plastron de Richter Belmont
+item.richter_belmont_leggings.name=Pantalon de Richter Belmont
+
+item.simon_belmont_boots.name=Bottes de Simon Belmont
+item.simon_belmont_chest.name=Plastron de Simon Belmont
+item.simon_belmont_leggings.name=Pantalon de Simon Belmont
+
+# Attachments
+
+item.crushing_stone_attachment.name=Accessoire de Pierre Concasseuse
+item.steel_attachment.name=Accessoire d'Acier
+item.platinum_attachment.name=Accessoire de Platine
+item.energy_circle_attachment.name=Accessoire de Cercle d'Énergie
+item.bullet_attachment.name=Accessoire de Balle
+item.red_stone_attachment.name=Accessoire de Pierre Rouge
+item.blue_stone_attachment.name=Accessoire de Pierre Bleue
+item.yellow_stone_attachment.name=Accessoire de Pierre Jaune
+item.green_stone_attachment.name=Accessoire de Pierre Verte
+
+# Bees
+
+for.bees.species.zombie=Zombie
+for.bees.species.skeleton=Squelette
+for.bees.species.frozen_shade=Ombre Glacée
+for.bees.species.heat_shade=Ombre Brûlante
+for.bees.species.vampire=Vampire
+for.bees.species.dracula=Dracula
+
+# Blocks
+
+minevania.dracula_castle_chiseled.name=Pierre sculptée du château de Dracula
+minevania.dracula_castle_cracked.name=Pierre taillée du château de Dracula
+minevania.dracula_castle_default.name=Pierre taillée du château de Dracula
+
+
+tile.blood_fluid.name=Sang
+tile.dracula_castle_cobblestone.name=Pierres du château de Dracula
+tile.dracula_castle_stone.name=Roche du château de Dracula
+tile.dracula_castle_stonebrick_slab_double.name=Double dalle en pierre taillée du château de Dracula
+tile.dracula_castle_stonebrick_slab_half.name=Demi-dalle en pierre taillée du château de Dracula
+tile.dracula_castle_stonebrick_stairs.name=Escaliers en pierre taillée du château de Dracula
+tile.dracula_castle_stonebrick_wall.name=Mur en pierre taillée du château de Dracula
+tile.holy_water_fluid.name=Eau Bénite
+
+# Bullet Souls
+
+item.bullet_soul.axe_armor_soul.name=Âme d'Armure à la Hache
+item.bullet_soul.skeleton_soul.name=Âme de Squelette
+item.bullet_soul.zombie_soul.name=Âme de Zombie
+
+# Combs
+
+item.cc.comb.rotten.name=Alvéole Putréfiée
+item.cc.comb.bone.name=Alvéole Osseuse
+item.cc.comb.blood.name=Alvéole Sanguine
+item.cc.comb.frozen.name=Alvéole Glacée
+item.cc.comb.warmed.name=Alvéole Brûlante
+
+# Creative Tabs
+
+itemGroup.minevania=Minevania
+
+# Drops
+
+item.cc.honey_drop.blood.name=Goutte de Sang
+
+# Entity
+
+entity.aggressive_bat.name=Chauve-souris Aggressive
+entity.blood_skeleton.name=Squelette de Sang
+entity.crucifix.name=Crucifix
+entity.dracula.name=Dracula
+entity.dracula_second_form.name=Dracula Seconde Forme
+entity.flea_man.name=Homme Puce
+entity.friendly_bat.name=Chauve-souris Amicale
+entity.friendly_zombie.name=Zombie Amicale
+entity.frozen_shade.name=Ombre Glacée
+entity.grim_reaper.name=La Faucheuse
+entity.heat_shade.name=Ombre Brûlante
+entity.ice_blade.name=Lame de Glace
+entity.medusa.name=Méduse
+entity.medusa_snake.name=Serpent de Méduse
+entity.Villager.high_priest=Grand Prêtre
+entity.rusalka.name=Rusalka
+entity.zephyr.name=Zephyr
+
+# Fluids
+
+fluid.blood_fluid=Sang
+fluid.holy_water_fluid=Eau Bénite
+
+# Guardian Souls
+
+item.guardian_soul.bat_soul.name=Âme de Chauve-souris
+
+# Items
+
+item.oak_crucifix.name=Crucifix en Chêne
+item.spruce_crucifix.name=Crucifix en Sapin
+item.birch_crucifix.name=Crucifix en Bouleau
+item.jungle_crucifix.name=Crucifix en Acajou
+item.acacia_crucifix.name=Crucifix en Acacia
+item.dark_oak_crucifix.name=Crucifix en Chêne Sombre
+item.death_scythe.name=Faux de la Mort
+
+# Key binds
+
+key.minevania.bullet_soul_keybind=Utiliser les Âmes De Type Munition
+key.minevania.guardian_soul_keybind=Utiliser les Âmes De Type Garde
+
+# Projectiles
+
+item.throwing_bone.name=Os Jetable
+item.scythe_projectile.name=Faux
+
+# Sub Weapons
+
+item.wooden_dagger.name=Poignard en Bois
+item.stone_dagger.name=Poignard en Pierre
+item.iron_dagger.name=Poignard en Fer
+item.golden_dagger.name=Poignard en Or
+item.diamond_dagger.name=Poignard en Diamant
+item.holy_bible.name=Bible
+item.wooden_holy_cross.name=Croix en Bois
+item.stone_holy_cross.name=Croix en Pierre
+item.iron_holy_cross.name=Croix en Fer
+item.golden_holy_cross.name=Croix en Or
+item.diamond_holy_cross.name=Croix en Diamant
+item.holy_water.name=Eau Bénite
+item.wooden_throwing_axe.name=Hache Lançable en Bois
+item.stone_throwing_axe.name=Hache Lançable en Pierre
+item.iron_throwing_axe.name=Hache Lançable en Fer
+item.golden_throwing_axe.name=Hache Lançable en Or
+item.diamond_throwing_axe.name=Hache Lançable en Diamant
+
+# Whips
+
+item.leather_whip.name=Fouet en Cuir
+item.steel_whip.name=Fouet en Acier
+item.rose_stem_whip.name=Fouet en Tige de Rose
+item.medusa_whip.name=Fouet de Méduse
+item.nebula.name=Nebula
+item.flame_whip.name=Fouet en Feu
+item.jet_black_whip.name=Fouet en Jais Noir
+item.undead_killer.name=Tueur de Mort-vivant
+item.vampire_killer.name=Tueur de Vampire
+item.vampire_killer_crushing_stone_attachment.name=Tueur de Vampire de Pierre Concasseuse
+item.vampire_killer_steel_attachment.name=Tueur de Vampire d'Acier
+item.vampire_killer_platinum_attachment.name=Tueur de Vampire de Platine
+item.vampire_killer_energy_circle_attachment.name=Tueur de Vampire de Cercle d'Énrgie
+item.vampire_killer_bullet_attachment.name=Tueur de Vampire de Balle
+item.vampire_killer_red_stone_attachment.name=Tueur de Vampire de Pierre Rouge
+item.vampire_killer_blue_stone_attachment.name=Tueur de Vampire de Pierre Bleue
+item.vampire_killer_yellow_stone_attachment.name=Tueur de Vampire de Pierre Jaune
+item.vampire_killer_green_stone_attachment.name=Tueur de Vampire de Pierre Verte

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":
+  [
+    {
+      "item": "minevania:vampire_killer_steel_attachment"
+    }
+  ],
+
+  "result":
+  {
+    "item": "minevania:steel_attachment",
+    "count": 1
+  }
+}

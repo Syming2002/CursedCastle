@@ -1,8 +1,8 @@
 package com.syming.minevania;
 
-import com.syming.castlevaniacraft.proxy.CommonProxy;
-import com.syming.castlevaniacraft.util.CCReferences;
-import com.syming.castlevaniacraft.util.handlers.RegistryHandler;
+import com.syming.minevania.proxy.CommonProxy;
+import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.handlers.RegistryHandler;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -23,7 +23,7 @@ public class MinevaniaMod {
     }
 
     @Mod.Instance
-    public static com.syming.castlevaniacraft.MinevaniaMod instance;
+    public static com.syming.minevania.MinevaniaMod instance;
 
     @SidedProxy(clientSide = CCReferences.CLIENT_PROXY, serverSide = CCReferences.COMMON_PROXY)
     public static CommonProxy proxy;

@@ -1,0 +1,26 @@
+package com.syming.minevania.block.draculacastlestone;
+
+import com.syming.minevania.init.CCBlock;
+import com.syming.minevania.item.CCItem;
+import com.syming.minevania.tab.CCTabs;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemBlock;
+
+public class BlockDraculaCastleCobblestone extends Block {
+    public BlockDraculaCastleCobblestone(String name) {
+        super(Material.ROCK, MapColor.BLACK);
+        this.setRegistryName(name);
+        this.setTranslationKey(name);
+
+        this.setCreativeTab(CCTabs.CREATIVE_TAB);
+        this.setHardness(2.5F);
+        this.setResistance(12.0F);
+        this.setSoundType(SoundType.STONE);
+
+        CCBlock.BLOCKS.add(this);
+        CCItem.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+    }
+}

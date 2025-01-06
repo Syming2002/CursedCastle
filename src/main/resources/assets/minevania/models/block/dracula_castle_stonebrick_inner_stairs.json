@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "minevania:blocks/dracula_castle_stonebrick_default",
+        "top": "minevania:blocks/dracula_castle_stonebrick_default",
+        "side": "minevania:blocks/dracula_castle_stonebrick_default"
+    }
+}

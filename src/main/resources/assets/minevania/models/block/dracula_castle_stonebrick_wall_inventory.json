@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_inventory",
+    "textures": {
+        "wall": "minevania:blocks/dracula_castle_stonebrick_default"
+    }
+}

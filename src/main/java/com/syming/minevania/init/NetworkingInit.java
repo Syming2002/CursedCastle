@@ -1,0 +1,27 @@
+//package com.syming.minevania.init;
+//
+//import com.syming.minevania.networking.MessageExtendedReachAttack;
+//import com.syming.minevania.networking.PacketOpenNormalInventory;
+//import com.syming.minevania.utils.CCReferences;
+//import net.minecraftforge.fml.common.network.NetworkRegistry;
+//import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+//import net.minecraftforge.fml.relauncher.Side;
+//
+//public class NetworkingInit {
+//
+//    public static final String NETWORK_CHANNEL_NAME = CCReferences.MODID;
+//    public static SimpleNetworkWrapper network;
+//
+//    public static void registerSimpleNetworking()
+//    {
+//        // DEBUG
+//        System.out.println("Registering simple networking");
+//        network = NetworkRegistry.INSTANCE.newSimpleChannel(NETWORK_CHANNEL_NAME);
+//
+//        int packetId = 0;
+//        network.registerMessage(MessageExtendedReachAttack.Handler.class, MessageExtendedReachAttack.class, packetId++, Side.SERVER);
+//        network.registerMessage(PacketOpenNormalInventory.class, PacketOpenNormalInventory.class, packetId++, Side.SERVER);
+//
+//    }
+//
+//}

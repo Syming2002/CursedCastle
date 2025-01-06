@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "minevania:dracula_castle_stone" },
+            { "model": "minevania:dracula_castle_stone_mirrored" },
+            { "model": "minevania:dracula_castle_stone", "y": 180 },
+            { "model": "minevania:dracula_castle_stone_mirrored", "y": 180 }
+        ]
+    }
+}
