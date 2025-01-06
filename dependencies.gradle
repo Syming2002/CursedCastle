@@ -39,4 +39,21 @@
  */
 dependencies {
 
+    implementation rfg.deobf("curse.maven:attributefix-280510:4427962")
+    implementation rfg.deobf("curse.maven:bubbles-a-baubles-fork-995393:5719448")
+    implementation rfg.deobf("curse.maven:better-advancements-272515:2685984")
+    implementation rfg.deobf("curse.maven:codechicken-lib-1-8-242818:2779848")
+    api("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.684")
+    implementation rfg.deobf("curse.maven:forestry-59751:2918418")
+    implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5519022")
+    implementation rfg.deobf("curse.maven:jei-bees-248370:2490058")
+//    implementation rfg.deobf("curse.maven:mantle-74924:2713386")
+    implementation rfg.deobf("curse.maven:beebetteratbees-244516:2627215")
+    implementation rfg.deobf("curse.maven:llibrary-243298:2504999")
+//    implementation rfg.deobf("curse.maven:journeymap-32274:5045718")
+    implementation rfg.deobf("curse.maven:just-enough-resources-jer-240630:4440935")
+    implementation rfg.deobf("curse.maven:mo-villages-243205:2484281")
+//    implementation rfg.deobf("curse.maven:tinkers-construct-74072:2902483")
+    implementation rfg.deobf("curse.maven:xaeros-minimap-263420:5262340")
+
 }
