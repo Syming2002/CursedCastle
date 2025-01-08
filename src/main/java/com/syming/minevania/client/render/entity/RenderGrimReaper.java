@@ -2,7 +2,7 @@ package com.syming.minevania.client.render.entity;
 
 import com.syming.minevania.client.models.entity.ModelGrimReaper;
 import com.syming.minevania.entity.mobs.boss.EntityGrimReaper;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RenderGrimReaper extends RenderLiving<EntityGrimReaper> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/grim_reaper.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/grim_reaper.png");
 
     public RenderGrimReaper(RenderManager renderManager) {
         super(renderManager, new ModelGrimReaper(), 0.5F);

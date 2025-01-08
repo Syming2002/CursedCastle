@@ -1,7 +1,7 @@
 package com.syming.minevania.client.render.entity;
 
 import com.syming.minevania.entity.projectiles.subweapons.EntityThrowingAxe;
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.item.projectiles.subweapons.throwingaxe.ItemThrowingAxe;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
@@ -54,15 +54,15 @@ public class RenderThrowingAxe extends Render<EntityThrowingAxe> {
         if (stack.getItem() instanceof ItemThrowingAxe itemThrowingAxe) {
             switch (itemThrowingAxe.getMaterial()) {
                 case WOOD:
-                    return new ItemStack(CCItem.animWoodenThrowingAxe);
+                    return new ItemStack(MVItem.animWoodenThrowingAxe);
                 case STONE:
-                    return new ItemStack(CCItem.animStoneThrowingAxe);
+                    return new ItemStack(MVItem.animStoneThrowingAxe);
                 case IRON:
-                    return new ItemStack(CCItem.animIronThrowingAxe);
+                    return new ItemStack(MVItem.animIronThrowingAxe);
                 case GOLD:
-                    return new ItemStack(CCItem.animGoldenThrowingAxe);
+                    return new ItemStack(MVItem.animGoldenThrowingAxe);
                 case DIAMOND:
-                    return new ItemStack(CCItem.animDiamondThrowingAxe);
+                    return new ItemStack(MVItem.animDiamondThrowingAxe);
             }
         }
         return stack;

@@ -2,7 +2,7 @@ package com.syming.minevania.block;
 
 import com.syming.minevania.damagesource.CCDamageSource;
 import com.syming.minevania.init.CCBlock;
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -23,7 +23,7 @@ public class BlockHolyWaterFluid extends BlockFluidClassic {
 
 
         CCBlock.BLOCKS.add(this);
-        CCItem.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+        MVItem.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override

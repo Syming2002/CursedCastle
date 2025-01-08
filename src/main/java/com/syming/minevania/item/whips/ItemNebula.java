@@ -2,9 +2,8 @@ package com.syming.minevania.item.whips;
 
 import com.syming.minevania.api.IElementalWeapon;
 import com.syming.minevania.damagesource.CCDamageSource;
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.tab.CCTabs;
-import com.syming.minevania.util.Helpers;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -19,13 +18,12 @@ public class ItemNebula extends ItemWhip implements IElementalWeapon {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        CCItem.ITEMS.add(this);
+        MVItem.ITEMS.add(this);
     }
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        stack.damageItem(1, attacker);
-        Helpers.playSound(attacker.world, attacker, "whip_impact", 0.5F, 1.0F);
+        super.hitEntity(stack, target, attacker);
         target.world.playSound(null, target.posX, target.posY, target.posZ, SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.MASTER, 0.5F, 1.0F);
         getElementalDamageSource(stack, target, attacker);
         return true;

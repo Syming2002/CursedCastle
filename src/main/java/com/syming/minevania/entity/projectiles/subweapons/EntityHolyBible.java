@@ -1,11 +1,12 @@
 package com.syming.minevania.entity.projectiles.subweapons;
 
-import com.syming.minevania.api.CompoundTags;
-import com.syming.minevania.api.CCThrowable;
-import com.syming.minevania.item.projectiles.subweapons.ItemHolyBible;
+import com.syming.minevania.entity.projectiles.MVThrowableWeapon;
+import com.syming.minevania.item.MVItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -14,7 +15,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntityHolyBible extends CCThrowable {
+public class EntityHolyBible extends MVThrowableWeapon {
 
     private int spiralTicks = 0;
     public static final DataParameter<Float> THROWER_X = EntityDataManager.createKey(EntityHolyBible.class,
@@ -35,18 +36,19 @@ public class EntityHolyBible extends CCThrowable {
     public EntityHolyBible(World world, EntityLivingBase thrower, ItemStack stack) {
         super(world, thrower);
 
-        setInited();
-        setCoords(thrower.posX, thrower.posY + thrower.getEyeHeight() / 2, thrower.posZ);
+        setCoordinates(thrower.posX, thrower.posY + thrower.getEyeHeight() / 2, thrower.posZ);
         setItemStack(stack);
     }
     @Override
     protected void entityInit() {
         super.entityInit();
         dataManager.register(STACK, ItemStack.EMPTY);
+
         dataManager.register(YAW, 0F);
         dataManager.register(THROWER_X, 0F);
         dataManager.register(THROWER_Y, 0F);
         dataManager.register(THROWER_Z, 0F);
+
         rotationYaw = dataManager.get(YAW);
     }
 
@@ -67,90 +69,60 @@ public class EntityHolyBible extends CCThrowable {
         return dataManager.get(THROWER_Z);
     }
 
-
-    public ItemStack getItemStack() {
-        return dataManager.get(STACK);
-    }
-
-    public void setItemStack(ItemStack stack) {
-        if (stack == null || stack.isEmpty() || !(stack.getItem() instanceof ItemHolyBible)) {
-            throw new IllegalArgumentException("Invalid Itemstack!");
-        }
-        dataManager.set(STACK, stack);
-    }
-
     @Override
-    protected float getImpactDamage(Entity target) {
+    protected float getImpactDamage() {
         return 20;
     }
 
+    public void setItemStack(ItemStack stack) {
+        if (!stack.isEmpty()) {
+            this.dataManager.set(STACK, stack);
+        }
+    }
+
+    public ItemStack getItemStack() {
+        return this.dataManager.get(STACK);
+    }
+
     @Override
-    protected boolean onEntityHit(Entity hitEntity) {
-        // It's an hit entity
-        hitEntity.attackEntityFrom(DamageSource.causeIndirectDamage(hitEntity, getThrower()), getImpactDamage(hitEntity));
+    protected void onImpact(RayTraceResult result) {
         ItemStack stack = getItemStack();
-        setItemStack(stack);
-        return false;
-    }
+        Entity hitEntity = result.entityHit;
 
-    @Override
-    protected void onImpact(RayTraceResult target) {
-        if (!world.isRemote) {
-            isDead = false;
-            if (target.entityHit == null) {
-                boolean blockHitResult = onBlockHit(target.getBlockPos());
-                if (blockHitResult) {
-                    isDead = false;
+        if (!this.world.isRemote && getThrower() != null) {
+            if (!stack.isEmpty()) {
+                applyEntityHitEnchantments(hitEntity, stack);
+                if (!stack.isItemEnchanted()) {
+                    hitEntity.attackEntityFrom(DamageSource.causeIndirectDamage(hitEntity, getThrower()), getImpactDamage());
                 }
-            } else {
-                if (target.entityHit instanceof EntityLivingBase && target.entityHit.equals(getThrower()) && ticksExisted < 5) {
-                    return;
-                }
-
-                boolean entityHitResult = onEntityHit(target.entityHit);
-                if (entityHitResult) {
-                    isDead = false;
-                }
-            }
-            if (isDead) {
-                setDead();
             }
         }
     }
 
     @Override
-    public void onUpdated() {
-
-        if (getThrower() != null && CompoundTags.giveCompound(getItemStack()).getBoolean(CompoundTags.ENCHANTED)) {
-            setCoords(getThrower().posX, getThrower().posY + getThrower().getEyeHeight() / 2, getThrower().posZ);
-        }
-
+    public void onUpdate() {
         if (getThrower() != null) {
 
-            // Initial position set to the thrower's position
             double throwerX = getThrower().posX;
             double throwerY = getThrower().posY + getThrower().getEyeHeight() / 2;
             double throwerZ = getThrower().posZ;
 
-            setCoords(getThrower().posX, getThrower().posY + getThrower().getEyeHeight() / 2, getThrower().posZ);
+            setCoordinates(getThrower().posX, getThrower().posY + getThrower().getEyeHeight() / 2, getThrower().posZ);
 
             double angle = rand.nextDouble() * Math.PI * 2;
             double distance = this.spiralTicks * 0.0078125;
             double speed = 0.125;
 
-            // Random direction multiplier
             double dirX = MathHelper.cos((float) angle);
             double dirZ = MathHelper.sin((float) angle);
-            double dirY = (rand.nextDouble() - 0.5) * 2; // Small random vertical movement
+            double dirY = (rand.nextDouble() - 0.5) * 2;
 
-            // Update positions outward from the thrower
             double randomX = throwerX + dirX * distance;
             double randomY = throwerY + dirY * distance;
             double randomZ = throwerZ + dirZ * distance;
 
-            // Set velocities for outward movement
             double randomMotionX = dirX * (0.1 + rand.nextDouble() * 0.1) * speed;
-            double randomMotionY = (rand.nextDouble() - 0.5) * 0.2 * speed; // Random up and down movement
+            double randomMotionY = (rand.nextDouble() - 0.5) * 0.2 * speed;
             double randomMotionZ = dirZ * (0.1 + rand.nextDouble() * 0.1) * speed;
 
             this.posX = randomX;
@@ -169,10 +141,26 @@ public class EntityHolyBible extends CCThrowable {
         }
     }
 
-    public void setCoords(double playerX, double playerY, double playerZ) {
+    public void setCoordinates(double playerX, double playerY, double playerZ) {
         dataManager.set(THROWER_X, (float) playerX);
         dataManager.set(THROWER_Y, (float) playerY);
         dataManager.set(THROWER_Z, (float) playerZ);
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound tagCompund) {
+
+        super.readEntityFromNBT(tagCompund);
+        setItemStack(new ItemStack(tagCompund.getCompoundTag("HolyBible")));
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound tagCompound) {
+        super.writeEntityToNBT(tagCompound);
+
+        if (getItemStack() != null && !getItemStack().isEmpty()) {
+            tagCompound.setTag("HolyBible", getItemStack().writeToNBT(new NBTTagCompound()));
+        }
     }
 }
 

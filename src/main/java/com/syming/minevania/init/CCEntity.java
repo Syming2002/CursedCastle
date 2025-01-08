@@ -10,8 +10,8 @@ import com.syming.minevania.entity.projectiles.EntityIceBladeProjectile;
 import com.syming.minevania.entity.projectiles.EntityScytheProjectile;
 import com.syming.minevania.entity.projectiles.EntityThrowingBoneProjectile;
 import com.syming.minevania.entity.projectiles.subweapons.*;
-import com.syming.minevania.item.CCItem;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.item.MVItem;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -31,7 +31,7 @@ public class CCEntity {
         registerHolyCross("holy_cross", EntityHolyCross.class, Item.ToolMaterial.GOLD);
         registerHolyCross("holy_cross", EntityHolyCross.class, Item.ToolMaterial.DIAMOND);
 
-        registerProjectile("holy_water", EntityHolyWater.class, CCItem.holyWater);
+        registerProjectile("holy_water", EntityHolyWater.class, MVItem.holyWater);
 
         registerDagger("dagger", EntityDagger.class, Item.ToolMaterial.WOOD);
         registerDagger("dagger", EntityDagger.class, Item.ToolMaterial.STONE);
@@ -45,11 +45,11 @@ public class CCEntity {
         registerThrowingAxe("throwing_axe", EntityThrowingAxe.class, Item.ToolMaterial.GOLD);
         registerThrowingAxe("throwing_axe", EntityThrowingAxe.class, Item.ToolMaterial.DIAMOND);
 
-        registerProjectile("holy_bible", EntityHolyBible.class, CCItem.holyBible);
+        registerProjectile("holy_bible", EntityHolyBible.class, MVItem.holyBible);
 
         // Projectiles
-        registerProjectile("scythe_projectile", EntityScytheProjectile.class, CCItem.scytheProjectile);
-        registerProjectile("throwing_bone", EntityThrowingBoneProjectile.class, CCItem.throwingBone);
+        registerProjectile("scythe_projectile", EntityScytheProjectile.class, MVItem.scytheProjectile);
+        registerProjectile("throwing_bone", EntityThrowingBoneProjectile.class, MVItem.throwingBone);
         registerProjectile("fire_pillar", EntityFirePillar.class, null);
         registerEntityWithNoEgg("ice_blade", EntityIceBladeProjectile.class, 64);
 
@@ -87,13 +87,13 @@ public class CCEntity {
 
     public static void registerProjectile(String name, Class<? extends Entity> entity, Item item) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, name);
+        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, name);
         EntityRegistry.registerModEntity(resourceLocation, entity, name, entityID, MinevaniaMod.instance, 64, 1, true);
     }
 
     private static void registerEntity(String name, Class<? extends Entity> entity, int range, int primaryColor, int secondaryColor) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, name);
+        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, name);
         EntityRegistry.registerModEntity(resourceLocation, entity, name, entityID, MinevaniaMod.instance, range, 1, true, primaryColor, secondaryColor);
 
     }
@@ -104,35 +104,35 @@ public class CCEntity {
 
     private static void registerEntityWithNoEgg(String name, Class<? extends Entity> entity, int range) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, name);
+        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, name);
         EntityRegistry.registerModEntity(resourceLocation, entity, name, entityID, MinevaniaMod.instance, range, 1, true);
 
     }
 
     private static void registerHolyCross(String name, Class<? extends EntityHolyCross> holyCross, Item.ToolMaterial material) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, material.toString() + "_" + name);
+        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, material.toString() + "_" + name);
         EntityRegistry.registerModEntity(resourceLocation, holyCross, name, entityID, MinevaniaMod.instance, 64, 1, true);
 
     }
 
     private static void registerThrowingAxe(String name, Class<? extends EntityThrowingAxe> throwingAxe, Item.ToolMaterial material) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, material.toString() + "_" + name);
+        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, material.toString() + "_" + name);
         EntityRegistry.registerModEntity(resourceLocation, throwingAxe, name, entityID, MinevaniaMod.instance, 64, 1, true);
 
     }
 
     private static void registerDagger(String name, Class<? extends EntityDagger> dagger, Item.ToolMaterial material) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, material.toString() + "_" + name);
+        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, material.toString() + "_" + name);
         EntityRegistry.registerModEntity(resourceLocation, dagger, name, entityID, MinevaniaMod.instance, 64, 1, true);
 
     }
 
     private static void registerCrucifix(String name, Class<? extends EntityCrucifix> crucifix, BlockPlanks.EnumType woodType) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, woodType.getTranslationKey() + "_" + name);
+        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, woodType.getTranslationKey() + "_" + name);
         EntityRegistry.registerModEntity(resourceLocation, crucifix, name, entityID, MinevaniaMod.instance, 64, 1, true);
     }
 

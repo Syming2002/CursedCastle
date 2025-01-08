@@ -3,7 +3,7 @@ package com.syming.minevania.client.render.entity;
 import com.syming.minevania.client.models.entity.ModelBloodSkeleton;
 import com.syming.minevania.entity.mobs.EntityBloodSkeleton;
 
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RenderBloodSkeleton extends RenderLiving<EntityBloodSkeleton> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/blood_skeleton.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/blood_skeleton.png");
 
     public RenderBloodSkeleton(RenderManager rendermanagerIn) {
         super(rendermanagerIn, new ModelBloodSkeleton(), 0.5F);

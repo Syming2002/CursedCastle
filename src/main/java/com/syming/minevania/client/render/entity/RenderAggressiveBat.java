@@ -2,7 +2,7 @@ package com.syming.minevania.client.render.entity;
 
 import com.syming.minevania.client.models.entity.ModelAggressiveBat;
 import com.syming.minevania.entity.mobs.EntityAggressiveBat;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RenderAggressiveBat extends RenderLiving<EntityAggressiveBat> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/aggressive_bat.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/aggressive_bat.png");
 
     public RenderAggressiveBat(RenderManager rendermanagerIn) {
         super(rendermanagerIn, new ModelAggressiveBat(), 0.25F);

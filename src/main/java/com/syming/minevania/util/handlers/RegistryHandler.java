@@ -8,7 +8,7 @@ import com.syming.minevania.event.EventImmobileEntityLiving;
 import com.syming.minevania.event.EventVanillaMobLootTableModifier;
 import com.syming.minevania.event.EventVillagerCrucifixProtection;
 import com.syming.minevania.init.*;
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.integration.forestry.bees.CCBeeDefinition;
 import com.syming.minevania.integration.forestry.items.CCCombItem;
 import com.syming.minevania.integration.forestry.items.CCDropItem;
@@ -53,7 +53,7 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onItemRegister(RegistryEvent.Register<Item> event) {
         itemRegistry = event.getRegistry();
-        event.getRegistry().registerAll(CCItem.ITEMS.toArray(new Item[0]));
+        event.getRegistry().registerAll(MVItem.ITEMS.toArray(new Item[0]));
         if (ModLoadedUtils.Forestry.isModLoaded()) {
             itemRegistry.register(DROPS);
             itemRegistry.register(COMBS);
@@ -67,7 +67,7 @@ public class RegistryHandler {
         RenderHandler.registerEntityRenders();
         RenderHandler.registerCustomMeshesAndStates();
 
-        for (Item item : CCItem.ITEMS) {
+        for (Item item : MVItem.ITEMS) {
             MinevaniaMod.proxy.registerItemRenderer(item, 0, "inventory");
         }
 

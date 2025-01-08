@@ -1,6 +1,6 @@
 package com.syming.minevania.item.whips;
 
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.tab.CCTabs;
 
 public class ItemLeatherWhip extends ItemWhip {
@@ -12,6 +12,6 @@ public class ItemLeatherWhip extends ItemWhip {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        CCItem.ITEMS.add(this);
+        MVItem.ITEMS.add(this);
     }
 }

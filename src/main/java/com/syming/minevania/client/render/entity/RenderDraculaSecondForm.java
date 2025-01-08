@@ -2,7 +2,7 @@ package com.syming.minevania.client.render.entity;
 
 import com.syming.minevania.client.models.entity.ModelDraculaSecondForm;
 import com.syming.minevania.entity.mobs.boss.EntityDraculaSecondForm;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 @SideOnly(Side.CLIENT)
 public class RenderDraculaSecondForm extends RenderLiving<EntityDraculaSecondForm> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/dracula_second_form.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/dracula_second_form.png");
 
     public RenderDraculaSecondForm(RenderManager rendermanagerIn) {
         super(rendermanagerIn, new ModelDraculaSecondForm(), 1.5F);

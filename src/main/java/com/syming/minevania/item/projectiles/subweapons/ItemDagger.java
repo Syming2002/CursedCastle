@@ -1,23 +1,25 @@
 package com.syming.minevania.item.projectiles.subweapons;
 
-import com.syming.minevania.api.ICCItemExtension;
 import com.syming.minevania.entity.projectiles.subweapons.EntityDagger;
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.tab.CCTabs;
-import com.syming.minevania.util.Helpers;
+import com.syming.minevania.util.handlers.SoundsHandler;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
-public class ItemDagger extends com.syming.minevania.api.CCItem {
+public class ItemDagger extends Item {
 
     private Item.ToolMaterial material;
 
@@ -29,16 +31,11 @@ public class ItemDagger extends com.syming.minevania.api.CCItem {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        CCItem.ITEMS.add(this);
+        MVItem.ITEMS.add(this);
     }
 
     public Item.ToolMaterial getMaterial() {
         return this.material;
-    }
-
-    @Override
-    public float getHitDamage() {
-        return 2 + this.material.getAttackDamage();
     }
 
     @Override
@@ -48,22 +45,17 @@ public class ItemDagger extends com.syming.minevania.api.CCItem {
 
     @Override
     public int getMaxItemUseDuration(ItemStack stack) {
-        return ICCItemExtension.USE_DURATION;
+        return 18000;
     }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
-        if (hand == EnumHand.MAIN_HAND) {
-            ArrowNockEvent event = new ArrowNockEvent(
-                    playerIn, playerIn.getHeldItemMainhand(), EnumHand.MAIN_HAND, worldIn, true);
-            if (MinecraftForge.EVENT_BUS.post(event))
-                return event.getAction();
-
-            playerIn.setActiveHand(EnumHand.MAIN_HAND);
-
-            return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
+        ArrowNockEvent event = new ArrowNockEvent(playerIn, playerIn.getHeldItemMainhand(), hand, worldIn, true);
+        if (MinecraftForge.EVENT_BUS.post(event)) {
+            return event.getAction();
         }
-        return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
+        playerIn.setActiveHand(hand);
+        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(hand));
     }
 
     @Override
@@ -79,14 +71,10 @@ public class ItemDagger extends com.syming.minevania.api.CCItem {
 
             ItemStack throwStack = stack.copy();
 
-            if (timeLeft <= getMaxItemUseDuration(stack) - 7
-                    && (playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, this))) {
+            if (getMaxItemUseDuration(stack) - timeLeft > 0) {
 
-                Helpers.playSound(worldIn, playerIn, "dagger_throw", 0.5F, 1.0F);
+                worldIn.playSound(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ, SoundsHandler.DAGGER_THROW, SoundCategory.MASTER, 0.5F, 1.0F);
                 if (!worldIn.isRemote) {
-                    if (throwStack.getCount() > 1) {
-                        throwStack = throwStack.splitStack(1);
-                    }
                     EntityDagger dagger = new EntityDagger(worldIn, playerIn, throwStack, stack.getMaxItemUseDuration() - timeLeft, getMaterial());
                     dagger.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 0.0F);
                     worldIn.spawnEntity(dagger);
@@ -96,8 +84,18 @@ public class ItemDagger extends com.syming.minevania.api.CCItem {
     }
 
     @Override
-    public double getAttackSpeed(ItemStack stack) {
-        return -1;
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
     }
 
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment == Enchantments.SHARPNESS
+                || enchantment == Enchantments.SMITE
+                || enchantment == Enchantments.BANE_OF_ARTHROPODS
+                || enchantment == Enchantments.KNOCKBACK
+                || enchantment == Enchantments.FIRE_ASPECT
+                || enchantment == Enchantments.LOOTING;
+    }
 }

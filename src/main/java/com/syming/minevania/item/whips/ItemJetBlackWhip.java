@@ -1,8 +1,7 @@
 package com.syming.minevania.item.whips;
 
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.tab.CCTabs;
-import com.syming.minevania.util.Helpers;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityVillager;
@@ -19,19 +18,17 @@ public class ItemJetBlackWhip extends ItemWhip {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        CCItem.ITEMS.add(this);
+        MVItem.ITEMS.add(this);
     }
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        stack.damageItem(1, attacker);
+        super.hitEntity(stack, target, attacker);
         if (target instanceof EntityZombie || target instanceof EntitySkeleton || target instanceof EntityStray || target instanceof EntityVillager || target instanceof EntityIronGolem || target instanceof EntitySnowman) {
             target.addPotionEffect(new PotionEffect(MobEffects.INSTANT_DAMAGE, 20, 2, true, false));
         } else {
             target.addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 20, 2, true, false));
         }
-
-        Helpers.playSound(attacker.world, attacker, "whip_impact", 0.5F, 1.0F);
         return true;
     }
 }

@@ -31,7 +31,7 @@ public class ItemCrucifix extends Item {
 
         this.woodType = woodType;
 
-        CCItem.ITEMS.add(this);
+        MVItem.ITEMS.add(this);
     }
 
     public BlockPlanks.EnumType getWoodType() {

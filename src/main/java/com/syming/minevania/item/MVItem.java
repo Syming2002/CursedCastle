@@ -12,7 +12,7 @@ import com.syming.minevania.item.souls.ItemGuardianSoul;
 import com.syming.minevania.item.whips.*;
 import com.syming.minevania.item.whips.attachments.*;
 import com.syming.minevania.item.whips.vampirekiller.*;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -23,16 +23,16 @@ import net.minecraftforge.common.util.EnumHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CCItem {
+public class MVItem {
 
     public static  List<Item> ITEMS = new ArrayList<>();
 
     // Materials Armors
-    public static ItemArmor.ArmorMaterial DRACULA_TUNIC_ARMOR = EnumHelper.addArmorMaterial("dracula_tunic_material", CCReferences.MODID + ":dracula_tunic", 10, new int[] {0, 0, 20, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.99F);
-    public static ItemArmor.ArmorMaterial OLROX_SUIT_ARMOR = EnumHelper.addArmorMaterial("olrox_suit_material", CCReferences.MODID + ":olrox_suit", 8, new int[] {0, 0, 16, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.99F);
-    public static ItemArmor.ArmorMaterial JUSTE_BELMONT_ARMOR = EnumHelper.addArmorMaterial("juste_belmont_armor_material", CCReferences.MODID + ":juste_belmont", 10, new int[] {4, 1, 3, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F);
-    public static ItemArmor.ArmorMaterial RICHTER_BELMONT_ARMOR = EnumHelper.addArmorMaterial("richter_belmont_armor_material", CCReferences.MODID + ":richter_belmont", 10, new int[] {2, 1, 3, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F);
-    public static ItemArmor.ArmorMaterial SIMON_BELMONT_ARMOR = EnumHelper.addArmorMaterial("simon_belmont_armor_material", CCReferences.MODID + ":simon_belmont", 10, new int[] {2, 1, 2, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.25F);
+    public static ItemArmor.ArmorMaterial DRACULA_TUNIC_ARMOR = EnumHelper.addArmorMaterial("dracula_tunic_material", MVReferences.MODID + ":dracula_tunic", 10, new int[] {0, 0, 20, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.99F);
+    public static ItemArmor.ArmorMaterial OLROX_SUIT_ARMOR = EnumHelper.addArmorMaterial("olrox_suit_material", MVReferences.MODID + ":olrox_suit", 8, new int[] {0, 0, 16, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.99F);
+    public static ItemArmor.ArmorMaterial JUSTE_BELMONT_ARMOR = EnumHelper.addArmorMaterial("juste_belmont_armor_material", MVReferences.MODID + ":juste_belmont", 10, new int[] {4, 1, 3, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F);
+    public static ItemArmor.ArmorMaterial RICHTER_BELMONT_ARMOR = EnumHelper.addArmorMaterial("richter_belmont_armor_material", MVReferences.MODID + ":richter_belmont", 10, new int[] {2, 1, 3, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F);
+    public static ItemArmor.ArmorMaterial SIMON_BELMONT_ARMOR = EnumHelper.addArmorMaterial("simon_belmont_armor_material", MVReferences.MODID + ":simon_belmont", 10, new int[] {2, 1, 2, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.25F);
 
     // Materials
 //    public static  Item.ToolMaterial LEATHER_WHIP_MATERIAL = EnumHelper.addToolMaterial("leather_whip_material", 1, 100, 2.0F, 2.2F, 5).setRepairItem(new ItemStack(Items.LEATHER));

@@ -1,9 +1,9 @@
 package com.syming.minevania.integration.forestry.bees;
 
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.integration.forestry.items.CCCombType;
 import com.syming.minevania.integration.forestry.items.CCDropType;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import com.syming.minevania.util.handlers.RegistryHandler;
 import forestry.api.apiculture.*;
 import forestry.api.core.EnumHumidity;
@@ -39,7 +39,7 @@ public enum CCBeeDefinition implements IBeeDefinition {
                 beeSpecies.addProduct(getForestryComb(EnumHoneyComb.HONEY), 0.30F);
                 beeSpecies.addProduct(getCCComb(CCCombType.ROTTEN), 0.15F);
                 beeSpecies.addSpecialty(new ItemStack(Items.ROTTEN_FLESH), 0.10F);
-                beeSpecies.addSpecialty(new ItemStack(CCItem.bulletSoul, 1, 0), 0.0055F);
+                beeSpecies.addSpecialty(new ItemStack(MVItem.bulletSoul, 1, 0), 0.0055F);
                 beeSpecies.setTemperature(EnumTemperature.NORMAL);
                 beeSpecies.setHumidity(EnumHumidity.NORMAL);
                 beeSpecies.setNocturnal();
@@ -60,7 +60,7 @@ public enum CCBeeDefinition implements IBeeDefinition {
                 beeSpecies.addProduct(getCCComb(CCCombType.BONE), 0.15F);
                 beeSpecies.addSpecialty(new ItemStack(Items.BONE), 0.10F);
                 beeSpecies.addSpecialty(new ItemStack(Items.SKULL, 1, 0), 0.05F);
-                beeSpecies.addSpecialty(new ItemStack(CCItem.bulletSoul, 1, 1), 0.0028F);
+                beeSpecies.addSpecialty(new ItemStack(MVItem.bulletSoul, 1, 1), 0.0028F);
                 beeSpecies.setTemperature(EnumTemperature.NORMAL);
                 beeSpecies.setHumidity(EnumHumidity.NORMAL);
                 beeSpecies.setNocturnal();
@@ -194,7 +194,7 @@ public enum CCBeeDefinition implements IBeeDefinition {
         String name = "for.bees.species." + lowercaseName;
 
         this.branch = branch;
-        this.species = new CCAlleleBeeSpecies(CCReferences.MODID, uid, name, CCReferences.NAME, description, dominant, branch.getBranch(), binomial, primary.getRGB(), secondary.getRGB());
+        this.species = new CCAlleleBeeSpecies(MVReferences.MODID, uid, name, MVReferences.NAME, description, dominant, branch.getBranch(), binomial, primary.getRGB(), secondary.getRGB());
         this.generationCondition = generationCondition;
     }
 

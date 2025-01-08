@@ -1,7 +1,7 @@
 package com.syming.minevania.item.whips;
 
 import com.google.common.collect.Multimap;
-import com.syming.minevania.util.Helpers;
+import com.syming.minevania.util.handlers.SoundsHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -23,28 +24,20 @@ public abstract class ItemWhip extends Item {
     private float attackDamage;
     private float attackSpeed;
     private float attackReach;
-//    private final Item.ToolMaterial material;
 
-    public ItemWhip(/*Item.ToolMaterial material, */float attackDamage, float attackSpeed, float attackReach)
+    public ItemWhip(float attackDamage, float attackSpeed, float attackReach)
     {
-//        this.material = material;
         this.maxStackSize = 1;
-//        this.setMaxDamage(material.getMaxUses());
-        this.attackDamage = attackDamage; /*+ material.getAttackDamage();*/
+        this.attackDamage = attackDamage;
         this.attackSpeed = attackSpeed;
         this.attackReach = attackReach;
     }
-
-//    public float getAttackDamage()
-//    {
-//        return this.material.getAttackDamage();
-//    }
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
         stack.damageItem(1, attacker);
-        Helpers.playSound(attacker.world, attacker, "whip_impact", 0.5F, 1.0F);
+        attacker.world.playSound((EntityPlayer) attacker, attacker.posX, attacker.posY, attacker.posZ, SoundsHandler.WHIP_IMPACT, SoundCategory.MASTER, 0.5F, 1.0F);
         return true;
     }
 

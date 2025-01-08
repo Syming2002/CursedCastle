@@ -1,33 +1,31 @@
 package com.syming.minevania.entity.projectiles.subweapons;
 
-import com.syming.minevania.api.CCThrowable;
+import com.syming.minevania.entity.projectiles.MVThrowableWeapon;
+import com.syming.minevania.item.MVItem;
+import com.syming.minevania.item.projectiles.subweapons.holycross.ItemHolyCross;
 import com.syming.minevania.item.projectiles.subweapons.throwingaxe.ItemThrowingAxe;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Enchantments;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import java.util.List;
-import java.util.Map;
+public class EntityThrowingAxe extends MVThrowableWeapon {
 
-public class EntityThrowingAxe extends CCThrowable {
 
     public static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(EntityThrowingAxe.class,
             DataSerializers.ITEM_STACK);
+
     private Item.ToolMaterial material;
 
     public EntityThrowingAxe(World worldIn) {
@@ -37,7 +35,6 @@ public class EntityThrowingAxe extends CCThrowable {
     public EntityThrowingAxe(World world, EntityLivingBase thrower, ItemStack stack, Item.ToolMaterial material) {
         super(world, thrower);
         this.material = material;
-        setInited();
         setItemStack(stack);
         shoot(this.motionX, this.motionY, this.motionZ, 1.0F, 0.5F);
     }
@@ -45,60 +42,36 @@ public class EntityThrowingAxe extends CCThrowable {
     @Override
     protected void entityInit() {
         super.entityInit();
-        dataManager.register(STACK, ItemStack.EMPTY);
-    }
 
+        this.dataManager.register(STACK, ItemStack.EMPTY);
+    }
     @Override
     protected float getGravityVelocity() {
         return 0.10F;
     }
 
     @Override
-    protected float getImpactDamage(Entity target) {
-
-        return this.material.getAttackDamage() + 10F;
-    }
-
-    public ItemStack getItemStack() {
-        return dataManager.get(STACK);
-    }
-
-    @Override
-    protected boolean onBlockHit(BlockPos blockPos) {
+    protected void onImpact(RayTraceResult result) {
         ItemStack stack = getItemStack();
-        if (!stack.attemptDamageItem(1, rand, null)) {
-            setItemStack(stack);
-        }
-        if (!world.isRemote) {
-            if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-                if (!creativeUse()) {
-                    entityDropItem(getItemStack(), 0.5f);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    protected boolean onEntityHit(Entity hitEntity) {
-        ItemStack stack = getItemStack();
-        hitEntity.attackEntityFrom(DamageSource.causeIndirectDamage(hitEntity, getThrower()), getImpactDamage(hitEntity));
-        Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-        for (Map.Entry<Enchantment, Integer> entry : enchantments.entrySet()) {
-            Enchantment enchantment = entry.getKey();
-            int level = entry.getValue();
-
-            applyEnchantmentEffect(hitEntity, enchantment, level);
-        }
-        if (!stack.attemptDamageItem(1, rand, null)) {
-            setItemStack(stack);
-        }
-        if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-            if (!creativeUse()) {
+        Entity hitEntity = result.entityHit;
+        if (!this.world.isRemote && getThrower() != null) {
+            if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
                 entityDropItem(getItemStack(), 0.5f);
+                stack.attemptDamageItem(1, this.rand, getThrower() instanceof EntityPlayerMP ? (EntityPlayerMP) getThrower() : null);
+                setDead();
+            } else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
+                applyEntityHitEnchantments(hitEntity, stack);
+                if (!stack.isItemEnchanted()) {
+                    hitEntity.attackEntityFrom(DamageSource.causeIndirectDamage(hitEntity, getThrower()), getImpactDamage());
+                }
+                stack.attemptDamageItem(1, this.rand, (EntityPlayerMP) getThrower());
             }
         }
-        return true;
+    }
+
+    @Override
+    protected float getImpactDamage() {
+        return this.material.getAttackDamage() + 10.0F;
     }
 
     @Override
@@ -114,14 +87,17 @@ public class EntityThrowingAxe extends CCThrowable {
     public void readEntityFromNBT(NBTTagCompound tagCompund) {
 
         super.readEntityFromNBT(tagCompund);
-        setItemStack(new ItemStack(tagCompund.getCompoundTag("item_throwing_axe")));
+        setItemStack(new ItemStack(tagCompund.getCompoundTag("ThrowingAxe")));
     }
 
     public void setItemStack(ItemStack stack) {
-        if (stack == null || stack.isEmpty() || !(stack.getItem() instanceof ItemThrowingAxe)) {
-            throw new IllegalArgumentException("Invalid Itemstack!");
+        if (!stack.isEmpty()) {
+            this.dataManager.set(STACK, stack);
         }
-        dataManager.set(STACK, stack);
+    }
+
+    public ItemStack getItemStack() {
+        return this.dataManager.get(STACK);
     }
 
     @Override
@@ -129,36 +105,32 @@ public class EntityThrowingAxe extends CCThrowable {
         super.writeEntityToNBT(tagCompound);
 
         if (getItemStack() != null && !getItemStack().isEmpty()) {
-            tagCompound.setTag("item_throwing_axe", getItemStack().writeToNBT(new NBTTagCompound()));
+            tagCompound.setTag("ThrowingAxe", getItemStack().writeToNBT(new NBTTagCompound()));
         }
     }
 
     @Override
     public void shoot(double x, double y, double z, float velocity, float inaccuracy)
     {
-        // Normalize the direction vector
         double length = MathHelper.sqrt(x * x + y * y + z * z);
         x /= length;
         y /= length;
         z /= length;
 
-        // Add some randomness to the direction
         x += this.rand.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
         y += this.rand.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
         z += this.rand.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
 
-        // Apply velocity to the direction
         x *= velocity;
         y *= velocity;
         z *= velocity;
 
-        // Apply bell trajectory
-        double time = 0.0; // You may need to adjust this based on your requirements
-        double amplitude = 0.5; // Adjust the amplitude as needed
-        double frequency = 1.0; // Adjust the frequency as needed
+        double time = 0.0;
+        double amplitude = 0.5;
+        double frequency = 1.0;
 
-        double xOffset = amplitude * Math.sin(frequency * time); // Bell curve in x direction
-        double yOffset = amplitude * Math.cos(frequency * time); // Bell curve in y direction
+        double xOffset = amplitude * Math.sin(frequency * time);
+        double yOffset = amplitude * Math.cos(frequency * time);
 
         x += xOffset;
         y += yOffset;
@@ -167,61 +139,10 @@ public class EntityThrowingAxe extends CCThrowable {
         this.motionY = y;
         this.motionZ = z;
 
-        // Set rotation based on the modified motion
         float f1 = MathHelper.sqrt(x * x + z * z);
         this.rotationYaw = (float)(MathHelper.atan2(x, z) * (180D / Math.PI));
         this.rotationPitch = (float)(MathHelper.atan2(y, (double)f1) * (180D / Math.PI));
         this.prevRotationYaw = this.rotationYaw;
         this.prevRotationPitch = this.rotationPitch;
     }
-
-    /**
-     * Applies effects for weapon enchantments to the hit entity.
-     */
-    private void applyEnchantmentEffect(Entity hitEntity, Enchantment enchantment, int level) {
-        if (enchantment == Enchantments.FIRE_ASPECT) {
-            // Fire Aspect: sets the target on fire
-            hitEntity.setFire(4 * level);
-        } else if (enchantment == Enchantments.KNOCKBACK) {
-            // Knockback: pushes the target away
-            double knockbackStrength = 0.5D + level * 0.5D;
-            hitEntity.addVelocity(-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * knockbackStrength, 0.1D,
-                    MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * knockbackStrength);
-        } else if (enchantment == Enchantments.SHARPNESS) {
-            // Sharpness: adds extra damage
-            float extraDamage = 1.0F + 0.5F * (level - 1);
-            hitEntity.attackEntityFrom(DamageSource.causeIndirectDamage(this, getThrower()), extraDamage);
-        } else if (enchantment == Enchantments.SMITE && hitEntity instanceof EntityLivingBase) {
-            // Smite: extra damage to undead
-            EntityLivingBase livingTarget = (EntityLivingBase) hitEntity;
-            if (livingTarget.isEntityUndead()) {
-                float extraDamage = 2.5F * level;
-                hitEntity.attackEntityFrom(DamageSource.causeIndirectDamage(this, getThrower()), extraDamage);
-            }
-        } else if (enchantment == Enchantments.BANE_OF_ARTHROPODS && hitEntity instanceof EntityLivingBase) {
-            // Bane of Arthropods: extra damage to arthropods and slowness
-            EntityLivingBase livingTarget = (EntityLivingBase) hitEntity;
-            if (livingTarget.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD) {
-                float extraDamage = 2.5F * level;
-                hitEntity.attackEntityFrom(DamageSource.causeIndirectDamage(this, getThrower()), extraDamage);
-                // Apply slowness effect for 1 second per level
-                livingTarget.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20 * level, 1));
-            }
-        } else if (enchantment == Enchantments.SWEEPING) {
-            // Sweeping Edge: increases damage of sweeping attacks
-            if (hitEntity instanceof EntityLivingBase) {
-                List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class,
-                        hitEntity.getEntityBoundingBox().grow(1.0D, 0.25D, 1.0D));
-                for (EntityLivingBase entity : entities) {
-                    if (entity != getThrower() && entity != hitEntity) {
-                        entity.attackEntityFrom(DamageSource.causeIndirectDamage(this, getThrower()), level);
-                    }
-                }
-            }
-        } else if (enchantment == Enchantments.LOOTING) {
-            // Looting: increases drops, handled by Minecraft's existing system on entity death
-            // Can be left empty unless you have custom loot logic
-        }
-    }
-
 }

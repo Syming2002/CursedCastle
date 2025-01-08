@@ -1,6 +1,6 @@
 package com.syming.minevania.item.whips.vampirekiller;
 
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.tab.CCTabs;
 
 public class ItemVampireKillerPlatinumAttachment extends ItemVampireKillerWhip {
@@ -10,8 +10,8 @@ public class ItemVampireKillerPlatinumAttachment extends ItemVampireKillerWhip {
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
-        setContainerItem(CCItem.vampireKiller);
+        setContainerItem(MVItem.vampireKiller);
 
-        CCItem.ITEMS.add(this);
+        MVItem.ITEMS.add(this);
     }
 }

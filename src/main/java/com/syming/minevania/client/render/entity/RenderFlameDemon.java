@@ -2,7 +2,7 @@ package com.syming.minevania.client.render.entity;
 
 import com.syming.minevania.client.models.entity.ModelFlameDemon;
 import com.syming.minevania.entity.mobs.EntityFlameDemon;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RenderFlameDemon extends RenderLiving<EntityFlameDemon> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/flame_demon.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/flame_demon.png");
     public RenderFlameDemon(RenderManager rendermanagerIn) {
         super(rendermanagerIn, new ModelFlameDemon(), 0.8F);
     }

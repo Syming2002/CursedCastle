@@ -3,7 +3,7 @@ package com.syming.minevania.client.render.entity;
 import com.syming.minevania.client.models.entity.ModelDagger;
 import com.syming.minevania.entity.projectiles.subweapons.EntityDagger;
 import com.syming.minevania.item.projectiles.subweapons.ItemDagger;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
@@ -18,11 +18,11 @@ public class RenderDagger<T extends EntityDagger> extends Render<T> {
     private ModelDagger modelDagger;
     private int modifier;
 
-    public static final ResourceLocation WOODEN_TEXTURE = new ResourceLocation(CCReferences.MODID,"textures/entity/wooden_dagger.png");
-    public static final ResourceLocation STONE_TEXTURE = new ResourceLocation(CCReferences.MODID,"textures/entity/stone_dagger.png");
-    public static final ResourceLocation IRON_TEXTURE = new ResourceLocation(CCReferences.MODID,"textures/entity/iron_dagger.png");
-    public static final ResourceLocation GOLDEN_TEXTURE = new ResourceLocation(CCReferences.MODID,"textures/entity/golden_dagger.png");
-    public static final ResourceLocation DIAMOND_TEXTURE = new ResourceLocation(CCReferences.MODID,"textures/entity/diamond_dagger.png");
+    public static final ResourceLocation WOODEN_TEXTURE = new ResourceLocation(MVReferences.MODID,"textures/entity/wooden_dagger.png");
+    public static final ResourceLocation STONE_TEXTURE = new ResourceLocation(MVReferences.MODID,"textures/entity/stone_dagger.png");
+    public static final ResourceLocation IRON_TEXTURE = new ResourceLocation(MVReferences.MODID,"textures/entity/iron_dagger.png");
+    public static final ResourceLocation GOLDEN_TEXTURE = new ResourceLocation(MVReferences.MODID,"textures/entity/golden_dagger.png");
+    public static final ResourceLocation DIAMOND_TEXTURE = new ResourceLocation(MVReferences.MODID,"textures/entity/diamond_dagger.png");
 
     public RenderDagger(RenderManager manager) {
         this(manager, 0);

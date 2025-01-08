@@ -1,7 +1,7 @@
 package com.syming.minevania.block.draculacastlestone;
 
 import com.syming.minevania.init.CCBlock;
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.tab.CCTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -21,6 +21,6 @@ public class BlockDraculaCastleCobblestone extends Block {
         this.setSoundType(SoundType.STONE);
 
         CCBlock.BLOCKS.add(this);
-        CCItem.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+        MVItem.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 }

@@ -1,7 +1,7 @@
 package com.syming.minevania.item.whips.vampirekiller;
 
 import com.google.common.collect.Sets;
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.item.whips.ItemWhipTool;
 import com.syming.minevania.tab.CCTabs;
 import net.minecraft.block.Block;
@@ -72,9 +72,9 @@ public class ItemVampireKillerCrushingStoneAttachment extends ItemWhipTool {
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
-        setContainerItem(CCItem.vampireKiller);
+        setContainerItem(MVItem.vampireKiller);
 
-        CCItem.ITEMS.add(this);
+        MVItem.ITEMS.add(this);
     }
 
     @Override

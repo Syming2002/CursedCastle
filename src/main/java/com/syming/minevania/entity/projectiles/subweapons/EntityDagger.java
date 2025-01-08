@@ -1,6 +1,6 @@
 package com.syming.minevania.entity.projectiles.subweapons;
 
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.item.projectiles.subweapons.ItemDagger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -258,15 +258,15 @@ public class EntityDagger extends EntityArrow {
         if (stack.getItem() instanceof ItemDagger itemDagger) {
             switch (itemDagger.getMaterial()) {
                 case WOOD:
-                    return new ItemStack(CCItem.woodenDagger);
+                    return new ItemStack(MVItem.woodenDagger);
                 case STONE:
-                    return new ItemStack(CCItem.stoneDagger);
+                    return new ItemStack(MVItem.stoneDagger);
                 case IRON:
-                    return new ItemStack(CCItem.ironDagger);
+                    return new ItemStack(MVItem.ironDagger);
                 case GOLD:
-                    return new ItemStack(CCItem.goldenDagger);
+                    return new ItemStack(MVItem.goldenDagger);
                 case DIAMOND:
-                    return new ItemStack(CCItem.diamondDagger);
+                    return new ItemStack(MVItem.diamondDagger);
             }
         }
         return stack;

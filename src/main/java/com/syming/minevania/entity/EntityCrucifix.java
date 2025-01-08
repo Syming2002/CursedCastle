@@ -1,7 +1,7 @@
 package com.syming.minevania.entity;
 
 import com.google.common.base.Predicate;
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.EnumPushReaction;
@@ -294,17 +294,17 @@ public class EntityCrucifix extends EntityLiving {
         BlockPlanks.EnumType woodType = this.getWoodType();
         switch (woodType) {
             case OAK:
-                Block.spawnAsEntity(this.world, new BlockPos(this), new ItemStack(CCItem.oakCrucifix));
+                Block.spawnAsEntity(this.world, new BlockPos(this), new ItemStack(MVItem.oakCrucifix));
             case SPRUCE:
-                Block.spawnAsEntity(this.world, new BlockPos(this), new ItemStack(CCItem.spruceCrucifix));
+                Block.spawnAsEntity(this.world, new BlockPos(this), new ItemStack(MVItem.spruceCrucifix));
             case BIRCH:
-                Block.spawnAsEntity(this.world, new BlockPos(this), new ItemStack(CCItem.birchCrucifix));
+                Block.spawnAsEntity(this.world, new BlockPos(this), new ItemStack(MVItem.birchCrucifix));
             case JUNGLE:
-                Block.spawnAsEntity(this.world, new BlockPos(this), new ItemStack(CCItem.jungleCrucifix));
+                Block.spawnAsEntity(this.world, new BlockPos(this), new ItemStack(MVItem.jungleCrucifix));
             case ACACIA:
-                Block.spawnAsEntity(this.world, new BlockPos(this), new ItemStack(CCItem.acaciaCrucifix));
+                Block.spawnAsEntity(this.world, new BlockPos(this), new ItemStack(MVItem.acaciaCrucifix));
             case DARK_OAK:
-                Block.spawnAsEntity(this.world, new BlockPos(this), new ItemStack(CCItem.darkOakCrucifix));
+                Block.spawnAsEntity(this.world, new BlockPos(this), new ItemStack(MVItem.darkOakCrucifix));
         }
     }
 

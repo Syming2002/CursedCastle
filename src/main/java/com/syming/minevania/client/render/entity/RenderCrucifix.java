@@ -2,7 +2,7 @@ package com.syming.minevania.client.render.entity;
 
 import com.syming.minevania.client.models.entity.ModelCrucifix;
 import com.syming.minevania.entity.EntityCrucifix;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -16,12 +16,12 @@ import org.jetbrains.annotations.Nullable;
 @SideOnly(Side.CLIENT)
 public class RenderCrucifix extends RenderLiving<EntityCrucifix> {
 
-    private static final ResourceLocation OAK_TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/crucifix_oak.png");
-    private static final ResourceLocation SPRUCE_TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/crucifix_spruce.png");
-    private static final ResourceLocation BIRCH_TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/crucifix_birch.png");
-    private static final ResourceLocation JUNGLE_TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/crucifix_jungle.png");
-    private static final ResourceLocation ACACIA_TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/crucifix_acacia.png");
-    private static final ResourceLocation DARK_OAK_TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/crucifix_dark_oak.png");
+    private static final ResourceLocation OAK_TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/crucifix_oak.png");
+    private static final ResourceLocation SPRUCE_TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/crucifix_spruce.png");
+    private static final ResourceLocation BIRCH_TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/crucifix_birch.png");
+    private static final ResourceLocation JUNGLE_TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/crucifix_jungle.png");
+    private static final ResourceLocation ACACIA_TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/crucifix_acacia.png");
+    private static final ResourceLocation DARK_OAK_TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/crucifix_dark_oak.png");
 
 
     public RenderCrucifix(RenderManager renderManagerIn) {

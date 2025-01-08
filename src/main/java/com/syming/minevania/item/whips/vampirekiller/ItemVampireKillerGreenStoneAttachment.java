@@ -1,10 +1,7 @@
 package com.syming.minevania.item.whips.vampirekiller;
 
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.tab.CCTabs;
-import com.syming.minevania.util.Helpers;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 
 public class ItemVampireKillerGreenStoneAttachment extends ItemVampireKillerWhip {
 
@@ -14,15 +11,8 @@ public class ItemVampireKillerGreenStoneAttachment extends ItemVampireKillerWhip
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
-        setContainerItem(CCItem.vampireKiller);
+        setContainerItem(MVItem.vampireKiller);
 
-        CCItem.ITEMS.add(this);
-    }
-
-    @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        stack.damageItem(1, attacker);
-        Helpers.playSound(attacker.world, attacker, "whip_impact", 0.5F, 1.0F);
-        return true;
+        MVItem.ITEMS.add(this);
     }
 }

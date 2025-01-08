@@ -1,7 +1,6 @@
 package com.syming.minevania.item.whips;
 
 import com.syming.minevania.item.whips.vampirekiller.ItemVampireKillerCrushingStoneAttachment;
-import com.syming.minevania.util.Helpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -49,8 +48,8 @@ public abstract class ItemWhipTool extends ItemWhip {
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
+        super.hitEntity(stack, target, attacker);
         stack.damageItem(2, attacker);
-        Helpers.playSound(attacker.world, attacker, "whip_impact", 0.5F, 1.0F);
         return true;
     }
 

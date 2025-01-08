@@ -1,6 +1,6 @@
 package com.syming.minevania.block.draculacastlestone;
 
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.tab.CCTabs;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
@@ -14,7 +14,7 @@ public class BlockHalfDraculaCastleStoneSlab extends BlockDraculaCastleStoneSlab
         setTranslationKey(name);
         setRegistryName(name);
 
-        CCItem.ITEMS.add(new ItemSlab(this, this, doubleSlab).setRegistryName(name));
+        MVItem.ITEMS.add(new ItemSlab(this, this, doubleSlab).setRegistryName(name));
     }
 
     @Override

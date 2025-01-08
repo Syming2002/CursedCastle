@@ -1,6 +1,6 @@
 package com.syming.minevania.util;
 
-public class CCReferences {
+public class MVReferences {
 
     public static final String MODID = "minevania";
     public static final String NAME = "Minevania";

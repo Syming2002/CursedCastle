@@ -1,8 +1,8 @@
 package com.syming.minevania.init;
 
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.item.projectiles.subweapons.ItemHolyWater;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.entity.IMerchant;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
@@ -20,9 +20,9 @@ import java.util.Random;
 public class VillagerInit {
 
     public static VillagerRegistry.VillagerProfession villagerHighPriest;
-    public static final String ID_VILLAGER_HIGH_PRIEST = new ResourceLocation(CCReferences.MODID, "high_priest").toString();
-    public static final String TEXTURE_SKIN_HIGH_PRIEST = CCReferences.MODID + ':' + "textures/entity/high_priest.png";
-    public static final String TEXTURE_SKIN_ZOMBIE_HIGH_PRIEST = CCReferences.MODID + ':' + "textures/entity/zombie_high_priest.png";
+    public static final String ID_VILLAGER_HIGH_PRIEST = new ResourceLocation(MVReferences.MODID, "high_priest").toString();
+    public static final String TEXTURE_SKIN_HIGH_PRIEST = MVReferences.MODID + ':' + "textures/entity/high_priest.png";
+    public static final String TEXTURE_SKIN_ZOMBIE_HIGH_PRIEST = MVReferences.MODID + ':' + "textures/entity/zombie_high_priest.png";
 
     public static void init() {
 
@@ -32,7 +32,7 @@ public class VillagerInit {
 
         VillagerRegistry.VillagerCareer highPriestCareer = new VillagerRegistry.VillagerCareer(villagerHighPriest, "high_priest");
         highPriestCareer.addTrade(1,
-                new GiveHolyWaterForPreciousItems((ItemHolyWater) CCItem.holyWater,
+                new GiveHolyWaterForPreciousItems((ItemHolyWater) MVItem.holyWater,
                         new ItemStack(Items.DIAMOND),
                         new EntityVillager.PriceInfo(2, 4), new EntityVillager.PriceInfo(1, 2)
                 ));

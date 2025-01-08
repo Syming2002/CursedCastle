@@ -1,7 +1,7 @@
 package com.syming.minevania.block.draculacastlestone;
 
 import com.syming.minevania.init.CCBlock;
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.itemblock.DraculaCastleStoneBrickItemBlock;
 import com.syming.minevania.tab.CCTabs;
 import net.minecraft.block.Block;
@@ -38,7 +38,7 @@ public class BlockDraculaCastleStoneBrick extends Block {
         this.setRegistryName(name);
 
         CCBlock.BLOCKS.add(this);
-        CCItem.ITEMS.add(new DraculaCastleStoneBrickItemBlock(this, new String[]{"dracula_castle_default", "dracula_castle_cracked", "dracula_castle_chiseled"}).setRegistryName(this.getRegistryName()));
+        MVItem.ITEMS.add(new DraculaCastleStoneBrickItemBlock(this, new String[]{"dracula_castle_default", "dracula_castle_cracked", "dracula_castle_chiseled"}).setRegistryName(this.getRegistryName()));
 
     }
 

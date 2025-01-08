@@ -24,7 +24,7 @@ public class ItemDeathScythe extends Item {
 
         this.attackDamage = 5.0F;
 
-        CCItem.ITEMS.add(this);
+        MVItem.ITEMS.add(this);
     }
 
     @Override

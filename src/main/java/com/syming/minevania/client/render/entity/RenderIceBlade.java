@@ -2,7 +2,7 @@ package com.syming.minevania.client.render.entity;
 
 import com.syming.minevania.client.models.entity.ModelIceBlade;
 import com.syming.minevania.entity.projectiles.EntityIceBladeProjectile;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RenderIceBlade extends Render<EntityIceBladeProjectile> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/ice_blade.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/ice_blade.png");
     public ModelIceBlade modelIceBlade;
 
     public RenderIceBlade(RenderManager renderManager) {

@@ -1,6 +1,6 @@
 package com.syming.minevania.item.projectiles.subweapons.throwingaxe;
 
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import net.minecraft.item.Item;
 
 public class ItemAnimDiamondThrowingAxe extends Item {
@@ -12,7 +12,7 @@ public class ItemAnimDiamondThrowingAxe extends Item {
         setRegistryName(name);
         setCreativeTab(null);
 
-        CCItem.ITEMS.add(this);
+        MVItem.ITEMS.add(this);
     }
 
 }

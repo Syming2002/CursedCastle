@@ -1,17 +1,23 @@
 package com.syming.minevania.entity.projectiles.subweapons;
 
-import com.syming.minevania.util.Helpers;
+import com.syming.minevania.entity.projectiles.MVThrowableWeapon;
+import com.syming.minevania.item.MVItem;
+import com.syming.minevania.util.handlers.SoundsHandler;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntityHolyWater extends EntityThrowable {
+public class EntityHolyWater extends MVThrowableWeapon {
 
     public EntityHolyWater(World worldIn)
     {
@@ -25,9 +31,9 @@ public class EntityHolyWater extends EntityThrowable {
 
     public void onImpact(RayTraceResult result)
     {
-        if (!this.world.isRemote)
+        if (!this.world.isRemote && getThrower() != null)
         {
-            Helpers.playSound(world, thrower, "holy_water_impact", 0.5F, 1.0F);
+            this.world.playSound((EntityPlayer) getThrower(), result.getBlockPos(), SoundsHandler.HOLY_WATER_IMPACT, SoundCategory.MASTER, 0.5F, 1.0F);
             if (result.entityHit instanceof EntityLivingBase)
             {
                 EntityLivingBase entity = (EntityLivingBase) result.entityHit;
@@ -58,6 +64,11 @@ public class EntityHolyWater extends EntityThrowable {
     protected float getGravityVelocity()
     {
         return 0.05F;
+    }
+
+    @Override
+    protected float getImpactDamage() {
+        return 0.5F;
     }
 
 }

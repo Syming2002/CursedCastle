@@ -2,7 +2,7 @@ package com.syming.minevania.client.render.entity;
 
 import com.syming.minevania.client.models.entity.ModelMedusa;
 import com.syming.minevania.entity.mobs.boss.EntityMedusa;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RenderMedusa extends RenderLiving<EntityMedusa> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/medusa.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/medusa.png");
 
     public RenderMedusa(RenderManager renderManager) {
         super(renderManager, new ModelMedusa(), 0.75F);

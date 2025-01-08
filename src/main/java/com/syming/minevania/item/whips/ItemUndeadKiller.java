@@ -1,8 +1,7 @@
 package com.syming.minevania.item.whips;
 
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.tab.CCTabs;
-import com.syming.minevania.util.Helpers;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
@@ -19,18 +18,16 @@ public class ItemUndeadKiller extends ItemWhip {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        CCItem.ITEMS.add(this);
+        MVItem.ITEMS.add(this);
     }
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
-        stack.damageItem(1, attacker);
-        if (target instanceof EntityZombie || target instanceof EntitySkeleton)
-        {
+        super.hitEntity(stack, target, attacker);
+        if (target instanceof EntityZombie || target instanceof EntitySkeleton) {
             target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker), 10.0F);
         }
-        Helpers.playSound(attacker.world, attacker, "whip_impact", 0.5F, 1.0F);
         return true;
     }
 }

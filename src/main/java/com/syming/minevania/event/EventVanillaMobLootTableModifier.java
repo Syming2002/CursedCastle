@@ -1,6 +1,6 @@
 package com.syming.minevania.event;
 
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.util.LootUtils;
 import net.minecraft.world.storage.loot.*;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
@@ -24,7 +24,7 @@ public class EventVanillaMobLootTableModifier {
         LootTable loot = event.getTable();
 
         if (event.getName().getPath().equals("entities/bat")) {
-            LootUtils.addItemToTable(loot, CCItem.guardianSoul, 1, 1, 0.028F, 0, 1, 0, 0, "minevania:guardian_soul",
+            LootUtils.addItemToTable(loot, MVItem.guardianSoul, 1, 1, 0.028F, 0, 1, 0, 0, "minevania:guardian_soul",
                     new LootUtils.IMethod() {
                         @Override
                         public void FunctionsCallback(ArrayList<LootFunction> lootfuncs) {
@@ -42,7 +42,7 @@ public class EventVanillaMobLootTableModifier {
         }
 
         if (event.getName().getPath().equals("entities/skeleton")) {
-            LootUtils.addItemToTable(loot, CCItem.bulletSoul, 1, 1, 0.055F, 0, 1, 0, 0, "minevania:bullet_soul",
+            LootUtils.addItemToTable(loot, MVItem.bulletSoul, 1, 1, 0.055F, 0, 1, 0, 0, "minevania:bullet_soul",
                     new LootUtils.IMethod() {
                         @Override
                         public void FunctionsCallback(ArrayList<LootFunction> lootfuncs) {
@@ -60,7 +60,7 @@ public class EventVanillaMobLootTableModifier {
         }
 
         if (event.getName().getPath().equals("entities/zombie")) {
-            LootUtils.addItemToTable(loot, CCItem.bulletSoul, 1, 1, 0.055F, 0, 1, 0, 0, "minevania:bullet_soul",
+            LootUtils.addItemToTable(loot, MVItem.bulletSoul, 1, 1, 0.055F, 0, 1, 0, 0, "minevania:bullet_soul",
                     new LootUtils.IMethod() {
                         @Override
                         public void FunctionsCallback(ArrayList<LootFunction> lootfuncs) {

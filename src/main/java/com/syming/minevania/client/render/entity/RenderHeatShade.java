@@ -2,7 +2,7 @@ package com.syming.minevania.client.render.entity;
 
 import com.syming.minevania.client.models.entity.ModelHeatShade;
 import com.syming.minevania.entity.mobs.EntityHeatShade;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RenderHeatShade extends RenderLiving<EntityHeatShade> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/heat_shade.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/heat_shade.png");
 
     public RenderHeatShade(RenderManager renderManager) {
         super(renderManager, new ModelHeatShade(), 0.5F);

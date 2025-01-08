@@ -1,6 +1,6 @@
 package com.syming.minevania.client.particles;
 
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -651,7 +651,7 @@ public class ParticlePoisonBreath extends Particle {
         private TextureDefinition(String parName, float parUMin, float parVMin, float parUMax, float parVMax, boolean parAnimMode, int parAnimFrames)
         {
             name = parName;
-            resourceLocation = new ResourceLocation(CCReferences.MODID, "textures/particles/"+name+".png");
+            resourceLocation = new ResourceLocation(MVReferences.MODID, "textures/particles/"+name+".png");
             uMin = parUMin;
             vMin = parVMin;
             uMax = parUMax;

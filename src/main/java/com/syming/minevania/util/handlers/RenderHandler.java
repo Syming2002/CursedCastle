@@ -10,7 +10,7 @@ import com.syming.minevania.entity.mobs.friendly.EntityFriendlyBat;
 import com.syming.minevania.entity.mobs.friendly.EntityFriendlyZombie;
 import com.syming.minevania.entity.projectiles.EntityIceBladeProjectile;
 import com.syming.minevania.init.CCBlock;
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -30,28 +30,28 @@ public class RenderHandler {
         ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(CCBlock.HOLY_WATER_FLUID), new ItemMeshDefinition() {
             @Override
             public ModelResourceLocation getModelLocation(ItemStack stack) {
-                return new ModelResourceLocation(CCReferences.MODID + ":holy_water_fluid", "fluid");
+                return new ModelResourceLocation(MVReferences.MODID + ":holy_water_fluid", "fluid");
             }
        });
 
        ModelLoader.setCustomStateMapper(CCBlock.HOLY_WATER_FLUID, new StateMapperBase() {
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                return new ModelResourceLocation(CCReferences.MODID + ":holy_water_fluid", "fluid");
+                return new ModelResourceLocation(MVReferences.MODID + ":holy_water_fluid", "fluid");
            }
     });
 
         ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(CCBlock.BLOOD_FLUID), new ItemMeshDefinition() {
             @Override
             public ModelResourceLocation getModelLocation(ItemStack stack) {
-                return new ModelResourceLocation(CCReferences.MODID + ":blood_fluid", "fluid");
+                return new ModelResourceLocation(MVReferences.MODID + ":blood_fluid", "fluid");
             }
         });
 
         ModelLoader.setCustomStateMapper(CCBlock.BLOOD_FLUID, new StateMapperBase() {
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                return new ModelResourceLocation(CCReferences.MODID + ":blood_fluid", "fluid");
+                return new ModelResourceLocation(MVReferences.MODID + ":blood_fluid", "fluid");
             }
         });
     }

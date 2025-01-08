@@ -1,6 +1,6 @@
 package com.syming.minevania.itemblock;
 
-import com.syming.minevania.util.CCReferences;
+import com.syming.minevania.util.MVReferences;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -25,6 +25,6 @@ public class DraculaCastleStoneBrickItemBlock extends ItemBlock {
     @Override
     public String getTranslationKey(ItemStack stack)
     {
-        return CCReferences.MODID + '.' + translationKey[stack.getMetadata()];
+        return MVReferences.MODID + '.' + translationKey[stack.getMetadata()];
     }
 }

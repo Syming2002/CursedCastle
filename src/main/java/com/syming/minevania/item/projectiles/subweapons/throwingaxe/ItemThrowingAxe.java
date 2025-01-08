@@ -1,26 +1,25 @@
 package com.syming.minevania.item.projectiles.subweapons.throwingaxe;
 
-import com.syming.minevania.api.ICCItemExtension;
 import com.syming.minevania.entity.projectiles.subweapons.EntityThrowingAxe;
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.tab.CCTabs;
-import com.syming.minevania.util.Helpers;
+import com.syming.minevania.util.handlers.SoundsHandler;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-public class ItemThrowingAxe extends com.syming.minevania.api.CCItem {
+public class ItemThrowingAxe extends Item {
 
     private Item.ToolMaterial material;
 
     public ItemThrowingAxe(String name, Item.ToolMaterial material) {
-        super();
         this.material = material;
         setMaxDamage(material.getMaxUses());
         setMaxStackSize(1);
@@ -28,7 +27,7 @@ public class ItemThrowingAxe extends com.syming.minevania.api.CCItem {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        CCItem.ITEMS.add(this);
+        MVItem.ITEMS.add(this);
     }
 
     public Item.ToolMaterial getMaterial() {
@@ -36,42 +35,24 @@ public class ItemThrowingAxe extends com.syming.minevania.api.CCItem {
     }
 
     @Override
-    public float getHitDamage() {
-        return this.getMaterial().getAttackDamage() + 10F;
-    }
-
-    @Override
     public int getMaxItemUseDuration(ItemStack stack) {
-        return ICCItemExtension.USE_DURATION;
+        return 36000;
     }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
-        ItemStack stack = playerIn.getHeldItemMainhand().copy();
-
-        if (hand == EnumHand.MAIN_HAND && (playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, this))) {
-            playerIn.setActiveHand(EnumHand.MAIN_HAND);
+        ItemStack throwStack = playerIn.getHeldItem(hand);
             if (!worldIn.isRemote) {
-                if (stack.getCount() > 1) {
-                    stack = stack.splitStack(1);
-                }
-                EntityThrowingAxe throwingAxe = new EntityThrowingAxe(worldIn, playerIn, stack, getMaterial());
+                ItemStack throwStackCopy = throwStack.copy();
+                EntityThrowingAxe throwingAxe = new EntityThrowingAxe(worldIn, playerIn, throwStackCopy, getMaterial());
                 worldIn.spawnEntity(throwingAxe);
-                Helpers.playSound(worldIn, playerIn, "throwing_axe_throw", 0.5F, 1.0F);
+                worldIn.playSound(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ, SoundsHandler.THROWING_AXE_THROW, SoundCategory.MASTER, 0.5F, 1.0F);
+                throwStack.shrink(1);
+
             }
-            return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
-        }
-        return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
+        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
     }
 
-    @Override
-    public double getAttackSpeed(ItemStack stack) {
-        return -2;
-    }
-
-    /**
-     * Return the enchantability factor of the item, most of the time is based on material.
-     */
     @Override
     public int getItemEnchantability()
     {
@@ -79,8 +60,19 @@ public class ItemThrowingAxe extends com.syming.minevania.api.CCItem {
     }
 
     @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+
+    @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment.type == EnumEnchantmentType.WEAPON || super.canApplyAtEnchantingTable(stack, enchantment);
+        return enchantment == Enchantments.SHARPNESS
+                || enchantment == Enchantments.SMITE
+                || enchantment == Enchantments.BANE_OF_ARTHROPODS
+                || enchantment == Enchantments.KNOCKBACK
+                || enchantment == Enchantments.FIRE_ASPECT
+                || enchantment == Enchantments.LOOTING;
     }
 
 }

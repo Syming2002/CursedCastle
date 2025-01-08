@@ -1,7 +1,7 @@
 package com.syming.minevania.client.render.entity;
 
 import com.syming.minevania.entity.projectiles.subweapons.EntityHolyCross;
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.item.projectiles.subweapons.holycross.ItemHolyCross;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
@@ -55,15 +55,15 @@ public class RenderHolyCross extends Render<EntityHolyCross> {
         if (stack.getItem() instanceof ItemHolyCross itemHolyCross) {
             switch (itemHolyCross.getMaterial()) {
                 case WOOD:
-                    return new ItemStack(CCItem.animWoodenHolyCross);
+                    return new ItemStack(MVItem.animWoodenHolyCross);
                 case STONE:
-                    return new ItemStack(CCItem.animStoneHolyCross);
+                    return new ItemStack(MVItem.animStoneHolyCross);
                 case IRON:
-                    return new ItemStack(CCItem.animIronHolyCross);
+                    return new ItemStack(MVItem.animIronHolyCross);
                 case GOLD:
-                    return new ItemStack(CCItem.animGoldenHolyCross);
+                    return new ItemStack(MVItem.animGoldenHolyCross);
                 case DIAMOND:
-                    return new ItemStack(CCItem.animDiamondHolyCross);
+                    return new ItemStack(MVItem.animDiamondHolyCross);
             }
         }
         return stack;

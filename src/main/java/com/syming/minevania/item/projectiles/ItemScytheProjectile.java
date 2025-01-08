@@ -1,10 +1,10 @@
 package com.syming.minevania.item.projectiles;
 
-import com.syming.minevania.item.CCItem;
+import com.syming.minevania.item.MVItem;
 import com.syming.minevania.tab.CCTabs;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 
-public class ItemScytheProjectile extends com.syming.minevania.api.CCItem {
+public class ItemScytheProjectile extends Item {
 
     public ItemScytheProjectile(String name) {
         super();
@@ -13,17 +13,6 @@ public class ItemScytheProjectile extends com.syming.minevania.api.CCItem {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        CCItem.ITEMS.add(this);
+        MVItem.ITEMS.add(this);
     }
-
-    @Override
-    public float getHitDamage() {
-        return 3;
-    }
-
-    @Override
-    public double getAttackSpeed(ItemStack stack) {
-        return -1;
-    }
-
 }
