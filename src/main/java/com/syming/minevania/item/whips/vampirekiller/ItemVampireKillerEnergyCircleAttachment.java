@@ -5,8 +5,8 @@ import com.syming.minevania.tab.CCTabs;
 
 public class ItemVampireKillerEnergyCircleAttachment extends ItemVampireKillerWhip {
 
-    public ItemVampireKillerEnergyCircleAttachment(String name, float attackDamage, float attackSpeed, float attackReach) {
-        super(attackDamage, attackSpeed, attackReach);
+    public ItemVampireKillerEnergyCircleAttachment(String name, float attackDamage, float attackSpeed) {
+        super(attackDamage, attackSpeed);
 
         setTranslationKey(name);
         setRegistryName(name);
@@ -14,5 +14,10 @@ public class ItemVampireKillerEnergyCircleAttachment extends ItemVampireKillerWh
         setContainerItem(MVItem.vampireKiller);
 
         MVItem.ITEMS.add(this);
+    }
+
+    @Override
+    public float getReach() {
+        return 12.0F;
     }
 }

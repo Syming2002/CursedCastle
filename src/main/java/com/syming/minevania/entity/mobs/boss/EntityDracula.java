@@ -5,6 +5,9 @@ import com.syming.minevania.entity.mobs.CCEntityMob;
 import com.syming.minevania.entity.mobs.EntityAggressiveBat;
 import com.syming.minevania.item.whips.vampirekiller.ItemVampireKillerWhip;
 import com.syming.minevania.loot.CCTreasures;
+import com.syming.minevania.networking.MVNetworking;
+import com.syming.minevania.networking.MessageDisplayBossInfo;
+import com.syming.minevania.networking.MessageRemoveBossInfo;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationAI;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
@@ -177,6 +180,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity {
     @Override
     public void addTrackingPlayer(EntityPlayerMP player) {
         super.addTrackingPlayer(player);
+
         this.bossInfo.addPlayer(player);
     }
 
@@ -187,6 +191,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity {
     @Override
     public void removeTrackingPlayer(EntityPlayerMP player) {
         super.removeTrackingPlayer(player);
+
         this.bossInfo.removePlayer(player);
     }
 

@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 
 public class ItemVampireKillerRedStoneAttachment extends ItemVampireKillerWhip {
 
-    public ItemVampireKillerRedStoneAttachment(String name, float attackDamage, float attackSpeed, float attackReach) {
-        super(attackDamage, attackSpeed, attackReach);
+    public ItemVampireKillerRedStoneAttachment(String name, float attackDamage, float attackSpeed) {
+        super(attackDamage, attackSpeed);
 
         setTranslationKey(name);
         setRegistryName(name);
@@ -23,5 +23,10 @@ public class ItemVampireKillerRedStoneAttachment extends ItemVampireKillerWhip {
         super.hitEntity(stack, target, attacker);
         target.setFire(5);
         return true;
+    }
+
+    @Override
+    public float getReach() {
+        return 12.0F;
     }
 }

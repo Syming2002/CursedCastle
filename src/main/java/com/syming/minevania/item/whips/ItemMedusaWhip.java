@@ -9,8 +9,8 @@ import net.minecraft.potion.PotionEffect;
 
 public class ItemMedusaWhip extends ItemWhip {
 
-    public ItemMedusaWhip(String name, float attackDamage, float attackSpeed, float attackReach) {
-        super(attackDamage, attackSpeed, attackReach);
+    public ItemMedusaWhip(String name, float attackDamage, float attackSpeed) {
+        super(attackDamage, attackSpeed);
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
@@ -23,5 +23,10 @@ public class ItemMedusaWhip extends ItemWhip {
         super.hitEntity(stack, target, attacker);
         target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 100, true, true));
         return true;
+    }
+
+    @Override
+    public float getReach() {
+        return 12.0F;
     }
 }

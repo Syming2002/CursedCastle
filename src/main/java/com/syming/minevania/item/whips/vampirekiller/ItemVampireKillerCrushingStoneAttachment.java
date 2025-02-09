@@ -67,8 +67,8 @@ public class ItemVampireKillerCrushingStoneAttachment extends ItemWhipTool {
             Blocks.GRASS_PATH,
             Blocks.CONCRETE_POWDER);
 
-    public ItemVampireKillerCrushingStoneAttachment(String name, float attackDamage, float attackSpeed, float attackReach, float efficiency) {
-        super(attackDamage, attackSpeed, attackReach, efficiency, EFFECTIVE_ON);
+    public ItemVampireKillerCrushingStoneAttachment(String name, float attackDamage, float attackSpeed, float efficiency) {
+        super(attackDamage, attackSpeed, efficiency, EFFECTIVE_ON);
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
@@ -110,5 +110,10 @@ public class ItemVampireKillerCrushingStoneAttachment extends ItemWhipTool {
             return true;
         }
         return material == Material.ANVIL;
+    }
+
+    @Override
+    public float getReach() {
+        return 12.0F;
     }
 }

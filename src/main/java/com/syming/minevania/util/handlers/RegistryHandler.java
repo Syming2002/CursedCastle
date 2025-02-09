@@ -3,10 +3,8 @@ package com.syming.minevania.util.handlers;
 
 import com.syming.minevania.MinevaniaMod;
 import com.syming.minevania.api.*;
-import com.syming.minevania.event.EventFriendlyZombieSpawningPrevention;
-import com.syming.minevania.event.EventImmobileEntityLiving;
-import com.syming.minevania.event.EventVanillaMobLootTableModifier;
-import com.syming.minevania.event.EventVillagerCrucifixProtection;
+import com.syming.minevania.entity.CCEntity;
+import com.syming.minevania.event.*;
 import com.syming.minevania.init.*;
 import com.syming.minevania.item.MVItem;
 import com.syming.minevania.integration.forestry.bees.CCBeeDefinition;
@@ -14,6 +12,7 @@ import com.syming.minevania.integration.forestry.items.CCCombItem;
 import com.syming.minevania.integration.forestry.items.CCDropItem;
 import com.syming.minevania.integration.forestry.recipes.CentrifugeRecipes;
 import com.syming.minevania.keybind.SoulKeyBind;
+import com.syming.minevania.networking.MVNetworking;
 import com.syming.minevania.recipe.CraftingRecipes;
 import com.syming.minevania.util.ModLoadedUtils;
 import com.syming.minevania.world.gen.structure.CCWorldGenerator;
@@ -37,6 +36,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -96,11 +96,15 @@ public class RegistryHandler {
 
     public static void registerEvent() {
         // Events
+        EventExtendedReach extendedReach = new EventExtendedReach();
+        EventFireballLauncher fireballLauncher = new EventFireballLauncher();
         EventFriendlyZombieSpawningPrevention friendlyZombieSpawningPrevention = new EventFriendlyZombieSpawningPrevention();
         EventImmobileEntityLiving immobileEntityLiving = new EventImmobileEntityLiving();
         EventVanillaMobLootTableModifier vanillaMobLootTableModifier = new EventVanillaMobLootTableModifier();
         EventVillagerCrucifixProtection villagerCrucifixProtection = new EventVillagerCrucifixProtection();
 
+        MinecraftForge.EVENT_BUS.register(extendedReach);
+        MinecraftForge.EVENT_BUS.register(fireballLauncher);
         MinecraftForge.EVENT_BUS.register(friendlyZombieSpawningPrevention);
         MinecraftForge.EVENT_BUS.register(immobileEntityLiving);
         MinecraftForge.EVENT_BUS.register(vanillaMobLootTableModifier);
@@ -117,6 +121,9 @@ public class RegistryHandler {
         CCEntity.registerEntities();
         registerEvent();
         FluidInit.registerFluids();
+        MVNetworking.registerSimpleNetworking();
+
+        NetworkRegistry.INSTANCE.registerGuiHandler(MinevaniaMod.instance, new GuiHandler());
 
         CCLog.init(event.getModLog());
 

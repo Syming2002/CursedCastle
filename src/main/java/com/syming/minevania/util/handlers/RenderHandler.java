@@ -70,6 +70,7 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityFrozenShade.class, RenderFrozenShade::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityGorgon.class, RenderGorgon::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityGrimReaper.class, RenderGrimReaper::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHarpy.class, RenderHarpy::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHeatShade.class, RenderHeatShade::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityIceBladeProjectile.class, RenderIceBlade::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMedusa.class, RenderMedusa::new);

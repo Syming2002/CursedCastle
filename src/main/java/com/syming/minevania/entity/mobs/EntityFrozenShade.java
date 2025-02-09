@@ -1,5 +1,7 @@
 package com.syming.minevania.entity.mobs;
 
+import com.syming.minevania.api.IElementalWeapon;
+import com.syming.minevania.damagesource.CCDamageSource;
 import com.syming.minevania.entity.ai.shade.frozenShade.AIIdle;
 import com.syming.minevania.entity.ai.shade.frozenShade.AIRepulseAttack;
 import com.syming.minevania.entity.projectiles.EntityIceBladeProjectile;
@@ -21,6 +23,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -34,7 +37,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 
-public class EntityFrozenShade extends EntityMob implements IAnimatedEntity, EntityFlying, IRangedAttackMob {
+public class EntityFrozenShade extends CCEntityMob implements IAnimatedEntity, EntityFlying, IRangedAttackMob {
     public static final Animation IDLE_ANIMATION = Animation.create(40);
     public static final Animation REPULSE_ATTACK_ANIMATION = Animation.create(180);
     private Animation animation = NO_ANIMATION;
@@ -63,6 +66,40 @@ public class EntityFrozenShade extends EntityMob implements IAnimatedEntity, Ent
         super(worldIn);
         this.setSize(1.33F, 2.0F);
         this.experienceValue = 4;
+    }
+
+    @Override
+    public boolean hasWeakness(DamageSource source, float damageAmount) {
+        EntityPlayer player = (EntityPlayer) getAttackingEntity();
+        if (player != null) {
+            System.out.println("player is not null");
+            ItemStack stack = player.getHeldItemMainhand();
+            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+                System.out.println("item implements IElementalWeapon");
+                if (elementalWeapon != null) {
+                    source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
+                    System.out.println("source damage detected");
+                    return source == CCDamageSource.getFireDamage();
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasStrength(DamageSource source, float damageAmount) {
+        EntityPlayer player = (EntityPlayer) getAttackingEntity();
+        if (player != null) {
+            ItemStack stack = player.getHeldItemMainhand();
+            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+                if (elementalWeapon != null) {
+                    source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
+                    System.out.println("source damage detected");
+                    return source == CCDamageSource.getIceDamage();
+                }
+            }
+        }
+        return false;
     }
 
     @Override

@@ -2,7 +2,7 @@
   "parent": "item/handheld",
   "textures":
   {
-    "layer0": "minevania:items/whips/vampire_killer_crushing_stone_attachment"
+    "layer0": "minevania:items/whips/vampire_killer_whip"
   },
   "display": {
     "thirdperson_righthand": {

@@ -12,8 +12,8 @@ import net.minecraft.util.SoundCategory;
 
 public class ItemNebula extends ItemWhip implements IElementalWeapon {
 
-    public ItemNebula(String name, float attackDamage, float attackSpeed, float attackReach) {
-        super(attackDamage, attackSpeed, attackReach);
+    public ItemNebula(String name, float attackDamage, float attackSpeed) {
+        super(attackDamage, attackSpeed);
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
@@ -32,5 +32,10 @@ public class ItemNebula extends ItemWhip implements IElementalWeapon {
     @Override
     public DamageSource getElementalDamageSource(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         return CCDamageSource.getThunderDamage();
+    }
+
+    @Override
+    public float getReach() {
+        return 20.0F;
     }
 }

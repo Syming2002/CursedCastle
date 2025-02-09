@@ -11,9 +11,9 @@ import net.minecraft.util.DamageSource;
 
 public class ItemUndeadKiller extends ItemWhip {
 
-    public ItemUndeadKiller(String name, float attackDamage, float attackSpeed, float attackReach)
+    public ItemUndeadKiller(String name, float attackDamage, float attackSpeed)
     {
-        super(attackDamage, attackSpeed, attackReach);
+        super(attackDamage, attackSpeed);
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
@@ -29,5 +29,10 @@ public class ItemUndeadKiller extends ItemWhip {
             target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) attacker), 10.0F);
         }
         return true;
+    }
+
+    @Override
+    public float getReach() {
+        return 16.0F;
     }
 }

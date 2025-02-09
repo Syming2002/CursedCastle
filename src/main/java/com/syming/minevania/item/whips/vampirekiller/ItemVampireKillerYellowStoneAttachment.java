@@ -8,8 +8,8 @@ import net.minecraft.item.ItemStack;
 
 public class ItemVampireKillerYellowStoneAttachment extends ItemVampireKillerWhip {
 
-    public ItemVampireKillerYellowStoneAttachment(String name, float attackDamage, float attackSpeed, float attackReach) {
-        super(attackDamage, attackSpeed, attackReach);
+    public ItemVampireKillerYellowStoneAttachment(String name, float attackDamage, float attackSpeed) {
+        super(attackDamage, attackSpeed);
 
         setTranslationKey(name);
         setRegistryName(name);
@@ -25,5 +25,10 @@ public class ItemVampireKillerYellowStoneAttachment extends ItemVampireKillerWhi
         EntityLightningBolt lightningBolt = new EntityLightningBolt(target.world, target.posX, target.posY, target.posZ, false);
         target.world.spawnEntity(lightningBolt);
         return true;
+    }
+
+    @Override
+    public float getReach() {
+        return 12.0F;
     }
 }

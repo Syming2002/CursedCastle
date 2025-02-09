@@ -1,6 +1,8 @@
 package com.syming.minevania.proxy;
 
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -37,6 +39,10 @@ public class CommonProxy {
     }
 
     public World getClientWorld() {
+        return null;
+    }
+
+    public EntityPlayerSP getPlayer() {
         return null;
     }
 

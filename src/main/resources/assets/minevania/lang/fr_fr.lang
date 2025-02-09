@@ -16,11 +16,11 @@ item.simon_belmont_leggings.name=Pantalon de Simon Belmont
 
 # Attachments
 
-item.crushing_stone_attachment.name=Accessoire de Pierre Concasseuse
+item.crushing_stone.name=Accessoire de Pierre Concasseuse
 item.steel_attachment.name=Accessoire d'Acier
 item.platinum_attachment.name=Accessoire de Platine
 item.energy_circle_attachment.name=Accessoire de Cercle d'Énergie
-item.bullet_attachment.name=Accessoire de Balle
+item.bullet_tip.name=Accessoire de Balle
 item.red_stone_attachment.name=Accessoire de Pierre Rouge
 item.blue_stone_attachment.name=Accessoire de Pierre Bleue
 item.yellow_stone_attachment.name=Accessoire de Pierre Jaune
@@ -142,6 +142,10 @@ item.iron_throwing_axe.name=Hache Lançable en Fer
 item.golden_throwing_axe.name=Hache Lançable en Or
 item.diamond_throwing_axe.name=Hache Lançable en Diamant
 
+# Tooltips
+
+item.extendedReach.getReach=A %s de distance carrée
+
 # Whips
 
 item.leather_whip.name=Fouet en Cuir
@@ -152,13 +156,13 @@ item.nebula.name=Nebula
 item.flame_whip.name=Fouet en Feu
 item.jet_black_whip.name=Fouet en Jais Noir
 item.undead_killer.name=Tueur de Mort-vivant
-item.vampire_killer.name=Tueur de Vampire
-item.vampire_killer_crushing_stone_attachment.name=Tueur de Vampire de Pierre Concasseuse
-item.vampire_killer_steel_attachment.name=Tueur de Vampire d'Acier
-item.vampire_killer_platinum_attachment.name=Tueur de Vampire de Platine
-item.vampire_killer_energy_circle_attachment.name=Tueur de Vampire de Cercle d'Énrgie
-item.vampire_killer_bullet_attachment.name=Tueur de Vampire de Balle
-item.vampire_killer_red_stone_attachment.name=Tueur de Vampire de Pierre Rouge
-item.vampire_killer_blue_stone_attachment.name=Tueur de Vampire de Pierre Bleue
-item.vampire_killer_yellow_stone_attachment.name=Tueur de Vampire de Pierre Jaune
-item.vampire_killer_green_stone_attachment.name=Tueur de Vampire de Pierre Verte
+item.vampire_killer_whip.name=Fouet Tueur de Vampire
+item.crushing_stone_vampire_killer_whip.name=Fouet Tueur de Vampire avec Pierre Concasseuse
+item.vampire_killer_steel_attachment.name=Fouet Tueur de Vampire avec Acier
+item.vampire_killer_platinum_attachment.name=Fouet Tueur de Vampire avec Platine
+item.vampire_killer_energy_circle_attachment.name=Fouet Tueur de Vampire avec Cercle d'Énrgie
+item.vampire_killer_bullet_attachment.name=Fouet Tueur de Vampire avec Balle
+item.vampire_killer_red_stone_attachment.name=Fouet Tueur de Vampire avec Pierre Rouge
+item.vampire_killer_blue_stone_attachment.name=Fouet Tueur de Vampire avec Pierre Bleue
+item.vampire_killer_yellow_stone_attachment.name=Fouet Tueur de Vampire avec Pierre Jaune
+item.vampire_killer_green_stone_attachment.name=Fouet Tueur de Vampire avec Pierre Verte

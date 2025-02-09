@@ -56,4 +56,6 @@ dependencies {
 //    implementation rfg.deobf("curse.maven:tinkers-construct-74072:2902483")
     implementation rfg.deobf("curse.maven:xaeros-minimap-263420:5262340")
 
+    // Extended Whip Attack
+    implementation rfg.deobf("curse.maven:reaches-fix-556777:6069258")
 }

@@ -52,7 +52,9 @@ public class AIFireballsAttack extends AnimationAI<EntityDracula> {
         Vec3d underRightArmPosSmallFireballs = new Vec3d(-0.5, 1.275,0);
         underRightArmPosSmallFireballs = underRightArmPosSmallFireballs.rotateYaw((float) Math.toRadians((-dracula.rotationYaw - 90)));
         underRightArmPosSmallFireballs = underRightArmPosSmallFireballs.add(dracula.getPositionVector());
-        underRightArmPosSmallFireballs = underRightArmPosSmallFireballs.add(new Vec3d(0, 0, 1.5).rotatePitch((float) Math.toRadians(-dracula.rotationPitch)).rotateYaw((float) Math.toRadians(-dracula.rotationYawHead)));
+        underRightArmPosSmallFireballs = underRightArmPosSmallFireballs.add(new Vec3d(0, 0, 1.5)
+                .rotatePitch((float) Math.toRadians(-dracula.rotationPitch))
+                .rotateYaw((float) Math.toRadians(-dracula.rotationYawHead)));
 
         double targetX = this.attackTarget.posX - this.dracula.posX;
         double targetY = this.attackTarget.getEntityBoundingBox().minY + (double) (this.attackTarget.height / 2.0F) - this.dracula.posY;

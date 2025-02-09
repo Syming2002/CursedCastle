@@ -1,7 +1,6 @@
-package com.syming.minevania.init;
+package com.syming.minevania.entity;
 
 import com.syming.minevania.MinevaniaMod;
-import com.syming.minevania.entity.*;
 import com.syming.minevania.entity.mobs.*;
 import com.syming.minevania.entity.mobs.boss.*;
 import com.syming.minevania.entity.mobs.friendly.EntityFriendlyBat;
@@ -66,6 +65,7 @@ public class CCEntity {
         registerEntity("frozen_shade", EntityFrozenShade.class, 64, 0x0350B1, 0x1092F9);
         registerEntity("gorgon", EntityGorgon.class, 64, 0xE8B000, 0xF05850);
         registerEntity("grim_reaper", EntityGrimReaper.class, 64, 0x1E4168, 0xF5EFEA);
+        registerEntity("harpy", EntityHarpy.class, 64, 0xF8B078, 0x08F5C6);
         registerEntity("heat_shade", EntityHeatShade.class, 64, 0xA10C05, 0xF01504);
         registerEntity("medusa", EntityMedusa.class, 64, 0x204018, 0xD8E068);
         registerEntity("medusa_snake", EntityMedusaSnake.class, 64, 0xD8E068, 0xB23434);

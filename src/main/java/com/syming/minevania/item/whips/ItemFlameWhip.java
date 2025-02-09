@@ -10,8 +10,8 @@ import net.minecraft.util.DamageSource;
 
 public class ItemFlameWhip extends ItemWhip implements IElementalWeapon {
 
-    public ItemFlameWhip(String name, float attackDamage, float attackSpeed, float attackReach) {
-        super(attackDamage, attackSpeed, attackReach);
+    public ItemFlameWhip(String name, float attackDamage, float attackSpeed) {
+        super(attackDamage, attackSpeed);
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
@@ -30,5 +30,10 @@ public class ItemFlameWhip extends ItemWhip implements IElementalWeapon {
     @Override
     public DamageSource getElementalDamageSource(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         return CCDamageSource.getFireDamage();
+    }
+
+    @Override
+    public float getReach() {
+        return 12.0F;
     }
 }

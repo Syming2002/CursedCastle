@@ -9,8 +9,8 @@ import net.minecraft.item.ItemStack;
 
 public class ItemVampireKillerBlueStoneAttachment extends ItemVampireKillerWhip {
 
-    public ItemVampireKillerBlueStoneAttachment(String name, float attackDamage, float attackSpeed, float attackReach) {
-        super(attackDamage, attackSpeed, attackReach);
+    public ItemVampireKillerBlueStoneAttachment(String name, float attackDamage, float attackSpeed) {
+        super(attackDamage, attackSpeed);
 
         setTranslationKey(name);
         setRegistryName(name);
@@ -32,5 +32,10 @@ public class ItemVampireKillerBlueStoneAttachment extends ItemVampireKillerWhip 
             player.getEntityData().setInteger("PlayerCannotMove", 100);
         }
         return true;
+    }
+
+    @Override
+    public float getReach() {
+        return 12.0F;
     }
 }

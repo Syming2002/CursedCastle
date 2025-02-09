@@ -16,11 +16,11 @@ item.simon_belmont_leggings.name=Simon Belmont Leggings
 
 # Attachments
 
-item.crushing_stone_attachment.name=Crushing Stone Attachment
+item.crushing_stone.name=Crushing Stone
 item.steel_attachment.name=Steel Attachment
 item.platinum_attachment.name=Platinum Attachment
 item.energy_circle_attachment.name=Energy Circle Attachment
-item.bullet_attachment.name=Bullet Attachment
+item.bullet_tip.name=Bullet Tip
 item.red_stone_attachment.name=Red Stone Attachment
 item.blue_stone_attachment.name=Blue Stone Attachment
 item.yellow_stone_attachment.name=Yellow Stone Attachment
@@ -53,6 +53,7 @@ tile.holy_water_fluid.name=Holy Water
 
 # Bullet Souls
 
+item.bullet_soul.axe_armor_soul.name=Axe Armor Soul
 item.bullet_soul.skeleton_soul.name=Skeleton Soul
 item.bullet_soul.zombie_soul.name=Zombie Soul
 
@@ -141,6 +142,10 @@ item.iron_throwing_axe.name=Iron Throwing Axe
 item.golden_throwing_axe.name=Golden Throwing Axe
 item.diamond_throwing_axe.name=Diamond Throwing Axe
 
+# Tooltips
+
+item.extendedReach.getReach=Has %s square distance reach
+
 # Whips
 
 item.leather_whip.name=Leather Whip
@@ -151,12 +156,12 @@ item.nebula.name=Nebula
 item.flame_whip.name=Flame Whip
 item.jet_black_whip.name=Jet Black Whip
 item.undead_killer.name=Undead Killer
-item.vampire_killer.name=Vampire Killer
-item.vampire_killer_crushing_stone_attachment.name=Vampire Killer Crushing Stone Attachment
+item.vampire_killer_whip.name=Vampire Killer Whip
+item.crushing_stone_vampire_killer_whip.name=Crushing Stone Vampire Killer Whip
 item.vampire_killer_steel_attachment.name=Vampire Killer Steel Attachment
 item.vampire_killer_platinum_attachment.name=Vampire Killer Platinum Attachment
 item.vampire_killer_energy_circle_attachment.name=Vampire Killer Energy Circle Attachment
-item.vampire_killer_bullet_attachment.name=Vampire Killer Bullet Attachment
+item.vampire_killer_bullet_attachment.name=Bullet Tip Vampire Killer Whip
 item.vampire_killer_red_stone_attachment.name=Vampire Killer Red Stone Attachment
 item.vampire_killer_blue_stone_attachment.name=Vampire Killer Blue Stone Attachment
 item.vampire_killer_yellow_stone_attachment.name=Vampire Killer Yellow Stone Attachment

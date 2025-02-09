@@ -2,6 +2,8 @@ package com.syming.minevania.proxy;
 
 import com.syming.minevania.MinevaniaMod;
 import com.syming.minevania.block.draculacastlestone.BlockDraculaCastleStoneBrick;
+import com.syming.minevania.client.gui.MVGui;
+import com.syming.minevania.client.gui.MVRenderBossBar;
 import com.syming.minevania.client.render.entity.RenderDagger;
 import com.syming.minevania.client.render.entity.RenderHolyCross;
 import com.syming.minevania.client.render.entity.RenderThrowingAxe;
@@ -16,6 +18,7 @@ import com.syming.minevania.item.souls.EnumBulletSoul;
 import com.syming.minevania.item.souls.EnumGuardianSoul;
 import com.syming.minevania.util.MVReferences;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -24,6 +27,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -57,7 +61,6 @@ public class ClientProxy extends CommonProxy {
 
         RenderingRegistry.registerEntityRenderingHandler(EntityScytheProjectile.class, new RenderSnowball<EntityScytheProjectile>(Minecraft.getMinecraft().getRenderManager(), MVItem.animScytheProjectile, Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityThrowingBoneProjectile.class, new RenderSnowball<EntityThrowingBoneProjectile>(Minecraft.getMinecraft().getRenderManager(), MVItem.throwingBone, Minecraft.getMinecraft().getRenderItem()));
-
     }
 
 
@@ -101,6 +104,11 @@ public class ClientProxy extends CommonProxy {
     @Override
     public World getClientWorld() {
         return FMLClientHandler.instance().getClient().world;
+    }
+
+    @Override
+    public EntityPlayerSP getPlayer() {
+        return FMLClientHandler.instance().getClientPlayerEntity();
     }
 
     @Override
