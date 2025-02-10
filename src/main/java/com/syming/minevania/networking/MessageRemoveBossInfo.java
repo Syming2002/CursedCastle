@@ -3,7 +3,7 @@ package com.syming.minevania.networking;
 import com.syming.minevania.MinevaniaMod;
 import com.syming.minevania.client.gui.MVRenderBossBar;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -29,7 +29,6 @@ public class MessageRemoveBossInfo implements IMessage {
     public void fromBytes(ByteBuf buf) {
         this.uuid = UUID.fromString(ByteBufUtils.readUTF8String(buf));
         this.entityID = ByteBufUtils.readVarInt(buf, 4);
-        new MessageRemoveBossInfo(this.uuid, this.entityID);
     }
 
     @Override
@@ -43,17 +42,14 @@ public class MessageRemoveBossInfo implements IMessage {
         @Override
         @SideOnly(Side.CLIENT)
         public IMessage onMessage(MessageRemoveBossInfo message, MessageContext ctx) {
-            final EntityPlayerMP playerMP = (EntityPlayerMP) MinevaniaMod.proxy.getPlayerEntityFromContext(ctx);
-
-            playerMP.getServer().addScheduledTask(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            MVRenderBossBar.removeDraculaBossBar(message.uuid, message.entityID);
-                        }
-                    }
-            );
+            if (ctx.side == Side.CLIENT) {
+                Minecraft.getMinecraft().addScheduledTask(() -> processMessage(message));
+            }
             return null;
+        }
+
+        void processMessage(MessageRemoveBossInfo messageBossInfo) {
+            MVRenderBossBar.BOSS_MAP.remove(messageBossInfo.uuid);
         }
     }
 }

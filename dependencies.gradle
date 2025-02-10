@@ -39,6 +39,9 @@
  */
 dependencies {
 
+//    implementation rfg.deobf("curse.maven:mixin-booter-419286:6156863")
+
+
     implementation rfg.deobf("curse.maven:attributefix-280510:4427962")
     implementation rfg.deobf("curse.maven:bubbles-a-baubles-fork-995393:5719448")
     implementation rfg.deobf("curse.maven:better-advancements-272515:2685984")

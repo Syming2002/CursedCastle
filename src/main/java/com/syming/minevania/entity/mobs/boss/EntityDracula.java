@@ -1,13 +1,15 @@
 package com.syming.minevania.entity.mobs.boss;
 
+import com.syming.minevania.api.ICustomBossBar;
 import com.syming.minevania.entity.ai.dracula.*;
 import com.syming.minevania.entity.mobs.CCEntityMob;
 import com.syming.minevania.entity.mobs.EntityAggressiveBat;
 import com.syming.minevania.item.whips.vampirekiller.ItemVampireKillerWhip;
 import com.syming.minevania.loot.CCTreasures;
 import com.syming.minevania.networking.MVNetworking;
-import com.syming.minevania.networking.MessageDisplayBossInfo;
+import com.syming.minevania.networking.MessageAddBossInfo;
 import com.syming.minevania.networking.MessageRemoveBossInfo;
+import com.syming.minevania.util.MVReferences;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationAI;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
@@ -37,11 +39,12 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityDracula extends CCEntityMob implements IAnimatedEntity {
+public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICustomBossBar {
 
     private Animation animation = NO_ANIMATION;
     public static final Animation IDLE_ANIMATION = Animation.create(40);
@@ -61,7 +64,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity {
     private static final Animation[] ANIMATIONS = {IDLE_ANIMATION, FIREBALLS_ANIMATION, DARK_INFERNO_ANIMATION, FIRE_PILLAR_ANIMATION, BATS_ATTACK_ANIMATION, DEATH_ANIMATION};
     private int animationTick;
     public AnimationAI currentAnim;
-    private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
+    private final BossInfoServer bossInfo = (BossInfoServer) new BossInfoServer(getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS).setDarkenSky(false);
     private static final int BAT_GROUP_RADIUS = 20;
     private List<EntityAggressiveBat> aggressiveBats = new ArrayList<>();
     public PartEntity draculaHead;
@@ -167,11 +170,11 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity {
     /**
      * Sets the custom name tag for this entity
      */
-    @Override
-    public void setCustomNameTag(String name) {
-        super.setCustomNameTag(name);
-        this.bossInfo.setName(this.getDisplayName());
-    }
+//    @Override
+//    public void setCustomNameTag(String name) {
+//        super.setCustomNameTag(name);
+//        this.bossInfo.setName(this.getDisplayName());
+//    }
 
     /**
      * Add the given player to the list of players tracking this entity. For instance, a player may track a boss in
@@ -180,6 +183,8 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity {
     @Override
     public void addTrackingPlayer(EntityPlayerMP player) {
         super.addTrackingPlayer(player);
+
+        MVNetworking.network.sendTo(new MessageAddBossInfo(this.bossInfo.getUniqueId(), getEntityId()), player);
 
         this.bossInfo.addPlayer(player);
     }
@@ -191,6 +196,8 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity {
     @Override
     public void removeTrackingPlayer(EntityPlayerMP player) {
         super.removeTrackingPlayer(player);
+
+        MVNetworking.network.sendTo(new MessageRemoveBossInfo(this.bossInfo.getUniqueId(), getEntityId()), player);
 
         this.bossInfo.removePlayer(player);
     }
@@ -492,5 +499,10 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity {
 
     public PartEntity getDraculaBody() {
         return this.draculaBody;
+    }
+
+    @Override
+    public @Nullable ResourceLocation getCustomBossBar() {
+        return new ResourceLocation(MVReferences.MODID, "textures/gui/dracula_boss_bar.png");
     }
 }

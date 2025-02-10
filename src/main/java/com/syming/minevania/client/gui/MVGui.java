@@ -1,18 +1,15 @@
 package com.syming.minevania.client.gui;
 
-import com.syming.minevania.entity.mobs.boss.EntityDracula;
-import com.syming.minevania.networking.MVNetworking;
-import com.syming.minevania.networking.MessageDisplayBossInfo;
-import com.syming.minevania.networking.MessageRemoveBossInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.BossInfoClient;
-import net.minecraft.entity.Entity;
-import net.minecraft.world.BossInfo;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.UUID;
 
+@SideOnly(Side.CLIENT)
 public class MVGui {
     private static final MVRenderBossBar bossBar = new MVRenderBossBar();
 
@@ -25,9 +22,7 @@ public class MVGui {
 
         if (MVRenderBossBar.isDraculaBossBar(bossUUID)) {
             bossBar.drawDraculaBossHealthBar(event.getX(), event.getY(), bossInfo);
-            MVNetworking.network.sendToServer(new MessageDisplayBossInfo());
-        } else {
-            MVNetworking.network.sendToServer(new MessageRemoveBossInfo());
+            event.setIncrement(event.getIncrement());
         }
     }
 }

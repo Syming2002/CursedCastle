@@ -65,7 +65,7 @@ public class MVItem {
     public static Item flameWhip = new ItemFlameWhip("flame_whip", 2.0F, -3.5F);
     public static Item jetBlackWhip = new ItemJetBlackWhip("jet_black_whip", 2.0F, -3.5F);
     public static Item undeadKiller = new ItemUndeadKiller("undead_killer", 2.0F, -3.5F);
-    public static Item vampireKiller = new ItemVampireKiller("vampire_killer_whip", 2.0F, -3.5F);
+    public static Item vampireKiller = new ItemVampireKiller("vampire_killer_whip", 8, -3.5F);
     public static Item vampireKillerCrushingStoneAttachment = new ItemVampireKillerCrushingStoneAttachment("crushing_stone_vampire_killer_whip", 3.0F, -3.5F, 12.0F);
     public static Item vampireKillerSteelAttachment = new ItemVampireKillerSteelAttachment("vampire_killer_steel_attachment", 2.0F, -3.5F);
     public static Item vampireKillerPlatinumAttachment = new ItemVampireKillerPlatinumAttachment("vampire_killer_platinum_attachment", 2.0F, -3.5F);

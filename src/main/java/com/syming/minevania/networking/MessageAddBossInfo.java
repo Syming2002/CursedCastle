@@ -1,9 +1,11 @@
 package com.syming.minevania.networking;
 
-import com.syming.minevania.MinevaniaMod;
 import com.syming.minevania.client.gui.MVRenderBossBar;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.play.server.SPacketUpdateBossInfo;
+import net.minecraft.world.BossInfo;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -13,14 +15,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.UUID;
 
-public class MessageDisplayBossInfo implements IMessage {
+public class MessageAddBossInfo implements IMessage {
     private UUID uuid;
     private int entityID;
 
-    public MessageDisplayBossInfo() {
+    public MessageAddBossInfo() {
     }
 
-    public MessageDisplayBossInfo(UUID uuid, int entityID) {
+    public MessageAddBossInfo(UUID uuid, int entityID) {
         this.uuid = uuid;
         this.entityID = entityID;
     }
@@ -29,7 +31,6 @@ public class MessageDisplayBossInfo implements IMessage {
     public void fromBytes(ByteBuf buf) {
         this.uuid = UUID.fromString(ByteBufUtils.readUTF8String(buf));
         this.entityID = ByteBufUtils.readVarInt(buf, 4);
-        new MessageDisplayBossInfo(this.uuid, this.entityID);
     }
 
     @Override
@@ -38,22 +39,19 @@ public class MessageDisplayBossInfo implements IMessage {
         ByteBufUtils.writeVarInt(buf, this.entityID, 4);
     }
 
-    public static class Handler implements IMessageHandler<MessageDisplayBossInfo, IMessage> {
+    public static class Handler implements IMessageHandler<MessageAddBossInfo, IMessage> {
 
         @Override
         @SideOnly(Side.CLIENT)
-        public IMessage onMessage(MessageDisplayBossInfo message, MessageContext ctx) {
-            final EntityPlayerMP playerMP = (EntityPlayerMP) MinevaniaMod.proxy.getPlayerEntityFromContext(ctx);
-
-            playerMP.getServer().addScheduledTask(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            MVRenderBossBar.addDraculaBossBar(message.uuid, message.entityID);
-                        }
-                    }
-            );
+        public IMessage onMessage(MessageAddBossInfo message, MessageContext ctx) {
+            if (ctx.side == Side.CLIENT) {
+                Minecraft.getMinecraft().addScheduledTask(() -> processMessage(message));
+            }
             return null;
+        }
+
+        void processMessage(MessageAddBossInfo messageBossInfo) {
+            MVRenderBossBar.BOSS_MAP.put(messageBossInfo.uuid, messageBossInfo.entityID);
         }
     }
 }
