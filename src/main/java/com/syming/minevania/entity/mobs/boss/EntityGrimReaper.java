@@ -1,7 +1,14 @@
 package com.syming.minevania.entity.mobs.boss;
 
+import com.syming.minevania.api.ICustomBossBar;
+import com.syming.minevania.api.IElementalWeapon;
+import com.syming.minevania.damagesource.CCDamageSource;
 import com.syming.minevania.entity.ai.grimReaper.*;
 import com.syming.minevania.entity.mobs.CCEntityMob;
+import com.syming.minevania.networking.MVNetworking;
+import com.syming.minevania.networking.MessageAddBossInfo;
+import com.syming.minevania.networking.MessageRemoveBossInfo;
+import com.syming.minevania.util.MVReferences;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationAI;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
@@ -22,14 +29,16 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, EntityFlying {
+public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, ICustomBossBar, EntityFlying {
 
     public static final Animation IDLE_ANIMATION = Animation.create(60);
     public static final Animation MELEE_ATTACK_ANIMATION = Animation.create(35);
@@ -53,11 +62,31 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, En
 
     @Override
     public boolean hasWeakness(DamageSource source, float damageAmount) {
+        EntityLivingBase living = getAttackingEntity();
+        if (living != null) {
+            ItemStack stack = living.getHeldItemMainhand();
+            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+                if (elementalWeapon != null) {
+                    source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
+                    return source == CCDamageSource.getHolyDamage();
+                }
+            }
+        }
         return false;
     }
 
     @Override
     public boolean hasStrength(DamageSource source, float damageAmount) {
+        EntityLivingBase living = getAttackingEntity();
+        if (living != null) {
+            ItemStack stack = living.getHeldItemMainhand();
+            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+                if (elementalWeapon != null) {
+                    source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
+                    return source == CCDamageSource.getDarkDamage();
+                }
+            }
+        }
         return false;
     }
 
@@ -84,7 +113,7 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, En
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_SPEED);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(1.2D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(1.2D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2222.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(888.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
 
@@ -103,13 +132,6 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, En
     }
 
     @Override
-    public void setCustomNameTag(String name)
-    {
-        super.setCustomNameTag(name);
-        this.bossInfo.setName(this.getDisplayName());
-    }
-
-    @Override
     protected void updateAITasks() {
         super.updateAITasks();
 
@@ -120,6 +142,9 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, En
     public void addTrackingPlayer(EntityPlayerMP player)
     {
         super.addTrackingPlayer(player);
+
+        MVNetworking.network.sendTo(new MessageAddBossInfo(this.bossInfo.getUniqueId(), getEntityId()), player);
+
         this.bossInfo.addPlayer(player);
     }
 
@@ -127,6 +152,9 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, En
     public void removeTrackingPlayer(EntityPlayerMP player)
     {
         super.removeTrackingPlayer(player);
+
+        MVNetworking.network.sendTo(new MessageRemoveBossInfo(this.bossInfo.getUniqueId(), getEntityId()), player);
+
         this.bossInfo.removePlayer(player);
     }
 
@@ -308,6 +336,20 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, En
         return flag;
     }
 
+    /**
+     * Called when the entity is attacked.
+     */
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (hasWeakness(source, amount)) {
+            return !this.isEntityInvulnerable(source) && super.attackEntityFrom(source, amount * amount);
+        }
+        if (hasStrength(source, amount)) {
+            return !this.isEntityInvulnerable(source) && super.attackEntityFrom(source, amount / amount);
+        }
+        return !this.isEntityInvulnerable(source) && super.attackEntityFrom(source, amount);
+    }
+
     @Override
     public int getAnimationTick() {
         return animationTick;
@@ -339,5 +381,10 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, En
     @Override
     public Animation[] getAnimations() {
         return ANIMATIONS;
+    }
+
+    @Override
+    public @Nullable ResourceLocation getCustomBossBar() {
+        return new ResourceLocation(MVReferences.MODID, "textures/gui/death_boss_bar.png");
     }
 }

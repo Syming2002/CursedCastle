@@ -190,55 +190,55 @@ public class ModelGrimReaper extends CCModel {
 			animator.move(scythe, -10, 0, -13);
 			this.rotate(animator, scythe, 0, 0, -72.5F);
 
-			animator.startKeyframe(20);
-			animator.move(scythe, -10, 0, -13);
-			this.rotate(animator, scythe, 14.7511F, 2.3554F, -425.1326F);
-			animator.endKeyframe();
-
-			this.rotate(animator, right_arm, -60.0079F, 12.4794F, 0.7185F);
-			this.rotate(animator, right_arm_sleve, -60.0079F, 12.4794F, 0.7185F);
-			this.rotate(animator, left_arm, -50.8617F, -91.9818F, -17.9605F);
-			this.rotate(animator, left_arm_sleve, -50.8617F, -91.9818F, -17.9605F);
-			animator.move(scythe, -10, 0, -13);
-			this.rotate(animator, scythe, 0, 0, -72.5F);
-
-			animator.startKeyframe(20);
-			animator.move(scythe, -10, 0, -13);
-			this.rotate(animator, scythe, 14.7511F, 2.3554F, -785.13F);
-			animator.endKeyframe();
-
-			this.rotate(animator, right_arm, -60.0079F, 12.4794F, 0.7185F);
-			this.rotate(animator, right_arm_sleve, -60.0079F, 12.4794F, 0.7185F);
-			this.rotate(animator, left_arm, -50.8617F, -91.9818F, -17.9605F);
-			this.rotate(animator, left_arm_sleve, -50.8617F, -91.9818F, -17.9605F);
-			animator.move(scythe, -10, 0, -13);
-			this.rotate(animator, scythe, 0, 0, -72.5F);
-
-			animator.startKeyframe(20);
-			animator.move(scythe, -10, 0, -13);
-			this.rotate(animator, scythe, 14.7511F, 2.3554F, -1145.13F);
-			animator.endKeyframe();
-
-			this.rotate(animator, right_arm, -60.0079F, 12.4794F, 0.7185F);
-			this.rotate(animator, right_arm_sleve, -60.0079F, 12.4794F, 0.7185F);
-			this.rotate(animator, left_arm, -50.8617F, -91.9818F, -17.9605F);
-			this.rotate(animator, left_arm_sleve, -50.8617F, -91.9818F, -17.9605F);
-			animator.move(scythe, -10, 0, -13);
-			this.rotate(animator, scythe, 0, 0, -72.5F);
-
-			animator.startKeyframe(20);
+			animator.startKeyframe(80);
 			animator.move(scythe, -10, 0, -13);
 			this.rotate(animator, scythe, 14.7511F, 2.3554F, -1502.5588F);
 			animator.endKeyframe();
 
-			animator.startKeyframe(20);
-			this.rotate(animator, right_arm, 0, 0, 0);
-			this.rotate(animator, right_arm_sleve, 0, 0, 0);
-			this.rotate(animator, left_arm, 0, 0, 0);
-			this.rotate(animator, left_arm_sleve, 0, 0, 0);
-			animator.move(scythe, 0, 0, 0);
-			this.rotate(animator, scythe, 0, 0, 0);
-			animator.endKeyframe();
+//			this.rotate(animator, right_arm, -60.0079F, 12.4794F, 0.7185F);
+//			this.rotate(animator, right_arm_sleve, -60.0079F, 12.4794F, 0.7185F);
+//			this.rotate(animator, left_arm, -50.8617F, -91.9818F, -17.9605F);
+//			this.rotate(animator, left_arm_sleve, -50.8617F, -91.9818F, -17.9605F);
+//			animator.move(scythe, -10, 0, -13);
+//			this.rotate(animator, scythe, 0, 0, -72.5F);
+//
+//			animator.startKeyframe(20);
+//			animator.move(scythe, -10, 0, -13);
+//			this.rotate(animator, scythe, 14.7511F, 2.3554F, -785.13F);
+//			animator.endKeyframe();
+//
+//			this.rotate(animator, right_arm, -60.0079F, 12.4794F, 0.7185F);
+//			this.rotate(animator, right_arm_sleve, -60.0079F, 12.4794F, 0.7185F);
+//			this.rotate(animator, left_arm, -50.8617F, -91.9818F, -17.9605F);
+//			this.rotate(animator, left_arm_sleve, -50.8617F, -91.9818F, -17.9605F);
+//			animator.move(scythe, -10, 0, -13);
+//			this.rotate(animator, scythe, 0, 0, -72.5F);
+//
+//			animator.startKeyframe(20);
+//			animator.move(scythe, -10, 0, -13);
+//			this.rotate(animator, scythe, 14.7511F, 2.3554F, -1145.13F);
+//			animator.endKeyframe();
+//
+//			this.rotate(animator, right_arm, -60.0079F, 12.4794F, 0.7185F);
+//			this.rotate(animator, right_arm_sleve, -60.0079F, 12.4794F, 0.7185F);
+//			this.rotate(animator, left_arm, -50.8617F, -91.9818F, -17.9605F);
+//			this.rotate(animator, left_arm_sleve, -50.8617F, -91.9818F, -17.9605F);
+//			animator.move(scythe, -10, 0, -13);
+//			this.rotate(animator, scythe, 0, 0, -72.5F);
+//
+//			animator.startKeyframe(20);
+//			animator.move(scythe, -10, 0, -13);
+//			this.rotate(animator, scythe, 14.7511F, 2.3554F, -1502.5588F);
+//			animator.endKeyframe();
+
+			animator.resetKeyframe(20);
+//			this.rotate(animator, right_arm, 0, 0, 0);
+//			this.rotate(animator, right_arm_sleve, 0, 0, 0);
+//			this.rotate(animator, left_arm, 0, 0, 0);
+//			this.rotate(animator, left_arm_sleve, 0, 0, 0);
+//			animator.move(scythe, 0, 0, 0);
+//			this.rotate(animator, scythe, 0, 0, 0);
+//			animator.endKeyframe();
 		}
 
 

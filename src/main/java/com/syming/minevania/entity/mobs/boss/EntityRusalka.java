@@ -12,6 +12,7 @@ import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.GuiBossOverlay;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -233,15 +234,12 @@ public class EntityRusalka extends CCEntityMob implements IAnimatedEntity {
 
     @Override
     public boolean hasWeakness(DamageSource source, float damageAmount) {
-        EntityPlayer player = (EntityPlayer) getAttackingEntity();
-        if (player != null) {
-            System.out.println("player is not null");
-            ItemStack stack = player.getHeldItemMainhand();
+        EntityLivingBase living = getAttackingEntity();
+        if (living != null) {
+            ItemStack stack = living.getHeldItemMainhand();
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
-                System.out.println("item implements IElementalWeapon");
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
-                    System.out.println("source damage detected");
                     return source == CCDamageSource.getThunderDamage();
                 }
             }
@@ -251,13 +249,12 @@ public class EntityRusalka extends CCEntityMob implements IAnimatedEntity {
 
     @Override
     public boolean hasStrength(DamageSource source, float damageAmount) {
-        EntityPlayer player = (EntityPlayer) getAttackingEntity();
-        if (player != null) {
-            ItemStack stack = player.getHeldItemMainhand();
+        EntityLivingBase living = getAttackingEntity();
+        if (living != null) {
+            ItemStack stack = living.getHeldItemMainhand();
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
-                    System.out.println("source damage detected");
                     return source == CCDamageSource.getWaterDamage();
                 }
             }

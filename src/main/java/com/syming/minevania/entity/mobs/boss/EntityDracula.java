@@ -168,15 +168,6 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     }
 
     /**
-     * Sets the custom name tag for this entity
-     */
-//    @Override
-//    public void setCustomNameTag(String name) {
-//        super.setCustomNameTag(name);
-//        this.bossInfo.setName(this.getDisplayName());
-//    }
-
-    /**
      * Add the given player to the list of players tracking this entity. For instance, a player may track a boss in
      * order to view its associated boss bar.
      */
@@ -407,8 +398,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource source, float damage) {
-
+    public boolean attackEntityFrom(DamageSource source, float amount) {
         if (source.getTrueSource() instanceof EntityPlayer attackingPlayer) {
 
             ItemStack heldItem = attackingPlayer.getHeldItemMainhand();
@@ -424,9 +414,16 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
         if (parts != null) {
             for (PartEntity part : parts) {
                 if (this.lastHitItem != null) {
-                    if (part == getDraculaHead() && this.lastHitItem instanceof ItemVampireKillerWhip) {
-                        super.attackEntityFrom(source, damage);
-                        return true;
+                    if (part == getDraculaHead()) {
+                        if (this.lastHitItem instanceof ItemVampireKillerWhip) {
+                            return !isEntityInvulnerable(source) && super.attackEntityFrom(source, amount);
+                        }
+                        if (hasWeakness(source, amount)) {
+                            return !isEntityInvulnerable(source) && super.attackEntityFrom(source, amount * amount);
+                        }
+                        if (hasStrength(source, amount)) {
+                            return !isEntityInvulnerable(source) && super.attackEntityFrom(source, amount / amount);
+                        }
                     }
 
                     if (part == getDraculaBody()) {

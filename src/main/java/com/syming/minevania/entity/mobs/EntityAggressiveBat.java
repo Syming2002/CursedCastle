@@ -4,6 +4,8 @@ import com.syming.minevania.api.IElementalWeapon;
 import com.syming.minevania.damagesource.CCDamageSource;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,10 +41,7 @@ public class EntityAggressiveBat extends CCEntityMob implements EntityFlying {
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (hasWeakness(source, amount)) {
-            if (source == DamageSource.ON_FIRE) {
-               return !this.isEntityInvulnerable(source) && super.attackEntityFrom(source, amount * amount * 2.0F);
-            }
+        if (hasWeakness(source, amount) || source == DamageSource.ON_FIRE) {
             return !this.isEntityInvulnerable(source) && super.attackEntityFrom(source, amount * amount);
         }
         if (hasStrength(source, amount)) {
@@ -53,32 +52,27 @@ public class EntityAggressiveBat extends CCEntityMob implements EntityFlying {
 
     @Override
     public boolean hasWeakness(DamageSource source, float damageAmount) {
-        EntityPlayer player = (EntityPlayer) getAttackingEntity();
-        if (player != null) {
-            System.out.println("player is not null");
-            ItemStack stack = player.getHeldItemMainhand();
+        EntityLivingBase living = getAttackingEntity();
+        if (living != null) {
+            ItemStack stack = living.getHeldItemMainhand();
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
-                System.out.println("item implements IElementalWeapon");
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
-                    System.out.println("source damage detected");
                     return source == CCDamageSource.getFireDamage();
                 }
             }
         }
-        System.out.println("fire damage source detected");
         return source == DamageSource.ON_FIRE;
     }
 
     @Override
     public boolean hasStrength(DamageSource source, float damageAmount) {
-        EntityPlayer player = (EntityPlayer) getAttackingEntity();
-        if (player != null) {
-            ItemStack stack = player.getHeldItemMainhand();
+        EntityLivingBase living = getAttackingEntity();
+        if (living != null) {
+            ItemStack stack = living.getHeldItemMainhand();
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
-                    System.out.println("source damage detected");
                     return source == CCDamageSource.getDarkDamage();
                 }
             }

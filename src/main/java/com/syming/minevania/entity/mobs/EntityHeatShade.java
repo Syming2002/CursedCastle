@@ -1,5 +1,7 @@
 package com.syming.minevania.entity.mobs;
 
+import com.syming.minevania.api.IElementalWeapon;
+import com.syming.minevania.damagesource.CCDamageSource;
 import com.syming.minevania.entity.ai.shade.heatShade.AIIdle;
 import com.syming.minevania.entity.ai.shade.heatShade.AIRepulseAttack;
 import com.syming.minevania.loot.CCTreasures;
@@ -8,6 +10,7 @@ import net.ilexiconn.llibrary.server.animation.AnimationAI;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -16,6 +19,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +27,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-public class EntityHeatShade extends EntityMob implements IAnimatedEntity, EntityFlying {
+public class EntityHeatShade extends CCEntityMob implements IAnimatedEntity, EntityFlying {
 
     public static final Animation IDLE_ANIMATION = Animation.create(40);
     public static final Animation REPULSE_ATTACK_ANIMATION = Animation.create(180);
@@ -39,6 +43,36 @@ public class EntityHeatShade extends EntityMob implements IAnimatedEntity, Entit
         super(worldIn);
         this.setSize(1.33F, 2.0F);
         this.experienceValue = (int) 1.36;
+    }
+
+    @Override
+    public boolean hasWeakness(DamageSource source, float damageAmount) {
+        EntityLivingBase living = getAttackingEntity();
+        if (living != null) {
+            ItemStack stack = living.getHeldItemMainhand();
+            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+                if (elementalWeapon != null) {
+                    source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
+                    return source == CCDamageSource.getIceDamage();
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasStrength(DamageSource source, float damageAmount) {
+        EntityLivingBase living = getAttackingEntity();
+        if (living != null) {
+            ItemStack stack = living.getHeldItemMainhand();
+            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+                if (elementalWeapon != null) {
+                    source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
+                    return source == CCDamageSource.getFireDamage();
+                }
+            }
+        }
+        return false;
     }
 
     @Override

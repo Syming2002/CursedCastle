@@ -70,15 +70,12 @@ public class EntityFrozenShade extends CCEntityMob implements IAnimatedEntity, E
 
     @Override
     public boolean hasWeakness(DamageSource source, float damageAmount) {
-        EntityPlayer player = (EntityPlayer) getAttackingEntity();
-        if (player != null) {
-            System.out.println("player is not null");
-            ItemStack stack = player.getHeldItemMainhand();
+        EntityLivingBase living = getAttackingEntity();
+        if (living != null) {
+            ItemStack stack = living.getHeldItemMainhand();
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
-                System.out.println("item implements IElementalWeapon");
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
-                    System.out.println("source damage detected");
                     return source == CCDamageSource.getFireDamage();
                 }
             }
@@ -88,13 +85,12 @@ public class EntityFrozenShade extends CCEntityMob implements IAnimatedEntity, E
 
     @Override
     public boolean hasStrength(DamageSource source, float damageAmount) {
-        EntityPlayer player = (EntityPlayer) getAttackingEntity();
-        if (player != null) {
-            ItemStack stack = player.getHeldItemMainhand();
+        EntityLivingBase living = getAttackingEntity();
+        if (living != null) {
+            ItemStack stack = living.getHeldItemMainhand();
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
-                    System.out.println("source damage detected");
                     return source == CCDamageSource.getIceDamage();
                 }
             }
