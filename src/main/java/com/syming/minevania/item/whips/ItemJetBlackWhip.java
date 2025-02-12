@@ -12,9 +12,9 @@ import net.minecraft.potion.PotionEffect;
 
 public class ItemJetBlackWhip extends ItemWhip {
 
-    public ItemJetBlackWhip(String name, float attackDamage, float attackSpeed)
+    public ItemJetBlackWhip(String name, float attackDamage, float attackSpeed, float reach)
     {
-        super(attackDamage, attackSpeed);
+        super(attackDamage, attackSpeed, reach);
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);

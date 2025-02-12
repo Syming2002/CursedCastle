@@ -18,9 +18,9 @@ public abstract class ItemWhipTool extends ItemWhip {
     protected final float efficiency;
     protected Set<Block> effectiveBlocks;
 
-    protected ItemWhipTool(float attackDamage, float attackSpeed, float efficiency,  Set<Block> effectiveBlocks)
+    protected ItemWhipTool(float attackDamage, float attackSpeed, float efficiency,  Set<Block> effectiveBlocks, float reach)
     {
-        super(attackDamage, attackSpeed);
+        super(attackDamage, attackSpeed, reach);
         this.efficiency = efficiency;
         this.effectiveBlocks = effectiveBlocks;
         this.setMaxStackSize(1);

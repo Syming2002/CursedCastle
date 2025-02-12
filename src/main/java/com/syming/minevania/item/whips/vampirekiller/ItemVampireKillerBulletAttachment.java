@@ -17,8 +17,8 @@ import net.minecraft.world.World;
 public class ItemVampireKillerBulletAttachment extends ItemVampireKillerWhip {
 
 
-    public ItemVampireKillerBulletAttachment(String name, float attackDamage, float attackSpeed) {
-        super(attackDamage, attackSpeed);
+    public ItemVampireKillerBulletAttachment(String name, float attackDamage, float attackSpeed, float reach) {
+        super(attackDamage, attackSpeed, reach);
 
         setTranslationKey(name);
         setRegistryName(name);

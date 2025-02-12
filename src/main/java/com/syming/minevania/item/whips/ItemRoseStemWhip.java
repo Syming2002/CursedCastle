@@ -5,8 +5,8 @@ import com.syming.minevania.tab.CCTabs;
 
 public class ItemRoseStemWhip extends ItemWhip {
 
-    public ItemRoseStemWhip(String name, float attackDamage, float attackSpeed) {
-        super(attackDamage, attackSpeed);
+    public ItemRoseStemWhip(String name, float attackDamage, float attackSpeed, float reach) {
+        super(attackDamage, attackSpeed, reach);
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);

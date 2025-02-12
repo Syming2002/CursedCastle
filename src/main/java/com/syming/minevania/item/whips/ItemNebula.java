@@ -12,8 +12,8 @@ import net.minecraft.util.SoundCategory;
 
 public class ItemNebula extends ItemWhip implements IElementalWeapon {
 
-    public ItemNebula(String name, float attackDamage, float attackSpeed) {
-        super(attackDamage, attackSpeed);
+    public ItemNebula(String name, float attackDamage, float attackSpeed, float reach) {
+        super(attackDamage, attackSpeed, reach);
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);

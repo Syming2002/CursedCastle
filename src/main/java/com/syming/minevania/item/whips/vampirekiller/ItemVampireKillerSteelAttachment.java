@@ -5,8 +5,8 @@ import com.syming.minevania.tab.CCTabs;
 
 public class ItemVampireKillerSteelAttachment extends ItemVampireKillerWhip {
 
-    public ItemVampireKillerSteelAttachment(String name, float attackDamage, float attackSpeed) {
-        super(attackDamage, attackSpeed);
+    public ItemVampireKillerSteelAttachment(String name, float attackDamage, float attackSpeed, float reach) {
+        super(attackDamage, attackSpeed, reach);
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);

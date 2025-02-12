@@ -3,16 +3,14 @@ package com.syming.minevania.event;
 import com.syming.minevania.api.IExtendedReach;
 import com.syming.minevania.networking.MVNetworking;
 import com.syming.minevania.networking.MessageExtendedReachAttack;
-import meldexun.reachfix.hook.client.EntityRendererHook;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -62,7 +60,7 @@ public class EventExtendedReach {
     /**
      * Gets the block or object that is being moused over.
      */
-    public RayTraceResult getMouseOver(float distance)
+    public static RayTraceResult getMouseOver(float distance)
     {
         Minecraft mc = FMLClientHandler.instance().getClient();
         Entity theRenderViewEntity = mc.getRenderViewEntity();

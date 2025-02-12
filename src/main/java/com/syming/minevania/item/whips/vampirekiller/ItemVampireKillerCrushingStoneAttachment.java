@@ -67,8 +67,8 @@ public class ItemVampireKillerCrushingStoneAttachment extends ItemWhipTool {
             Blocks.GRASS_PATH,
             Blocks.CONCRETE_POWDER);
 
-    public ItemVampireKillerCrushingStoneAttachment(String name, float attackDamage, float attackSpeed, float efficiency) {
-        super(attackDamage, attackSpeed, efficiency, EFFECTIVE_ON);
+    public ItemVampireKillerCrushingStoneAttachment(String name, float attackDamage, float attackSpeed, float efficiency, float reach) {
+        super(attackDamage, attackSpeed, efficiency, EFFECTIVE_ON, reach);
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);

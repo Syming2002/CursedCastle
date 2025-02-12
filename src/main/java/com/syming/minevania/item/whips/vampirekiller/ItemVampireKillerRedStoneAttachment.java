@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 
 public class ItemVampireKillerRedStoneAttachment extends ItemVampireKillerWhip {
 
-    public ItemVampireKillerRedStoneAttachment(String name, float attackDamage, float attackSpeed) {
-        super(attackDamage, attackSpeed);
+    public ItemVampireKillerRedStoneAttachment(String name, float attackDamage, float attackSpeed, float reach) {
+        super(attackDamage, attackSpeed, reach);
 
         setTranslationKey(name);
         setRegistryName(name);

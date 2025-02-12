@@ -57,24 +57,24 @@ public class MVItem {
 
 
     // Whips
-    public static Item leatherWhip = new ItemLeatherWhip("leather_whip", 2.0F, -3.5F);
-    public static Item steelWhip = new ItemSteelWhip("steel_whip", 2.0F, -3.5F);
-    public static Item roseStemWhip = new ItemRoseStemWhip("rose_stem_whip", 2.0F, -3.5F);
-    public static Item medusaWhip = new ItemMedusaWhip("medusa_whip", 2.0F, -3.5F);
-    public static Item nebula = new ItemNebula("nebula", 2.0F, -3.5F);
-    public static Item flameWhip = new ItemFlameWhip("flame_whip", 2.0F, -3.5F);
-    public static Item jetBlackWhip = new ItemJetBlackWhip("jet_black_whip", 2.0F, -3.5F);
-    public static Item undeadKiller = new ItemUndeadKiller("undead_killer", 2.0F, -3.5F);
-    public static Item vampireKiller = new ItemVampireKiller("vampire_killer_whip", 8, -3.5F);
-    public static Item vampireKillerCrushingStoneAttachment = new ItemVampireKillerCrushingStoneAttachment("crushing_stone_vampire_killer_whip", 3.0F, -3.5F, 12.0F);
-    public static Item vampireKillerSteelAttachment = new ItemVampireKillerSteelAttachment("vampire_killer_steel_attachment", 2.0F, -3.5F);
-    public static Item vampireKillerPlatinumAttachment = new ItemVampireKillerPlatinumAttachment("vampire_killer_platinum_attachment", 2.0F, -3.5F);
-    public static Item vampireKillerEnergyCircleAttachment = new ItemVampireKillerEnergyCircleAttachment("vampire_killer_energy_circle_attachment", 2.0F, -3.5F);
-    public static Item vampireKillerBulletAttachment = new ItemVampireKillerBulletAttachment("bullet_tip_vampire_killer_whip", 2.0F, -3.5F);
-    public static Item vampireKillerRedStoneAttachment = new ItemVampireKillerRedStoneAttachment("vampire_killer_red_stone_attachment", 2.0F, -3.5F);
-    public static Item vampireKillerBlueStoneAttachment = new ItemVampireKillerBlueStoneAttachment("vampire_killer_blue_stone_attachment", 2.0F, -3.5F);
-    public static Item vampireKillerYellowStoneAttachment = new ItemVampireKillerYellowStoneAttachment("vampire_killer_yellow_stone_attachment", 2.0F, -3.5F);
-    public static Item vampireKillerGreenStoneAttachment = new ItemVampireKillerGreenStoneAttachment("vampire_killer_green_stone_attachment", 2.0F, -3.5F);
+    public static Item leatherWhip = new ItemLeatherWhip("leather_whip", 2.0F, -3.5F, 12.0F);
+    public static Item steelWhip = new ItemSteelWhip("steel_whip", 2.0F, -3.5F, 12.0F);
+    public static Item roseStemWhip = new ItemRoseStemWhip("rose_stem_whip", 2.0F, -3.5F, 8.0F);
+    public static Item medusaWhip = new ItemMedusaWhip("medusa_whip", 2.0F, -3.5F, 12.0F);
+    public static Item nebula = new ItemNebula("nebula", 2.0F, -3.5F, 20.0F);
+    public static Item flameWhip = new ItemFlameWhip("flame_whip", 2.0F, -3.5F, 12.0F);
+    public static Item jetBlackWhip = new ItemJetBlackWhip("jet_black_whip", 2.0F, -3.5F, 12.0F);
+    public static Item undeadKiller = new ItemUndeadKiller("undead_killer", 2.0F, -3.5F, 16.0F);
+    public static Item vampireKiller = new ItemVampireKiller("vampire_killer_whip", 8, -3.5F, 12.0F);
+    public static Item vampireKillerCrushingStoneAttachment = new ItemVampireKillerCrushingStoneAttachment("crushing_stone_vampire_killer_whip", 3.0F, -3.5F, 12.0F, 12.0F);
+    public static Item vampireKillerSteelAttachment = new ItemVampireKillerSteelAttachment("vampire_killer_steel_attachment", 2.0F, -3.5F, 12.0F);
+    public static Item vampireKillerPlatinumAttachment = new ItemVampireKillerPlatinumAttachment("vampire_killer_platinum_attachment", 2.0F, -3.5F, 12.0F);
+    public static Item vampireKillerEnergyCircleAttachment = new ItemVampireKillerEnergyCircleAttachment("vampire_killer_energy_circle_attachment", 2.0F, -3.5F, 12.0F);
+    public static Item vampireKillerBulletAttachment = new ItemVampireKillerBulletAttachment("bullet_tip_vampire_killer_whip", 2.0F, -3.5F, 12.0F);
+    public static Item vampireKillerRedStoneAttachment = new ItemVampireKillerRedStoneAttachment("vampire_killer_red_stone_attachment", 2.0F, -3.5F, 12.0F);
+    public static Item vampireKillerBlueStoneAttachment = new ItemVampireKillerBlueStoneAttachment("vampire_killer_blue_stone_attachment", 2.0F, -3.5F, 12.0F);
+    public static Item vampireKillerYellowStoneAttachment = new ItemVampireKillerYellowStoneAttachment("vampire_killer_yellow_stone_attachment", 2.0F, -3.5F, 12.0F);
+    public static Item vampireKillerGreenStoneAttachment = new ItemVampireKillerGreenStoneAttachment("vampire_killer_green_stone_attachment", 2.0F, -3.5F, 12.0F);
 
 
     // Whips Attachments

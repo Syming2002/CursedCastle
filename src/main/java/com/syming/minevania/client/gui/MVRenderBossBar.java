@@ -38,8 +38,6 @@ public class MVRenderBossBar extends Gui {
             if (health > 0) {
                 drawTexturedModalRect(x, y, 0, 0, health, 90);
             }
-
-//            System.out.println("Render Health Bar");
         }
     }
 

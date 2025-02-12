@@ -11,9 +11,9 @@ import net.minecraft.util.DamageSource;
 
 public class ItemUndeadKiller extends ItemWhip {
 
-    public ItemUndeadKiller(String name, float attackDamage, float attackSpeed)
+    public ItemUndeadKiller(String name, float attackDamage, float attackSpeed, float reach)
     {
-        super(attackDamage, attackSpeed);
+        super(attackDamage, attackSpeed, reach);
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);

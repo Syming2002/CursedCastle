@@ -3,7 +3,6 @@ package com.syming.minevania.proxy;
 import com.syming.minevania.MinevaniaMod;
 import com.syming.minevania.block.draculacastlestone.BlockDraculaCastleStoneBrick;
 import com.syming.minevania.client.gui.MVGui;
-import com.syming.minevania.client.gui.MVRenderBossBar;
 import com.syming.minevania.client.render.entity.RenderDagger;
 import com.syming.minevania.client.render.entity.RenderHolyCross;
 import com.syming.minevania.client.render.entity.RenderThrowingAxe;
@@ -114,13 +113,12 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
+        MinecraftForge.EVENT_BUS.register(new MVGui());
     }
 
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-
-        MinecraftForge.EVENT_BUS.register(new MVGui());
 
         CCJerIntegration.init();
     }

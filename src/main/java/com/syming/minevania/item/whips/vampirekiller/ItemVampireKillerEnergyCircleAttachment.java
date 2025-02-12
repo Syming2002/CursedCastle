@@ -5,8 +5,8 @@ import com.syming.minevania.tab.CCTabs;
 
 public class ItemVampireKillerEnergyCircleAttachment extends ItemVampireKillerWhip {
 
-    public ItemVampireKillerEnergyCircleAttachment(String name, float attackDamage, float attackSpeed) {
-        super(attackDamage, attackSpeed);
+    public ItemVampireKillerEnergyCircleAttachment(String name, float attackDamage, float attackSpeed, float reach) {
+        super(attackDamage, attackSpeed, reach);
 
         setTranslationKey(name);
         setRegistryName(name);

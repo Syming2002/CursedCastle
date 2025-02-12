@@ -123,8 +123,6 @@ public class RegistryHandler {
         FluidInit.registerFluids();
         MVNetworking.registerSimpleNetworking();
 
-//        NetworkRegistry.INSTANCE.registerGuiHandler(MinevaniaMod.instance, new GuiHandler());
-
         CCLog.init(event.getModLog());
 
         if (ModLoadedUtils.Forestry.isModLoaded()) {

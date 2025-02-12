@@ -6,8 +6,10 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntitySmallFireball;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -15,23 +17,15 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageSyncEventFireballLauncher implements IMessage {
 
-    private int entityId;
-
     public MessageSyncEventFireballLauncher() {
-    }
-
-    public MessageSyncEventFireballLauncher(int entityId) {
-        this.entityId = entityId;
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        this.entityId = ByteBufUtils.readVarInt(buf, 4);
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-        ByteBufUtils.writeVarInt(buf, this.entityId, 4);
     }
 
     public static class Handler implements IMessageHandler<MessageSyncEventFireballLauncher, IMessage> {
@@ -40,45 +34,41 @@ public class MessageSyncEventFireballLauncher implements IMessage {
         public IMessage onMessage(MessageSyncEventFireballLauncher message, MessageContext ctx) {
             EntityPlayerMP playerMP = (EntityPlayerMP) ctx.getServerHandler().player;
 
-            playerMP.getServer().addScheduledTask(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-
-                            Entity entity = playerMP.world.getEntityByID(message.entityId);
-
-                            if (playerMP.getHeldItemMainhand() == null) {
-                                return;
-                            }
-                            if (playerMP.getHeldItemMainhand().getItem() == MVItem.vampireKillerBulletAttachment) {
-
-                                Vec3d smallFireballPosition = new Vec3d(0, playerMP.posY + playerMP.getEyeHeight(), 0);
-                                smallFireballPosition = smallFireballPosition.rotateYaw((float) Math.toRadians((-playerMP.rotationYaw - 90)));
-                                smallFireballPosition = smallFireballPosition.add(playerMP.getPositionVector()
-                                        .rotatePitch((float) Math.toRadians(-playerMP.rotationPitch))
-                                        .rotateYaw((float) Math.toRadians(-playerMP.rotationYawHead)));
-
-                                double targetX = entity.posX - playerMP.posX;
-                                double targetY = entity.getEntityBoundingBox().minY + (double) (entity.height / 2.0F) - playerMP.posY;
-                                double targetZ = entity.posZ - playerMP.posZ;
-
-                                float distance = MathHelper.sqrt(targetX * targetX + targetY * targetY + targetZ * targetZ) * 0.5F;
-
-                                double directionX = targetX / distance;
-                                double directionY = targetY / distance;
-                                double directionZ = targetZ / distance;
-
-                                EntitySmallFireball smallFireball = new EntitySmallFireball(playerMP.world, smallFireballPosition.x, smallFireballPosition.y, smallFireballPosition.z, directionX * 0.5, directionY * 0.5, directionZ * 0.5);
-
-                                if (!playerMP.world.isRemote) {
-                                    playerMP.world.spawnEntity(smallFireball);
-                                }
-                            }
-                            return;
-                        }
-                    }
-            );
+            playerMP.getServer().addScheduledTask(() -> {
+                if (playerMP.getHeldItemMainhand().getItem() == MVItem.vampireKillerBulletAttachment) {
+                    launchSmallFireball(playerMP);
+                }
+            });
             return null;
+        }
+
+        private void launchSmallFireball(EntityPlayerMP playerMP) {
+            if (!playerMP.world.isRemote) {
+                Vec3d look = playerMP.getLookVec();
+                double speed = 0.5D;
+                double motionX = look.x * speed;
+                double motionY = look.y * speed;
+                double motionZ = look.z * speed;
+
+                double spawnX = playerMP.posX + look.x * 1.5D;
+                double spawnY = playerMP.posY + playerMP.getEyeHeight();
+                double spawnZ = playerMP.posZ + look.z * 1.5D;
+
+                EntitySmallFireball smallFireball = new EntitySmallFireball(
+                        playerMP.world);
+
+                smallFireball.setPosition(
+                        spawnX,
+                        spawnY,
+                        spawnZ);
+
+                smallFireball.accelerationX = motionX * 0.1D;
+                smallFireball.accelerationY = motionY * 0.1D;
+                smallFireball.accelerationZ = motionZ * 0.1D;
+                playerMP.world.spawnEntity(smallFireball);
+
+                playerMP.getCooldownTracker().setCooldown(playerMP.getHeldItemMainhand().getItem(), 100);
+            }
         }
     }
 }

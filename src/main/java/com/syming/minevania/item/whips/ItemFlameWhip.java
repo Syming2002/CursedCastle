@@ -10,8 +10,8 @@ import net.minecraft.util.DamageSource;
 
 public class ItemFlameWhip extends ItemWhip implements IElementalWeapon {
 
-    public ItemFlameWhip(String name, float attackDamage, float attackSpeed) {
-        super(attackDamage, attackSpeed);
+    public ItemFlameWhip(String name, float attackDamage, float attackSpeed, float reach) {
+        super(attackDamage, attackSpeed, reach);
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
