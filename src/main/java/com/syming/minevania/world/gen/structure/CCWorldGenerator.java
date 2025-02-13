@@ -17,6 +17,7 @@ public class CCWorldGenerator implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         if (world.provider.getDimension() == 0) { //Overworld Generator
             generateOverworld(world, random, chunkX, chunkZ);
+            System.out.println("A Rusalka Cave has spawn at " + chunkX + ", " + chunkZ);
         }
     }
 
@@ -25,7 +26,7 @@ public class CCWorldGenerator implements IWorldGenerator {
         int z = (chunkZ * 16) + random.nextInt(16);
         int y = 16 + random.nextInt(17);
 
-        if (random.nextInt(100) == 0) {
+        if (random.nextInt(200) == 0) {
             BlockPos pos = new BlockPos(x, y, z);
             RUSALKA_CAVE.generate(world, random, pos);
         }

@@ -28,11 +28,54 @@ public class MVItem {
     public static  List<Item> ITEMS = new ArrayList<>();
 
     // Materials Armors
-    public static ItemArmor.ArmorMaterial DRACULA_TUNIC_ARMOR = EnumHelper.addArmorMaterial("dracula_tunic_material", MVReferences.MODID + ":dracula_tunic", 10, new int[] {0, 0, 20, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.99F);
-    public static ItemArmor.ArmorMaterial OLROX_SUIT_ARMOR = EnumHelper.addArmorMaterial("olrox_suit_material", MVReferences.MODID + ":olrox_suit", 8, new int[] {0, 0, 16, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.99F);
-    public static ItemArmor.ArmorMaterial JUSTE_BELMONT_ARMOR = EnumHelper.addArmorMaterial("juste_belmont_armor_material", MVReferences.MODID + ":juste_belmont", 10, new int[] {4, 1, 3, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F);
-    public static ItemArmor.ArmorMaterial RICHTER_BELMONT_ARMOR = EnumHelper.addArmorMaterial("richter_belmont_armor_material", MVReferences.MODID + ":richter_belmont", 10, new int[] {2, 1, 3, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F);
-    public static ItemArmor.ArmorMaterial SIMON_BELMONT_ARMOR = EnumHelper.addArmorMaterial("simon_belmont_armor_material", MVReferences.MODID + ":simon_belmont", 10, new int[] {2, 1, 2, 0}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.25F);
+    public static ItemArmor.ArmorMaterial DRACULA_TUNIC_ARMOR = EnumHelper.addArmorMaterial(
+            "dracula_tunic_material",
+            MVReferences.MODID + ":dracula_tunic",
+            10,
+            new int[] {0, 0, 20, 0},
+            5,
+            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
+            0.99F);
+    public static ItemArmor.ArmorMaterial LEON_BELMONT_ARMOR = EnumHelper.addArmorMaterial(
+            "leon_belmont_armor_material",
+            MVReferences.MODID + ":leon_belmont",
+            10,
+            new int[] {4, 1, 3, 0},
+            5,
+            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
+            0.125F);
+    public static ItemArmor.ArmorMaterial JUSTE_BELMONT_ARMOR = EnumHelper.addArmorMaterial(
+            "juste_belmont_armor_material",
+            MVReferences.MODID + ":juste_belmont",
+            10,
+            new int[] {4, 1, 3, 0},
+            5,
+            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
+            0.125F);
+    public static ItemArmor.ArmorMaterial OLROX_SUIT_ARMOR = EnumHelper.addArmorMaterial(
+            "olrox_suit_material",
+            MVReferences.MODID + ":olrox_suit",
+            8,
+            new int[] {0, 0, 16, 0},
+            5,
+            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
+            0.99F);
+    public static ItemArmor.ArmorMaterial RICHTER_BELMONT_ARMOR = EnumHelper.addArmorMaterial(
+            "richter_belmont_armor_material",
+            MVReferences.MODID + ":richter_belmont",
+            10,
+            new int[] {2, 1, 3, 0},
+            5,
+            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
+            0.125F);
+    public static ItemArmor.ArmorMaterial SIMON_BELMONT_ARMOR = EnumHelper.addArmorMaterial(
+            "simon_belmont_armor_material",
+            MVReferences.MODID + ":simon_belmont",
+            10,
+            new int[] {2, 1, 2, 0},
+            5,
+            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
+            0.25F);
 
     // Materials
 //    public static  Item.ToolMaterial LEATHER_WHIP_MATERIAL = EnumHelper.addToolMaterial("leather_whip_material", 1, 100, 2.0F, 2.2F, 5).setRepairItem(new ItemStack(Items.LEATHER));
@@ -142,15 +185,20 @@ public class MVItem {
 
     // Armors
     public static Item draculaTunic = new ItemDraculaTunicArmor("dracula_tunic", DRACULA_TUNIC_ARMOR, 1, EntityEquipmentSlot.CHEST);
-    public static Item olroxSuit = new ItemOlroxSuitArmor("olrox_suit", OLROX_SUIT_ARMOR, 1, EntityEquipmentSlot.CHEST);
 
     public static Item justeBelmontChest = new ItemJusteBelmontArmor("juste_belmont_chest", JUSTE_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
     public static Item justeBelmontLeggings = new ItemJusteBelmontArmor("juste_belmont_leggings", JUSTE_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
     public static Item justeBelmontBoots = new ItemJusteBelmontArmor("juste_belmont_boots", JUSTE_BELMONT_ARMOR, 2, EntityEquipmentSlot.FEET);
 
+    public static Item leonBelmontChest = new ItemLeonBelmontArmor("leon_belmont_chest", LEON_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
+    public static Item leonBelmontLeggings = new ItemLeonBelmontArmor("leon_belmont_leggings", LEON_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
+    public static Item leonBelmontBoots = new ItemLeonBelmontArmor("leon_belmont_boots", LEON_BELMONT_ARMOR, 1, EntityEquipmentSlot.FEET);
+
+    public static Item olroxSuit = new ItemOlroxSuitArmor("olrox_suit", OLROX_SUIT_ARMOR, 1, EntityEquipmentSlot.CHEST);
+
     public static Item richterBelmontChest = new ItemRichterBelmontArmor("richter_belmont_chest", RICHTER_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
     public static Item richterBelmontLeggings = new ItemRichterBelmontArmor("richter_belmont_leggings", RICHTER_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
-    public static Item richterBelmontBoots = new ItemRichterBelmontArmor("richter_belmont_boots", RICHTER_BELMONT_ARMOR, 1, EntityEquipmentSlot.FEET);
+    public static Item richterBelmontBoots = new ItemRichterBelmontArmor("richter_belmont_boots", RICHTER_BELMONT_ARMOR, 2, EntityEquipmentSlot.FEET);
 
     public static Item simonBelmontChest = new ItemSimonBelmontArmor("simon_belmont_chest", SIMON_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
     public static Item simonBelmontLeggings = new ItemSimonBelmontArmor("simon_belmont_leggings", SIMON_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);

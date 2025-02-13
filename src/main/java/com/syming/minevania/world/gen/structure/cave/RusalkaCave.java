@@ -39,14 +39,14 @@ public class RusalkaCave extends WorldGenerator {
                     BlockPos targetPos = position.add(x, y, z);
 
                     if (Math.abs(distance - radius) < 0.5) {
-                        world.setBlockState(targetPos, prismarineState, 3);
+                        world.setBlockState(targetPos, prismarineState, 2);
                     } else if (distance <= radius) {
                         if (y == 0) {
-                            world.setBlockState(targetPos, waterFloor, 3);
+                            world.setBlockState(targetPos, this.waterFloor, 2);
                         } else if (y < 0) {
-                            world.setBlockState(targetPos, prismarineState, 3);
+                            world.setBlockState(targetPos, prismarineState, 2);
                         } else {
-                            world.setBlockState(targetPos, air, 3);
+                            world.setBlockState(targetPos, this.air, 2);
                         }
                     }
                 }

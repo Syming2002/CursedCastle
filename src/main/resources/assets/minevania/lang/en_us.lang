@@ -2,9 +2,15 @@
 
 item.dracula_tunic.name=Dracula's Tunic
 
+item.leon_belmont_boots.name=Leon Belmont Boots
+item.leon_belmont_chest.name=Leon Belmont Chestplate
+item.leon_belmont_leggings.name=Leon Belmont Leggings
+
 item.juste_belmont_boots.name=Juste Belmont Boots
 item.juste_belmont_chest.name=Juste Belmont Chestplate
 item.juste_belmont_leggings.name=Juste Belmont Leggings
+
+item.olrox_suit.name=Olrox's Suit
 
 item.richter_belmont_boots.name=Richter Belmont Boots
 item.richter_belmont_chest.name=Richter Belmont Chestplate
@@ -161,7 +167,7 @@ item.crushing_stone_vampire_killer_whip.name=Crushing Stone Vampire Killer Whip
 item.vampire_killer_steel_attachment.name=Vampire Killer Steel Attachment
 item.vampire_killer_platinum_attachment.name=Vampire Killer Platinum Attachment
 item.vampire_killer_energy_circle_attachment.name=Vampire Killer Energy Circle Attachment
-item.vampire_killer_bullet_attachment.name=Bullet Tip Vampire Killer Whip
+item.bullet_tip_vampire_killer_whip.name=Bullet Tip Vampire Killer Whip
 item.vampire_killer_red_stone_attachment.name=Vampire Killer Red Stone Attachment
 item.vampire_killer_blue_stone_attachment.name=Vampire Killer Blue Stone Attachment
 item.vampire_killer_yellow_stone_attachment.name=Vampire Killer Yellow Stone Attachment
