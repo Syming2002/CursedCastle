@@ -1,0 +1,10 @@
+{
+  "package": "com.syming.castlevaniacraft.mixin",
+  "refmap": "mixins.castlevaniacraft.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [],
+  "client": ["client.EntityRendererMixin"],
+  "server": []
+}

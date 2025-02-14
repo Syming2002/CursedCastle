@@ -1,0 +1,17 @@
+{
+  "parent": "item/handheld",
+  "textures":
+  {
+    "layer0": "castlevaniacraft:items/whips/flame_whip"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "translation": [0, 0, -5],
+      "rotation": [0, -90, 0]
+    },
+    "thirdperson_lefthand": {
+      "translation": [0, 0, -5],
+      "rotation": [0, -270, 0]
+    }
+  }
+}

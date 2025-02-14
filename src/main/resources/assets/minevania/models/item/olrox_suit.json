@@ -1,7 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures":
-    {
-        "layer0": "minevania:items/armors/olrox_suit"
-    }
-}

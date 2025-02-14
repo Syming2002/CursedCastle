@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "minevania:blocks/dracula_castle_stonebrick_chiseled"
-    }
-}

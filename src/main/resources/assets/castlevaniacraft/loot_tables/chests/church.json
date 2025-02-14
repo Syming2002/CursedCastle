@@ -1,0 +1,69 @@
+{
+  "pools": [
+    {
+      "name": "castlevaniacraft:church",
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
+      "entries": [
+        {
+          "type": "item",
+          "name": "castlevaniacraft:holy_water",
+          "entryName": "holy_water",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "castlevaniacraft:wooden_holy_cross",
+          "entryName": "wooden_holy_cross",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "castlevaniacraft:holy_bible",
+          "entryName": "holy_bible",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 1
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "castlevaniacraft:vampire_killer",
+          "entryName": "vampire_killer",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,0 @@
-{
-  "parent": "minevania:item/guardian_soul",
-  "textures": {
-    "layer0": "minevania:items/souls/guardians/guardian_soul.bat_soul"
-  }
-}

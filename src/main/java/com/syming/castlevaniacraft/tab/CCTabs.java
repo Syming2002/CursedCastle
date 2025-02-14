@@ -1,0 +1,23 @@
+package com.syming.castlevaniacraft.tab;
+
+import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.util.MVReferences;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+
+public class CCTabs {
+
+    public static final CCCreativeTab CREATIVE_TAB = new CCCreativeTab();
+
+    public static class CCCreativeTab extends CreativeTabs {
+        public CCCreativeTab() {
+            super(MVReferences.MODID);
+        }
+
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(MVItem.leatherWhip);
+        }
+    }
+
+}

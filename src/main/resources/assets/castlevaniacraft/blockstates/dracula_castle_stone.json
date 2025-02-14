@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "castlevaniacraft:dracula_castle_stone" },
+            { "model": "castlevaniacraft:dracula_castle_stone_mirrored" },
+            { "model": "castlevaniacraft:dracula_castle_stone", "y": 180 },
+            { "model": "castlevaniacraft:dracula_castle_stone_mirrored", "y": 180 }
+        ]
+    }
+}

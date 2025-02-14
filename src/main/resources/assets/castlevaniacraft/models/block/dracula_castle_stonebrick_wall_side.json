@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_side",
+    "textures": {
+        "wall": "castlevaniacraft:blocks/dracula_castle_stonebrick_default"
+    }
+}

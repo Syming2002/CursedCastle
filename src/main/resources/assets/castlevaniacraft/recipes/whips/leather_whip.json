@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    " LT",
+    "LTL",
+    "SL "
+  ],
+
+  "key":
+  {
+    "S":
+    {
+      "item": "minecraft:stick"
+    },
+
+    "L":
+    {
+      "item": "minecraft:leather"
+    },
+    "T":
+    {
+      "item": "minecraft:string"
+    }
+  },
+
+  "result":
+  {
+    "item": "castlevaniacraft:leather_whip",
+    "count": 1
+  }
+}

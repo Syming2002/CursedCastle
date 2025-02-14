@@ -1,0 +1,6 @@
+{
+  "parent": "castlevaniacraft:item/bullet_soul",
+  "textures": {
+    "layer0": "castlevaniacraft:items/souls/bullets/bullet_soul.axe_armor_soul"
+  }
+}

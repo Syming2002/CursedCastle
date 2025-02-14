@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+
+  "ingredients":
+  [
+    {
+      "item": "castlevaniacraft:crushing_stone_attachment"
+    },
+
+    {
+      "item": "castlevaniacraft:vampire_killer"
+    }
+  ],
+
+  "result":
+  {
+    "item": "castlevaniacraft:vampire_killer_crushing_stone_attachment",
+    "count": 1
+  }
+}
