@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityThrowingAxe;
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.throwingaxe.ItemThrowingAxe;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
@@ -54,15 +54,15 @@ public class RenderThrowingAxe extends Render<EntityThrowingAxe> {
         if (stack.getItem() instanceof ItemThrowingAxe itemThrowingAxe) {
             switch (itemThrowingAxe.getMaterial()) {
                 case WOOD:
-                    return new ItemStack(MVItem.animWoodenThrowingAxe);
+                    return new ItemStack(CCItem.animWoodenThrowingAxe);
                 case STONE:
-                    return new ItemStack(MVItem.animStoneThrowingAxe);
+                    return new ItemStack(CCItem.animStoneThrowingAxe);
                 case IRON:
-                    return new ItemStack(MVItem.animIronThrowingAxe);
+                    return new ItemStack(CCItem.animIronThrowingAxe);
                 case GOLD:
-                    return new ItemStack(MVItem.animGoldenThrowingAxe);
+                    return new ItemStack(CCItem.animGoldenThrowingAxe);
                 case DIAMOND:
-                    return new ItemStack(MVItem.animDiamondThrowingAxe);
+                    return new ItemStack(CCItem.animDiamondThrowingAxe);
             }
         }
         return stack;

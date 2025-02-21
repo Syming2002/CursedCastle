@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.item.whips;
 
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -18,7 +18,7 @@ public class ItemUndeadKiller extends ItemWhip {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
     @Override

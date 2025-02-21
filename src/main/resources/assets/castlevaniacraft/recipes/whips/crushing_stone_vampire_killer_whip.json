@@ -4,7 +4,7 @@
   "ingredients":
   [
     {
-      "item": "castlevaniacraft:crushing_stone_attachment"
+      "item": "castlevaniacraft:crushing_stone"
     },
 
     {
@@ -14,7 +14,7 @@
 
   "result":
   {
-    "item": "castlevaniacraft:vampire_killer_crushing_stone_attachment",
+    "item": "castlevaniacraft:crushing_stone_vampire_killer_whip",
     "count": 1
   }
 }

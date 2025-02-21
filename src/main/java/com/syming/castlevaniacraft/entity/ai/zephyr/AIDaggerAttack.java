@@ -2,7 +2,7 @@ package com.syming.castlevaniacraft.entity.ai.zephyr;
 
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityZephyr;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityDagger;
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationAI;
 import net.minecraft.entity.EntityLivingBase;
@@ -64,11 +64,11 @@ public class AIDaggerAttack extends AnimationAI<EntityZephyr> {
     }
 
     private void launchDagger(double posX, double posY, double posZ, double speed) {
-        ItemStack woodenStack = new ItemStack(MVItem.woodenDagger);
-        ItemStack stoneStack = new ItemStack(MVItem.stoneDagger);
-        ItemStack ironStack = new ItemStack(MVItem.ironDagger);
-        ItemStack goldenStack = new ItemStack(MVItem.goldenDagger);
-        ItemStack diamondStack = new ItemStack(MVItem.diamondDagger);
+        ItemStack woodenStack = new ItemStack(CCItem.woodenDagger);
+        ItemStack stoneStack = new ItemStack(CCItem.stoneDagger);
+        ItemStack ironStack = new ItemStack(CCItem.ironDagger);
+        ItemStack goldenStack = new ItemStack(CCItem.goldenDagger);
+        ItemStack diamondStack = new ItemStack(CCItem.diamondDagger);
 
 
         if (!zephyr.world.isRemote) {

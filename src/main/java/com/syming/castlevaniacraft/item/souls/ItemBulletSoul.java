@@ -5,7 +5,7 @@ import baubles.api.BaublesApi;
 import baubles.api.IBauble;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
 import com.syming.castlevaniacraft.entity.projectiles.EntityThrowingBoneProjectile;
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.keybind.SoulKeyBind;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.creativetab.CreativeTabs;
@@ -27,7 +27,7 @@ public class ItemBulletSoul extends Item implements IBauble {
         this.setHasSubtypes(true);
         this.setMaxStackSize(9);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
     @SideOnly(Side.CLIENT)

@@ -2,7 +2,7 @@ package com.syming.castlevaniacraft.item.whips;
 
 import com.syming.castlevaniacraft.api.IElementalWeapon;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
@@ -18,7 +18,7 @@ public class ItemNebula extends ItemWhip implements IElementalWeapon {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
     @Override

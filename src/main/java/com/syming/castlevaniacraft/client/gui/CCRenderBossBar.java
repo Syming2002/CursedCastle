@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @SideOnly(Side.CLIENT)
-public class MVRenderBossBar extends Gui {
+public class CCRenderBossBar extends Gui {
     public static final Map<UUID, Integer> BOSS_MAP = new HashMap<>();
 
     public void drawHealthBar(int x, int y, BossInfoClient bossInfoClient) {

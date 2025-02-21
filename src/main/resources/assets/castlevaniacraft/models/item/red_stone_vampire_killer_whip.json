@@ -2,7 +2,7 @@
   "parent": "item/handheld",
   "textures":
   {
-    "layer0": "castlevaniacraft:items/whips/vampire_killer_yellow_stone_attachment"
+    "layer0": "castlevaniacraft:items/whips/red_stone_vampire_killer_whip"
   },
   "display": {
     "thirdperson_righthand": {

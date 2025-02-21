@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.item.armors;
 
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelBiped;
@@ -20,7 +20,7 @@ public class ItemLeonBelmontArmor extends ItemArmor {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
     @Override

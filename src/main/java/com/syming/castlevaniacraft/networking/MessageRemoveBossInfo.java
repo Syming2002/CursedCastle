@@ -1,7 +1,6 @@
 package com.syming.castlevaniacraft.networking;
 
-import com.syming.castlevaniacraft.castlevaniacraftMod;
-import com.syming.castlevaniacraft.client.gui.MVRenderBossBar;
+import com.syming.castlevaniacraft.client.gui.CCRenderBossBar;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
@@ -49,7 +48,7 @@ public class MessageRemoveBossInfo implements IMessage {
         }
 
         void processMessage(MessageRemoveBossInfo messageBossInfo) {
-            MVRenderBossBar.BOSS_MAP.remove(messageBossInfo.uuid);
+            CCRenderBossBar.BOSS_MAP.remove(messageBossInfo.uuid);
         }
     }
 }

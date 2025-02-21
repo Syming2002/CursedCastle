@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.entity.projectiles.subweapons;
 
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.ItemDagger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -258,15 +258,15 @@ public class EntityDagger extends EntityArrow {
         if (stack.getItem() instanceof ItemDagger itemDagger) {
             switch (itemDagger.getMaterial()) {
                 case WOOD:
-                    return new ItemStack(MVItem.woodenDagger);
+                    return new ItemStack(CCItem.woodenDagger);
                 case STONE:
-                    return new ItemStack(MVItem.stoneDagger);
+                    return new ItemStack(CCItem.stoneDagger);
                 case IRON:
-                    return new ItemStack(MVItem.ironDagger);
+                    return new ItemStack(CCItem.ironDagger);
                 case GOLD:
-                    return new ItemStack(MVItem.goldenDagger);
+                    return new ItemStack(CCItem.goldenDagger);
                 case DIAMOND:
-                    return new ItemStack(MVItem.diamondDagger);
+                    return new ItemStack(CCItem.diamondDagger);
             }
         }
         return stack;

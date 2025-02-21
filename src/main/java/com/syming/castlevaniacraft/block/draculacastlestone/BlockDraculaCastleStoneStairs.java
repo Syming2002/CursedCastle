@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft.block.draculacastlestone;
 
 import com.syming.castlevaniacraft.init.CCBlock;
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
@@ -22,6 +22,6 @@ public class BlockDraculaCastleStoneStairs extends BlockStairs {
         this.setRegistryName(name);
 
         CCBlock.BLOCKS.add(this);
-        MVItem.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+        CCItem.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 }

@@ -1,7 +1,8 @@
 package com.syming.castlevaniacraft.util.handlers;
 
-import com.syming.castlevaniacraft.castlevaniacraftMod;
+
 //import com.syming.castlevaniacraft.client.models.entity.ModelDraculaHead;
+import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.client.render.entity.*;
 import com.syming.castlevaniacraft.entity.EntityCrucifix;
 import com.syming.castlevaniacraft.entity.mobs.*;
@@ -80,6 +81,6 @@ public class RenderHandler {
     }
 
     public static void registerItemRenders() {
-        castlevaniacraftMod.proxy.registerItemsVariantsRenderer();
+        CastlevaniaCraftMod.proxy.registerItemsVariantsRenderer();
     }
 }

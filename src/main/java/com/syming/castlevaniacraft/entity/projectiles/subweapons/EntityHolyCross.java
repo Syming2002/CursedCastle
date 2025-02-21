@@ -1,9 +1,6 @@
 package com.syming.castlevaniacraft.entity.projectiles.subweapons;
 
 import com.syming.castlevaniacraft.entity.projectiles.MVThrowableWeapon;
-import com.syming.castlevaniacraft.item.MVItem;
-import com.syming.castlevaniacraft.item.projectiles.subweapons.holycross.ItemHolyCross;
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,10 +15,8 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import org.lwjgl.Sys;
 
 public class EntityHolyCross extends MVThrowableWeapon {
 

@@ -1,11 +1,10 @@
 package com.syming.castlevaniacraft.item.whips;
 
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -19,7 +18,7 @@ public class ItemJetBlackWhip extends ItemWhip {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
     @Override

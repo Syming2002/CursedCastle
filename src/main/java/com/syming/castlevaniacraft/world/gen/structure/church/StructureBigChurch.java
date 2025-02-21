@@ -1326,7 +1326,7 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
 
 
         // Log Beam
-        if (!(this.biome instanceof BiomeSnow || this.biome instanceof BiomeDesert || this.biome instanceof BiomeMesa)) {
+        if (!(this.biome instanceof BiomeSnow || this.biome instanceof BiomeDesert || this.biome instanceof BiomeMesa || this.biome instanceof BiomeMushroomIsland)) {
             IBlockState logAxisZ = this.getBiomeSpecificBlockState(Blocks.LOG.getDefaultState())
                     .withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Z);
             for (int k = 5; k < 33; ++k) {

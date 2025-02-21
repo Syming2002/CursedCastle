@@ -1,15 +1,11 @@
 package com.syming.castlevaniacraft.entity.projectiles.subweapons;
 
 import com.syming.castlevaniacraft.entity.projectiles.MVThrowableWeapon;
-import com.syming.castlevaniacraft.item.MVItem;
 import com.syming.castlevaniacraft.util.handlers.SoundsHandler;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;

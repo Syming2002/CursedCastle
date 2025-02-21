@@ -1,16 +1,10 @@
 package com.syming.castlevaniacraft.networking;
 
-import com.syming.castlevaniacraft.item.MVItem;
-import com.syming.castlevaniacraft.item.whips.vampirekiller.ItemVampireKillerBulletAttachment;
+import com.syming.castlevaniacraft.item.CCItem;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntitySmallFireball;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.event.entity.ProjectileImpactEvent;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -35,7 +29,7 @@ public class MessageSyncEventFireballLauncher implements IMessage {
             EntityPlayerMP playerMP = (EntityPlayerMP) ctx.getServerHandler().player;
 
             playerMP.getServer().addScheduledTask(() -> {
-                if (playerMP.getHeldItemMainhand().getItem() == MVItem.vampireKillerBulletAttachment) {
+                if (playerMP.getHeldItemMainhand().getItem() == CCItem.vampireKillerBulletAttachment) {
                     launchSmallFireball(playerMP);
                 }
             });

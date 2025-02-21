@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft.item.projectiles.subweapons;
 
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityHolyBible;
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import com.syming.castlevaniacraft.util.handlers.SoundsHandler;
 import net.minecraft.enchantment.Enchantment;
@@ -23,7 +23,7 @@ public class ItemHolyBible extends Item {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
     @Override

@@ -1,10 +1,8 @@
 package com.syming.castlevaniacraft.entity.projectiles.subweapons;
 
 import com.syming.castlevaniacraft.entity.projectiles.MVThrowableWeapon;
-import com.syming.castlevaniacraft.item.MVItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;

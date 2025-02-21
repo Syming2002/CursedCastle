@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.item.whips.attachments;
 
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.item.Item;
 
@@ -13,7 +13,7 @@ public class ItemSteelAttachment extends Item {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
 }

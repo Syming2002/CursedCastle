@@ -1,6 +1,5 @@
 package com.syming.castlevaniacraft.mixin.client;
 
-import com.syming.castlevaniacraft.client.gui.MVGui;
 import com.syming.castlevaniacraft.util.ReachFixUtil;
 import net.minecraft.client.renderer.EntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;

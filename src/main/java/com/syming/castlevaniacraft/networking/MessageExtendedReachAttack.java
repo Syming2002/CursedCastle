@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.networking;
 
-import com.syming.castlevaniacraft.castlevaniacraftMod;
+import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.api.IExtendedReach;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
@@ -35,7 +35,7 @@ public class MessageExtendedReachAttack implements IMessage {
 
         @Override
         public IMessage onMessage(MessageExtendedReachAttack message, MessageContext ctx) {
-            final EntityPlayerMP playerMP = (EntityPlayerMP) castlevaniacraftMod.proxy.getPlayerEntityFromContext(ctx);
+            final EntityPlayerMP playerMP = (EntityPlayerMP) CastlevaniaCraftMod.proxy.getPlayerEntityFromContext(ctx);
 
             playerMP.getServer().addScheduledTask(
                     new Runnable() {

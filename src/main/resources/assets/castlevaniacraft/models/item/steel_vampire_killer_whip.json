@@ -2,7 +2,7 @@
   "parent": "item/handheld",
   "textures":
   {
-    "layer0": "castlevaniacraft:items/whips/vampire_killer_energy_circle_attachment"
+    "layer0": "castlevaniacraft:items/whips/steel_vampire_killer_whip"
   },
   "display": {
     "thirdperson_righthand": {

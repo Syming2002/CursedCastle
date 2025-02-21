@@ -5,7 +5,7 @@ import baubles.api.IBauble;
 //import com.syming.castlevaniacraft.api.ISouls;
 //import com.syming.castlevaniacraft.api.SoulType;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.keybind.SoulKeyBind;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.creativetab.CreativeTabs;
@@ -27,7 +27,7 @@ public class ItemGuardianSoul extends Item implements IBauble {
         this.setHasSubtypes(true);
         this.setMaxStackSize(9);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
     @SideOnly(Side.CLIENT)

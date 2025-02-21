@@ -11,8 +11,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
         import java.util.UUID;
 
 @SideOnly(Side.CLIENT)
-public class MVGui {
-    private static final MVRenderBossBar bossBar = new MVRenderBossBar();
+public class CCGui {
+    private static final CCRenderBossBar bossBar = new CCRenderBossBar();
 
     @SubscribeEvent
     public void onRenderBossInfo(RenderGameOverlayEvent.BossInfo event) {
@@ -21,11 +21,11 @@ public class MVGui {
         UUID bossUUID = bossInfo.getUniqueId();
         if (mc.world == null) return;
 
-        if (MVRenderBossBar.isDraculaBossBar(bossUUID)) {
+        if (CCRenderBossBar.isDraculaBossBar(bossUUID)) {
             bossBar.drawHealthBar(event.getX(), event.getY(), bossInfo);
             event.setIncrement(event.getIncrement());
             event.setCanceled(true);
-        } else if (MVRenderBossBar.isDeathBossBar(bossUUID)) {
+        } else if (CCRenderBossBar.isDeathBossBar(bossUUID)) {
             bossBar.drawHealthBar(event.getX(), event.getY(), bossInfo);
             event.setIncrement(event.getIncrement());
             event.setCanceled(true);

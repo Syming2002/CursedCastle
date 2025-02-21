@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.item.whips.vampirekiller;
 
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -14,9 +14,9 @@ public class ItemVampireKillerYellowStoneAttachment extends ItemVampireKillerWhi
         setTranslationKey(name);
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
-        setContainerItem(MVItem.vampireKiller);
+        setContainerItem(CCItem.vampireKiller);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
     @Override

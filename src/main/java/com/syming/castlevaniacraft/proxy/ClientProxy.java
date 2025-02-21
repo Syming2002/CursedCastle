@@ -1,8 +1,8 @@
 package com.syming.castlevaniacraft.proxy;
 
-import com.syming.castlevaniacraft.castlevaniacraftMod;
+import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.block.draculacastlestone.BlockDraculaCastleStoneBrick;
-import com.syming.castlevaniacraft.client.gui.MVGui;
+import com.syming.castlevaniacraft.client.gui.CCGui;
 import com.syming.castlevaniacraft.client.render.entity.RenderDagger;
 import com.syming.castlevaniacraft.client.render.entity.RenderHolyCross;
 import com.syming.castlevaniacraft.client.render.entity.RenderThrowingAxe;
@@ -11,7 +11,7 @@ import com.syming.castlevaniacraft.entity.projectiles.EntityThrowingBoneProjecti
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.*;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityHolyCross;
 import com.syming.castlevaniacraft.init.CCBlock;
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.integration.jer.CCJerIntegration;
 import com.syming.castlevaniacraft.item.souls.EnumBulletSoul;
 import com.syming.castlevaniacraft.item.souls.EnumGuardianSoul;
@@ -54,38 +54,38 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityThrowingAxe.class, new RenderThrowingAxe(Minecraft.getMinecraft().getRenderManager(), Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityHolyCross.class, new RenderHolyCross(Minecraft.getMinecraft().getRenderManager(), Minecraft.getMinecraft().getRenderItem()));
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityHolyWater.class, new RenderSnowball<EntityHolyWater>(Minecraft.getMinecraft().getRenderManager(), MVItem.holyWater, Minecraft.getMinecraft().getRenderItem()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityHolyWater.class, new RenderSnowball<EntityHolyWater>(Minecraft.getMinecraft().getRenderManager(), CCItem.holyWater, Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityDagger.class, RenderDagger::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityHolyBible.class, new RenderSnowball<EntityHolyBible>(Minecraft.getMinecraft().getRenderManager(), MVItem.holyBible, Minecraft.getMinecraft().getRenderItem()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityHolyBible.class, new RenderSnowball<EntityHolyBible>(Minecraft.getMinecraft().getRenderManager(), CCItem.holyBible, Minecraft.getMinecraft().getRenderItem()));
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityScytheProjectile.class, new RenderSnowball<EntityScytheProjectile>(Minecraft.getMinecraft().getRenderManager(), MVItem.animScytheProjectile, Minecraft.getMinecraft().getRenderItem()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityThrowingBoneProjectile.class, new RenderSnowball<EntityThrowingBoneProjectile>(Minecraft.getMinecraft().getRenderManager(), MVItem.throwingBone, Minecraft.getMinecraft().getRenderItem()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityScytheProjectile.class, new RenderSnowball<EntityScytheProjectile>(Minecraft.getMinecraft().getRenderManager(), CCItem.animScytheProjectile, Minecraft.getMinecraft().getRenderItem()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityThrowingBoneProjectile.class, new RenderSnowball<EntityThrowingBoneProjectile>(Minecraft.getMinecraft().getRenderManager(), CCItem.throwingBone, Minecraft.getMinecraft().getRenderItem()));
     }
 
 
     @Override
     public void registerModelBakeryVariants() {
-        ModelBakery.registerItemVariants(MVItem.bulletSoul,
+        ModelBakery.registerItemVariants(CCItem.bulletSoul,
                 new ResourceLocation(MVReferences.MODID, "bullet_soul.zombie_soul"),
                 new ResourceLocation(MVReferences.MODID, "bullet_soul.skeleton_soul"),
                 new ResourceLocation(MVReferences.MODID, "bullet_soul.axe_armor_soul"));
 
-        ModelBakery.registerItemVariants(MVItem.guardianSoul,
+        ModelBakery.registerItemVariants(CCItem.guardianSoul,
                 new ResourceLocation(MVReferences.MODID, "guardian_soul.bat_soul"));
     }
 
     @Override
     public void registerItemsVariantsRenderer() {
         for (int i = 0; i < EnumBulletSoul.SoulType.values().length; i++) {
-            castlevaniacraftMod.proxy.registerItemVariantsRenderer(MVItem.bulletSoul, i, "bullet_soul." + EnumBulletSoul.SoulType.values()[i].getName());
+            CastlevaniaCraftMod.proxy.registerItemVariantsRenderer(CCItem.bulletSoul, i, "bullet_soul." + EnumBulletSoul.SoulType.values()[i].getName());
         }
 
         for (int i = 0; i < EnumGuardianSoul.SoulType.values().length; i++) {
-            castlevaniacraftMod.proxy.registerItemVariantsRenderer(MVItem.guardianSoul, i, "guardian_soul." + EnumGuardianSoul.SoulType.values()[i].getName());
+            CastlevaniaCraftMod.proxy.registerItemVariantsRenderer(CCItem.guardianSoul, i, "guardian_soul." + EnumGuardianSoul.SoulType.values()[i].getName());
         }
 
         for (int i = 0; i < BlockDraculaCastleStoneBrick.EnumType.values().length; i++) {
-            castlevaniacraftMod.proxy.registerItemVariantsRenderer(Item.getItemFromBlock(CCBlock.DRACULA_CASTLE_STONE_BRICK), i, BlockDraculaCastleStoneBrick.EnumType.values()[i].getName());
+            CastlevaniaCraftMod.proxy.registerItemVariantsRenderer(Item.getItemFromBlock(CCBlock.DRACULA_CASTLE_STONE_BRICK), i, BlockDraculaCastleStoneBrick.EnumType.values()[i].getName());
         }
     }
 
@@ -113,7 +113,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
-        MinecraftForge.EVENT_BUS.register(new MVGui());
+        MinecraftForge.EVENT_BUS.register(new CCGui());
     }
 
     @Override

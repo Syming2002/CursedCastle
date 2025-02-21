@@ -1,11 +1,8 @@
 package com.syming.castlevaniacraft.networking;
 
-import com.syming.castlevaniacraft.client.gui.MVRenderBossBar;
+import com.syming.castlevaniacraft.client.gui.CCRenderBossBar;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.SPacketUpdateBossInfo;
-import net.minecraft.world.BossInfo;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -51,7 +48,7 @@ public class MessageAddBossInfo implements IMessage {
         }
 
         void processMessage(MessageAddBossInfo messageBossInfo) {
-            MVRenderBossBar.BOSS_MAP.put(messageBossInfo.uuid, messageBossInfo.entityID);
+            CCRenderBossBar.BOSS_MAP.put(messageBossInfo.uuid, messageBossInfo.entityID);
         }
     }
 }

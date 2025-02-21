@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.item.whips.vampirekiller;
 
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 
 public class ItemVampireKiller extends ItemVampireKillerWhip {
@@ -12,7 +12,7 @@ public class ItemVampireKiller extends ItemVampireKillerWhip {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
     @Override

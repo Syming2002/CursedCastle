@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.item.whips;
 
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 
 public class ItemLeatherWhip extends ItemWhip {
@@ -12,7 +12,7 @@ public class ItemLeatherWhip extends ItemWhip {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
     @Override

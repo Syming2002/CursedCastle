@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.item.projectiles;
 
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import net.minecraft.item.Item;
 
 public class ItemAnimScytheProjectile extends Item {
@@ -12,7 +12,7 @@ public class ItemAnimScytheProjectile extends Item {
         setRegistryName(name);
         setCreativeTab(null);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
 }

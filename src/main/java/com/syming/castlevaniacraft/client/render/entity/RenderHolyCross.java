@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityHolyCross;
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.holycross.ItemHolyCross;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
@@ -55,15 +55,15 @@ public class RenderHolyCross extends Render<EntityHolyCross> {
         if (stack.getItem() instanceof ItemHolyCross itemHolyCross) {
             switch (itemHolyCross.getMaterial()) {
                 case WOOD:
-                    return new ItemStack(MVItem.animWoodenHolyCross);
+                    return new ItemStack(CCItem.animWoodenHolyCross);
                 case STONE:
-                    return new ItemStack(MVItem.animStoneHolyCross);
+                    return new ItemStack(CCItem.animStoneHolyCross);
                 case IRON:
-                    return new ItemStack(MVItem.animIronHolyCross);
+                    return new ItemStack(CCItem.animIronHolyCross);
                 case GOLD:
-                    return new ItemStack(MVItem.animGoldenHolyCross);
+                    return new ItemStack(CCItem.animGoldenHolyCross);
                 case DIAMOND:
-                    return new ItemStack(MVItem.animDiamondHolyCross);
+                    return new ItemStack(CCItem.animDiamondHolyCross);
             }
         }
         return stack;

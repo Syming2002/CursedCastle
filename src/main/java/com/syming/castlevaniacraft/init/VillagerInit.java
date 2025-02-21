@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.init;
 
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.ItemHolyWater;
 import com.syming.castlevaniacraft.util.MVReferences;
 import net.minecraft.entity.IMerchant;
@@ -32,7 +32,7 @@ public class VillagerInit {
 
         VillagerRegistry.VillagerCareer highPriestCareer = new VillagerRegistry.VillagerCareer(villagerHighPriest, "high_priest");
         highPriestCareer.addTrade(1,
-                new GiveHolyWaterForPreciousItems((ItemHolyWater) MVItem.holyWater,
+                new GiveHolyWaterForPreciousItems((ItemHolyWater) CCItem.holyWater,
                         new ItemStack(Items.DIAMOND),
                         new EntityVillager.PriceInfo(2, 4), new EntityVillager.PriceInfo(1, 2)
                 ));

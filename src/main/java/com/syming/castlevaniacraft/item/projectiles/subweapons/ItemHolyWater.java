@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft.item.projectiles.subweapons;
 
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityHolyWater;
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -21,7 +21,7 @@ public class ItemHolyWater extends Item {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        MVItem.ITEMS.add(this);
+        CCItem.ITEMS.add(this);
     }
 
 

@@ -16,7 +16,7 @@
               "function": "set_count",
               "count": {
                 "min": 0,
-                "max": 3
+                "max": 2
               }
             }
           ]
@@ -30,7 +30,63 @@
               "function": "set_count",
               "count": {
                 "min": 0,
+                "max": 5
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "castlevaniacraft:stone_holy_cross",
+          "entryName": "stone_holy_cross",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 4
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "castlevaniacraft:iron_holy_cross",
+          "entryName": "iron_holy_cross",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "castlevaniacraft:golden_holy_cross",
+          "entryName": "golden_holy_cross",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
                 "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "castlevaniacraft:diamond_holy_cross",
+          "entryName": "diamond_holy_cross",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 1
               }
             }
           ]
@@ -51,8 +107,8 @@
         },
         {
           "type": "item",
-          "name": "castlevaniacraft:vampire_killer",
-          "entryName": "vampire_killer",
+          "name": "castlevaniacraft:vampire_killer_whip",
+          "entryName": "vampire_killer_whip",
           "functions": [
             {
               "function": "set_count",

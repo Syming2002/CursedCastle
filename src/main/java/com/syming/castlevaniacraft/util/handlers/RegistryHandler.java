@@ -1,12 +1,12 @@
 package com.syming.castlevaniacraft.util.handlers;
 
 
-import com.syming.castlevaniacraft.castlevaniacraftMod;
+import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.api.*;
 import com.syming.castlevaniacraft.entity.CCEntity;
 import com.syming.castlevaniacraft.event.*;
 import com.syming.castlevaniacraft.init.*;
-import com.syming.castlevaniacraft.item.MVItem;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.integration.forestry.bees.CCBeeDefinition;
 import com.syming.castlevaniacraft.integration.forestry.items.CCCombItem;
 import com.syming.castlevaniacraft.integration.forestry.items.CCDropItem;
@@ -36,7 +36,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -53,7 +52,7 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onItemRegister(RegistryEvent.Register<Item> event) {
         itemRegistry = event.getRegistry();
-        event.getRegistry().registerAll(MVItem.ITEMS.toArray(new Item[0]));
+        event.getRegistry().registerAll(CCItem.ITEMS.toArray(new Item[0]));
         if (ModLoadedUtils.Forestry.isModLoaded()) {
             itemRegistry.register(DROPS);
             itemRegistry.register(COMBS);
@@ -67,14 +66,14 @@ public class RegistryHandler {
         RenderHandler.registerEntityRenders();
         RenderHandler.registerCustomMeshesAndStates();
 
-        for (Item item : MVItem.ITEMS) {
-            castlevaniacraftMod.proxy.registerItemRenderer(item, 0, "inventory");
+        for (Item item : CCItem.ITEMS) {
+            CastlevaniaCraftMod.proxy.registerItemRenderer(item, 0, "inventory");
         }
 
         RenderHandler.registerItemRenders();
 
         for(Block block : CCBlock.BLOCKS) {
-            castlevaniacraftMod.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
+            CastlevaniaCraftMod.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
         }
 
         if (ModLoadedUtils.Forestry.isModLoaded()) {
@@ -116,8 +115,8 @@ public class RegistryHandler {
     }
 
     public static void preInitRegistries(FMLPreInitializationEvent event) {
-        castlevaniacraftMod.proxy.preInit(event);
-        castlevaniacraftMod.proxy.render();
+        CastlevaniaCraftMod.proxy.preInit(event);
+        CastlevaniaCraftMod.proxy.render();
         CCEntity.registerEntities();
         registerEvent();
         FluidInit.registerFluids();
@@ -132,9 +131,9 @@ public class RegistryHandler {
     }
 
     public static void initRegistries(FMLInitializationEvent event) {
-        castlevaniacraftMod.proxy.init(event);
-        castlevaniacraftMod.proxy.render();
-        castlevaniacraftMod.proxy.registerModelBakeryVariants();
+        CastlevaniaCraftMod.proxy.init(event);
+        CastlevaniaCraftMod.proxy.render();
+        CastlevaniaCraftMod.proxy.registerModelBakeryVariants();
         SoundsHandler.registerSounds();
         CraftingRecipes.init();
         BigChurchCreationHandler.registerBigChurchComponents();
@@ -158,7 +157,7 @@ public class RegistryHandler {
     }
 
     public static void postInitRegistries(FMLPostInitializationEvent event) {
-        castlevaniacraftMod.proxy.postInit(event);
+        CastlevaniaCraftMod.proxy.postInit(event);
         if (ModLoadedUtils.Forestry.isModLoaded()) {
             CCBeeDefinition.doInit();
         }
