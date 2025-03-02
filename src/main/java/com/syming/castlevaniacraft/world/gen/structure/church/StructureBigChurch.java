@@ -1326,7 +1326,7 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
 
 
         // Log Beam
-        if (!(this.biome instanceof BiomeSnow || this.biome instanceof BiomeDesert || this.biome instanceof BiomeMesa || this.biome instanceof BiomeMushroomIsland)) {
+        if (!(this.biome instanceof BiomeSnow || this.biome instanceof BiomeDesert || this.biome instanceof BiomeMesa || this.biome instanceof BiomeMushroomIsland || this.biome instanceof BiomeHills)) {
             IBlockState logAxisZ = this.getBiomeSpecificBlockState(Blocks.LOG.getDefaultState())
                     .withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Z);
             for (int k = 5; k < 33; ++k) {
@@ -1773,7 +1773,12 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
     @Override
     protected int chooseProfession(int villagersSpawnedIn, int currentVillagerProfession) {
         ForgeRegistry<VillagerRegistry.VillagerProfession> registry = (ForgeRegistry<VillagerRegistry.VillagerProfession>) ForgeRegistries.VILLAGER_PROFESSIONS;
-        return registry.getID(VillagerInit.villagerHighPriest);
+
+        if (villagersSpawnedIn == 0) {
+            return registry.getID(VillagerInit.villagerHighPriest);
+        } else {
+            return currentVillagerProfession;
+        }
     }
 
     @Override
@@ -1781,7 +1786,7 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
         net.minecraftforge.event.terraingen.BiomeEvent.GetVillageBlockID event = new net.minecraftforge.event.terraingen.BiomeEvent.GetVillageBlockID(startPiece == null ? null : startPiece.biome, blockstateIn);
         net.minecraftforge.common.MinecraftForge.TERRAIN_GEN_BUS.post(event);
         if (event.getResult() == net.minecraftforge.fml.common.eventhandler.Event.Result.DENY) return event.getReplacement();
-        if (this.structureType == 1) {
+        if (this.biome instanceof BiomeDesert) {
             if (blockstateIn.getBlock() == Blocks.LOG || blockstateIn.getBlock() == Blocks.LOG2) {
                 return Blocks.SANDSTONE.getDefaultState();
             }
@@ -1821,7 +1826,7 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
                 return Blocks.STONE_SLAB.getDefaultState().withProperty(BlockStoneSlab.VARIANT, BlockStoneSlab.EnumType.SAND).withProperty(BlockStoneSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
             }
         }
-        else if (this.structureType == 3) {
+        else if (this.biome instanceof BiomeTaiga || this.biome instanceof BiomeSnow) {
             if (blockstateIn.getBlock() == Blocks.LOG || blockstateIn.getBlock() == Blocks.LOG2) {
                 return Blocks.LOG.getDefaultState()
                         .withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE);
@@ -1851,7 +1856,7 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
                 return Blocks.WOODEN_SLAB.getDefaultState().withProperty(BlockWoodSlab.VARIANT, BlockPlanks.EnumType.SPRUCE).withProperty(BlockWoodSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
             }
         }
-        else if (this.structureType == 2) {
+        else if (this.biome instanceof BiomeSavanna) {
             if (blockstateIn.getBlock() == Blocks.LOG || blockstateIn.getBlock() == Blocks.LOG2) {
                 return Blocks.LOG2.getDefaultState()
                         .withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA);
@@ -1910,17 +1915,19 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
             if (blockstateIn.getBlock() == Blocks.WOODEN_SLAB) {
                 return Blocks.WOODEN_SLAB.getDefaultState().withProperty(BlockWoodSlab.VARIANT, BlockPlanks.EnumType.JUNGLE).withProperty(BlockWoodSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
             }
-        } else if (this.biome instanceof BiomeSnow) {
+        } else if (this.biome == Biomes.ROOFED_FOREST || this.biome == Biomes.MUTATED_ROOFED_FOREST) {
+
             if (blockstateIn.getBlock() == Blocks.LOG || blockstateIn.getBlock() == Blocks.LOG2) {
-                return Blocks.SNOW.getDefaultState();
+                return Blocks.LOG.getDefaultState()
+                        .withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.DARK_OAK);
             }
 
             if (blockstateIn.getBlock() == Blocks.PLANKS) {
-                return Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE);
+                return Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.DARK_OAK);
             }
 
             if (blockstateIn.getBlock() == Blocks.OAK_STAIRS) {
-                return Blocks.SPRUCE_STAIRS.getDefaultState()
+                return Blocks.DARK_OAK_STAIRS.getDefaultState()
                         .withProperty(BlockStairs.FACING, blockstateIn.getValue(BlockStairs.FACING))
                         .withProperty(BlockStairs.HALF, blockstateIn.getValue(BlockStairs.HALF))
                         .withProperty(BlockStairs.SHAPE, blockstateIn.getValue(BlockStairs.SHAPE));
@@ -1928,15 +1935,15 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
 
             if (blockstateIn.getBlock() == Blocks.COBBLESTONE)
             {
-                return Blocks.SNOW.getDefaultState();
+                return Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK).withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y);
             }
 
             if (blockstateIn.getBlock() == Blocks.OAK_FENCE) {
-                return Blocks.SPRUCE_FENCE.getDefaultState();
+                return Blocks.DARK_OAK_FENCE.getDefaultState();
             }
 
             if (blockstateIn.getBlock() == Blocks.WOODEN_SLAB) {
-                return Blocks.WOODEN_SLAB.getDefaultState().withProperty(BlockWoodSlab.VARIANT, BlockPlanks.EnumType.SPRUCE).withProperty(BlockWoodSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
+                return Blocks.WOODEN_SLAB.getDefaultState().withProperty(BlockWoodSlab.VARIANT, BlockPlanks.EnumType.DARK_OAK).withProperty(BlockWoodSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
             }
         }
         return blockstateIn;
@@ -1945,18 +1952,14 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
     @Override
     protected @NotNull BlockDoor biomeDoor() {
 
-        if (biome instanceof BiomeJungle) {
+        if (this.biome instanceof BiomeJungle) {
             return Blocks.JUNGLE_DOOR;
-        } else if (biome == Biomes.ROOFED_FOREST || biome == Biomes.MUTATED_ROOFED_FOREST) {
+        } else if (this.biome == Biomes.ROOFED_FOREST || this.biome == Biomes.MUTATED_ROOFED_FOREST) {
             return Blocks.DARK_OAK_DOOR;
-        } else if (biome == Biomes.ICE_PLAINS || biome == Biomes.ICE_MOUNTAINS) {
+        } else if (this.biome instanceof BiomeTaiga || this.biome instanceof BiomeSnow) {
             return Blocks.SPRUCE_DOOR;
-        }
-
-        if (this.structureType == 2) {
+        } else if (this.biome instanceof BiomeSavanna) {
             return Blocks.ACACIA_DOOR;
-        } else if (this.structureType == 3) {
-            return Blocks.SPRUCE_DOOR;
         } else {
             return Blocks.OAK_DOOR;
         }

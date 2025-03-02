@@ -75,7 +75,6 @@ item.cc.honey_drop.blood.name=Goutte de Sang
 
 # Entity
 
-entity.aggressive_bat.name=Chauve-souris Aggressive
 entity.blood_skeleton.name=Squelette de Sang
 entity.crucifix.name=Crucifix
 entity.dracula.name=Dracula
@@ -91,6 +90,7 @@ entity.medusa.name=Méduse
 entity.medusa_snake.name=Serpent de Méduse
 entity.Villager.high_priest=Grand Prêtre
 entity.rusalka.name=Rusalka
+entity.vampire_bat.name=Chauve-souris Vampire
 entity.zephyr.name=Zephyr
 
 # Fluids

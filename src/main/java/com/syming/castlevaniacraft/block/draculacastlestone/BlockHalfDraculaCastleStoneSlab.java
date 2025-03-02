@@ -1,5 +1,6 @@
 package com.syming.castlevaniacraft.block.draculacastlestone;
 
+import com.syming.castlevaniacraft.init.CCBlock;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.block.BlockSlab;
@@ -7,14 +8,15 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemSlab;
 
 public class BlockHalfDraculaCastleStoneSlab extends BlockDraculaCastleStoneSlab {
-    public BlockHalfDraculaCastleStoneSlab(String name, Material materialIn, BlockSlab half, BlockSlab doubleSlab) {
-        super(name, materialIn, half);
+
+    public BlockHalfDraculaCastleStoneSlab(String name) {
+        super(name);
 
         setCreativeTab(CCTabs.CREATIVE_TAB);
         setTranslationKey(name);
         setRegistryName(name);
 
-        CCItem.ITEMS.add(new ItemSlab(this, this, doubleSlab).setRegistryName(name));
+        CCItem.ITEMS.add(new ItemSlab(this, this, CCBlock.DRACULA_CASTLE_STONE_SLAB_DOUBLE).setRegistryName(name));
     }
 
     @Override

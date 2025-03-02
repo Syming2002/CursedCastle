@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft.tab;
 
 import com.syming.castlevaniacraft.item.CCItem;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
@@ -11,7 +11,7 @@ public class CCTabs {
 
     public static class CCCreativeTab extends CreativeTabs {
         public CCCreativeTab() {
-            super(MVReferences.MODID);
+            super(CCReferences.MODID);
         }
 
         @Override

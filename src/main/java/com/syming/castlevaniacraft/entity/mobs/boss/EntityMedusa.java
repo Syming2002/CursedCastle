@@ -157,12 +157,6 @@ public class EntityMedusa extends CCEntityMob implements IAnimatedEntity {
         return false;
     }
 
-    private void despawnIfPeaceful() {
-        if (world.getDifficulty() == EnumDifficulty.PEACEFUL) {
-            setDead();
-        }
-    }
-
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();

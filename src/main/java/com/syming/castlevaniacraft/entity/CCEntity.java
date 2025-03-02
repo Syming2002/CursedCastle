@@ -5,12 +5,13 @@ import com.syming.castlevaniacraft.entity.mobs.*;
 import com.syming.castlevaniacraft.entity.mobs.boss.*;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
+import com.syming.castlevaniacraft.entity.projectiles.EntityHarpyFeather;
 import com.syming.castlevaniacraft.entity.projectiles.EntityIceBladeProjectile;
 import com.syming.castlevaniacraft.entity.projectiles.EntityScytheProjectile;
 import com.syming.castlevaniacraft.entity.projectiles.EntityThrowingBoneProjectile;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.*;
 import com.syming.castlevaniacraft.item.CCItem;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -51,9 +52,10 @@ public class CCEntity {
         registerProjectile("throwing_bone", EntityThrowingBoneProjectile.class, CCItem.throwingBone);
         registerProjectile("fire_pillar", EntityFirePillar.class, null);
         registerEntityWithNoEgg("ice_blade", EntityIceBladeProjectile.class, 64);
+        registerEntityWithNoEgg("harpy_feather", EntityHarpyFeather.class, 64);
 
         // Entity
-        registerEntity("aggressive_bat", EntityAggressiveBat.class, 64, 0x393939, 0x8C0808);
+        registerEntity("vampire_bat", EntityVampireBat.class, 64, 0x393939, 0x8C0808);
         registerEntity("blood_skeleton", EntityBloodSkeleton.class, 64, 0x8F0000, 0x420000);
         registerEntity("catoblepas", EntityCatoblepas.class, 64, 0x081010, 0x485800);
         registerEntity("dracula", EntityDracula.class, 64, 0x000000, 0xBF3030);
@@ -87,13 +89,13 @@ public class CCEntity {
 
     public static void registerProjectile(String name, Class<? extends Entity> entity, Item item) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, name);
+        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, name);
         EntityRegistry.registerModEntity(resourceLocation, entity, name, entityID, CastlevaniaCraftMod.instance, 64, 1, true);
     }
 
     private static void registerEntity(String name, Class<? extends Entity> entity, int range, int primaryColor, int secondaryColor) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, name);
+        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, name);
         EntityRegistry.registerModEntity(resourceLocation, entity, name, entityID, CastlevaniaCraftMod.instance, range, 1, true, primaryColor, secondaryColor);
 
     }
@@ -104,35 +106,35 @@ public class CCEntity {
 
     private static void registerEntityWithNoEgg(String name, Class<? extends Entity> entity, int range) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, name);
+        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, name);
         EntityRegistry.registerModEntity(resourceLocation, entity, name, entityID, CastlevaniaCraftMod.instance, range, 1, true);
 
     }
 
     private static void registerHolyCross(String name, Class<? extends EntityHolyCross> holyCross, Item.ToolMaterial material) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, material.toString() + "_" + name);
+        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, material.toString() + "_" + name);
         EntityRegistry.registerModEntity(resourceLocation, holyCross, name, entityID, CastlevaniaCraftMod.instance, 64, 1, true);
 
     }
 
     private static void registerThrowingAxe(String name, Class<? extends EntityThrowingAxe> throwingAxe, Item.ToolMaterial material) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, material.toString() + "_" + name);
+        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, material.toString() + "_" + name);
         EntityRegistry.registerModEntity(resourceLocation, throwingAxe, name, entityID, CastlevaniaCraftMod.instance, 64, 1, true);
 
     }
 
     private static void registerDagger(String name, Class<? extends EntityDagger> dagger, Item.ToolMaterial material) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, material.toString() + "_" + name);
+        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, material.toString() + "_" + name);
         EntityRegistry.registerModEntity(resourceLocation, dagger, name, entityID, CastlevaniaCraftMod.instance, 64, 1, true);
 
     }
 
     private static void registerCrucifix(String name, Class<? extends EntityCrucifix> crucifix, BlockPlanks.EnumType woodType) {
         int entityID = nextEntityID();
-        ResourceLocation resourceLocation = new ResourceLocation(MVReferences.MODID, woodType.getTranslationKey() + "_" + name);
+        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, woodType.getTranslationKey() + "_" + name);
         EntityRegistry.registerModEntity(resourceLocation, crucifix, name, entityID, CastlevaniaCraftMod.instance, 64, 1, true);
     }
 

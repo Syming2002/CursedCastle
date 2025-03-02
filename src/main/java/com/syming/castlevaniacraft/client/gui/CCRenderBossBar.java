@@ -58,11 +58,7 @@ public class CCRenderBossBar extends Gui {
         }
     }
 
-    public static boolean isDraculaBossBar(UUID uuid) {
-        return BOSS_MAP.containsKey(uuid);
-    }
-
-    public static boolean isDeathBossBar(UUID uuid) {
+    public static boolean isCCBossBar(UUID uuid) {
         return BOSS_MAP.containsKey(uuid);
     }
 }

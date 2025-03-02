@@ -2,7 +2,7 @@ package com.syming.castlevaniacraft.client.render.entity;
 
 import com.syming.castlevaniacraft.client.models.entity.ModelFriendlyBat;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RenderFriendlyBat extends RenderLiving<EntityFriendlyBat> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/friendly_bat.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/friendly_bat.png");
 
     public RenderFriendlyBat(RenderManager rendermanagerIn) {
         super(rendermanagerIn, new ModelFriendlyBat(), 0.25F);

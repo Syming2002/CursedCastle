@@ -12,7 +12,7 @@ import com.syming.castlevaniacraft.item.souls.ItemGuardianSoul;
 import com.syming.castlevaniacraft.item.whips.*;
 import com.syming.castlevaniacraft.item.whips.attachments.*;
 import com.syming.castlevaniacraft.item.whips.vampirekiller.*;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -30,7 +30,7 @@ public class CCItem {
     // Materials Armors
     public static ItemArmor.ArmorMaterial DRACULA_TUNIC_ARMOR = EnumHelper.addArmorMaterial(
             "dracula_tunic_material",
-            MVReferences.MODID + ":dracula_tunic",
+            CCReferences.MODID + ":dracula_tunic",
             10,
             new int[] {0, 0, 20, 0},
             5,
@@ -38,7 +38,7 @@ public class CCItem {
             0.99F);
     public static ItemArmor.ArmorMaterial LEON_BELMONT_ARMOR = EnumHelper.addArmorMaterial(
             "leon_belmont_armor_material",
-            MVReferences.MODID + ":leon_belmont",
+            CCReferences.MODID + ":leon_belmont",
             10,
             new int[] {4, 1, 3, 0},
             5,
@@ -46,7 +46,7 @@ public class CCItem {
             0.125F);
     public static ItemArmor.ArmorMaterial JUSTE_BELMONT_ARMOR = EnumHelper.addArmorMaterial(
             "juste_belmont_armor_material",
-            MVReferences.MODID + ":juste_belmont",
+            CCReferences.MODID + ":juste_belmont",
             10,
             new int[] {4, 1, 3, 0},
             5,
@@ -54,7 +54,7 @@ public class CCItem {
             0.125F);
     public static ItemArmor.ArmorMaterial OLROX_SUIT_ARMOR = EnumHelper.addArmorMaterial(
             "olrox_suit_material",
-            MVReferences.MODID + ":olrox_suit",
+            CCReferences.MODID + ":olrox_suit",
             8,
             new int[] {0, 0, 16, 0},
             5,
@@ -62,7 +62,7 @@ public class CCItem {
             0.99F);
     public static ItemArmor.ArmorMaterial RICHTER_BELMONT_ARMOR = EnumHelper.addArmorMaterial(
             "richter_belmont_armor_material",
-            MVReferences.MODID + ":richter_belmont",
+            CCReferences.MODID + ":richter_belmont",
             10,
             new int[] {2, 1, 3, 0},
             5,
@@ -70,7 +70,7 @@ public class CCItem {
             0.125F);
     public static ItemArmor.ArmorMaterial SIMON_BELMONT_ARMOR = EnumHelper.addArmorMaterial(
             "simon_belmont_armor_material",
-            MVReferences.MODID + ":simon_belmont",
+            CCReferences.MODID + ":simon_belmont",
             10,
             new int[] {2, 1, 2, 0},
             5,

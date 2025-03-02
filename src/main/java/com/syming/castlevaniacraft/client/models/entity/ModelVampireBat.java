@@ -1,12 +1,12 @@
 package com.syming.castlevaniacraft.client.models.entity;
 
-import com.syming.castlevaniacraft.entity.mobs.EntityAggressiveBat;
+import com.syming.castlevaniacraft.entity.mobs.EntityVampireBat;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelAggressiveBat extends ModelBase {
+public class ModelVampireBat extends ModelBase {
 
     private final ModelRenderer batHead;
     /** The body box of the bat model. */
@@ -20,7 +20,7 @@ public class ModelAggressiveBat extends ModelBase {
     /** The outer left wing box of the bat model. */
     private final ModelRenderer batOuterLeftWing;
 
-    public ModelAggressiveBat()
+    public ModelVampireBat()
     {
         this.textureWidth = 64;
         this.textureHeight = 64;
@@ -70,7 +70,7 @@ public class ModelAggressiveBat extends ModelBase {
      * "far" arms and legs can swing at most.
      */
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
-        if (((EntityAggressiveBat) entityIn).getIsBatHanging()) {
+        if (((EntityVampireBat) entityIn).getIsBatHanging()) {
             this.batHead.rotateAngleX = headPitch * 0.017453292F;
             this.batHead.rotateAngleY = (float) Math.PI - netHeadYaw * 0.017453292F;
             this.batHead.rotateAngleZ = (float) Math.PI;

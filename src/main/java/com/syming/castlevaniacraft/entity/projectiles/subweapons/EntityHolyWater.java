@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.entity.projectiles.subweapons;
 
-import com.syming.castlevaniacraft.entity.projectiles.MVThrowableWeapon;
+import com.syming.castlevaniacraft.entity.projectiles.CCThrowableWeapon;
 import com.syming.castlevaniacraft.util.handlers.SoundsHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntityHolyWater extends MVThrowableWeapon {
+public class EntityHolyWater extends CCThrowableWeapon {
 
     public EntityHolyWater(World worldIn)
     {

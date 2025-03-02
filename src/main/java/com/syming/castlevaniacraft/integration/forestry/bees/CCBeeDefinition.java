@@ -3,7 +3,7 @@ package com.syming.castlevaniacraft.integration.forestry.bees;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.integration.forestry.items.CCCombType;
 import com.syming.castlevaniacraft.integration.forestry.items.CCDropType;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import com.syming.castlevaniacraft.util.handlers.RegistryHandler;
 import forestry.api.apiculture.*;
 import forestry.api.core.EnumHumidity;
@@ -194,7 +194,7 @@ public enum CCBeeDefinition implements IBeeDefinition {
         String name = "for.bees.species." + lowercaseName;
 
         this.branch = branch;
-        this.species = new CCAlleleBeeSpecies(MVReferences.MODID, uid, name, MVReferences.NAME, description, dominant, branch.getBranch(), binomial, primary.getRGB(), secondary.getRGB());
+        this.species = new CCAlleleBeeSpecies(CCReferences.MODID, uid, name, CCReferences.NAME, description, dominant, branch.getBranch(), binomial, primary.getRGB(), secondary.getRGB());
         this.generationCondition = generationCondition;
     }
 

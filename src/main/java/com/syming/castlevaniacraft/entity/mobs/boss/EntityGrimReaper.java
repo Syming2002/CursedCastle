@@ -3,12 +3,15 @@ package com.syming.castlevaniacraft.entity.mobs.boss;
 import com.syming.castlevaniacraft.api.ICustomBossBar;
 import com.syming.castlevaniacraft.api.IElementalWeapon;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
+import com.syming.castlevaniacraft.entity.ai.AIFlyAwayTarget;
+import com.syming.castlevaniacraft.entity.ai.AIFlyTowardsTarget;
+import com.syming.castlevaniacraft.entity.ai.AIRandomFly;
 import com.syming.castlevaniacraft.entity.ai.grimReaper.*;
 import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
 import com.syming.castlevaniacraft.networking.MVNetworking;
 import com.syming.castlevaniacraft.networking.MessageAddBossInfo;
 import com.syming.castlevaniacraft.networking.MessageRemoveBossInfo;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationAI;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
@@ -34,7 +37,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -167,12 +169,6 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
     public boolean isNonBoss()
     {
         return false;
-    }
-
-    private void despawnIfPeaceful() {
-        if (!world.isRemote && world.getDifficulty() == EnumDifficulty.PEACEFUL) {
-            setDead();
-        }
     }
 
     @Override
@@ -385,6 +381,6 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
 
     @Override
     public @Nullable ResourceLocation getCustomBossBar() {
-        return new ResourceLocation(MVReferences.MODID, "textures/gui/death_boss_bar.png");
+        return new ResourceLocation(CCReferences.MODID, "textures/gui/death_boss_bar.png");
     }
 }

@@ -2,7 +2,7 @@ package com.syming.castlevaniacraft.client.render.entity;
 
 import com.syming.castlevaniacraft.client.models.entity.ModelFleaMan;
 import com.syming.castlevaniacraft.entity.mobs.EntityFleaMan;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class RenderFleaMan extends RenderLiving<EntityFleaMan> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/flea_man.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/flea_man.png");
 
     public RenderFleaMan(RenderManager rendermanagerIn) {
         super(rendermanagerIn, new ModelFleaMan(), 0.25F);

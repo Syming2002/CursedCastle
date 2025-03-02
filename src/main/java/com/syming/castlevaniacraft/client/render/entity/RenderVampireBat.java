@@ -1,8 +1,8 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelAggressiveBat;
-import com.syming.castlevaniacraft.entity.mobs.EntityAggressiveBat;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.client.models.entity.ModelVampireBat;
+import com.syming.castlevaniacraft.entity.mobs.EntityVampireBat;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -10,27 +10,27 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 
-public class RenderAggressiveBat extends RenderLiving<EntityAggressiveBat> {
+public class RenderVampireBat extends RenderLiving<EntityVampireBat> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/aggressive_bat.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/vampire_bat.png");
 
-    public RenderAggressiveBat(RenderManager rendermanagerIn) {
-        super(rendermanagerIn, new ModelAggressiveBat(), 0.25F);
+    public RenderVampireBat(RenderManager rendermanagerIn) {
+        super(rendermanagerIn, new ModelVampireBat(), 0.25F);
     }
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(EntityAggressiveBat entity) {
+    protected ResourceLocation getEntityTexture(EntityVampireBat entity) {
         return TEXTURE;
     }
 
     @Override
-    protected void preRenderCallback(EntityAggressiveBat entitylivingbaseIn, float partialTickTime) {
+    protected void preRenderCallback(EntityVampireBat entitylivingbaseIn, float partialTickTime) {
         GlStateManager.scale(0.35F, 0.35F, 0.35F);
     }
 
     @Override
-    protected void applyRotations(EntityAggressiveBat entityLiving, float ageInTicks, float rotationYaw, float partialTicks)
+    protected void applyRotations(EntityVampireBat entityLiving, float ageInTicks, float rotationYaw, float partialTicks)
     {
         if (entityLiving.getIsBatHanging())
         {

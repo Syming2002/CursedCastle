@@ -206,12 +206,6 @@ public class EntityFrozenShade extends CCEntityMob implements IAnimatedEntity, E
         this.dataManager.set(ICE_BLADE_TARGETS[targetOffset], Integer.valueOf(newId));
     }
 
-    private void despawnIfPeaceful() {
-        if (world.getDifficulty() == EnumDifficulty.PEACEFUL) {
-            setDead();
-        }
-    }
-
 
     @Override
     public void onLivingUpdate() {

@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.entity.ai.dracula;
 
-import com.syming.castlevaniacraft.entity.mobs.EntityAggressiveBat;
+import com.syming.castlevaniacraft.entity.mobs.EntityVampireBat;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDracula;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationAI;
@@ -61,7 +61,7 @@ public class AIBatsAttack extends AnimationAI<EntityDracula> {
             double offsetX = Math.cos(angle) * distance;
             double offsetZ = Math.sin(angle) * distance;
 
-            EntityAggressiveBat aggressiveBat = new EntityAggressiveBat(this.dracula.world);
+            EntityVampireBat aggressiveBat = new EntityVampireBat(this.dracula.world);
             aggressiveBat.setLocationAndAngles(x + offsetX, y, z + offsetZ, this.dracula.rotationYaw, this.dracula.rotationPitch);
             this.dracula.world.spawnEntity(aggressiveBat);
             System.out.println("Aggressive bats are spawning!");

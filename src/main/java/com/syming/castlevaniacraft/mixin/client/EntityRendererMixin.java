@@ -13,7 +13,7 @@ public abstract class EntityRendererMixin {
      * @reason Add attack indicator to Extended Reach
      */
     @Overwrite
-    private void getMouseOver(float partialTicks) {
+    public void getMouseOver(float partialTicks) {
         ReachFixUtil.getMouseOver(partialTicks);
     }
 

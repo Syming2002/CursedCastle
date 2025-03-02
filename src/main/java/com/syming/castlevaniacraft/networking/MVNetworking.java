@@ -1,13 +1,13 @@
 package com.syming.castlevaniacraft.networking;
 
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class MVNetworking {
 
-    public static final String NETWORK_CHANNEL_NAME = MVReferences.MODID;
+    public static final String NETWORK_CHANNEL_NAME = CCReferences.MODID;
     public static SimpleNetworkWrapper network;
 
     public static void registerSimpleNetworking() {

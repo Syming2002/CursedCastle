@@ -3,13 +3,13 @@ package com.syming.castlevaniacraft.entity.mobs.boss;
 import com.syming.castlevaniacraft.api.ICustomBossBar;
 import com.syming.castlevaniacraft.entity.ai.dracula.*;
 import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
-import com.syming.castlevaniacraft.entity.mobs.EntityAggressiveBat;
+import com.syming.castlevaniacraft.entity.mobs.EntityVampireBat;
 import com.syming.castlevaniacraft.item.whips.vampirekiller.ItemVampireKillerWhip;
 import com.syming.castlevaniacraft.loot.CCTreasures;
 import com.syming.castlevaniacraft.networking.MVNetworking;
 import com.syming.castlevaniacraft.networking.MessageAddBossInfo;
 import com.syming.castlevaniacraft.networking.MessageRemoveBossInfo;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationAI;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
@@ -35,7 +35,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
@@ -66,7 +65,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     public AnimationAI currentAnim;
     private final BossInfoServer bossInfo = (BossInfoServer) new BossInfoServer(getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS).setDarkenSky(false);
     private static final int BAT_GROUP_RADIUS = 20;
-    private List<EntityAggressiveBat> aggressiveBats = new ArrayList<>();
+    private List<EntityVampireBat> aggressiveBats = new ArrayList<>();
     public PartEntity draculaHead;
     public PartEntity draculaBody;
     private Item lastHitItem;
@@ -209,16 +208,10 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
         return false;
     }
 
-    private void despawnIfPeaceful() {
-        if (world.getDifficulty() == EnumDifficulty.PEACEFUL) {
-            setDead();
-        }
-    }
-
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        aggressiveBats = this.world.getEntitiesWithinAABB(EntityAggressiveBat.class, this.getEntityBoundingBox().grow(BAT_GROUP_RADIUS));
+        aggressiveBats = this.world.getEntitiesWithinAABB(EntityVampireBat.class, this.getEntityBoundingBox().grow(BAT_GROUP_RADIUS));
         if (this.world.isDaytime() && !this.world.isRemote && this.shouldBurnInDay()) {
             float f = this.getBrightness();
 
@@ -500,6 +493,6 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
 
     @Override
     public @Nullable ResourceLocation getCustomBossBar() {
-        return new ResourceLocation(MVReferences.MODID, "textures/gui/dracula_boss_bar.png");
+        return new ResourceLocation(CCReferences.MODID, "textures/gui/dracula_boss_bar.png");
     }
 }

@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.entity.projectiles.subweapons;
 
-import com.syming.castlevaniacraft.entity.projectiles.MVThrowableWeapon;
+import com.syming.castlevaniacraft.entity.projectiles.CCThrowableWeapon;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,7 +18,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntityHolyCross extends MVThrowableWeapon {
+public class EntityHolyCross extends CCThrowableWeapon {
 
     public static final DataParameter<Float> THROWER_X = EntityDataManager.createKey(EntityHolyCross.class,
             DataSerializers.FLOAT);

@@ -1,4 +1,4 @@
-package com.syming.castlevaniacraft.entity.ai.grimReaper;
+package com.syming.castlevaniacraft.entity.ai;
 
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityGrimReaper;
 import net.minecraft.entity.EntityLivingBase;

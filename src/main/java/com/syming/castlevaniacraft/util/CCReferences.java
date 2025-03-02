@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.util;
 
-public class MVReferences {
+public class CCReferences {
 
     public static final String MODID = "castlevaniacraft";
     public static final String NAME = "Castlevania Craft";

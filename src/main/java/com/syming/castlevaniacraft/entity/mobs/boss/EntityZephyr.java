@@ -121,12 +121,6 @@ public class EntityZephyr extends CCEntityMob implements IAnimatedEntity {
         return false;
     }
 
-    private void despawnIfPeaceful() {
-        if (!world.isRemote && world.getDifficulty() == EnumDifficulty.PEACEFUL) {
-            setDead();
-        }
-    }
-
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();

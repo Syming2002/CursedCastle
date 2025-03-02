@@ -2,12 +2,15 @@ package com.syming.castlevaniacraft.entity.mobs;
 
 import com.syming.castlevaniacraft.api.IElementalWeapon;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
+import com.syming.castlevaniacraft.entity.ai.shade.frozenShade.AIIdle;
+import com.syming.castlevaniacraft.entity.ai.shade.frozenShade.AIRepulseAttack;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityFlying;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -24,15 +27,15 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import org.jetbrains.annotations.Nullable;
 
-public class EntityAggressiveBat extends CCEntityMob implements EntityFlying {
+public class EntityVampireBat extends CCEntityMob implements EntityFlying {
 
-    private static final DataParameter<Byte> HANGING = EntityDataManager.<Byte>createKey(EntityAggressiveBat.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> HANGING = EntityDataManager.<Byte>createKey(EntityVampireBat.class, DataSerializers.BYTE);
     /**
      * Coordinates of where the bat spawned.
      */
     private BlockPos spawnPosition;
 
-    public EntityAggressiveBat(World worldIn) {
+    public EntityVampireBat(World worldIn) {
         super(worldIn);
         this.experienceValue = 1;
         this.setSize(0.5F, 0.9F);
@@ -143,9 +146,22 @@ public class EntityAggressiveBat extends CCEntityMob implements EntityFlying {
     }
 
     @Override
+    protected void initEntityAI() {
+        super.initEntityAI();
+        this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, true));
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityVillager.class, 8.0F));
+        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
+    }
+
+    @Override
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
+        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_SPEED);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(1.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.2D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
     }
@@ -252,15 +268,6 @@ public class EntityAggressiveBat extends CCEntityMob implements EntityFlying {
                 this.moveForward = 0.5F;
                 this.rotationYaw += f1;
             }
-        }
-        if (this.getAttackTarget() == null) {
-            this.setAttackTarget(this.world.getClosestPlayerToEntity(this, 10.0D));
-        } else if (getAttackTarget().isEntityAlive()) {
-            if (isEntityAlive() && canEntityBeSeen(getAttackTarget()) && getDistance(getAttackTarget()) <= 2.0D) {
-                attackEntityAsMob(getAttackTarget());
-            }
-        } else {
-            setAttackTarget(null);
         }
     }
 

@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.util.handlers;
 
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -23,7 +23,7 @@ public class SoundsHandler {
     }
 
     private static SoundEvent registerSound(String name) {
-        ResourceLocation location = new ResourceLocation(MVReferences.MODID, name);
+        ResourceLocation location = new ResourceLocation(CCReferences.MODID, name);
         SoundEvent event = new SoundEvent(location);
         event.setRegistryName(name);
         ForgeRegistries.SOUND_EVENTS.register(event);
@@ -31,7 +31,7 @@ public class SoundsHandler {
     }
 
     public static SoundEvent getSound(String name) {
-        return SoundEvent.REGISTRY.getObject(new ResourceLocation(MVReferences.MODID, name));
+        return SoundEvent.REGISTRY.getObject(new ResourceLocation(CCReferences.MODID, name));
     }
 
 }

@@ -1,9 +1,8 @@
 package com.syming.castlevaniacraft.client.gui;
 
-//import com.syming.castlevaniacraft.networking.MessageAttackIndicator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.BossInfoClient;
-        import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,11 +20,7 @@ public class CCGui {
         UUID bossUUID = bossInfo.getUniqueId();
         if (mc.world == null) return;
 
-        if (CCRenderBossBar.isDraculaBossBar(bossUUID)) {
-            bossBar.drawHealthBar(event.getX(), event.getY(), bossInfo);
-            event.setIncrement(event.getIncrement());
-            event.setCanceled(true);
-        } else if (CCRenderBossBar.isDeathBossBar(bossUUID)) {
+        if (CCRenderBossBar.isCCBossBar(bossUUID)) {
             bossBar.drawHealthBar(event.getX(), event.getY(), bossInfo);
             event.setIncrement(event.getIncrement());
             event.setCanceled(true);

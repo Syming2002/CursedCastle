@@ -1,11 +1,15 @@
 package com.syming.castlevaniacraft.client.models.entity;
 
+import com.syming.castlevaniacraft.entity.mobs.EntityGorgon;
+import com.syming.castlevaniacraft.entity.mobs.EntityHarpy;
+import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelBase;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
+import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.entity.Entity;
 
-public class ModelHarpy extends AdvancedModelBase {
+public class ModelHarpy extends CCModel {
 
     private final AdvancedModelRenderer model_core;
     private final AdvancedModelRenderer head;
@@ -17,6 +21,8 @@ public class ModelHarpy extends AdvancedModelBase {
     private final AdvancedModelRenderer left_leg;
     private final AdvancedModelRenderer left_thigh;
 
+    private ModelAnimator animator;
+
     public ModelHarpy() {
         textureWidth = 128;
         textureHeight = 128;
@@ -26,9 +32,9 @@ public class ModelHarpy extends AdvancedModelBase {
 
 
         head = new AdvancedModelRenderer(this);
-        head.setRotationPoint(0.0F, 0.0F, 0.0F);
+        head.setRotationPoint(-1.0F, -40.0F, -3.0F);
         model_core.addChild(head);
-        head.cubeList.add(new ModelBox(head, 60, 0, -5.0F, -44.0F, -7.0F, 8, 8, 8, -0.125F, false));
+        head.cubeList.add(new ModelBox(head, 60, 0, -4.0F, -4.0F, -4.0F, 8, 8, 8, -0.125F, false));
 
         body = new AdvancedModelRenderer(this);
         body.setRotationPoint(-1.0F, -29.4954F, -0.1974F);
@@ -71,11 +77,49 @@ public class ModelHarpy extends AdvancedModelBase {
         left_thigh.setRotationPoint(0.0F, -3.2943F, 8.1832F);
         left_leg.addChild(left_thigh);
         left_thigh.cubeList.add(new ModelBox(left_thigh, 32, 50, -2.0F, -2.0F, -10.0F, 4, 4, 12, 0.0F, false));
+
+        this.animator = ModelAnimator.create();
+        updateDefaultPose();
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        model_core.render(f5);
+    public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTick, float headYaw, float headPitch, float scale) {
+        EntityHarpy harpy = (EntityHarpy) entity;
+        animate(harpy, limbSwing, limbSwingAmount, ageInTick, headYaw, headPitch, scale);
+        model_core.render(scale);
+    }
+
+    public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float ageInTick, float headYaw, float headPitch, float scale) {
+        EntityHarpy harpy = (EntityHarpy) entity;
+        animator.update(harpy);
+        this.setRotationAngles(limbSwing, limbSwingAmount, ageInTick, headYaw, headPitch, scale, harpy);
+
+        if (harpy.getAnimation() == EntityHarpy.FEATHER_ATTACK && harpy.isEntityAlive()) {
+            animator.setAnimation(EntityHarpy.FEATHER_ATTACK);
+
+            animator.startKeyframe(20);
+            this.rotate(animator, right_wing, 51.2193380833F, -7.2766554875F, -68.429738455F);
+            this.rotate(animator, left_wing, 51.2193380833F, 7.2766554875F, 68.429738455F);
+            animator.endKeyframe();
+
+            animator.startKeyframe(2);
+            this.rotate(animator, right_wing, -62.35F, 13.66F, -80.95F);
+            this.rotate(animator, left_wing, -62.35F, -13.66F, 80.95F);
+            animator.endKeyframe();
+
+            animator.resetKeyframe(13);
+        }
+        if (harpy.getAnimation() == EntityHarpy.DAGGER_ATTACK && harpy.isEntityAlive()) {
+            animator.setAnimation(EntityHarpy.DAGGER_ATTACK);
+
+            animator.startKeyframe(25);
+            this.rotate(animator, model_core, -15.0F, 0, 0);
+            animator.endKeyframe();
+
+            animator.startKeyframe(7);
+            this.rotate(animator, model_core, 360, 0, 0);
+            animator.endKeyframe();
+        }
     }
 
     public void setRotationAngle(AdvancedModelRenderer modelRenderer, float x, float y, float z) {
@@ -88,12 +132,17 @@ public class ModelHarpy extends AdvancedModelBase {
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale, Entity entity) {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
 
+        resetToDefaultPose();
+
         this.head.rotateAngleX = headPitch * 0.017453292F;
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
 
-        float wingFlapAngle = Math.abs((float) Math.cos(0.275F * ageInTicks)) * 2.5F;
+        EntityHarpy harpy = (EntityHarpy) entity;
+        if (harpy.getAnimation() != EntityHarpy.FEATHER_ATTACK) {
+            float wingFlapAngle = Math.abs((float) Math.cos(0.275F * ageInTicks)) * 2.5F;
 
-        right_wing.rotateAngleZ = wingFlapAngle;
-        left_wing.rotateAngleZ = -wingFlapAngle;
+            right_wing.rotateAngleZ = wingFlapAngle;
+            left_wing.rotateAngleZ = -wingFlapAngle;
+        }
     }
 }

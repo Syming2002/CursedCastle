@@ -2,7 +2,7 @@ package com.syming.castlevaniacraft.client.render.entity;
 
 import com.syming.castlevaniacraft.client.models.entity.ModelDracula;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDracula;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 @SideOnly(Side.CLIENT)
 public class RenderDracula extends RenderLiving<EntityDracula> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MVReferences.MODID, "textures/entity/dracula.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/dracula.png");
 
     public RenderDracula(RenderManager rendermanagerIn) {
         super(rendermanagerIn, new ModelDracula(), 0.5F);

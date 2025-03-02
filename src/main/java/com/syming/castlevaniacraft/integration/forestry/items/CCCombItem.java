@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.integration.forestry.items;
 
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import forestry.api.core.IItemModelRegister;
 import forestry.api.core.IModelManager;
 import forestry.api.core.Tabs;
@@ -24,7 +24,7 @@ public class CCCombItem extends Item implements IColoredItem, IItemModelRegister
 
     public CCCombItem() {
         super();
-        setRegistryName(MVReferences.MODID, "cc.comb");
+        setRegistryName(CCReferences.MODID, "cc.comb");
         setTranslationKey("cc.comb");
         setHasSubtypes(true);
         setCreativeTab(Tabs.tabApiculture);

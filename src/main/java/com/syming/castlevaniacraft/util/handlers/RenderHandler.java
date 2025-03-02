@@ -9,9 +9,10 @@ import com.syming.castlevaniacraft.entity.mobs.*;
 import com.syming.castlevaniacraft.entity.mobs.boss.*;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
+import com.syming.castlevaniacraft.entity.projectiles.EntityHarpyFeather;
 import com.syming.castlevaniacraft.entity.projectiles.EntityIceBladeProjectile;
 import com.syming.castlevaniacraft.init.CCBlock;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -31,34 +32,34 @@ public class RenderHandler {
         ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(CCBlock.HOLY_WATER_FLUID), new ItemMeshDefinition() {
             @Override
             public ModelResourceLocation getModelLocation(ItemStack stack) {
-                return new ModelResourceLocation(MVReferences.MODID + ":holy_water_fluid", "fluid");
+                return new ModelResourceLocation(CCReferences.MODID + ":holy_water_fluid", "fluid");
             }
        });
 
        ModelLoader.setCustomStateMapper(CCBlock.HOLY_WATER_FLUID, new StateMapperBase() {
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                return new ModelResourceLocation(MVReferences.MODID + ":holy_water_fluid", "fluid");
+                return new ModelResourceLocation(CCReferences.MODID + ":holy_water_fluid", "fluid");
            }
     });
 
         ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(CCBlock.BLOOD_FLUID), new ItemMeshDefinition() {
             @Override
             public ModelResourceLocation getModelLocation(ItemStack stack) {
-                return new ModelResourceLocation(MVReferences.MODID + ":blood_fluid", "fluid");
+                return new ModelResourceLocation(CCReferences.MODID + ":blood_fluid", "fluid");
             }
         });
 
         ModelLoader.setCustomStateMapper(CCBlock.BLOOD_FLUID, new StateMapperBase() {
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                return new ModelResourceLocation(MVReferences.MODID + ":blood_fluid", "fluid");
+                return new ModelResourceLocation(CCReferences.MODID + ":blood_fluid", "fluid");
             }
         });
     }
 
     public static void registerEntityRenders() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityAggressiveBat.class, RenderAggressiveBat::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityVampireBat.class, RenderVampireBat::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityBloodSkeleton.class, RenderBloodSkeleton::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCatoblepas.class, RenderCatoblepas::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCrucifix.class, RenderCrucifix::new);
@@ -72,6 +73,7 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityGorgon.class, RenderGorgon::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityGrimReaper.class, RenderGrimReaper::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHarpy.class, RenderHarpy::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHarpyFeather.class, RenderHarpyFeather::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHeatShade.class, RenderHeatShade::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityIceBladeProjectile.class, RenderIceBlade::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMedusa.class, RenderMedusa::new);

@@ -1,28 +1,30 @@
-package com.syming.castlevaniacraft.entity.ai.grimReaper;
+package com.syming.castlevaniacraft.entity.ai;
 
+import com.syming.castlevaniacraft.entity.CCEntity;
+import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityGrimReaper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 
 public class AIFlyTowardsTarget extends EntityAIBase {
 
-    private final EntityGrimReaper grimReaper;
+    private final CCEntityMob ccEntityMob;
     private double targetDistance;
 
-    public AIFlyTowardsTarget(EntityGrimReaper grimReaper, double targetDistance) {
-        this.grimReaper = grimReaper;
+    public AIFlyTowardsTarget(CCEntityMob ccEntityMob, double targetDistance) {
+        this.ccEntityMob = ccEntityMob;
         this.targetDistance = targetDistance;
         this.setMutexBits(1);
     }
 
     @Override
     public boolean shouldExecute() {
-        return this.grimReaper.getAttackTarget() != null;
+        return this.ccEntityMob.getAttackTarget() != null;
     }
 
     @Override
     public boolean shouldContinueExecuting() {
-        EntityLivingBase target = this.grimReaper.getAttackTarget();
+        EntityLivingBase target = this.ccEntityMob.getAttackTarget();
         return target != null && target.isEntityAlive() /*&& this.taskOwner.getDistanceSq(target) > this.targetDistance * this.targetDistance*/;
     }
 
@@ -33,16 +35,16 @@ public class AIFlyTowardsTarget extends EntityAIBase {
 
     @Override
     public void updateTask() {
-        EntityLivingBase target = this.grimReaper.getAttackTarget();
+        EntityLivingBase target = this.ccEntityMob.getAttackTarget();
         if (target != null) {
-            double distanceSq = this.grimReaper.getDistanceSq(target);
+            double distanceSq = this.ccEntityMob.getDistanceSq(target);
             double targetDistanceSq = this.targetDistance * this.targetDistance;
 
             if (distanceSq > targetDistanceSq) {
                 // Calculate direction towards the target
-                double dX = target.posX - this.grimReaper.posX;
-                double dY = target.posY - this.grimReaper.posY;
-                double dZ = target.posZ - this.grimReaper.posZ;
+                double dX = target.posX - this.ccEntityMob.posX;
+                double dY = target.posY - this.ccEntityMob.posY;
+                double dZ = target.posZ - this.ccEntityMob.posZ;
 
                 // Normalize the direction vector
                 double length = Math.sqrt(dX * dX + dY * dY + dZ * dZ);
@@ -57,7 +59,7 @@ public class AIFlyTowardsTarget extends EntityAIBase {
                 double targetY = target.posY - dY * this.targetDistance;
                 double targetZ = target.posZ - dZ * this.targetDistance;
 
-                this.grimReaper.getMoveHelper().setMoveTo(targetX, targetY, targetZ, 1.75F);
+                this.ccEntityMob.getMoveHelper().setMoveTo(targetX, targetY, targetZ, 0.5F);
             }
         }
     }

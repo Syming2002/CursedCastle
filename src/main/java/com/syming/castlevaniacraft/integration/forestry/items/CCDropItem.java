@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.integration.forestry.items;
 
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import forestry.api.apiculture.BeeManager;
 import forestry.api.arboriculture.TreeManager;
 import forestry.api.core.IItemModelRegister;
@@ -25,7 +25,7 @@ public class CCDropItem extends Item implements IColoredItem, IItemModelRegister
         setHasSubtypes(true);
         setCreativeTab(Tabs.tabApiculture);
         setTranslationKey("cc.honey_drop");
-        setRegistryName(MVReferences.MODID, "cc.honey_drop");
+        setRegistryName(CCReferences.MODID, "cc.honey_drop");
         setResearchSuitability(BeeManager.beeRoot);
         setResearchSuitability(TreeManager.treeRoot);
         setResearchSuitability(ButterflyManager.butterflyRoot);

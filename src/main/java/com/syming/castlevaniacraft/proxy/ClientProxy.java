@@ -15,7 +15,7 @@ import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.integration.jer.CCJerIntegration;
 import com.syming.castlevaniacraft.item.souls.EnumBulletSoul;
 import com.syming.castlevaniacraft.item.souls.EnumGuardianSoul;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -44,7 +44,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerItemVariantsRenderer(Item item, int meta, String fileName) {
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(MVReferences.MODID, fileName), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(CCReferences.MODID, fileName), "inventory"));
     }
 
 
@@ -66,12 +66,12 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerModelBakeryVariants() {
         ModelBakery.registerItemVariants(CCItem.bulletSoul,
-                new ResourceLocation(MVReferences.MODID, "bullet_soul.zombie_soul"),
-                new ResourceLocation(MVReferences.MODID, "bullet_soul.skeleton_soul"),
-                new ResourceLocation(MVReferences.MODID, "bullet_soul.axe_armor_soul"));
+                new ResourceLocation(CCReferences.MODID, "bullet_soul.zombie_soul"),
+                new ResourceLocation(CCReferences.MODID, "bullet_soul.skeleton_soul"),
+                new ResourceLocation(CCReferences.MODID, "bullet_soul.axe_armor_soul"));
 
         ModelBakery.registerItemVariants(CCItem.guardianSoul,
-                new ResourceLocation(MVReferences.MODID, "guardian_soul.bat_soul"));
+                new ResourceLocation(CCReferences.MODID, "guardian_soul.bat_soul"));
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.world.gen.structure.cemetery;
 
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.*;
@@ -13,7 +13,7 @@ import java.util.Random;
 public class CemeteryCreationHandler implements VillagerRegistry.IVillageCreationHandler {
 
     public static void registerCemeteryComponents() {
-        MapGenStructureIO.registerStructureComponent(StructureCemeteryPieces.class, new ResourceLocation(MVReferences.MODID,"Cemetery").toString());
+        MapGenStructureIO.registerStructureComponent(StructureCemeteryPieces.class, new ResourceLocation(CCReferences.MODID,"Cemetery").toString());
     }
 
     @Override

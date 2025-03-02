@@ -91,12 +91,6 @@ public class EntityHeatShade extends CCEntityMob implements IAnimatedEntity, Ent
         super.updateAITasks();
     }
 
-    private void despawnIfPeaceful() {
-        if (world.getDifficulty() == EnumDifficulty.PEACEFUL) {
-            setDead();
-        }
-    }
-
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();

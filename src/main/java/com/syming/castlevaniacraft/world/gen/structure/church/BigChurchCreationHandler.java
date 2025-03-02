@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.world.gen.structure.church;
 
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
@@ -14,7 +14,7 @@ import java.util.Random;
 public class BigChurchCreationHandler implements VillagerRegistry.IVillageCreationHandler {
 
     public static void registerBigChurchComponents() {
-        MapGenStructureIO.registerStructureComponent(StructureBigChurch.class, new ResourceLocation(MVReferences.MODID,"BigChurch").toString());
+        MapGenStructureIO.registerStructureComponent(StructureBigChurch.class, new ResourceLocation(CCReferences.MODID,"BigChurch").toString());
     }
 
     @Override

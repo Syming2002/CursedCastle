@@ -71,7 +71,6 @@ item.cc.honey_drop.blood.name=血の滴
 
 # Entity
 
-entity.aggressive_bat.name=攻撃的なコウモリ
 entity.blood_skeleton.name=レッドスケルトン
 entity.crucifix.name=十字架
 entity.dracula.name=ドラキュラ
@@ -87,6 +86,7 @@ entity.medusa.name=メディウサ
 entity.medusa_snake.name=メディウサの蛇
 entity.Villager.high_priest=主教
 entity.rusalka.name=ルサールカ
+entity.vampire_bat.name=吸血鬼のコウモリ
 entity.zephyr.name=ゼファル
 
 # Fluids

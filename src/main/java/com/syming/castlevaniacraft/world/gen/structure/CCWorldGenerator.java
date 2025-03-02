@@ -1,6 +1,8 @@
 package com.syming.castlevaniacraft.world.gen.structure;
 
 import com.syming.castlevaniacraft.world.gen.structure.cave.RusalkaCave;
+import com.syming.castlevaniacraft.world.gen.structure.draculcastle.StructureDraculaCastle;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -17,7 +19,7 @@ public class CCWorldGenerator implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         if (world.provider.getDimension() == 0) { //Overworld Generator
             generateOverworld(world, random, chunkX, chunkZ);
-            System.out.println("A Rusalka Cave has spawn at " + chunkX + ", " + chunkZ);
+
         }
     }
 
@@ -29,6 +31,15 @@ public class CCWorldGenerator implements IWorldGenerator {
         if (random.nextInt(200) == 0) {
             BlockPos pos = new BlockPos(x, y, z);
             RUSALKA_CAVE.generate(world, random, pos);
+            System.out.println("A Rusalka Cave has spawn at " + x + ", " + z);
+        }
+
+        if (random.nextInt(200) == 0) {
+            BlockPos pos = new BlockPos(x, 64, z);
+
+//            StructureDraculaCastle.(world, pos, "dracula_castle_entrance", Rotation.NONE);
+
+            System.out.println("A Dracula Castle has spawn at " + x + ", " + z);
         }
     }
 }

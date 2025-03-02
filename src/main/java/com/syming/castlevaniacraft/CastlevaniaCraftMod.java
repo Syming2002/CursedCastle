@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft;
 
 import com.syming.castlevaniacraft.proxy.CommonProxy;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import com.syming.castlevaniacraft.util.handlers.RegistryHandler;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -11,9 +11,9 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = MVReferences.MODID,
-        name = MVReferences.NAME,
-        version = MVReferences.VERSION,
+@Mod(modid = CCReferences.MODID,
+        name = CCReferences.NAME,
+        version = CCReferences.VERSION,
         dependencies = "required-after:llibrary@[1.7.9,);" +
                 "required-after:baubles@[1.5,);" +
                 "required-after:reachfix@[1.0.11,);")
@@ -27,7 +27,7 @@ public class CastlevaniaCraftMod {
     @Mod.Instance
     public static CastlevaniaCraftMod instance;
 
-    @SidedProxy(clientSide = MVReferences.CLIENT_PROXY, serverSide = MVReferences.COMMON_PROXY)
+    @SidedProxy(clientSide = CCReferences.CLIENT_PROXY, serverSide = CCReferences.COMMON_PROXY)
     public static CommonProxy proxy;
 
     @Mod.EventHandler

@@ -10,9 +10,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-public abstract class MVThrowableWeapon extends EntityThrowable {
+public abstract class CCThrowableWeapon extends EntityThrowable {
 
-    public MVThrowableWeapon(World worldIn, EntityLivingBase thrower) {
+    public CCThrowableWeapon(World worldIn, EntityLivingBase thrower) {
         super(worldIn, thrower);
         this.ignoreEntity = thrower;
         setLocationAndAngles(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ, thrower.rotationYaw,
@@ -27,7 +27,7 @@ public abstract class MVThrowableWeapon extends EntityThrowable {
         shoot(motionX, motionY, motionZ, 1.5F, 1.0F);
     }
 
-    public MVThrowableWeapon(World worldIn) {
+    public CCThrowableWeapon(World worldIn) {
         super(worldIn);
     }
 

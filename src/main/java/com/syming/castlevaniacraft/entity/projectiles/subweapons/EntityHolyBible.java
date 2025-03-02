@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.entity.projectiles.subweapons;
 
-import com.syming.castlevaniacraft.entity.projectiles.MVThrowableWeapon;
+import com.syming.castlevaniacraft.entity.projectiles.CCThrowableWeapon;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntityHolyBible extends MVThrowableWeapon {
+public class EntityHolyBible extends CCThrowableWeapon {
 
     private int spiralTicks = 0;
     public static final DataParameter<Float> THROWER_X = EntityDataManager.createKey(EntityHolyBible.class,

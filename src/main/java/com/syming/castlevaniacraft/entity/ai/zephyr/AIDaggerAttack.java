@@ -55,7 +55,9 @@ public class AIDaggerAttack extends AnimationAI<EntityZephyr> {
         Vec3d daggerPos = new Vec3d(0, 1.275,0);
         daggerPos = daggerPos.rotateYaw((float) Math.toRadians((-zephyr.rotationYaw - 90)));
         daggerPos = daggerPos.add(zephyr.getPositionVector());
-        daggerPos = daggerPos.add(new Vec3d(0, 0, 1.5).rotatePitch((float) Math.toRadians(-zephyr.rotationPitch)).rotateYaw((float) Math.toRadians(-zephyr.rotationYawHead)));
+        daggerPos = daggerPos.add(new Vec3d(0, 0, 1.5)
+                .rotatePitch((float) Math.toRadians(-zephyr.rotationPitch))
+                .rotateYaw((float) Math.toRadians(-zephyr.rotationYawHead)));
 
         if (zephyr.getAnimationTick() == 24 && attackTarget != null) {
             launchDagger(daggerPos.x, daggerPos.y, daggerPos.z, 1.5F);

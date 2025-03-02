@@ -2,7 +2,7 @@ package com.syming.castlevaniacraft.init;
 
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.ItemHolyWater;
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.entity.IMerchant;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
@@ -20,9 +20,9 @@ import java.util.Random;
 public class VillagerInit {
 
     public static VillagerRegistry.VillagerProfession villagerHighPriest;
-    public static final String ID_VILLAGER_HIGH_PRIEST = new ResourceLocation(MVReferences.MODID, "high_priest").toString();
-    public static final String TEXTURE_SKIN_HIGH_PRIEST = MVReferences.MODID + ':' + "textures/entity/high_priest.png";
-    public static final String TEXTURE_SKIN_ZOMBIE_HIGH_PRIEST = MVReferences.MODID + ':' + "textures/entity/zombie_high_priest.png";
+    public static final String ID_VILLAGER_HIGH_PRIEST = new ResourceLocation(CCReferences.MODID, "high_priest").toString();
+    public static final String TEXTURE_SKIN_HIGH_PRIEST = CCReferences.MODID + ':' + "textures/entity/high_priest.png";
+    public static final String TEXTURE_SKIN_ZOMBIE_HIGH_PRIEST = CCReferences.MODID + ':' + "textures/entity/zombie_high_priest.png";
 
     public static void init() {
 

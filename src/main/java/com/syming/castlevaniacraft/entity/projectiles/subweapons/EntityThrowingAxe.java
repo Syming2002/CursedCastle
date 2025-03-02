@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.entity.projectiles.subweapons;
 
-import com.syming.castlevaniacraft.entity.projectiles.MVThrowableWeapon;
+import com.syming.castlevaniacraft.entity.projectiles.CCThrowableWeapon;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -15,7 +15,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntityThrowingAxe extends MVThrowableWeapon {
+public class EntityThrowingAxe extends CCThrowableWeapon {
 
 
     public static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(EntityThrowingAxe.class,

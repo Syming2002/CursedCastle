@@ -81,7 +81,6 @@ item.cc.honey_drop.blood.name=Blood Drop
 
 # Entity
 
-entity.aggressive_bat.name=Aggressive Bat
 entity.blood_skeleton.name=Blood Skeleton
 entity.crucifix.name=Crucifix
 entity.dracula.name=Dracula
@@ -97,6 +96,7 @@ entity.medusa.name=Medusa
 entity.medusa_snake.name=Medusa Snake
 entity.Villager.high_priest=High Priest
 entity.rusalka.name=Rusalka
+entity.vampire_bat.name=Vampire Bat
 entity.zephyr.name=Zephyr
 
 # Fluids

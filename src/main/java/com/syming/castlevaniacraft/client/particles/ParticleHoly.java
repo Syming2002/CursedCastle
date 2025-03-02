@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.particles;
 
-import com.syming.castlevaniacraft.util.MVReferences;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -599,7 +599,7 @@ public class ParticleHoly extends Particle {
 
         private TextureDefinition(String parName, float parUMin, float parVMin, float parUMax, float parVMax, boolean parAnimMode, int parAnimFrames) {
             name = parName;
-            resourceLocation = new ResourceLocation(MVReferences.MODID, "textures/particles/"+name+".png");
+            resourceLocation = new ResourceLocation(CCReferences.MODID, "textures/particles/"+name+".png");
             uMin = parUMin;
             vMin = parVMin;
             uMax = parUMax;
