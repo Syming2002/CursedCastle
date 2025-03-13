@@ -56,7 +56,6 @@ tile.dracula_castle_stonebrick_stairs.name=Dracula's Castle Stone Bricks Stairs
 tile.dracula_castle_stonebrick_wall.name=Dracula's Castle Stone Bricks Wall
 tile.holy_water_fluid.name=Holy Water
 
-
 # Bullet Souls
 
 item.bullet_soul.axe_armor_soul.name=Axe Armor Soul
@@ -78,18 +77,24 @@ itemGroup.castlevaniacraft=Castlevania Craft
 # Drops
 
 item.cc.honey_drop.blood.name=Blood Drop
+item.cc.honey_drop.frozen.name=Frozen Drop
+item.cc.honey_drop.warmed.name=Warmed Drop
 
 # Entity
 
 entity.blood_skeleton.name=Blood Skeleton
+entity.catoblepas.name=Catoblepas
 entity.crucifix.name=Crucifix
 entity.dracula.name=Dracula
 entity.dracula_second_form.name=Dracula Second Form
+entity.flame_demon.name=Flame Demon
 entity.flea_man.name=Flea Man
 entity.friendly_bat.name=Friendly Bat
 entity.friendly_zombie.name=Friendly Zombie
 entity.frozen_shade.name=Frozen Shade
+entity.gorgon.name=Gorgon
 entity.grim_reaper.name=Grim Reaper
+entity.harpy.name=Harpy
 entity.heat_shade.name=Heat Shade
 entity.ice_blade.name=Ice Blade
 entity.medusa.name=Medusa
@@ -150,7 +155,7 @@ item.diamond_throwing_axe.name=Diamond Throwing Axe
 
 # Tooltips
 
-item.extendedReach.getReach=Has %s square distance reach
+item.extendedReach.getReach=Has %s square distance reach.
 
 # Whips
 

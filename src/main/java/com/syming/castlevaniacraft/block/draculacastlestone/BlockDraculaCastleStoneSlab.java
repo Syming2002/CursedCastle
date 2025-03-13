@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.block.draculacastlestone;
 
-import com.syming.castlevaniacraft.init.CCBlock;
+import com.syming.castlevaniacraft.block.CCBlock;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.MapColor;

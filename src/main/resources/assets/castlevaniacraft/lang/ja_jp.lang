@@ -6,6 +6,12 @@ item.juste_belmont_boots.name=ジュスト・ベルモンドのブーツ
 item.juste_belmont_chest.name=ジュスト・ベルモンドのチェストプレート
 item.juste_belmont_leggings.name=ジュスト・ベルモンドのレギンス
 
+item.leon_belmont_boots.name=レオン・ベルモンドのブーツ
+item.leon_belmont_chest.name=レオン・ベルモンドのチェストプレート
+item.leon_belmont_leggings.name=レオン・ベルモンドのレギンス
+
+item.olrox_suit.name=オルロックのスーツ
+
 item.richter_belmont_boots.name=リヒター・ベルモンドのブーツ
 item.richter_belmont_chest.name=リヒター・ベルモンドのチェストプレート
 item.richter_belmont_leggings.name=リヒター・ベルモンドのレギンス
@@ -28,12 +34,12 @@ item.green_stone_attachment.name=グリーンストーンーンアタッチメ�
 
 # Bees
 
-for.bees.species.zombie=Zombie
-for.bees.species.skeleton=Skeleton
-for.bees.species.frozen_shade=Frozen Shade
-for.bees.species.heat_shade=Heat Shade
-for.bees.species.vampire=Vampire
-for.bees.species.dracula=Dracula
+for.bees.species.zombie=ゾンビ
+for.bees.species.skeleton=骨格
+for.bees.species.frozen_shade=フローズンシェイド
+for.bees.species.heat_shade=ヒートシェイド
+for.bees.species.vampire=吸血鬼
+for.bees.species.dracula=ドラキュラ
 
 # Blocks
 
@@ -52,11 +58,14 @@ tile.holy_water_fluid.name=聖水
 
 # Bullet Souls
 
+item.bullet_soul.axe_armor_soul.name=アックスアーマーの魂
 item.bullet_soul.zombie_soul.name=ゾンビの魂
 item.bullet_soul.skeleton_soul.name=スケルトンの魂
 
 # Combs
 
+item.cc.comb.rotten.name=腐った巣板
+item.cc.comb.bone.name=骨の巣板
 item.cc.comb.blood.name=血の巣板
 item.cc.comb.frozen.name=フローズンの巣板
 item.cc.comb.warmed.name=暑い巣板
@@ -68,18 +77,24 @@ itemGroup.castlevaniacraft=悪魔城ドラキュラクラフト
 # Drops
 
 item.cc.honey_drop.blood.name=血の滴
+item.cc.honey_drop.frozen.name=氷の滴
+item.cc.honey_drop.warmed.name=暑い滴
 
 # Entity
 
 entity.blood_skeleton.name=レッドスケルトン
+entity.catoblepas.name=カトブレパス
 entity.crucifix.name=十字架
 entity.dracula.name=ドラキュラ
 entity.dracula_second_form.name=ドラキュラ第二形態
+entity.flame_demon.name=フレイムデーモン
 entity.flea_man.name=のみ男
 entity.friendly_bat.name=フレンドリーなバット
 entity.friendly_zombie.name=フレンドリーなゾンビ
 entity.frozen_shade.name=フローズンシェイド
+entity.gorgon.name=ゴルゴン
 entity.grim_reaper.name=死神
+entity.harpy.name=ハーピー
 entity.heat_shade.name=ヒートシェイド
 entity.ice_blade.name=アイスニードル
 entity.medusa.name=メディウサ
@@ -138,6 +153,10 @@ item.iron_throwing_axe.name=鉄の斧
 item.golden_throwing_axe.name=金の斧
 item.diamond_throwing_axe.name=ダイヤモンドの斧
 
+# Tooltips
+
+item.extendedReach.getReach=%s 平方距離があります。
+
 # Whips
 
 item.leather_whip.name=革の鞭
@@ -150,11 +169,11 @@ item.jet_black_whip.name=漆黒の鞭
 item.undead_killer.name=アンデッドキラー
 item.vampire_killer_whip.name=ヴァンパイアキラー
 item.crushing_stone_vampire_killer_whip.name=ヴァンパイアキラークラッシングストーンアタッチメント
-item.vampire_killer_steel_attachment_whip.name=ヴァンパイアキラースチールアタッチメント
-item.vampire_killer_platinum_attachment_whip.name=ヴァンパイアキラープラチナムアタッチメント
-item.vampire_killer_energy_circle_attachment_whip.name=ヴァンパイアキラーエネルギーサークルアタッチメント
+item.steel_vampire_killer_whip.name=ヴァンパイアキラースチールアタッチメント
+item.platinum_vampire_killer_whip.name=ヴァンパイアキラープラチナムアタッチメント
+item.energy_circle_vampire_killer_whip.name=ヴァンパイアキラーエネルギーサークルアタッチメント
 item.bullet_tip_vampire_killer_whip.name=ヴァンパイアキラー弾丸のアタッチメント
-item.vampire_killer_red_stone_attachment_whip.name=ヴァンパイアキラーレッドストーンアタッチメント
-item.vampire_killer_blue_stone_attachment_whip.name=ヴァンパイアキラーブルーストーンアタッチメント
-item.vampire_killer_yellow_stone_attachment_whip.name=ヴァンパイアキラーイエローストーンアタッチメント
-item.vampire_killer_green_stone_attachment_whip.name=ヴァンパイアキラーグリーンストーンアタッチメント
+item.red_stone_vampire_killer_whip.name=ヴァンパイアキラーレッドストーンアタッチメント
+item.blue_stone_vampire_killer_whip.name=ヴァンパイアキラーブルーストーンアタッチメント
+item.yellow_stone_vampire_killer_whip.name=ヴァンパイアキラーイエローストーンアタッチメント
+item.green_stone_vampire_killer_whip.name=ヴァンパイアキラーグリーンストーンアタッチメント

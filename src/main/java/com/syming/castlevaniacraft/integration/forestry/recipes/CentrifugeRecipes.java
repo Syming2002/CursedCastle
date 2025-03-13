@@ -3,11 +3,12 @@ package com.syming.castlevaniacraft.integration.forestry.recipes;
 import com.syming.castlevaniacraft.integration.forestry.bees.CCBeeDefinition;
 import com.syming.castlevaniacraft.integration.forestry.items.CCCombType;
 import com.syming.castlevaniacraft.integration.forestry.items.CCDropType;
+
 import forestry.api.recipes.RecipeManagers;
 import forestry.apiculture.ModuleApiculture;
 import forestry.core.ModuleCore;
+
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.HashMap;
@@ -28,6 +29,10 @@ public class CentrifugeRecipes {
 
         Map<ItemStack, Float> bloodCombProducts = new HashMap<>();
 
+        Map<ItemStack, Float> frozenCombProducts = new HashMap<>();
+
+        Map<ItemStack, Float> warmedCombProducts = new HashMap<>();
+
         ItemStack rottenFlesh = Items.ROTTEN_FLESH.getDefaultInstance();
 
         ItemStack bone = Items.BONE.getDefaultInstance();
@@ -39,6 +44,10 @@ public class CentrifugeRecipes {
         ItemStack honeyDrop = ModuleApiculture.getItems().honeyDrop.getItemStack();
 
         ItemStack bloodDrop = CCBeeDefinition.getCCDrop(CCDropType.BLOOD);
+
+        ItemStack frozenDrop = CCBeeDefinition.getCCDrop(CCDropType.FROZEN);
+
+        ItemStack warmedDrop = CCBeeDefinition.getCCDrop(CCDropType.WARMED);
 
         rottenCombProducts.put(beeswax, 0.8F);
         rottenCombProducts.put(honeyDrop, 0.5F);
@@ -53,11 +62,23 @@ public class CentrifugeRecipes {
         bloodCombProducts.put(honeyDrop, 0.5F);
         bloodCombProducts.put(bloodDrop, 0.25F);
 
+        frozenCombProducts.put(beeswax, 0.8F);
+        frozenCombProducts.put(honeyDrop, 0.5F);
+        frozenCombProducts.put(frozenDrop, 0.25F);
+
+        warmedCombProducts.put(beeswax, 0.8F);
+        warmedCombProducts.put(honeyDrop, 0.5F);
+        warmedCombProducts.put(warmedDrop, 0.25F);
+
         RecipeManagers.centrifugeManager.addRecipe(20, getCCComb(CCCombType.BLOOD), bloodCombProducts);
 
         RecipeManagers.centrifugeManager.addRecipe(20, getCCComb(CCCombType.ROTTEN), rottenCombProducts);
 
         RecipeManagers.centrifugeManager.addRecipe(20, getCCComb(CCCombType.BONE), boneCombProducts);
+
+        RecipeManagers.centrifugeManager.addRecipe(20, getCCComb(CCCombType.FROZEN), frozenCombProducts);
+
+        RecipeManagers.centrifugeManager.addRecipe(20, getCCComb(CCCombType.WARMED), warmedCombProducts);
     }
 
 }

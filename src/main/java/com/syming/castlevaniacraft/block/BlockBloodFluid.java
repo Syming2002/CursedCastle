@@ -1,6 +1,5 @@
 package com.syming.castlevaniacraft.block;
 
-import com.syming.castlevaniacraft.init.CCBlock;
 import com.syming.castlevaniacraft.item.CCItem;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

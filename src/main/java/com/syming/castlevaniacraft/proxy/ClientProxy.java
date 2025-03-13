@@ -10,7 +10,7 @@ import com.syming.castlevaniacraft.entity.projectiles.EntityScytheProjectile;
 import com.syming.castlevaniacraft.entity.projectiles.EntityThrowingBoneProjectile;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.*;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityHolyCross;
-import com.syming.castlevaniacraft.init.CCBlock;
+import com.syming.castlevaniacraft.block.CCBlock;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.integration.jer.CCJerIntegration;
 import com.syming.castlevaniacraft.item.souls.EnumBulletSoul;

@@ -18,6 +18,7 @@ public class MVNetworking {
         //Server
         network.registerMessage(MessageExtendedReachAttack.Handler.class, MessageExtendedReachAttack.class, packetId++, Side.SERVER);
         network.registerMessage(MessageSyncEventFireballLauncher.Handler.class, MessageSyncEventFireballLauncher.class, packetId++, Side.SERVER);
+        network.registerMessage(MessageSyncEventFlameWhipParticle.Handler.class, MessageSyncEventFlameWhipParticle.class, packetId++, Side.SERVER);
 
         // Client
         network.registerMessage(MessageAddBossInfo.Handler.class, MessageAddBossInfo.class, packetId++, Side.CLIENT);

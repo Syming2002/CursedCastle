@@ -1,10 +1,10 @@
-package com.syming.castlevaniacraft.init;
+package com.syming.castlevaniacraft.block;
 
-import com.syming.castlevaniacraft.block.BlockBloodFluid;
-import com.syming.castlevaniacraft.block.BlockHolyWaterFluid;
 import com.syming.castlevaniacraft.block.draculacastlestone.*;
+import com.syming.castlevaniacraft.fluid.CCFluid;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraftforge.fluids.BlockFluidClassic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +24,8 @@ public class CCBlock {
 
     // Fluids
 
-    public static final Block HOLY_WATER_FLUID = new BlockHolyWaterFluid("holy_water_fluid", FluidInit.HOLY_WATER_FLUID, Material.WATER);
-    public static final Block BLOOD_FLUID = new BlockBloodFluid("blood_fluid", FluidInit.BLOOD_FLUID, Material.WATER);
+    public static final BlockFluidClassic HOLY_WATER_FLUID = new BlockHolyWaterFluid("holy_water_fluid", CCFluid.HOLY_WATER_FLUID, Material.WATER);
+    public static final BlockFluidClassic BLOOD_FLUID = new BlockBloodFluid("blood_fluid", CCFluid.BLOOD_FLUID, Material.WATER);
 
 
 

@@ -1,8 +1,10 @@
 package com.syming.castlevaniacraft.util;
 
 import com.syming.castlevaniacraft.item.whips.ItemWhip;
+
 import meldexun.reachfix.config.ReachFixConfig;
 import meldexun.reachfix.util.BoundingBoxUtil;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

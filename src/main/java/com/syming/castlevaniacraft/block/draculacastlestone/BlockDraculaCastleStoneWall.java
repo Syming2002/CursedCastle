@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.block.draculacastlestone;
 
-import com.syming.castlevaniacraft.init.CCBlock;
+import com.syming.castlevaniacraft.block.CCBlock;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.block.Block;

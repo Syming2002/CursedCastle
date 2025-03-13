@@ -6,6 +6,12 @@ item.juste_belmont_boots.name=Bottes de Juste Belmont
 item.juste_belmont_chest.name=Plastron de Juste Belmont
 item.juste_belmont_leggings.name=Pantalon de Juste Belmont
 
+item.leon_belmont_boots.name=Bottes de Leon Belmont
+item.leon_belmont_chest.name=Plastron de Leon Belmont
+item.leon_belmont_leggings.name=Pantalon de Leon Belmont
+
+item.olrox_suit.name=Costume d'Olrox
+
 item.richter_belmont_boots.name=Bottes de Richter Belmont
 item.richter_belmont_chest.name=Plastron de Richter Belmont
 item.richter_belmont_leggings.name=Pantalon de Richter Belmont
@@ -41,7 +47,6 @@ castlevaniacraft.dracula_castle_chiseled.name=Pierre sculptée du château de Dr
 castlevaniacraft.dracula_castle_cracked.name=Pierre taillée du château de Dracula
 castlevaniacraft.dracula_castle_default.name=Pierre taillée du château de Dracula
 
-
 tile.blood_fluid.name=Sang
 tile.dracula_castle_cobblestone.name=Pierres du château de Dracula
 tile.dracula_castle_stone.name=Roche du château de Dracula
@@ -67,23 +72,29 @@ item.cc.comb.warmed.name=Alvéole Brûlante
 
 # Creative Tabs
 
-itemGroup.castlevaniacraft=castlevaniacraft
+itemGroup.castlevaniacraft=Castlevania Craft
 
 # Drops
 
 item.cc.honey_drop.blood.name=Goutte de Sang
+item.cc.honey_drop.frozen.name=Goutte de Glace
+item.cc.honey_drop.warmed.name=Goutte Brûlante
 
 # Entity
 
 entity.blood_skeleton.name=Squelette de Sang
+entity.catoblepas.name=Catoblepas
 entity.crucifix.name=Crucifix
 entity.dracula.name=Dracula
 entity.dracula_second_form.name=Dracula Seconde Forme
+entity.flame_demon.name=Flame Demon
 entity.flea_man.name=Homme Puce
 entity.friendly_bat.name=Chauve-souris Amicale
 entity.friendly_zombie.name=Zombie Amicale
 entity.frozen_shade.name=Ombre Glacée
+entity.gorgon.name=Gorgon
 entity.grim_reaper.name=La Faucheuse
+entity.harpy.name=Harpy
 entity.heat_shade.name=Ombre Brûlante
 entity.ice_blade.name=Lame de Glace
 entity.medusa.name=Méduse
@@ -144,7 +155,7 @@ item.diamond_throwing_axe.name=Hache Lançable en Diamant
 
 # Tooltips
 
-item.extendedReach.getReach=A %s de distance carrée
+item.extendedReach.getReach=A %s de distance carrée.
 
 # Whips
 

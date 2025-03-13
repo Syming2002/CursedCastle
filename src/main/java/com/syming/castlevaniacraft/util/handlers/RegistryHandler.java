@@ -3,9 +3,12 @@ package com.syming.castlevaniacraft.util.handlers;
 
 import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.api.*;
+import com.syming.castlevaniacraft.block.CCBlock;
 import com.syming.castlevaniacraft.entity.CCEntity;
 import com.syming.castlevaniacraft.event.*;
+import com.syming.castlevaniacraft.fluid.CCFluid;
 import com.syming.castlevaniacraft.init.*;
+import com.syming.castlevaniacraft.integration.forestry.recipes.SqueezerRecipes;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.integration.forestry.bees.CCBeeDefinition;
 import com.syming.castlevaniacraft.integration.forestry.items.CCCombItem;
@@ -97,6 +100,7 @@ public class RegistryHandler {
         // Events
         EventExtendedReach extendedReach = new EventExtendedReach();
         EventFireballLauncher fireballLauncher = new EventFireballLauncher();
+        EventFlameWhipParticle flameWhipParticle = new EventFlameWhipParticle();
         EventFriendlyZombieSpawningPrevention friendlyZombieSpawningPrevention = new EventFriendlyZombieSpawningPrevention();
         EventImmobileEntityLiving immobileEntityLiving = new EventImmobileEntityLiving();
         EventVanillaMobLootTableModifier vanillaMobLootTableModifier = new EventVanillaMobLootTableModifier();
@@ -104,6 +108,7 @@ public class RegistryHandler {
 
         MinecraftForge.EVENT_BUS.register(extendedReach);
         MinecraftForge.EVENT_BUS.register(fireballLauncher);
+        MinecraftForge.EVENT_BUS.register(flameWhipParticle);
         MinecraftForge.EVENT_BUS.register(friendlyZombieSpawningPrevention);
         MinecraftForge.EVENT_BUS.register(immobileEntityLiving);
         MinecraftForge.EVENT_BUS.register(vanillaMobLootTableModifier);
@@ -119,7 +124,7 @@ public class RegistryHandler {
         CastlevaniaCraftMod.proxy.render();
         CCEntity.registerEntities();
         registerEvent();
-        FluidInit.registerFluids();
+        CCFluid.registerFluids();
         MVNetworking.registerSimpleNetworking();
 
         CCLog.init(event.getModLog());
@@ -162,6 +167,7 @@ public class RegistryHandler {
             CCBeeDefinition.doInit();
         }
         CentrifugeRecipes.register();
+        SqueezerRecipes.register();
 
     }
 

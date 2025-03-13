@@ -1,13 +1,11 @@
-package com.syming.castlevaniacraft.init;
+package com.syming.castlevaniacraft.fluid;
 
-import com.syming.castlevaniacraft.fluid.FluidBlood;
-import com.syming.castlevaniacraft.fluid.FluidHolyWater;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class FluidInit {
+public class CCFluid {
 
     public static final Fluid HOLY_WATER_FLUID = new FluidHolyWater("holy_water_fluid", new ResourceLocation(CCReferences.MODID + ":blocks/holy_water_still"),
            new ResourceLocation(CCReferences.MODID + ":blocks/holy_water_flow"),

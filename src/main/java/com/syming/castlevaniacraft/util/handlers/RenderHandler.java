@@ -11,7 +11,7 @@ import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
 import com.syming.castlevaniacraft.entity.projectiles.EntityHarpyFeather;
 import com.syming.castlevaniacraft.entity.projectiles.EntityIceBladeProjectile;
-import com.syming.castlevaniacraft.init.CCBlock;
+import com.syming.castlevaniacraft.block.CCBlock;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;

@@ -1,10 +1,8 @@
 package com.syming.castlevaniacraft.block.draculacastlestone;
 
-import com.syming.castlevaniacraft.init.CCBlock;
+import com.syming.castlevaniacraft.block.CCBlock;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemSlab;
 
 public class BlockHalfDraculaCastleStoneSlab extends BlockDraculaCastleStoneSlab {

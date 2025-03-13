@@ -10,15 +10,19 @@ import com.syming.castlevaniacraft.networking.MVNetworking;
 import com.syming.castlevaniacraft.networking.MessageAddBossInfo;
 import com.syming.castlevaniacraft.networking.MessageRemoveBossInfo;
 import com.syming.castlevaniacraft.util.CCReferences;
+
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationAI;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.ilexiconn.llibrary.server.entity.multipart.PartEntity;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.passive.EntityVillager;
@@ -36,8 +40,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -69,6 +75,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     public PartEntity draculaHead;
     public PartEntity draculaBody;
     private Item lastHitItem;
+    public EntityEnderCrystal healingEnderCrystal;
 
 
     public EntityDracula(World worldIn) {
@@ -280,6 +287,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
             batsAttackCooldown--;
         }
 
+        updateDraculaEnderCrystal();
     }
 
     protected boolean shouldBurnInDay() {
@@ -417,6 +425,8 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
                         if (hasStrength(source, amount)) {
                             return !isEntityInvulnerable(source) && super.attackEntityFrom(source, amount / amount);
                         }
+
+                        onCrystalDestroyed(this.healingEnderCrystal, new BlockPos(this.posX, this.posY, this.posZ), source);
                     }
 
                     if (part == getDraculaBody()) {
@@ -471,6 +481,63 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
         }
 
         return flag;
+    }
+
+    /**
+     * Updates the state of the enderdragon's current endercrystal.
+     */
+    private void updateDraculaEnderCrystal()
+    {
+        if (this.healingEnderCrystal != null)
+        {
+            if (this.healingEnderCrystal.isDead)
+            {
+                this.healingEnderCrystal = null;
+            }
+            else if (this.ticksExisted % 10 == 0 && this.getHealth() < this.getMaxHealth())
+            {
+                this.setHealth(this.getHealth() + 1.0F);
+            }
+        }
+
+        if (this.rand.nextInt(10) == 0)
+        {
+            List<EntityEnderCrystal> list = this.world.<EntityEnderCrystal>getEntitiesWithinAABB(EntityEnderCrystal.class, this.getEntityBoundingBox().grow(32.0D));
+            EntityEnderCrystal entityendercrystal = null;
+            double d0 = Double.MAX_VALUE;
+
+            for (EntityEnderCrystal entityendercrystal1 : list)
+            {
+                double d1 = entityendercrystal1.getDistanceSq(this);
+
+                if (d1 < d0)
+                {
+                    d0 = d1;
+                    entityendercrystal = entityendercrystal1;
+                }
+            }
+
+            this.healingEnderCrystal = entityendercrystal;
+        }
+    }
+
+    public void onCrystalDestroyed(EntityEnderCrystal crystal, BlockPos pos, DamageSource dmgSrc)
+    {
+        EntityPlayer entityplayer;
+
+        if (dmgSrc.getTrueSource() instanceof EntityPlayer)
+        {
+            entityplayer = (EntityPlayer)dmgSrc.getTrueSource();
+        }
+        else
+        {
+            entityplayer = this.world.getNearestAttackablePlayer(pos, 64.0D, 64.0D);
+        }
+
+        if (crystal == this.healingEnderCrystal)
+        {
+            this.attackEntityFrom(DamageSource.causeExplosionDamage(entityplayer), 10.0F);
+        }
     }
 
     @Override
