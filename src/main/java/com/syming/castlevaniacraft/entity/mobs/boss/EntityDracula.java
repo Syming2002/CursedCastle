@@ -21,7 +21,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -408,6 +407,10 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
                 this.lastHitItem = heldItem.getItem();
             } else {
                 this.lastHitItem = null;
+            }
+
+            if (getHealth() <= 0) {
+                AnimationHandler.INSTANCE.sendAnimationMessage(this, DEATH_ANIMATION);
             }
         }
 
