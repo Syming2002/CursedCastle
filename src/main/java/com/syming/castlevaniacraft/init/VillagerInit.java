@@ -19,16 +19,35 @@ import java.util.Random;
 
 public class VillagerInit {
 
+    public static VillagerRegistry.VillagerProfession villagerLeaderPriest;
+    public static final String ID_VILLAGER_LEADER_PRIEST = new ResourceLocation(CCReferences.MODID, "leader_priest").toString();
+    public static final String TEXTURE_SKIN_LEADER_PRIEST = CCReferences.MODID + ':' + "textures/entity/leader_priest.png";
+    public static final String TEXTURE_SKIN_ZOMBIE_LEADER_PRIEST = CCReferences.MODID + ':' + "textures/entity/zombie_leader_priest.png";
     public static VillagerRegistry.VillagerProfession villagerHighPriest;
     public static final String ID_VILLAGER_HIGH_PRIEST = new ResourceLocation(CCReferences.MODID, "high_priest").toString();
     public static final String TEXTURE_SKIN_HIGH_PRIEST = CCReferences.MODID + ':' + "textures/entity/high_priest.png";
     public static final String TEXTURE_SKIN_ZOMBIE_HIGH_PRIEST = CCReferences.MODID + ':' + "textures/entity/zombie_high_priest.png";
 
     public static void init() {
+        villagerLeaderPriest = new VillagerRegistry.VillagerProfession(ID_VILLAGER_LEADER_PRIEST, TEXTURE_SKIN_LEADER_PRIEST, TEXTURE_SKIN_ZOMBIE_LEADER_PRIEST);
+        IForgeRegistry<VillagerRegistry.VillagerProfession> leaderPriestProfessions = ForgeRegistries.VILLAGER_PROFESSIONS;
+        leaderPriestProfessions.register(villagerLeaderPriest);
+
+        VillagerRegistry.VillagerCareer leaderPriestCareer = new VillagerRegistry.VillagerCareer(villagerLeaderPriest, "leader_priest");
+        leaderPriestCareer.addTrade(1,
+                new GiveEmeraldForHolyCrossItems( new ItemStack(CCItem.woodenHolyCross), new EntityVillager.PriceInfo(1, 2)));
+        leaderPriestCareer.addTrade(2,
+                new GiveEmeraldForHolyCrossItems( new ItemStack(CCItem.stoneHolyCross), new EntityVillager.PriceInfo(3, 4)));
+        leaderPriestCareer.addTrade(3,
+                new GiveEmeraldForHolyCrossItems( new ItemStack(CCItem.ironHolyCross), new EntityVillager.PriceInfo(4, 5)));
+        leaderPriestCareer.addTrade(4,
+                new GiveEmeraldForHolyCrossItems( new ItemStack(CCItem.goldenHolyCross), new EntityVillager.PriceInfo(3, 4)));
+        leaderPriestCareer.addTrade(5,
+                new GiveEmeraldForHolyCrossItems( new ItemStack(CCItem.diamondHolyCross), new EntityVillager.PriceInfo(5, 6)));
 
         villagerHighPriest = new VillagerRegistry.VillagerProfession(ID_VILLAGER_HIGH_PRIEST, TEXTURE_SKIN_HIGH_PRIEST, TEXTURE_SKIN_ZOMBIE_HIGH_PRIEST);
-        IForgeRegistry<VillagerRegistry.VillagerProfession> villagerProfessions = ForgeRegistries.VILLAGER_PROFESSIONS;
-        villagerProfessions.register(villagerHighPriest);
+        IForgeRegistry<VillagerRegistry.VillagerProfession> highPriestProfessions = ForgeRegistries.VILLAGER_PROFESSIONS;
+        highPriestProfessions.register(villagerHighPriest);
 
         VillagerRegistry.VillagerCareer highPriestCareer = new VillagerRegistry.VillagerCareer(villagerHighPriest, "high_priest");
         highPriestCareer.addTrade(1,
@@ -69,4 +88,29 @@ public class VillagerInit {
 
     }
 
+    public static class GiveEmeraldForHolyCrossItems implements EntityVillager.ITradeList {
+        public final ItemStack sellingItem;
+        @Nullable
+        public final EntityVillager.PriceInfo price;
+
+        public GiveEmeraldForHolyCrossItems(ItemStack stack, @Nullable EntityVillager.PriceInfo priceInfo) {
+            this.sellingItem = stack;
+            this.price = priceInfo;
+        }
+
+        @Override
+        public void addMerchantRecipe(IMerchant merchant, MerchantRecipeList recipeList, Random random) {
+
+            int sellAmount = 1;
+            if (this.price != null) {
+                sellAmount = this.price.getPrice(random);
+            }
+
+            ItemStack itemToSell = this.sellingItem.copy();
+            itemToSell.setCount(sellAmount);
+
+            recipeList.add(new MerchantRecipe(new ItemStack(Items.EMERALD), itemToSell));
+        }
+
+    }
 }

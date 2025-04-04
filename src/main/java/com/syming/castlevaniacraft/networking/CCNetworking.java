@@ -5,7 +5,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class MVNetworking {
+public class CCNetworking {
 
     public static final String NETWORK_CHANNEL_NAME = CCReferences.MODID;
     public static SimpleNetworkWrapper network;

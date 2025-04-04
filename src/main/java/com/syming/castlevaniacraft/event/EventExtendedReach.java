@@ -1,10 +1,9 @@
 package com.syming.castlevaniacraft.event;
 
 import com.syming.castlevaniacraft.api.IExtendedReach;
-import com.syming.castlevaniacraft.networking.MVNetworking;
+import com.syming.castlevaniacraft.networking.CCNetworking;
 import com.syming.castlevaniacraft.networking.MessageExtendedReachAttack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -47,7 +46,7 @@ public class EventExtendedReach {
                         if (result != null) {
                             if (result.entityHit != null && result.entityHit.hurtResistantTime == 0) {
                                 if (result.entityHit != player) {
-                                    MVNetworking.network.sendToServer(new MessageExtendedReachAttack(result.entityHit.getEntityId()));
+                                    CCNetworking.network.sendToServer(new MessageExtendedReachAttack(result.entityHit.getEntityId()));
                                 }
                             }
                         }

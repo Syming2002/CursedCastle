@@ -9,6 +9,8 @@ import com.syming.castlevaniacraft.item.projectiles.subweapons.holycross.*;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.throwingaxe.*;
 import com.syming.castlevaniacraft.item.souls.ItemBulletSoul;
 import com.syming.castlevaniacraft.item.souls.ItemGuardianSoul;
+import com.syming.castlevaniacraft.item.spellbooks.ItemFireBook;
+import com.syming.castlevaniacraft.item.spellbooks.ItemSpellBook;
 import com.syming.castlevaniacraft.item.whips.*;
 import com.syming.castlevaniacraft.item.whips.attachments.*;
 import com.syming.castlevaniacraft.item.whips.vampirekiller.*;
@@ -182,6 +184,10 @@ public class CCItem {
 
     // Special Weapons
     public static Item deathScythe = new ItemDeathScythe("death_scythe");
+
+    // Spell Books
+
+    public static Item fireBook = new ItemFireBook("fire_book");
 
     // Armors
     public static Item draculaTunic = new ItemDraculaTunicArmor("dracula_tunic", DRACULA_TUNIC_ARMOR, 1, EntityEquipmentSlot.CHEST);

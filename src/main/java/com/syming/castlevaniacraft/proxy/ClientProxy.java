@@ -15,9 +15,11 @@ import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.integration.jer.CCJerIntegration;
 import com.syming.castlevaniacraft.item.souls.EnumBulletSoul;
 import com.syming.castlevaniacraft.item.souls.EnumGuardianSoul;
+import com.syming.castlevaniacraft.particle.ParticlePoisonBreath;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -35,6 +37,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class ClientProxy extends CommonProxy {
+
+    private static int nextParticleID = 48;
 
     @Override
     public void registerItemRenderer(Item item, int meta, String id)
@@ -114,6 +118,11 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
         MinecraftForge.EVENT_BUS.register(new CCGui());
+
+        ParticleManager manager = Minecraft.getMinecraft().effectRenderer;
+        if (manager != null) {
+            manager.registerParticle(nextParticleID++, new ParticlePoisonBreath.Factory());
+        }
     }
 
     @Override

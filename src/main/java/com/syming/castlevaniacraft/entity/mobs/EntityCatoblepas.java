@@ -34,8 +34,8 @@ public class EntityCatoblepas extends EntityMob implements IAnimatedEntity {
         super.initEntityAI();
 
         this.tasks.addTask(2, new AIStoneBreath(this, STONE_BREATH_ANIMATION));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, true));
         this.tasks.addTask(8, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
     }

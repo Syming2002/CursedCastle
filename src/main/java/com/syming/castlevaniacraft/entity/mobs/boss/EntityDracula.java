@@ -6,7 +6,7 @@ import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
 import com.syming.castlevaniacraft.entity.mobs.EntityVampireBat;
 import com.syming.castlevaniacraft.item.whips.vampirekiller.ItemVampireKillerWhip;
 import com.syming.castlevaniacraft.loot.CCTreasures;
-import com.syming.castlevaniacraft.networking.MVNetworking;
+import com.syming.castlevaniacraft.networking.CCNetworking;
 import com.syming.castlevaniacraft.networking.MessageAddBossInfo;
 import com.syming.castlevaniacraft.networking.MessageRemoveBossInfo;
 import com.syming.castlevaniacraft.util.CCReferences;
@@ -55,7 +55,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     public static final Animation FIREBALLS_ANIMATION = Animation.create(80);
     public static final Animation DARK_INFERNO_ANIMATION = Animation.create(80);
     public static final Animation FIRE_PILLAR_ANIMATION = Animation.create(60);
-    public static final Animation BATS_ATTACK_ANIMATION = Animation.create(35);
+    public static final Animation BATS_ATTACK_ANIMATION = Animation.create(55);
     public static final Animation DEATH_ANIMATION = Animation.create(200);
     private int fireballsCooldown = 0;
     private int darkInfernoCooldown = 0;
@@ -180,7 +180,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     public void addTrackingPlayer(EntityPlayerMP player) {
         super.addTrackingPlayer(player);
 
-        MVNetworking.network.sendTo(new MessageAddBossInfo(this.bossInfo.getUniqueId(), getEntityId()), player);
+        CCNetworking.network.sendTo(new MessageAddBossInfo(this.bossInfo.getUniqueId(), getEntityId()), player);
 
         this.bossInfo.addPlayer(player);
     }
@@ -193,7 +193,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     public void removeTrackingPlayer(EntityPlayerMP player) {
         super.removeTrackingPlayer(player);
 
-        MVNetworking.network.sendTo(new MessageRemoveBossInfo(this.bossInfo.getUniqueId(), getEntityId()), player);
+        CCNetworking.network.sendTo(new MessageRemoveBossInfo(this.bossInfo.getUniqueId(), getEntityId()), player);
 
         this.bossInfo.removePlayer(player);
     }

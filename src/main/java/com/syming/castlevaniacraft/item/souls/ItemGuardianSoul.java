@@ -6,7 +6,7 @@ import baubles.api.IBauble;
 //import com.syming.castlevaniacraft.api.SoulType;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
 import com.syming.castlevaniacraft.item.CCItem;
-import com.syming.castlevaniacraft.keybind.SoulKeyBind;
+import com.syming.castlevaniacraft.keybind.CCKeybind;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -59,7 +59,7 @@ public class ItemGuardianSoul extends Item implements IBauble {
     public void onWornTick(ItemStack stack, EntityLivingBase livingBase) {
 
         if (!livingBase.world.isRemote) {
-            if (SoulKeyBind.guardianKey.isPressed()) {
+            if (CCKeybind.guardianKey.isPressed()) {
                 if (livingBase instanceof EntityPlayer && stack.getMetadata() == EnumGuardianSoul.SoulType.BAT_SOUL.getMeta() && stack.getCount() == 1) {
                     spawnFriendlyBat((EntityPlayer) livingBase);
                 } else if (livingBase instanceof EntityPlayer && stack.getMetadata() == EnumGuardianSoul.SoulType.BAT_SOUL.getMeta() && stack.getCount() == 6) {

@@ -1,8 +1,8 @@
 package com.syming.castlevaniacraft.entity;
 
-import com.syming.castlevaniacraft.client.particles.ParticlePoisonBreath;
+import com.syming.castlevaniacraft.particle.ParticlePoisonBreath;
 import com.syming.castlevaniacraft.entity.mobs.EntityGorgon;
-import com.syming.castlevaniacraft.init.CCParticle;
+import com.syming.castlevaniacraft.particle.CCParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.Entity;
@@ -119,9 +119,7 @@ public class EntityPoisonBreath extends EntityAttackMagic {
                 double xSpeed = speed * xComp + (spread * 0.7 * (rand.nextFloat() * 2 - 1) * (Math.sqrt(1 - xComp * xComp)));
                 double ySpeed = speed * yComp + (spread * 0.7 * (rand.nextFloat() * 2 - 1) * (Math.sqrt(1 - yComp * yComp)));
                 double zSpeed = speed * zComp + (spread * 0.7 * (rand.nextFloat() * 2 - 1) * (Math.sqrt(1 - zComp * zComp)));
-                Particle poisonBreathParticle = new ParticlePoisonBreath(CCParticle.POISON_BREATH, world, this.posX, this.posY, this.posZ, xSpeed, ySpeed, zSpeed)
-                        .setCanCollide(true)
-                        .setScale(2.0F);
+                ParticlePoisonBreath poisonBreathParticle = new ParticlePoisonBreath(this.world, this.posX, this.posY, this.posZ, xSpeed, ySpeed, zSpeed);
                 Minecraft.getMinecraft().effectRenderer.addEffect(poisonBreathParticle);
             }
         }

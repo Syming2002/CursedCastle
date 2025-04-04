@@ -1,7 +1,10 @@
 package com.syming.castlevaniacraft.item.projectiles.subweapons.holycross;
 
+import baubles.api.BaublesApi;
+import baubles.common.Baubles;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityHolyCross;
 import com.syming.castlevaniacraft.item.CCItem;
+import com.syming.castlevaniacraft.item.spellbooks.ItemFireBook;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import com.syming.castlevaniacraft.util.handlers.SoundsHandler;
 import net.minecraft.enchantment.Enchantment;
@@ -19,6 +22,7 @@ import net.minecraft.world.World;
 public class ItemHolyCross extends Item {
 
     private Item.ToolMaterial material;
+    private final ItemFireBook fireBook = (ItemFireBook) CCItem.fireBook;
 
     public ItemHolyCross(String name, Item.ToolMaterial material) {
         this.material = material;
@@ -58,7 +62,12 @@ public class ItemHolyCross extends Item {
             EntityHolyCross holyCross = new EntityHolyCross(worldIn, playerIn, throwStackCopy, getMaterial());
             worldIn.spawnEntity(holyCross);
             throwStack.shrink(1);
+
+            if (BaublesApi.isBaubleEquipped(playerIn, this.fireBook) == 3) {
+
+            }
         }
+
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
     }
 

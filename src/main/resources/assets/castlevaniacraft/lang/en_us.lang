@@ -70,6 +70,10 @@ item.cc.comb.blood.name=Blood Comb
 item.cc.comb.frozen.name=Frozen Comb
 item.cc.comb.warmed.name=Warmed Comb
 
+# Container
+
+container.alchemy_table=Alchemy Table
+
 # Creative Tabs
 
 itemGroup.castlevaniacraft=Castlevania Craft
@@ -152,6 +156,10 @@ item.stone_throwing_axe.name=Stone Throwing Axe
 item.iron_throwing_axe.name=Iron Throwing Axe
 item.golden_throwing_axe.name=Golden Throwing Axe
 item.diamond_throwing_axe.name=Diamond Throwing Axe
+
+# Tile Entity
+
+tile.alchemy_table.name=Alchemy Table
 
 # Tooltips
 

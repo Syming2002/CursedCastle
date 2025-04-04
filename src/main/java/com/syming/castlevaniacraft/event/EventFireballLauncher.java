@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft.event;
 
 import com.syming.castlevaniacraft.item.CCItem;
-import com.syming.castlevaniacraft.networking.MVNetworking;
+import com.syming.castlevaniacraft.networking.CCNetworking;
 import com.syming.castlevaniacraft.networking.MessageSyncEventFireballLauncher;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -18,7 +18,7 @@ public class EventFireballLauncher {
         if (!event.getWorld().isRemote) return;
 
         if (stack.getItem() == CCItem.vampireKillerBulletAttachment) {
-            MVNetworking.network.sendToServer(new MessageSyncEventFireballLauncher());
+            CCNetworking.network.sendToServer(new MessageSyncEventFireballLauncher());
             event.getWorld().playSound(event.getEntityPlayer(),
                     event.getEntityPlayer().posX,
                     event.getEntityPlayer().posY,
@@ -37,7 +37,7 @@ public class EventFireballLauncher {
         if (!event.getWorld().isRemote) return;
 
         if (stack.getItem() == CCItem.vampireKillerBulletAttachment) {
-            MVNetworking.network.sendToServer(new MessageSyncEventFireballLauncher());
+            CCNetworking.network.sendToServer(new MessageSyncEventFireballLauncher());
             event.getWorld().playSound(event.getEntityPlayer(),
                     event.getEntityPlayer().posX,
                     event.getEntityPlayer().posY,

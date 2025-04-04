@@ -2,7 +2,7 @@ package com.syming.castlevaniacraft.event;
 
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.item.whips.ItemWhip;
-import com.syming.castlevaniacraft.networking.MVNetworking;
+import com.syming.castlevaniacraft.networking.CCNetworking;
 import com.syming.castlevaniacraft.networking.MessageSyncEventFlameWhipParticle;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,7 +39,7 @@ public class EventFlameWhipParticle {
             }
 
 
-            MVNetworking.network.sendToServer(new MessageSyncEventFlameWhipParticle());
+            CCNetworking.network.sendToServer(new MessageSyncEventFlameWhipParticle());
             event.getWorld().playSound(event.getEntityPlayer(),
                     event.getEntityPlayer().posX,
                     event.getEntityPlayer().posY,
@@ -74,7 +74,7 @@ public class EventFlameWhipParticle {
             }
 
 
-            MVNetworking.network.sendToServer(new MessageSyncEventFlameWhipParticle());
+            CCNetworking.network.sendToServer(new MessageSyncEventFlameWhipParticle());
             event.getWorld().playSound(event.getEntityPlayer(),
                     event.getEntityPlayer().posX,
                     event.getEntityPlayer().posY,

@@ -6,7 +6,7 @@ import baubles.api.IBauble;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
 import com.syming.castlevaniacraft.entity.projectiles.EntityThrowingBoneProjectile;
 import com.syming.castlevaniacraft.item.CCItem;
-import com.syming.castlevaniacraft.keybind.SoulKeyBind;
+import com.syming.castlevaniacraft.keybind.CCKeybind;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -69,7 +69,7 @@ public class ItemBulletSoul extends Item implements IBauble {
     @Override
     public void onWornTick(ItemStack stack, EntityLivingBase livingBase) {
         if (!livingBase.world.isRemote) {
-            if (SoulKeyBind.bulletKey.isPressed()) {
+            if (CCKeybind.bulletKey.isPressed()) {
                 if (livingBase instanceof EntityPlayer && stack.getMetadata() == EnumBulletSoul.SoulType.ZOMBIE_SOUL.getMeta()) {
                     spawnFriendlyZombie((EntityPlayer) livingBase);
                 } else if (livingBase instanceof EntityPlayer && stack.getMetadata() == EnumBulletSoul.SoulType.SKELETON_SOUL.getMeta()) {

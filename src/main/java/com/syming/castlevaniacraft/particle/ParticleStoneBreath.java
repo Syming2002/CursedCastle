@@ -1,4 +1,4 @@
-package com.syming.castlevaniacraft.client.particles;
+package com.syming.castlevaniacraft.particle;
 
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.Minecraft;
@@ -17,13 +17,13 @@ import net.minecraft.world.World;
 
 import java.awt.*;
 
-public class ParticleHoly extends Particle {
+public class ParticleStoneBreath extends Particle {
 
     private static final double GRAVITY = 0.04D;
     private static final double GROUND_DECCEL = 0.7D;
     private static final VertexFormat VERTEX_FORMAT = (new VertexFormat()).addElement(DefaultVertexFormats.POSITION_3F).addElement(DefaultVertexFormats.TEX_2F).addElement(DefaultVertexFormats.COLOR_4UB).addElement(DefaultVertexFormats.TEX_2S).addElement(DefaultVertexFormats.NORMAL_3B).addElement(DefaultVertexFormats.PADDING_1B);
 
-    private ParticleHoly.TextureDefinition TEXTURE_DEF;
+    private ParticleStoneBreath.TextureDefinition TEXTURE_DEF;
 
     /*
      * Animation-related fields
@@ -39,9 +39,14 @@ public class ParticleHoly extends Particle {
     private float initialScale = 1.0F;
     private float finalScale = 1.0F;
 
+    private double radius;
+    private double rpt;
+
+    private double x, y, z;
+
     private boolean enableDepth = true;
 
-    public ParticleHoly(TextureDefinition parTexDef, World parWorld, double parX, double parY, double parZ, double parMotionX, double parMotionY, double parMotionZ)
+    public ParticleStoneBreath(ParticleStoneBreath.TextureDefinition parTexDef, World parWorld, double parX, double parY, double parZ, double parMotionX, double parMotionY, double parMotionZ)
     {
         super(parWorld, parX, parY, parZ);
         TEXTURE_DEF = parTexDef;
@@ -84,6 +89,30 @@ public class ParticleHoly extends Particle {
 
         prevParticleAngle = particleAngle;
         particleAngle += (float)Math.PI * rotSpeed * 2.0F;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
+    public double getMotionX() {
+        return motionX;
+    }
+
+    public double getMotionY() {
+        return motionY;
+    }
+
+    public double getMotionZ() {
+        return motionZ;
     }
 
     private void processGravityAndDeccel()
@@ -247,7 +276,7 @@ public class ParticleHoly extends Particle {
      * @param lifeIn the life in
      * @return the custom particle
      */
-    public ParticleHoly setLifeSpan(int lifeIn)
+    public ParticleStoneBreath setLifeSpan(int lifeIn)
     {
         particleMaxAge = lifeIn;
         return this;
@@ -259,7 +288,7 @@ public class ParticleHoly extends Particle {
      * @param canCollideIn the can collide in
      * @return the custom particle
      */
-    public ParticleHoly setCanCollide(boolean canCollideIn)
+    public ParticleStoneBreath setCanCollide(boolean canCollideIn)
     {
         canCollide = canCollideIn;
         return this;
@@ -271,7 +300,7 @@ public class ParticleHoly extends Particle {
      * @param boundingBoxIn the bounding box in
      * @return the custom particle
      */
-    public ParticleHoly setAABB(AxisAlignedBB boundingBoxIn)
+    public ParticleStoneBreath setAABB(AxisAlignedBB boundingBoxIn)
     {
         setBoundingBox(boundingBoxIn);
         return this;
@@ -284,7 +313,7 @@ public class ParticleHoly extends Particle {
      * @param deccelIn the decceleration in
      * @return the custom particle
      */
-    public ParticleHoly setDeccel(double deccelIn)
+    public ParticleStoneBreath setDeccel(double deccelIn)
     {
         deccel = deccelIn;
         return this;
@@ -296,7 +325,7 @@ public class ParticleHoly extends Particle {
      * @param scaleIn the scale in
      * @return the custom particle
      */
-    public ParticleHoly setScale(float scaleIn)
+    public ParticleStoneBreath setScale(float scaleIn)
     {
         particleScale = scaleIn;
         initialScale = scaleIn;
@@ -313,7 +342,7 @@ public class ParticleHoly extends Particle {
      * @param blueIn the blue in
      * @return the custom particle
      */
-    public ParticleHoly setTintColor(float redIn, float greenIn, float blueIn)
+    public ParticleStoneBreath setTintColor(float redIn, float greenIn, float blueIn)
     {
         particleRed = redIn;
         particleGreen = greenIn;
@@ -330,7 +359,7 @@ public class ParticleHoly extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticleHoly setTintColor(Color colorIn)
+    public ParticleStoneBreath setTintColor(Color colorIn)
     {
         particleGreen = colorIn.getGreen() / 256.0F;
         particleBlue = colorIn.getBlue() / 256.0F;
@@ -350,7 +379,7 @@ public class ParticleHoly extends Particle {
      * @param alphaIn the alpha in
      * @return the custom particle
      */
-    public ParticleHoly setTintColorAndAlpha(float redIn, float greenIn, float blueIn, float alphaIn)
+    public ParticleStoneBreath setTintColorAndAlpha(float redIn, float greenIn, float blueIn, float alphaIn)
     {
         setTintColor(redIn, greenIn, blueIn);
         setAlpha(alphaIn);
@@ -364,7 +393,7 @@ public class ParticleHoly extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticleHoly setTintColorAndAlpha(Color colorIn)
+    public ParticleStoneBreath setTintColorAndAlpha(Color colorIn)
     {
         setTintColor(colorIn);
         setAlpha(colorIn);
@@ -378,7 +407,7 @@ public class ParticleHoly extends Particle {
      * @param alphaIn the alpha in
      * @return the custom particle
      */
-    public ParticleHoly setAlpha(float alphaIn)
+    public ParticleStoneBreath setAlpha(float alphaIn)
     {
         particleAlpha = alphaIn;
         initialAlpha = alphaIn;
@@ -393,7 +422,7 @@ public class ParticleHoly extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticleHoly setAlpha(Color colorIn)
+    public ParticleStoneBreath setAlpha(Color colorIn)
     {
         particleAlpha = colorIn.getAlpha() / 256.0F;
         initialAlpha = particleAlpha;
@@ -409,7 +438,7 @@ public class ParticleHoly extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticleHoly setInitalTint(Color colorIn)
+    public ParticleStoneBreath setInitalTint(Color colorIn)
     {
         initialTint = colorIn;
         particleGreen = colorIn.getGreen() / 256.0F;
@@ -425,7 +454,7 @@ public class ParticleHoly extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticleHoly setFinalTint(Color colorIn)
+    public ParticleStoneBreath setFinalTint(Color colorIn)
     {
         finalTint = colorIn;
         return this;
@@ -439,7 +468,7 @@ public class ParticleHoly extends Particle {
      * @param alphaIn the alpha in
      * @return the custom particle
      */
-    public ParticleHoly setInitialAlpha(float alphaIn)
+    public ParticleStoneBreath setInitialAlpha(float alphaIn)
     {
         initialAlpha = alphaIn;
         particleAlpha = alphaIn;
@@ -454,7 +483,7 @@ public class ParticleHoly extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticleHoly setInitialAlpha(Color colorIn)
+    public ParticleStoneBreath setInitialAlpha(Color colorIn)
     {
         initialAlpha = colorIn.getAlpha() / 256.0F;
         particleAlpha = colorIn.getAlpha() / 256.0F;
@@ -468,7 +497,7 @@ public class ParticleHoly extends Particle {
      * @param alphaIn the alpha in
      * @return the custom particle
      */
-    public ParticleHoly setFinalAlpha(float alphaIn)
+    public ParticleStoneBreath setFinalAlpha(float alphaIn)
     {
         finalAlpha = alphaIn;
         return this;
@@ -481,7 +510,7 @@ public class ParticleHoly extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticleHoly setFinalAlpha(Color colorIn)
+    public ParticleStoneBreath setFinalAlpha(Color colorIn)
     {
         finalAlpha = colorIn.getAlpha() / 256.0F;
         return this;
@@ -495,7 +524,7 @@ public class ParticleHoly extends Particle {
      * @param scaleIn the scale in
      * @return the custom particle
      */
-    public ParticleHoly setInitialScale(float scaleIn)
+    public ParticleStoneBreath setInitialScale(float scaleIn)
     {
         particleScale = scaleIn;
         initialScale = scaleIn;
@@ -509,7 +538,7 @@ public class ParticleHoly extends Particle {
      * @param scaleIn the scale in
      * @return the custom particle
      */
-    public ParticleHoly setFinalScale(float scaleIn)
+    public ParticleStoneBreath setFinalScale(float scaleIn)
     {
         finalScale = scaleIn;
         return this;
@@ -521,7 +550,7 @@ public class ParticleHoly extends Particle {
      * @param gravityIn the gravity in
      * @return the custom particle
      */
-    public ParticleHoly setGravity(float gravityIn)
+    public ParticleStoneBreath setGravity(float gravityIn)
     {
         particleGravity = gravityIn;
         return this;
@@ -530,10 +559,11 @@ public class ParticleHoly extends Particle {
     /**
      * Sets the rot speed.
      *
+     * @param v
      * @param rotIn the rot in
      * @return the custom particle
      */
-    public ParticleHoly setRotSpeed(float rotIn)
+    public ParticleStoneBreath setRotSpeed(double v, float rotIn)
     {
         rotSpeed = rotIn;
         return this;
@@ -545,7 +575,7 @@ public class ParticleHoly extends Particle {
      * @param enableDepthIn the enable depth in
      * @return the custom particle
      */
-    public ParticleHoly setEnableDepth(boolean enableDepthIn)
+    public ParticleStoneBreath setEnableDepth(boolean enableDepthIn)
     {
         enableDepth = enableDepthIn;
         return this;
@@ -560,7 +590,26 @@ public class ParticleHoly extends Particle {
      *
      */
 
-    public static class TextureDefinition {
+    public ParticleStoneBreath spin(double radius, double speed){
+        this.radius = radius;
+        this.rpt = speed;
+        return this;
+    }
+
+    public ParticleStoneBreath pos(double x, double y, double z){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        return this;
+    }
+
+    public ParticleStoneBreath pos(Vec3d pos)
+    {
+        return pos(pos.x, pos.y, pos.z);
+    }
+
+    public static class TextureDefinition
+    {
         private String name;
         private ResourceLocation resourceLocation;
         private float uMin;
@@ -581,7 +630,8 @@ public class ParticleHoly extends Particle {
             this(parName, 0.0F, 0.0F, 1.0F, 1.0F);
         }
 
-        private TextureDefinition(String parName, float parUMin, float parVMin, float parUMax, float parVMax) {
+        private TextureDefinition(String parName, float parUMin, float parVMin, float parUMax, float parVMax)
+        {
             this(parName, parUMin, parVMin, parUMax, parVMax, false, 1);
         }
 
@@ -593,11 +643,13 @@ public class ParticleHoly extends Particle {
          * @param parAnimMode the animation mode
          * @param parAnimFrames the animation frames
          */
-        public TextureDefinition(String parName, boolean parAnimMode, int parAnimFrames) {
+        public TextureDefinition(String parName, boolean parAnimMode, int parAnimFrames)
+        {
             this(parName, 0.0F, 0.0F, 1.0F, 1.0F / parAnimFrames, parAnimMode, parAnimFrames);
         }
 
-        private TextureDefinition(String parName, float parUMin, float parVMin, float parUMax, float parVMax, boolean parAnimMode, int parAnimFrames) {
+        private TextureDefinition(String parName, float parUMin, float parVMin, float parUMax, float parVMax, boolean parAnimMode, int parAnimFrames)
+        {
             name = parName;
             resourceLocation = new ResourceLocation(CCReferences.MODID, "textures/particles/"+name+".png");
             uMin = parUMin;

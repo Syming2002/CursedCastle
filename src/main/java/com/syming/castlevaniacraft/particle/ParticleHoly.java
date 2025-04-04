@@ -1,4 +1,4 @@
-package com.syming.castlevaniacraft.client.particles;
+package com.syming.castlevaniacraft.particle;
 
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.Minecraft;
@@ -17,13 +17,13 @@ import net.minecraft.world.World;
 
 import java.awt.*;
 
-public class ParticlePoisonBreath extends Particle {
+public class ParticleHoly extends Particle {
 
     private static final double GRAVITY = 0.04D;
     private static final double GROUND_DECCEL = 0.7D;
     private static final VertexFormat VERTEX_FORMAT = (new VertexFormat()).addElement(DefaultVertexFormats.POSITION_3F).addElement(DefaultVertexFormats.TEX_2F).addElement(DefaultVertexFormats.COLOR_4UB).addElement(DefaultVertexFormats.TEX_2S).addElement(DefaultVertexFormats.NORMAL_3B).addElement(DefaultVertexFormats.PADDING_1B);
 
-    private ParticlePoisonBreath.TextureDefinition TEXTURE_DEF;
+    private ParticleHoly.TextureDefinition TEXTURE_DEF;
 
     /*
      * Animation-related fields
@@ -39,14 +39,9 @@ public class ParticlePoisonBreath extends Particle {
     private float initialScale = 1.0F;
     private float finalScale = 1.0F;
 
-    private double radius;
-    private double rpt;
-
-    private double x, y, z;
-
     private boolean enableDepth = true;
 
-    public ParticlePoisonBreath(ParticlePoisonBreath.TextureDefinition parTexDef, World parWorld, double parX, double parY, double parZ, double parMotionX, double parMotionY, double parMotionZ)
+    public ParticleHoly(TextureDefinition parTexDef, World parWorld, double parX, double parY, double parZ, double parMotionX, double parMotionY, double parMotionZ)
     {
         super(parWorld, parX, parY, parZ);
         TEXTURE_DEF = parTexDef;
@@ -89,30 +84,6 @@ public class ParticlePoisonBreath extends Particle {
 
         prevParticleAngle = particleAngle;
         particleAngle += (float)Math.PI * rotSpeed * 2.0F;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getZ() {
-        return z;
-    }
-
-    public double getMotionX() {
-        return motionX;
-    }
-
-    public double getMotionY() {
-        return motionY;
-    }
-
-    public double getMotionZ() {
-        return motionZ;
     }
 
     private void processGravityAndDeccel()
@@ -276,7 +247,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param lifeIn the life in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setLifeSpan(int lifeIn)
+    public ParticleHoly setLifeSpan(int lifeIn)
     {
         particleMaxAge = lifeIn;
         return this;
@@ -288,7 +259,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param canCollideIn the can collide in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setCanCollide(boolean canCollideIn)
+    public ParticleHoly setCanCollide(boolean canCollideIn)
     {
         canCollide = canCollideIn;
         return this;
@@ -300,7 +271,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param boundingBoxIn the bounding box in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setAABB(AxisAlignedBB boundingBoxIn)
+    public ParticleHoly setAABB(AxisAlignedBB boundingBoxIn)
     {
         setBoundingBox(boundingBoxIn);
         return this;
@@ -313,7 +284,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param deccelIn the decceleration in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setDeccel(double deccelIn)
+    public ParticleHoly setDeccel(double deccelIn)
     {
         deccel = deccelIn;
         return this;
@@ -325,7 +296,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param scaleIn the scale in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setScale(float scaleIn)
+    public ParticleHoly setScale(float scaleIn)
     {
         particleScale = scaleIn;
         initialScale = scaleIn;
@@ -342,7 +313,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param blueIn the blue in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setTintColor(float redIn, float greenIn, float blueIn)
+    public ParticleHoly setTintColor(float redIn, float greenIn, float blueIn)
     {
         particleRed = redIn;
         particleGreen = greenIn;
@@ -359,7 +330,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setTintColor(Color colorIn)
+    public ParticleHoly setTintColor(Color colorIn)
     {
         particleGreen = colorIn.getGreen() / 256.0F;
         particleBlue = colorIn.getBlue() / 256.0F;
@@ -379,7 +350,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param alphaIn the alpha in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setTintColorAndAlpha(float redIn, float greenIn, float blueIn, float alphaIn)
+    public ParticleHoly setTintColorAndAlpha(float redIn, float greenIn, float blueIn, float alphaIn)
     {
         setTintColor(redIn, greenIn, blueIn);
         setAlpha(alphaIn);
@@ -393,7 +364,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setTintColorAndAlpha(Color colorIn)
+    public ParticleHoly setTintColorAndAlpha(Color colorIn)
     {
         setTintColor(colorIn);
         setAlpha(colorIn);
@@ -407,7 +378,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param alphaIn the alpha in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setAlpha(float alphaIn)
+    public ParticleHoly setAlpha(float alphaIn)
     {
         particleAlpha = alphaIn;
         initialAlpha = alphaIn;
@@ -422,7 +393,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setAlpha(Color colorIn)
+    public ParticleHoly setAlpha(Color colorIn)
     {
         particleAlpha = colorIn.getAlpha() / 256.0F;
         initialAlpha = particleAlpha;
@@ -438,7 +409,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setInitalTint(Color colorIn)
+    public ParticleHoly setInitalTint(Color colorIn)
     {
         initialTint = colorIn;
         particleGreen = colorIn.getGreen() / 256.0F;
@@ -454,7 +425,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setFinalTint(Color colorIn)
+    public ParticleHoly setFinalTint(Color colorIn)
     {
         finalTint = colorIn;
         return this;
@@ -468,7 +439,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param alphaIn the alpha in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setInitialAlpha(float alphaIn)
+    public ParticleHoly setInitialAlpha(float alphaIn)
     {
         initialAlpha = alphaIn;
         particleAlpha = alphaIn;
@@ -483,7 +454,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setInitialAlpha(Color colorIn)
+    public ParticleHoly setInitialAlpha(Color colorIn)
     {
         initialAlpha = colorIn.getAlpha() / 256.0F;
         particleAlpha = colorIn.getAlpha() / 256.0F;
@@ -497,7 +468,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param alphaIn the alpha in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setFinalAlpha(float alphaIn)
+    public ParticleHoly setFinalAlpha(float alphaIn)
     {
         finalAlpha = alphaIn;
         return this;
@@ -510,7 +481,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param colorIn the color in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setFinalAlpha(Color colorIn)
+    public ParticleHoly setFinalAlpha(Color colorIn)
     {
         finalAlpha = colorIn.getAlpha() / 256.0F;
         return this;
@@ -524,7 +495,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param scaleIn the scale in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setInitialScale(float scaleIn)
+    public ParticleHoly setInitialScale(float scaleIn)
     {
         particleScale = scaleIn;
         initialScale = scaleIn;
@@ -538,7 +509,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param scaleIn the scale in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setFinalScale(float scaleIn)
+    public ParticleHoly setFinalScale(float scaleIn)
     {
         finalScale = scaleIn;
         return this;
@@ -550,7 +521,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param gravityIn the gravity in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setGravity(float gravityIn)
+    public ParticleHoly setGravity(float gravityIn)
     {
         particleGravity = gravityIn;
         return this;
@@ -559,11 +530,10 @@ public class ParticlePoisonBreath extends Particle {
     /**
      * Sets the rot speed.
      *
-     * @param v
      * @param rotIn the rot in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setRotSpeed(double v, float rotIn)
+    public ParticleHoly setRotSpeed(float rotIn)
     {
         rotSpeed = rotIn;
         return this;
@@ -575,7 +545,7 @@ public class ParticlePoisonBreath extends Particle {
      * @param enableDepthIn the enable depth in
      * @return the custom particle
      */
-    public ParticlePoisonBreath setEnableDepth(boolean enableDepthIn)
+    public ParticleHoly setEnableDepth(boolean enableDepthIn)
     {
         enableDepth = enableDepthIn;
         return this;
@@ -590,26 +560,7 @@ public class ParticlePoisonBreath extends Particle {
      *
      */
 
-    public ParticlePoisonBreath spin(double radius, double speed){
-        this.radius = radius;
-        this.rpt = speed;
-        return this;
-    }
-
-    public ParticlePoisonBreath pos(double x, double y, double z){
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        return this;
-    }
-
-    public ParticlePoisonBreath pos(Vec3d pos)
-    {
-        return pos(pos.x, pos.y, pos.z);
-    }
-
-    public static class TextureDefinition
-    {
+    public static class TextureDefinition {
         private String name;
         private ResourceLocation resourceLocation;
         private float uMin;
@@ -630,8 +581,7 @@ public class ParticlePoisonBreath extends Particle {
             this(parName, 0.0F, 0.0F, 1.0F, 1.0F);
         }
 
-        private TextureDefinition(String parName, float parUMin, float parVMin, float parUMax, float parVMax)
-        {
+        private TextureDefinition(String parName, float parUMin, float parVMin, float parUMax, float parVMax) {
             this(parName, parUMin, parVMin, parUMax, parVMax, false, 1);
         }
 
@@ -643,13 +593,11 @@ public class ParticlePoisonBreath extends Particle {
          * @param parAnimMode the animation mode
          * @param parAnimFrames the animation frames
          */
-        public TextureDefinition(String parName, boolean parAnimMode, int parAnimFrames)
-        {
+        public TextureDefinition(String parName, boolean parAnimMode, int parAnimFrames) {
             this(parName, 0.0F, 0.0F, 1.0F, 1.0F / parAnimFrames, parAnimMode, parAnimFrames);
         }
 
-        private TextureDefinition(String parName, float parUMin, float parVMin, float parUMax, float parVMax, boolean parAnimMode, int parAnimFrames)
-        {
+        private TextureDefinition(String parName, float parUMin, float parVMin, float parUMax, float parVMax, boolean parAnimMode, int parAnimFrames) {
             name = parName;
             resourceLocation = new ResourceLocation(CCReferences.MODID, "textures/particles/"+name+".png");
             uMin = parUMin;

@@ -1,25 +1,19 @@
 package com.syming.castlevaniacraft.entity.mobs;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-import com.syming.castlevaniacraft.client.particles.ParticleHoly;
-import com.syming.castlevaniacraft.init.CCParticle;
+import com.syming.castlevaniacraft.particle.ParticleHoly;
+import com.syming.castlevaniacraft.particle.CCParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public abstract class CCEntityMob extends EntityMob {

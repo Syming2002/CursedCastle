@@ -14,8 +14,8 @@ import com.syming.castlevaniacraft.integration.forestry.bees.CCBeeDefinition;
 import com.syming.castlevaniacraft.integration.forestry.items.CCCombItem;
 import com.syming.castlevaniacraft.integration.forestry.items.CCDropItem;
 import com.syming.castlevaniacraft.integration.forestry.recipes.CentrifugeRecipes;
-import com.syming.castlevaniacraft.keybind.SoulKeyBind;
-import com.syming.castlevaniacraft.networking.MVNetworking;
+import com.syming.castlevaniacraft.keybind.CCKeybind;
+import com.syming.castlevaniacraft.networking.CCNetworking;
 import com.syming.castlevaniacraft.recipe.CraftingRecipes;
 import com.syming.castlevaniacraft.util.ModLoadedUtils;
 import com.syming.castlevaniacraft.world.gen.structure.CCWorldGenerator;
@@ -39,6 +39,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -115,8 +116,8 @@ public class RegistryHandler {
         MinecraftForge.EVENT_BUS.register(villagerCrucifixProtection);
 
         // Keybindings
-        ClientRegistry.registerKeyBinding(SoulKeyBind.bulletKey);
-        ClientRegistry.registerKeyBinding(SoulKeyBind.guardianKey);
+        ClientRegistry.registerKeyBinding(CCKeybind.bulletKey);
+        ClientRegistry.registerKeyBinding(CCKeybind.guardianKey);
     }
 
     public static void preInitRegistries(FMLPreInitializationEvent event) {
@@ -125,7 +126,7 @@ public class RegistryHandler {
         CCEntity.registerEntities();
         registerEvent();
         CCFluid.registerFluids();
-        MVNetworking.registerSimpleNetworking();
+        CCNetworking.registerSimpleNetworking();
 
         CCLog.init(event.getModLog());
 
@@ -133,6 +134,8 @@ public class RegistryHandler {
             DROPS = new CCDropItem();
             COMBS = new CCCombItem();
         }
+
+        TileEntityHandler.register();
     }
 
     public static void initRegistries(FMLInitializationEvent event) {
@@ -169,6 +172,7 @@ public class RegistryHandler {
         CentrifugeRecipes.register();
         SqueezerRecipes.register();
 
+        NetworkRegistry.INSTANCE.registerGuiHandler(CastlevaniaCraftMod.instance, new GuiHandler());
     }
 
     public static void serverRegistries(FMLServerStartingEvent event) {

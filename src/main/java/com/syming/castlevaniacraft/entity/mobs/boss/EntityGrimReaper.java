@@ -8,7 +8,7 @@ import com.syming.castlevaniacraft.entity.ai.AIFlyTowardsTarget;
 import com.syming.castlevaniacraft.entity.ai.AIRandomFly;
 import com.syming.castlevaniacraft.entity.ai.grimReaper.*;
 import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
-import com.syming.castlevaniacraft.networking.MVNetworking;
+import com.syming.castlevaniacraft.networking.CCNetworking;
 import com.syming.castlevaniacraft.networking.MessageAddBossInfo;
 import com.syming.castlevaniacraft.networking.MessageRemoveBossInfo;
 import com.syming.castlevaniacraft.util.CCReferences;
@@ -145,7 +145,7 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
     {
         super.addTrackingPlayer(player);
 
-        MVNetworking.network.sendTo(new MessageAddBossInfo(this.bossInfo.getUniqueId(), getEntityId()), player);
+        CCNetworking.network.sendTo(new MessageAddBossInfo(this.bossInfo.getUniqueId(), getEntityId()), player);
 
         this.bossInfo.addPlayer(player);
     }
@@ -155,7 +155,7 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
     {
         super.removeTrackingPlayer(player);
 
-        MVNetworking.network.sendTo(new MessageRemoveBossInfo(this.bossInfo.getUniqueId(), getEntityId()), player);
+        CCNetworking.network.sendTo(new MessageRemoveBossInfo(this.bossInfo.getUniqueId(), getEntityId()), player);
 
         this.bossInfo.removePlayer(player);
     }

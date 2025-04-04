@@ -28,6 +28,9 @@ public class CCBlock {
     public static final BlockFluidClassic BLOOD_FLUID = new BlockBloodFluid("blood_fluid", CCFluid.BLOOD_FLUID, Material.WATER);
 
 
+    // Tile Blocks
+
+    public static final Block ALCHEMY_TABLE = new BlockAlchemyTable("alchemy_table");
 
 
 }

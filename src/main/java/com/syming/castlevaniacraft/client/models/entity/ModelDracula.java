@@ -199,6 +199,7 @@ public class ModelDracula extends CCModel {
 			this.rotate(animator, left_arm, 0, 0, -135.0F);
 			this.rotate(animator, left_arm_sleve, 0, 0, -135.0F);
 			animator.endKeyframe();
+			animator.resetKeyframe(20);
 		}
 
 		// Death Animation
