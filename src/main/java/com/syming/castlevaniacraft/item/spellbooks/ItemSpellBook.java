@@ -49,16 +49,5 @@ public abstract class ItemSpellBook extends Item implements IBauble {
         return BaubleType.BELT;
     }
 
-    @Override
-    public boolean canEquip(ItemStack stack, EntityLivingBase player) {
-        for (int i = 0; i < 4; i++) {
-            ItemStack soulStack = BaublesApi.getBaublesHandler((EntityPlayer) player).getStackInSlot(1 + i);
-            if (!soulStack.isEmpty() && soulStack.getItem() instanceof ItemBulletSoul) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public abstract EnumSpellBook.SpellBookType getSpellBook();
 }

@@ -2,6 +2,7 @@ package com.syming.castlevaniacraft.util.handlers;
 
 
 import com.syming.castlevaniacraft.CastlevaniaCraftMod;
+import com.syming.castlevaniacraft.DelayedTaskScheduler;
 import com.syming.castlevaniacraft.api.*;
 import com.syming.castlevaniacraft.block.CCBlock;
 import com.syming.castlevaniacraft.entity.CCEntity;
@@ -99,6 +100,9 @@ public class RegistryHandler {
 
     public static void registerEvent() {
         // Events
+
+        DelayedTaskScheduler delayedTaskScheduler = new DelayedTaskScheduler();
+        EventClient client = new EventClient();
         EventExtendedReach extendedReach = new EventExtendedReach();
         EventFireballLauncher fireballLauncher = new EventFireballLauncher();
         EventFlameWhipParticle flameWhipParticle = new EventFlameWhipParticle();
@@ -107,6 +111,8 @@ public class RegistryHandler {
         EventVanillaMobLootTableModifier vanillaMobLootTableModifier = new EventVanillaMobLootTableModifier();
         EventVillagerCrucifixProtection villagerCrucifixProtection = new EventVillagerCrucifixProtection();
 
+        MinecraftForge.EVENT_BUS.register(delayedTaskScheduler);
+        MinecraftForge.EVENT_BUS.register(client);
         MinecraftForge.EVENT_BUS.register(extendedReach);
         MinecraftForge.EVENT_BUS.register(fireballLauncher);
         MinecraftForge.EVENT_BUS.register(flameWhipParticle);

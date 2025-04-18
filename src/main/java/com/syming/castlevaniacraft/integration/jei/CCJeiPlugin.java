@@ -17,6 +17,9 @@ public class CCJeiPlugin implements IModPlugin {
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animStoneHolyCross));
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animGoldenHolyCross));
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animDiamondHolyCross));
+
+        blacklist.addItemToBlacklist(new ItemStack(CCItem.animFireHolyCross));
+
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animScytheProjectile));
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animWoodenThrowingAxe));
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animStoneThrowingAxe));

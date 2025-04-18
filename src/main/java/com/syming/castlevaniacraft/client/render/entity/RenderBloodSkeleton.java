@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelBloodSkeleton;
+import com.syming.castlevaniacraft.client.model.entity.ModelBloodSkeleton;
 import com.syming.castlevaniacraft.entity.mobs.EntityBloodSkeleton;
 
 import com.syming.castlevaniacraft.util.CCReferences;

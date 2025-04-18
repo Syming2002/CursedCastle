@@ -173,6 +173,8 @@ public class CCItem {
     public static Item animGoldenHolyCross = new ItemAnimWoodenHolyCross("anim_golden_holy_cross");
     public static Item animDiamondHolyCross = new ItemAnimWoodenHolyCross("anim_diamond_holy_cross");
 
+    public static Item animFireHolyCross = new ItemAnimFireHolyCross("anim_fire_holy_cross");
+
     public static Item animIronThrowingAxe = new ItemAnimIronThrowingAxe("anim_iron_throwing_axe");
     public static Item animWoodenThrowingAxe = new ItemAnimWoodThrowingAxe("anim_wooden_throwing_axe");
     public static Item animStoneThrowingAxe = new ItemAnimStoneThrowingAxe("anim_stone_throwing_axe");

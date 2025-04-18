@@ -1,5 +1,7 @@
 package com.syming.castlevaniacraft.entity.projectiles.subweapons;
 
+import baubles.api.BaublesApi;
+import baubles.api.cap.BaublesContainer;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.ItemDagger;
 import net.minecraft.block.Block;
@@ -12,15 +14,18 @@ import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -33,7 +38,7 @@ import javax.annotation.Nullable;
 
 public class EntityDagger extends EntityArrow {
 
-    public static final DataParameter<Boolean> INITIATED = EntityDataManager.createKey(EntityDagger.class, DataSerializers.BOOLEAN);
+//    public static final DataParameter<Boolean> INITIATED = EntityDataManager.createKey(EntityDagger.class, DataSerializers.BOOLEAN);
     public static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(EntityDagger.class, DataSerializers.ITEM_STACK);
     public static final DataParameter<Integer> DURATION = EntityDataManager.createKey(EntityDagger.class, DataSerializers.VARINT);
     private int xTile;
@@ -44,6 +49,10 @@ public class EntityDagger extends EntityArrow {
     private int ticksInAir;
     private double damage;
     private Item.ToolMaterial material;
+
+    public double accelerationX;
+    public double accelerationY;
+    public double accelerationZ;
 
     public EntityDagger(World world) {
         super(world);
@@ -59,7 +68,7 @@ public class EntityDagger extends EntityArrow {
         this.material = material;
 
         setItemStack(stack);
-        setInited();
+//        setInited();
 
         if (thrower instanceof EntityPlayer)
         {
@@ -77,7 +86,7 @@ public class EntityDagger extends EntityArrow {
 
         setItemStack(stack);
         setDurLoaded(durationLoaded);
-        setInited();
+//        setInited();
 
         if (durationLoaded < 20) {
             durationLoaded = 20;
@@ -94,11 +103,26 @@ public class EntityDagger extends EntityArrow {
         }
     }
 
+    public EntityDagger(World world, EntityLivingBase thrower, ItemStack stack, double x,double y, double z, double accelX, double accelY, double accelZ, Item.ToolMaterial material) {
+        super(world, thrower);
+        this.damage = 2.0D + material.getAttackDamage();
+        this.material = material;
+
+        setItemStack(stack);
+
+        this.setLocationAndAngles(x, y, z, this.rotationYaw, this.rotationPitch);
+        this.setPosition(x, y, z);
+        double d0 = (double)MathHelper.sqrt(accelX * accelX + accelY * accelY + accelZ * accelZ);
+        this.accelerationX = accelX / d0 * 0.1D;
+        this.accelerationY = accelY / d0 * 0.1D;
+        this.accelerationZ = accelZ / d0 * 0.1D;
+    }
+
     @Override
     protected void entityInit() {
         super.entityInit();
         dataManager.register(STACK, ItemStack.EMPTY);
-        dataManager.register(INITIATED, false);
+//        dataManager.register(INITIATED, false);
         dataManager.register(DURATION, 1);
     }
 
@@ -111,8 +135,61 @@ public class EntityDagger extends EntityArrow {
     }
 
     @Override
+    public boolean hasNoGravity()
+    {
+        if (this.shootingEntity != null) {
+            return isFireSpellBookEquipped((EntityPlayer) this.shootingEntity);
+        }
+        return false;
+    }
+
+
+    @Override
     public void onUpdate() {
         super.onUpdate();
+
+        if (this.shootingEntity != null) {
+            if (isFireSpellBookEquipped((EntityPlayer) this.shootingEntity)) {
+                if (this.world.isRemote) {
+                    double offsetX = (this.rand.nextDouble() - 0.5D) * 0.5D;
+                    double offsetY = this.rand.nextDouble() * 0.02D;
+                    double offsetZ = (this.rand.nextDouble() - 0.5D) * 0.5D;
+
+                    double particleX = this.posX + offsetX;
+                    double particleY = this.posY + offsetY;
+                    double particleZ = this.posZ + offsetZ;
+
+                    double motionY = 0.02D + this.rand.nextDouble() * 0.02D;
+
+                    this.world.spawnParticle(EnumParticleTypes.FLAME, particleX, particleY, particleZ, 0.0D, motionY, 0.0D);
+                }
+
+                this.posX += this.motionX;
+                this.posY += this.motionY;
+                this.posZ += this.motionZ;
+                ProjectileHelper.rotateTowardsMovement(this, 0.2F);
+                float f = this.getMotionFactor();
+
+                if (this.isInWater())
+                {
+                    for (int i = 0; i < 4; ++i)
+                    {
+                        float f1 = 0.25F;
+                        this.world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * 0.25D, this.posY - this.motionY * 0.25D, this.posZ - this.motionZ * 0.25D, this.motionX, this.motionY, this.motionZ);
+                    }
+
+                    f = 0.8F;
+                }
+
+                this.motionX += this.accelerationX;
+                this.motionY += this.accelerationY;
+                this.motionZ += this.accelerationZ;
+                this.motionX *= (double)f;
+                this.motionY *= (double)f;
+                this.motionZ *= (double)f;
+                this.setPosition(this.posX, this.posY, this.posZ);
+            }
+        }
     }
 
     @Override
@@ -180,6 +257,12 @@ public class EntityDagger extends EntityArrow {
                 if (!(entity instanceof EntityEnderman))
                 {
                     this.setDead();
+                }
+
+                if (this.shootingEntity != null) {
+                    if (isFireSpellBookEquipped((EntityPlayer) this.shootingEntity)) {
+                        entity.setFire(5);
+                    }
                 }
             }
             else
@@ -250,6 +333,20 @@ public class EntityDagger extends EntityArrow {
         {
             this.damage = tagCompund.getDouble("damage");
         }
+
+        if (this.shootingEntity != null) {
+            if (isFireSpellBookEquipped((EntityPlayer) this.shootingEntity)) {
+                if (tagCompund.hasKey("power", 9)) {
+                    NBTTagList nbttaglist = tagCompund.getTagList("power", 6);
+
+                    if (nbttaglist.tagCount() == 3) {
+                        this.accelerationX = nbttaglist.getDoubleAt(0);
+                        this.accelerationY = nbttaglist.getDoubleAt(1);
+                        this.accelerationZ = nbttaglist.getDoubleAt(2);
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -301,11 +398,23 @@ public class EntityDagger extends EntityArrow {
         tagCompound.setInteger("zTile", this.zTile);
         tagCompound.setByte("inData", (byte)this.inData);
         tagCompound.setDouble("damage", this.damage);
+
+        if (this.shootingEntity != null) {
+            if (isFireSpellBookEquipped((EntityPlayer) this.shootingEntity)) {
+                tagCompound.setTag("power", this.newDoubleNBTList(new double[]{this.accelerationX, this.accelerationY, this.accelerationZ}));
+            }
+        }
     }
 
-    public void setInited() {
-        dataManager.set(INITIATED, true);
+//    public void setInited() {
+//        dataManager.set(INITIATED, true);
+//    }
+
+    protected float getMotionFactor()
+    {
+        return 0.95F;
     }
+
 
     @Override
     public void onCollideWithPlayer(EntityPlayer entityIn) {
@@ -321,5 +430,13 @@ public class EntityDagger extends EntityArrow {
     @SideOnly(Side.CLIENT)
     public void setPositionAndRotationDirect(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean teleport) {
         super.setPositionAndRotationDirect(x, y, z, yaw, pitch, posRotationIncrements, teleport);
+    }
+
+    private boolean isFireSpellBookEquipped(EntityPlayer thrower) {
+        BaublesContainer baubles = (BaublesContainer) BaublesApi.getBaublesHandler(thrower);
+
+        ItemStack belt = baubles.getStackInSlot(4);
+
+        return !belt.isEmpty() && belt.getItem() == CCItem.fireBook;
     }
 }

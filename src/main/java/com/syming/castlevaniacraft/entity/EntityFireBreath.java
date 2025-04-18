@@ -5,7 +5,9 @@ import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
 import com.syming.castlevaniacraft.entity.mobs.EntityHeatShade;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -16,7 +18,6 @@ import java.util.List;
 public class EntityFireBreath extends EntityAttackMagic {
 
     private final int RANGE = 10;
-    public EntityHeatShade heatShade;
 
     public EntityFireBreath(World world) {
         super(world);
@@ -29,7 +30,6 @@ public class EntityFireBreath extends EntityAttackMagic {
         if (!world.isRemote) {
             this.setCasterID(caster.getEntityId());
         }
-        this.heatShade = (EntityHeatShade) caster;
     }
 
     @Override
@@ -38,21 +38,23 @@ public class EntityFireBreath extends EntityAttackMagic {
 
         if (this.caster != null && this.caster.isDead) {
             this.setDead();
+            return;
         }
 
         if (this.caster != null) {
-            Vec3d headPos = new Vec3d(0, 1.5,0);
-            headPos = headPos.rotateYaw((float) Math.toRadians((-caster.rotationYaw - 90)));
-            headPos = headPos.add(caster.getPositionVector());
-            headPos = headPos.add(new Vec3d(0, 0, 0.25).rotatePitch((float) Math.toRadians(-caster.rotationPitch)).rotateYaw((float) Math.toRadians(-caster.rotationYawHead)));
-            this.setPositionAndRotation(headPos.x, headPos.y, headPos.z, this.caster.rotationYawHead, this.caster.rotationPitch);
-            spawnFireParticles();
+            if (this.caster instanceof EntityHeatShade) {
+                Vec3d headPos = new Vec3d(0, 1.5, 0);
+                headPos = headPos.rotateYaw((float) Math.toRadians((-caster.rotationYaw - 90)));
+                headPos = headPos.add(caster.getPositionVector());
+                headPos = headPos.add(new Vec3d(0, 0, 0.25).rotatePitch((float) Math.toRadians(-caster.rotationPitch)).rotateYaw((float) Math.toRadians(-caster.rotationYawHead)));
+                this.setPositionAndRotation(headPos.x, headPos.y, headPos.z, this.caster.rotationYawHead, this.caster.rotationPitch);
+            }
         }
 
         if (ticksExisted > 10) {
             hitEntities();
         }
-        if (ticksExisted > 65) {
+        if (ticksExisted > 80) {
             setDead();
         }
     }
@@ -104,14 +106,16 @@ public class EntityFireBreath extends EntityAttackMagic {
 
     @SideOnly(Side.CLIENT)
     public void spawnFireParticles() {
-        float yaw = (float) Math.toRadians(-rotationYaw);
-        float pitch = (float) Math.toRadians(-rotationPitch);
-        float spread = 0.25f;
-        float speed = 0.56f;
-        float xComp = (float) (Math.sin(yaw) * Math.cos(pitch));
-        float yComp = (float) (Math.sin(pitch));
-        float zComp = (float) (Math.cos(yaw) * Math.cos(pitch));
-        if (this.world.isRemote) {
+        if (!this.world.isRemote) return;
+
+        if (this.caster instanceof EntityHeatShade) {
+            float yaw = (float) Math.toRadians(-rotationYaw);
+            float pitch = (float) Math.toRadians(-rotationPitch);
+            float spread = 0.25f;
+            float speed = 0.56f;
+            float xComp = (float) (Math.sin(yaw) * Math.cos(pitch));
+            float yComp = (float) (Math.sin(pitch));
+            float zComp = (float) (Math.cos(yaw) * Math.cos(pitch));
             for (int i = 0; i < 5; i++) {
                 double xSpeed = speed * xComp + (spread * 0.7 * (rand.nextFloat() * 2 - 1) * (Math.sqrt(1 - xComp * xComp)));
                 double ySpeed = speed * yComp + (spread * 0.7 * (rand.nextFloat() * 2 - 1) * (Math.sqrt(1 - yComp * yComp)));

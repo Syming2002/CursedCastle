@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelFleaMan;
+import com.syming.castlevaniacraft.client.model.entity.ModelFleaMan;
 import com.syming.castlevaniacraft.entity.mobs.EntityFleaMan;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.GlStateManager;

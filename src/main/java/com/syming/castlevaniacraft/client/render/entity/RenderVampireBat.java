@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelVampireBat;
+import com.syming.castlevaniacraft.client.model.entity.ModelVampireBat;
 import com.syming.castlevaniacraft.entity.mobs.EntityVampireBat;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.GlStateManager;

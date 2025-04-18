@@ -9,6 +9,7 @@ import com.syming.castlevaniacraft.entity.mobs.*;
 import com.syming.castlevaniacraft.entity.mobs.boss.*;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
+import com.syming.castlevaniacraft.entity.projectiles.EntityFireHydra;
 import com.syming.castlevaniacraft.entity.projectiles.EntityHarpyFeather;
 import com.syming.castlevaniacraft.entity.projectiles.EntityIceBladeProjectile;
 import com.syming.castlevaniacraft.block.CCBlock;
@@ -65,6 +66,7 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityCrucifix.class, RenderCrucifix::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityDracula.class, RenderDracula::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityDraculaSecondForm.class, RenderDraculaSecondForm::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityFireHydra.class, RenderFireHydra::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityFlameDemon.class, RenderFlameDemon::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityFleaMan.class, RenderFleaMan::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityFriendlyBat.class, RenderFriendlyBat::new);

@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelFriendlyBat;
+import com.syming.castlevaniacraft.client.model.entity.ModelFriendlyBat;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.GlStateManager;

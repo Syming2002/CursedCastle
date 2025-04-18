@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelCrucifix;
+import com.syming.castlevaniacraft.client.model.entity.ModelCrucifix;
 import com.syming.castlevaniacraft.entity.EntityCrucifix;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.block.BlockPlanks;

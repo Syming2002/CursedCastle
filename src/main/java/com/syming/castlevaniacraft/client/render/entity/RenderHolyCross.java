@@ -1,14 +1,18 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
+import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityFireHolyCross;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityHolyCross;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.holycross.ItemHolyCross;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -29,7 +33,9 @@ public class RenderHolyCross extends Render<EntityHolyCross> {
         GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate((float)(this.renderManager.options.thirdPersonView == 2 ? -1 : 1) * this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
         GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
-        this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+
+        bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+
 
         if (this.renderOutlines)
         {

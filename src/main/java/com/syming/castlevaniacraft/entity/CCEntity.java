@@ -5,10 +5,7 @@ import com.syming.castlevaniacraft.entity.mobs.*;
 import com.syming.castlevaniacraft.entity.mobs.boss.*;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
-import com.syming.castlevaniacraft.entity.projectiles.EntityHarpyFeather;
-import com.syming.castlevaniacraft.entity.projectiles.EntityIceBladeProjectile;
-import com.syming.castlevaniacraft.entity.projectiles.EntityScytheProjectile;
-import com.syming.castlevaniacraft.entity.projectiles.EntityThrowingBoneProjectile;
+import com.syming.castlevaniacraft.entity.projectiles.*;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.*;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.util.CCReferences;
@@ -30,6 +27,8 @@ public class CCEntity {
         registerHolyCross("holy_cross", EntityHolyCross.class, Item.ToolMaterial.IRON);
         registerHolyCross("holy_cross", EntityHolyCross.class, Item.ToolMaterial.GOLD);
         registerHolyCross("holy_cross", EntityHolyCross.class, Item.ToolMaterial.DIAMOND);
+
+        registerFireHolyCross("fire_holy_cross", EntityFireHolyCross.class);
 
         registerProjectile("holy_water", EntityHolyWater.class, CCItem.holyWater);
 
@@ -53,6 +52,7 @@ public class CCEntity {
         registerProjectile("fire_pillar", EntityFirePillar.class, null);
         registerEntityWithNoEgg("ice_blade", EntityIceBladeProjectile.class, 64);
         registerEntityWithNoEgg("harpy_feather", EntityHarpyFeather.class, 64);
+        registerEntityWithNoEgg("fire_hydra", EntityFireHydra.class, 64);
 
         // Entity
         registerEntity("vampire_bat", EntityVampireBat.class, 64, 0x393939, 0x8C0808);
@@ -114,6 +114,13 @@ public class CCEntity {
     private static void registerHolyCross(String name, Class<? extends EntityHolyCross> holyCross, Item.ToolMaterial material) {
         int entityID = nextEntityID();
         ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, material.toString() + "_" + name);
+        EntityRegistry.registerModEntity(resourceLocation, holyCross, name, entityID, CastlevaniaCraftMod.instance, 64, 1, true);
+
+    }
+
+    private static void registerFireHolyCross(String name, Class<? extends EntityFireHolyCross> holyCross) {
+        int entityID = nextEntityID();
+        ResourceLocation resourceLocation = new ResourceLocation(CCReferences.MODID, name);
         EntityRegistry.registerModEntity(resourceLocation, holyCross, name, entityID, CastlevaniaCraftMod.instance, 64, 1, true);
 
     }

@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelCatoblepas;
+import com.syming.castlevaniacraft.client.model.entity.ModelCatoblepas;
 import com.syming.castlevaniacraft.entity.mobs.EntityCatoblepas;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.entity.RenderLiving;

@@ -4,6 +4,7 @@ import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.block.draculacastlestone.BlockDraculaCastleStoneBrick;
 import com.syming.castlevaniacraft.client.gui.CCGui;
 import com.syming.castlevaniacraft.client.render.entity.RenderDagger;
+import com.syming.castlevaniacraft.client.render.entity.RenderFireHolyCross;
 import com.syming.castlevaniacraft.client.render.entity.RenderHolyCross;
 import com.syming.castlevaniacraft.client.render.entity.RenderThrowingAxe;
 import com.syming.castlevaniacraft.entity.projectiles.EntityScytheProjectile;
@@ -57,6 +58,8 @@ public class ClientProxy extends CommonProxy {
     public void render() {
         RenderingRegistry.registerEntityRenderingHandler(EntityThrowingAxe.class, new RenderThrowingAxe(Minecraft.getMinecraft().getRenderManager(), Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityHolyCross.class, new RenderHolyCross(Minecraft.getMinecraft().getRenderManager(), Minecraft.getMinecraft().getRenderItem()));
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityFireHolyCross.class, new RenderFireHolyCross(Minecraft.getMinecraft().getRenderManager(), Minecraft.getMinecraft().getRenderItem()));
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHolyWater.class, new RenderSnowball<EntityHolyWater>(Minecraft.getMinecraft().getRenderManager(), CCItem.holyWater, Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityDagger.class, RenderDagger::new);

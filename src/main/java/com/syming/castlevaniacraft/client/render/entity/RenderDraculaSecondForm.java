@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelDraculaSecondForm;
+import com.syming.castlevaniacraft.client.model.entity.ModelDraculaSecondForm;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDraculaSecondForm;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.entity.RenderLiving;

@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelDagger;
+import com.syming.castlevaniacraft.client.model.entity.ModelDagger;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityDagger;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.ItemDagger;
 import com.syming.castlevaniacraft.util.CCReferences;

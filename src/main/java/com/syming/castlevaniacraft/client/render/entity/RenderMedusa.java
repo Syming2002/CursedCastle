@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelMedusa;
+import com.syming.castlevaniacraft.client.model.entity.ModelMedusa;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityMedusa;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.entity.RenderLiving;

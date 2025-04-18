@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelDracula;
+import com.syming.castlevaniacraft.client.model.entity.ModelDracula;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDracula;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;

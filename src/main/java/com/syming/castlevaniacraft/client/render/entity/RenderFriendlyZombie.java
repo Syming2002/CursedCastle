@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelFriendlyZombie;
+import com.syming.castlevaniacraft.client.model.entity.ModelFriendlyZombie;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.entity.RenderBiped;

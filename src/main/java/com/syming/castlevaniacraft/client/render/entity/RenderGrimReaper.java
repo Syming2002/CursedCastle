@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.models.entity.ModelGrimReaper;
+import com.syming.castlevaniacraft.client.model.entity.ModelGrimReaper;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityGrimReaper;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.GlStateManager;
