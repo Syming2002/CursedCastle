@@ -34,12 +34,13 @@ item.green_stone_attachment.name=グリーンストーンーンアタッチメ�
 
 # Bees
 
-for.bees.species.zombie=ゾンビ
-for.bees.species.skeleton=骨格
+for.bees.species.dracula=ドラキュラ
 for.bees.species.frozen_shade=フローズンシェイド
 for.bees.species.heat_shade=ヒートシェイド
+for.bees.species.holy=聖
+for.bees.species.skeleton=骨格
 for.bees.species.vampire=吸血鬼
-for.bees.species.dracula=ドラキュラ
+for.bees.species.zombie=ゾンビ
 
 # Blocks
 
@@ -64,10 +65,11 @@ item.bullet_soul.skeleton_soul.name=スケルトンの魂
 
 # Combs
 
-item.cc.comb.rotten.name=腐った巣板
-item.cc.comb.bone.name=骨の巣板
 item.cc.comb.blood.name=血の巣板
+item.cc.comb.bone.name=骨の巣板
 item.cc.comb.frozen.name=フローズンの巣板
+item.cc.comb.holy.name=聖の巣板
+item.cc.comb.rotten.name=腐った巣板
 item.cc.comb.warmed.name=暑い巣板
 
 # Creative Tabs
@@ -78,6 +80,7 @@ itemGroup.castlevaniacraft=悪魔城ドラキュラクラフト
 
 item.cc.honey_drop.blood.name=血の滴
 item.cc.honey_drop.frozen.name=氷の滴
+item.cc.honey_drop.holy.name=聖の滴
 item.cc.honey_drop.warmed.name=暑い滴
 
 # Entity
@@ -103,6 +106,14 @@ entity.Villager.high_priest=主教
 entity.rusalka.name=ルサールカ
 entity.vampire_bat.name=吸血鬼のコウモリ
 entity.zephyr.name=ゼファル
+
+# Flowers
+
+castlevaniacraft.flowers.blood.name=血
+castlevaniacraft.flowers.bone.name=骨
+castlevaniacraft.flowers.holy.name=聖
+castlevaniacraft.flowers.ice.name=氷
+castlevaniacraft.flowers.magma.name=マグマ
 
 # Fluids
 

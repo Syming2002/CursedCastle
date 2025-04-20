@@ -1,5 +1,7 @@
 package com.syming.castlevaniacraft.integration.forestry.bees;
 
+import com.syming.castlevaniacraft.block.CCBlock;
+import com.syming.castlevaniacraft.integration.forestry.genetics.CCBeesFlowers;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.integration.forestry.items.CCCombType;
 import com.syming.castlevaniacraft.integration.forestry.items.CCDropType;
@@ -29,10 +31,30 @@ import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static forestry.api.apiculture.EnumBeeChromosome.*;
-
 
 public enum CCBeeDefinition implements IBeeDefinition {
+    HOLY(CCBranchDefinition.HOLY, "Benedicta", false, new Color(0x8FC7DF), new Color(0xE6E6E6),
+            beeSpecies -> {
+                beeSpecies.addProduct(getForestryComb(EnumHoneyComb.HONEY), 0.30F);
+                beeSpecies.addProduct(getCCComb(CCCombType.HOLY), 0.10F);
+                beeSpecies.addSpecialty(new ItemStack(CCItem.holyWater), 0.01F);
+                beeSpecies.addSpecialty(new ItemStack(CCItem.holyBible), 0.001F);
+                beeSpecies.setTemperature(EnumTemperature.NORMAL);
+                beeSpecies.setHumidity(EnumHumidity.NORMAL);
+                beeSpecies.setNocturnal();
+                beeSpecies.setHasEffect();
+            },
+            template -> {
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FERTILITY, EnumAllele.Fertility.NORMAL);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.BOTH_2);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.HUMIDITY_TOLERANCE, EnumAllele.Tolerance.BOTH_2);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TOLERATES_RAIN, false);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FLOWER_PROVIDER, CCBeesFlowers.HOLY);
+            },
+            dis -> {
+                IBeeMutationBuilder mutation = dis.registerMutation(BeeDefinition.MODEST, BeeDefinition.IMPERIAL, 5);
+                mutation.requireResource(CCBlock.HOLY_WATER_FLUID.getDefaultState());
+            }),
 
     ZOMBIE(CCBranchDefinition.UNDEAD, "Zombie", false, new Color(0x00AFAF), new Color(0x799C65),
             beeSpecies -> {
@@ -45,10 +67,10 @@ public enum CCBeeDefinition implements IBeeDefinition {
                 beeSpecies.setNocturnal();
             },
             template -> {
-                AlleleHelper.getInstance().set(template, FERTILITY, EnumAllele.Fertility.NORMAL);
-                AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.DOWN_5);
-                AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, EnumAllele.Tolerance.BOTH_1);
-                AlleleHelper.getInstance().set(template, TOLERATES_RAIN, true);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FERTILITY, EnumAllele.Fertility.NORMAL);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.DOWN_5);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.HUMIDITY_TOLERANCE, EnumAllele.Tolerance.BOTH_1);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TOLERATES_RAIN, true);
             },
             dis -> {
 
@@ -66,10 +88,11 @@ public enum CCBeeDefinition implements IBeeDefinition {
                 beeSpecies.setNocturnal();
             },
             template -> {
-                AlleleHelper.getInstance().set(template, FERTILITY, EnumAllele.Fertility.NORMAL);
-                AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.DOWN_5);
-                AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, EnumAllele.Tolerance.BOTH_1);
-                AlleleHelper.getInstance().set(template, TOLERATES_RAIN, true);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FERTILITY, EnumAllele.Fertility.NORMAL);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.DOWN_5);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.HUMIDITY_TOLERANCE, EnumAllele.Tolerance.BOTH_1);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TOLERATES_RAIN, true);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FLOWER_PROVIDER, CCBeesFlowers.BONE);
             },
             dis -> {
 
@@ -84,11 +107,12 @@ public enum CCBeeDefinition implements IBeeDefinition {
                 beeSpecies.setNocturnal();
             },
             template -> {
-                AlleleHelper.getInstance().set(template, FERTILITY, EnumAllele.Fertility.NORMAL);
-                AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.DOWN_5);
-                AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, EnumAllele.Tolerance.BOTH_1);
-                AlleleHelper.getInstance().set(template, TOLERATES_RAIN, true);
-                AlleleHelper.getInstance().set(template, EFFECT, AlleleEffects.effectGlacial);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FERTILITY, EnumAllele.Fertility.NORMAL);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.DOWN_5);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.HUMIDITY_TOLERANCE, EnumAllele.Tolerance.BOTH_1);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TOLERATES_RAIN, true);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.EFFECT, AlleleEffects.effectGlacial);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FLOWER_PROVIDER, CCBeesFlowers.ICE);
             },
             dis -> {
                 IBeeMutationBuilder mutation = dis.registerMutation(BeeDefinition.GLACIAL, BeeDefinition.DEMONIC, 15);
@@ -104,12 +128,12 @@ public enum CCBeeDefinition implements IBeeDefinition {
                 beeSpecies.setNocturnal();
             },
             template -> {
-                AlleleHelper.getInstance().set(template, FERTILITY, EnumAllele.Fertility.NORMAL);
-                AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.UP_5);
-                AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, EnumAllele.Tolerance.DOWN_5);
-                AlleleHelper.getInstance().set(template, FLOWER_PROVIDER, EnumAllele.Flowers.NETHER);
-                AlleleHelper.getInstance().set(template, TOLERATES_RAIN, false);
-                AlleleHelper.getInstance().set(template, EFFECT, AlleleEffects.effectIgnition);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FERTILITY, EnumAllele.Fertility.NORMAL);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.UP_5);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.HUMIDITY_TOLERANCE, EnumAllele.Tolerance.DOWN_5);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FLOWER_PROVIDER, CCBeesFlowers.MAGMA);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TOLERATES_RAIN, false);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.EFFECT, AlleleEffects.effectIgnition);
             },
             dis -> {
                 IBeeMutationBuilder mutation = dis.registerMutation(BeeDefinition.SINISTER, BeeDefinition.DEMONIC, 15);
@@ -119,19 +143,21 @@ public enum CCBeeDefinition implements IBeeDefinition {
     VAMPIRE(CCBranchDefinition.VAMPIRE, "Vampirum", false, new Color(0x0C0B0F), new Color(0x8E1D26),
             beeSpecies -> {
                 beeSpecies.addProduct(getForestryComb(EnumHoneyComb.HONEY), 0.30F);
-                beeSpecies.addProduct(getCCComb(CCCombType.BLOOD), 0.15f);
+                beeSpecies.addProduct(getCCComb(CCCombType.BLOOD), 0.15F);
                 beeSpecies.setTemperature(EnumTemperature.HELLISH);
                 beeSpecies.setHumidity(EnumHumidity.ARID);
                 beeSpecies.setNocturnal();
             },
             template -> {
-                AlleleHelper.getInstance().set(template, FERTILITY, EnumAllele.Fertility.LOW);
-                AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.UP_5);
-                AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, EnumAllele.Tolerance.UP_5);
-                AlleleHelper.getInstance().set(template, TOLERATES_RAIN, true);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FERTILITY, EnumAllele.Fertility.LOW);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.UP_5);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.HUMIDITY_TOLERANCE, EnumAllele.Tolerance.UP_5);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TOLERATES_RAIN, true);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FLOWER_PROVIDER, CCBeesFlowers.BLOOD);
             },
             dis -> {
-
+                IBeeMutationBuilder mutation = dis.registerMutation(BeeDefinition.DEMONIC, BeeDefinition.SINISTER, 10);
+                mutation.requireResource(CCBlock.BLOOD_FLUID.getDefaultState());
             }),
 
     DRACULA(CCBranchDefinition.VAMPIRE, "Draculum", false, new Color(0x0C0B0F), new Color(0x8E1D26),
@@ -144,13 +170,15 @@ public enum CCBeeDefinition implements IBeeDefinition {
                 beeSpecies.setHasEffect();
             },
             template -> {
-                AlleleHelper.getInstance().set(template, FERTILITY, EnumAllele.Fertility.LOW);
-                AlleleHelper.getInstance().set(template, TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.UP_5);
-                AlleleHelper.getInstance().set(template, HUMIDITY_TOLERANCE, EnumAllele.Tolerance.UP_5);
-                AlleleHelper.getInstance().set(template, TOLERATES_RAIN, true);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FERTILITY, EnumAllele.Fertility.LOW);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.UP_5);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.HUMIDITY_TOLERANCE, EnumAllele.Tolerance.UP_5);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.TOLERATES_RAIN, true);
+                AlleleHelper.getInstance().set(template, EnumBeeChromosome.FLOWER_PROVIDER, CCBeesFlowers.BLOOD);
             },
             dis -> {
-
+                IBeeMutationBuilder mutation = dis.registerMutation(BeeDefinition.IMPERIAL, CCBeeDefinition.VAMPIRE, 5);
+                mutation.requireResource(CCBlock.BLOOD_FLUID.getDefaultState());
             });
 
 
@@ -247,7 +275,7 @@ public enum CCBeeDefinition implements IBeeDefinition {
             setSpeciesProperties(species);
 
             template = branch.getTemplate();
-            AlleleHelper.getInstance().set(template, SPECIES, species);
+            AlleleHelper.getInstance().set(template, EnumBeeChromosome.SPECIES, species);
             setAlleles(template);
 
             //noinspection ConstantConditions

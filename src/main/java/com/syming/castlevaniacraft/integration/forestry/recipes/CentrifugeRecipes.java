@@ -31,11 +31,13 @@ public class CentrifugeRecipes {
 
         Map<ItemStack, Float> frozenCombProducts = new HashMap<>();
 
+        Map<ItemStack, Float> holyWaterCombProducts = new HashMap<>();
+
         Map<ItemStack, Float> warmedCombProducts = new HashMap<>();
 
-        ItemStack rottenFlesh = Items.ROTTEN_FLESH.getDefaultInstance();
+        ItemStack rottenFlesh = new ItemStack(Items.ROTTEN_FLESH);
 
-        ItemStack bone = Items.BONE.getDefaultInstance();
+        ItemStack bone = new ItemStack(Items.BONE);
 
         ItemStack boneMeal = new ItemStack(Items.DYE, 1, 15);
 
@@ -46,6 +48,8 @@ public class CentrifugeRecipes {
         ItemStack bloodDrop = CCBeeDefinition.getCCDrop(CCDropType.BLOOD);
 
         ItemStack frozenDrop = CCBeeDefinition.getCCDrop(CCDropType.FROZEN);
+
+        ItemStack holyWaterDrop = CCBeeDefinition.getCCDrop(CCDropType.HOLY);
 
         ItemStack warmedDrop = CCBeeDefinition.getCCDrop(CCDropType.WARMED);
 
@@ -66,9 +70,15 @@ public class CentrifugeRecipes {
         frozenCombProducts.put(honeyDrop, 0.5F);
         frozenCombProducts.put(frozenDrop, 0.25F);
 
+        holyWaterCombProducts.put(beeswax, 0.8F);
+        holyWaterCombProducts.put(honeyDrop, 0.5F);
+        holyWaterCombProducts.put(holyWaterDrop, 0.25F);
+
         warmedCombProducts.put(beeswax, 0.8F);
         warmedCombProducts.put(honeyDrop, 0.5F);
         warmedCombProducts.put(warmedDrop, 0.25F);
+
+        RecipeManagers.centrifugeManager.addRecipe(20, getCCComb(CCCombType.HOLY), holyWaterCombProducts);
 
         RecipeManagers.centrifugeManager.addRecipe(20, getCCComb(CCCombType.BLOOD), bloodCombProducts);
 

@@ -14,25 +14,31 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-import static forestry.api.apiculture.EnumBeeChromosome.*;
-
 public enum CCBranchDefinition implements IBranchDefinition {
+    HOLY("Sanctus", alleles -> {
+        AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.BOTH_1);
+        AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.FERTILITY, EnumAllele.Fertility.NORMAL);
+        AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.TOLERATES_RAIN, false);
+        AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.EFFECT, AlleleEffects.effectBeatific);
+        AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.EFFECT, AlleleEffects.effectHeroic);
+    }),
+
     UNDEAD("Inmortui", alleles -> {
-        AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.BOTH_3);
-        AlleleHelper.getInstance().set(alleles, FERTILITY, EnumAllele.Fertility.NORMAL);
+        AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.BOTH_3);
+        AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.FERTILITY, EnumAllele.Fertility.NORMAL);
     }),
 
     SHADE("Umbra", alleles -> {
-       AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.BOTH_5);
-       AlleleHelper.getInstance().set(alleles, FERTILITY, EnumAllele.Fertility.NORMAL);
+       AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.BOTH_5);
+       AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.FERTILITY, EnumAllele.Fertility.NORMAL);
     }),
 
     VAMPIRE("Vampirum",
         alleles -> {
-            AlleleHelper.getInstance().set(alleles, TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.UP_5);
-            AlleleHelper.getInstance().set(alleles, FERTILITY, EnumAllele.Fertility.LOW);
-            AlleleHelper.getInstance().set(alleles, TOLERATES_RAIN, true);
-            AlleleHelper.getInstance().set(alleles, EFFECT, AlleleEffects.effectAggressive);
+            AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.UP_5);
+            AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.FERTILITY, EnumAllele.Fertility.LOW);
+            AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.TOLERATES_RAIN, true);
+            AlleleHelper.getInstance().set(alleles, EnumBeeChromosome.EFFECT, AlleleEffects.effectAggressive);
         });
 
     private static IAllele[] defaultTemplate;
@@ -67,18 +73,18 @@ public enum CCBranchDefinition implements IBranchDefinition {
         if (defaultTemplate == null) {
             defaultTemplate = new IAllele[EnumBeeChromosome.values().length];
 
-            AlleleHelper.getInstance().set(defaultTemplate, SPEED, EnumAllele.Speed.SLOWEST);
-            AlleleHelper.getInstance().set(defaultTemplate, LIFESPAN, EnumAllele.Lifespan.SHORTER);
-            AlleleHelper.getInstance().set(defaultTemplate, FERTILITY, EnumAllele.Fertility.NORMAL);
-            AlleleHelper.getInstance().set(defaultTemplate, TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.NONE);
-            AlleleHelper.getInstance().set(defaultTemplate, NEVER_SLEEPS, false);
-            AlleleHelper.getInstance().set(defaultTemplate, HUMIDITY_TOLERANCE, EnumAllele.Tolerance.NONE);
-            AlleleHelper.getInstance().set(defaultTemplate, TOLERATES_RAIN, false);
-            AlleleHelper.getInstance().set(defaultTemplate, CAVE_DWELLING, false);
-            AlleleHelper.getInstance().set(defaultTemplate, FLOWER_PROVIDER, EnumAllele.Flowers.VANILLA);
-            AlleleHelper.getInstance().set(defaultTemplate, FLOWERING, EnumAllele.Flowering.SLOWEST);
-            AlleleHelper.getInstance().set(defaultTemplate, TERRITORY, EnumAllele.Territory.AVERAGE);
-            AlleleHelper.getInstance().set(defaultTemplate, EFFECT, AlleleEffects.effectNone);
+            AlleleHelper.getInstance().set(defaultTemplate,  EnumBeeChromosome.SPEED, EnumAllele.Speed.SLOWEST);
+            AlleleHelper.getInstance().set(defaultTemplate,  EnumBeeChromosome.LIFESPAN, EnumAllele.Lifespan.SHORTER);
+            AlleleHelper.getInstance().set(defaultTemplate,  EnumBeeChromosome.FERTILITY, EnumAllele.Fertility.NORMAL);
+            AlleleHelper.getInstance().set(defaultTemplate,  EnumBeeChromosome.TEMPERATURE_TOLERANCE, EnumAllele.Tolerance.NONE);
+            AlleleHelper.getInstance().set(defaultTemplate,  EnumBeeChromosome.NEVER_SLEEPS, false);
+            AlleleHelper.getInstance().set(defaultTemplate,  EnumBeeChromosome.HUMIDITY_TOLERANCE, EnumAllele.Tolerance.NONE);
+            AlleleHelper.getInstance().set(defaultTemplate,  EnumBeeChromosome.TOLERATES_RAIN, false);
+            AlleleHelper.getInstance().set(defaultTemplate,  EnumBeeChromosome.CAVE_DWELLING, false);
+            AlleleHelper.getInstance().set(defaultTemplate,  EnumBeeChromosome.FLOWER_PROVIDER, EnumAllele.Flowers.VANILLA);
+            AlleleHelper.getInstance().set(defaultTemplate,  EnumBeeChromosome.FLOWERING, EnumAllele.Flowering.SLOWEST);
+            AlleleHelper.getInstance().set(defaultTemplate,  EnumBeeChromosome.TERRITORY, EnumAllele.Territory.AVERAGE);
+            AlleleHelper.getInstance().set(defaultTemplate,  EnumBeeChromosome.EFFECT, AlleleEffects.effectNone);
         }
         return Arrays.copyOf(defaultTemplate, defaultTemplate.length);
     }

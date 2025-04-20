@@ -32,7 +32,7 @@ public class ItemHolyWater extends Item {
         playerIn.getCooldownTracker().setCooldown(this, 40);
         if (!worldIn.isRemote)
         {
-            EntityHolyWater holyWater = new EntityHolyWater(worldIn, playerIn, stack);
+            EntityHolyWater holyWater = new EntityHolyWater(worldIn, playerIn);
             holyWater.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, -20.0F, 0.5F, 1.0F);
             worldIn.spawnEntity(holyWater);
         }

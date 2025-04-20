@@ -26,7 +26,7 @@ public class EntityHolyFire extends EntityAreaEffectCloud {
         List<EntityLivingBase> list = this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox());
 
         for (EntityLivingBase entity : list) {
-            if (entity instanceof EntityMob) {
+            if (entity instanceof EntityMob && entity != getOwner()) {
                 if (!entity.isImmuneToFire()) {
                     entity.setFire(5);
                 }

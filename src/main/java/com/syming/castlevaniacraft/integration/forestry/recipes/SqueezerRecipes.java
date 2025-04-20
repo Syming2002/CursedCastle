@@ -26,6 +26,7 @@ public class SqueezerRecipes {
     private static void squeezerRecipes() {
 
         Fluid blood = CCFluid.BLOOD_FLUID;
+        Fluid holyWater = CCFluid.HOLY_WATER_FLUID;
         Fluid ice = Fluids.ICE.getFluid();
         Fluid lava = FluidRegistry.LAVA;
         ItemStack propolis = ModuleApiculture.getItems().propolis.getItemStack();
@@ -42,6 +43,14 @@ public class SqueezerRecipes {
                 20,
                 getCCDrop(CCDropType.FROZEN),
                 new FluidStack(ice, 25),
+                propolis,
+                5
+        );
+
+        RecipeManagers.squeezerManager.addRecipe(
+                20,
+                getCCDrop(CCDropType.HOLY),
+                new FluidStack(holyWater, 25),
                 propolis,
                 5
         );

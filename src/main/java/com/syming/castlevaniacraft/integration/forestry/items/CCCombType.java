@@ -4,6 +4,7 @@ import java.awt.*;
 
 public enum CCCombType {
 
+    HOLY("holy", new Color(0x8FC7DF), new Color(0xE6E6E6)),
     ROTTEN("rotten", new Color(0xBD422D), new Color(0x753D13)),
     BONE("bone", new Color(0xFFFEF0), new Color(0xE4E2D2)),
     BLOOD("blood", new Color(0x992626), new Color(0x8E1D26)),

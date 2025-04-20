@@ -34,12 +34,13 @@ item.green_stone_attachment.name=Green Stone Attachment
 
 # Bees
 
-for.bees.species.zombie=Zombie
-for.bees.species.skeleton=Skeleton
+for.bees.species.dracula=Dracula
 for.bees.species.frozen_shade=Frozen Shade
 for.bees.species.heat_shade=Heat Shade
+for.bees.species.holy=Holy
+for.bees.species.skeleton=Skeleton
 for.bees.species.vampire=Vampire
-for.bees.species.dracula=Dracula
+for.bees.species.zombie=Zombie
 
 # Blocks
 
@@ -64,10 +65,11 @@ item.bullet_soul.zombie_soul.name=Zombie Soul
 
 # Combs
 
-item.cc.comb.rotten.name=Rotten Comb
-item.cc.comb.bone.name=Bone Comb
 item.cc.comb.blood.name=Blood Comb
+item.cc.comb.bone.name=Bone Comb
 item.cc.comb.frozen.name=Frozen Comb
+item.cc.comb.holy.name=Holy Comb
+item.cc.comb.rotten.name=Rotten Comb
 item.cc.comb.warmed.name=Warmed Comb
 
 # Container
@@ -82,6 +84,7 @@ itemGroup.castlevaniacraft=Castlevania Craft
 
 item.cc.honey_drop.blood.name=Blood Drop
 item.cc.honey_drop.frozen.name=Frozen Drop
+item.cc.honey_drop.holy.name=Holy Drop
 item.cc.honey_drop.warmed.name=Warmed Drop
 
 # Entity
@@ -107,6 +110,15 @@ entity.Villager.high_priest=High Priest
 entity.rusalka.name=Rusalka
 entity.vampire_bat.name=Vampire Bat
 entity.zephyr.name=Zephyr
+
+# Flowers
+
+castlevaniacraft.flowers.blood.name=Blood
+castlevaniacraft.flowers.bone.name=Bone
+castlevaniacraft.flowers.holy.name=Holy
+castlevaniacraft.flowers.ice.name=Ice
+castlevaniacraft.flowers.magma.name=Magma
+
 
 # Fluids
 

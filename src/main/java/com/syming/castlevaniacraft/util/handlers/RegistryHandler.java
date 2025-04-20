@@ -9,6 +9,7 @@ import com.syming.castlevaniacraft.entity.CCEntity;
 import com.syming.castlevaniacraft.event.*;
 import com.syming.castlevaniacraft.fluid.CCFluid;
 import com.syming.castlevaniacraft.init.*;
+import com.syming.castlevaniacraft.integration.forestry.genetics.CCBeesFlowers;
 import com.syming.castlevaniacraft.integration.forestry.recipes.SqueezerRecipes;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.integration.forestry.bees.CCBeeDefinition;
@@ -157,14 +158,16 @@ public class RegistryHandler {
 
         GameRegistry.registerWorldGenerator(new CCWorldGenerator(), 0);
 
-
-        if (event.getSide() == Side.CLIENT) {
-            Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-                if (stack.getItem() instanceof IColoredItem coloredItem) {
-                    return coloredItem.getColorFromItemstack(stack, tintIndex);
-                }
-                return 0xFFFFFF;
-            }, DROPS, COMBS);
+        if (ModLoadedUtils.Forestry.isModLoaded()) {
+            if (event.getSide() == Side.CLIENT) {
+                Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+                    if (stack.getItem() instanceof IColoredItem coloredItem) {
+                        return coloredItem.getColorFromItemstack(stack, tintIndex);
+                    }
+                    return 0xFFFFFF;
+                }, DROPS, COMBS);
+            }
+            CCBeesFlowers.doInit();
         }
 
         VillagerInit.init();
@@ -174,10 +177,9 @@ public class RegistryHandler {
         CastlevaniaCraftMod.proxy.postInit(event);
         if (ModLoadedUtils.Forestry.isModLoaded()) {
             CCBeeDefinition.doInit();
+            CentrifugeRecipes.register();
+            SqueezerRecipes.register();
         }
-        CentrifugeRecipes.register();
-        SqueezerRecipes.register();
-
         NetworkRegistry.INSTANCE.registerGuiHandler(CastlevaniaCraftMod.instance, new GuiHandler());
     }
 

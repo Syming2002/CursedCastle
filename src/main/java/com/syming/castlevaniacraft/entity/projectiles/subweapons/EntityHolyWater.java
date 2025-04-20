@@ -3,6 +3,7 @@ package com.syming.castlevaniacraft.entity.projectiles.subweapons;
 import com.syming.castlevaniacraft.entity.EntityHolyFire;
 import com.syming.castlevaniacraft.entity.projectiles.CCThrowableWeapon;
 import com.syming.castlevaniacraft.util.handlers.SoundsHandler;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,17 +20,18 @@ public class EntityHolyWater extends CCThrowableWeapon {
         super(worldIn);
     }
 
-    public EntityHolyWater(World worldIn, EntityLivingBase throwerIn, ItemStack holyWaterDamageIn)
+    public EntityHolyWater(World worldIn, EntityLivingBase throwerIn)
     {
         super(worldIn, throwerIn);
     }
 
+    @Override
     public void onImpact(RayTraceResult result) {
         if (!this.world.isRemote && getThrower() != null) {
-            this.world.playSound((EntityPlayer) getThrower(), this.posX, this.posY, this.posZ, SoundsHandler.HOLY_WATER_IMPACT, SoundCategory.MASTER, 0.5F, 1.0F);
             if (result.typeOfHit == RayTraceResult.Type.ENTITY && result.entityHit instanceof EntityLivingBase livingBase) {
                 livingBase.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 0.5F);
             } else if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
+                this.world.playSound(null, result.getBlockPos(), SoundsHandler.HOLY_WATER_IMPACT, SoundCategory.MASTER, 0.5F, 1.0F);
                 spawnHolyFire();
             }
             setDead();
@@ -48,6 +50,7 @@ public class EntityHolyWater extends CCThrowableWeapon {
         this.world.spawnEntity(holyFire);
     }
 
+    @Override
     protected float getGravityVelocity()
     {
         return 0.05F;
