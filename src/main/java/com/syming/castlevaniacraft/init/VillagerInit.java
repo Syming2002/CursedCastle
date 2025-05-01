@@ -3,9 +3,11 @@ package com.syming.castlevaniacraft.init;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.ItemHolyWater;
 import com.syming.castlevaniacraft.util.CCReferences;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.IMerchant;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.village.MerchantRecipe;
@@ -35,15 +37,15 @@ public class VillagerInit {
 
         VillagerRegistry.VillagerCareer leaderPriestCareer = new VillagerRegistry.VillagerCareer(villagerLeaderPriest, "leader_priest");
         leaderPriestCareer.addTrade(1,
-                new GiveEmeraldForHolyCrossItems( new ItemStack(CCItem.woodenHolyCross), new EntityVillager.PriceInfo(1, 2)));
+                new GiveEmeraldForHolyCrossItems(new ItemStack(CCItem.woodenHolyCross), Item.ToolMaterial.WOOD));
         leaderPriestCareer.addTrade(2,
-                new GiveEmeraldForHolyCrossItems( new ItemStack(CCItem.stoneHolyCross), new EntityVillager.PriceInfo(3, 4)));
+                new GiveEmeraldForHolyCrossItems(new ItemStack(CCItem.stoneHolyCross), Item.ToolMaterial.STONE));
         leaderPriestCareer.addTrade(3,
-                new GiveEmeraldForHolyCrossItems( new ItemStack(CCItem.ironHolyCross), new EntityVillager.PriceInfo(4, 5)));
+                new GiveEmeraldForHolyCrossItems(new ItemStack(CCItem.ironHolyCross), Item.ToolMaterial.IRON));
         leaderPriestCareer.addTrade(4,
-                new GiveEmeraldForHolyCrossItems( new ItemStack(CCItem.goldenHolyCross), new EntityVillager.PriceInfo(3, 4)));
+                new GiveEmeraldForHolyCrossItems(new ItemStack(CCItem.goldenHolyCross), Item.ToolMaterial.GOLD));
         leaderPriestCareer.addTrade(5,
-                new GiveEmeraldForHolyCrossItems( new ItemStack(CCItem.diamondHolyCross), new EntityVillager.PriceInfo(5, 6)));
+                new GiveEmeraldForHolyCrossItems(new ItemStack(CCItem.diamondHolyCross), Item.ToolMaterial.DIAMOND));
 
         villagerHighPriest = new VillagerRegistry.VillagerProfession(ID_VILLAGER_HIGH_PRIEST, TEXTURE_SKIN_HIGH_PRIEST, TEXTURE_SKIN_ZOMBIE_HIGH_PRIEST);
         IForgeRegistry<VillagerRegistry.VillagerProfession> highPriestProfessions = ForgeRegistries.VILLAGER_PROFESSIONS;
@@ -89,28 +91,49 @@ public class VillagerInit {
     }
 
     public static class GiveEmeraldForHolyCrossItems implements EntityVillager.ITradeList {
-        public final ItemStack sellingItem;
-        @Nullable
-        public final EntityVillager.PriceInfo price;
+        public final ItemStack holyCrossItem;
+        private Item.ToolMaterial material;
 
-        public GiveEmeraldForHolyCrossItems(ItemStack stack, @Nullable EntityVillager.PriceInfo priceInfo) {
-            this.sellingItem = stack;
-            this.price = priceInfo;
+        public GiveEmeraldForHolyCrossItems(ItemStack stack, Item.ToolMaterial material) {
+            this.holyCrossItem = stack;
+            this.material = material;
         }
 
         @Override
         public void addMerchantRecipe(IMerchant merchant, MerchantRecipeList recipeList, Random random) {
 
-            int sellAmount = 1;
-            if (this.price != null) {
-                sellAmount = this.price.getPrice(random);
-            }
+            int price = getEmeraldCostForMaterial(material, random);
 
-            ItemStack itemToSell = this.sellingItem.copy();
-            itemToSell.setCount(sellAmount);
+            ItemStack emeraldStack = new ItemStack(Items.EMERALD, price);
 
-            recipeList.add(new MerchantRecipe(new ItemStack(Items.EMERALD), itemToSell));
+            ItemStack holyCrossToSell = this.holyCrossItem.copy();
+            holyCrossToSell.setCount(1);
+
+            recipeList.add(new MerchantRecipe(emeraldStack, holyCrossToSell));
         }
 
+    }
+
+    private static int getEmeraldCostForMaterial(Item.ToolMaterial material, Random random) {
+        switch (material) {
+            case WOOD: {
+                return random.nextInt(3);
+            }
+            case STONE: {
+                return random.nextInt(5);
+            }
+            case IRON: {
+                return random.nextInt(7);
+            }
+            case GOLD: {
+                return random.nextInt(9);
+            }
+            case DIAMOND: {
+                return random.nextInt(11);
+            }
+            default: {
+                return 0;
+            }
+        }
     }
 }

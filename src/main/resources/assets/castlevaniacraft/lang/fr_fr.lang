@@ -102,9 +102,10 @@ entity.heat_shade.name=Ombre Brûlante
 entity.ice_blade.name=Lame de Glace
 entity.medusa.name=Méduse
 entity.medusa_snake.name=Serpent de Méduse
-entity.Villager.high_priest=Grand Prêtre
 entity.rusalka.name=Rusalka
 entity.vampire_bat.name=Chauve-souris Vampire
+entity.Villager.high_priest=Grand Prêtre
+entity.Villager.leader_priest=Prêtre Chef
 entity.zephyr.name=Zephyr
 
 # Flowers

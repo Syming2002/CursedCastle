@@ -102,9 +102,10 @@ entity.heat_shade.name=ヒートシェイド
 entity.ice_blade.name=アイスニードル
 entity.medusa.name=メディウサ
 entity.medusa_snake.name=メディウサの蛇
-entity.Villager.high_priest=主教
 entity.rusalka.name=ルサールカ
 entity.vampire_bat.name=吸血鬼のコウモリ
+entity.Villager.high_priest=主教
+entity.Villager.leader_priest=主任司教
 entity.zephyr.name=ゼファル
 
 # Flowers

@@ -61,14 +61,21 @@ dependencies {
     implementation rfg.deobf("curse.maven:mo-villages-243205:2484281")
 //    implementation rfg.deobf("curse.maven:tinkers-construct-74072:2902483")
     implementation rfg.deobf("curse.maven:torcherino-community-edition-919322:6006961")
-    implementation rfg.deobf("curse.maven:xaeros-minimap-263420:5262340")
-
+    implementation rfg.deobf("curse.maven:xaeros-minimap-263420:6310964")
+    
     implementation rfg.deobf("curse.maven:cofh-core-69162:2920433")
     implementation rfg.deobf("curse.maven:cofh-world-271384:2920434")
     implementation rfg.deobf("curse.maven:thermal-foundation-222880:2926428")
     implementation rfg.deobf("curse.maven:thermal-expansion-69163:2926431")
     implementation rfg.deobf("curse.maven:thermal-dynamics-227443:2920505")
     implementation rfg.deobf("curse.maven:redstone-flux-270789:2920436")
+
+    // Atlas Lib
+    implementation rfg.deobf("curse.maven:atlas-lib-463826:5877784")
+
+    // Deeper Depths
+    implementation rfg.deobf("curse.maven:deeper-depths-1101129:6447597")
+
 
     // Extended Whip Attack
     implementation rfg.deobf("curse.maven:reaches-fix-556777:6069258")

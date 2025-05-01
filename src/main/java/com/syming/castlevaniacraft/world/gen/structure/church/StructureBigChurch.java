@@ -908,7 +908,7 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
         }
 
         // Inside Church
-        this.spawnVillagers(world, structureBoundingBoxIn, 6, 5, 30, 1);
+        spawnVillagers(world, structureBoundingBoxIn, 6, 5, 30, VillagerInit.villagerHighPriest);
 
         this.spawnCrucifix(world, structureBoundingBoxIn, 6, 5, 32, 1);
 
@@ -982,6 +982,9 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
             }
         }
 
+        spawnVillagers(world, structureBoundingBoxIn, 6, 11, 6, VillagerInit.villagerLeaderPriest);
+
+        spawnVillagers(world, structureBoundingBoxIn, 6, 11, 8, VillagerInit.villagerLeaderPriest);
 
         // Chest
 
@@ -1776,6 +1779,8 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
 
         if (villagersSpawnedIn == 0) {
             return registry.getID(VillagerInit.villagerHighPriest);
+        } else if (villagersSpawnedIn == 2) {
+            return registry.getID(VillagerInit.villagerLeaderPriest);
         } else {
             return currentVillagerProfession;
         }
@@ -1965,41 +1970,31 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
         }
     }
 
-    @Override
-    protected void spawnVillagers(World worldIn, StructureBoundingBox structurebb, int x, int y, int z, int count) {
-        if (this.villagersSpawned < count) {
-            for (int i = this.villagersSpawned; i < count; ++i) {
-                int j = this.getXWithOffset(x + i, z);
-                int k = this.getYWithOffset(y);
-                int l = this.getZWithOffset(x + i, z);
+    protected void spawnVillagers(World worldIn, StructureBoundingBox structurebb, int x, int y, int z, VillagerRegistry.VillagerProfession profession) {
+        int j = this.getXWithOffset(x, z);
+        int k = this.getYWithOffset(y);
+        int l = this.getZWithOffset(x, z);
 
-                if (!structurebb.isVecInside(new BlockPos(j, k, l)))
-                {
-                    break;
-                }
-
-                ++this.villagersSpawned;
-
-                if (this.isZombieInfested)
-                {
-                    EntityZombieVillager entityzombievillager = new EntityZombieVillager(worldIn);
-                    entityzombievillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-                    entityzombievillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityzombievillager)), (IEntityLivingData)null);
-                    entityzombievillager.setForgeProfession(this.chooseForgeProfession(i, net.minecraftforge.fml.common.registry.VillagerRegistry.FARMER));
-                    entityzombievillager.enablePersistence();
-                    worldIn.spawnEntity(entityzombievillager);
-                }
-                else
-                {
-                    EntityVillager entityvillager = new EntityVillager(worldIn);
-                    entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-                    net.minecraftforge.fml.common.registry.VillagerRegistry.setRandomProfession(entityvillager, worldIn.rand);
-                    entityvillager.setProfession(this.chooseForgeProfession(i, entityvillager.getProfessionForge()));
-                    entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
-                    worldIn.spawnEntity(entityvillager);
-                }
-            }
+        if (!structurebb.isVecInside(new BlockPos(j, k, l))) {
+            return;
         }
+
+        if (this.isZombieInfested) {
+            EntityZombieVillager entityzombievillager = new EntityZombieVillager(worldIn);
+            entityzombievillager.setLocationAndAngles((double) j + 0.5D, (double) k, (double) l + 0.5D, 0.0F, 0.0F);
+            entityzombievillager.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityzombievillager)), (IEntityLivingData) null);
+            entityzombievillager.setForgeProfession(chooseForgeProfession(1, profession));
+            entityzombievillager.enablePersistence();
+            worldIn.spawnEntity(entityzombievillager);
+        } else {
+            EntityVillager entityvillager = new EntityVillager(worldIn);
+            entityvillager.setLocationAndAngles((double) j + 0.5D, (double) k, (double) l + 0.5D, 0.0F, 0.0F);
+            net.minecraftforge.fml.common.registry.VillagerRegistry.setRandomProfession(entityvillager, worldIn.rand);
+            entityvillager.setProfession(this.chooseForgeProfession(1, profession));
+            entityvillager.finalizeMobSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData) null, false);
+            worldIn.spawnEntity(entityvillager);
+        }
+
     }
 
     protected void spawnCrucifix(World worldIn, StructureBoundingBox structurebb, int x, int y, int z, int count) {

@@ -19,7 +19,6 @@ import java.util.List;
 public abstract class CCEntityMob extends EntityMob {
 
     public float targetDistance;
-    public final List<EntityVillager> villagerEntities = Lists.<EntityVillager>newArrayList();
 
     public CCEntityMob(World worldIn) {
         super(worldIn);
