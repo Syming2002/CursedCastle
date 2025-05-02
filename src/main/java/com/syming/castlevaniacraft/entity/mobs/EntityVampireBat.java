@@ -2,10 +2,6 @@ package com.syming.castlevaniacraft.entity.mobs;
 
 import com.syming.castlevaniacraft.api.IElementalWeapon;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
-import com.syming.castlevaniacraft.entity.ai.dracula.AIBatsAttack;
-import com.syming.castlevaniacraft.entity.ai.shade.frozenShade.AIIdle;
-import com.syming.castlevaniacraft.entity.ai.shade.frozenShade.AIRepulseAttack;
-import com.syming.castlevaniacraft.entity.mobs.boss.EntityDracula;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,7 +21,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import org.jetbrains.annotations.Nullable;

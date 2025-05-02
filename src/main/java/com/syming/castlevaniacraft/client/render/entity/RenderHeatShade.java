@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
 import com.syming.castlevaniacraft.client.model.entity.ModelHeatShade;
-import com.syming.castlevaniacraft.entity.mobs.EntityHeatShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityHeatShade;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

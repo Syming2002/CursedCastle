@@ -1,4 +1,4 @@
-package com.syming.castlevaniacraft.util.handlers;
+package com.syming.castlevaniacraft.util.handler;
 
 import net.minecraftforge.common.config.Configuration;
 

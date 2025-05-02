@@ -8,9 +8,8 @@ import com.syming.castlevaniacraft.entity.projectiles.EntityFireHydra;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityThrowingAxe;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
-import com.syming.castlevaniacraft.util.handlers.SoundsHandler;
+import com.syming.castlevaniacraft.util.handler.SoundsHandler;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
@@ -20,7 +19,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class ItemThrowingAxe extends Item {

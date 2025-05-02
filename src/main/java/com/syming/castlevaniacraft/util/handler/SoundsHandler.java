@@ -1,4 +1,4 @@
-package com.syming.castlevaniacraft.util.handlers;
+package com.syming.castlevaniacraft.util.handler;
 
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.util.ResourceLocation;

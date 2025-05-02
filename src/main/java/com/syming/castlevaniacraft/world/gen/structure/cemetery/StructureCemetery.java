@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft.world.gen.structure.cemetery;
 
-import com.syming.castlevaniacraft.entity.mobs.EntityFrozenShade;
-import com.syming.castlevaniacraft.entity.mobs.EntityHeatShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityHeatShade;
 import com.syming.castlevaniacraft.loot.CCTreasures;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
@@ -23,17 +23,17 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class StructureCemeteryPieces extends StructureVillagePieces.Village {
+public class StructureCemetery extends StructureVillagePieces.Village {
 
     private Biome biome = this.startPiece.biome;
     private boolean hasSpawner;
     private boolean spawnerPlaced;
 
 
-    public StructureCemeteryPieces() {
+    public StructureCemetery() {
     }
 
-    public StructureCemeteryPieces(StructureVillagePieces.Start start, int type, Random random, StructureBoundingBox boundingBox, EnumFacing facing) {
+    public StructureCemetery(StructureVillagePieces.Start start, int type, Random random, StructureBoundingBox boundingBox, EnumFacing facing) {
         super(start, type);
         setCoordBaseMode(facing);
         this.boundingBox = boundingBox;
@@ -50,7 +50,7 @@ public class StructureCemeteryPieces extends StructureVillagePieces.Village {
     }
 
     @Nullable
-    public static StructureCemeteryPieces buildComponent(StructureVillagePieces.Start startPieces, List<StructureComponent> pieces, Random random, int structureMinX, int structureMinY, int structureMinZ, EnumFacing facing, int componentType) {
+    public static StructureCemetery buildComponent(StructureVillagePieces.Start startPieces, List<StructureComponent> pieces, Random random, int structureMinX, int structureMinY, int structureMinZ, EnumFacing facing, int componentType) {
 
         int xOffset = 16;
         int zOffset = 16;
@@ -65,7 +65,7 @@ public class StructureCemeteryPieces extends StructureVillagePieces.Village {
 
         System.out.println("Cemetery buildComponent() at " + structureMinX + ", " + structureMinY + ", " + structureMinZ);
 
-        return new StructureCemeteryPieces(startPieces, componentType, random, structureBoundingBox, facing);
+        return new StructureCemetery(startPieces, componentType, random, structureBoundingBox, facing);
     }
 
     @Override

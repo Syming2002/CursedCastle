@@ -32,8 +32,6 @@ import java.util.Random;
 public class StructureBigChurch extends StructureVillagePieces.Village {
 
     private Biome biome = this.startPiece.biome;
-    private int villagersSpawned;
-    private int crucifixSpawned;
 
     public StructureBigChurch() {}
 
@@ -87,9 +85,9 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
         structureMinZ += zOffset;
 
         StructureBoundingBox structureBoundingBox = StructureBoundingBox.getComponentToAddBoundingBox(structureMinX, structureMinY, structureMinZ, 0, 0, -3, 13, 42, 38, facing);
-        if (!canVillageGoDeeper(structureBoundingBox) || StructureComponent.findIntersecting(pieces, structureBoundingBox) != null) {
-            return null;
-        }
+//        if (!canVillageGoDeeper(structureBoundingBox) || StructureComponent.findIntersecting(pieces, structureBoundingBox) != null) {
+//            return null;
+//        }
 
         System.out.println("Big Church buildComponent() at " + structureMinX + ", " + structureMinY + ", " + structureMinZ + "and facing: " + facing);
 
@@ -910,7 +908,7 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
         // Inside Church
         spawnVillagers(world, structureBoundingBoxIn, 6, 5, 30, VillagerInit.villagerHighPriest);
 
-        this.spawnCrucifix(world, structureBoundingBoxIn, 6, 5, 32, 1);
+        this.spawnCrucifix(world, structureBoundingBoxIn, 6, 5, 32);
 
         for (int j = 8; j < 10; ++j) {
             this.setBlockState(world, fence, 6, j, 7, structureBoundingBoxIn);
@@ -1997,46 +1995,42 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
 
     }
 
-    protected void spawnCrucifix(World worldIn, StructureBoundingBox structurebb, int x, int y, int z, int count) {
-        if (this.crucifixSpawned < count) {
-            for (int i = this.crucifixSpawned; i < count; ++i) {
+    protected void spawnCrucifix(World worldIn, StructureBoundingBox structurebb, int x, int y, int z) {
 
-                EnumFacing facing = this.getCoordBaseMode();
+        EnumFacing facing = this.getCoordBaseMode();
 
-                int j = this.getXWithOffset(x, z);
-                int k = this.getYWithOffset(y);
-                int l = this.getZWithOffset(x, z);
+        int j = this.getXWithOffset(x, z);
+        int k = this.getYWithOffset(y);
+        int l = this.getZWithOffset(x, z);
 
-                if (!structurebb.isVecInside(new BlockPos(j, k, l))) {
+        if (!structurebb.isVecInside(new BlockPos(j, k, l))) {
+            return;
+        }
+
+        Biome biome = worldIn.getBiome(new BlockPos(j, k, l));
+        BlockPlanks.EnumType woodType = getWoodTypeFromBiome(biome);
+        EntityCrucifix entityCrucifix = new EntityCrucifix(worldIn, x, y, z, woodType);
+
+        float rotationYaw = 0.0F;
+        float rotationPitch = 0.0F;
+        if (facing != null) {
+            switch (facing) {
+                case NORTH:
+                    rotationYaw = 0.0F;
                     break;
-                }
-
-                Biome biome = worldIn.getBiome(new BlockPos(j, k, l));
-                BlockPlanks.EnumType woodType = getWoodTypeFromBiome(biome);
-                EntityCrucifix entityCrucifix = new EntityCrucifix(worldIn, x, y, z, woodType);
-
-                float rotationYaw = 0.0F;
-                float rotationPitch = 0.0F;
-                if (facing != null) {
-                    switch (facing) {
-                        case NORTH:
-                            rotationYaw = 0.0F;
-                            break;
-                        case SOUTH:
-                            rotationYaw = 180.0F;
-                            break;
-                        case WEST:
-                            rotationYaw = -90.0F;
-                            break;
-                        case EAST:
-                            rotationYaw = 90.0F;
-                            break;
-                    }
-                }
-                entityCrucifix.setLocationAndAngles((double) j + 0.5D, (double) k, (double) l + 0.5D, rotationYaw, rotationPitch);
-                worldIn.spawnEntity(entityCrucifix);
+                case SOUTH:
+                    rotationYaw = 180.0F;
+                    break;
+                case WEST:
+                    rotationYaw = -90.0F;
+                    break;
+                case EAST:
+                    rotationYaw = 90.0F;
+                    break;
             }
         }
+        entityCrucifix.setLocationAndAngles((double) j + 0.5D, (double) k, (double) l + 0.5D, rotationYaw, rotationPitch);
+        worldIn.spawnEntity(entityCrucifix);
     }
 
     private BlockPlanks.EnumType getWoodTypeFromBiome(Biome biome) {

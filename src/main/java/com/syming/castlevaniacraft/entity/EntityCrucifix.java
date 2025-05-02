@@ -396,7 +396,7 @@ public class EntityCrucifix extends EntityLiving {
         }
         else
         {
-            this.setSize(2.25F, 4.1875F);
+            this.setSize(0.5F, 2.5F);
         }
     }
 
@@ -494,7 +494,7 @@ public class EntityCrucifix extends EntityLiving {
     {
         if (STATUS.equals(key))
         {
-            this.setSize(2.25F, 4.1875F);
+            this.setSize(0.5F, 2.5F);
         }
 
         super.notifyDataManagerChange(key);

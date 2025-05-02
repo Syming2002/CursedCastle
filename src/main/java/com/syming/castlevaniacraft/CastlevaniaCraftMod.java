@@ -2,7 +2,7 @@ package com.syming.castlevaniacraft;
 
 import com.syming.castlevaniacraft.proxy.CommonProxy;
 import com.syming.castlevaniacraft.util.CCReferences;
-import com.syming.castlevaniacraft.util.handlers.RegistryHandler;
+import com.syming.castlevaniacraft.util.handler.RegistryHandler;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;

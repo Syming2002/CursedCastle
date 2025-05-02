@@ -4,7 +4,7 @@ package com.syming.castlevaniacraft.client.model.entity;
 // Exported for Minecraft version 1.7 - 1.12
 // Paste this class into your mod and generate all required imports
 
-import com.syming.castlevaniacraft.entity.mobs.EntityFrozenShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;

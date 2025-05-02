@@ -2,12 +2,10 @@ package com.syming.castlevaniacraft.entity;
 
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
 import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
-import com.syming.castlevaniacraft.entity.mobs.EntityHeatShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityHeatShade;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;

@@ -1,10 +1,9 @@
 package com.syming.castlevaniacraft.entity;
 
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityPoisonShade;
 import com.syming.castlevaniacraft.particle.ParticlePoisonBreath;
 import com.syming.castlevaniacraft.entity.mobs.EntityGorgon;
-import com.syming.castlevaniacraft.particle.CCParticle;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
@@ -21,6 +20,7 @@ public class EntityPoisonBreath extends EntityAttackMagic {
 
     private final int RANGE = 5;
     public EntityGorgon gorgon;
+    public EntityPoisonShade poisonShade;
 
     public EntityPoisonBreath(World world) {
         super(world);
@@ -30,10 +30,12 @@ public class EntityPoisonBreath extends EntityAttackMagic {
     public EntityPoisonBreath(World world, EntityLivingBase caster) {
         super(world);
         setSize(0, 0);
+
         if (!world.isRemote) {
             this.setCasterID(caster.getEntityId());
         }
-        gorgon = (EntityGorgon) caster;
+
+
     }
 
     @Override
@@ -45,14 +47,25 @@ public class EntityPoisonBreath extends EntityAttackMagic {
         }
 
         if (this.caster != null) {
-            Vec3d headPos = new Vec3d(0, 1.015625, 0);
-            headPos = headPos.rotateYaw((float) Math.toRadians((-this.caster.rotationYaw - 90)));
-            headPos = headPos.add(this.caster.getPositionVector());
-            headPos = headPos.add(new Vec3d(0, 0, 1.5)
-                    .rotatePitch((float) Math.toRadians(-this.caster.rotationPitch))
-                    .rotateYaw((float) Math.toRadians(-this.caster.rotationYawHead)));
-            this.setPositionAndRotation(headPos.x, headPos.y, headPos.z, this.caster.rotationYawHead, this.caster.rotationPitch);
-            spawnPoisonBreathParticles();
+            if (this.caster instanceof EntityPoisonShade) {
+                Vec3d headPos = new Vec3d(0, 1.015625, 0);
+                headPos = headPos.rotateYaw((float) Math.toRadians((-this.caster.rotationYaw - 90)));
+                headPos = headPos.add(this.caster.getPositionVector());
+                headPos = headPos.add(new Vec3d(0, 0, 1.5)
+                        .rotatePitch((float) Math.toRadians(-this.caster.rotationPitch))
+                        .rotateYaw((float) Math.toRadians(-this.caster.rotationYawHead)));
+                setPositionAndRotation(headPos.x, headPos.y, headPos.z, this.caster.rotationYawHead, this.caster.rotationPitch);
+                spawnPoisonBreathParticles();
+            } else if (this.caster instanceof EntityGorgon) {
+                Vec3d headPos = new Vec3d(0, 1.015625,0);
+                headPos = headPos.rotateYaw((float) Math.toRadians((-gorgon.rotationYaw - 90)));
+                headPos = headPos.add(gorgon.getPositionVector());
+                headPos = headPos.add(new Vec3d(0, 0, 1.5)
+                        .rotatePitch((float) Math.toRadians(-gorgon.rotationPitch))
+                        .rotateYaw((float) Math.toRadians(-gorgon.rotationYawHead)));
+                setPositionAndRotation(headPos.x, headPos.y, headPos.z, this.gorgon.rotationYawHead, this.gorgon.rotationPitch);
+                spawnPoisonBreathParticles();
+            }
         }
 
 

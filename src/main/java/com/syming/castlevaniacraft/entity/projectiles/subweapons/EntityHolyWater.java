@@ -2,11 +2,9 @@ package com.syming.castlevaniacraft.entity.projectiles.subweapons;
 
 import com.syming.castlevaniacraft.entity.EntityHolyFire;
 import com.syming.castlevaniacraft.entity.projectiles.CCThrowableWeapon;
-import com.syming.castlevaniacraft.util.handlers.SoundsHandler;
+import com.syming.castlevaniacraft.util.handler.SoundsHandler;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;

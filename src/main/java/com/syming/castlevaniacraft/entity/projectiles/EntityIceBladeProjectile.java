@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft.entity.projectiles;
 
 import com.syming.castlevaniacraft.entity.EntityAttackMagic;
-import com.syming.castlevaniacraft.entity.mobs.EntityFrozenShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.init.MobEffects;

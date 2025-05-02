@@ -14,12 +14,12 @@ import java.util.Random;
 public class BigChurchCreationHandler implements VillagerRegistry.IVillageCreationHandler {
 
     public static void registerBigChurchComponents() {
-        MapGenStructureIO.registerStructureComponent(StructureBigChurch.class, new ResourceLocation(CCReferences.MODID,"BigChurch").toString());
+        MapGenStructureIO.registerStructureComponent(StructureBigChurch.class, new ResourceLocation(CCReferences.MODID,"Bc").toString());
     }
 
     @Override
     public StructureVillagePieces.PieceWeight getVillagePieceWeight(Random random, int i) {
-        return new StructureVillagePieces.PieceWeight(getComponentClass(), 3, 1);
+        return new StructureVillagePieces.PieceWeight(getComponentClass(), 25, 1);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft.integration.jer;
 
-import com.syming.castlevaniacraft.entity.mobs.EntityFrozenShade;
-import com.syming.castlevaniacraft.entity.mobs.EntityHeatShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityHeatShade;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDracula;
 import com.syming.castlevaniacraft.loot.CCTreasures;
 import jeresources.api.conditionals.LightLevel;

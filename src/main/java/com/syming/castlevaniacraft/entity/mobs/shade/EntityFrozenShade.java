@@ -1,13 +1,11 @@
-package com.syming.castlevaniacraft.entity.mobs;
+package com.syming.castlevaniacraft.entity.mobs.shade;
 
 import com.syming.castlevaniacraft.api.IElementalWeapon;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
-import com.syming.castlevaniacraft.entity.ai.shade.frozenShade.AIIdle;
-import com.syming.castlevaniacraft.entity.ai.shade.frozenShade.AIRepulseAttack;
+import com.syming.castlevaniacraft.entity.ai.shade.AIRepulseAttack;
 import com.syming.castlevaniacraft.entity.projectiles.EntityIceBladeProjectile;
 import com.syming.castlevaniacraft.loot.CCTreasures;
 import net.ilexiconn.llibrary.server.animation.Animation;
-import net.ilexiconn.llibrary.server.animation.AnimationAI;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.block.state.IBlockState;
@@ -19,7 +17,6 @@ import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,17 +34,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 
-public class EntityFrozenShade extends CCEntityMob implements IAnimatedEntity, EntityFlying, IRangedAttackMob {
-    public static final Animation IDLE_ANIMATION = Animation.create(40);
-    public static final Animation REPULSE_ATTACK_ANIMATION = Animation.create(180);
-    private Animation animation = NO_ANIMATION;
-    private static final Animation[] ANIMATIONS = {IDLE_ANIMATION, REPULSE_ATTACK_ANIMATION};
-    private int repulseAttackCooldown = 0;
-    public static final int REPULSE_ATTACK_COOLDOWN = 150;
-    private int animationTick;
-    public AnimationAI currentAnim;
-    public float targetDistance;
-
+public class EntityFrozenShade extends EntityShade implements IAnimatedEntity, EntityFlying, IRangedAttackMob {
     public EntityIceBladeProjectile iceBladeUp;
 
     private static final DataParameter<Integer> FIRST_ICE_BLADE_TARGET = EntityDataManager.<Integer>createKey(EntityFrozenShade.class, DataSerializers.VARINT);
@@ -110,14 +97,6 @@ public class EntityFrozenShade extends CCEntityMob implements IAnimatedEntity, E
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(0, new AIIdle(this, IDLE_ANIMATION));
-        this.tasks.addTask(2, new AIRepulseAttack(this, REPULSE_ATTACK_ANIMATION));
-        this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, true));
-        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityVillager.class, 8.0F));
-        this.tasks.addTask(7, new EntityAILookIdle(this));
     }
 
     @Override
@@ -218,11 +197,6 @@ public class EntityFrozenShade extends CCEntityMob implements IAnimatedEntity, E
             }
 
             targetDistance = getDistance(getAttackTarget()) - getAttackTarget().width / 2f;
-
-        } else if (!world.isRemote) {
-            if (getAnimation() == NO_ANIMATION /*&& getAnimation() != DEATH_ANIMATION*/ && this.isEntityAlive()) {
-                AnimationHandler.INSTANCE.sendAnimationMessage(this, IDLE_ANIMATION);
-            }
         }
 
         if (getAnimation() != NO_ANIMATION) {
@@ -236,9 +210,6 @@ public class EntityFrozenShade extends CCEntityMob implements IAnimatedEntity, E
         despawnIfPeaceful();
     }
 
-    private boolean isRepulseAnimation() {
-        return animation == REPULSE_ATTACK_ANIMATION;
-    }
 
     @Override
     public float getEyeHeight() {

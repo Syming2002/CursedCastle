@@ -1,4 +1,4 @@
-package com.syming.castlevaniacraft.util.handlers;
+package com.syming.castlevaniacraft.util.handler;
 
 import com.syming.castlevaniacraft.client.gui.GuiAlchemyTable;
 import com.syming.castlevaniacraft.container.ContainerAlchemyTable;

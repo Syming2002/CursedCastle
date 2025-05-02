@@ -6,7 +6,7 @@ import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.integration.forestry.items.CCCombType;
 import com.syming.castlevaniacraft.integration.forestry.items.CCDropType;
 import com.syming.castlevaniacraft.util.CCReferences;
-import com.syming.castlevaniacraft.util.handlers.RegistryHandler;
+import com.syming.castlevaniacraft.util.handler.RegistryHandler;
 import forestry.api.apiculture.*;
 import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;

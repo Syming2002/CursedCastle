@@ -2,7 +2,7 @@ package com.syming.castlevaniacraft.entity;
 
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
 import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
-import com.syming.castlevaniacraft.entity.mobs.EntityFrozenShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;

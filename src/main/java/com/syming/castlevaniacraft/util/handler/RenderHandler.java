@@ -1,4 +1,4 @@
-package com.syming.castlevaniacraft.util.handlers;
+package com.syming.castlevaniacraft.util.handler;
 
 
 //import com.syming.castlevaniacraft.client.models.entity.ModelDraculaHead;
@@ -9,6 +9,9 @@ import com.syming.castlevaniacraft.entity.mobs.*;
 import com.syming.castlevaniacraft.entity.mobs.boss.*;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityHeatShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityPoisonShade;
 import com.syming.castlevaniacraft.entity.projectiles.EntityFireHydra;
 import com.syming.castlevaniacraft.entity.projectiles.EntityHarpyFeather;
 import com.syming.castlevaniacraft.entity.projectiles.EntityIceBladeProjectile;
@@ -80,6 +83,7 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityIceBladeProjectile.class, RenderIceBlade::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMedusa.class, RenderMedusa::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMedusaSnake.class, RenderMedusaSnake::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityPoisonShade.class, RenderPoisonShade::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityRusalka.class, RenderRusalka::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityZephyr.class, RenderZephyr::new);
     }

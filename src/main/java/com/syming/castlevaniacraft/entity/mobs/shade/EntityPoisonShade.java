@@ -1,89 +1,41 @@
-package com.syming.castlevaniacraft.entity.mobs;
+package com.syming.castlevaniacraft.entity.mobs.shade;
 
-import com.syming.castlevaniacraft.api.IElementalWeapon;
-import com.syming.castlevaniacraft.damagesource.CCDamageSource;
-import com.syming.castlevaniacraft.entity.ai.shade.heatShade.AIIdle;
-import com.syming.castlevaniacraft.entity.ai.shade.heatShade.AIRepulseAttack;
-import com.syming.castlevaniacraft.loot.CCTreasures;
 import net.ilexiconn.llibrary.server.animation.Animation;
-import net.ilexiconn.llibrary.server.animation.AnimationAI;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-public class EntityHeatShade extends CCEntityMob implements IAnimatedEntity, EntityFlying {
+public class EntityPoisonShade extends EntityShade implements IAnimatedEntity {
 
-    public static final Animation IDLE_ANIMATION = Animation.create(40);
-    public static final Animation REPULSE_ATTACK_ANIMATION = Animation.create(180);
-    private Animation animation = NO_ANIMATION;
-    private static final Animation[] ANIMATIONS = {IDLE_ANIMATION, REPULSE_ATTACK_ANIMATION};
-    private int repulseAttackCooldown = 0;
-    public static final int REPULSE_ATTACK_COOLDOWN = 150;
-    private int animationTick;
-    public AnimationAI currentAnim;
-    public float targetDistance;
-
-    public EntityHeatShade(World worldIn) {
+    public EntityPoisonShade(World worldIn) {
         super(worldIn);
-        this.setSize(1.33F, 2.0F);
-        this.experienceValue = (int) 1.36;
     }
 
     @Override
     public boolean hasWeakness(DamageSource source, float damageAmount) {
-        EntityLivingBase living = getAttackingEntity();
-        if (living != null) {
-            ItemStack stack = living.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
-                if (elementalWeapon != null) {
-                    source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
-                    return source == CCDamageSource.getIceDamage();
-                }
-            }
-        }
         return false;
     }
 
     @Override
     public boolean hasStrength(DamageSource source, float damageAmount) {
-        EntityLivingBase living = getAttackingEntity();
-        if (living != null) {
-            ItemStack stack = living.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
-                if (elementalWeapon != null) {
-                    source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
-                    return source == CCDamageSource.getFireDamage();
-                }
-            }
-        }
         return false;
     }
 
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(0, new AIIdle(this, IDLE_ANIMATION));
-        this.tasks.addTask(2, new AIRepulseAttack(this, REPULSE_ATTACK_ANIMATION));
-        this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, true));
-        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     }
 
     @Override
@@ -103,11 +55,11 @@ public class EntityHeatShade extends CCEntityMob implements IAnimatedEntity, Ent
 
             targetDistance = getDistance(getAttackTarget()) - getAttackTarget().width / 2f;
 
-        } else if (!world.isRemote) {
-            if (getAnimation() == NO_ANIMATION /*&& getAnimation() != DEATH_ANIMATION*/ && this.isEntityAlive()) {
+        } /*else if (!world.isRemote) {
+            if (getAnimation() == NO_ANIMATION && getAnimation() != DEATH_ANIMATION && this.isEntityAlive()) {
                 AnimationHandler.INSTANCE.sendAnimationMessage(this, IDLE_ANIMATION);
             }
-        }
+        }*/
 
         if (getAnimation() != NO_ANIMATION) {
             animationTick++;
@@ -120,7 +72,7 @@ public class EntityHeatShade extends CCEntityMob implements IAnimatedEntity, Ent
         despawnIfPeaceful();
 
         if (world.isRaining()) {
-            this.attackEntityFrom(DamageSource.DROWN, 3.0F);
+            this.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 10, 1));
         }
     }
 
@@ -131,10 +83,6 @@ public class EntityHeatShade extends CCEntityMob implements IAnimatedEntity, Ent
         } else {
             return 1.62F;
         }
-    }
-
-    private boolean isRepulseAnimation() {
-        return animation == REPULSE_ATTACK_ANIMATION;
     }
 
     @Override
@@ -251,8 +199,8 @@ public class EntityHeatShade extends CCEntityMob implements IAnimatedEntity, Ent
         return ANIMATIONS;
     }
 
-    @Override
-    public ResourceLocation getLootTable() {
-        return CCTreasures.HEAT_SHADE;
-    }
+//    @Override
+//    public ResourceLocation getLootTable() {
+//        return CCTreasures.HEAT_SHADE;
+//    }
 }
