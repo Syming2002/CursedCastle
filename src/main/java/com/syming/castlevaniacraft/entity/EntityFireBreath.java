@@ -40,12 +40,13 @@ public class EntityFireBreath extends EntityAttackMagic {
         }
 
         if (this.caster != null) {
-            if (this.caster instanceof EntityHeatShade) {
+            if (this.caster instanceof EntityHeatShade heatShade) {
                 Vec3d headPos = new Vec3d(0, 1.5, 0);
-                headPos = headPos.rotateYaw((float) Math.toRadians((-caster.rotationYaw - 90)));
-                headPos = headPos.add(caster.getPositionVector());
-                headPos = headPos.add(new Vec3d(0, 0, 0.25).rotatePitch((float) Math.toRadians(-caster.rotationPitch)).rotateYaw((float) Math.toRadians(-caster.rotationYawHead)));
-                this.setPositionAndRotation(headPos.x, headPos.y, headPos.z, this.caster.rotationYawHead, this.caster.rotationPitch);
+                headPos = headPos.rotateYaw((float) Math.toRadians((-heatShade.rotationYaw - 90)));
+                headPos = headPos.add(heatShade.getPositionVector());
+                headPos = headPos.add(new Vec3d(0, 0, 0.25).rotatePitch((float) Math.toRadians(-heatShade.rotationPitch)).rotateYaw((float) Math.toRadians(-heatShade.rotationYawHead)));
+                this.setPositionAndRotation(headPos.x, headPos.y, headPos.z, heatShade.rotationYawHead, heatShade.rotationPitch);
+                spawnFireParticles();
             }
         }
 

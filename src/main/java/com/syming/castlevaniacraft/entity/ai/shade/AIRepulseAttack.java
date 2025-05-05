@@ -40,14 +40,14 @@ public class AIRepulseAttack extends AnimationAI<EntityShade> {
     @Override
     public void startExecuting() {
         super.startExecuting();
-        shade.currentAnim = this;
-        attackTarget = shade.getAttackTarget();
+        this.shade.currentAnim = this;
+        this.attackTarget = shade.getAttackTarget();
     }
 
     @Override
     public void resetTask() {
         super.resetTask();
-        shade.currentAnim = null;
+        this.shade.currentAnim = null;
     }
 
     @Override
@@ -61,24 +61,28 @@ public class AIRepulseAttack extends AnimationAI<EntityShade> {
                 .rotatePitch((float) Math.toRadians(-this.shade.rotationPitch))
                 .rotateYaw((float) Math.toRadians(-this.shade.rotationYawHead)));
 
-        if (this.shade.getAnimationTick() == 95 && attackTarget != null) {
-//            this.iceBreath.setPositionAndRotation(headPos.x, headPos.y, headPos.z, this.shade.rotationYawHead, this.shade.rotationPitch);
-            if (!this.shade.world.isRemote) {
-                if (this.shade instanceof EntityFrozenShade frozenShade) {
-                    this.iceBreath = new EntityIceBreath(frozenShade.world, frozenShade);
-                    this.iceBreath.setPositionAndRotation(headPos.x, headPos.y, headPos.z, frozenShade.rotationYawHead, frozenShade.rotationPitch);
-                    frozenShade.world.spawnEntity(this.iceBreath);
-                    System.out.println("Ice Breath is Launching");
-                } else if (this.shade instanceof EntityHeatShade heatShade) {
-                    this.fireBreath = new EntityFireBreath(heatShade.world, heatShade);
-                    this.fireBreath.setPositionAndRotation(headPos.x, headPos.y, headPos.z, heatShade.rotationYawHead, heatShade.rotationPitch);
-                    heatShade.world.spawnEntity(this.fireBreath);
-                    System.out.println("Ice Breath is Launching");
-                } else if (this.shade instanceof EntityPoisonShade poisonShade) {
-                    this.poisonBreath = new EntityPoisonBreath(poisonShade.world, poisonShade);
-                    this.poisonBreath.setPositionAndRotation(headPos.x, headPos.y, headPos.z, poisonShade.rotationYawHead, poisonShade.rotationPitch);
-                    poisonShade.world.spawnEntity(this.poisonBreath);
-                    System.out.println("Ice Breath is Launching");
+        if (this.attackTarget != null) {
+            this.shade.faceEntity(this.attackTarget, 30.0F, 30.0F);
+            this.shade.rotationYawHead = this.shade.rotationYaw;
+            this.shade.renderYawOffset = this.shade.rotationYaw;
+            if (this.shade.getAnimationTick() == 95) {
+                if (!this.shade.world.isRemote) {
+                    if (this.shade instanceof EntityFrozenShade frozenShade) {
+                        this.iceBreath = new EntityIceBreath(frozenShade.world, frozenShade);
+                        this.iceBreath.setPositionAndRotation(headPos.x, headPos.y, headPos.z, frozenShade.rotationYawHead, frozenShade.rotationPitch);
+                        frozenShade.world.spawnEntity(this.iceBreath);
+                        System.out.println("Ice Breath is Launching");
+                    } else if (this.shade instanceof EntityHeatShade heatShade) {
+                        this.fireBreath = new EntityFireBreath(heatShade.world, heatShade);
+                        this.fireBreath.setPositionAndRotation(headPos.x, headPos.y, headPos.z, heatShade.rotationYawHead, heatShade.rotationPitch);
+                        heatShade.world.spawnEntity(this.fireBreath);
+                        System.out.println("Fire Breath is Launching");
+                    } else if (this.shade instanceof EntityPoisonShade poisonShade) {
+                        this.poisonBreath = new EntityPoisonBreath(poisonShade.world, poisonShade);
+                        this.poisonBreath.setPositionAndRotation(headPos.x, headPos.y, headPos.z, poisonShade.rotationYawHead, poisonShade.rotationPitch);
+                        poisonShade.world.spawnEntity(this.poisonBreath);
+                        System.out.println("Poison Breath is Launching");
+                    }
                 }
             }
         }

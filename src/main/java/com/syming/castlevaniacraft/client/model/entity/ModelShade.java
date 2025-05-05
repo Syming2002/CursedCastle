@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.model.entity;
 
-import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityShade;
 import com.syming.castlevaniacraft.entity.mobs.shade.EntityPoisonShade;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
@@ -18,7 +18,7 @@ public abstract class ModelShade extends CCModel {
     protected final AdvancedModelRenderer right_leg;
     protected final AdvancedModelRenderer left_leg;
 
-    private ModelAnimator animator;
+    protected ModelAnimator animator;
 
     public ModelShade() {
         textureWidth = 64;
@@ -66,32 +66,19 @@ public abstract class ModelShade extends CCModel {
 
     @Override
     public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTick, float headYaw, float headPitch, float scale) {
-        EntityFrozenShade frozenShade = (EntityFrozenShade) entity;
-        animate(frozenShade, limbSwing, limbSwingAmount, ageInTick, headYaw, headPitch, scale);
+        EntityShade shade = (EntityShade) entity;
+        animate(shade, limbSwing, limbSwingAmount, ageInTick, headYaw, headPitch, scale);
         model_core.render(scale);
     }
 
     public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float ageInTick, float headYaw, float headPitch, float scale) {
-        EntityFrozenShade frozenShade = (EntityFrozenShade) entity;
-        animator.update(frozenShade);
-        this.setRotationAngles(limbSwing, limbSwingAmount, ageInTick, headYaw, headPitch, scale, frozenShade);
-
-        // Idle Animation
-        if (frozenShade.getAnimation() == EntityFrozenShade.IDLE_ANIMATION && frozenShade.isEntityAlive()) {
-            animator.setAnimation(EntityFrozenShade.IDLE_ANIMATION);
-            animator.startKeyframe(20);
-            this.rotate(animator, left_arm, 0, 0, 5);
-            this.rotate(animator, right_arm, 0, 0, -5);
-            animator.endKeyframe();
-            animator.startKeyframe(20);
-            this.rotate(animator, left_arm, 0, 0, 0);
-            this.rotate(animator, right_arm, 0, 0, 0);
-            animator.endKeyframe();
-        }
+        EntityShade shade = (EntityShade) entity;
+        animator.update(shade);
+        this.setRotationAngles(limbSwing, limbSwingAmount, ageInTick, headYaw, headPitch, scale, shade);
 
         // Repulse Attack Animation
-        if (frozenShade.getAnimation() == EntityFrozenShade.REPULSE_ATTACK_ANIMATION && frozenShade.isEntityAlive()) {
-            animator.setAnimation(EntityFrozenShade.REPULSE_ATTACK_ANIMATION);
+        if (shade.getAnimation() == EntityShade.REPULSE_ATTACK_ANIMATION && shade.isEntityAlive()) {
+            animator.setAnimation(EntityShade.REPULSE_ATTACK_ANIMATION);
 
             animator.startKeyframe(30);
             animator.move(head, 0, 1, -1.5F);
@@ -135,12 +122,14 @@ public abstract class ModelShade extends CCModel {
     @Override
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale, Entity entity) {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
+        EntityShade shade = (EntityShade) entity;
+
         resetToDefaultPose();
 
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
         this.head.rotateAngleX = headPitch * 0.017453292F;
 
-        if (poisonShade.getAnimation() != EntityPoisonShade.REPULSE_ATTACK_ANIMATION) {
+        if (shade.getAnimation() != EntityPoisonShade.REPULSE_ATTACK_ANIMATION) {
             float animationSpeed = (float) (2 * Math.PI / 40);
             float wave = (float) Math.sin(ageInTicks * animationSpeed);
             float waveAmount = (float) Math.toRadians(5);
