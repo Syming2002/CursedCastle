@@ -1,6 +1,5 @@
 package com.syming.castlevaniacraft.entity;
 
-import com.syming.castlevaniacraft.entity.mobs.EntityCatoblepas;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
@@ -12,12 +11,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
+import java.util.*;
 
 public class EntityStoneBreath extends EntityAttackMagic {
 
     private final int RANGE = 5;
-    public EntityCatoblepas catoblepas;
+    public static final Map<UUID, Integer> affectedEntities = new HashMap<>();
 
     public EntityStoneBreath(World world) {
         super(world);
@@ -30,7 +29,6 @@ public class EntityStoneBreath extends EntityAttackMagic {
         if (!world.isRemote) {
             this.setCasterID(caster.getEntityId());
         }
-        catoblepas = (EntityCatoblepas) caster;
     }
 
     @Override
@@ -62,11 +60,11 @@ public class EntityStoneBreath extends EntityAttackMagic {
     }
 
     public void hitEntities() {
-        if (caster != null) {
-            List<EntityLivingBase> entitiesHit = getEntityLivingBaseNearby(RANGE, caster.getEyeHeight(), RANGE, 5);
+        if (this.caster != null) {
+            List<EntityLivingBase> entitiesHit = getEntityLivingBaseNearby(RANGE, this.caster.getEyeHeight(), RANGE, 5);
             float damage = 0.5F;
             for (EntityLivingBase entityHit : entitiesHit) {
-                if (entityHit != caster) {
+                if (entityHit != this.caster) {
                     float entityHitYaw = (float) ((Math.atan2(entityHit.posZ - posZ, entityHit.posX - posX) * (180 / Math.PI) - 90) % 360);
                     float entityAttackingYaw = rotationYaw % 360;
                     if (entityHitYaw < 0) {
@@ -85,8 +83,8 @@ public class EntityStoneBreath extends EntityAttackMagic {
                         boolean inRange = entityHitDistance <= RANGE;
 
                         if (inRange) {
+                            affectedEntities.put(entityHit.getUniqueID(), 200);
                             entityHit.attackEntityFrom(DamageSource.MAGIC, damage);
-                            entityHit.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 100, true, false));
                         }
                     }
                 }

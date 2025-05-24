@@ -84,10 +84,10 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
         structureMinX += xOffset;
         structureMinZ += zOffset;
 
-        StructureBoundingBox structureBoundingBox = StructureBoundingBox.getComponentToAddBoundingBox(structureMinX, structureMinY, structureMinZ, 0, 0, -3, 13, 42, 38, facing);
-//        if (!canVillageGoDeeper(structureBoundingBox) || StructureComponent.findIntersecting(pieces, structureBoundingBox) != null) {
-//            return null;
-//        }
+        StructureBoundingBox structureBoundingBox = StructureBoundingBox.getComponentToAddBoundingBox(structureMinX, structureMinY, structureMinZ, 0, 0, 0, 13, 42, 41, facing);
+        if (!canVillageGoDeeper(structureBoundingBox) || StructureComponent.findIntersecting(pieces, structureBoundingBox) != null) {
+            return null;
+        }
 
         System.out.println("Big Church buildComponent() at " + structureMinX + ", " + structureMinY + ", " + structureMinZ + "and facing: " + facing);
 
@@ -97,56 +97,54 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
     private void generateBigChurch(World world, Random rand, StructureBoundingBox structureBoundingBoxIn) {
         IBlockState air = Blocks.AIR.getDefaultState();
 
-        IBlockState cobblestone = Blocks.COBBLESTONE.getDefaultState();
+        IBlockState cobblestone = this.getBiomeSpecificBlockState(Blocks.COBBLESTONE.getDefaultState());
 
-        IBlockState stairCobblestoneEastBottomOuterLeft = Blocks.STONE_STAIRS.getDefaultState()
+        IBlockState stairCobblestoneEastBottomOuterLeft = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState()
                 .withProperty(BlockStairs.FACING, EnumFacing.EAST)
                 .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.BOTTOM)
-                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.OUTER_LEFT);
+                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.OUTER_LEFT));
 
-        IBlockState stairCobblestoneNorthBottomStraight = Blocks.STONE_STAIRS.getDefaultState()
+        IBlockState stairCobblestoneNorthBottomStraight = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState()
                 .withProperty(BlockStairs.FACING, EnumFacing.NORTH)
                 .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.BOTTOM)
-                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.STRAIGHT);
+                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.STRAIGHT));
 
-        IBlockState stairCobblestoneWestBottomOuterRight = Blocks.STONE_STAIRS.getDefaultState()
+        IBlockState stairCobblestoneWestBottomOuterRight = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState()
                 .withProperty(BlockStairs.FACING, EnumFacing.WEST)
                 .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.BOTTOM)
-                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.OUTER_RIGHT);
+                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.OUTER_RIGHT));
 
-        IBlockState stairCobblestoneEastBottomStraight = Blocks.STONE_STAIRS.getDefaultState()
+        IBlockState stairCobblestoneEastBottomStraight = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState()
                 .withProperty(BlockStairs.FACING, EnumFacing.EAST)
                 .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.BOTTOM)
-                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.STRAIGHT);
+                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.STRAIGHT));
 
-        IBlockState stairCobblestoneWestBottomStraight = Blocks.STONE_STAIRS.getDefaultState()
+        IBlockState stairCobblestoneWestBottomStraight = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState()
                 .withProperty(BlockStairs.FACING, EnumFacing.WEST)
                 .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.BOTTOM)
-                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.STRAIGHT);
+                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.STRAIGHT));
 
-        IBlockState stairCobblestoneSouthBottomOuterRight = Blocks.STONE_STAIRS.getDefaultState()
+        IBlockState stairCobblestoneSouthBottomOuterRight = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState()
                 .withProperty(BlockStairs.FACING, EnumFacing.SOUTH)
                 .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.BOTTOM)
-                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.OUTER_RIGHT);
+                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.OUTER_RIGHT));
 
-        IBlockState stairCobblestoneSouthBottomOuterLeft = Blocks.STONE_STAIRS.getDefaultState()
+        IBlockState stairCobblestoneSouthBottomOuterLeft = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState()
                 .withProperty(BlockStairs.FACING, EnumFacing.SOUTH)
                 .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.BOTTOM)
-                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.OUTER_LEFT);
+                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.OUTER_LEFT));
 
-        IBlockState stairCobblestoneSouthBottomStraight = Blocks.STONE_STAIRS.getDefaultState()
+        IBlockState stairCobblestoneSouthBottomStraight = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState()
                 .withProperty(BlockStairs.FACING, EnumFacing.SOUTH)
                 .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.BOTTOM)
-                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.STRAIGHT);
+                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.STRAIGHT));
 
 
         IBlockState glowstone = Blocks.GLOWSTONE.getDefaultState();
 
-        IBlockState slabCobblestoneTop = Blocks.STONE_SLAB.getDefaultState()
+        IBlockState slabCobblestoneTop = this.getBiomeSpecificBlockState(Blocks.STONE_SLAB.getDefaultState()
                 .withProperty(BlockStoneSlab.VARIANT, BlockStoneSlab.EnumType.COBBLESTONE)
-                .withProperty(BlockStoneSlab.HALF, BlockSlab.EnumBlockHalf.TOP);
-
-        IBlockState cobblestoneWall = Blocks.COBBLESTONE_WALL.getDefaultState();
+                .withProperty(BlockStoneSlab.HALF, BlockSlab.EnumBlockHalf.TOP));
 
         IBlockState stairWoodSouthBottomStraight = this.getBiomeSpecificBlockState(Blocks.OAK_STAIRS.getDefaultState()
                 .withProperty(BlockStairs.FACING, EnumFacing.SOUTH)
@@ -161,18 +159,15 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
                 .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.TOP)
                 .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.STRAIGHT));
 
-        IBlockState stairCobblestoneWestBottomInnerRight = Blocks.STONE_STAIRS.getDefaultState()
+        IBlockState stairCobblestoneWestBottomInnerRight = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState()
                 .withProperty(BlockStairs.FACING, EnumFacing.WEST)
                 .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.BOTTOM)
-                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.INNER_RIGHT);
+                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.INNER_RIGHT));
 
-        IBlockState stairCobblestoneEastBottomInnerLeft = Blocks.STONE_STAIRS.getDefaultState()
+        IBlockState stairCobblestoneEastBottomInnerLeft = this.getBiomeSpecificBlockState(Blocks.STONE_STAIRS.getDefaultState()
                 .withProperty(BlockStairs.FACING, EnumFacing.EAST)
                 .withProperty(BlockStairs.HALF, BlockStairs.EnumHalf.BOTTOM)
-                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.INNER_LEFT);
-
-
-        Block stainedGlass = Blocks.STAINED_GLASS;
+                .withProperty(BlockStairs.SHAPE, BlockStairs.EnumShape.INNER_LEFT));
 
         int colorMetadata = rand.nextInt(16);
         EnumDyeColor dyeColor = EnumDyeColor.byMetadata(colorMetadata);
@@ -352,1375 +347,808 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
 
         // Clear Area
 
-        for (int i = 5; i < 8; ++i) {
-            for (int j = 4; j < 23; ++j) {
-                this.setBlockState(world, air, i, j, 5, structureBoundingBoxIn);
-            }
-        }
-
-        for (int i = 4; i < 9; ++i) {
-            for (int j = 4; j < 23; ++j) {
-                this.setBlockState(world, air, i, j, 6, structureBoundingBoxIn);
-            }
-        }
-
-        for (int i = 3; i < 10; ++i) {
-            for (int j = 4; j < 23; ++j) {
-                this.setBlockState(world, air, i, j, 7, structureBoundingBoxIn);
-            }
-        }
-
-        for (int i = 2; i < 11; ++i) {
-            for (int j = 4; j < 23; ++j) {
-                for (int k = 29; k < 31; ++k) {
-                    this.setBlockState(world, air, i, j, k, structureBoundingBoxIn);
-                }
-            }
-        }
-
-
-
-        for (int i = 3; i < 10; ++i) {
-            for (int j = 5; j < 23; ++j) {
-                for (int k = 29; k < 31; ++k) {
-                    this.setBlockState(world, air, i, j, k, structureBoundingBoxIn);
-                }
-            }
-        }
-
-        for (int i = 4; i < 9; ++i) {
-            for (int j = 5; j < 23; ++j) {
-                for (int k = 31; k < 33; ++k) {
-                    this.setBlockState(world, air, i, j, k, structureBoundingBoxIn);
-                }
-            }
-        }
+//        for (int i = 5; i < 8; ++i) {
+//            for (int j = 4; j < 23; ++j) {
+//                this.setBlockState(world, air, i, j, 5, structureBoundingBoxIn);
+//            }
+//        }
+//
+//        for (int i = 4; i < 9; ++i) {
+//            for (int j = 4; j < 23; ++j) {
+//                this.setBlockState(world, air, i, j, 6, structureBoundingBoxIn);
+//            }
+//        }
+//
+//        for (int i = 3; i < 10; ++i) {
+//            for (int j = 4; j < 23; ++j) {
+//                this.setBlockState(world, air, i, j, 7, structureBoundingBoxIn);
+//            }
+//        }
+//
+//        for (int i = 2; i < 11; ++i) {
+//            for (int j = 4; j < 23; ++j) {
+//                for (int k = 29; k < 31; ++k) {
+//                    this.setBlockState(world, air, i, j, k, structureBoundingBoxIn);
+//                }
+//            }
+//        }
+//
+//
+//
+//        for (int i = 3; i < 10; ++i) {
+//            for (int j = 5; j < 23; ++j) {
+//                for (int k = 29; k < 31; ++k) {
+//                    this.setBlockState(world, air, i, j, k, structureBoundingBoxIn);
+//                }
+//            }
+//        }
+//
+//        for (int i = 4; i < 9; ++i) {
+//            for (int j = 5; j < 23; ++j) {
+//                for (int k = 31; k < 33; ++k) {
+//                    this.setBlockState(world, air, i, j, k, structureBoundingBoxIn);
+//                }
+//            }
+//        }
 
         // Stairs Entrance
 
         // Left Side First Stairs
-        for (int k = -2; k < 4; ++k) {
-            this.setBlockState(world, stairCobblestoneEastBottomStraight, 1, 0, k, structureBoundingBoxIn);
-        }
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, -2 + 3, 1, 0, 3 + 3, stairCobblestoneEastBottomStraight, stairCobblestoneEastBottomStraight, false);
+
 
         // Left Side Second Stairs
-        for (int k = -1; k < 4; ++k) {
-            this.setBlockState(world, cobblestone, 2, 0, k, structureBoundingBoxIn);
-        }
-        for (int k = -1; k < 4; ++k) {
-            this.setBlockState(world, stairCobblestoneEastBottomStraight, 2, 1, k, structureBoundingBoxIn);
-        }
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 0, -1 + 3, 2, 0, 3 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 1, -1 + 3, 2, 1, 3 + 3, stairCobblestoneEastBottomStraight, stairCobblestoneEastBottomStraight, false);
+
 
         // Left Side Third Stairs
-        for (int j = 0; j < 2; ++j) {
-            for (int k = 0; k < 4; ++k) {
-                this.setBlockState(world, cobblestone, 3, j, k, structureBoundingBoxIn);
-            }
-        }
-        for (int k = 0; k < 4; ++k) {
-            this.setBlockState(world, stairCobblestoneEastBottomStraight, 3, 2, k, structureBoundingBoxIn);
-        }
+        this.fillWithBlocks(world, structureBoundingBoxIn, 3, 0, 0 + 3, 3, 1, 3 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 3, 2, 0 + 3, 3, 2, 3 + 3, stairCobblestoneEastBottomStraight, stairCobblestoneEastBottomStraight, false);
+
 
         // Left Side Fourth Stairs
-        for (int j = 0; j < 3; ++j) {
-            for (int k = 1; k < 5; ++k) {
-                this.setBlockState(world, cobblestone, 4, j, k, structureBoundingBoxIn);
-            }
-        }
-        for (int k = 1; k < 4; ++k) {
-            this.setBlockState(world, stairCobblestoneEastBottomStraight, 4, 3, k, structureBoundingBoxIn);
-        }
-
-
-
-        // Left Corner Fourth Stairs
-        this.setBlockState(world, stairCobblestoneSouthBottomOuterLeft, 4, 3, 4,structureBoundingBoxIn);
-
-
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 0, 1 + 3, 4, 2, 4 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 3, 1 + 3, 4, 3, 3 + 3, stairCobblestoneEastBottomStraight, stairCobblestoneEastBottomStraight, false);
 
 
         // First Stairs
-        this.setBlockState(world, stairCobblestoneEastBottomOuterLeft, 1, 0, -3, structureBoundingBoxIn);
-        for (int i = 2; i < 11; ++i) {
-            this.setBlockState(world, stairCobblestoneNorthBottomStraight, i, 0, -3, structureBoundingBoxIn);
-        }
-        this.setBlockState(world, stairCobblestoneWestBottomOuterRight, 11, 0, -3, structureBoundingBoxIn);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 0, -3 + 3, 10, 0, -3 + 3, stairCobblestoneNorthBottomStraight, stairCobblestoneNorthBottomStraight, false);
 
 
         // Second Stairs
-        for (int i = 2; i < 11; ++i) {
-            this.setBlockState(world, cobblestone, i, 0, -2, structureBoundingBoxIn);
-        }
-        this.setBlockState(world, stairCobblestoneEastBottomOuterLeft, 2, 1, -2, structureBoundingBoxIn);
-        for (int i = 3; i < 10; ++i) {
-            this.setBlockState(world, stairCobblestoneNorthBottomStraight, i, 1, -2, structureBoundingBoxIn);
-        }
-        this.setBlockState(world, stairCobblestoneWestBottomOuterRight, 10, 1, -2, structureBoundingBoxIn);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 0, -2 + 3, 10, 0, -2 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 3, 1, -2 + 3, 9, 1, -2 + 3, stairCobblestoneNorthBottomStraight, stairCobblestoneNorthBottomStraight, false);
 
 
         // Third Stairs
-        for (int i = 3; i < 10; ++i) {
-            for (int j = 0; j < 2; ++j) {
-                this.setBlockState(world, cobblestone, i, j, -1, structureBoundingBoxIn);
-            }
-        }
-        this.setBlockState(world, stairCobblestoneEastBottomOuterLeft, 3, 2, -1, structureBoundingBoxIn);
-        for (int i = 4; i < 9; ++i) {
-            this.setBlockState(world, stairCobblestoneNorthBottomStraight, i, 2, -1, structureBoundingBoxIn);
-        }
-        this.setBlockState(world, stairCobblestoneWestBottomOuterRight, 9, 2, -1, structureBoundingBoxIn);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 3, 0, -1 + 3, 9, 1, -1 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 2, -1 + 3, 8, 2, -1 + 3, stairCobblestoneNorthBottomStraight, stairCobblestoneNorthBottomStraight, false);
 
 
         // Fourth Stairs
-        for (int i = 4; i < 9; ++i) {
-            for (int j = 0; j < 3; ++j) {
-                this.setBlockState(world, cobblestone, i, j, 0, structureBoundingBoxIn);
-            }
-        }
-        this.setBlockState(world, stairCobblestoneEastBottomOuterLeft, 4, 3, 0, structureBoundingBoxIn);
-        for (int i = 5; i < 8; ++i) {
-            this.setBlockState(world, stairCobblestoneNorthBottomStraight, i, 3, 0, structureBoundingBoxIn);
-        }
-        this.setBlockState(world, stairCobblestoneWestBottomOuterRight, 8, 3, 0, structureBoundingBoxIn);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 0, 0 + 3, 8, 2, 0 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 3, 0 + 3, 7, 3, 0 + 3, stairCobblestoneNorthBottomStraight, stairCobblestoneNorthBottomStraight, false);
 
 
+        // Left Corner Fourth Stairs
+        this.setBlockState(world, stairCobblestoneSouthBottomOuterLeft, 4, 3, 4 + 3, structureBoundingBoxIn);
+
+
+        // First Stairs - Corners
+        this.setBlockState(world, stairCobblestoneEastBottomOuterLeft, 1, 0, -3 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneWestBottomOuterRight, 11, 0, -3 + 3, structureBoundingBoxIn);
+
+
+        // Second Stairs - Corners
+        this.setBlockState(world, stairCobblestoneEastBottomOuterLeft, 2, 1, -2 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneWestBottomOuterRight, 10, 1, -2 + 3, structureBoundingBoxIn);
+
+
+        // Third Stairs - Corners
+        this.setBlockState(world, stairCobblestoneEastBottomOuterLeft, 3, 2, -1 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneWestBottomOuterRight, 9, 2, -1 + 3, structureBoundingBoxIn);
+
+
+        // Fourth Stairs - Corners
+        this.setBlockState(world, stairCobblestoneEastBottomOuterLeft, 4, 3, 0 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneWestBottomOuterRight, 8, 3, 0 + 3, structureBoundingBoxIn);
 
         // Floor Cobblestone Length
-        for (int i = 5; i < 8; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                for (int k = 1; k < 34; ++k) {
-                    this.setBlockState(world, cobblestone, i, j, k, structureBoundingBoxIn);
-                }
-            }
-        }
-
-        this.setBlockState(world, glowstone, 6, 3, 10, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 6, 3, 16, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 6, 3, 22, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 6, 3, 28, structureBoundingBoxIn);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 0, 1 + 3, 7, 3, 33 + 3, cobblestone, cobblestone, false);
 
 
-        for (int j = 0; j < 4; ++j) {
-            for (int k = 8; k < 29; ++k) {
-                this.setBlockState(world, cobblestone, 2, j, k, structureBoundingBoxIn);
-            }
-        }
-        for (int j = 0; j < 4; ++j) {
-            for (int k = 7; k < 31; ++k) {
-                this.setBlockState(world, cobblestone, 3, j, k, structureBoundingBoxIn);
-            }
-        }
-        for (int j = 0; j < 4; ++j) {
-            for (int k = 6; k < 33; ++k) {
-                this.setBlockState(world, cobblestone, 4, j, k, structureBoundingBoxIn);
-            }
-        }
+        // Left side sloped floor (rows 2 to 4)
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 0, 8 + 3, 2, 3, 28 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 3, 0, 7 + 3, 3, 3, 30 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 0, 6 + 3, 4, 3, 32 + 3, cobblestone, cobblestone, false);
 
 
+        // Right side sloped floor (rows 8 to 10)
+        this.fillWithBlocks(world, structureBoundingBoxIn, 8, 0, 6 + 3, 8, 3, 32 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 9, 0, 7 + 3, 9, 3, 30 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 10, 0, 8 + 3, 10, 3, 28 + 3, cobblestone, cobblestone, false);
 
 
-        for (int j = 0; j < 4; ++j) {
-            for (int k = 6; k < 33; ++k) {
-                this.setBlockState(world, cobblestone, 8, j, k, structureBoundingBoxIn);
-            }
-        }
-        for (int j = 0; j < 4; ++j) {
-            for (int k = 7; k < 31; ++k) {
-                this.setBlockState(world, cobblestone, 9, j, k, structureBoundingBoxIn);
-            }
-        }
-        for (int j = 0; j < 4; ++j) {
-            for (int k = 8; k < 29; ++k) {
-                this.setBlockState(world, cobblestone, 10, j, k, structureBoundingBoxIn);
-            }
-        }
+        // Right Side Second Stairs platform
+        this.fillWithBlocks(world, structureBoundingBoxIn, 10, 0, 0 + 3, 10, 0, 3 + 3, cobblestone, cobblestone, false);
 
 
+        // Right Side Third Stairs platform
+        this.fillWithBlocks(world, structureBoundingBoxIn, 9, 0, 0 + 3, 9, 1, 3 + 3, cobblestone, cobblestone, false);
+
+
+        // Right Side Fourth Stairs platform
+        this.fillWithBlocks(world, structureBoundingBoxIn, 8, 0, 1 + 3, 8, 2, 4 + 3, cobblestone, cobblestone, false);
+
+        // Glowstone placements
+        this.setBlockState(world, glowstone, 6, 3, 10 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, glowstone, 6, 3, 16 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, glowstone, 6, 3, 22 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, glowstone, 6, 3, 28 + 3, structureBoundingBoxIn);
 
 
         // Right Side First Stairs
-        for (int k = -2; k < 4; ++k) {
+        for (int k = -2 + 3; k < 4 + 3; ++k) {
             this.setBlockState(world, stairCobblestoneWestBottomStraight, 11, 0, k, structureBoundingBoxIn);
         }
 
+
         // Right Side Second Stairs
-        for (int k = -1; k < 4; ++k) {
-            this.setBlockState(world, cobblestone, 10, 0, k, structureBoundingBoxIn);
-        }
-        for (int k = -1; k < 4; ++k) {
+        for (int k = -1 + 3; k < 4 + 3; ++k) {
             this.setBlockState(world, stairCobblestoneWestBottomStraight, 10, 1, k, structureBoundingBoxIn);
         }
 
+
         // Right Side Third Stairs
-        for (int j = 0; j < 2; ++j) {
-            for (int k = 0; k < 4; ++k) {
-                this.setBlockState(world, cobblestone, 9, j, k, structureBoundingBoxIn);
-            }
-        }
-        for (int k = 0; k < 4; ++k) {
+        for (int k = 0 + 3; k < 4 + 3; ++k) {
             this.setBlockState(world, stairCobblestoneWestBottomStraight, 9, 2, k, structureBoundingBoxIn);
         }
 
+
         // Right Side Fourth Stairs
-        for (int j = 0; j < 3; ++j) {
-            for (int k = 1; k < 5; ++k) {
-                this.setBlockState(world, cobblestone, 8, j, k, structureBoundingBoxIn);
-            }
-        }
-        for (int k = 1; k < 4; ++k) {
+        for (int k = 1 + 3; k < 4 + 3; ++k) {
             this.setBlockState(world, stairCobblestoneWestBottomStraight, 8, 3, k, structureBoundingBoxIn);
         }
 
+
         // Right Corner Fourth Stairs
-        this.setBlockState(world, stairCobblestoneSouthBottomOuterRight, 8, 3, 4, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneSouthBottomOuterRight, 8, 3, 4 + 3, structureBoundingBoxIn);
+
+        // Entrance vertical pillars
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 4, 4 + 3, 5, 5, 4 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 7, 4, 4 + 3, 7, 5, 4 + 3, cobblestone, cobblestone, false);
 
 
-
-        // Entrance
-        for (int j = 4; j < 6; ++j) {
-            this.setBlockState(world, cobblestone, 5, j, 4, structureBoundingBoxIn);
-        }
-
-        for (int i = 5; i < 8; ++i) {
-            for (int j = 6; j < 23; ++j) {
-                this.setBlockState(world, cobblestone, i, j, 4, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 4; j < 6; ++j) {
-            this.setBlockState(world, cobblestone, 7, j, 4, structureBoundingBoxIn);
-        }
-
-        // Door
-
-        this.createVillageDoor(world, structureBoundingBoxIn, rand, 6, 4, 4, EnumFacing.NORTH);
-
-
+        // Entrance central vertical wall
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 6, 4 + 3, 7, 22, 4 + 3, cobblestone, cobblestone, false);
 
 
         // Right Side Church
-
-        for (int j = 0; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 4, j, 5, structureBoundingBoxIn);
-        }
-        for (int j = 0; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 3, j, 6, structureBoundingBoxIn);
-        }
-        for (int j = 0; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 2, j, 7, structureBoundingBoxIn);
-        }
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 0, 5 + 3, 4, 22, 5 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 3, 0, 6 + 3, 3, 22, 6 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 0, 7 + 3, 2, 22, 7 + 3, cobblestone, cobblestone, false);
 
 
+        // Door
+        this.createVillageDoor(world, structureBoundingBoxIn, rand, 6, 4, 4 + 3, EnumFacing.NORTH);
 
 
-        for (int j = 0; j < 23; ++j) {
-            for (int k = 8; k < 12; ++k) {
-                this.setBlockState(world, cobblestone, 1, j, k, structureBoundingBoxIn);
-            }
-        }
+        // Side wall bands and borders
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 8 + 3, 1, 22, 11 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 12 + 3, 1, 9, 12 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 17, 12 + 3, 1, 22, 12 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 13 + 3, 1, 8, 13 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 18, 13 + 3, 1, 22, 13 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 14 + 3, 1, 9, 14 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 17, 14 + 3, 1, 22, 14 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 15 + 3, 1, 22, 17 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 15 + 3, 1, 9, 15 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 17, 15 + 3, 1, 22, 15 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 16 + 3, 1, 8, 16 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 18, 16 + 3, 1, 22, 16 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 17 + 3, 1, 9, 17 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 17, 17 + 3, 1, 22, 17 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 18 + 3, 1, 9, 18 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 17, 18 + 3, 1, 22, 18 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 19 + 3, 1, 8, 19 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 18, 19 + 3, 1, 22, 19 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 20 + 3, 1, 9, 20 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 17, 20 + 3, 1, 22, 20 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 21 + 3, 1, 22, 23 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 24 + 3, 1, 9, 24 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 17, 24 + 3, 1, 22, 24 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 25 + 3, 1, 8, 25 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 18, 25 + 3, 1, 22, 25 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 26 + 3, 1, 9, 26 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 17, 26 + 3, 1, 22, 26 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 0, 27 + 3, 1, 22, 28 + 3, cobblestone, cobblestone, false);
 
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 12, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 12, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 9; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 13, structureBoundingBoxIn);
-        }
-
-        for (int j = 18; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 13, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 14, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 14, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 23; ++j) {
-            for (int k = 15; k < 18; ++k) {
-                this.setBlockState(world, cobblestone, 1, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 15, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 15, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 9; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 16, structureBoundingBoxIn);
-        }
-
-        for (int j = 18; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 16, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 17, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 17, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 18, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 18, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 9; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 19, structureBoundingBoxIn);
-        }
-
-        for (int j = 18; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 19, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 20, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 20, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 23; ++j) {
-            for (int k = 21; k < 24; ++k) {
-                this.setBlockState(world, cobblestone, 1, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 24, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 24, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 9; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 25, structureBoundingBoxIn);
-        }
-
-        for (int j = 18; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 25, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 26, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 1, j, 26, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 23; ++j) {
-            for (int k = 27; k < 29; ++k) {
-                this.setBlockState(world, cobblestone, 1, j, k, structureBoundingBoxIn);
-            }
-        }
-
-
-        for (int j = 0; j < 23; ++j) {
-            for (int k = 29; k < 31; ++k) {
-                this.setBlockState(world, cobblestone, 2, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 0; j < 23; ++j) {
-            for (int k = 31; k < 33; ++k) {
-                this.setBlockState(world, cobblestone, 3, j, k, structureBoundingBoxIn);
-            }
-        }
+        // Right-edge elevation
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 0, 29 + 3, 2, 22, 30 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 3, 0, 31 + 3, 3, 22, 32 + 3, cobblestone, cobblestone, false);
 
 
         // Left Side Church
 
-        for (int j = 0; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 8, j, 5, structureBoundingBoxIn);
-        }
-        for (int j = 0; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 9, j, 6, structureBoundingBoxIn);
-        }
-        for (int j = 0; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 10, j, 7, structureBoundingBoxIn);
-        }
+        // Front columns
+        this.fillWithBlocks(world, structureBoundingBoxIn, 8, 0, 5 + 3, 8, 22, 5 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 9, 0, 6 + 3, 9, 22, 6 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 10, 0, 7 + 3, 10, 22, 7 + 3, cobblestone, cobblestone, false);
 
 
+        // Main wall band
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 8 + 3, 11, 22, 11 + 3, cobblestone, cobblestone, false);
 
 
-        for (int j = 0; j < 23; ++j) {
-            for (int k = 8; k < 12; ++k) {
-                this.setBlockState(world, cobblestone, 11, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 12, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 12, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 9; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 13, structureBoundingBoxIn);
-        }
-
-        for (int j = 18; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 13, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 14, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 14, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 23; ++j) {
-            for (int k = 15; k < 18; ++k) {
-                this.setBlockState(world, cobblestone, 11, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 15, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 15, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 9; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 16, structureBoundingBoxIn);
-        }
-
-        for (int j = 18; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 16, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 17, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 17, structureBoundingBoxIn);
-        }
+        // Symmetric left-right edges
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 12 + 3, 11, 9, 12 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 17, 12 + 3, 11, 22, 12 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 13 + 3, 11, 8, 13 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 18, 13 + 3, 11, 22, 13 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 14 + 3, 11, 9, 14 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 17, 14 + 3, 11, 22, 14 + 3, cobblestone, cobblestone, false);
 
 
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 18, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 18, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 9; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 19, structureBoundingBoxIn);
-        }
-
-        for (int j = 18; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 19, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 20, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 20, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 23; ++j) {
-            for (int k = 21; k < 24; ++k) {
-                this.setBlockState(world, cobblestone, 11, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 24, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 24, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 9; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 25, structureBoundingBoxIn);
-        }
-
-        for (int j = 18; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 25, structureBoundingBoxIn);
-        }
-
-        for (int j = 0; j < 10; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 26, structureBoundingBoxIn);
-        }
-
-        for (int j = 17; j < 23; ++j) {
-            this.setBlockState(world, cobblestone, 11, j, 26, structureBoundingBoxIn);
-        }
+        // Central body
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 15 + 3, 11, 22, 17 + 3, cobblestone, cobblestone, false);
 
 
-        for (int j = 0; j < 23; ++j) {
-            for (int k = 27; k < 29; ++k) {
-                this.setBlockState(world, cobblestone, 11, j, k, structureBoundingBoxIn);
-            }
-        }
+        // Edges on central body
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 15 + 3, 11, 9, 15 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 17, 15 + 3, 11, 22, 15 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 16 + 3, 11, 8, 16 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 18, 16 + 3, 11, 22, 16 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 17 + 3, 11, 9, 17 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 17, 17 + 3, 11, 22, 17 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 18 + 3, 11, 9, 18 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 17, 18 + 3, 11, 22, 18 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 19 + 3, 11, 8, 19 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 18, 19 + 3, 11, 22, 19 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 20 + 3, 11, 9, 20 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 17, 20 + 3, 11, 22, 20 + 3, cobblestone, cobblestone, false);
+
+        // Solid rear block
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 21 + 3, 11, 22, 23 + 3, cobblestone, cobblestone, false);
 
 
+        // Tail end edge pattern
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 24 + 3, 11, 9, 24 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 17, 24 + 3, 11, 22, 24 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 25 + 3, 11, 8, 25 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 18, 25 + 3, 11, 22, 25 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 26 + 3, 11, 9, 26 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 17, 26 + 3, 11, 22, 26 + 3, cobblestone, cobblestone, false);
 
-        for (int j = 0; j < 23; ++j) {
-            for (int k = 29; k < 31; ++k) {
-                this.setBlockState(world, cobblestone, 10, j, k, structureBoundingBoxIn);
-            }
-        }
-        for (int j = 0; j < 23; ++j) {
-            for (int k = 31; k < 33; ++k) {
-                this.setBlockState(world, cobblestone, 9, j, k, structureBoundingBoxIn);
-            }
-        }
 
-        // Back Church
+        // Rear wall strip
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 0, 27 + 3, 11, 22, 28 + 3, cobblestone, cobblestone, false);
 
-        for (int i = 4; i < 9; ++i) {
-            for (int j = 0; j < 23; ++j) {
-                this.setBlockState(world, cobblestone, i, j, 33, structureBoundingBoxIn);
-            }
-        }
+
+        // Left tapering roof section
+        this.fillWithBlocks(world, structureBoundingBoxIn, 10, 0, 29 + 3, 10, 22, 30 + 3, cobblestone, cobblestone, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 9, 0, 31 + 3, 9, 22, 32 + 3, cobblestone, cobblestone, false);
+
+        // Back Church Wall
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 0, 33 + 3, 8, 22, 33 + 3, cobblestone, cobblestone, false);
+
 
         // Inside Church
-        spawnVillagers(world, structureBoundingBoxIn, 6, 5, 30, VillagerInit.villagerHighPriest);
+        spawnVillagers(world, structureBoundingBoxIn, 6, 5, 30 + 3, VillagerInit.villagerHighPriest);
+        this.spawnCrucifix(world, structureBoundingBoxIn, 6, 5, 32 + 3);
 
-        this.spawnCrucifix(world, structureBoundingBoxIn, 6, 5, 32);
 
-        for (int j = 8; j < 10; ++j) {
-            this.setBlockState(world, fence, 6, j, 7, structureBoundingBoxIn);
-        }
+        // Altar Fence & Light
+        this.fillWithBlocks(world, structureBoundingBoxIn, 6, 8, 7 + 3, 6, 9, 7 + 3, fence, fence, false);
+        this.setBlockState(world, glowstone, 6, 7, 7 + 3, structureBoundingBoxIn);
 
-        this.setBlockState(world, glowstone, 6, 7, 7, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorSouthTopOpen, 6, 7, 6, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorNorthTopOpen, 6, 7, 8, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorWestTopOpen, 5, 7, 7, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorEastTopOpen, 7, 7, 7, structureBoundingBoxIn);
 
-        this.setBlockState(world, glowstone, 4, 3, 6, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 8, 3, 6, structureBoundingBoxIn);
+        // Trapdoors around glowstone
+        this.setBlockState(world, trapDoorSouthTopOpen, 6, 7, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorNorthTopOpen, 6, 7, 8 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorWestTopOpen, 5, 7, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorEastTopOpen, 7, 7, 7 + 3, structureBoundingBoxIn);
+
+
+        // Ambient Glowstone (symmetric)
+        this.setBlockState(world, glowstone, 4, 3, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, glowstone, 8, 3, 6 + 3, structureBoundingBoxIn);
+
 
         // Right Stairs
+        this.setBlockState(world, stairCobblestoneWestBottomStraight, 3, 4, 9 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 2, 4, 9 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneWestBottomStraight, 2, 5, 9 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 2, 5, 8 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneSouthBottomStraight, 2, 6, 8 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 3, 6, 8 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneEastBottomStraight, 3, 7, 8 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 3, 7, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneSouthBottomStraight, 3, 8, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 4, 8, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneEastBottomStraight, 4, 9, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 4, 9, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneSouthBottomStraight, 4, 10, 6 + 3, structureBoundingBoxIn);
 
-        this.setBlockState(world, stairCobblestoneWestBottomStraight, 3, 4, 9, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 2, 4, 9, structureBoundingBoxIn);
-        this.setBlockState(world, stairCobblestoneWestBottomStraight, 2, 5, 9, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 2, 5, 8, structureBoundingBoxIn);
-        this.setBlockState(world, stairCobblestoneSouthBottomStraight, 2, 6, 8, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 3, 6, 8, structureBoundingBoxIn);
-        this.setBlockState(world, stairCobblestoneEastBottomStraight, 3, 7, 8, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 3, 7, 7, structureBoundingBoxIn);
-        this.setBlockState(world, stairCobblestoneSouthBottomStraight, 3, 8, 7, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 4, 8, 7, structureBoundingBoxIn);
-        this.setBlockState(world, stairCobblestoneEastBottomStraight, 4, 9, 7, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 4, 9, 6, structureBoundingBoxIn);
-        this.setBlockState(world, stairCobblestoneSouthBottomStraight, 4, 10, 6, structureBoundingBoxIn);
 
         // Left Stairs
+        this.setBlockState(world, stairCobblestoneEastBottomStraight, 9, 4, 9 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 10, 4, 9 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneEastBottomStraight, 10, 5, 9 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 10, 5, 8 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneSouthBottomStraight, 10, 6, 8 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 9, 6, 8 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneWestBottomStraight, 9, 7, 8 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 9, 7, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneSouthBottomStraight, 9, 8, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 8, 8, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneWestBottomStraight, 8, 9, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 8, 9, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneSouthBottomStraight, 8, 10, 6 + 3, structureBoundingBoxIn);
 
-        this.setBlockState(world, stairCobblestoneEastBottomStraight, 9, 4, 9, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 10, 4, 9, structureBoundingBoxIn);
-        this.setBlockState(world, stairCobblestoneEastBottomStraight, 10, 5, 9, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 10, 5, 8, structureBoundingBoxIn);
-        this.setBlockState(world, stairCobblestoneSouthBottomStraight, 10, 6, 8, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 9, 6, 8, structureBoundingBoxIn);
-        this.setBlockState(world, stairCobblestoneWestBottomStraight, 9, 7, 8, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 9, 7, 7, structureBoundingBoxIn);
-        this.setBlockState(world, stairCobblestoneSouthBottomStraight, 9, 8, 7, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 8, 8, 7, structureBoundingBoxIn);
-        this.setBlockState(world, stairCobblestoneWestBottomStraight, 8, 9, 7, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 8, 9, 6, structureBoundingBoxIn);
-        this.setBlockState(world, stairCobblestoneSouthBottomStraight, 8, 10, 6, structureBoundingBoxIn);
+        // Floor center cobblestone
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 10, 7 + 3, 7, 10, 7 + 3, cobblestone, cobblestone, false);
 
-        // Second Floor
 
-        for (int i = 5; i < 8; ++i) {
-            this.setBlockState(world, cobblestone, i, 10, 7, structureBoundingBoxIn);
-        }
+        // Floor slabs (front portion)
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 10, 5 + 3, 7, 10, 6 + 3, slabCobblestoneTop, slabCobblestoneTop, false);
 
-        for (int i = 5; i < 8; ++i) {
-            for (int k = 5; k < 7; ++k) {
-                this.setBlockState(world, slabCobblestoneTop, i, 10, k, structureBoundingBoxIn);
+
+        // Edge slabs
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 10, 8 + 3, 8, 10, 8 + 3, slabCobblestoneTop, slabCobblestoneTop, false);
+        this.setBlockState(world, slabCobblestoneTop, 2, 10, 8 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, slabCobblestoneTop, 10, 10, 8 + 3, structureBoundingBoxIn);
+
+
+        // Back slab platform
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 10, 9 + 3, 10, 10, 10 + 3, slabCobblestoneTop, slabCobblestoneTop, false);
+
+
+        // Villager spawns
+        spawnVillagers(world, structureBoundingBoxIn, 6, 11, 6 + 3, VillagerInit.villagerLeaderPriest);
+        spawnVillagers(world, structureBoundingBoxIn, 6, 11, 8 + 3, VillagerInit.villagerLeaderPriest);
+
+
+        // Chests
+        this.generateChest(world, structureBoundingBoxIn, rand, 7, 11, 5 + 3, CCTreasures.CHURCH);
+        this.generateChest(world, structureBoundingBoxIn, rand, 5, 11, 5 + 3, CCTreasures.CHURCH);
+
+
+        // Fence
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 11, 10 + 3, 10, 11, 10 + 3, fence, fence, false);
+
+
+        // Vertical fence behind altar
+        this.fillWithBlocks(world, structureBoundingBoxIn, 6, 19, 5 + 3, 6, 19, 15 + 3, fence, fence, false);
+
+
+        // Vertical fence front-center
+        this.fillWithBlocks(world, structureBoundingBoxIn, 6, 15, 7 + 3, 6, 22, 7 + 3, fence, fence, false);
+
+
+        // Glowstone altar light
+        this.setBlockState(world, glowstone, 6, 14, 7 + 3, structureBoundingBoxIn);
+
+
+        // Trapdoors around glowstone
+        this.setBlockState(world, trapDoorSouthTopOpen, 6, 14, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorNorthTopOpen, 6, 14, 8 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorWestTopOpen, 5, 14, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorEastTopOpen, 7, 14, 7 + 3, structureBoundingBoxIn);
+
+
+        // Chairs (left and right side)
+        for (int z = 10 + 3; z <= 26 + 3; z += 2) {
+            for (int x = 2; x < 5; x++) {
+                this.setBlockState(world, stairWoodSouthBottomStraight, x, 4, z, structureBoundingBoxIn);
+            }
+            for (int x = 8; x < 11; x++) {
+                this.setBlockState(world, stairWoodSouthBottomStraight, x, 4, z, structureBoundingBoxIn);
             }
         }
 
-        for (int i = 4; i < 9; ++i) {
-            this.setBlockState(world, slabCobblestoneTop, i, 10, 8, structureBoundingBoxIn);
+
+        // Left glowstone lanterns
+        for (int z = 11 + 3; z <= 27 + 3; z += 2) {
+            this.setBlockState(world, glowstone, 2, 3, z, structureBoundingBoxIn);
         }
 
-        this.setBlockState(world, slabCobblestoneTop, 2, 10, 8, structureBoundingBoxIn);
-        this.setBlockState(world, slabCobblestoneTop, 10, 10, 8, structureBoundingBoxIn);
 
-        for (int i = 2; i < 11; ++i) {
-            for (int k = 9; k < 11; ++k) {
-                this.setBlockState(world, slabCobblestoneTop, i, 10, k, structureBoundingBoxIn);
-            }
+        // Right glowstone lanterns
+        for (int z = 11 + 3; z <= 27 + 3; z += 2) {
+            this.setBlockState(world, glowstone, 10, 3, z, structureBoundingBoxIn);
         }
-
-        spawnVillagers(world, structureBoundingBoxIn, 6, 11, 6, VillagerInit.villagerLeaderPriest);
-
-        spawnVillagers(world, structureBoundingBoxIn, 6, 11, 8, VillagerInit.villagerLeaderPriest);
-
-        // Chest
-
-        this.generateChest(world, structureBoundingBoxIn, rand, 7, 11, 5, CCTreasures.CHURCH);
-        this.generateChest(world, structureBoundingBoxIn, rand, 5, 11, 5, CCTreasures.CHURCH);
-
-
-        // Cobblestone Wall
-
-        for (int i = 2; i < 11; ++i) {
-            this.setBlockState(world, cobblestoneWall, i, 11, 10, structureBoundingBoxIn);
-        }
-
-        for (int k = 5; k < 16; ++k) {
-            this.setBlockState(world, fence, 6, 19, k, structureBoundingBoxIn);
-        }
-
-        for (int j = 15; j < 23; ++j) {
-            this.setBlockState(world, fence, 6, j, 7, structureBoundingBoxIn);
-        }
-
-        this.setBlockState(world, glowstone, 6, 14, 7, structureBoundingBoxIn);
-
-        this.setBlockState(world, trapDoorSouthTopOpen, 6, 14, 6, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorNorthTopOpen, 6, 14, 8, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorWestTopOpen, 5, 14, 7, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorEastTopOpen, 7, 14, 7, structureBoundingBoxIn);
-
-
-
-        // Chairs
-
-        for (int i = 2; i < 5; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 10, structureBoundingBoxIn);
-        }
-        for (int i = 2; i < 5; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 12, structureBoundingBoxIn);
-        }
-        for (int i = 2; i < 5; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 14, structureBoundingBoxIn);
-        }
-        for (int i = 2; i < 5; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 16, structureBoundingBoxIn);
-        }
-        for (int i = 2; i < 5; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 18, structureBoundingBoxIn);
-        }
-        for (int i = 2; i < 5; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 20, structureBoundingBoxIn);
-        }
-        for (int i = 2; i < 5; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 22, structureBoundingBoxIn);
-        }
-        for (int i = 2; i < 5; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 24, structureBoundingBoxIn);
-        }
-        for (int i = 2; i < 5; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 26, structureBoundingBoxIn);
-        }
-
-        this.setBlockState(world, glowstone, 2, 3, 11, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 2, 3, 13, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 2, 3, 15, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 2, 3, 17, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 2, 3, 19, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 2, 3, 21, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 2, 3, 23, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 2, 3, 25, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 2, 3, 27, structureBoundingBoxIn);
-
-
-
-
-
-        for (int i = 8; i < 11; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 10, structureBoundingBoxIn);
-        }
-        for (int i = 8; i < 11; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 12, structureBoundingBoxIn);
-        }
-        for (int i = 8; i < 11; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 14, structureBoundingBoxIn);
-        }
-        for (int i = 8; i < 11; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 16, structureBoundingBoxIn);
-        }
-        for (int i = 8; i < 11; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 18, structureBoundingBoxIn);
-        }
-        for (int i = 8; i < 11; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 20, structureBoundingBoxIn);
-        }
-        for (int i = 8; i < 11; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 22, structureBoundingBoxIn);
-        }
-        for (int i = 8; i < 11; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 24, structureBoundingBoxIn);
-        }
-        for (int i = 8; i < 11; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 4, 26, structureBoundingBoxIn);
-        }
-
-        this.setBlockState(world, glowstone, 10, 3, 11, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 10, 3, 13, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 10, 3, 15, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 10, 3, 17, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 10, 3, 19, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 10, 3, 21, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 10, 3, 23, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 10, 3, 25, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 10, 3, 27, structureBoundingBoxIn);
 
 
         for (int j = 9; j < 23; ++j) {
-            this.setBlockState(world, fence, 6, j, 16, structureBoundingBoxIn);
+            this.setBlockState(world, fence, 6, j, 16 + 3, structureBoundingBoxIn);
         }
 
-        this.setBlockState(world, glowstone, 6, 8, 16, structureBoundingBoxIn);
+        this.setBlockState(world, glowstone, 6, 8, 16 + 3, structureBoundingBoxIn);
 
-        this.setBlockState(world, trapDoorSouthTopOpen, 6, 8, 15, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorNorthTopOpen, 6, 8, 17, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorWestTopOpen, 5, 8, 16, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorEastTopOpen, 7, 8, 16, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorSouthTopOpen, 6, 8, 15 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorNorthTopOpen, 6, 8, 17 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorWestTopOpen, 5, 8, 16 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorEastTopOpen, 7, 8, 16 + 3, structureBoundingBoxIn);
 
 
         for (int j = 9; j < 23; ++j) {
-            this.setBlockState(world, fence, 6, j, 22, structureBoundingBoxIn);
+            this.setBlockState(world, fence, 6, j, 22 + 3, structureBoundingBoxIn);
         }
 
-        this.setBlockState(world, glowstone, 6, 8, 22, structureBoundingBoxIn);
+        this.setBlockState(world, glowstone, 6, 8, 22 + 3, structureBoundingBoxIn);
 
-        this.setBlockState(world, trapDoorSouthTopOpen, 6, 8, 21, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorNorthTopOpen, 6, 8, 23, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorWestTopOpen, 5, 8, 22, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorEastTopOpen, 7, 8, 22, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorSouthTopOpen, 6, 8, 21 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorNorthTopOpen, 6, 8, 23 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorWestTopOpen, 5, 8, 22 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorEastTopOpen, 7, 8, 22 + 3, structureBoundingBoxIn);
 
 
-        for (int k = 17; k < 30; ++k) {
-            this.setBlockState(world, fence, 6, 15, k, structureBoundingBoxIn);
-        }
+        // Perimeter Fence (Z-Axis at center)
+        this.fillWithBlocks(world, structureBoundingBoxIn, 6, 15, 17 + 3, 6, 15, 29 + 3, fence, fence, false);
 
-        for (int i = 2; i < 11; ++i) {
-            this.setBlockState(world, fence, i, 15, 16, structureBoundingBoxIn);
-        }
 
-        for (int i = 2; i < 11; ++i) {
-            this.setBlockState(world, fence, i, 15, 22, structureBoundingBoxIn);
-        }
+        // Perimeter Fence (X-Axis rows)
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 15, 16 + 3, 10, 15, 16 + 3, fence, fence, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 15, 22 + 3, 10, 15, 22 + 3, fence, fence, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 15, 28 + 3, 10, 15, 28 + 3, fence, fence, false);
 
-        for (int i = 2; i < 11; ++i) {
-            this.setBlockState(world, fence, i, 15, 28, structureBoundingBoxIn);
-        }
-        // Table Floor
 
-        this.setBlockState(world, stairCobblestoneEastBottomInnerLeft, 2, 4,28, structureBoundingBoxIn);
+        // Table Floor Outline
+        this.setBlockState(world, stairCobblestoneEastBottomInnerLeft, 2, 4, 28 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneWestBottomInnerRight, 10, 4, 28 + 3, structureBoundingBoxIn);
 
-        for (int i = 3; i < 5; ++i) {
-            this.setBlockState(world, stairCobblestoneNorthBottomStraight, i, 4, 28, structureBoundingBoxIn);
-        }
 
-        for (int i = 3; i < 10; ++i) {
-            for (int k = 29; k < 31; ++k) {
-                this.setBlockState(world, cobblestone, i, 4, k, structureBoundingBoxIn);
-            }
-        }
+        // Table Floor North-facing stairs (middle)
+        this.setBlockState(world, stairCobblestoneNorthBottomStraight, 3, 4, 28 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneNorthBottomStraight, 4, 4, 28 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneNorthBottomStraight, 8, 4, 28 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairCobblestoneNorthBottomStraight, 9, 4, 28 + 3, structureBoundingBoxIn);
 
-        for (int i = 4; i < 9; ++i) {
-            for (int k = 31; k < 33; ++k) {
-                this.setBlockState(world, cobblestone, i, 4, k, structureBoundingBoxIn);
-            }
-        }
 
-        for (int i = 8; i < 10; ++i) {
-            this.setBlockState(world, stairCobblestoneNorthBottomStraight, i, 4, 28, structureBoundingBoxIn);
-        }
+        // Cobblestone floor center
+        this.fillWithBlocks(world, structureBoundingBoxIn, 3, 4, 29 + 3, 9, 4, 30 + 3, cobblestone, cobblestone, false);
 
-        this.setBlockState(world, stairCobblestoneWestBottomInnerRight, 10, 4,28, structureBoundingBoxIn);
 
-        this.setBlockState(world, glowstone, 4, 4, 32, structureBoundingBoxIn);
-        this.setBlockState(world, glowstone, 8, 4, 32, structureBoundingBoxIn);
+        // Cobblestone floor forward section
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 4, 31 + 3, 8, 4, 32 + 3, cobblestone, cobblestone, false);
 
-        for (int j = 10; j < 23; ++j) {
-            this.setBlockState(world, fence, 6, j, 30, structureBoundingBoxIn);
-        }
 
-        this.setBlockState(world, glowstone, 6, 9, 30, structureBoundingBoxIn);
+        // Glowstone at back of table floor
+        this.setBlockState(world, glowstone, 4, 4, 32 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, glowstone, 8, 4, 32 + 3, structureBoundingBoxIn);
 
-        this.setBlockState(world, trapDoorSouthTopOpen, 6, 9, 29, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorNorthTopOpen, 6, 9, 31, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorWestTopOpen, 5, 9, 30, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorEastTopOpen, 7, 9, 30, structureBoundingBoxIn);
 
-        // Table
+        // Vertical fence column behind table
+        this.fillWithBlocks(world, structureBoundingBoxIn, 6, 10, 30 + 3, 6, 22, 30 + 3, fence, fence, false);
 
-        this.setBlockState(world, stairWoodNorthTopStraight, 5, 5, 30, structureBoundingBoxIn);
 
-        for (int i = 5; i < 8; ++i) {
-            this.setBlockState(world, slabWoodTop, i, 5, 29, structureBoundingBoxIn);
-        }
-        this.setBlockState(world, stairWoodNorthTopStraight, 7, 5, 30, structureBoundingBoxIn);
+        // Glowstone light above table
+        this.setBlockState(world, glowstone, 6, 9, 30 + 3, structureBoundingBoxIn);
 
-        // Stained Glass Windows
 
-        this.setBlockState(world, stainedGlassRandom, 1, 17, 13, structureBoundingBoxIn);
+        // Trapdoors around light
+        this.setBlockState(world, trapDoorSouthTopOpen, 6, 9, 29 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorNorthTopOpen, 6, 9, 31 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorWestTopOpen, 5, 9, 30 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorEastTopOpen, 7, 9, 30 + 3, structureBoundingBoxIn);
 
-        for (int j = 10; j < 17; ++j) {
-            for (int k = 12; k < 15; ++k) {
-                int colorMetadata0 = rand.nextInt(16);
-                EnumDyeColor dyeColor0 = EnumDyeColor.byMetadata(colorMetadata0);
-                IBlockState stainedGlassRandom0 = stainedGlass.getDefaultState().withProperty(BlockStainedGlass.COLOR, dyeColor0);
-                this.setBlockState(world, stainedGlassRandom0, 1, j, k, structureBoundingBoxIn);
-            }
-        }
 
-        this.setBlockState(world, stainedGlassRandom, 1, 9, 13, structureBoundingBoxIn);
+        // Table Structure (Top slabs and chairs)
+        this.setBlockState(world, stairWoodNorthTopStraight, 5, 5, 30 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthTopStraight, 7, 5, 30 + 3, structureBoundingBoxIn);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 5, 29 + 3, 7, 5, 29 + 3, slabWoodTop, slabWoodTop, false);
 
 
-        this.setBlockState(world, stainedGlassRandom, 1, 17, 19, structureBoundingBoxIn);
+        // Top and bottom fixed blocks
+        this.setBlockState(world, stainedGlassRandom, 1, 17, 13 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stainedGlassRandom, 1, 9, 13 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stainedGlassRandom, 1, 17, 19 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stainedGlassRandom, 1, 9, 19 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stainedGlassRandom, 1, 17, 25 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stainedGlassRandom, 1, 9, 25 + 3, structureBoundingBoxIn);
 
-        for (int j = 10; j < 17; ++j) {
-            for (int k = 18; k < 21; ++k) {
-                int colorMetadata0 = rand.nextInt(16);
-                EnumDyeColor dyeColor0 = EnumDyeColor.byMetadata(colorMetadata0);
-                IBlockState stainedGlassRandom0 = stainedGlass.getDefaultState().withProperty(BlockStainedGlass.COLOR, dyeColor0);
-                this.setBlockState(world, stainedGlassRandom0, 1, j, k, structureBoundingBoxIn);
-            }
-        }
+        this.setBlockState(world, stainedGlassRandom, 11, 17, 13 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stainedGlassRandom, 11, 9, 13 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stainedGlassRandom, 11, 17, 19 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stainedGlassRandom, 11, 9, 19 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stainedGlassRandom, 11, 17, 25 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stainedGlassRandom, 11, 9, 25 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stainedGlassRandom, 6, 17, 33 + 3, structureBoundingBoxIn);
 
-        this.setBlockState(world, stainedGlassRandom, 1, 9, 19, structureBoundingBoxIn);
 
+        // Create a selector
+        StructureComponent.BlockSelector stainedSelector = new RandomStainedGlassSelector(stainedGlassRandom);
 
-        this.setBlockState(world, stainedGlassRandom, 1, 17, 25, structureBoundingBoxIn);
 
-        for (int j = 10; j < 17; ++j) {
-            for (int k = 24; k < 27; ++k) {
-                int colorMetadata0 = rand.nextInt(16);
-                EnumDyeColor dyeColor0 = EnumDyeColor.byMetadata(colorMetadata0);
-                IBlockState stainedGlassRandom0 = stainedGlass.getDefaultState().withProperty(BlockStainedGlass.COLOR, dyeColor0);
-                this.setBlockState(world, stainedGlassRandom0, 1, j, k, structureBoundingBoxIn);
-            }
-        }
+        // Fill regions
+        this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, 10, 12 + 3, 1, 16, 14 + 3, false, rand, stainedSelector);
+        this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, 10, 18 + 3, 1, 16, 20 + 3, false, rand, stainedSelector);
+        this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 1, 10, 24 + 3, 1, 16, 26 + 3, false, rand, stainedSelector);
+        this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 11, 10, 12 + 3, 11, 16, 14 + 3, false, rand, stainedSelector);
+        this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 11, 10, 18 + 3, 11, 16, 20 + 3, false, rand, stainedSelector);
+        this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 11, 10, 24 + 3, 11, 16, 26 + 3, false, rand, stainedSelector);
+        this.fillWithRandomizedBlocks(world, structureBoundingBoxIn, 5, 11, 33 + 3, 7, 16, 33 + 3, false, rand, stainedSelector);
 
-        this.setBlockState(world, stainedGlassRandom, 1, 9, 25, structureBoundingBoxIn);
+        // Main Roof Slab Surface
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 23, 8 + 3, 2, 23, 28 + 3, slabWoodTop, slabWoodTop, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 3, 23, 7 + 3, 3, 23, 30 + 3, slabWoodTop, slabWoodTop, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 23, 6 + 3, 4, 23, 32 + 3, slabWoodTop, slabWoodTop, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 23, 5 + 3, 7, 23, 32 + 3, slabWoodTop, slabWoodTop, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 8, 23, 6 + 3, 8, 23, 32 + 3, slabWoodTop, slabWoodTop, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 9, 23, 7 + 3, 9, 23, 30 + 3, slabWoodTop, slabWoodTop, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 10, 23, 8 + 3, 10, 23, 28 + 3, slabWoodTop, slabWoodTop, false);
 
 
-
-
-
-
-        this.setBlockState(world, stainedGlassRandom, 6, 17, 33, structureBoundingBoxIn);
-
-        for (int i = 5; i < 8; ++i) {
-            for (int j = 11; j < 17; ++j) {
-                int colorMetadata0 = rand.nextInt(16);
-                EnumDyeColor dyeColor0 = EnumDyeColor.byMetadata(colorMetadata0);
-                IBlockState stainedGlassRandom0 = stainedGlass.getDefaultState().withProperty(BlockStainedGlass.COLOR, dyeColor0);
-                this.setBlockState(world, stainedGlassRandom0, i, j, 33, structureBoundingBoxIn);
-            }
-        }
-
-
-
-
-
-
-        this.setBlockState(world, stainedGlassRandom, 11, 17, 13, structureBoundingBoxIn);
-
-        for (int j = 10; j < 17; ++j) {
-            for (int k = 12; k < 15; ++k) {
-                int colorMetadata0 = rand.nextInt(16);
-                EnumDyeColor dyeColor0 = EnumDyeColor.byMetadata(colorMetadata0);
-                IBlockState stainedGlassRandom0 = stainedGlass.getDefaultState().withProperty(BlockStainedGlass.COLOR, dyeColor0);
-                this.setBlockState(world, stainedGlassRandom0, 11, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        this.setBlockState(world, stainedGlassRandom, 11, 9, 13, structureBoundingBoxIn);
-
-
-
-
-        this.setBlockState(world, stainedGlassRandom, 11, 17, 19, structureBoundingBoxIn);
-
-        for (int j = 10; j < 17; ++j) {
-            for (int k = 18; k < 21; ++k) {
-                int colorMetadata0 = rand.nextInt(16);
-                EnumDyeColor dyeColor0 = EnumDyeColor.byMetadata(colorMetadata0);
-                IBlockState stainedGlassRandom0 = stainedGlass.getDefaultState().withProperty(BlockStainedGlass.COLOR, dyeColor0);
-                this.setBlockState(world, stainedGlassRandom0, 11, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        this.setBlockState(world, stainedGlassRandom, 11, 9, 19, structureBoundingBoxIn);
-
-
-
-
-        this.setBlockState(world, stainedGlassRandom, 11, 17, 25, structureBoundingBoxIn);
-
-        for (int j = 10; j < 17; ++j) {
-            for (int k = 24; k < 27; ++k) {
-                int colorMetadata0 = rand.nextInt(16);
-                EnumDyeColor dyeColor0 = EnumDyeColor.byMetadata(colorMetadata0);
-                IBlockState stainedGlassRandom0 = stainedGlass.getDefaultState().withProperty(BlockStainedGlass.COLOR, dyeColor0);
-                this.setBlockState(world, stainedGlassRandom0, 11, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        this.setBlockState(world, stainedGlassRandom, 11, 9, 25, structureBoundingBoxIn);
-
-        // Roof
-
-        for (int k = 6; k < 33; ++k) {
-            this.setBlockState(world, slabWoodTop, 8, 23, k, structureBoundingBoxIn);
-        }
-
-        for (int k = 7; k < 31; ++k) {
-            this.setBlockState(world, slabWoodTop, 9, 23, k, structureBoundingBoxIn);
-        }
-
-        for (int k = 8; k < 29; ++k) {
-            this.setBlockState(world, slabWoodTop, 10, 23, k, structureBoundingBoxIn);
-        }
-
-        for (int i = 5; i < 8; ++i) {
-            for (int k = 5; k < 33; ++k) {
-                this.setBlockState(world, slabWoodTop, i, 23, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int k = 6; k < 33; ++k) {
-            this.setBlockState(world, slabWoodTop, 4, 23, k, structureBoundingBoxIn);
-        }
-
-        for (int k = 7; k < 31; ++k) {
-            this.setBlockState(world, slabWoodTop, 3, 23, k, structureBoundingBoxIn);
-        }
-
-        for (int k = 8; k < 29; ++k) {
-            this.setBlockState(world, slabWoodTop, 2, 23, k, structureBoundingBoxIn);
-        }
-
-
-        // Log Beam
-        if (!(this.biome instanceof BiomeSnow || this.biome instanceof BiomeDesert || this.biome instanceof BiomeMesa || this.biome instanceof BiomeHills)) {
+        // Log Beam (if biome is not snow, desert, mesa, or hills)
+        if (!(biome instanceof BiomeSnow || biome instanceof BiomeDesert || biome instanceof BiomeMesa || biome instanceof BiomeHills)) {
             IBlockState logAxisZ = this.getBiomeSpecificBlockState(Blocks.LOG.getDefaultState())
                     .withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Z);
-            for (int k = 5; k < 33; ++k) {
-                this.setBlockState(world, logAxisZ, 6, 23, k, structureBoundingBoxIn);
-            }
+            this.fillWithBlocks(world, structureBoundingBoxIn, 6, 23, 5 + 3, 6, 23, 32 + 3, logAxisZ, logAxisZ, false);
         }
-
 
 
         // Front Roof
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 22, 3 + 3, 7, 22, 3 + 3, stairWoodNorthTopStraight, stairWoodNorthTopStraight, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 23, 4 + 3, 7, 23, 4 + 3, stairWoodNorthBottomStraight, stairWoodNorthBottomStraight, false);
+
+
+        // === Right Roof (Top)
+        this.setBlockState(world, stairWoodWestTopOuterRight, 8, 22, 3 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthTopInnerLeft, 8, 22, 4 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestTopOuterRight, 9, 22, 4 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthTopInnerLeft, 9, 22, 5 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestTopOuterRight, 10, 22, 5 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthTopInnerLeft, 10, 22, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestTopOuterRight, 11, 22, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthTopInnerLeft, 11, 22, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestTopOuterRight, 12, 22, 7 + 3, structureBoundingBoxIn);
+
+        this.fillWithBlocks(world, structureBoundingBoxIn, 12, 22, 8 + 3, 12, 22, 28 + 3, stairWoodWestTopStraight, stairWoodWestTopStraight, false);
+        this.setBlockState(world, stairWoodSouthTopOuterRight, 12, 22, 29 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodSouthTopInnerRight, 11, 22, 29 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestTopStraight, 11, 22, 30 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestTopOuterLeft, 11, 22, 31 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodSouthTopInnerRight, 10, 22, 31 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestTopStraight, 10, 22, 32 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodSouthTopOuterRight, 10, 22, 33 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodSouthTopInnerRight, 9, 22, 33 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestTopOuterLeft, 9, 22, 34 + 3, structureBoundingBoxIn);
+
+
+        // === Right Roof (Bottom)
+        this.setBlockState(world, stairWoodWestBottomOuterRight, 8, 23, 4 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthBottomInnerLeft, 8, 23, 5 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthBottomOuterLeft, 9, 23, 5 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestBottomInnerRight, 9, 23, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthBottomOuterLeft, 10, 23, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestBottomInnerRight, 10, 23, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthBottomOuterLeft, 11, 23, 7 + 3, structureBoundingBoxIn);
+
+        this.fillWithBlocks(world, structureBoundingBoxIn, 11, 23, 8 + 3, 11, 23, 28 + 3, stairWoodWestBottomStraight, stairWoodWestBottomStraight, false);
+        this.setBlockState(world, stairWoodSouthBottomOuterRight, 11, 23, 29 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestBottomInnerLeft, 10, 23, 29 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestBottomStraight, 10, 23, 30 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodSouthBottomOuterRight, 10, 23, 31 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestBottomInnerLeft, 9, 23, 31 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestBottomStraight, 9, 23, 32 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodWestBottomOuterLeft, 9, 23, 33 + 3, structureBoundingBoxIn);
 
-        for (int i = 5; i < 8; ++i) {
-            this.setBlockState(world, stairWoodNorthTopStraight, i, 22, 3, structureBoundingBoxIn);
-        }
-
-        for (int i = 5; i < 8; ++i) {
-            this.setBlockState(world, stairWoodNorthBottomStraight, i, 23, 4, structureBoundingBoxIn);
-        }
-
-        // Right Roof
-
-        this.setBlockState(world, stairWoodWestTopOuterRight, 8, 22, 3, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthTopInnerLeft, 8, 22, 4, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestTopOuterRight, 9, 22, 4, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthTopInnerLeft, 9, 22, 5, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestTopOuterRight, 10, 22, 5, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthTopInnerLeft, 10, 22, 6, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestTopOuterRight, 11, 22, 6, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthTopInnerLeft, 11, 22, 7, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestTopOuterRight, 12, 22, 7, structureBoundingBoxIn);
-
-        for (int k = 8; k < 29; ++k) {
-            this.setBlockState(world, stairWoodWestTopStraight, 12, 22, k, structureBoundingBoxIn);
-        }
-
-        this.setBlockState(world, stairWoodSouthTopOuterRight, 12, 22, 29, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodSouthTopInnerRight, 11, 22, 29, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestTopStraight, 11, 22, 30, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestTopOuterLeft, 11, 22, 31, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodSouthTopInnerRight, 10, 22, 31, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestTopStraight, 10, 22, 32, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodSouthTopOuterRight, 10, 22, 33, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodSouthTopInnerRight, 9, 22, 33, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestTopOuterLeft, 9, 22, 34, structureBoundingBoxIn);
-
 
+        // === Left Roof (Top)
+        this.setBlockState(world, stairWoodNorthTopOuterRight, 4, 22, 3 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastTopInnerLeft, 4, 22, 4 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthTopOuterRight, 3, 22, 4 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastTopInnerLeft, 3, 22, 5 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthTopOuterRight, 2, 22, 5 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastTopInnerLeft, 2, 22, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthTopOuterRight, 1, 22, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastTopInnerLeft, 1, 22, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthTopOuterRight, 0, 22, 7 + 3, structureBoundingBoxIn);
 
-        this.setBlockState(world, stairWoodWestBottomOuterRight, 8, 23, 4, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthBottomInnerLeft, 8, 23, 5, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthBottomOuterLeft, 9, 23, 5, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestBottomInnerRight, 9, 23, 6, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthBottomOuterLeft, 10, 23, 6, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestBottomInnerRight, 10, 23, 7, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthBottomOuterLeft, 11, 23, 7, structureBoundingBoxIn);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 0, 22, 8 + 3, 0, 22, 28 + 3, stairWoodEastTopStraight, stairWoodEastTopStraight, false);
+        this.setBlockState(world, stairWoodSouthTopOuterLeft, 0, 22, 29 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastTopInnerRight, 1, 22, 29 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastTopStraight, 1, 22, 30 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodSouthTopOuterLeft, 1, 22, 31 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastTopInnerRight, 2, 22, 31 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastTopStraight, 2, 22, 32 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodSouthTopOuterLeft, 2, 22, 33 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastTopInnerRight, 3, 22, 33 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodSouthTopOuterLeft, 3, 22, 34 + 3, structureBoundingBoxIn);
 
-        for (int k = 8; k < 29; ++k) {
-            this.setBlockState(world, stairWoodWestBottomStraight, 11, 23, k, structureBoundingBoxIn);
-        }
 
-        this.setBlockState(world, stairWoodSouthBottomOuterRight, 11, 23, 29, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestBottomInnerLeft, 10, 23, 29, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestBottomStraight, 10, 23, 30, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodSouthBottomOuterRight, 10, 23, 31, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestBottomInnerLeft, 9, 23, 31, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestBottomStraight, 9, 23, 32, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodWestBottomOuterLeft, 9, 23, 33, structureBoundingBoxIn);
+        // === Left Roof (Bottom)
+        this.setBlockState(world, stairWoodEastBottomOuterLeft, 4, 23, 4 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastBottomInnerLeft, 4, 23, 5 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthBottomOuterRight, 3, 23, 5 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastBottomInnerLeft, 3, 23, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthBottomOuterRight, 2, 23, 6 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastBottomInnerLeft, 2, 23, 7 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodNorthBottomOuterRight, 1, 23, 7 + 3, structureBoundingBoxIn);
 
-        // Left Roof
+        this.fillWithBlocks(world, structureBoundingBoxIn, 1, 23, 8 + 3, 1, 23, 28 + 3, stairWoodEastBottomStraight, stairWoodEastBottomStraight, false);
+        this.setBlockState(world, stairWoodSouthBottomOuterLeft, 1, 23, 29 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodSouthBottomInnerLeft, 2, 23, 29 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastBottomStraight, 2, 23, 30 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodSouthBottomOuterLeft, 2, 23, 31 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastBottomInnerLeft, 3, 23, 31 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastBottomStraight, 3, 23, 32 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, stairWoodEastBottomOuterRight, 3, 23, 33 + 3, structureBoundingBoxIn);
 
-        this.setBlockState(world, stairWoodNorthTopOuterRight, 4, 22, 3, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastTopInnerLeft, 4, 22, 4, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthTopOuterRight, 3, 22, 4, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastTopInnerLeft, 3, 22, 5, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthTopOuterRight, 2, 22, 5, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastTopInnerLeft, 2, 22, 6, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthTopOuterRight, 1, 22, 6, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastTopInnerLeft, 1, 22, 7, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthTopOuterRight, 0, 22, 7, structureBoundingBoxIn);
 
-        for (int k = 8; k < 29; ++k) {
-            this.setBlockState(world, stairWoodEastTopStraight, 0, 22, k, structureBoundingBoxIn);
-        }
+        // Top row
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 22, 34 + 3, 8, 22, 34 + 3, stairWoodSouthTopStraight, stairWoodSouthTopStraight, false);
 
-        this.setBlockState(world, stairWoodSouthTopOuterLeft, 0, 22, 29, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastTopInnerRight, 1, 22, 29, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastTopStraight, 1, 22, 30, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodSouthTopOuterLeft, 1, 22, 31, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastTopInnerRight, 2, 22, 31, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastTopStraight, 2, 22, 32, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodSouthTopOuterLeft, 2, 22, 33, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastTopInnerRight, 3, 22, 33, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodSouthTopOuterLeft, 3, 22, 34, structureBoundingBoxIn);
 
+        // Bottom row
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 23, 33 + 3, 8, 23, 33 + 3, stairWoodSouthBottomStraight, stairWoodSouthBottomStraight, false);
 
 
-        this.setBlockState(world, stairWoodEastBottomOuterLeft, 4, 23, 4, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastBottomInnerLeft, 4, 23, 5, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthBottomOuterRight, 3, 23, 5, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastBottomInnerLeft, 3, 23, 6, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthBottomOuterRight, 2, 23, 6, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastBottomInnerLeft, 2, 23, 7, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodNorthBottomOuterRight, 1, 23, 7, structureBoundingBoxIn);
+        // First fence column
+        this.fillWithBlocks(world, structureBoundingBoxIn, 6, 28, 23 + 3, 6, 33, 23 + 3, fence, fence, false);
 
-        for (int k = 8; k < 29; ++k) {
-            this.setBlockState(world, stairWoodEastBottomStraight, 1, 23, k, structureBoundingBoxIn);
-        }
 
-        this.setBlockState(world, stairWoodSouthBottomOuterLeft, 1, 23, 29, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodSouthBottomInnerLeft, 2, 23, 29, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastBottomStraight, 2, 23, 30, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodSouthBottomOuterLeft, 2, 23, 31, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastBottomInnerLeft, 3, 23, 31, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastBottomStraight, 3, 23, 32, structureBoundingBoxIn);
-        this.setBlockState(world, stairWoodEastBottomOuterRight, 3, 23, 33, structureBoundingBoxIn);
+        // Glowstone and trapdoors remain set individually
+        this.setBlockState(world, glowstone, 6, 27, 23 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorSouthTopOpen, 6, 27, 22 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorNorthTopOpen, 6, 27, 24 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorWestTopOpen, 5, 27, 23 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorEastTopOpen, 7, 27, 23 + 3, structureBoundingBoxIn);
 
 
-        // Back Roof
+        // Second fence column
+        this.fillWithBlocks(world, structureBoundingBoxIn, 6, 28, 27 + 3, 6, 33, 27 + 3, fence, fence, false);
 
-        for (int i = 4; i < 9; ++i) {
-            this.setBlockState(world, stairWoodSouthTopStraight, i, 22, 34, structureBoundingBoxIn);
-        }
+        this.setBlockState(world, glowstone, 6, 27, 27 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorSouthTopOpen, 6, 27, 26 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorNorthTopOpen, 6, 27, 28 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorWestTopOpen, 5, 27, 27 + 3, structureBoundingBoxIn);
+        this.setBlockState(world, trapDoorEastTopOpen, 7, 27, 27 + 3, structureBoundingBoxIn);
 
-        for (int i = 4; i < 9; ++i) {
-            this.setBlockState(world, stairWoodSouthBottomStraight, i, 23, 33, structureBoundingBoxIn);
-        }
 
+        // Front wall (lower)
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 24, 18 + 3, 7, 27, 18 + 3, plankWood, plankWood, false);
 
-        // Roof Bell
 
-        // Inside Roof Bell
+        // Middle wall
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 28, 19 + 3, 7, 30, 19 + 3, plankWood, plankWood, false);
 
 
-        for (int j = 28; j < 34; ++j) {
-            this.setBlockState(world, fence, 6, j, 23, structureBoundingBoxIn);
-        }
+        // Upper layer
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 31, 20 + 3, 7, 31, 20 + 3, plankWood, plankWood, false);
 
-        this.setBlockState(world, glowstone, 6, 27, 23, structureBoundingBoxIn);
 
-        this.setBlockState(world, trapDoorSouthTopOpen, 6, 27, 22, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorNorthTopOpen, 6, 27, 24, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorWestTopOpen, 5, 27, 23, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorEastTopOpen, 7, 27, 23, structureBoundingBoxIn);
+        // Roof peak
+        this.setBlockState(world, plankWood, 6, 32, 20 + 3, structureBoundingBoxIn);
 
 
+        // Left and right sides
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 31, 21 + 3, 5, 32, 21 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 7, 31, 21 + 3, 7, 32, 21 + 3, plankWood, plankWood, false);
 
-        for (int j = 28; j < 34; ++j) {
-            this.setBlockState(world, fence, 6, j, 27, structureBoundingBoxIn);
-        }
 
-        this.setBlockState(world, glowstone, 6, 27, 27, structureBoundingBoxIn);
+        // Glass
+        this.setBlockState(world, glass, 6, 27, 18 + 3, structureBoundingBoxIn);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 26, 18 + 3, 7, 26, 18 + 3, glass, glass, false);
+        this.setBlockState(world, glass, 6, 25, 18 + 3, structureBoundingBoxIn);
 
-        this.setBlockState(world, trapDoorSouthTopOpen, 6, 27, 26, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorNorthTopOpen, 6, 27, 28, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorWestTopOpen, 5, 27, 27, structureBoundingBoxIn);
-        this.setBlockState(world, trapDoorEastTopOpen, 7, 27, 27, structureBoundingBoxIn);
 
 
-        // Front Roof Bell
+        this.fillWithBlocks(world, structureBoundingBoxIn, 8, 24, 19 + 3, 8, 27, 19 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 9, 24, 20 + 3, 9, 27, 21 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 10, 24, 22 + 3, 10, 27, 28 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 9, 24, 29 + 3, 9, 27, 30 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 8, 24, 31 + 3, 8, 27, 31 + 3, plankWood, plankWood, false);
 
-        for (int i = 5; i < 8; ++i) {
-            for (int j = 24; j < 28; ++j) {
-                this.setBlockState(world, plankWood, i, j, 18, structureBoundingBoxIn);
-            }
-        }
+        this.fillWithBlocks(world, structureBoundingBoxIn, 8, 28, 20 + 3, 8, 30, 21 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 9, 28, 22 + 3, 9, 30, 28 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 8, 28, 29 + 3, 8, 30, 30 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 8, 31, 22 + 3, 8, 32, 28 + 3, plankWood, plankWood, false);
 
-        for (int i = 5; i < 8; ++i) {
-            for (int j = 28; j < 31; ++j) {
-                this.setBlockState(world, plankWood, i, j, 19, structureBoundingBoxIn);
-            }
-        }
 
-        for (int i = 5; i < 8; ++i) {
-            this.setBlockState(world, plankWood, i, 31, 20, structureBoundingBoxIn);
-        }
+        // Glass
+        this.setBlockState(world, glass, 10, 27, 25 + 3, structureBoundingBoxIn);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 10, 26, 24 + 3, 10, 26, 26 + 3, glass, glass, false);
+        this.setBlockState(world, glass, 10, 25, 25 + 3, structureBoundingBoxIn);
 
-        this.setBlockState(world, plankWood, 6, 32, 20, structureBoundingBoxIn);
 
-        for (int j = 31; j < 33; ++j) {
-            this.setBlockState(world, plankWood, 7, j, 21, structureBoundingBoxIn);
-        }
-        for (int j = 31; j < 33; ++j) {
-            this.setBlockState(world, plankWood, 5, j, 21, structureBoundingBoxIn);
-        }
 
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 24, 19 + 3, 4, 27, 19 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 3, 24, 20 + 3, 3, 27, 21 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 24, 22 + 3, 2, 27, 28 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 3, 24, 29 + 3, 3, 27, 30 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 24, 31 + 3, 4, 27, 31 + 3, plankWood, plankWood, false);
 
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 28, 20 + 3, 4, 30, 21 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 3, 28, 22 + 3, 3, 30, 28 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 28, 29 + 3, 4, 30, 30 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 4, 31, 22 + 3, 4, 32, 28 + 3, plankWood, plankWood, false);
 
-        this.setBlockState(world, glass, 6, 27, 18,structureBoundingBoxIn);
 
-        for (int i = 5; i < 8; ++i) {
-            this.setBlockState(world, glass, i, 26, 18, structureBoundingBoxIn);
-        }
-
-        this.setBlockState(world, glass, 6, 25, 18,structureBoundingBoxIn);
-
-
-
-        // Right Roof Bell
-
-        for (int j = 24; j < 28; ++j) {
-            this.setBlockState(world, plankWood, 8, j, 19, structureBoundingBoxIn);
-        }
-
-        for (int j = 24; j < 28; ++j) {
-            for (int k = 20; k < 22; ++k) {
-                this.setBlockState(world, plankWood, 9, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 24; j < 28; ++j) {
-            for (int k = 22; k < 29; ++k) {
-                this.setBlockState(world, plankWood, 10, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 24; j < 28; ++j) {
-            for (int k = 29; k < 31; ++k) {
-                this.setBlockState(world, plankWood, 9, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 24; j < 28; ++j) {
-            this.setBlockState(world, plankWood, 8, j, 31, structureBoundingBoxIn);
-        }
-
-
-
-        for (int j = 28; j < 31; ++j) {
-            for (int k = 20; k < 22; ++k) {
-                this.setBlockState(world, plankWood, 8, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 28; j < 31; ++j) {
-            for (int k = 22; k < 29; ++k) {
-                this.setBlockState(world, plankWood, 9, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 28; j < 31; ++j) {
-            for (int k = 29; k < 31; ++k) {
-                this.setBlockState(world, plankWood, 8, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 31; j < 33; ++j) {
-            for (int k = 22; k < 29; ++k) {
-                this.setBlockState(world, plankWood, 8, j, k, structureBoundingBoxIn);
-            }
-        }
-
-
-        this.setBlockState(world, glass, 10, 27, 25, structureBoundingBoxIn);
-
-        for (int k = 24; k < 27; ++k) {
-            this.setBlockState(world, glass, 10, 26, k, structureBoundingBoxIn);
-        }
-
-        this.setBlockState(world, glass, 10, 25, 25, structureBoundingBoxIn);
-
-        // Left Roof Bell
-
-        for (int j = 24; j < 28; ++j) {
-            this.setBlockState(world, plankWood, 4, j, 19, structureBoundingBoxIn);
-        }
-
-        for (int j = 24; j < 28; ++j) {
-            for (int k = 20; k < 22; ++k) {
-                this.setBlockState(world, plankWood, 3, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 24; j < 28; ++j) {
-            for (int k = 22; k < 29; ++k) {
-                this.setBlockState(world, plankWood, 2, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 24; j < 28; ++j) {
-            for (int k = 29; k < 31; ++k) {
-                this.setBlockState(world, plankWood, 3, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 24; j < 28; ++j) {
-            this.setBlockState(world, plankWood, 4, j, 31, structureBoundingBoxIn);
-        }
-
-        for (int j = 28; j < 31; ++j) {
-            for (int k = 20; k < 22; ++k) {
-                this.setBlockState(world, plankWood, 4, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 28; j < 31; ++j) {
-            for (int k = 22; k < 29; ++k) {
-                this.setBlockState(world, plankWood, 3, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        for (int j = 28; j < 31; ++j) {
-            for (int k = 29; k < 31; ++k) {
-                this.setBlockState(world, plankWood, 4, j, k, structureBoundingBoxIn);
-            }
-        }
-
-
-        for (int j = 31; j < 33; ++j) {
-            for (int k = 22; k < 29; ++k) {
-                this.setBlockState(world, plankWood, 4, j, k, structureBoundingBoxIn);
-            }
-        }
-
-        this.setBlockState(world, glass, 2, 27, 25, structureBoundingBoxIn);
-
-        for (int k = 24; k < 27; ++k) {
-            this.setBlockState(world, glass, 2, 26, k, structureBoundingBoxIn);
-        }
-
-        this.setBlockState(world, glass, 2, 25, 25, structureBoundingBoxIn);
-
+        // Glass
+        this.setBlockState(world, glass, 2, 27, 25 + 3, structureBoundingBoxIn);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 2, 26, 24 + 3, 2, 26, 26 + 3, glass, glass, false);
+        this.setBlockState(world, glass, 2, 25, 25 + 3, structureBoundingBoxIn);
 
         // Back Roof Bell
 
-        for (int i = 5; i < 8; ++i) {
-            for (int j = 24; j < 28; ++j) {
-                this.setBlockState(world, plankWood, i, j, 32, structureBoundingBoxIn);
-            }
-        }
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 24, 32 + 3, 7, 27, 32 + 3, plankWood, plankWood, false);
 
-        for (int i = 5; i < 8; ++i) {
-            for (int j = 28; j < 31; ++j) {
-                this.setBlockState(world, plankWood, i, j, 31, structureBoundingBoxIn);
-            }
-        }
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 28, 31 + 3, 7, 30, 31 + 3, plankWood, plankWood, false);
 
-        for (int i = 5; i < 8; ++i) {
-            this.setBlockState(world, plankWood, i, 31, 30, structureBoundingBoxIn);
-        }
 
-        this.setBlockState(world, plankWood, 6, 32, 30, structureBoundingBoxIn);
+        // Top row: single row at y=31
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 31, 30 + 3, 7, 31, 30 + 3, plankWood, plankWood, false);
 
-        for (int j = 31; j < 33; ++j) {
-            this.setBlockState(world, plankWood, 7, j, 29, structureBoundingBoxIn);
-        }
-        for (int j = 31; j < 33; ++j) {
-            this.setBlockState(world, plankWood, 5, j, 29, structureBoundingBoxIn);
-        }
 
-        this.setBlockState(world, glass, 6, 27, 32,structureBoundingBoxIn);
+        // Peak block
+        this.setBlockState(world, plankWood, 6, 32, 30 + 3, structureBoundingBoxIn);
 
-        for (int i = 5; i < 8; ++i) {
-            this.setBlockState(world, glass, i, 26, 32, structureBoundingBoxIn);
-        }
 
-        this.setBlockState(world, glass, 6, 25, 32,structureBoundingBoxIn);
+        // Outer columns
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 31, 29 + 3, 5, 32, 29 + 3, plankWood, plankWood, false);
+        this.fillWithBlocks(world, structureBoundingBoxIn, 7, 31, 29 + 3, 7, 32, 29 + 3, plankWood, plankWood, false);
+
+
+        // Glass window center
+        this.setBlockState(world, glass, 6, 27, 32 + 3, structureBoundingBoxIn);
+
+
+        // Glass row
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 26, 32 + 3, 7, 26, 32 + 3, glass, glass, false);
+
+
+        // Glass bottom
+        this.setBlockState(world, glass, 6, 25, 32 + 3, structureBoundingBoxIn);
+
+
+
 
         // Top Roof Bell
 
-        for (int k = 22; k < 29; ++k) {
-            this.setBlockState(world, plankWood, 7, 33, k, structureBoundingBoxIn);
-        }
+        // Right side top layer
+        this.fillWithBlocks(world, structureBoundingBoxIn, 7, 33, 22 + 3, 7, 33, 28 + 3, plankWood, plankWood, false);
 
-        this.setBlockState(world, plankWood, 6, 33, 21, structureBoundingBoxIn);
 
-        for (int k = 22; k < 25; ++k) {
-            this.setBlockState(world, plankWood, 6, 34, k, structureBoundingBoxIn);
-        }
+        // Left side top layer
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 33, 22 + 3, 5, 33, 28 + 3, plankWood, plankWood, false);
 
-        this.setBlockState(world, plankWood, 5, 34, 25, structureBoundingBoxIn);
 
-        this.setBlockState(world, plankWood, 6, 35, 25, structureBoundingBoxIn);
+        // Peak tip
+        this.setBlockState(world, plankWood, 6, 33, 21 + 3, structureBoundingBoxIn);
 
-        this.setBlockState(world, plankWood, 7, 34, 25, structureBoundingBoxIn);
 
-        for (int k = 26; k < 29; ++k) {
-            this.setBlockState(world, plankWood, 6, 34, k, structureBoundingBoxIn);
-        }
+        // Front ramp
+        this.fillWithBlocks(world, structureBoundingBoxIn, 6, 34, 22 + 3, 6, 34, 24 + 3, plankWood, plankWood, false);
 
-        this.setBlockState(world, plankWood, 6, 33, 29, structureBoundingBoxIn);
 
-        for (int k = 22; k < 29; ++k) {
-            this.setBlockState(world, plankWood, 5, 33, k, structureBoundingBoxIn);
-        }
+        // Middle three-way cap
+        this.fillWithBlocks(world, structureBoundingBoxIn, 5, 34, 25 + 3, 7, 34, 25 + 3, plankWood, plankWood, false);
+
+
+        // Rear ramp
+        this.fillWithBlocks(world, structureBoundingBoxIn, 6, 34, 26 + 3, 6, 34, 28 + 3, plankWood, plankWood, false);
+
+
+        // Peak end
+        this.setBlockState(world, plankWood, 6, 33, 29 + 3, structureBoundingBoxIn);
+
+
+
 
         // Roof Cross
 
-        this.setBlockState(world, fenceWest, 7, 40, 25, structureBoundingBoxIn);
+        // Cross west side
+        this.setBlockState(world, fenceWest, 7, 40, 25 + 3, structureBoundingBoxIn);
 
-        for (int j = 36; j < 42; ++j) {
-            this.setBlockState(world, fence, 6, j, 25, structureBoundingBoxIn);
-        }
 
-        this.setBlockState(world, fenceEast, 5, 40, 25, structureBoundingBoxIn);
+        // Vertical fence post
+        this.fillWithBlocks(world, structureBoundingBoxIn, 6, 36, 25 + 3, 6, 41, 25 + 3, fence, fence, false);
+
+
+        // Cross east side
+        this.setBlockState(world, fenceEast, 5, 40, 25 + 3, structureBoundingBoxIn);
 
         // Foundation
 
@@ -2054,6 +1482,21 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
             return BlockPlanks.EnumType.SPRUCE;
         } else {
             return BlockPlanks.EnumType.OAK;
+        }
+    }
+
+    private static class RandomStainedGlassSelector extends StructureComponent.BlockSelector {
+        private final IBlockState stainedGlass;
+
+        public RandomStainedGlassSelector(IBlockState stainedGlass) {
+            this.stainedGlass = stainedGlass;
+        }
+
+        @Override
+        public void selectBlocks(Random rand, int x, int y, int z, boolean isBoundary) {
+            int colorMetadata = rand.nextInt(16);
+            EnumDyeColor dyeColor = EnumDyeColor.byMetadata(colorMetadata);
+            this.blockstate = stainedGlass.withProperty(BlockStainedGlass.COLOR, dyeColor);
         }
     }
 }

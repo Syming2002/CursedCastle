@@ -28,7 +28,7 @@ public class CCWorldGenerator implements IWorldGenerator {
         int z = (chunkZ * 16) + random.nextInt(16);
         int y = 16 + random.nextInt(17);
 
-        if (random.nextInt(200) == 0) {
+        if (random.nextInt(500) == 0) {
             BlockPos pos = new BlockPos(x, y, z);
             RUSALKA_CAVE.generate(world, random, pos);
             System.out.println("A Rusalka Cave has spawn at " + x + ", " + z);

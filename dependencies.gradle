@@ -53,6 +53,7 @@ dependencies {
     implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5519022")
     implementation rfg.deobf("curse.maven:jei-bees-248370:2490058")
     implementation rfg.deobf("curse.maven:gendustry-jei-addon-301364:2609434")
+    implementation rfg.deobf("curse.maven:jei-villagers-283013:2508393")
 //    implementation rfg.deobf("curse.maven:mantle-74924:2713386")
     implementation rfg.deobf("curse.maven:beebetteratbees-244516:2627215")
     implementation rfg.deobf("curse.maven:llibrary-243298:2504999")
@@ -75,6 +76,10 @@ dependencies {
 
     // Deeper Depths
     implementation rfg.deobf("curse.maven:deeper-depths-1101129:6447597")
+
+    // Village Names
+    implementation rfg.deobf("curse.maven:village-names-259230:5886882")
+
 
 
     // Extended Whip Attack

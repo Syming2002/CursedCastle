@@ -19,7 +19,7 @@ public class BigChurchCreationHandler implements VillagerRegistry.IVillageCreati
 
     @Override
     public StructureVillagePieces.PieceWeight getVillagePieceWeight(Random random, int i) {
-        return new StructureVillagePieces.PieceWeight(getComponentClass(), 25, 1);
+        return new StructureVillagePieces.PieceWeight(getComponentClass(), 100, 1);
     }
 
     @Override

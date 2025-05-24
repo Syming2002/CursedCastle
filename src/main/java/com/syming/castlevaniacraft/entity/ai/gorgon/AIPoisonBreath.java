@@ -56,13 +56,18 @@ public class AIPoisonBreath extends AnimationAI<EntityGorgon> {
                 .rotatePitch((float) Math.toRadians(-gorgon.rotationPitch))
                 .rotateYaw((float) Math.toRadians(-gorgon.rotationYawHead)));
 
-        if (this.gorgon.getAnimationTick() == 1 && attackTarget != null) {
-            this.poisonBreath = new EntityPoisonBreath(this.gorgon.world, this.gorgon);
-            this.poisonBreath.setPositionAndRotation(headPos.x, headPos.y, headPos.z, this.gorgon.rotationYawHead, this.gorgon.rotationPitch);
-            if (!this.gorgon.world.isRemote) {
-                this.gorgon.world.spawnEntity(this.poisonBreath);
+        if (this.attackTarget != null) {
+            this.gorgon.faceEntity(this.attackTarget, 30.0F, 30.0F);
+            this.gorgon.rotationYawHead = this.gorgon.rotationYaw;
+            this.gorgon.renderYawOffset = this.gorgon.rotationYaw;
+            if (this.gorgon.getAnimationTick() == 1) {
+                this.poisonBreath = new EntityPoisonBreath(this.gorgon.world, this.gorgon);
                 this.poisonBreath.setPositionAndRotation(headPos.x, headPos.y, headPos.z, this.gorgon.rotationYawHead, this.gorgon.rotationPitch);
-                System.out.println("Poison Breath is Launching");
+                if (!this.gorgon.world.isRemote) {
+                    this.gorgon.world.spawnEntity(this.poisonBreath);
+                    this.poisonBreath.setPositionAndRotation(headPos.x, headPos.y, headPos.z, this.gorgon.rotationYawHead, this.gorgon.rotationPitch);
+                    System.out.println("Poison Breath is Launching");
+                }
             }
         }
     }

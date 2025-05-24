@@ -2,6 +2,7 @@ package com.syming.castlevaniacraft.world.gen.structure.cemetery;
 
 import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
 import com.syming.castlevaniacraft.entity.mobs.shade.EntityHeatShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityPoisonShade;
 import com.syming.castlevaniacraft.loot.CCTreasures;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
@@ -177,8 +178,6 @@ public class StructureCemetery extends StructureVillagePieces.Village {
         if (!this.hasSpawner && !this.spawnerPlaced) {
             BlockPos blockPos = new BlockPos(this.getXWithOffset(5, 2), this.getYWithOffset(-2), this.getZWithOffset(5, 2));
             if (structureBoundingBoxIn.isVecInside(blockPos)) {
-                this.hasSpawner = true;
-                this.spawnerPlaced = true;
                 worldIn.setBlockState(blockPos, Blocks.MOB_SPAWNER.getDefaultState(), 2);
                 TileEntity tileEntity = worldIn.getTileEntity(blockPos);
 
@@ -186,13 +185,24 @@ public class StructureCemetery extends StructureVillagePieces.Village {
                     if (tileEntity instanceof TileEntityMobSpawner) {
                         ((TileEntityMobSpawner) tileEntity).getSpawnerBaseLogic().setEntityId(EntityList.getKey(EntityHeatShade.class));
                     }
+                    this.hasSpawner = true;
+                    this.spawnerPlaced = true;
 
-                } else if (structureType == 3 || biome instanceof BiomeSnow) {
+                } else if (structureType == 3 || biome instanceof BiomeSnow || this.biome instanceof BiomeTaiga) {
                     if (tileEntity instanceof TileEntityMobSpawner) {
                         ((TileEntityMobSpawner) tileEntity).getSpawnerBaseLogic().setEntityId(EntityList.getKey(EntityFrozenShade.class));
                     }
-                } else {
+                    this.hasSpawner = true;
+                    this.spawnerPlaced = true;
+                } else if (biome instanceof BiomeJungle) {
+                    if (tileEntity instanceof TileEntityMobSpawner) {
+                        ((TileEntityMobSpawner) tileEntity).getSpawnerBaseLogic().setEntityId(EntityList.getKey(EntityPoisonShade.class));
+                    }
+                    this.hasSpawner = true;
+                    this.spawnerPlaced = true;
+                } else if (this.biome instanceof BiomeForest) {
                     this.hasSpawner = false;
+                    this.spawnerPlaced = false;
                 }
             }
         }

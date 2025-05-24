@@ -105,17 +105,20 @@ public class RegistryHandler {
         DelayedTaskScheduler delayedTaskScheduler = new DelayedTaskScheduler();
         EventClient client = new EventClient();
         EventCommon common = new EventCommon();
+        EventEntityNotMoving noJumping = new EventEntityNotMoving();
         EventExtendedReach extendedReach = new EventExtendedReach();
         EventFireballLauncher fireballLauncher = new EventFireballLauncher();
         EventFlameWhipParticle flameWhipParticle = new EventFlameWhipParticle();
         EventFriendlyZombieSpawningPrevention friendlyZombieSpawningPrevention = new EventFriendlyZombieSpawningPrevention();
         EventImmobileEntityLiving immobileEntityLiving = new EventImmobileEntityLiving();
+
         EventVanillaMobLootTableModifier vanillaMobLootTableModifier = new EventVanillaMobLootTableModifier();
         EventVillagerCrucifixProtection villagerCrucifixProtection = new EventVillagerCrucifixProtection();
 
         MinecraftForge.EVENT_BUS.register(delayedTaskScheduler);
         MinecraftForge.EVENT_BUS.register(client);
         MinecraftForge.EVENT_BUS.register(common);
+        MinecraftForge.EVENT_BUS.register(noJumping);
         MinecraftForge.EVENT_BUS.register(extendedReach);
         MinecraftForge.EVENT_BUS.register(fireballLauncher);
         MinecraftForge.EVENT_BUS.register(flameWhipParticle);
