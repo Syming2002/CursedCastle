@@ -102,6 +102,7 @@ entity.heat_shade.name=ヒートシェイド
 entity.ice_blade.name=アイスニードル
 entity.medusa.name=メディウサ
 entity.medusa_snake.name=メディウサの蛇
+entity.poison_shade.name=毒のシェイド
 entity.rusalka.name=ルサールカ
 entity.vampire_bat.name=吸血鬼のコウモリ
 entity.Villager.high_priest=主教

@@ -62,7 +62,7 @@ dependencies {
     implementation rfg.deobf("curse.maven:mo-villages-243205:2484281")
 //    implementation rfg.deobf("curse.maven:tinkers-construct-74072:2902483")
     implementation rfg.deobf("curse.maven:torcherino-community-edition-919322:6006961")
-    implementation rfg.deobf("curse.maven:xaeros-minimap-263420:6310964")
+    implementation rfg.deobf("curse.maven:xaeros-minimap-263420:6515004")
     
     implementation rfg.deobf("curse.maven:cofh-core-69162:2920433")
     implementation rfg.deobf("curse.maven:cofh-world-271384:2920434")

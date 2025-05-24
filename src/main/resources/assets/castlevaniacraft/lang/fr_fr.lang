@@ -102,6 +102,7 @@ entity.heat_shade.name=Ombre Brûlante
 entity.ice_blade.name=Lame de Glace
 entity.medusa.name=Méduse
 entity.medusa_snake.name=Serpent de Méduse
+entity.poison_shade.name=Ombre Empoisonnée
 entity.rusalka.name=Rusalka
 entity.vampire_bat.name=Chauve-souris Vampire
 entity.Villager.high_priest=Grand Prêtre

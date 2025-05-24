@@ -1,6 +1,8 @@
 package com.syming.castlevaniacraft.entity.mobs.shade;
 
+import com.syming.castlevaniacraft.loot.CCTreasures;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -39,8 +41,8 @@ public class EntityPoisonShade extends EntityShade {
         }
     }
 
-//    @Override
-//    public ResourceLocation getLootTable() {
-//        return CCTreasures.HEAT_SHADE;
-//    }
+    @Override
+    public ResourceLocation getLootTable() {
+        return CCTreasures.POISON_SHADE;
+    }
 }

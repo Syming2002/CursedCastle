@@ -10,4 +10,6 @@ public class CCTreasures {
     public static final ResourceLocation DRACULA = LootTableList.register(new ResourceLocation(CCReferences.MODID, "entities/dracula"));
     public static final ResourceLocation FROZEN_SHADE = LootTableList.register(new ResourceLocation(CCReferences.MODID, "entities/frozen_shade"));
     public static final ResourceLocation HEAT_SHADE = LootTableList.register(new ResourceLocation(CCReferences.MODID, "entities/heat_shade"));
+    public static final ResourceLocation POISON_SHADE = LootTableList.register(new ResourceLocation(CCReferences.MODID, "entities/poison_shade"));
+
 }

@@ -106,6 +106,7 @@ entity.heat_shade.name=Heat Shade
 entity.ice_blade.name=Ice Blade
 entity.medusa.name=Medusa
 entity.medusa_snake.name=Medusa Snake
+entity.poison_shade.name=Poison Shade
 entity.rusalka.name=Rusalka
 entity.vampire_bat.name=Vampire Bat
 entity.Villager.high_priest=High Priest
