@@ -25,15 +25,15 @@ public class JERCC extends JERBase implements IJERIntegration {
 
     private void registerCCMonsters() {
         registerMob(new EntityDracula(world), LightLevel.hostile, CCTreasures.DRACULA);
-        registerMob(new EntityFrozenShade(world), LightLevel.hostile, new String[] {Biomes.COLD_TAIGA.biomeName, Biomes.ICE_PLAINS.biomeName, Biomes.MUTATED_ICE_FLATS.biomeName}, CCTreasures.FROZEN_SHADE);
-        registerMob(new EntityHeatShade(world), LightLevel.hostile, new String[] {Biomes.DESERT.biomeName, Biomes.DESERT_HILLS.biomeName}, CCTreasures.HEAT_SHADE);
-        registerMob(new EntityPoisonShade(this.world), LightLevel.hostile, new String[] {Biomes.JUNGLE.biomeName}, CCTreasures.POISON_SHADE);
+        registerMob(new EntityFrozenShade(world), LightLevel.hostile, new String[] {Biomes.COLD_TAIGA.getBiomeName(), Biomes.ICE_PLAINS.getBiomeName(), Biomes.MUTATED_ICE_FLATS.getBiomeName()}, CCTreasures.FROZEN_SHADE);
+        registerMob(new EntityHeatShade(world), LightLevel.hostile, new String[] {Biomes.DESERT.getBiomeName(), Biomes.DESERT_HILLS.getBiomeName()}, CCTreasures.HEAT_SHADE);
+        registerMob(new EntityPoisonShade(this.world), LightLevel.hostile, new String[] {Biomes.JUNGLE.getBiomeName()}, CCTreasures.POISON_SHADE);
     }
 
-    private void adjustHumanoidRenderHook(Class<? extends EntityLiving> clazz) {
-        registerRenderHook(clazz, ((renderInfo, e) -> {
-            GlStateManager.translate(-0.05,-0.45,0);
-            return renderInfo;
-        }));
-    }
+//    private void adjustHumanoidRenderHook(Class<? extends EntityLiving> clazz) {
+//        registerRenderHook(clazz, ((renderInfo, e) -> {
+//            GlStateManager.translate(-0.05,-0.45,0);
+//            return renderInfo;
+//        }));
+//    }
 }

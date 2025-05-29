@@ -22,6 +22,7 @@ public class ModelFrozenShade extends ModelShade {
 		super.render(entity, limbSwing, limbSwingAmount, ageInTick, headYaw, headPitch, scale);
 	}
 
+	@Override
 	public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float ageInTick, float headYaw, float headPitch, float scale) {
 		super.animate(entity, limbSwing, limbSwingAmount, ageInTick, headYaw, headPitch, scale);
 	}

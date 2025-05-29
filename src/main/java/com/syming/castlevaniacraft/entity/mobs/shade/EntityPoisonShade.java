@@ -36,7 +36,7 @@ public class EntityPoisonShade extends EntityShade {
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
-        if (world.isRaining() && this.world.getBiome(new BlockPos(this)).canRain()) {
+        if (this.world.isRaining() && this.world.getBiome(new BlockPos(this)).canRain()) {
             onShadeHeal(this);
         }
     }

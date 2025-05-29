@@ -43,33 +43,33 @@ dependencies {
 
 
     implementation rfg.deobf("curse.maven:attributefix-280510:4427962")
-    implementation rfg.deobf("curse.maven:bdlib-70496:4675629")
+//    implementation rfg.deobf("curse.maven:bdlib-70496:4675629")
     implementation rfg.deobf("curse.maven:bubbles-a-baubles-fork-995393:6355119")
-    implementation rfg.deobf("curse.maven:better-advancements-272515:2685984")
-    implementation rfg.deobf("curse.maven:codechicken-lib-1-8-242818:2779848")
-    api("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.684")
+//    implementation rfg.deobf("curse.maven:better-advancements-272515:2685984")
+//    implementation rfg.deobf("curse.maven:codechicken-lib-1-8-242818:2779848")
+//    api("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.684")
     implementation rfg.deobf("curse.maven:forestry-59751:6104316")
-    implementation rfg.deobf("curse.maven:gendustry-70492:2516215")
-    implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5519022")
-    implementation rfg.deobf("curse.maven:jei-bees-248370:2490058")
-    implementation rfg.deobf("curse.maven:gendustry-jei-addon-301364:2609434")
+//    implementation rfg.deobf("curse.maven:gendustry-70492:2516215")
+//    implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:5519022")
+//    implementation rfg.deobf("curse.maven:jei-bees-248370:2490058")
+//    implementation rfg.deobf("curse.maven:gendustry-jei-addon-301364:2609434")
     implementation rfg.deobf("curse.maven:jei-villagers-283013:2508393")
 //    implementation rfg.deobf("curse.maven:mantle-74924:2713386")
-    implementation rfg.deobf("curse.maven:beebetteratbees-244516:2627215")
+//    implementation rfg.deobf("curse.maven:beebetteratbees-244516:2627215")
     implementation rfg.deobf("curse.maven:llibrary-243298:2504999")
 //    implementation rfg.deobf("curse.maven:journeymap-32274:5045718")
     implementation rfg.deobf("curse.maven:just-enough-resources-jer-240630:4440935")
-    implementation rfg.deobf("curse.maven:mo-villages-243205:2484281")
+//    implementation rfg.deobf("curse.maven:mo-villages-243205:2484281")
 //    implementation rfg.deobf("curse.maven:tinkers-construct-74072:2902483")
-    implementation rfg.deobf("curse.maven:torcherino-community-edition-919322:6006961")
+//    implementation rfg.deobf("curse.maven:torcherino-community-edition-919322:6006961")
     implementation rfg.deobf("curse.maven:xaeros-minimap-263420:6515004")
     
-    implementation rfg.deobf("curse.maven:cofh-core-69162:2920433")
-    implementation rfg.deobf("curse.maven:cofh-world-271384:2920434")
-    implementation rfg.deobf("curse.maven:thermal-foundation-222880:2926428")
-    implementation rfg.deobf("curse.maven:thermal-expansion-69163:2926431")
-    implementation rfg.deobf("curse.maven:thermal-dynamics-227443:2920505")
-    implementation rfg.deobf("curse.maven:redstone-flux-270789:2920436")
+//    implementation rfg.deobf("curse.maven:cofh-core-69162:2920433")
+//    implementation rfg.deobf("curse.maven:cofh-world-271384:2920434")
+//    implementation rfg.deobf("curse.maven:thermal-foundation-222880:2926428")
+//    implementation rfg.deobf("curse.maven:thermal-expansion-69163:2926431")
+//    implementation rfg.deobf("curse.maven:thermal-dynamics-227443:2920505")
+//    implementation rfg.deobf("curse.maven:redstone-flux-270789:2920436")
 
     // Atlas Lib
     implementation rfg.deobf("curse.maven:atlas-lib-463826:5877784")
@@ -79,6 +79,12 @@ dependencies {
 
     // Village Names
     implementation rfg.deobf("curse.maven:village-names-259230:5886882")
+
+    // Nether API
+    implementation files("libs/Nether-API-v1.3.0-mc1.12.2.jar")
+
+    // Unseen Nether Backport
+    implementation files("libs/Unseens Nether Backport - 0.6.jar")
 
 
 

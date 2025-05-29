@@ -104,6 +104,7 @@ entity.medusa.name=Méduse
 entity.medusa_snake.name=Serpent de Méduse
 entity.poison_shade.name=Ombre Empoisonnée
 entity.rusalka.name=Rusalka
+entity.thunder_shade.name=Ombre Électrifiée
 entity.vampire_bat.name=Chauve-souris Vampire
 entity.Villager.high_priest=Grand Prêtre
 entity.Villager.leader_priest=Prêtre Chef

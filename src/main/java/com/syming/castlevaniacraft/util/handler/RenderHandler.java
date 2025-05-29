@@ -12,6 +12,7 @@ import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
 import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
 import com.syming.castlevaniacraft.entity.mobs.shade.EntityHeatShade;
 import com.syming.castlevaniacraft.entity.mobs.shade.EntityPoisonShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityThunderShade;
 import com.syming.castlevaniacraft.entity.projectiles.EntityFireHydra;
 import com.syming.castlevaniacraft.entity.projectiles.EntityHarpyFeather;
 import com.syming.castlevaniacraft.entity.projectiles.EntityIceBladeProjectile;
@@ -85,6 +86,7 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntityMedusaSnake.class, RenderMedusaSnake::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityPoisonShade.class, RenderPoisonShade::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityRusalka.class, RenderRusalka::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityThunderShade.class, RenderThunderShade::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityZephyr.class, RenderZephyr::new);
     }
 

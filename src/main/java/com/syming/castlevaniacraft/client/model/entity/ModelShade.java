@@ -108,14 +108,7 @@ public abstract class ModelShade extends CCModel {
             animator.endKeyframe();
             animator.setStaticKeyframe(60);
 
-            animator.startKeyframe(20);
-            animator.move(head, 0, 0, 0);
-            this.rotate(animator, body, 0, 0, 0);
-            this.rotate(animator, right_arm, 0, 0, 0);
-            this.rotate(animator, left_arm, 0, 0, 0);
-            animator.move(right_leg, 0, 0, 0);
-            animator.move(left_leg, 0, 0, 0);
-            animator.endKeyframe();
+            animator.resetKeyframe(20);
         }
     }
 

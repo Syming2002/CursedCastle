@@ -8,6 +8,7 @@ import com.syming.castlevaniacraft.entity.ai.AIFlyTowardsTarget;
 import com.syming.castlevaniacraft.entity.ai.AIRandomFly;
 import com.syming.castlevaniacraft.entity.ai.grimReaper.*;
 import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
+import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.networking.CCNetworking;
 import com.syming.castlevaniacraft.networking.MessageAddBossInfo;
 import com.syming.castlevaniacraft.networking.MessageRemoveBossInfo;
@@ -18,17 +19,16 @@ import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -37,8 +37,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Calendar;
 
 public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, ICustomBossBar, EntityFlying {
 
@@ -382,5 +385,32 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
     @Override
     public @Nullable ResourceLocation getCustomBossBar() {
         return new ResourceLocation(CCReferences.MODID, "textures/gui/death_boss_bar.png");
+    }
+
+    /**
+     * Gives armor or weapon for entity based on given DifficultyInstance
+     */
+    @Override
+    protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty) {
+        super.setEquipmentBasedOnDifficulty(difficulty);
+        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(CCItem.deathScythe));
+    }
+
+    @Override
+    @Nullable
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
+        this.setEquipmentBasedOnDifficulty(difficulty);
+        return super.onInitialSpawn(difficulty, livingdata);
+    }
+
+    @Override
+    public void setItemStackToSlot(EntityEquipmentSlot slotIn, ItemStack stack) {
+        super.setItemStackToSlot(slotIn, stack);
+    }
+
+    @Override
+    protected boolean canEquipItem(ItemStack stack)
+    {
+        return stack.getItem() != CCItem.deathScythe ? false : super.canEquipItem(stack);
     }
 }

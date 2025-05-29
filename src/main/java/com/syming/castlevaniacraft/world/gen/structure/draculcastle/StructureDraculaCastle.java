@@ -1,5 +1,9 @@
 package com.syming.castlevaniacraft.world.gen.structure.draculcastle;
 
+import com.deeperdepths.common.blocks.BlockDDStairs;
+import com.deeperdepths.common.blocks.BlockDDStone;
+import com.deeperdepths.common.blocks.DeeperDepthsBlocks;
+import com.deeperdepths.common.blocks.enums.EnumStoneType;
 import com.syming.castlevaniacraft.block.CCBlock;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,31 +31,44 @@ public class StructureDraculaCastle extends StructureComponent {
         return false;
     }
 
-    private IBlockState getRandomStone(Random random) {
-        IBlockState draculaCobblestone = CCBlock.DRACULA_CASTLE_COBBLESTONE.getDefaultState();
-        IBlockState draculaStone = CCBlock.DRACULA_CASTLE_STONE.getDefaultState();
-        IBlockState draculaStonebrick = CCBlock.DRACULA_CASTLE_STONE_BRICK.getDefaultState();
+    private void generateDraculaCastle(World world, Random random, StructureBoundingBox structureBoundingBox) {
+
+    }
+
+    private IBlockState getRandomDeepslateStone(Random random) {
+        IBlockState deepslate = DeeperDepthsBlocks.DEEPSLATE.getDefaultState();
+        IBlockState deepslateTile = DeeperDepthsBlocks.STONE.getDefaultState().withProperty(BlockDDStone.VARIANT, EnumStoneType.DEEPSLATE_TILE);
+        IBlockState crackedDeepslateTile = DeeperDepthsBlocks.STONE.getDefaultState().withProperty(BlockDDStone.VARIANT, EnumStoneType.CRACKED_DEEPSLATE_TILE);
+        IBlockState cobbledDeepslate = DeeperDepthsBlocks.STONE.getDefaultState().withProperty(BlockDDStone.VARIANT, EnumStoneType.COBBLED_DEEPSLATE);
+        IBlockState deepslateBrick = DeeperDepthsBlocks.STONE.getDefaultState().withProperty(BlockDDStone.VARIANT, EnumStoneType.DEEPSLATE_BRICK);
+        IBlockState deepslateStone = DeeperDepthsBlocks.STONE.getDefaultState();
 
         float randomStone = random.nextFloat();
 
-        if (randomStone < 0.35F) {
-            return draculaCobblestone;
+        if (randomStone < 0.15F) {
+            return crackedDeepslateTile;
+        } else if (randomStone < 0.25F) {
+            return deepslateTile;
+        } else if (randomStone < 0.35F) {
+            return deepslateBrick;
         } else if (randomStone < 0.45F) {
-            return draculaStone;
+            return deepslateStone;
+        } else if (randomStone < 0.55F) {
+            return cobbledDeepslate;
         } else {
-            return draculaStonebrick;
+            return deepslate;
         }
     }
 
-    private IBlockState getDraculaStoneStair() {
-        return CCBlock.DRACULA_CASTLE_STONE_STAIRS.getDefaultState();
+    private IBlockState getDeepslateStairsFacingNorth(EnumStoneType type) {
+        return DeeperDepthsBlocks.STONE_STAIRS.get(type).getDefaultState();
     }
 
-    private IBlockState getDraculaStonebrickWall() {
-        return CCBlock.DRACULA_CASTLE_STONE_WALL.getDefaultState();
+    private IBlockState getDeepslateStoneWall() {
+        return DeeperDepthsBlocks.STONE_WALL.getDefaultState();
     }
 
-    private IBlockState getDraculaStonebrickSlab() {
-        return CCBlock.DRACULA_CASTLE_STONE_SLAB_HALF.getDefaultState();
+    private IBlockState getDeepslateStoneSlab() {
+        return DeeperDepthsBlocks.STONE_SLAB.getDefaultState();
     }
 }

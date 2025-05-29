@@ -8,6 +8,7 @@ import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
 import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
 import com.syming.castlevaniacraft.entity.mobs.shade.EntityHeatShade;
 import com.syming.castlevaniacraft.entity.mobs.shade.EntityPoisonShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityThunderShade;
 import com.syming.castlevaniacraft.entity.projectiles.*;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.*;
 import com.syming.castlevaniacraft.item.CCItem;
@@ -76,6 +77,7 @@ public class CCEntity {
         registerEntity("medusa_snake", EntityMedusaSnake.class, 64, 0xD8E068, 0xB23434);
         registerEntity("poison_shade", EntityPoisonShade.class, 64, 0x45F248, 0x319E3D);
         registerEntity("rusalka", EntityRusalka.class, 64, 0x002080, 0x00F878);
+        registerEntity("thunder_shade", EntityThunderShade.class,64, 0xFFFF75,0xB3B334);
         registerEntity("zephyr", EntityZephyr.class, 64, 0x4D1366 , 0x86BABA);
 
         registerCrucifix("crucifix", EntityCrucifix.class, BlockPlanks.EnumType.OAK);
