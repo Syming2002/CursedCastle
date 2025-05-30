@@ -48,39 +48,42 @@ public class AIMeleeAttack extends AnimationAI<EntityGrimReaper> {
     @Override
     public void updateTask() {
         super.updateTask();
-        if (attackTarget == null) {
+        if (this.attackTarget == null) {
             return;
         }
 
-        double distToEnemySqr = this.grimReaper.getDistanceSq(attackTarget);
-        double d0 = this.getAttackReachSqr(attackTarget);
+        double distToEnemySqr = this.grimReaper.getDistanceSq(this.attackTarget);
+        double attackReachSqr = this.getAttackReachSqr(this.attackTarget);
+        int animationTick = this.grimReaper.getAnimationTick();
 
-        if (grimReaper.getAnimationTick() == 25 && distToEnemySqr <= d0) {
-            this.grimReaper.attackEntityAsMob(attackTarget);
+        if (animationTick < 25) {
+            this.grimReaper.getNavigator().tryMoveToEntityLiving(this.attackTarget, 50.0D);
         }
 
-        // Check if the mob is too close to the target
-        double minDistanceSq = 2 * 2;
-        if (distToEnemySqr < minDistanceSq) {
-            // Calculate direction away from the target
-            double dX = this.grimReaper.posX - attackTarget.posX;
-            double dY = this.grimReaper.posY - attackTarget.posY;
-            double dZ = this.grimReaper.posZ - attackTarget.posZ;
+        if (animationTick == 25 && distToEnemySqr <= attackReachSqr) {
+            this.grimReaper.attackEntityAsMob(this.attackTarget);
+        }
 
-            // Normalize the direction vector
-            double length = Math.sqrt(dX * dX + dY * dY + dZ * dZ);
-            if (length > 0.0D) {
-                dX /= length;
-                dY /= length;
-                dZ /= length;
+        if (animationTick > 25) {
+            double minDistanceSq = 4.0D;
+            if (distToEnemySqr < minDistanceSq) {
+                double x = this.grimReaper.posX - this.attackTarget.posX;
+                double y = this.grimReaper.posY - this.attackTarget.posY;
+                double z = this.grimReaper.posZ - this.attackTarget.posZ;
+
+                double length = Math.sqrt(x * x + y * y + z * z);
+                if (length > 0.0D) {
+                    x /= length;
+                    y /= length;
+                    z /= length;
+                }
+
+                double retreatX = this.grimReaper.posX + x * this.targetDistance;
+                double retreatY = this.grimReaper.posY + y * this.targetDistance;
+                double retreatZ = this.grimReaper.posZ + z * this.targetDistance;
+
+                this.grimReaper.getMoveHelper().setMoveTo(retreatX, retreatY, retreatZ, 1.0F);
             }
-
-            // Move the entity away from the target with the target distance
-            double targetX = this.grimReaper.posX + dX * this.targetDistance;
-            double targetY = this.grimReaper.posY + dY * this.targetDistance;
-            double targetZ = this.grimReaper.posZ + dZ * this.targetDistance;
-
-            this.grimReaper.getMoveHelper().setMoveTo(targetX, targetY, targetZ, 1.0F);
         }
 
     }

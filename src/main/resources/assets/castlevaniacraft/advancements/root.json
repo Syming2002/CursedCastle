@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "item": "castlevaniacraft:dracula_tunic"
+    },
+    "title": {
+      "translate": "itemGroup.castlevaniacraft"
+    },
+    "description": {
+      "translate": "advancement.castlevaniacraft.root.description"
+    },
+    "background": "deeperdepths:textures/blocks/deepslate_tile.png",
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

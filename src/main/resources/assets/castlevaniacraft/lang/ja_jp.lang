@@ -1,3 +1,9 @@
+# Advancements
+advancement.castlevaniacraft.root.description="キャッスルヴァニアクラフトの進捗"
+
+advancement.grim_reaper_death.description="ドラキュラ城の時計台で死神を殺します"
+advancement.grim_reaper_death.title="死神は死んだ"
+
 # Armors
 
 item.dracula_tunic.name=ドラキュラの服
@@ -74,7 +80,7 @@ item.cc.comb.warmed.name=暑い巣板
 
 # Creative Tabs
 
-itemGroup.castlevaniacraft=悪魔城ドラキュラクラフト
+itemGroup.castlevaniacraft=キャッスルヴァニアクラフト
 
 # Drops
 

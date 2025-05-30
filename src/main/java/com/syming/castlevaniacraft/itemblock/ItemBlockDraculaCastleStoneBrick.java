@@ -5,11 +5,11 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class DraculaCastleStoneBrickItemBlock extends ItemBlock {
+public class ItemBlockDraculaCastleStoneBrick extends ItemBlock {
 
-    String[] translationKey;
+    private String[] translationKey;
 
-    public DraculaCastleStoneBrickItemBlock(Block block, String[] translationKey) {
+    public ItemBlockDraculaCastleStoneBrick(Block block, String[] translationKey) {
         super(block);
 
         this.translationKey = translationKey;

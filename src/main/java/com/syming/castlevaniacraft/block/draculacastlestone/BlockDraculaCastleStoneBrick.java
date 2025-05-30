@@ -2,7 +2,7 @@ package com.syming.castlevaniacraft.block.draculacastlestone;
 
 import com.syming.castlevaniacraft.block.CCBlock;
 import com.syming.castlevaniacraft.item.CCItem;
-import com.syming.castlevaniacraft.itemblock.DraculaCastleStoneBrickItemBlock;
+import com.syming.castlevaniacraft.itemblock.ItemBlockDraculaCastleStoneBrick;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -38,7 +38,7 @@ public class BlockDraculaCastleStoneBrick extends Block {
         this.setRegistryName(name);
 
         CCBlock.BLOCKS.add(this);
-        CCItem.ITEMS.add(new DraculaCastleStoneBrickItemBlock(this, new String[]{"dracula_castle_default", "dracula_castle_cracked", "dracula_castle_chiseled"}).setRegistryName(this.getRegistryName()));
+        CCItem.ITEMS.add(new ItemBlockDraculaCastleStoneBrick(this, new String[]{"dracula_castle_default", "dracula_castle_cracked", "dracula_castle_chiseled"}).setRegistryName(this.getRegistryName()));
 
     }
 

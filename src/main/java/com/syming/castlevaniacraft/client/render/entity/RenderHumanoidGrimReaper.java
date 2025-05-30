@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.model.entity.CCModelHumanoidGrimReaper;
+import com.syming.castlevaniacraft.client.model.entity.ModelGrimReaper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderHumanoidGrimReaper <T extends EntityLiving> extends RenderLiving<T> {
 
-    public RenderHumanoidGrimReaper(RenderManager renderManagerIn, CCModelHumanoidGrimReaper modelBipedIn, float shadowSize)
+    public RenderHumanoidGrimReaper(RenderManager renderManagerIn, ModelGrimReaper modelBipedIn, float shadowSize)
     {
         super(renderManagerIn, modelBipedIn, shadowSize);
         this.addLayer(new CCLayerHeldItemDeathScythe(this));

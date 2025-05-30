@@ -10,7 +10,6 @@ import com.syming.castlevaniacraft.item.projectiles.subweapons.throwingaxe.*;
 import com.syming.castlevaniacraft.item.souls.ItemBulletSoul;
 import com.syming.castlevaniacraft.item.souls.ItemGuardianSoul;
 import com.syming.castlevaniacraft.item.spellbooks.ItemFireBook;
-import com.syming.castlevaniacraft.item.spellbooks.ItemSpellBook;
 import com.syming.castlevaniacraft.item.whips.*;
 import com.syming.castlevaniacraft.item.whips.attachments.*;
 import com.syming.castlevaniacraft.item.whips.vampirekiller.*;

@@ -86,6 +86,8 @@ dependencies {
     // Unseen Nether Backport
     implementation files("libs/Unseens Nether Backport - 0.6.jar")
 
+    // Advancement Plaques
+    implementation rfg.deobf("curse.maven:advancement-plaques-499826:4528933")
 
 
     // Extended Whip Attack

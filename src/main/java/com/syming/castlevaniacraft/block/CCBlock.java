@@ -1,8 +1,11 @@
 package com.syming.castlevaniacraft.block;
 
 import com.syming.castlevaniacraft.block.draculacastlestone.*;
+import com.syming.castlevaniacraft.block.head.BlockDraculaHead;
 import com.syming.castlevaniacraft.fluid.CCFluid;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
@@ -27,6 +30,8 @@ public class CCBlock {
     public static final BlockFluidClassic HOLY_WATER_FLUID = new BlockHolyWaterFluid("holy_water_fluid", CCFluid.HOLY_WATER_FLUID, Material.WATER);
     public static final BlockFluidClassic BLOOD_FLUID = new BlockBloodFluid("blood_fluid", CCFluid.BLOOD_FLUID, Material.WATER);
 
+    // Heads
+    public static final BlockDraculaHead DRACULA_HEAD = new BlockDraculaHead("dracula_head");
 
     // Tile Blocks
 

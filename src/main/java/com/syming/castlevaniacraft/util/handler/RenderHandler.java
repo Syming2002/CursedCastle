@@ -4,6 +4,7 @@ package com.syming.castlevaniacraft.util.handler;
 //import com.syming.castlevaniacraft.client.models.entity.ModelDraculaHead;
 import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.client.render.entity.*;
+import com.syming.castlevaniacraft.client.render.tile.TileEntityDraculaHeadRenderer;
 import com.syming.castlevaniacraft.entity.EntityCrucifix;
 import com.syming.castlevaniacraft.entity.mobs.*;
 import com.syming.castlevaniacraft.entity.mobs.boss.*;
@@ -17,6 +18,7 @@ import com.syming.castlevaniacraft.entity.projectiles.EntityFireHydra;
 import com.syming.castlevaniacraft.entity.projectiles.EntityHarpyFeather;
 import com.syming.castlevaniacraft.entity.projectiles.EntityIceBladeProjectile;
 import com.syming.castlevaniacraft.block.CCBlock;
+import com.syming.castlevaniacraft.tile.TileEntityDraculaHead;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -25,6 +27,7 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -92,5 +95,9 @@ public class RenderHandler {
 
     public static void registerItemRenders() {
         CastlevaniaCraftMod.proxy.registerItemsVariantsRenderer();
+    }
+
+    public static void registerTileEntityRenderers() {
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDraculaHead.class, TileEntityDraculaHeadRenderer.INSTANCE);
     }
 }

@@ -1,7 +1,6 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
-import com.syming.castlevaniacraft.client.model.entity.CCModelHumanoidGrimReaper;
-import com.syming.castlevaniacraft.entity.mobs.boss.EntityGrimReaper;
+import com.syming.castlevaniacraft.client.model.entity.ModelGrimReaper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -54,7 +53,7 @@ public class CCLayerHeldItemDeathScythe implements LayerRenderer<EntityLivingBas
     }
 
     protected void translateToHand(EnumHandSide side) {
-        ((CCModelHumanoidGrimReaper) this.livingEntityRenderer.getMainModel()).postRenderArm(0.0625F, side);
+        ((ModelGrimReaper) this.livingEntityRenderer.getMainModel()).postRenderArm(0.0625F, side);
     }
 
     @Override

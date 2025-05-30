@@ -1,3 +1,9 @@
+# Advancements
+advancement.castlevaniacraft.root.description="Progrès de Castlevania Craft"
+
+advancement.grim_reaper_death.description="Tuer la Grande Faucheuse dans la tour de l'horloge dans le château de Dracula"
+advancement.grim_reaper_death.title="La Mort est Morte"
+
 # Armors
 
 item.dracula_tunic.name=Tunique de Dracula

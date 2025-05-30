@@ -1,11 +1,10 @@
 package com.syming.castlevaniacraft.entity.mobs.boss;
 
+import com.syming.castlevaniacraft.advancement.CCAdvancement;
 import com.syming.castlevaniacraft.api.ICustomBossBar;
 import com.syming.castlevaniacraft.api.IElementalWeapon;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
-import com.syming.castlevaniacraft.entity.ai.AIFlyAwayTarget;
-import com.syming.castlevaniacraft.entity.ai.AIFlyTowardsTarget;
-import com.syming.castlevaniacraft.entity.ai.AIRandomFly;
+import com.syming.castlevaniacraft.entity.ai.AIFlyOverTarget;
 import com.syming.castlevaniacraft.entity.ai.grimReaper.*;
 import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
 import com.syming.castlevaniacraft.item.CCItem;
@@ -13,24 +12,27 @@ import com.syming.castlevaniacraft.networking.CCNetworking;
 import com.syming.castlevaniacraft.networking.MessageAddBossInfo;
 import com.syming.castlevaniacraft.networking.MessageRemoveBossInfo;
 import com.syming.castlevaniacraft.util.CCReferences;
+
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationAI;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -39,17 +41,17 @@ import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Calendar;
+import java.util.Random;
 
 public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, ICustomBossBar, EntityFlying {
 
-    public static final Animation IDLE_ANIMATION = Animation.create(60);
     public static final Animation MELEE_ATTACK_ANIMATION = Animation.create(35);
     public static final Animation SCYTHE_PROJECTILE_ATTACK_ANIMATION = Animation.create(200);
     private Animation animation = NO_ANIMATION;
-    private static final Animation[] ANIMATIONS = {IDLE_ANIMATION, MELEE_ATTACK_ANIMATION, SCYTHE_PROJECTILE_ATTACK_ANIMATION};
+    private static final Animation[] ANIMATIONS = {MELEE_ATTACK_ANIMATION, SCYTHE_PROJECTILE_ATTACK_ANIMATION};
     private int attackMeleeCooldown = 0;
     private int scytheProjectileAttackCooldown = 0;
     public static final int MELEE_ATTACK_COOLDOWN = 40;
@@ -63,6 +65,9 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
         this.fall(0, 0);
         this.setSize(1.5F, 3.0F);
         this.noClip = false;
+        this.navigator = new PathNavigateFlying(this, this.world);
+        this.experienceValue = 100;
+        this.moveHelper = new EntityFlyHelper(this);
     }
 
     @Override
@@ -98,16 +103,14 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(0, new AIIdle(this, IDLE_ANIMATION));
         this.tasks.addTask(2, new AIMeleeAttack(this, MELEE_ATTACK_ANIMATION,2.0D));
-        this.tasks.addTask(5, new AIFlyTowardsTarget(this, 2.0D));
-        this.tasks.addTask(5, new AIFlyAwayTarget(this, 50.0D));
+        this.tasks.addTask(2, new AIScytheProjectileAttack(this, SCYTHE_PROJECTILE_ATTACK_ANIMATION));
+        this.tasks.addTask(5, new AIRandomFly(this));
         this.tasks.addTask(7, new AILookAround(this));
-        this.tasks.addTask(6, new AIRandomFly(this));
+        this.tasks.addTask(3, new AIFlyOverTarget(this, 4.0D, 1.2D));
         this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true));
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, true));
-        this.tasks.addTask(2, new AIScytheProjectileAttack(this, SCYTHE_PROJECTILE_ATTACK_ANIMATION));
     }
 
     @Override
@@ -117,10 +120,11 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(36.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_SPEED);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(1.2D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(1.2D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(888.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
+        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
+        this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(0.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
 
     }
 
@@ -179,19 +183,14 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
         super.onLivingUpdate();
         if (getAttackTarget() != null) {
 
-            if (getAnimation() == NO_ANIMATION && attackMeleeCooldown <= 0 /*&& getAnimation() != DEATH_ANIMATION*/ && this.isEntityAlive()) {
+            if (getAnimation() == NO_ANIMATION && this.attackMeleeCooldown <= 0 && this.isEntityAlive() && this.rand.nextFloat() < 0.70F) {
                 AnimationHandler.INSTANCE.sendAnimationMessage(this, MELEE_ATTACK_ANIMATION);
                 this.attackMeleeCooldown = MELEE_ATTACK_COOLDOWN;
             }
 
-            if (getAnimation() == NO_ANIMATION && scytheProjectileAttackCooldown <= 0 /*&& getAnimation() != DEATH_ANIMATION*/ && this.isEntityAlive()) {
+            if (this.targetDistance > 10.0D && getAnimation() == NO_ANIMATION && this.scytheProjectileAttackCooldown <= 0 && this.isEntityAlive() && this.rand.nextFloat() < 0.30F) {
                 AnimationHandler.INSTANCE.sendAnimationMessage(this, SCYTHE_PROJECTILE_ATTACK_ANIMATION);
                 this.scytheProjectileAttackCooldown = SCYTHE_PROJECTILE_ATTACK_COOLDOWN;
-            }
-
-        } else if (!world.isRemote) {
-            if (getAnimation() == NO_ANIMATION /*&& getAnimation() != DEATH_ANIMATION*/ && this.isEntityAlive()) {
-                AnimationHandler.INSTANCE.sendAnimationMessage(this, IDLE_ANIMATION);
             }
         }
 
@@ -206,6 +205,11 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
 
         if (attackMeleeCooldown > 0) attackMeleeCooldown--;
         if (scytheProjectileAttackCooldown > 0) scytheProjectileAttackCooldown--;
+    }
+
+    @Override
+    public void onDeath(DamageSource cause) {
+        super.onDeath(cause);
     }
 
     @Override
@@ -412,5 +416,64 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
     protected boolean canEquipItem(ItemStack stack)
     {
         return stack.getItem() != CCItem.deathScythe ? false : super.canEquipItem(stack);
+    }
+
+    static class AIRandomFly extends EntityAIBase
+    {
+        private final EntityGrimReaper parentEntity;
+        private final double maxHeight = 96.0D;
+
+        public AIRandomFly(EntityGrimReaper grimReaper)
+        {
+            this.parentEntity = grimReaper;
+            this.setMutexBits(1);
+        }
+
+        /**
+         * Returns whether the EntityAIBase should begin execution.
+         */
+        @Override
+        public boolean shouldExecute()
+        {
+            EntityMoveHelper entitymovehelper = this.parentEntity.getMoveHelper();
+
+            if (!entitymovehelper.isUpdating())
+            {
+                return true;
+            }
+            else
+            {
+                double d0 = entitymovehelper.getX() - this.parentEntity.posX;
+                double d1 = entitymovehelper.getY() - this.parentEntity.posY;
+                double d2 = entitymovehelper.getZ() - this.parentEntity.posZ;
+                double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+                return d3 < 1.0D || d3 > 3600.0D;
+            }
+        }
+
+        /**
+         * Returns whether an in-progress EntityAIBase should continue executing
+         */
+        @Override
+        public boolean shouldContinueExecuting()
+        {
+            return false;
+        }
+
+        /**
+         * Execute a one shot task or start executing a continuous task
+         */
+        @Override
+        public void startExecuting()
+        {
+            Random random = this.parentEntity.getRNG();
+            double d0 = this.parentEntity.posX + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
+            double d1 = this.parentEntity.posY + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
+            double d2 = this.parentEntity.posZ + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
+
+            d1 = Math.min(d1, this.maxHeight);
+
+            this.parentEntity.getMoveHelper().setMoveTo(d0, d1, d2, 1.0D);
+        }
     }
 }

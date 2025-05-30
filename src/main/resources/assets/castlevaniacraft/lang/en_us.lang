@@ -1,3 +1,9 @@
+# Advancements
+advancement.castlevaniacraft.root.description="Castlevania Craft Advancements"
+
+advancement.grim_reaper_death.description="Kill the Grim Reaper at the Clock Tower of the Dracula's Castle"
+advancement.grim_reaper_death.title="Death is Dead"
+
 # Armors
 
 item.dracula_tunic.name=Dracula's Tunic

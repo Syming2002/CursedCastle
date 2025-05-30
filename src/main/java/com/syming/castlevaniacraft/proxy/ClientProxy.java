@@ -7,6 +7,7 @@ import com.syming.castlevaniacraft.client.render.entity.RenderDagger;
 import com.syming.castlevaniacraft.client.render.entity.RenderFireHolyCross;
 import com.syming.castlevaniacraft.client.render.entity.RenderHolyCross;
 import com.syming.castlevaniacraft.client.render.entity.RenderThrowingAxe;
+import com.syming.castlevaniacraft.client.render.tile.TileEntityDraculaHeadRenderer;
 import com.syming.castlevaniacraft.entity.projectiles.EntityScytheProjectile;
 import com.syming.castlevaniacraft.entity.projectiles.EntityThrowingBoneProjectile;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.*;
@@ -17,7 +18,9 @@ import com.syming.castlevaniacraft.integration.jer.CCJerIntegration;
 import com.syming.castlevaniacraft.item.souls.EnumBulletSoul;
 import com.syming.castlevaniacraft.item.souls.EnumGuardianSoul;
 import com.syming.castlevaniacraft.particle.ParticlePoisonBreath;
+import com.syming.castlevaniacraft.tile.TileEntityDraculaHead;
 import com.syming.castlevaniacraft.util.CCReferences;
+import com.syming.castlevaniacraft.util.handler.RenderHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.particle.ParticleManager;
@@ -31,6 +34,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -133,6 +137,8 @@ public class ClientProxy extends CommonProxy {
         super.init(event);
 
         CCJerIntegration.init();
+
+        RenderHandler.registerTileEntityRenderers();
     }
 
     @Override

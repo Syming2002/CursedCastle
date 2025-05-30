@@ -3,6 +3,7 @@ package com.syming.castlevaniacraft.util.handler;
 
 import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.DelayedTaskScheduler;
+import com.syming.castlevaniacraft.advancement.CCAdvancement;
 import com.syming.castlevaniacraft.api.*;
 import com.syming.castlevaniacraft.block.CCBlock;
 import com.syming.castlevaniacraft.entity.CCEntity;
@@ -147,7 +148,7 @@ public class RegistryHandler {
             COMBS = new CCCombItem();
         }
 
-        TileEntityHandler.register();
+        CastlevaniaCraftMod.proxy.registerTileEntities();
     }
 
     public static void initRegistries(FMLInitializationEvent event) {
@@ -160,6 +161,8 @@ public class RegistryHandler {
         CemeteryCreationHandler.registerCemeteryComponents();
         VillagerRegistry.instance().registerVillageCreationHandler(WorldGenInit.BIG_CHURCH_HANDLER);
         VillagerRegistry.instance().registerVillageCreationHandler(WorldGenInit.CEMETERY_HANDLER);
+
+        CCAdvancement.init();
 
         GameRegistry.registerWorldGenerator(new CCWorldGenerator(), 0);
 
