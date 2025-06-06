@@ -1,14 +1,15 @@
 package com.syming.castlevaniacraft.entity.mobs.boss;
 
 import com.syming.castlevaniacraft.api.ICustomBossBar;
+import com.syming.castlevaniacraft.entity.EntityLaserBeamTeleportation;
 import com.syming.castlevaniacraft.entity.ai.dracula.*;
 import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
 import com.syming.castlevaniacraft.entity.mobs.EntityVampireBat;
-import com.syming.castlevaniacraft.item.whips.vampirekiller.ItemVampireKillerWhip;
 import com.syming.castlevaniacraft.loot.CCTreasures;
 import com.syming.castlevaniacraft.networking.CCNetworking;
 import com.syming.castlevaniacraft.networking.MessageAddBossInfo;
 import com.syming.castlevaniacraft.networking.MessageRemoveBossInfo;
+import com.syming.castlevaniacraft.particle.CCParticle;
 import com.syming.castlevaniacraft.util.CCReferences;
 
 import net.ilexiconn.llibrary.server.animation.Animation;
@@ -17,19 +18,18 @@ import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.ilexiconn.llibrary.server.entity.multipart.PartEntity;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -51,7 +51,6 @@ import java.util.List;
 public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICustomBossBar {
 
     private Animation animation = NO_ANIMATION;
-    public static final Animation IDLE_ANIMATION = Animation.create(40);
     public static final Animation FIREBALLS_ANIMATION = Animation.create(80);
     public static final Animation DARK_INFERNO_ANIMATION = Animation.create(80);
     public static final Animation FIRE_PILLAR_ANIMATION = Animation.create(60);
@@ -65,7 +64,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     public static final int DARK_INFERNO_COOLDOWN = 200;
     public static final int FIRE_PILLAR_COOLDOWN = 250;
     public static final int BATS_ATTACK_COOLDOWN = 150;
-    private static final Animation[] ANIMATIONS = {IDLE_ANIMATION, FIREBALLS_ANIMATION, DARK_INFERNO_ANIMATION, FIRE_PILLAR_ANIMATION, BATS_ATTACK_ANIMATION, DEATH_ANIMATION};
+    private static final Animation[] ANIMATIONS = {FIREBALLS_ANIMATION, DARK_INFERNO_ANIMATION, FIRE_PILLAR_ANIMATION, BATS_ATTACK_ANIMATION, DEATH_ANIMATION};
     private int animationTick;
     public AnimationAI currentAnim;
     private final BossInfoServer bossInfo = (BossInfoServer) new BossInfoServer(getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS).setDarkenSky(false);
@@ -73,14 +72,13 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     private List<EntityVampireBat> aggressiveBats = new ArrayList<>();
     public PartEntity draculaHead;
     public PartEntity draculaBody;
-    private Item lastHitItem;
-    public EntityEnderCrystal healingEnderCrystal;
+
 
 
     public EntityDracula(World worldIn) {
         super(worldIn);
         this.setSize(1.0F, 2.5F);
-        this.experienceValue = 200;
+        this.experienceValue = 666;
         this.draculaHead = new EntityDraculaHead(this, 0.0F, 0, 2.0F, 1.0625F, 0.5F, 0.0F);
         this.draculaBody = new EntityDraculaBody(this, 0.0F, 0, 0.0F, 1.0625F, 2.0F, 0.0F);
     }
@@ -143,7 +141,6 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     protected void initEntityAI() {
         super.initEntityAI();
 
-        this.tasks.addTask(0, new AIIdle(this, IDLE_ANIMATION));
         this.tasks.addTask(1, new AIDie(this, DEATH_ANIMATION));
         this.tasks.addTask(2, new AIFireballsAttack(this, FIREBALLS_ANIMATION));
         this.tasks.addTask(2, new AIDarkInfernoAttack(this, DARK_INFERNO_ANIMATION));
@@ -165,7 +162,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_SPEED);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(1.2D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(300.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(600.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
@@ -247,11 +244,6 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
                 AnimationHandler.INSTANCE.sendAnimationMessage(this, BATS_ATTACK_ANIMATION);
                 this.batsAttackCooldown = BATS_ATTACK_COOLDOWN;
             }
-
-        } else if (!world.isRemote) {
-            if (getAnimation() == NO_ANIMATION && getAnimation() != DEATH_ANIMATION && this.isEntityAlive()) {
-                AnimationHandler.INSTANCE.sendAnimationMessage(this, IDLE_ANIMATION);
-            }
         }
 
 
@@ -261,14 +253,15 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
                 setAnimation(NO_ANIMATION);
             }
         }
+        if ((animationTick == FIREBALLS_ANIMATION.getDuration() - 20 || animationTick == DARK_INFERNO_ANIMATION.getDuration() - 20 || animationTick == FIRE_PILLAR_ANIMATION.getDuration() - 20) && isEntityAlive()) {
+            if (!this.world.isRemote) {
+                EntityLaserBeamTeleportation laserBeamTeleportation = new EntityLaserBeamTeleportation(this.world, this);
+                this.world.spawnEntity(laserBeamTeleportation);
+                System.out.println("Teleportation Laser Appear");
+            }
+        }
 
-        if (animationTick == FIREBALLS_ANIMATION.getDuration() && this.isEntityAlive()) {
-            teleportRandomlyNearTarget();
-        }
-        if (animationTick == DARK_INFERNO_ANIMATION.getDuration() && this.isEntityAlive()) {
-            teleportRandomlyNearTarget();
-        }
-        if (animationTick == FIRE_PILLAR_ANIMATION.getDuration() && this.isEntityAlive()) {
+        if ((animationTick == FIREBALLS_ANIMATION.getDuration() || animationTick == DARK_INFERNO_ANIMATION.getDuration() || animationTick == FIRE_PILLAR_ANIMATION.getDuration()) && isEntityAlive()) {
             teleportRandomlyNearTarget();
         }
         despawnIfPeaceful();
@@ -286,7 +279,6 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
             batsAttackCooldown--;
         }
 
-        updateDraculaEnderCrystal();
     }
 
     protected boolean shouldBurnInDay() {
@@ -399,42 +391,22 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source.getTrueSource() instanceof EntityPlayer attackingPlayer) {
-
-            ItemStack heldItem = attackingPlayer.getHeldItemMainhand();
-
-            if (!heldItem.isEmpty()) {
-                this.lastHitItem = heldItem.getItem();
-            } else {
-                this.lastHitItem = null;
-            }
-
-            if (getHealth() <= 0) {
-                AnimationHandler.INSTANCE.sendAnimationMessage(this, DEATH_ANIMATION);
-            }
+        if (getHealth() <= 0) {
+            AnimationHandler.INSTANCE.sendAnimationMessage(this, DEATH_ANIMATION);
         }
-
         PartEntity[] parts = this.getParts();
         if (parts != null) {
             for (PartEntity part : parts) {
-                if (this.lastHitItem != null) {
-                    if (part == getDraculaHead()) {
-                        if (this.lastHitItem instanceof ItemVampireKillerWhip) {
-                            return !isEntityInvulnerable(source) && super.attackEntityFrom(source, amount);
-                        }
-                        if (hasWeakness(source, amount)) {
-                            return !isEntityInvulnerable(source) && super.attackEntityFrom(source, amount * amount);
-                        }
-                        if (hasStrength(source, amount)) {
-                            return !isEntityInvulnerable(source) && super.attackEntityFrom(source, amount / amount);
-                        }
-
-                        onCrystalDestroyed(this.healingEnderCrystal, new BlockPos(this.posX, this.posY, this.posZ), source);
+                if (part == getDraculaHead()) {
+                    if (hasWeakness(source, amount) || source.isExplosion()) {
+                        return super.attackEntityFrom(source, amount * amount);
                     }
-
-                    if (part == getDraculaBody()) {
-                        return false;
+                    if (hasStrength(source, amount)) {
+                        return super.attackEntityFrom(source, amount / amount);
                     }
+                    return super.attackEntityFrom(source, amount);
+                } else if (part == getDraculaBody()) {
+                    return false;
                 }
             }
         }
@@ -454,7 +426,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     public void teleportRandomlyNearTarget() {
         EntityLivingBase target = this.getAttackTarget();
         if (target != null) {
-            double radius = 8.0D; // Adjust the radius if needed
+            double radius = 8.0D;
 
             double d0 = target.posX + (this.rand.nextDouble() - 0.5D) * radius;
             double d1 = target.posY + (double)(this.rand.nextInt(16) - 8);
@@ -486,62 +458,7 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
         return flag;
     }
 
-    /**
-     * Updates the state of the enderdragon's current endercrystal.
-     */
-    private void updateDraculaEnderCrystal()
-    {
-        if (this.healingEnderCrystal != null)
-        {
-            if (this.healingEnderCrystal.isDead)
-            {
-                this.healingEnderCrystal = null;
-            }
-            else if (this.ticksExisted % 10 == 0 && this.getHealth() < this.getMaxHealth())
-            {
-                this.setHealth(this.getHealth() + 1.0F);
-            }
-        }
 
-        if (this.rand.nextInt(10) == 0)
-        {
-            List<EntityEnderCrystal> list = this.world.<EntityEnderCrystal>getEntitiesWithinAABB(EntityEnderCrystal.class, this.getEntityBoundingBox().grow(32.0D));
-            EntityEnderCrystal entityendercrystal = null;
-            double d0 = Double.MAX_VALUE;
-
-            for (EntityEnderCrystal entityendercrystal1 : list)
-            {
-                double d1 = entityendercrystal1.getDistanceSq(this);
-
-                if (d1 < d0)
-                {
-                    d0 = d1;
-                    entityendercrystal = entityendercrystal1;
-                }
-            }
-
-            this.healingEnderCrystal = entityendercrystal;
-        }
-    }
-
-    public void onCrystalDestroyed(EntityEnderCrystal crystal, BlockPos pos, DamageSource dmgSrc)
-    {
-        EntityPlayer entityplayer;
-
-        if (dmgSrc.getTrueSource() instanceof EntityPlayer)
-        {
-            entityplayer = (EntityPlayer)dmgSrc.getTrueSource();
-        }
-        else
-        {
-            entityplayer = this.world.getNearestAttackablePlayer(pos, 64.0D, 64.0D);
-        }
-
-        if (crystal == this.healingEnderCrystal)
-        {
-            this.attackEntityFrom(DamageSource.causeExplosionDamage(entityplayer), 10.0F);
-        }
-    }
 
     @Override
     public ResourceLocation getLootTable() {

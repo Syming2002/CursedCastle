@@ -1,8 +1,8 @@
 # Advancements
-advancement.castlevaniacraft.root.description="キャッスルヴァニアクラフトの進捗"
+advancement.castlevaniacraft.root.description=キャッスルヴァニアクラフトの進捗
 
-advancement.grim_reaper_death.description="ドラキュラ城の時計台で死神を殺します"
-advancement.grim_reaper_death.title="死神は死んだ"
+advancement.grim_reaper_death.description=ドラキュラ城の時計台で死神を殺します
+advancement.grim_reaper_death.title=死神は死んだ
 
 # Armors
 
@@ -172,6 +172,12 @@ item.stone_throwing_axe.name=石の斧
 item.iron_throwing_axe.name=鉄の斧
 item.golden_throwing_axe.name=金の斧
 item.diamond_throwing_axe.name=ダイヤモンドの斧
+
+
+# Tile Entity
+
+tile.alchemy_table.name=錬金術のテーブル
+tile.dracula_head.name=ドラキュラの頭
 
 # Tooltips
 

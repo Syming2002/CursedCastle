@@ -1,8 +1,8 @@
 # Advancements
-advancement.castlevaniacraft.root.description="Castlevania Craft Advancements"
+advancement.castlevaniacraft.root.description=Castlevania Craft Advancements
 
-advancement.grim_reaper_death.description="Kill the Grim Reaper at the Clock Tower of the Dracula's Castle"
-advancement.grim_reaper_death.title="Death is Dead"
+advancement.grim_reaper_death.description=Kill the Grim Reaper at the Clock Tower of the Dracula's Castle
+advancement.grim_reaper_death.title=Death is Dead
 
 # Armors
 
@@ -181,6 +181,7 @@ item.diamond_throwing_axe.name=Diamond Throwing Axe
 # Tile Entity
 
 tile.alchemy_table.name=Alchemy Table
+tile.dracula_head.name=Dracula's Head
 
 # Tooltips
 

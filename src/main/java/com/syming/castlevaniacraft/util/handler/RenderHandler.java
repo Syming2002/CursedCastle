@@ -6,6 +6,7 @@ import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.client.render.entity.*;
 import com.syming.castlevaniacraft.client.render.tile.TileEntityDraculaHeadRenderer;
 import com.syming.castlevaniacraft.entity.EntityCrucifix;
+import com.syming.castlevaniacraft.entity.EntityLaserBeamTeleportation;
 import com.syming.castlevaniacraft.entity.mobs.*;
 import com.syming.castlevaniacraft.entity.mobs.boss.*;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
@@ -67,30 +68,7 @@ public class RenderHandler {
     }
 
     public static void registerEntityRenders() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityVampireBat.class, RenderVampireBat::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityBloodSkeleton.class, RenderBloodSkeleton::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityCatoblepas.class, RenderCatoblepas::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityCrucifix.class, RenderCrucifix::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityDracula.class, RenderDracula::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityDraculaSecondForm.class, RenderDraculaSecondForm::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityFireHydra.class, RenderFireHydra::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityFlameDemon.class, RenderFlameDemon::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityFleaMan.class, RenderFleaMan::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityFriendlyBat.class, RenderFriendlyBat::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityFriendlyZombie.class, RenderFriendlyZombie::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityFrozenShade.class, RenderFrozenShade::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityGorgon.class, RenderGorgon::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityGrimReaper.class, RenderGrimReaper::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityHarpy.class, RenderHarpy::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityHarpyFeather.class, RenderHarpyFeather::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityHeatShade.class, RenderHeatShade::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityIceBladeProjectile.class, RenderIceBlade::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityMedusa.class, RenderMedusa::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityMedusaSnake.class, RenderMedusaSnake::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityPoisonShade.class, RenderPoisonShade::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityRusalka.class, RenderRusalka::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityThunderShade.class, RenderThunderShade::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityZephyr.class, RenderZephyr::new);
+
     }
 
     public static void registerItemRenders() {

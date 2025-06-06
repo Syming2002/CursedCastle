@@ -1,4 +1,3 @@
 {
-  "parent": "castlevaniacraft:block/dracula_head",
-  "textures": {"particle":  "castlevaniacraft:entity/dracula"}
+  "parent": "castlevaniacraft:block/dracula_head"
 }

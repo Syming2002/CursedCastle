@@ -66,7 +66,7 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
         this.setSize(1.5F, 3.0F);
         this.noClip = false;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.experienceValue = 100;
+        this.experienceValue = 444;
         this.moveHelper = new EntityFlyHelper(this);
     }
 
@@ -120,7 +120,7 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(36.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_SPEED);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(1.2D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(444.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
         this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(0.5D);

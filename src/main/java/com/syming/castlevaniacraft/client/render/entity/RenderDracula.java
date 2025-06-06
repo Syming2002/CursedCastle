@@ -2,6 +2,7 @@ package com.syming.castlevaniacraft.client.render.entity;
 
 import com.syming.castlevaniacraft.client.model.entity.ModelDracula;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDracula;
+import com.syming.castlevaniacraft.entity.mobs.boss.EntityDraculaHead;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -30,21 +31,19 @@ public class RenderDracula extends RenderLiving<EntityDracula> {
      * Renders the desired {@code T} type Entity.
      */
     @Override
-    public void doRender(EntityDracula entity, double x, double y, double z, float entityYaw, float partialTicks)
-    {
+    public void doRender(EntityDracula entity, double x, double y, double z, float entityYaw, float partialTicks) {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
+         EntityDraculaHead head = (EntityDraculaHead) entity.getDraculaHead();
 
-        if (entity.healingEnderCrystal != null)
-        {
+        if (head.healingEnderCrystal != null) {
             this.bindTexture(ENDERCRYSTAL_BEAM_TEXTURES);
-            float f = MathHelper.sin(((float)entity.healingEnderCrystal.ticksExisted + partialTicks) * 0.2F) / 2.0F + 0.5F;
+            float f = MathHelper.sin(((float)head.healingEnderCrystal.ticksExisted + partialTicks) * 0.2F) / 2.0F + 0.5F;
             f = (f * f + f) * 0.2F;
-            renderCrystalBeams(x, y, z, partialTicks, entity.posX + (entity.prevPosX - entity.posX) * (double)(1.0F - partialTicks), entity.posY + (entity.prevPosY - entity.posY) * (double)(1.0F - partialTicks), entity.posZ + (entity.prevPosZ - entity.posZ) * (double)(1.0F - partialTicks), entity.ticksExisted, entity.healingEnderCrystal.posX, (double)f + entity.healingEnderCrystal.posY, entity.healingEnderCrystal.posZ);
+            renderCrystalBeams(x, y, z, partialTicks, entity.posX + (entity.prevPosX - entity.posX) * (double)(1.0F - partialTicks), entity.posY + (entity.prevPosY - entity.posY) * (double)(1.0F - partialTicks), entity.posZ + (entity.prevPosZ - entity.posZ) * (double)(1.0F - partialTicks), entity.ticksExisted, head.healingEnderCrystal.posX, (double)f + head.healingEnderCrystal.posY, head.healingEnderCrystal.posZ);
         }
     }
 
-    public static void renderCrystalBeams(double p_188325_0_, double p_188325_2_, double p_188325_4_, float p_188325_6_, double p_188325_7_, double p_188325_9_, double p_188325_11_, int p_188325_13_, double p_188325_14_, double p_188325_16_, double p_188325_18_)
-    {
+    public static void renderCrystalBeams(double p_188325_0_, double p_188325_2_, double p_188325_4_, float p_188325_6_, double p_188325_7_, double p_188325_9_, double p_188325_11_, int p_188325_13_, double p_188325_14_, double p_188325_16_, double p_188325_18_) {
         float f = (float)(p_188325_14_ - p_188325_7_);
         float f1 = (float)(p_188325_16_ - 1.0D - p_188325_9_);
         float f2 = (float)(p_188325_18_ - p_188325_11_);
@@ -64,8 +63,7 @@ public class RenderDracula extends RenderLiving<EntityDracula> {
         bufferbuilder.begin(5, DefaultVertexFormats.POSITION_TEX_COLOR);
         int i = 8;
 
-        for (int j = 0; j <= 8; ++j)
-        {
+        for (int j = 0; j <= 8; ++j) {
             float f7 = MathHelper.sin((float)(j % 8) * ((float)Math.PI * 2F) / 8.0F) * 0.75F;
             float f8 = MathHelper.cos((float)(j % 8) * ((float)Math.PI * 2F) / 8.0F) * 0.75F;
             float f9 = (float)(j % 8) / 8.0F;

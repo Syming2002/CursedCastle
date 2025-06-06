@@ -124,7 +124,11 @@ public class EntityHolyCross extends CCThrowableWeapon {
 
     @Override
     protected float getImpactDamage() {
-        return material.getAttackDamage() + 2.0F;
+        if (this.material != null) {
+            return material.getAttackDamage() + 2.0F;
+        } else {
+            return 0.0F;
+        }
     }
 
     public ItemStack getItemStack() {

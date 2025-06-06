@@ -2,25 +2,20 @@ package com.syming.castlevaniacraft.itemblock;
 
 import com.syming.castlevaniacraft.block.CCBlock;
 import com.syming.castlevaniacraft.block.head.BlockDraculaHead;
-import com.syming.castlevaniacraft.client.render.tile.TileEntityDraculaHeadRenderer;
+import com.syming.castlevaniacraft.client.render.tile.RenderTileEntityItemDraculaHead;
 import com.syming.castlevaniacraft.tile.TileEntityDraculaHead;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -31,6 +26,7 @@ public class ItemBlockDraculaHead extends ItemBlock
     public ItemBlockDraculaHead(Block block)
     {
         super(block);
+        this.setTileEntityItemStackRenderer(new RenderTileEntityItemDraculaHead());
     }
 
     /**
