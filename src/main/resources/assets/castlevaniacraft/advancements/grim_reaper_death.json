@@ -1,8 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:skull",
-      "data": 0
+      "item": "castlevaniacraft:grim_reaper_head"
     },
     "title": {
       "translate": "advancement.grim_reaper_death.title"

@@ -178,6 +178,7 @@ item.diamond_throwing_axe.name=ダイヤモンドの斧
 
 tile.alchemy_table.name=錬金術のテーブル
 tile.dracula_head.name=ドラキュラの頭
+tile.grim_reaper_head.name=死神の頭
 
 # Tooltips
 

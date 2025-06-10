@@ -4,7 +4,6 @@ import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.block.draculacastlestone.BlockDraculaCastleStoneBrick;
 import com.syming.castlevaniacraft.client.gui.CCGui;
 import com.syming.castlevaniacraft.client.render.entity.*;
-import com.syming.castlevaniacraft.client.render.tile.TileEntityDraculaHeadRenderer;
 import com.syming.castlevaniacraft.entity.EntityCrucifix;
 import com.syming.castlevaniacraft.entity.EntityLaserBeamTeleportation;
 import com.syming.castlevaniacraft.entity.mobs.*;

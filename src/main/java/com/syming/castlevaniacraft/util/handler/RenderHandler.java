@@ -5,6 +5,7 @@ package com.syming.castlevaniacraft.util.handler;
 import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.client.render.entity.*;
 import com.syming.castlevaniacraft.client.render.tile.TileEntityDraculaHeadRenderer;
+import com.syming.castlevaniacraft.client.render.tile.TileEntityGrimReaperHeadRenderer;
 import com.syming.castlevaniacraft.entity.EntityCrucifix;
 import com.syming.castlevaniacraft.entity.EntityLaserBeamTeleportation;
 import com.syming.castlevaniacraft.entity.mobs.*;
@@ -20,6 +21,7 @@ import com.syming.castlevaniacraft.entity.projectiles.EntityHarpyFeather;
 import com.syming.castlevaniacraft.entity.projectiles.EntityIceBladeProjectile;
 import com.syming.castlevaniacraft.block.CCBlock;
 import com.syming.castlevaniacraft.tile.TileEntityDraculaHead;
+import com.syming.castlevaniacraft.tile.TileEntityGrimReaperHead;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -77,5 +79,6 @@ public class RenderHandler {
 
     public static void registerTileEntityRenderers() {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDraculaHead.class, TileEntityDraculaHeadRenderer.INSTANCE);
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrimReaperHead.class, TileEntityGrimReaperHeadRenderer.INSTANCE);
     }
 }

@@ -2,6 +2,7 @@ package com.syming.castlevaniacraft.block;
 
 import com.syming.castlevaniacraft.block.draculacastlestone.*;
 import com.syming.castlevaniacraft.block.head.BlockDraculaHead;
+import com.syming.castlevaniacraft.block.head.BlockGrimReaperHead;
 import com.syming.castlevaniacraft.fluid.CCFluid;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
@@ -32,6 +33,7 @@ public class CCBlock {
 
     // Heads
     public static final BlockDraculaHead DRACULA_HEAD = new BlockDraculaHead("dracula_head");
+    public static final BlockGrimReaperHead GRIM_REAPER_HEAD = new BlockGrimReaperHead("grim_reaper_head");
 
     // Tile Blocks
 

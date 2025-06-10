@@ -9,10 +9,6 @@ public class ModelCCHead extends ModelBase {
 
     public ModelRenderer head;
 
-    public ModelCCHead() {
-        this(0, 35, 64, 64);
-    }
-
     public ModelCCHead(int texU, int texV, int texWidth, int texHeight) {
         this.textureWidth = texWidth;
         this.textureHeight = texHeight;

@@ -17,7 +17,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModelGrimReaper extends CCModel {
 
-//    private final AdvancedModelRenderer modelCore;
     private final AdvancedModelRenderer head;
     private final AdvancedModelRenderer headWear;
     private final AdvancedModelRenderer body;
@@ -33,7 +32,7 @@ public class ModelGrimReaper extends CCModel {
 
     public ModelGrimReaper()
     {
-        this(128, 128);
+        this(64, 64);
     }
 
     public ModelGrimReaper(int textureWidthIn, int textureHeightIn) {
@@ -43,53 +42,38 @@ public class ModelGrimReaper extends CCModel {
         this.textureWidth = textureWidthIn;
         this.textureHeight = textureHeightIn;
 
-//        modelCore = new AdvancedModelRenderer(this);
-//        modelCore.setRotationPoint(0.0F, 24.0F, 0.0F);
-
 
         head = new AdvancedModelRenderer(this);
         head.setRotationPoint(0.0F, 0.0F, 0.0F);
-//        modelCore.addChild(head);
-        head.cubeList.add(new ModelBox(head, 21, 0, -4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F, false));
+        head.cubeList.add(new ModelBox(head, 32, 28, -4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F, false));
 
         headWear = new AdvancedModelRenderer(this);
         headWear.setRotationPoint(0.0F, 0.0F, 0.0F);
-//        modelCore.addChild(headWear);
-        headWear.cubeList.add(new ModelBox(headWear, 45, 8, -4.0F, -8.0F, -4.0F, 8, 8, 8, 0.5F, false));
+        headWear.cubeList.add(new ModelBox(headWear, 0, 28, -4.0F, -8.0F, -4.0F, 8, 8, 8, 0.5F, false));
 
         body = new AdvancedModelRenderer(this);
         body.setRotationPoint(0.0F, 0.0F, 0.0F);
-//        modelCore.addChild(body);
-        body.cubeList.add(new ModelBox(body, 24, 20, -4.0F, 0.0F, -2.0F, 8, 24, 4, 0.0F, false));
+        body.cubeList.add(new ModelBox(body, 0, 0, -4.0F, 0.0F, -2.0F, 8, 24, 4, 0.0F, false));
 
         bodyWear = new AdvancedModelRenderer(this);
         bodyWear.setRotationPoint(0.0F, 0.0F, 0.0F);
-//        modelCore.addChild(bodyWear);
-        bodyWear.cubeList.add(new ModelBox(bodyWear, 0, 20, -4.0F, 0.0F, -2.0F, 8, 24, 4, 0.25F, false));
+        bodyWear.cubeList.add(new ModelBox(bodyWear, 24, 0, -4.0F, 0.0F, -2.0F, 8, 24, 4, 0.25F, false));
 
         humanoidRightArm = new AdvancedModelRenderer(this);
         humanoidRightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
-//        modelCore.addChild(humanoidRightArm);
-//        setRotationAngle(humanoidRightArm, -0.4659F, -0.1198F, -0.2333F);
-        humanoidRightArm.cubeList.add(new ModelBox(humanoidRightArm, 48, 24, -3.0F, -1.5F, -1.0F, 4, 12, 4, 0.0F, false));
+        humanoidRightArm.cubeList.add(new ModelBox(humanoidRightArm, 0, 44, -3.0F, -1.5F, -1.0F, 4, 12, 4, 0.0F, false));
 
         humanoidLeftArm = new AdvancedModelRenderer(this);
         humanoidLeftArm.setRotationPoint(5.0F, 2.0F, 0.0F);
-//        modelCore.addChild(humanoidLeftArm);
-//        setRotationAngle(humanoidLeftArm, -1.0321F, 0.2261F, 0.1332F);
-        humanoidLeftArm.cubeList.add(new ModelBox(humanoidLeftArm, 16, 48, -1.0F, -1.5F, -1.0F, 4, 12, 4, 0.0F, false));
+        humanoidLeftArm.cubeList.add(new ModelBox(humanoidLeftArm, 16, 44, -1.0F, -1.5F, -1.0F, 4, 12, 4, 0.0F, false));
 
         humanoidRightArmSleeve = new AdvancedModelRenderer(this);
         humanoidRightArmSleeve.setRotationPoint(-5.0F, 2.0F, 0.0F);
-//        modelCore.addChild(humanoidRightArmSleeve);
-//        setRotationAngle(humanoidRightArmSleeve, -0.4659F, -0.1198F, -0.2333F);
-        humanoidRightArmSleeve.cubeList.add(new ModelBox(humanoidRightArmSleeve, 0, 0, -3.0F, -1.5F, -1.0F, 4, 12, 4, 0.0625F, false));
+        humanoidRightArmSleeve.cubeList.add(new ModelBox(humanoidRightArmSleeve, 48, 0, -3.0F, -1.5F, -1.0F, 4, 12, 4, 0.0625F, false));
 
         humanoidLeftArmSleeve = new AdvancedModelRenderer(this);
         humanoidLeftArmSleeve.setRotationPoint(5.0F, 2.0F, 0.0F);
-//        modelCore.addChild(humanoidLeftArmSleeve);
-//        setRotationAngle(humanoidLeftArmSleeve, -1.0321F, 0.2261F, 0.1332F);
-        humanoidLeftArmSleeve.cubeList.add(new ModelBox(humanoidLeftArmSleeve, 0, 48, -1.0F, -1.5F, -1.0F, 4, 12, 4, 0.0625F, false));
+        humanoidLeftArmSleeve.cubeList.add(new ModelBox(humanoidLeftArmSleeve, 32, 44, -1.0F, -1.5F, -1.0F, 4, 12, 4, 0.0625F, false));
 
         this.animator = ModelAnimator.create();
         updateDefaultPose();
@@ -102,7 +86,6 @@ public class ModelGrimReaper extends CCModel {
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         EntityGrimReaper grimReaper = (EntityGrimReaper) entityIn;
         animate(grimReaper, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-//        this.modelCore.render(scale);
         this.head.render(scale);
         this.headWear.render(scale);
         this.body.render(scale);

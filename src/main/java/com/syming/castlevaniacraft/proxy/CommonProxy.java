@@ -2,6 +2,7 @@ package com.syming.castlevaniacraft.proxy;
 
 import com.syming.castlevaniacraft.tile.TileEntityAlchemyTable;
 import com.syming.castlevaniacraft.tile.TileEntityDraculaHead;
+import com.syming.castlevaniacraft.tile.TileEntityGrimReaperHead;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,5 +66,6 @@ public class CommonProxy {
     public void registerTileEntities() {
         GameRegistry.registerTileEntity(TileEntityAlchemyTable.class, new ResourceLocation(CCReferences.MODID,"alchemy_table"));
         GameRegistry.registerTileEntity(TileEntityDraculaHead.class, new ResourceLocation(CCReferences.MODID,"dracula_head"));
+        GameRegistry.registerTileEntity(TileEntityGrimReaperHead.class, new ResourceLocation(CCReferences.MODID,"grim_reaper_head"));
     }
 }
