@@ -4,12 +4,15 @@ import com.syming.castlevaniacraft.client.model.entity.ModelDracula;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDracula;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDraculaHead;
 import com.syming.castlevaniacraft.util.CCReferences;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -41,6 +44,8 @@ public class RenderDracula extends RenderLiving<EntityDracula> {
             f = (f * f + f) * 0.2F;
             renderCrystalBeams(x, y, z, partialTicks, entity.posX + (entity.prevPosX - entity.posX) * (double)(1.0F - partialTicks), entity.posY + (entity.prevPosY - entity.posY) * (double)(1.0F - partialTicks), entity.posZ + (entity.prevPosZ - entity.posZ) * (double)(1.0F - partialTicks), entity.ticksExisted, head.healingEnderCrystal.posX, (double)f + head.healingEnderCrystal.posY, head.healingEnderCrystal.posZ);
         }
+
+        renderLaserBeamTeleportation(entity, x, y , z, partialTicks);
     }
 
     public static void renderCrystalBeams(double p_188325_0_, double p_188325_2_, double p_188325_4_, float p_188325_6_, double p_188325_7_, double p_188325_9_, double p_188325_11_, int p_188325_13_, double p_188325_14_, double p_188325_16_, double p_188325_18_) {
@@ -76,6 +81,59 @@ public class RenderDracula extends RenderLiving<EntityDracula> {
         GlStateManager.shadeModel(7424);
         RenderHelper.enableStandardItemLighting();
         GlStateManager.popMatrix();
+    }
+
+    private void renderLaserBeamTeleportation(EntityDracula entity, double x, double y, double z, float partialTicks)
+    {
+        if (entity.isTeleporting()) {
+            GlStateManager.disableLighting();
+            TextureMap texturemap = Minecraft.getMinecraft().getTextureMapBlocks();
+            TextureAtlasSprite textureatlassprite = texturemap.getAtlasSprite("castlevaniacraft:entity/teleportation_laser_beam.png");
+            GlStateManager.pushMatrix();
+            GlStateManager.translate((float) x, (float) y, (float) z);
+            float f = entity.width * 1.8F;
+            GlStateManager.scale(f, f, f);
+            Tessellator tessellator = Tessellator.getInstance();
+            BufferBuilder bufferbuilder = tessellator.getBuffer();
+            float f1 = 0.5F;
+            float f2 = 0.0F;
+            float f3 = entity.height / f;
+            float f4 = (float) (entity.posY - entity.getEntityBoundingBox().minY);
+            GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+            GlStateManager.translate(0.0F, 0.0F, -0.3F + (float) ((int) f3) * 0.02F);
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            float f5 = 0.0F;
+            int i = 0;
+            bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+
+            while (f3 > 0.0F) {
+                this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+                float f6 = textureatlassprite.getMinU();
+                float f7 = textureatlassprite.getMinV();
+                float f8 = textureatlassprite.getMaxU();
+                float f9 = textureatlassprite.getMaxV();
+
+                if (i / 2 % 2 == 0) {
+                    float f10 = f8;
+                    f8 = f6;
+                    f6 = f10;
+                }
+
+                bufferbuilder.pos((double) (f1 - 0.0F), (double) (0.0F - f4), (double) f5).tex((double) f8, (double) f9).endVertex();
+                bufferbuilder.pos((double) (-f1 - 0.0F), (double) (0.0F - f4), (double) f5).tex((double) f6, (double) f9).endVertex();
+                bufferbuilder.pos((double) (-f1 - 0.0F), (double) (1.4F - f4), (double) f5).tex((double) f6, (double) f7).endVertex();
+                bufferbuilder.pos((double) (f1 - 0.0F), (double) (1.4F - f4), (double) f5).tex((double) f8, (double) f7).endVertex();
+                f3 -= 0.45F;
+                f4 -= 0.45F;
+                f1 *= 0.9F;
+                f5 += 0.03F;
+                ++i;
+            }
+
+            tessellator.draw();
+            GlStateManager.popMatrix();
+            GlStateManager.enableLighting();
+        }
     }
 
     @Override

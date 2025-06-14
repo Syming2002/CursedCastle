@@ -158,6 +158,10 @@ key.castlevaniacraft.guardian_soul_keybind=Use Guardian Souls
 item.throwing_bone.name=Throwing Bone
 item.scythe_projectile.name=Scythe Projectile
 
+# Spell Books
+
+item.fire_book.fire_book.name=Fire Book
+
 # Sub Weapons
 
 item.wooden_dagger.name=Wooden Dagger
@@ -165,18 +169,21 @@ item.stone_dagger.name=Stone Dagger
 item.iron_dagger.name=Iron Dagger
 item.golden_dagger.name=Golden Dagger
 item.diamond_dagger.name=Diamond Dagger
+item.netherite_dagger.name=Netherite Dagger
 item.holy_bible.name=Holy Bible
 item.wooden_holy_cross.name=Wooden Holy Cross
 item.stone_holy_cross.name=Stone Holy Cross
 item.iron_holy_cross.name=Iron Holy Cross
 item.golden_holy_cross.name=Golden Holy Cross
 item.diamond_holy_cross.name=Diamond Holy Cross
+item.netherite_holy_cross.name=Netherite Holy Cross
 item.holy_water.name=Holy Water
 item.wooden_throwing_axe.name=Wooden Throwing Axe
 item.stone_throwing_axe.name=Stone Throwing Axe
 item.iron_throwing_axe.name=Iron Throwing Axe
 item.golden_throwing_axe.name=Golden Throwing Axe
 item.diamond_throwing_axe.name=Diamond Throwing Axe
+item.netherite_throwing_axe.name=Netherite Throwing Axe
 
 # Tile Entity
 

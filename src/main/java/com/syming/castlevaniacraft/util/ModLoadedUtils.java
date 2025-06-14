@@ -4,10 +4,12 @@ import net.minecraftforge.fml.common.Loader;
 
 public enum ModLoadedUtils {
 
-    Forestry(ModNames.FORESTRY);
+    Forestry(ModNames.FORESTRY),
+    NetherBackport(ModNames.NETHER_BACKPORT);
 
     public static class ModNames {
         public static final String FORESTRY = "forestry";
+        public static final String NETHER_BACKPORT = "nb";
     }
 
     private final String ID;

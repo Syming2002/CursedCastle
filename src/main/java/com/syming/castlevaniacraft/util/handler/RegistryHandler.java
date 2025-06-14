@@ -17,6 +17,13 @@ import com.syming.castlevaniacraft.integration.forestry.bees.CCBeeDefinition;
 import com.syming.castlevaniacraft.integration.forestry.items.CCCombItem;
 import com.syming.castlevaniacraft.integration.forestry.items.CCDropItem;
 import com.syming.castlevaniacraft.integration.forestry.recipes.CentrifugeRecipes;
+import com.syming.castlevaniacraft.item.projectiles.subweapons.ItemDagger;
+import com.syming.castlevaniacraft.item.projectiles.subweapons.holycross.ItemAnimNetheriteHolyCross;
+import com.syming.castlevaniacraft.item.projectiles.subweapons.holycross.ItemAnimWoodenHolyCross;
+import com.syming.castlevaniacraft.item.projectiles.subweapons.holycross.ItemHolyCross;
+import com.syming.castlevaniacraft.item.projectiles.subweapons.throwingaxe.ItemAnimDiamondThrowingAxe;
+import com.syming.castlevaniacraft.item.projectiles.subweapons.throwingaxe.ItemAnimNetheriteThrowingAxe;
+import com.syming.castlevaniacraft.item.projectiles.subweapons.throwingaxe.ItemThrowingAxe;
 import com.syming.castlevaniacraft.keybind.CCKeybind;
 import com.syming.castlevaniacraft.networking.CCNetworking;
 import com.syming.castlevaniacraft.recipe.CraftingRecipes;
@@ -28,12 +35,14 @@ import com.syming.castlevaniacraft.world.gen.structure.church.BigChurchCreationH
 import forestry.api.core.ForestryAPI;
 import forestry.core.items.IColoredItem;
 
+import git.jbredwards.nether_api.mod.NetherAPI;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -49,12 +58,21 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import static com.unseen.nb.init.NBSoundTypes.NETHERITE;
+
 @Mod.EventBusSubscriber
 public class RegistryHandler {
 
     private static IForgeRegistry<Item> itemRegistry;
     public static CCCombItem COMBS;
     public static CCDropItem DROPS;
+    public static Item.ToolMaterial NETHERITE = EnumHelper.addToolMaterial("netherite", 4, 2031, 10.0F, 4.0F, 15);
+    public static ItemAnimNetheriteHolyCross animNetheriteHolyCross;
+    public static ItemAnimNetheriteThrowingAxe animNetheriteThrowingAxe;
+    public static ItemDagger netheriteDagger;
+    public static ItemHolyCross netheriteHolyCross;
+    public static ItemThrowingAxe netheriteThrowingAxe;
+
 
     @SubscribeEvent
     public static void onItemRegister(RegistryEvent.Register<Item> event) {
@@ -63,6 +81,18 @@ public class RegistryHandler {
         if (ModLoadedUtils.Forestry.isModLoaded()) {
             itemRegistry.register(DROPS);
             itemRegistry.register(COMBS);
+        }
+        if (ModLoadedUtils.NetherBackport.isModLoaded()) {
+            animNetheriteHolyCross = new ItemAnimNetheriteHolyCross("anim_netherite_holy_cross");
+            itemRegistry.register(animNetheriteHolyCross);
+            animNetheriteThrowingAxe = new ItemAnimNetheriteThrowingAxe("anim_netherite_throwing_axe");
+            itemRegistry.register(animNetheriteThrowingAxe);
+            netheriteDagger = new ItemDagger("netherite_dagger", NETHERITE);
+            itemRegistry.register(netheriteDagger);
+            netheriteHolyCross = new ItemHolyCross("netherite_holy_cross", NETHERITE);
+            itemRegistry.register(netheriteHolyCross);
+            netheriteThrowingAxe = new ItemThrowingAxe("netherite_throwing_axe", NETHERITE);
+            itemRegistry.register(netheriteThrowingAxe);
         }
     }
 

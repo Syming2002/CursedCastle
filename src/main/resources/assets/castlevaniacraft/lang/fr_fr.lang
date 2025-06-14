@@ -153,6 +153,10 @@ key.castlevaniacraft.guardian_soul_keybind=Utiliser les Âmes De Type Garde
 item.throwing_bone.name=Os Jetable
 item.scythe_projectile.name=Faux
 
+# Spell Books
+
+item.fire_book.fire_book.name=Livre de Feu
+
 # Sub Weapons
 
 item.wooden_dagger.name=Poignard en Bois
@@ -160,18 +164,21 @@ item.stone_dagger.name=Poignard en Pierre
 item.iron_dagger.name=Poignard en Fer
 item.golden_dagger.name=Poignard en Or
 item.diamond_dagger.name=Poignard en Diamant
+item.netherite_dagger.name=Poignard en Netherite
 item.holy_bible.name=Bible
 item.wooden_holy_cross.name=Croix en Bois
 item.stone_holy_cross.name=Croix en Pierre
 item.iron_holy_cross.name=Croix en Fer
 item.golden_holy_cross.name=Croix en Or
 item.diamond_holy_cross.name=Croix en Diamant
+item.netherite_holy_cross.name=Croix en Netherite
 item.holy_water.name=Eau Bénite
 item.wooden_throwing_axe.name=Hache Lançable en Bois
 item.stone_throwing_axe.name=Hache Lançable en Pierre
 item.iron_throwing_axe.name=Hache Lançable en Fer
 item.golden_throwing_axe.name=Hache Lançable en Or
 item.diamond_throwing_axe.name=Hache Lançable en Diamant
+item.netherite_throwing_axe.name=Hache Lançable en Netherite
 
 
 # Tile Entity

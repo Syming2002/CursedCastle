@@ -89,7 +89,6 @@ public class CCEntity {
 
         registerEntityWithNoEgg("fire_breath", EntityFireBreath.class, 64);
         registerEntityWithNoEgg("ice_breath", EntityIceBreath.class, 64);
-        registerEntityWithNoEgg("laser_beam_teleportation", EntityLaserBeamTeleportation.class, 64);
         registerEntityWithNoEgg("poison_breath", EntityPoisonBreath.class, 64);
         registerEntityWithNoEgg("stone_breath", EntityStoneBreath.class, 64);
     }

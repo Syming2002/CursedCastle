@@ -153,6 +153,10 @@ key.castlevaniacraft.guardian_soul_keybind=ガーディアンのタイプの魂�
 item.throwing_bone.name=投げ骨
 item.scythe_projectile.name=鎌の発射体
 
+# Spell Books
+
+item.fire_book.fire_book.name=火の本
+
 # Sub Weapons
 
 item.wooden_dagger.name=木の短剣
@@ -160,18 +164,21 @@ item.stone_dagger.name=石の短剣
 item.iron_dagger.name=鉄の短剣
 item.golden_dagger.name=金の短剣
 item.diamond_dagger.name=ダイヤモンドの短剣
+item.netherite_dagger.name=ネザライトの短剣
 item.holy_bible.name=聖書
 item.wooden_holy_cross.name=木の十字架
 item.stone_holy_cross.name=石の十字架
 item.iron_holy_cross.name=鉄の十字架
 item.golden_holy_cross.name=金の十字架
 item.diamond_holy_cross.name=ダイヤモンドの十字架
+item.netherite_holy_cross.name=ネザライトの十字架
 item.holy_water.name=聖水
 item.wooden_throwing_axe.name=木の斧
 item.stone_throwing_axe.name=石の斧
 item.iron_throwing_axe.name=鉄の斧
 item.golden_throwing_axe.name=金の斧
 item.diamond_throwing_axe.name=ダイヤモンドの斧
+item.netherite_throwing_axe.name=ネザライトの斧
 
 
 # Tile Entity

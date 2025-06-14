@@ -1,7 +1,6 @@
 package com.syming.castlevaniacraft.entity.mobs.boss;
 
 import com.syming.castlevaniacraft.api.ICustomBossBar;
-import com.syming.castlevaniacraft.entity.EntityLaserBeamTeleportation;
 import com.syming.castlevaniacraft.entity.ai.dracula.*;
 import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
 import com.syming.castlevaniacraft.entity.mobs.EntityVampireBat;
@@ -9,7 +8,6 @@ import com.syming.castlevaniacraft.loot.CCTreasures;
 import com.syming.castlevaniacraft.networking.CCNetworking;
 import com.syming.castlevaniacraft.networking.MessageAddBossInfo;
 import com.syming.castlevaniacraft.networking.MessageRemoveBossInfo;
-import com.syming.castlevaniacraft.particle.CCParticle;
 import com.syming.castlevaniacraft.util.CCReferences;
 
 import net.ilexiconn.llibrary.server.animation.Animation;
@@ -18,9 +16,9 @@ import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.ilexiconn.llibrary.server.entity.multipart.PartEntity;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.Particle;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -47,6 +45,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICustomBossBar {
 
@@ -72,6 +71,12 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     private List<EntityVampireBat> aggressiveBats = new ArrayList<>();
     public PartEntity draculaHead;
     public PartEntity draculaBody;
+
+    private boolean isTeleporting;
+    private boolean isPostTeleport;
+    private int teleportTick = 0;
+
+
 
 
 
@@ -253,13 +258,6 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
                 setAnimation(NO_ANIMATION);
             }
         }
-        if ((animationTick == FIREBALLS_ANIMATION.getDuration() - 20 || animationTick == DARK_INFERNO_ANIMATION.getDuration() - 20 || animationTick == FIRE_PILLAR_ANIMATION.getDuration() - 20) && isEntityAlive()) {
-            if (!this.world.isRemote) {
-                EntityLaserBeamTeleportation laserBeamTeleportation = new EntityLaserBeamTeleportation(this.world, this);
-                this.world.spawnEntity(laserBeamTeleportation);
-                System.out.println("Teleportation Laser Appear");
-            }
-        }
 
         if ((animationTick == FIREBALLS_ANIMATION.getDuration() || animationTick == DARK_INFERNO_ANIMATION.getDuration() || animationTick == FIRE_PILLAR_ANIMATION.getDuration()) && isEntityAlive()) {
             teleportRandomlyNearTarget();
@@ -278,7 +276,6 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
         if (batsAttackCooldown > 0) {
             batsAttackCooldown--;
         }
-
     }
 
     protected boolean shouldBurnInDay() {
@@ -431,7 +428,32 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
             double d0 = target.posX + (this.rand.nextDouble() - 0.5D) * radius;
             double d1 = target.posY + (double)(this.rand.nextInt(16) - 8);
             double d2 = target.posZ + (this.rand.nextDouble() - 0.5D) * radius;
-            this.teleportTo(d0, d1, d2);
+
+            if (this.isTeleporting) {
+                this.teleportTick++;
+
+                if (this.teleportTick == 6) {
+                    setInvisible(true);
+                }
+
+                if (this.teleportTick >= 12) {
+                    this.isTeleporting = false;
+                    this.teleportTick = 0;
+
+                    this.teleportTo(d0, d1, d2);
+                }
+            } else if (this.isPostTeleport) {
+                this.teleportTick++;
+
+                if (this.teleportTick == 6) {
+                    setInvisible(false);
+                }
+
+                if (this.teleportTick >= 12) {
+                    this.isPostTeleport = false;
+                    this.teleportTick = 0;
+                }
+            }
         }
     }
 
@@ -458,8 +480,9 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
         return flag;
     }
 
-
-
+    public boolean isTeleporting() {
+        return this.isTeleporting || this.isPostTeleport;
+    }
     @Override
     public ResourceLocation getLootTable() {
         return CCTreasures.DRACULA;

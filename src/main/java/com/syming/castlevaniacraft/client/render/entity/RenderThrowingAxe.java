@@ -3,14 +3,20 @@ package com.syming.castlevaniacraft.client.render.entity;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityThrowingAxe;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.throwingaxe.ItemThrowingAxe;
+import com.syming.castlevaniacraft.util.handler.RegistryHandler;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.Objects;
+
+import static com.syming.castlevaniacraft.util.handler.RegistryHandler.NETHERITE;
 
 public class RenderThrowingAxe extends Render<EntityThrowingAxe> {
 
@@ -52,17 +58,18 @@ public class RenderThrowingAxe extends Render<EntityThrowingAxe> {
     public ItemStack getStackToRender(EntityThrowingAxe entityIn) {
         ItemStack stack = entityIn.getItemStack();
         if (stack.getItem() instanceof ItemThrowingAxe itemThrowingAxe) {
-            switch (itemThrowingAxe.getMaterial()) {
-                case WOOD:
-                    return new ItemStack(CCItem.animWoodenThrowingAxe);
-                case STONE:
-                    return new ItemStack(CCItem.animStoneThrowingAxe);
-                case IRON:
-                    return new ItemStack(CCItem.animIronThrowingAxe);
-                case GOLD:
-                    return new ItemStack(CCItem.animGoldenThrowingAxe);
-                case DIAMOND:
-                    return new ItemStack(CCItem.animDiamondThrowingAxe);
+            if (itemThrowingAxe.getMaterial() == Item.ToolMaterial.WOOD) {
+                return new ItemStack(CCItem.animWoodenThrowingAxe);
+            } else if (itemThrowingAxe.getMaterial() == Item.ToolMaterial.STONE) {
+                return new ItemStack(CCItem.animStoneThrowingAxe);
+            } else if (itemThrowingAxe.getMaterial() == Item.ToolMaterial.IRON) {
+                return new ItemStack(CCItem.animIronThrowingAxe);
+            } else if (itemThrowingAxe.getMaterial() == Item.ToolMaterial.GOLD) {
+                return new ItemStack(CCItem.animGoldenThrowingAxe);
+            } else if (itemThrowingAxe.getMaterial() == Item.ToolMaterial.DIAMOND) {
+                return new ItemStack(CCItem.animDiamondThrowingAxe);
+            } else if (itemThrowingAxe.getMaterial() == NETHERITE) {
+                return new ItemStack(RegistryHandler.animNetheriteThrowingAxe);
             }
         }
         return stack;

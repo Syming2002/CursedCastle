@@ -168,9 +168,9 @@ public class CCItem {
     // SubWeapons Entity Throwable
     public static Item animIronHolyCross = new ItemAnimIronHolyCross("anim_iron_holy_cross");
     public static Item animWoodenHolyCross = new ItemAnimWoodenHolyCross("anim_wooden_holy_cross");
-    public static Item animStoneHolyCross = new ItemAnimWoodenHolyCross("anim_stone_holy_cross");
-    public static Item animGoldenHolyCross = new ItemAnimWoodenHolyCross("anim_golden_holy_cross");
-    public static Item animDiamondHolyCross = new ItemAnimWoodenHolyCross("anim_diamond_holy_cross");
+    public static Item animStoneHolyCross = new ItemAnimStoneHolyCross("anim_stone_holy_cross");
+    public static Item animGoldenHolyCross = new ItemAnimGoldHolyCross("anim_golden_holy_cross");
+    public static Item animDiamondHolyCross = new ItemAnimDiamondHolyCross("anim_diamond_holy_cross");
 
     public static Item animFireHolyCross = new ItemAnimFireHolyCross("anim_fire_holy_cross");
 

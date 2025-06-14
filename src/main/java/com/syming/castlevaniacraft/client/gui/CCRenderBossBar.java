@@ -34,11 +34,11 @@ public class CCRenderBossBar extends Gui {
             x -= 37;
 
             minecraft.getTextureManager().bindTexture(dracula.getCustomBossBar());
-            drawTexturedModalRect(x, y, 0, 166, 256, 90);
+            drawTexturedModalRect(x, y, 0, 189, 256, 67);
 
-            int health = (int) (bossInfo.getPercent() * 256.0F);
+            int health = (int) (bossInfo.getPercent() * 178.0F);
             if (health > 0) {
-                drawTexturedModalRect(x, y, 0, 0, health, 90);
+                drawTexturedModalRect(x + 39, y, 39, 0, health, 67);
             }
         }
     }
@@ -49,11 +49,11 @@ public class CCRenderBossBar extends Gui {
             x -= 37;
 
             minecraft.getTextureManager().bindTexture(grimReaper.getCustomBossBar());
-            drawTexturedModalRect(x, y, 0, 74, 256, 74);
+            drawTexturedModalRect(x, y, 0, 128, 256, 128);
 
-            int health = (int) (bossInfo.getPercent() * 256.0F);
+            int health = (int) (bossInfo.getPercent() * 217.0F);
             if (health > 0) {
-                drawTexturedModalRect(x, y, 0, 0, health, 74);
+                drawTexturedModalRect(x + 34, y, 34, 0, health, 128);
             }
         }
     }

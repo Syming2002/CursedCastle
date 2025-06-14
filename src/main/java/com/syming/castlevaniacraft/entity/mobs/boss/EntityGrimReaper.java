@@ -388,7 +388,7 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
 
     @Override
     public @Nullable ResourceLocation getCustomBossBar() {
-        return new ResourceLocation(CCReferences.MODID, "textures/gui/death_boss_bar.png");
+        return new ResourceLocation(CCReferences.MODID, "textures/gui/grim_reaper_boss_bar.png");
     }
 
     /**

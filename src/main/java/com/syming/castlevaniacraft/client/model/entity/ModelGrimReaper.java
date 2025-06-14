@@ -25,7 +25,6 @@ public class ModelGrimReaper extends CCModel {
     private final AdvancedModelRenderer humanoidLeftArm;
     private final AdvancedModelRenderer humanoidRightArmSleeve;
     private final AdvancedModelRenderer humanoidLeftArmSleeve;
-    public ArmPose leftArmPose;
     public ArmPose rightArmPose;
 
     private ModelAnimator animator;
@@ -36,7 +35,6 @@ public class ModelGrimReaper extends CCModel {
     }
 
     public ModelGrimReaper(int textureWidthIn, int textureHeightIn) {
-        this.leftArmPose = ArmPose.DEATH_SCYTHE;
         this.rightArmPose = ArmPose.DEATH_SCYTHE;
 
         this.textureWidth = textureWidthIn;
@@ -244,6 +242,7 @@ public class ModelGrimReaper extends CCModel {
             this.rotate(animator, humanoidLeftArm, 0, 0, 0);
             this.rotate(animator, humanoidLeftArmSleeve, 0, 0, 0);
             animator.endKeyframe();
+
         }
     }
 
@@ -255,7 +254,6 @@ public class ModelGrimReaper extends CCModel {
     public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
     {
         this.rightArmPose = ArmPose.EMPTY;
-        this.leftArmPose = ArmPose.EMPTY;
         ItemStack itemstack = entitylivingbaseIn.getHeldItem(EnumHand.MAIN_HAND);
 
         if (itemstack.getItem() instanceof ItemDeathScythe)
@@ -263,10 +261,6 @@ public class ModelGrimReaper extends CCModel {
             if (entitylivingbaseIn.getPrimaryHand() == EnumHandSide.RIGHT)
             {
                 this.rightArmPose = ArmPose.DEATH_SCYTHE;
-            }
-            else
-            {
-                this.leftArmPose = ArmPose.EMPTY;
             }
         }
 

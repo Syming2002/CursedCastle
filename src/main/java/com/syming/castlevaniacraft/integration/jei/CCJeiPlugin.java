@@ -1,6 +1,7 @@
 package com.syming.castlevaniacraft.integration.jei;
 
 import com.syming.castlevaniacraft.item.CCItem;
+import com.syming.castlevaniacraft.util.handler.RegistryHandler;
 import mezz.jei.api.IItemBlacklist;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -17,6 +18,7 @@ public class CCJeiPlugin implements IModPlugin {
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animStoneHolyCross));
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animGoldenHolyCross));
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animDiamondHolyCross));
+        blacklist.addItemToBlacklist(new ItemStack(RegistryHandler.animNetheriteHolyCross));
 
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animFireHolyCross));
 
@@ -26,5 +28,6 @@ public class CCJeiPlugin implements IModPlugin {
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animIronThrowingAxe));
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animGoldenThrowingAxe));
         blacklist.addItemToBlacklist(new ItemStack(CCItem.animDiamondThrowingAxe));
+        blacklist.addItemToBlacklist(new ItemStack(RegistryHandler.animNetheriteThrowingAxe));
     }
 }
