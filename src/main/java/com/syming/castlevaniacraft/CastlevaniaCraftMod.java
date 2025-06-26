@@ -16,9 +16,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
         version = CCReferences.VERSION,
         dependencies = "required-after:llibrary@[1.7.9,);" +
                 "required-after:baubles@[1.5,);" +
-                "required-after:reachfix@[1.0.11,);" +
-                "required-after:atlaslib@[1.1.6,);" +
-                "required-after:deeperdepths@[1.0.3,);")
+                "required-after:reachfix@[1.0.11,);")
 public class CastlevaniaCraftMod {
 
     static

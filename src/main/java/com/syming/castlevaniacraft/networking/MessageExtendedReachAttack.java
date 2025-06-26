@@ -49,12 +49,14 @@ public class MessageExtendedReachAttack implements IMessage {
                             if (playerMP.getHeldItemMainhand().getItem() instanceof IExtendedReach) {
                                 IExtendedReach extendedReach = (IExtendedReach) playerMP.getHeldItemMainhand().getItem();
 
-                                double distanceSq = playerMP.getDistanceSq(entity);
+                                if (entity != null) {
+                                    double distanceSq = playerMP.getDistanceSq(entity);
 
-                                double reachSq = extendedReach.getReach() * extendedReach.getReach();
+                                    double reachSq = extendedReach.getReach() * extendedReach.getReach();
 
-                                if (reachSq >= distanceSq) {
-                                    playerMP.attackTargetEntityWithCurrentItem(entity);
+                                    if (reachSq >= distanceSq) {
+                                        playerMP.attackTargetEntityWithCurrentItem(entity);
+                                    }
                                 }
                             }
                             return;

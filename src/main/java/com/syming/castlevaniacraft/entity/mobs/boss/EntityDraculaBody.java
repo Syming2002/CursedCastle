@@ -15,7 +15,6 @@ public class EntityDraculaBody extends PartEntity {
     @Override
     public boolean attackEntityFrom(DamageSource source, float damage) {
         if (this.parent instanceof EntityDracula && source.getTrueSource() instanceof EntityPlayer) {
-            System.out.println("Body is Hit");
         }
         return false;
     }

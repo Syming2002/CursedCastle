@@ -22,7 +22,6 @@ public class EntityDraculaHead extends PartEntity {
     public boolean attackEntityFrom(DamageSource source, float damage) {
         if (this.parent instanceof EntityDracula dracula) {
             dracula.attackEntityFrom(source, damage);
-            System.out.println("Head is Hit");
 //            super.attackEntityFrom(source, damage);
             return true;
         }

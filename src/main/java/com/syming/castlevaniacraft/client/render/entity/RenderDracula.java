@@ -1,14 +1,12 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
+import akka.dispatch.sysmsg.Suspend;
 import com.syming.castlevaniacraft.client.model.entity.ModelDracula;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDracula;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDraculaHead;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -18,7 +16,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.lwjgl.Sys;
+import org.lwjgl.opengl.GL11;
 
 import static net.minecraft.client.renderer.entity.RenderDragon.ENDERCRYSTAL_BEAM_TEXTURES;
 
@@ -34,9 +35,9 @@ public class RenderDracula extends RenderLiving<EntityDracula> {
      * Renders the desired {@code T} type Entity.
      */
     @Override
-    public void doRender(EntityDracula entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    public void doRender(@NotNull EntityDracula entity, double x, double y, double z, float entityYaw, float partialTicks) {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
-         EntityDraculaHead head = (EntityDraculaHead) entity.getDraculaHead();
+        EntityDraculaHead head = (EntityDraculaHead) entity.getDraculaHead();
 
         if (head.healingEnderCrystal != null) {
             this.bindTexture(ENDERCRYSTAL_BEAM_TEXTURES);
@@ -45,7 +46,14 @@ public class RenderDracula extends RenderLiving<EntityDracula> {
             renderCrystalBeams(x, y, z, partialTicks, entity.posX + (entity.prevPosX - entity.posX) * (double)(1.0F - partialTicks), entity.posY + (entity.prevPosY - entity.posY) * (double)(1.0F - partialTicks), entity.posZ + (entity.prevPosZ - entity.posZ) * (double)(1.0F - partialTicks), entity.ticksExisted, head.healingEnderCrystal.posX, (double)f + head.healingEnderCrystal.posY, head.healingEnderCrystal.posZ);
         }
 
-        renderLaserBeamTeleportation(entity, x, y , z, partialTicks);
+        if (entity != null
+                && entity.world != null
+                && entity.world.isRemote
+                && ((entity.getTeleportTick() >= 50 && entity.getTeleportTick() < 70)
+                || (entity.getTeleportTick() >= 100 && entity.getTeleportTick() < 120))) {
+            renderLaserBeamTeleportation(entity, x, y, z, partialTicks);
+            System.out.println("Rendering Laser Beam");
+        }
     }
 
     public static void renderCrystalBeams(double p_188325_0_, double p_188325_2_, double p_188325_4_, float p_188325_6_, double p_188325_7_, double p_188325_9_, double p_188325_11_, int p_188325_13_, double p_188325_14_, double p_188325_16_, double p_188325_18_) {
@@ -83,57 +91,67 @@ public class RenderDracula extends RenderLiving<EntityDracula> {
         GlStateManager.popMatrix();
     }
 
-    private void renderLaserBeamTeleportation(EntityDracula entity, double x, double y, double z, float partialTicks)
-    {
-        if (entity.isTeleporting()) {
-            GlStateManager.disableLighting();
-            TextureMap texturemap = Minecraft.getMinecraft().getTextureMapBlocks();
-            TextureAtlasSprite textureatlassprite = texturemap.getAtlasSprite("castlevaniacraft:entity/teleportation_laser_beam.png");
+    public void renderLaserBeamTeleportation(EntityDracula entity, double x, double y, double z, float partialTicks) {
+        GlStateManager.pushMatrix();
+        GlStateManager.translate((float) x, (float) y, (float) z);
+
+        float scale = entity.width * 6.0F;
+        GlStateManager.scale(scale, entity.world.getHeight(), scale);
+
+        GlStateManager.disableLighting();
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+        this.bindTexture(new ResourceLocation(CCReferences.MODID, "textures/blocks/teleportation_laser_beam.png"));
+
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+
+        int ticks = entity.ticksExisted;
+        int numFrames = 8;
+        float frameHeight = 1.0F / numFrames;
+        int currentFrame = (ticks / 4) % numFrames;
+        float vMin = currentFrame * frameHeight;
+        float vMax = vMin + frameHeight;
+
+        float uMin = 0.0F;
+        float uMax = 1.0F;
+
+        float quadSize = 0.5F;
+        float quadHeight = 1.0F;
+
+        GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+
+        for (int pass = 0; pass < 2; pass++) {
             GlStateManager.pushMatrix();
-            GlStateManager.translate((float) x, (float) y, (float) z);
-            float f = entity.width * 1.8F;
-            GlStateManager.scale(f, f, f);
-            Tessellator tessellator = Tessellator.getInstance();
-            BufferBuilder bufferbuilder = tessellator.getBuffer();
-            float f1 = 0.5F;
-            float f2 = 0.0F;
-            float f3 = entity.height / f;
-            float f4 = (float) (entity.posY - entity.getEntityBoundingBox().minY);
-            GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-            GlStateManager.translate(0.0F, 0.0F, -0.3F + (float) ((int) f3) * 0.02F);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            float f5 = 0.0F;
-            int i = 0;
-            bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-
-            while (f3 > 0.0F) {
-                this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-                float f6 = textureatlassprite.getMinU();
-                float f7 = textureatlassprite.getMinV();
-                float f8 = textureatlassprite.getMaxU();
-                float f9 = textureatlassprite.getMaxV();
-
-                if (i / 2 % 2 == 0) {
-                    float f10 = f8;
-                    f8 = f6;
-                    f6 = f10;
-                }
-
-                bufferbuilder.pos((double) (f1 - 0.0F), (double) (0.0F - f4), (double) f5).tex((double) f8, (double) f9).endVertex();
-                bufferbuilder.pos((double) (-f1 - 0.0F), (double) (0.0F - f4), (double) f5).tex((double) f6, (double) f9).endVertex();
-                bufferbuilder.pos((double) (-f1 - 0.0F), (double) (1.4F - f4), (double) f5).tex((double) f6, (double) f7).endVertex();
-                bufferbuilder.pos((double) (f1 - 0.0F), (double) (1.4F - f4), (double) f5).tex((double) f8, (double) f7).endVertex();
-                f3 -= 0.45F;
-                f4 -= 0.45F;
-                f1 *= 0.9F;
-                f5 += 0.03F;
-                ++i;
+            if (pass == 1) {
+                GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
             }
+
+            bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+
+            bufferbuilder.pos(-quadSize, 0.0F, 0.0F).tex(uMin, vMax).endVertex();
+            bufferbuilder.pos(quadSize, 0.0F, 0.0F).tex(uMax, vMax).endVertex();
+            bufferbuilder.pos(quadSize, quadHeight, 0.0F).tex(uMax, vMin).endVertex();
+            bufferbuilder.pos(-quadSize, quadHeight, 0.0F).tex(uMin, vMin).endVertex();
 
             tessellator.draw();
             GlStateManager.popMatrix();
-            GlStateManager.enableLighting();
         }
+
+        int i = entity.getBrightnessForRender();
+
+        if (entity.isTeleporting()) {
+            i = 15728880;
+        }
+
+        int j = i % 65536;
+        int k = i / 65536;
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j, (float)k);
+
+        GlStateManager.disableBlend();
+        GlStateManager.enableLighting();
+        GlStateManager.popMatrix();
     }
 
     @Override

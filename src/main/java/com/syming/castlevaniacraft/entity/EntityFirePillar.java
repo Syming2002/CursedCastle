@@ -58,26 +58,23 @@ public class EntityFirePillar extends EntityAreaEffectCloud {
         double yCenter = this.posY;
         double zCenter = this.posZ;
 
-        // Update rotation angle
-        rotationAngle += 5; // Adjust the rotation speed as needed
+        rotationAngle += 5;
         if (rotationAngle >= 360) {
             rotationAngle -= 360;
         }
 
-        int numberOfParticles = 10; // Number of particles to spawn in the circle
+        int numberOfParticles = 10;
         for (int i = 0; i < numberOfParticles; i++) {
             double angleRad = Math.toRadians(rotationAngle + (360.0 / numberOfParticles) * i);
 
-            // Calculate the particle position in a circle
             double particleX = xCenter + radius * Math.cos(angleRad);
             double particleZ = zCenter + radius * Math.sin(angleRad);
-            double particleY = yCenter; // Start at the same Y level
+            double particleY = yCenter;
 
-            double motionX = 0;
-            double motionY = 0.1; // Rising effect
-            double motionZ = 0;
+            double motionX = 0.0D;
+            double motionY = 0.75D;
+            double motionZ = 0.0D;
 
-            // Spawn the particle
             this.world.spawnParticle(EnumParticleTypes.FLAME, particleX, particleY, particleZ, motionX, motionY, motionZ);
         }
     }

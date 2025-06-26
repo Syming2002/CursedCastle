@@ -45,9 +45,16 @@ public class AIFirePillarAttack extends AnimationAI<EntityDracula> {
 
     @Override
     public void updateTask() {
-        if (dracula.getAnimationTick() == 30 && attackTarget != null) {
-            spawnFirePillar();
-            System.out.println("Fire Pillar is spawning");
+        if (this.attackTarget != null) {
+            if (this.dracula.getAnimationTick() == 30) {
+                spawnFirePillar();
+            }
+            if (this.dracula.getAnimationTick() == 40) {
+                spawnFirePillar();
+            }
+            if (this.dracula.getAnimationTick() == 50) {
+                spawnFirePillar();
+            }
         }
     }
 

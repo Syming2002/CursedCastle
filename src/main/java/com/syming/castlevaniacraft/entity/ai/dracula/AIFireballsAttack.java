@@ -71,8 +71,6 @@ public class AIFireballsAttack extends AnimationAI<EntityDracula> {
             spawnSmallFireball(underRightArmPosSmallFireballs.x, underRightArmPosSmallFireballs.y, underRightArmPosSmallFireballs.z, directionX + 0.2, directionY, directionZ, speed);
             spawnSmallFireball(underRightArmPosSmallFireballs.x, underRightArmPosSmallFireballs.y, underRightArmPosSmallFireballs.z, directionX, directionY, directionZ, speed);
             spawnSmallFireball(underRightArmPosSmallFireballs.x, underRightArmPosSmallFireballs.y, underRightArmPosSmallFireballs.z, directionX - 0.2, directionY, directionZ, speed);
-
-            System.out.println("Fireballs are spawning!");
         }
     }
 

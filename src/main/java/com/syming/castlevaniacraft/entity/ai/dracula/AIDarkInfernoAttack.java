@@ -78,7 +78,6 @@ public class AIDarkInfernoAttack extends AnimationAI<EntityDracula> {
                     directionY,
                     directionZ,
                     speed);
-            System.out.println("First Large Fireball is spawning!");
         }
         if (this.dracula.getAnimationTick() == 60) {
             spawnSecondLargeFireball(
@@ -90,7 +89,6 @@ public class AIDarkInfernoAttack extends AnimationAI<EntityDracula> {
                     directionZ,
                     speed);
 
-            System.out.println("Second Large Fireball is spawning!");
         }
     }
 
