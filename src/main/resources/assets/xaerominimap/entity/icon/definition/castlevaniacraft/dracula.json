@@ -1,5 +1,6 @@
 {
   "variants" : {
+    "castlevaniacraft:textures/entity/dracula_bloodmoon.png": "sprite:castlevaniacraft/dracula_bloodmoon.png",
     "default": "sprite:castlevaniacraft/dracula.png"
   }
 }

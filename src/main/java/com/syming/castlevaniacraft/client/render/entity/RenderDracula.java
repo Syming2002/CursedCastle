@@ -5,6 +5,7 @@ import com.syming.castlevaniacraft.client.model.entity.ModelDracula;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDracula;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDraculaHead;
 import com.syming.castlevaniacraft.util.CCReferences;
+import lumien.bloodmoon.Bloodmoon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -25,7 +26,9 @@ import static net.minecraft.client.renderer.entity.RenderDragon.ENDERCRYSTAL_BEA
 
 @SideOnly(Side.CLIENT)
 public class RenderDracula extends RenderLiving<EntityDracula> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/dracula.png");
+    private static final ResourceLocation DRACULA_TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/dracula.png");
+    private static final ResourceLocation DRACULA_BLOODMOON_TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/dracula_bloodmoon.png");
+
 
     public RenderDracula(RenderManager rendermanagerIn) {
         super(rendermanagerIn, new ModelDracula(), 0.5F);
@@ -162,6 +165,10 @@ public class RenderDracula extends RenderLiving<EntityDracula> {
     @Nullable
     @Override
     protected ResourceLocation getEntityTexture(EntityDracula entity) {
-        return TEXTURE;
+        if (Bloodmoon.proxy.isBloodmoon()) {
+            return DRACULA_BLOODMOON_TEXTURE;
+        } else {
+            return DRACULA_TEXTURE;
+        }
     }
 }

@@ -10,6 +10,7 @@ import com.syming.castlevaniacraft.networking.MessageAddBossInfo;
 import com.syming.castlevaniacraft.networking.MessageRemoveBossInfo;
 import com.syming.castlevaniacraft.util.CCReferences;
 
+import lumien.bloodmoon.Bloodmoon;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.ilexiconn.llibrary.server.animation.AnimationAI;
 import net.ilexiconn.llibrary.server.animation.AnimationHandler;
@@ -17,10 +18,7 @@ import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.ilexiconn.llibrary.server.entity.multipart.PartEntity;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -74,20 +72,23 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     private static final int BAT_GROUP_RADIUS = 20;
     private List<EntityVampireBat> aggressiveBats = new ArrayList<>();
     public PartEntity draculaHead;
-    public PartEntity draculaBody;
+//    public PartEntity draculaBody;
 
     private int teleportTick;
     private boolean isTeleporting;
 
+    public ActionState currentState = ActionState.ATTACKING;
+    private int stateTick = 0;
+
 
     public EntityDracula(World worldIn) {
         super(worldIn);
-        this.setSize(1.0F, 2.5F);
+        this.setSize(0.6F, 2.5F);
         this.experienceValue = 666;
         this.isImmuneToFire = true;
 
-        this.draculaHead = new EntityDraculaHead(this, 0.0F, 0, 2.0F, 1.0625F, 0.5F, 0.0F);
-        this.draculaBody = new EntityDraculaBody(this, 0.0F, 0, 0.0F, 1.0625F, 2.0F, 0.0F);
+        this.draculaHead = new EntityDraculaHead(this, 0.0F, 0, 2.0F, 0.7F, 0.6F, 0.0F);
+//        this.draculaBody = new EntityDraculaBody(this, 0.0F, 0, 0.0F, 1.0625F, 2.0F, 0.0F);
     }
 
     @Override
@@ -155,7 +156,8 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
     @Nullable
     public EntityLivingBase getAttackTarget() {
         int id = this.dataManager.get(TARGET_ID);
-        return id == -1 ? null : (EntityLivingBase) this.world.getEntityByID(id);
+        Entity entity = this.world.getEntityByID(id);
+        return (entity instanceof EntityLivingBase livingBase) ? livingBase : null;
     }
 
     @Override
@@ -185,9 +187,8 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_SPEED).setBaseValue(1.2D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(600.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(200.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
-
     }
 
     /**
@@ -237,8 +238,10 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
         super.onLivingUpdate();
         EntityLivingBase target = getAttackTarget();
 
-        aggressiveBats = this.world.getEntitiesWithinAABB(EntityVampireBat.class, this.getEntityBoundingBox().grow(BAT_GROUP_RADIUS));
-        if (this.world.isDaytime() && !this.world.isRemote && this.shouldBurnInDay()) {
+        if (target == null && !isEntityAlive()) return;
+
+        this.aggressiveBats = this.world.getEntitiesWithinAABB(EntityVampireBat.class, this.getEntityBoundingBox().grow(BAT_GROUP_RADIUS));
+        if (this.world.isDaytime() && !this.world.isRemote && shouldBurnInDay()) {
             float f = this.getBrightness();
 
             if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(new BlockPos(this.posX, this.posY + (double) this.getEyeHeight(), this.posZ))) {
@@ -247,25 +250,55 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
         }
 
         if (target != null) {
-            if (!isTeleporting() && !isInvisible() && getAnimation() == NO_ANIMATION && fireballsCooldown <= 0 && getAnimation() != DEATH_ANIMATION && this.isEntityAlive() && this.rand.nextFloat() < 0.75F) {
+            getLookHelper().setLookPositionWithEntity(target, 30.0F, 30.0F);
+            if ((!isTeleporting() && !isInvisible()) &&
+                    getAnimation() == NO_ANIMATION &&
+                    this.fireballsCooldown <= 0 &&
+                    getAnimation() != DEATH_ANIMATION &&
+                    isEntityAlive() &&
+                    this.rand.nextFloat() < 0.75F &&
+                    this.currentState == ActionState.ATTACKING) {
+
                 AnimationHandler.INSTANCE.sendAnimationMessage(this, FIREBALLS_ANIMATION);
                 this.fireballsCooldown = FIREBALLS_COOLDOWN;
 
             }
 
-            if (!isTeleporting() && !isInvisible() && getAnimation() == NO_ANIMATION && darkInfernoCooldown <= 0 && getAnimation() != DEATH_ANIMATION && this.isEntityAlive() && this.rand.nextFloat() < 0.50F) {
+            if ((!isTeleporting() && !isInvisible()) &&
+                    getAnimation() == NO_ANIMATION &&
+                    darkInfernoCooldown <= 0 &&
+                    getAnimation() != DEATH_ANIMATION &&
+                    this.isEntityAlive() &&
+                    this.rand.nextFloat() < 0.50F &&
+                    this.currentState == ActionState.ATTACKING) {
+
                 AnimationHandler.INSTANCE.sendAnimationMessage(this, DARK_INFERNO_ANIMATION);
                 this.darkInfernoCooldown = DARK_INFERNO_COOLDOWN;
 
             }
 
-            if (!isTeleporting() && !isInvisible() && getAnimation() == NO_ANIMATION && firePillarCooldown <= 0 && getAnimation() != DEATH_ANIMATION && this.isEntityAlive() && this.rand.nextFloat() < 0.25F) {
+            if ((!isTeleporting() && !isInvisible()) &&
+                    getAnimation() == NO_ANIMATION &&
+                    this.firePillarCooldown <= 0 &&
+                    getAnimation() != DEATH_ANIMATION &&
+                    isEntityAlive() &&
+                    this.rand.nextFloat() < 0.25F &&
+                    this.currentState == ActionState.ATTACKING) {
+
                 AnimationHandler.INSTANCE.sendAnimationMessage(this, FIRE_PILLAR_ANIMATION);
                 this.firePillarCooldown = FIRE_PILLAR_COOLDOWN;
 
             }
 
-            if (!isTeleporting() && !isInvisible() && getAnimation() == NO_ANIMATION && batsAttackCooldown <= 0 && getAnimation() != DEATH_ANIMATION && aggressiveBats.isEmpty() && this.isEntityAlive() && this.rand.nextFloat() < 0.50F) {
+            if ((!isTeleporting() && !isInvisible()) &&
+                    getAnimation() == NO_ANIMATION &&
+                    this.batsAttackCooldown <= 0 &&
+                    getAnimation() != DEATH_ANIMATION &&
+                    this.aggressiveBats.isEmpty() &&
+                    this.isEntityAlive() &&
+                    this.rand.nextFloat() < 0.50F &&
+                    this.currentState == ActionState.ATTACKING) {
+
                 AnimationHandler.INSTANCE.sendAnimationMessage(this, BATS_ATTACK_ANIMATION);
                 this.batsAttackCooldown = BATS_ATTACK_COOLDOWN;
 
@@ -284,56 +317,76 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
 
 
         if (target != null && isEntityAlive()) {
-            this.teleportTick++;
+            this.stateTick++;
 
-            if ((this.teleportTick >= FIREBALLS_ANIMATION.getDuration() - 10 ||
-                    this.teleportTick >= DARK_INFERNO_ANIMATION.getDuration() - 10 ||
-                    this.teleportTick >= FIRE_PILLAR_ANIMATION.getDuration() + 10 ||
-                    this.teleportTick >= BATS_ATTACK_ANIMATION.getDuration() + 15) && this.teleportTick < 100) {
-                setInvisible(true);
-                setEntityInvulnerable(true);
-                this.isTeleporting = true;
+            switch (this.currentState) {
+                case ATTACKING:
+
+                    this.isTeleporting = false;
+
+                    if (isAnAttackAnimationFinished()) {
+                        transitionTo(ActionState.WAITING_AFTER_ATTACK);
+                    }
+                    break;
+
+                case WAITING_AFTER_ATTACK:
+
+                    this.isTeleporting = false;
+
+                    if (this.stateTick >= 20) {
+                        this.teleportTick = 0;
+                        transitionTo(ActionState.TELEPORTING);
+                    }
+                    break;
+
+                case TELEPORTING:
+                    this.teleportTick++;
+
+                    this.isTeleporting = true;
+
+                    if (this.teleportTick >= 70 && this.teleportTick < 100) {
+                        setInvisible(true);
+                        setEntityInvulnerable(true);
+                    }
+
+                    if (this.teleportTick >= 80 && this.teleportTick < 90) {
+                        teleportRandomlyNearTarget();
+                    }
+
+                    if (this.teleportTick >= 110 && this.teleportTick < 130) {
+                        setInvisible(false);
+                        setEntityInvulnerable(false);
+                    }
+
+                    if (isTeleportTickIsFinished()) {
+                        this.teleportTick = 0;
+                        transitionTo(ActionState.WAITING_AFTER_TELEPORT);
+                    }
+                    break;
+
+                case WAITING_AFTER_TELEPORT:
+
+                    this.isTeleporting = false;
+
+                    if (this.stateTick >= 20) {
+                        transitionTo(ActionState.ATTACKING);
+                    }
+                    break;
             }
-
-            if (isInvisible() && (this.teleportTick > 70 && this.teleportTick < 90)) {
-                teleportRandomlyNearTarget();
-                this.isTeleporting = true;
-            }
-
-            if (this.teleportTick >= 110 && this.teleportTick < 130) {
-                setInvisible(false);
-                setEntityInvulnerable(false);
-                this.isTeleporting = false;
-            }
-
-            if (isTeleportTickIsFinished()) {
-                this.teleportTick = 0;
-                this.isTeleporting = false;
-            }
-            System.out.println(this.teleportTick);
-
         }
-
-        if (target == null && isEntityAlive()) {
-            this.teleportTick = 0;
-            setInvisible(false);
-            setEntityInvulnerable(false);
-            this.isTeleporting = false;
-        }
-
 
         despawnIfPeaceful();
 
-        if (this.fireballsCooldown > 0) {
+        if (this.fireballsCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible())) {
             this.fireballsCooldown--;
         }
-        if (this.darkInfernoCooldown > 0) {
+        if (this.darkInfernoCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible())) {
             this.darkInfernoCooldown--;
         }
-        if (this.firePillarCooldown > 0) {
+        if (this.firePillarCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible())) {
             this.firePillarCooldown--;
         }
-        if (this.batsAttackCooldown > 0) {
+        if (this.batsAttackCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible())) {
             this.batsAttackCooldown--;
         }
 
@@ -409,13 +462,13 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
         super.onUpdate();
 
         this.draculaHead.onUpdate();
-        this.draculaBody.onUpdate();
+//        this.draculaBody.onUpdate();
 
-        if (this.world.isDaytime() && !this.world.isRemote) {
-            if (isEntityAlive()) {
-                world.setWorldTime(18000);
-            }
-        }
+//        if (this.world.isDaytime() && !this.world.isRemote) {
+//            if (isEntityAlive()) {
+//                this.world.setWorldTime(11999);
+//            }
+//        }
     }
 
     @Override
@@ -510,24 +563,21 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
+        return false;
+    }
+
+    public boolean hurtHead(PartEntity part, DamageSource source, float amount) {
         if (getHealth() <= 0) {
             AnimationHandler.INSTANCE.sendAnimationMessage(this, DEATH_ANIMATION);
         }
-        PartEntity[] parts = this.getParts();
-        if (parts != null) {
-            for (PartEntity part : parts) {
-                if (part == getDraculaHead()) {
-                    if (hasWeakness(source, amount) || source.isExplosion()) {
-                        return super.attackEntityFrom(source, amount * amount);
-                    }
-                    if (hasStrength(source, amount)) {
-                        return super.attackEntityFrom(source, amount / amount);
-                    }
-                    return super.attackEntityFrom(source, amount);
-                } else if (part == getDraculaBody()) {
-                    return false;
-                }
+        if (part == getDraculaHead() || source.isExplosion()) {
+            if (hasWeakness(source, amount)) {
+                return super.attackEntityFrom(source, amount * amount);
             }
+            if (hasStrength(source, amount)) {
+                return super.attackEntityFrom(source, amount / amount);
+            }
+            return super.attackEntityFrom(source, amount);
         }
         return false;
     }
@@ -579,26 +629,26 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
 
     @Override
     public PartEntity[] getParts() {
-        return new PartEntity[] {this.draculaHead, this.draculaBody};
+        return new PartEntity[] {this.draculaHead/*, this.draculaBody*/};
     }
 
     public PartEntity getDraculaHead() {
         return this.draculaHead;
     }
 
-    public PartEntity getDraculaBody() {
-        return this.draculaBody;
-    }
+//    public PartEntity getDraculaBody() {
+//        return this.draculaBody;
+//    }
 
-    public boolean isAttackAnimationFinished() {
-        return this.animationTick == FIREBALLS_ANIMATION.getDuration()||
-                this.animationTick ==  DARK_INFERNO_ANIMATION.getDuration() ||
-                this.animationTick ==  FIRE_PILLAR_ANIMATION.getDuration() ||
-                this.animationTick ==  BATS_ATTACK_ANIMATION.getDuration();
+    public boolean isAnAttackAnimationFinished() {
+        return this.animationTick >= FIREBALLS_ANIMATION.getDuration()||
+                this.animationTick >=  DARK_INFERNO_ANIMATION.getDuration() ||
+                this.animationTick >=  FIRE_PILLAR_ANIMATION.getDuration() ||
+                this.animationTick >=  BATS_ATTACK_ANIMATION.getDuration();
     }
 
     public boolean isTeleportTickIsFinished() {
-        return this.teleportTick > 130;
+        return this.teleportTick >= 130;
     }
 
     @Override
@@ -612,5 +662,17 @@ public class EntityDracula extends CCEntityMob implements IAnimatedEntity, ICust
 
     public int getTeleportTick() {
         return this.teleportTick;
+    }
+
+    private void transitionTo(ActionState newState) {
+        this.currentState = newState;
+        this.stateTick = 0;
+    }
+
+    public enum ActionState {
+        ATTACKING,
+        WAITING_AFTER_ATTACK,
+        TELEPORTING,
+        WAITING_AFTER_TELEPORT
     }
 }

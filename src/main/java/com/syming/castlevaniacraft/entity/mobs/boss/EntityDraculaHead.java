@@ -20,10 +20,10 @@ public class EntityDraculaHead extends PartEntity {
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float damage) {
-        if (this.parent instanceof EntityDracula dracula) {
-            dracula.attackEntityFrom(source, damage);
-//            super.attackEntityFrom(source, damage);
-            return true;
+        if (this.parent != null && !this.parent.isEntityInvulnerable(source)) {
+            if (this.parent instanceof EntityDracula dracula) {
+                return dracula.hurtHead(this, source, damage);
+            }
         }
         return false;
     }
@@ -35,6 +35,18 @@ public class EntityDraculaHead extends PartEntity {
     @Override
     public void onUpdate() {
         super.onUpdate();
+
+        if (this.parent != null) {
+            if (this.parent instanceof EntityDracula dracula) {
+                if (dracula.isTeleporting()) {
+                    setInvisible(true);
+                    setEntityInvulnerable(true);
+                } else if (!dracula.isTeleporting()) {
+                    setInvisible(false);
+                    setEntityInvulnerable(false);
+                }
+            }
+        }
 
         updateDraculaEnderCrystal();
     }

@@ -89,6 +89,8 @@ dependencies {
     // Advancement Plaques
     implementation rfg.deobf("curse.maven:advancement-plaques-499826:4528933")
 
+    // Blood Moon
+    implementation rfg.deobf("curse.maven:bloodmoon-226321:2537917")
 
     // Extended Whip Attack
     implementation rfg.deobf("curse.maven:reaches-fix-556777:6069258")
