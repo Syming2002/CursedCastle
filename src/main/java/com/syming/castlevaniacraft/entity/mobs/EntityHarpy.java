@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.entity.mobs;
 
-import com.syming.castlevaniacraft.api.IElementalWeapon;
+import com.syming.castlevaniacraft.api.IElementalDamage;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
 import com.syming.castlevaniacraft.entity.ai.AIFlyOverTarget;
 import com.syming.castlevaniacraft.entity.ai.harpy.AIDaggerAttack;
@@ -74,7 +74,7 @@ public class EntityHarpy extends CCEntityMob implements IAnimatedEntity, EntityF
         if (player != null) {
             System.out.println("player is not null");
             ItemStack stack = player.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 System.out.println("item implements IElementalWeapon");
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
@@ -91,7 +91,7 @@ public class EntityHarpy extends CCEntityMob implements IAnimatedEntity, EntityF
         EntityPlayer player = (EntityPlayer) getAttackingEntity();
         if (player != null) {
             ItemStack stack = player.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
                     System.out.println("source damage detected");

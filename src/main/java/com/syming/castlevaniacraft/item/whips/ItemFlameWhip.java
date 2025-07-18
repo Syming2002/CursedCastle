@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.item.whips;
 
-import com.syming.castlevaniacraft.api.IElementalWeapon;
+import com.syming.castlevaniacraft.api.IElementalDamage;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
@@ -14,7 +14,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 
-public class ItemFlameWhip extends ItemWhip implements IElementalWeapon {
+public class ItemFlameWhip extends ItemWhip implements IElementalDamage {
 
     public ItemFlameWhip(String name, float attackDamage, float attackSpeed, float reach) {
         super(attackDamage, attackSpeed, reach);

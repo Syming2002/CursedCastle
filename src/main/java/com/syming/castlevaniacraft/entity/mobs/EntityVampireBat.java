@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.entity.mobs;
 
-import com.syming.castlevaniacraft.api.IElementalWeapon;
+import com.syming.castlevaniacraft.api.IElementalDamage;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -56,7 +56,7 @@ public class EntityVampireBat extends CCEntityMob implements EntityFlying {
         EntityLivingBase living = getAttackingEntity();
         if (living != null) {
             ItemStack stack = living.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
                     return source == CCDamageSource.getFireDamage();
@@ -71,7 +71,7 @@ public class EntityVampireBat extends CCEntityMob implements EntityFlying {
         EntityLivingBase living = getAttackingEntity();
         if (living != null) {
             ItemStack stack = living.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
                     return source == CCDamageSource.getDarkDamage();

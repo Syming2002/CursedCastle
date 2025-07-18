@@ -1,8 +1,11 @@
 package com.syming.castlevaniacraft.entity;
 
-import com.syming.castlevaniacraft.api.IElementalWeapon;
+import com.syming.castlevaniacraft.api.IElementalDamage;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
-import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
+import com.syming.castlevaniacraft.particle.CCParticle;
+import com.syming.castlevaniacraft.particle.ParticleHoly;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.ParticleEnchantmentTable;
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
@@ -11,10 +14,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class EntityHolyFire extends EntityAreaEffectCloud implements IElementalWeapon {
+public class EntityHolyFire extends EntityAreaEffectCloud implements IElementalDamage {
     public EntityHolyFire(World worldIn) {
         super(worldIn);
     }
@@ -35,13 +40,13 @@ public class EntityHolyFire extends EntityAreaEffectCloud implements IElementalW
                 if (!mob.isImmuneToFire()) {
                     mob.setFire(5);
                 }
-                addEffect(new PotionEffect(MobEffects.WITHER, 200, 1));
+                mob.addPotionEffect(new PotionEffect(MobEffects.WITHER, 200, 1));
                 mob.attackEntityFrom(CCDamageSource.getHolyDamage(), 10);
                 mob.motionX *= 0;
                 mob.motionZ *= 0;
-                System.out.println("Mob is being damaged with Holy Damage");
             }
         }
+
     }
 
     @Override

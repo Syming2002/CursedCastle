@@ -23,7 +23,6 @@ import net.minecraft.world.World;
 public class EntityMedusa extends CCEntityMob implements IAnimatedEntity {
 
     private Animation animation = NO_ANIMATION;
-//    public static final Animation IDLE_ANIMATION = Animation.create(40);
     public static final Animation MELEE_ATTACK_ANIMATION = Animation.create(45);
     public static final Animation STARE_ATTACK_ANIMATION = Animation.create(120);
     private int meleeAttackCooldown = 0;
@@ -32,15 +31,15 @@ public class EntityMedusa extends CCEntityMob implements IAnimatedEntity {
     public static final int MELEE_ATTACK_COOLDOWN = 50;
     public static final int STARE_ATTACK_COOLDOWN = 300;
     public static final int SNAKE_ATTACK_COOLDOWN = 450;
-    private static final Animation[] ANIMATIONS = {/*IDLE_ANIMATION,*/ MELEE_ATTACK_ANIMATION, STARE_ATTACK_ANIMATION};
+    private static final Animation[] ANIMATIONS = {MELEE_ATTACK_ANIMATION, STARE_ATTACK_ANIMATION};
     private int animationTick;
     public AnimationAI currentAnim;
     private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.GREEN, BossInfo.Overlay.PROGRESS));
 
     public EntityMedusa(World worldIn) {
         super(worldIn);
-        this.setSize(1.5F, 2F);
-        this.experienceValue = 25;
+        this.setSize(0.6F, 1.8F);
+        this.experienceValue = 100;
     }
 
     @Override
@@ -56,7 +55,6 @@ public class EntityMedusa extends CCEntityMob implements IAnimatedEntity {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-//        this.tasks.addTask(0, new AIIdle(this, IDLE_ANIMATION));
         this.tasks.addTask(1, new AIMeleeAttack(this, MELEE_ATTACK_ANIMATION, 1.2D, false));
         this.tasks.addTask(2, new AIStareAttack(this, STARE_ATTACK_ANIMATION));
         this.tasks.addTask(1, new EntityAIWander(this, 1D));
@@ -183,13 +181,7 @@ public class EntityMedusa extends CCEntityMob implements IAnimatedEntity {
                 AnimationHandler.INSTANCE.sendAnimationMessage(this, STARE_ATTACK_ANIMATION);
                 this.stareAttackCooldown = STARE_ATTACK_COOLDOWN;
             }
-
         }
-//        else if (!world.isRemote) {
-//            if (getAnimation() == NO_ANIMATION && this.isEntityAlive()) {
-//                AnimationHandler.INSTANCE.sendAnimationMessage(this, IDLE_ANIMATION);
-//            }
-//        }
 
 
         if (getAnimation() != NO_ANIMATION) {
@@ -198,6 +190,7 @@ public class EntityMedusa extends CCEntityMob implements IAnimatedEntity {
                 setAnimation(NO_ANIMATION);
             }
         }
+
         despawnIfPeaceful();
         if (meleeAttackCooldown > 0) meleeAttackCooldown--;
         if (stareAttackCooldown > 0) stareAttackCooldown--;

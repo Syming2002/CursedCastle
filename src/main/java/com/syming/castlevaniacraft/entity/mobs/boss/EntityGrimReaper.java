@@ -1,8 +1,7 @@
 package com.syming.castlevaniacraft.entity.mobs.boss;
 
-import com.syming.castlevaniacraft.advancement.CCAdvancement;
 import com.syming.castlevaniacraft.api.ICustomBossBar;
-import com.syming.castlevaniacraft.api.IElementalWeapon;
+import com.syming.castlevaniacraft.api.IElementalDamage;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
 import com.syming.castlevaniacraft.entity.ai.AIFlyOverTarget;
 import com.syming.castlevaniacraft.entity.ai.grimReaper.*;
@@ -22,8 +21,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -75,7 +72,7 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
         EntityLivingBase living = getAttackingEntity();
         if (living != null) {
             ItemStack stack = living.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
                     return source == CCDamageSource.getHolyDamage();
@@ -90,7 +87,7 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
         EntityLivingBase living = getAttackingEntity();
         if (living != null) {
             ItemStack stack = living.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
                     return source == CCDamageSource.getDarkDamage();

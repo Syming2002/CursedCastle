@@ -21,6 +21,7 @@ import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.integration.jer.CCJerIntegration;
 import com.syming.castlevaniacraft.item.souls.EnumBulletSoul;
 import com.syming.castlevaniacraft.item.souls.EnumGuardianSoul;
+import com.syming.castlevaniacraft.particle.ParticleHoly;
 import com.syming.castlevaniacraft.particle.ParticlePoisonBreath;
 import com.syming.castlevaniacraft.util.CCReferences;
 import com.syming.castlevaniacraft.util.handler.RenderHandler;

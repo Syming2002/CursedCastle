@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.item.whips;
 
-import com.syming.castlevaniacraft.api.IElementalWeapon;
+import com.syming.castlevaniacraft.api.IElementalDamage;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 
-public class ItemNebula extends ItemWhip implements IElementalWeapon {
+public class ItemNebula extends ItemWhip implements IElementalDamage {
 
     public ItemNebula(String name, float attackDamage, float attackSpeed, float reach) {
         super(attackDamage, attackSpeed, reach);

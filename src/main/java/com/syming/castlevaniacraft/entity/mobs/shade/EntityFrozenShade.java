@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.entity.mobs.shade;
 
-import com.syming.castlevaniacraft.api.IElementalWeapon;
+import com.syming.castlevaniacraft.api.IElementalDamage;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
 import com.syming.castlevaniacraft.entity.projectiles.EntityIceBladeProjectile;
 import com.syming.castlevaniacraft.loot.CCTreasures;
@@ -48,7 +48,7 @@ public class EntityFrozenShade extends EntityShade implements IRangedAttackMob {
         EntityLivingBase living = getAttackingEntity();
         if (living != null) {
             ItemStack stack = living.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
                     return source == CCDamageSource.getFireDamage();
@@ -63,7 +63,7 @@ public class EntityFrozenShade extends EntityShade implements IRangedAttackMob {
         EntityLivingBase living = getAttackingEntity();
         if (living != null) {
             ItemStack stack = living.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
                     return source == CCDamageSource.getIceDamage();

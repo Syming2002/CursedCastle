@@ -1,6 +1,7 @@
 package com.syming.castlevaniacraft.entity;
 
 import com.syming.castlevaniacraft.entity.mobs.shade.EntityPoisonShade;
+import com.syming.castlevaniacraft.particle.ParticleHoly;
 import com.syming.castlevaniacraft.particle.ParticlePoisonBreath;
 import com.syming.castlevaniacraft.entity.mobs.EntityGorgon;
 import net.minecraft.client.Minecraft;
