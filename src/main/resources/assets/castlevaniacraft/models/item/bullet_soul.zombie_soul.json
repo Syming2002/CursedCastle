@@ -1,6 +1,0 @@
-{
-  "parent": "castlevaniacraft:item/bullet_soul",
-  "textures": {
-    "layer0": "castlevaniacraft:items/souls/bullets/bullet_soul.zombie_soul"
-  }
-}

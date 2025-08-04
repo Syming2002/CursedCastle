@@ -2,6 +2,6 @@
     "parent": "item/generated",
     "textures":
     {
-        "layer0": "castlevaniacraft:items/wooden_holy_cross"
+        "layer0": "castlevaniacraft:item/wooden_holy_cross"
     }
 }

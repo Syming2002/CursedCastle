@@ -1,36 +1,51 @@
 package com.syming.castlevaniacraft.block;
 
-import com.syming.castlevaniacraft.block.draculacastlestone.*;
-import com.syming.castlevaniacraft.fluid.CCFluid;
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraftforge.fluids.BlockFluidClassic;
+import com.syming.castlevaniacraft.CastlevaniaCraftMod;
+import com.syming.castlevaniacraft.item.CCItem;
+import com.syming.castlevaniacraft.item.whip.LeatherWhipItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.function.Supplier;
 
 public class CCBlock {
 
-    public static final List<Block> BLOCKS = new ArrayList<>();
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CastlevaniaCraftMod.MOD_ID);
 
-    // Dracula's Castle Stone Blocks
-    public static final Block DRACULA_CASTLE_STONE = new BlockDraculaCastleStone("dracula_castle_stone");
-    public static final Block DRACULA_CASTLE_COBBLESTONE = new BlockDraculaCastleCobblestone("dracula_castle_cobblestone");
-    public static final Block DRACULA_CASTLE_STONE_BRICK = new BlockDraculaCastleStoneBrick("dracula_castle_stonebrick");
-    public static final BlockStairs DRACULA_CASTLE_STONE_STAIRS = new BlockDraculaCastleStoneStairs("dracula_castle_stonebrick_stairs", CCBlock.DRACULA_CASTLE_STONE_BRICK.getDefaultState().withProperty(BlockDraculaCastleStoneBrick.VARIANT, BlockDraculaCastleStoneBrick.EnumType.DEFAULT));
-    public static final BlockSlab DRACULA_CASTLE_STONE_SLAB_DOUBLE = new BlockDoubleDraculaCastleStoneSlab("dracula_castle_stonebrick_slab_double");
-    public static final BlockSlab DRACULA_CASTLE_STONE_SLAB_HALF = new BlockHalfDraculaCastleStoneSlab("dracula_castle_stonebrick_slab_half");
-    public static final BlockDraculaCastleStoneWall DRACULA_CASTLE_STONE_WALL = new BlockDraculaCastleStoneWall("dracula_castle_stonebrick_wall", CCBlock.DRACULA_CASTLE_STONE_BRICK);
+    public static final RegistryObject<Block> DRACULA_CASTLE_COBBLESTONE = registerBlock("dracula_castle_cobblestone",
+            () -> new DraculaCastleCobblestoneBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_BLACK)
+                            .strength(2.5F, 12.0F)
+                            .sound(SoundType.STONE)));
 
-    // Fluids
+    public static final RegistryObject<Block> DRACULA_CASTLE_STONE = registerBlock("dracula_castle_stone",
+            () -> new DraculaCastleStoneBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_BLACK)
+                            .strength(2.5F, 12.0F)
+                            .sound(SoundType.STONE)));
 
-    public static final BlockFluidClassic HOLY_WATER_FLUID = new BlockHolyWaterFluid("holy_water_fluid", CCFluid.HOLY_WATER_FLUID, Material.WATER);
-    public static final BlockFluidClassic BLOOD_FLUID = new BlockBloodFluid("blood_fluid", CCFluid.BLOOD_FLUID, Material.WATER);
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
+        RegistryObject<T> registry = BLOCKS.register(name, block);
+        registerItemBlock(name, registry);
+        return registry;
+    }
 
+    private static  <T extends Block> RegistryObject<Item> registerItemBlock(String name, RegistryObject<T> block) {
+        return CCItem.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    }
 
-    // Tile Blocks
-
-    public static final Block ALCHEMY_TABLE = new BlockAlchemyTable("alchemy_table");
-
-
+    public static void register(IEventBus eventBus) {
+        BLOCKS.register(eventBus);
+    }
 }

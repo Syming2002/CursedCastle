@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "castlevaniacraft:item/netherite_dagger_3d"
+  },
+  "perspectives": {
+    "thirdperson_righthand":{
+      "parent": "castlevaniacraft:item/netherite_dagger_3d"
+    },
+    "thirdperson_lefthand": {
+      "parent": "castlevaniacraft:item/netherite_dagger_3d"
+    },
+    "firstperson_righthand": {
+      "parent": "castlevaniacraft:item/netherite_dagger_3d"
+    },
+    "firstperson_lefthand": {
+      "parent": "castlevaniacraft:item/netherite_dagger_3d"
+    },
+    "head": {
+      "parent": "castlevaniacraft:item/netherite_dagger_2d"
+    },
+    "gui": {
+      "parent": "castlevaniacraft:item/netherite_dagger_2d"
+    },
+    "ground": {
+      "parent": "castlevaniacraft:item/netherite_dagger_2d"
+    },
+    "fixed": {
+      "parent": "castlevaniacraft:item/netherite_dagger_2d"
+    }
+  }
+}

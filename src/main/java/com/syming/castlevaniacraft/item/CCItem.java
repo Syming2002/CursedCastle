@@ -1,223 +1,250 @@
 package com.syming.castlevaniacraft.item;
 
-import com.syming.castlevaniacraft.item.armors.*;
-import com.syming.castlevaniacraft.item.projectiles.ItemAnimScytheProjectile;
-import com.syming.castlevaniacraft.item.projectiles.ItemScytheProjectile;
-import com.syming.castlevaniacraft.item.projectiles.ItemThrowingBone;
-import com.syming.castlevaniacraft.item.projectiles.subweapons.*;
-import com.syming.castlevaniacraft.item.projectiles.subweapons.holycross.*;
-import com.syming.castlevaniacraft.item.projectiles.subweapons.throwingaxe.*;
-import com.syming.castlevaniacraft.item.souls.ItemBulletSoul;
-import com.syming.castlevaniacraft.item.souls.ItemGuardianSoul;
-import com.syming.castlevaniacraft.item.spellbooks.ItemFireBook;
-import com.syming.castlevaniacraft.item.spellbooks.ItemSpellBook;
-import com.syming.castlevaniacraft.item.whips.*;
-import com.syming.castlevaniacraft.item.whips.attachments.*;
-import com.syming.castlevaniacraft.item.whips.vampirekiller.*;
-import com.syming.castlevaniacraft.util.CCReferences;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraftforge.common.util.EnumHelper;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.syming.castlevaniacraft.CastlevaniaCraftMod;
+import com.syming.castlevaniacraft.item.subweapon.*;
+import com.syming.castlevaniacraft.item.whip.LeatherWhipItem;
+import com.syming.castlevaniacraft.item.whip.vampirekiller.BulletTipVampireKillerWhipItem;
+import com.syming.castlevaniacraft.item.whip.vampirekiller.CrushingStoneVampireKillerWhipItem;
+import com.syming.castlevaniacraft.item.whip.vampirekiller.VampireKillerWhipItem;
+import com.syming.castlevaniacraft.item.whip.vampirekiller.attachment.BulletTipItem;
+import com.syming.castlevaniacraft.item.whip.vampirekiller.attachment.CrushingStoneItem;
+import com.syming.castlevaniacraft.world.entity.CCEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tiers;
+import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class CCItem {
 
-    public static  List<Item> ITEMS = new ArrayList<>();
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CastlevaniaCraftMod.MOD_ID);
 
-    // Materials Armors
-    public static ItemArmor.ArmorMaterial DRACULA_TUNIC_ARMOR = EnumHelper.addArmorMaterial(
-            "dracula_tunic_material",
-            CCReferences.MODID + ":dracula_tunic",
-            10,
-            new int[] {0, 0, 20, 0},
-            5,
-            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
-            0.99F);
-    public static ItemArmor.ArmorMaterial LEON_BELMONT_ARMOR = EnumHelper.addArmorMaterial(
-            "leon_belmont_armor_material",
-            CCReferences.MODID + ":leon_belmont",
-            10,
-            new int[] {4, 1, 3, 0},
-            5,
-            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
-            0.125F);
-    public static ItemArmor.ArmorMaterial JUSTE_BELMONT_ARMOR = EnumHelper.addArmorMaterial(
-            "juste_belmont_armor_material",
-            CCReferences.MODID + ":juste_belmont",
-            10,
-            new int[] {4, 1, 3, 0},
-            5,
-            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
-            0.125F);
-    public static ItemArmor.ArmorMaterial OLROX_SUIT_ARMOR = EnumHelper.addArmorMaterial(
-            "olrox_suit_material",
-            CCReferences.MODID + ":olrox_suit",
-            8,
-            new int[] {0, 0, 16, 0},
-            5,
-            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
-            0.99F);
-    public static ItemArmor.ArmorMaterial RICHTER_BELMONT_ARMOR = EnumHelper.addArmorMaterial(
-            "richter_belmont_armor_material",
-            CCReferences.MODID + ":richter_belmont",
-            10,
-            new int[] {2, 1, 3, 0},
-            5,
-            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
-            0.125F);
-    public static ItemArmor.ArmorMaterial SIMON_BELMONT_ARMOR = EnumHelper.addArmorMaterial(
-            "simon_belmont_armor_material",
-            CCReferences.MODID + ":simon_belmont",
-            10,
-            new int[] {2, 1, 2, 0},
-            5,
-            SoundEvents.ITEM_ARMOR_EQUIP_GENERIC,
-            0.25F);
+    public static final RegistryObject<Item> FLAME_WHIP = ITEMS.register("flame_whip",
+            () -> new LeatherWhipItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(250),
+                    (int) 6.5F,
+                    -3.5F,
+                    12.0F));
 
-    // Materials
-//    public static  Item.ToolMaterial LEATHER_WHIP_MATERIAL = EnumHelper.addToolMaterial("leather_whip_material", 1, 100, 2.0F, 2.2F, 5).setRepairItem(new ItemStack(Items.LEATHER));
-//    public static  Item.ToolMaterial STEEL_WHIP_MATERIAL = EnumHelper.addToolMaterial("steel_whip_material", 3, 400, 2.0F, 3.5F, 5);
-//    public static  Item.ToolMaterial ROSE_STEM_WHIP_MATERIAL = EnumHelper.addToolMaterial("rose_stem_whip_material", 1, 50, 1.0F, 6.0F, 5).setRepairItem(new ItemStack(Blocks.VINE));
-//    public static  Item.ToolMaterial MEDUSA_WHIP_MATERIAL = EnumHelper.addToolMaterial("medusa_whip_material", 2, 350, 2.0F, 3.0F, 5);
-//    public static  Item.ToolMaterial NEBULA_MATERIAL = EnumHelper.addToolMaterial("nebula_material", 1, 200, 1.5F, 3.7F, 5);
-//    public static  Item.ToolMaterial FLAME_WHIP_MATERIAL = EnumHelper.addToolMaterial("flame_whip_material", 1, 75, 1.0F, 6.5F, 5);
-//    public static  Item.ToolMaterial JET_BLACK_WHIP_MATERIAL = EnumHelper.addToolMaterial("jet_black_whip_material", 2, 150, 2.0F, 4.4F, 5);
-//    public static  Item.ToolMaterial UNDEAD_KILLER_MATERIAL = EnumHelper.addToolMaterial("undead_killer_material", 1, 200, 1.5F, 7.0F, 5);
-//    public static  Item.ToolMaterial VAMPIRE_KILLER_MATERIAL = EnumHelper.addToolMaterial("vampire_killer_material", 3, 700, 2.5F, 8.0F, 5);
-//    public static  Item.ToolMaterial VAMPIRE_KILLER_CRUSHING_STONE_ATTACHMENT_MATERIAL = EnumHelper.addToolMaterial("vampire_killer_crushing_stone_attachment_material", 3, 700, 5.0F, 3.0F, 5);
-//    public static  Item.ToolMaterial VAMPIRE_KILLER_STEEL_ATTACHMENT_MATERIAL = EnumHelper.addToolMaterial("vampire_killer_steel_attachment_material", 3, 1100, 2.0F, 18.0F, 5);
-//    public static  Item.ToolMaterial VAMPIRE_KILLER_PLATINUM_ATTACHMENT_MATERIAL = EnumHelper.addToolMaterial("vampire_killer_platinum_attachment_material", 3, 1300, 4.0F, 28.0F, 5);
-//    public static  Item.ToolMaterial VAMPIRE_KILLER_ENERGY_CIRCLE_ATTACHMENT_MATERIAL = EnumHelper.addToolMaterial("vampire_killer_energy_circle_attachment_material", 3, 800, 3.0F, 8.0F, 5);
-//    public static  Item.ToolMaterial VAMPIRE_KILLER_BULLET_ATTACHMENT_MATERIAL = EnumHelper.addToolMaterial("vampire_killer_bullet_attachment_material", 3, 900, 3.0F, 13.0F, 5);
-//    public static  Item.ToolMaterial VAMPIRE_KILLER_RED_STONE_ATTACHMENT_MATERIAL = EnumHelper.addToolMaterial("vampire_killer_red_stone_attachment_material", 3, 1000, 3.0F, 10.0F, 5);
-//    public static  Item.ToolMaterial VAMPIRE_KILLER_BLUE_STONE_ATTACHMENT_MATERIAL = EnumHelper.addToolMaterial("vampire_killer_blue_stone_attachment_material", 3, 1000, 3.0F, 10.0F, 5);
-//    public static  Item.ToolMaterial VAMPIRE_KILLER_YELLOW_STONE_ATTACHMENT_MATERIAL = EnumHelper.addToolMaterial("vampire_killer_yellow_stone_attachment_material", 3, 1000, 3.0F, 10.0F, 5);
-//    public static  Item.ToolMaterial VAMPIRE_KILLER_GREEN_STONE_ATTACHMENT_MATERIAL = EnumHelper.addToolMaterial("vampire_killer_green_stone_attachment_material", 3, 1000, 3.0F, 10.0F, 5);
+    public static final RegistryObject<Item> LEATHER_WHIP = ITEMS.register("leather_whip",
+            () -> new LeatherWhipItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(100),
+                    2,
+                    -3.5F,
+                    8.0F));
+
+    public static final RegistryObject<Item> VAMPIRE_KILLER_WHIP = ITEMS.register("vampire_killer_whip",
+            () -> new VampireKillerWhipItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(1000),
+                    8,
+                    -3.5F,
+                    8.0F));
+
+    public static final RegistryObject<Item> CRUSHING_STONE_VAMPIRE_KILLER_WHIP = ITEMS.register("crushing_stone_vampire_killer_whip",
+            () -> new CrushingStoneVampireKillerWhipItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(900)
+                            .craftRemainder(CCItem.VAMPIRE_KILLER_WHIP.get()),
+                    3,
+                    -3.5F,
+                    8.0F,
+                    5.0F));
+
+    public static final RegistryObject<Item> BULLET_TIP_VAMPIRE_KILLER_WHIP = ITEMS.register("bullet_tip_vampire_killer_whip",
+            () -> new BulletTipVampireKillerWhipItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(950)
+                            .craftRemainder(CCItem.VAMPIRE_KILLER_WHIP.get()),
+                    13,
+                    -3.5F,
+                    8.0F));
 
 
+    public static final RegistryObject<Item> CRUSHING_STONE = ITEMS.register("crushing_stone",
+            () -> new CrushingStoneItem(
+                    new Item.Properties()
+                            .stacksTo(1)));
 
-    // Whips
-    public static Item leatherWhip = new ItemLeatherWhip("leather_whip", 2.0F, -3.5F, 12.0F);
-    public static Item steelWhip = new ItemSteelWhip("steel_whip", 4.0F, -3.5F, 12.0F);
-    public static Item roseStemWhip = new ItemRoseStemWhip("rose_stem_whip", 6.0F, -3.5F, 8.0F);
-    public static Item medusaWhip = new ItemMedusaWhip("medusa_whip", 3.0F, -3.5F, 12.0F);
-    public static Item nebula = new ItemNebula("nebula", 3.7F, -3.5F, 20.0F);
-    public static Item flameWhip = new ItemFlameWhip("flame_whip", 6.5F, -3.5F, 12.0F);
-    public static Item jetBlackWhip = new ItemJetBlackWhip("jet_black_whip", 4.4F, -3.5F, 12.0F);
-    public static Item undeadKiller = new ItemUndeadKiller("undead_killer", 7.0F, -3.5F, 16.0F);
-    public static Item vampireKiller = new ItemVampireKiller("vampire_killer_whip", 8.0F, -3.5F, 12.0F);
-    public static Item vampireKillerCrushingStoneAttachment = new ItemVampireKillerCrushingStoneAttachment("crushing_stone_vampire_killer_whip", 3.0F, -3.5F, 12.0F, 12.0F);
-    public static Item vampireKillerSteelAttachment = new ItemVampireKillerSteelAttachment("steel_vampire_killer_whip", 18.0F, -3.5F, 12.0F);
-    public static Item vampireKillerPlatinumAttachment = new ItemVampireKillerPlatinumAttachment("platinum_vampire_killer_whip", 28.0F, -3.5F, 12.0F);
-    public static Item vampireKillerEnergyCircleAttachment = new ItemVampireKillerEnergyCircleAttachment("energy_circle_vampire_killer_whip", 8.0F, -3.5F, 12.0F);
-    public static Item vampireKillerBulletAttachment = new ItemVampireKillerBulletAttachment("bullet_tip_vampire_killer_whip", 13.0F, -3.5F, 12.0F);
-    public static Item vampireKillerRedStoneAttachment = new ItemVampireKillerRedStoneAttachment("red_stone_vampire_killer_whip", 10.0F, -3.5F, 12.0F);
-    public static Item vampireKillerBlueStoneAttachment = new ItemVampireKillerBlueStoneAttachment("blue_stone_vampire_killer_whip", 10.0F, -3.5F, 12.0F);
-    public static Item vampireKillerYellowStoneAttachment = new ItemVampireKillerYellowStoneAttachment("yellow_stone_vampire_killer_whip", 10.0F, -3.5F, 12.0F);
-    public static Item vampireKillerGreenStoneAttachment = new ItemVampireKillerGreenStoneAttachment("green_stone_vampire_killer_whip", 10.0F, -3.5F, 12.0F);
+    public static final RegistryObject<Item> BULLET_TIP = ITEMS.register("bullet_tip",
+            () -> new BulletTipItem(
+                    new Item.Properties()
+                            .stacksTo(1)));
 
 
-    // Whips Attachments
-    public static Item crushingStoneAttachment = new ItemCrushingStoneAttachment("crushing_stone");
-    public static Item steelAttachment = new ItemSteelAttachment("steel_attachment");
-    public static Item platinumAttachment = new ItemPlatinumAttachment("platinum_attachment");
-    public static Item energyCircleAttachment = new ItemEnergyCircleAttachment("energy_circle_attachment");
-    public static Item bulletAttachment = new ItemBulletAttachment("bullet_tip");
-    public static Item redStoneAttachment = new ItemRedStoneAttachment("red_stone_attachment");
-    public static Item blueStoneAttachment = new ItemBlueStoneAttachment("blue_stone_attachment");
-    public static Item yellowStoneAttachment = new ItemYellowStoneAttachment("yellow_stone_attachment");
-    public static Item greenStoneAttachment = new ItemGreenStoneAttachment("green_stone_attachment");
+    public static final RegistryObject<Item> WOODEN_DAGGER = ITEMS.register("wooden_dagger",
+            () -> new DaggerItem(Tiers.WOOD,
+                    new Item.Properties()
+                            .durability(Tiers.WOOD.getUses())
+            ));
+    public static final RegistryObject<Item> STONE_DAGGER = ITEMS.register("stone_dagger",
+            () -> new DaggerItem(Tiers.STONE,
+                    new Item.Properties()
+                            .durability(Tiers.STONE.getUses())
+            ));
+    public static final RegistryObject<Item> IRON_DAGGER = ITEMS.register("iron_dagger",
+            () -> new DaggerItem(Tiers.IRON,
+                    new Item.Properties()
+                            .durability(Tiers.IRON.getUses())
+            ));
+    public static final RegistryObject<Item> GOLDEN_DAGGER = ITEMS.register("golden_dagger",
+            () -> new DaggerItem(Tiers.GOLD,
+                    new Item.Properties()
+                            .durability(Tiers.GOLD.getUses())
+            ));
+    public static final RegistryObject<Item> DIAMOND_DAGGER = ITEMS.register("diamond_dagger",
+            () -> new DaggerItem(Tiers.DIAMOND,
+                    new Item.Properties()
+                            .durability(Tiers.DIAMOND.getUses())
+            ));
+    public static final RegistryObject<Item> NETHERITE_DAGGER = ITEMS.register("netherite_dagger",
+            () -> new DaggerItem(Tiers.NETHERITE,
+                    new Item.Properties()
+                            .durability(Tiers.NETHERITE.getUses())
+            ));
 
 
-    // Soul
-    public static Item bulletSoul = new ItemBulletSoul("bullet_soul");
 
-    public static Item guardianSoul = new ItemGuardianSoul("guardian_soul");
+    public static final RegistryObject<Item> HOLY_BIBLE = ITEMS.register("holy_bible",
+            () -> new HolyBibleItem(new Item.Properties()
+                    .stacksTo(1)));
 
-    // SubWeapons
-    public static ItemHolyCross ironHolyCross = new ItemHolyCross("iron_holy_cross", Item.ToolMaterial.IRON);
-    public static ItemHolyCross woodenHolyCross = new ItemHolyCross("wooden_holy_cross", Item.ToolMaterial.WOOD);
-    public static ItemHolyCross stoneHolyCross = new ItemHolyCross("stone_holy_cross", Item.ToolMaterial.STONE);
-    public static ItemHolyCross goldenHolyCross = new ItemHolyCross("golden_holy_cross", Item.ToolMaterial.GOLD);
-    public static ItemHolyCross diamondHolyCross = new ItemHolyCross("diamond_holy_cross", Item.ToolMaterial.DIAMOND);
+    public static final RegistryObject<Item> WOODEN_HOLY_CROSS = ITEMS.register("wooden_holy_cross",
+            () -> new HolyCrossItem(Tiers.WOOD,
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(Tiers.WOOD.getUses())
+            ));
+    public static final RegistryObject<Item> STONE_HOLY_CROSS = ITEMS.register("stone_holy_cross",
+            () -> new HolyCrossItem(Tiers.STONE,
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(Tiers.STONE.getUses())
 
-    public static Item holyWater = new ItemHolyWater("holy_water");
+            ));
+    public static final RegistryObject<Item> IRON_HOLY_CROSS = ITEMS.register("iron_holy_cross",
+            () -> new HolyCrossItem(Tiers.IRON,
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(Tiers.IRON.getUses())
+            ));
+    public static final RegistryObject<Item> GOLDEN_HOLY_CROSS = ITEMS.register("golden_holy_cross",
+            () -> new HolyCrossItem(Tiers.GOLD,
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(Tiers.GOLD.getUses())
+            ));
+    public static final RegistryObject<Item> DIAMOND_HOLY_CROSS = ITEMS.register("diamond_holy_cross",
+            () -> new HolyCrossItem(Tiers.DIAMOND,
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(Tiers.DIAMOND.getUses())
+            ));
+    public static final RegistryObject<Item> NETHERITE_HOLY_CROSS = ITEMS.register("netherite_holy_cross",
+            () -> new HolyCrossItem(Tiers.NETHERITE,
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(Tiers.NETHERITE.getUses())
+            ));
 
-    public static ItemDagger woodenDagger = new ItemDagger("wooden_dagger", Item.ToolMaterial.WOOD);
-    public static ItemDagger stoneDagger = new ItemDagger("stone_dagger", Item.ToolMaterial.STONE);
-    public static ItemDagger ironDagger = new ItemDagger("iron_dagger", Item.ToolMaterial.IRON);
-    public static ItemDagger goldenDagger = new ItemDagger("golden_dagger", Item.ToolMaterial.GOLD);
-    public static ItemDagger diamondDagger = new ItemDagger("diamond_dagger", Item.ToolMaterial.DIAMOND);
-
-    public static ItemThrowingAxe ironThrowingAxe = new ItemThrowingAxe("iron_throwing_axe", Item.ToolMaterial.IRON);
-    public static ItemThrowingAxe woodenThrowingAxe = new ItemThrowingAxe("wooden_throwing_axe", Item.ToolMaterial.WOOD);
-    public static ItemThrowingAxe stoneThrowingAxe = new ItemThrowingAxe("stone_throwing_axe", Item.ToolMaterial.STONE);
-    public static ItemThrowingAxe goldenThrowingAxe = new ItemThrowingAxe("golden_throwing_axe", Item.ToolMaterial.GOLD);
-    public static ItemThrowingAxe diamondThrowingAxe = new ItemThrowingAxe("diamond_throwing_axe", Item.ToolMaterial.DIAMOND);
-
-    public static Item holyBible = new ItemHolyBible("holy_bible");
-
-    // Projectiles
-    public static Item scytheProjectile = new ItemScytheProjectile("scythe_projectile");
-    public static Item throwingBone = new ItemThrowingBone("throwing_bone");
-
-    // SubWeapons Entity Throwable
-    public static Item animIronHolyCross = new ItemAnimIronHolyCross("anim_iron_holy_cross");
-    public static Item animWoodenHolyCross = new ItemAnimWoodenHolyCross("anim_wooden_holy_cross");
-    public static Item animStoneHolyCross = new ItemAnimWoodenHolyCross("anim_stone_holy_cross");
-    public static Item animGoldenHolyCross = new ItemAnimWoodenHolyCross("anim_golden_holy_cross");
-    public static Item animDiamondHolyCross = new ItemAnimWoodenHolyCross("anim_diamond_holy_cross");
-
-    public static Item animFireHolyCross = new ItemAnimFireHolyCross("anim_fire_holy_cross");
-
-    public static Item animIronThrowingAxe = new ItemAnimIronThrowingAxe("anim_iron_throwing_axe");
-    public static Item animWoodenThrowingAxe = new ItemAnimWoodThrowingAxe("anim_wooden_throwing_axe");
-    public static Item animStoneThrowingAxe = new ItemAnimStoneThrowingAxe("anim_stone_throwing_axe");
-    public static Item animGoldenThrowingAxe = new ItemAnimGoldThrowingAxe("anim_golden_throwing_axe");
-    public static Item animDiamondThrowingAxe = new ItemAnimDiamondThrowingAxe("anim_diamond_throwing_axe");
-
-    // Projectiles Entity Throwable
-    public static Item animScytheProjectile = new ItemAnimScytheProjectile("anim_scythe_projectile");
-
-    // Special Weapons
-    public static Item deathScythe = new ItemDeathScythe("death_scythe");
-
-    // Spell Books
-
-    public static Item fireBook = new ItemFireBook("fire_book");
-
-    // Armors
-    public static Item draculaTunic = new ItemDraculaTunicArmor("dracula_tunic", DRACULA_TUNIC_ARMOR, 1, EntityEquipmentSlot.CHEST);
-
-    public static Item justeBelmontChest = new ItemJusteBelmontArmor("juste_belmont_chest", JUSTE_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
-    public static Item justeBelmontLeggings = new ItemJusteBelmontArmor("juste_belmont_leggings", JUSTE_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
-    public static Item justeBelmontBoots = new ItemJusteBelmontArmor("juste_belmont_boots", JUSTE_BELMONT_ARMOR, 2, EntityEquipmentSlot.FEET);
-
-    public static Item leonBelmontChest = new ItemLeonBelmontArmor("leon_belmont_chest", LEON_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
-    public static Item leonBelmontLeggings = new ItemLeonBelmontArmor("leon_belmont_leggings", LEON_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
-    public static Item leonBelmontBoots = new ItemLeonBelmontArmor("leon_belmont_boots", LEON_BELMONT_ARMOR, 1, EntityEquipmentSlot.FEET);
-
-    public static Item olroxSuit = new ItemOlroxSuitArmor("olrox_suit", OLROX_SUIT_ARMOR, 1, EntityEquipmentSlot.CHEST);
-
-    public static Item richterBelmontChest = new ItemRichterBelmontArmor("richter_belmont_chest", RICHTER_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
-    public static Item richterBelmontLeggings = new ItemRichterBelmontArmor("richter_belmont_leggings", RICHTER_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
-    public static Item richterBelmontBoots = new ItemRichterBelmontArmor("richter_belmont_boots", RICHTER_BELMONT_ARMOR, 2, EntityEquipmentSlot.FEET);
-
-    public static Item simonBelmontChest = new ItemSimonBelmontArmor("simon_belmont_chest", SIMON_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
-    public static Item simonBelmontLeggings = new ItemSimonBelmontArmor("simon_belmont_leggings", SIMON_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
-    public static Item simonBelmontBoots = new ItemSimonBelmontArmor("simon_belmont_boots", SIMON_BELMONT_ARMOR, 1, EntityEquipmentSlot.FEET);
+    public static final RegistryObject<Item> HOLY_WATER = ITEMS.register("holy_water",
+            () -> new HolyWaterItem(new Item.Properties()
+                    .stacksTo(1)));
 
 
-    // Misc Items
-    public static ItemCrucifix oakCrucifix = new ItemCrucifix("oak_crucifix", BlockPlanks.EnumType.OAK);
-    public static ItemCrucifix spruceCrucifix = new ItemCrucifix("spruce_crucifix", BlockPlanks.EnumType.SPRUCE);
-    public static ItemCrucifix birchCrucifix = new ItemCrucifix("birch_crucifix", BlockPlanks.EnumType.BIRCH);
-    public static ItemCrucifix jungleCrucifix = new ItemCrucifix("jungle_crucifix", BlockPlanks.EnumType.JUNGLE);
-    public static ItemCrucifix acaciaCrucifix = new ItemCrucifix("acacia_crucifix", BlockPlanks.EnumType.ACACIA);
-    public static ItemCrucifix darkOakCrucifix = new ItemCrucifix("dark_oak_crucifix", BlockPlanks.EnumType.DARK_OAK);
+
+
+    public static final RegistryObject<Item> WOODEN_THROWING_AXE = ITEMS.register("wooden_throwing_axe",
+            () -> new ThrowingAxeItem(Tiers.WOOD,
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(Tiers.WOOD.getUses())
+            ));
+    public static final RegistryObject<Item> STONE_THROWING_AXE = ITEMS.register("stone_throwing_axe",
+            () -> new ThrowingAxeItem(Tiers.STONE,
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(Tiers.STONE.getUses())
+
+            ));
+    public static final RegistryObject<Item> IRON_THROWING_AXE = ITEMS.register("iron_throwing_axe",
+            () -> new ThrowingAxeItem(Tiers.IRON,
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(Tiers.IRON.getUses())
+            ));
+    public static final RegistryObject<Item> GOLDEN_THROWING_AXE = ITEMS.register("golden_throwing_axe",
+            () -> new ThrowingAxeItem(Tiers.GOLD,
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(Tiers.GOLD.getUses())
+            ));
+    public static final RegistryObject<Item> DIAMOND_THROWING_AXE = ITEMS.register("diamond_throwing_axe",
+            () -> new ThrowingAxeItem(Tiers.DIAMOND,
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(Tiers.DIAMOND.getUses())
+            ));
+    public static final RegistryObject<Item> NETHERITE_THROWING_AXE = ITEMS.register("netherite_throwing_axe",
+            () -> new ThrowingAxeItem(Tiers.NETHERITE,
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(Tiers.NETHERITE.getUses())
+            ));
+
+    public static final RegistryObject<Item> ANIM_WOOD_HOLY_CROSS = ITEMS.register("anim_wooden_holy_cross",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANIM_STONE_HOLY_CROSS = ITEMS.register("anim_stone_holy_cross",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANIM_IRON_HOLY_CROSS = ITEMS.register("anim_iron_holy_cross",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANIM_GOLD_HOLY_CROSS = ITEMS.register("anim_golden_holy_cross",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANIM_DIAMOND_HOLY_CROSS = ITEMS.register("anim_diamond_holy_cross",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANIM_NETHERITE_HOLY_CROSS = ITEMS.register("anim_netherite_holy_cross",
+            () -> new Item(new Item.Properties()));
+
+
+    public static final RegistryObject<Item> ANIM_WOOD_THROWING_AXE = ITEMS.register("anim_wooden_throwing_axe",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANIM_STONE_THROWING_AXE = ITEMS.register("anim_stone_throwing_axe",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANIM_IRON_THROWING_AXE = ITEMS.register("anim_iron_throwing_axe",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANIM_GOLD_THROWING_AXE = ITEMS.register("anim_golden_throwing_axe",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANIM_DIAMOND_THROWING_AXE = ITEMS.register("anim_diamond_throwing_axe",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANIM_NETHERITE_THROWING_AXE = ITEMS.register("anim_netherite_throwing_axe",
+            () -> new Item(new Item.Properties()));
+
+    // Spawn Eggs
+
+    public static final RegistryObject<Item> BLOOD_SKELETON_SPAWN_EGG = ITEMS.register("blood_skeleton_spawn_egg",
+            () -> new ForgeSpawnEggItem(
+                    CCEntity.BLOOD_SKELETON,
+                    0x8F0000,
+                    0x420000,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> DRACULA_SPAWN_EGG = ITEMS.register("dracula_spawn_egg",
+            () -> new ForgeSpawnEggItem(
+                    CCEntity.DRACULA,
+                    0x000000,
+                    0xBF3030,
+                    new Item.Properties()));
+
+    public static void register(IEventBus eventBus) {
+        ITEMS.register(eventBus);
+    }
 }

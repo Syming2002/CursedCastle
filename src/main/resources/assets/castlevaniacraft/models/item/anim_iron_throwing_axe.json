@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures":
   {
-    "layer0": "castlevaniacraft:entity/anim_iron_throwing_axe"
+    "layer0": "castlevaniacraft:item/anim_iron_throwing_axe"
   }
 }

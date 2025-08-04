@@ -1,17 +1,33 @@
 {
-	"parent": "item/generated",
-	"textures":
-	{
-		"layer0": "castlevaniacraft:items/golden_dagger"
-	},
-	"display": {
-		"thirdperson_righthand": {
-			"translation": [0, 0, -2.5],
-			"rotation": [0, -90, 0]
-		},
-		"thirdperson_lefthand": {
-			"translation": [0, 0, -2.5],
-			"rotation": [0, -270, 0]
-		}
-	}
+  "parent": "minecraft:item/generated",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "castlevaniacraft:item/golden_dagger_3d"
+  },
+  "perspectives": {
+    "thirdperson_righthand":{
+      "parent": "castlevaniacraft:item/golden_dagger_3d"
+    },
+    "thirdperson_lefthand": {
+      "parent": "castlevaniacraft:item/golden_dagger_3d"
+    },
+    "firstperson_righthand": {
+      "parent": "castlevaniacraft:item/golden_dagger_3d"
+    },
+    "firstperson_lefthand": {
+      "parent": "castlevaniacraft:item/golden_dagger_3d"
+    },
+    "head": {
+      "parent": "castlevaniacraft:item/golden_dagger_2d"
+    },
+    "gui": {
+      "parent": "castlevaniacraft:item/golden_dagger_2d"
+    },
+    "ground": {
+      "parent": "castlevaniacraft:item/golden_dagger_2d"
+    },
+    "fixed": {
+      "parent": "castlevaniacraft:item/golden_dagger_2d"
+    }
+  }
 }

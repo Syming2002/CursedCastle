@@ -1,0 +1,27 @@
+package com.syming.castlevaniacraft.client.event;
+
+import com.syming.castlevaniacraft.CastlevaniaCraftMod;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.LerpingBossEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+import java.util.UUID;
+
+@Mod.EventBusSubscriber(modid = CastlevaniaCraftMod.MOD_ID, value = Dist.CLIENT)
+public class GuiEvent {
+
+    @SubscribeEvent
+    public static void onRenderBossBar(CustomizeGuiOverlayEvent.BossEventProgress event) {
+        GuiGraphics guiGraphics = event.getGuiGraphics();
+        LerpingBossEvent bossEvent = event.getBossEvent();
+        UUID bossUUID = bossEvent.getId();
+        if (DraculaBossBar.isDraculaBossBar(bossUUID)) {
+            DraculaBossBar.drawDraculaBossHealthBar(guiGraphics, event.getX(), event.getY(), bossEvent);
+            event.setIncrement(event.getIncrement());
+        }
+    }
+
+}

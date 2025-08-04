@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures":
   {
-    "layer0": "castlevaniacraft:items/whips/attachments/bullet_tip"
+    "layer0": "castlevaniacraft:item/bullet_tip"
   }
 }

@@ -1,11 +1,11 @@
 package com.syming.castlevaniacraft.api;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 public interface IElementalWeapon {
 
-    public DamageSource getElementalDamageSource(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker);
+    public DamageSource getElementalDamageSource(ItemStack stack, LivingEntity target, LivingEntity attacker);
 
 }

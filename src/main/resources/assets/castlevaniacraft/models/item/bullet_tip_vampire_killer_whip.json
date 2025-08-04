@@ -2,7 +2,7 @@
   "parent": "item/handheld",
   "textures":
   {
-    "layer0": "castlevaniacraft:items/whips/bullet_tip_vampire_killer_whip"
+    "layer0": "castlevaniacraft:item/bullet_tip_vampire_killer_whip"
   },
   "display": {
     "thirdperson_righthand": {

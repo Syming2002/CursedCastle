@@ -1,47 +1,59 @@
 package com.syming.castlevaniacraft.damagesource;
 
-import net.minecraft.util.DamageSource;
+import com.syming.castlevaniacraft.CastlevaniaCraftMod;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.*;
+import net.minecraft.world.entity.Entity;
+import org.jetbrains.annotations.Nullable;
 
-public class CCDamageSource {
+public class CCDamageSource implements RegistrySetBuilder.RegistryBootstrap<DamageType> {
 
-    private static final DamageSource FIRE = new DamageSource("fire").setFireDamage();
-    private static final DamageSource ICE = new DamageSource("ice");
-    private static final DamageSource THUNDER = new DamageSource("thunder");
-    private static final DamageSource WATER = new DamageSource("water");
-    private static final DamageSource HOLY = new DamageSource("holy");
-    private static final DamageSource DARK = new DamageSource("dark");
-    private static final DamageSource WIND = new DamageSource("wind");
-    private static final DamageSource EARTH = new DamageSource("earth");
+    private CCDamageSource() {}
 
-    public static DamageSource getFireDamage() {
-        return FIRE;
+    public static void register(RegistrySetBuilder builder) {
+        builder.add(Registries.DAMAGE_TYPE, new CCDamageSource());
     }
 
-    public static DamageSource getWaterDamage() {
-        return WATER;
+    public static final ResourceKey<DamageType> FIRE = create("fire");
+    public static final ResourceKey<DamageType> ICE = create("ice");
+    public static final ResourceKey<DamageType> THUNDER = create("thunder");
+    public static final ResourceKey<DamageType> WATER = create("water");
+    public static final ResourceKey<DamageType> WIND = create("wind");
+    public static final ResourceKey<DamageType> EARTH = create("earth");
+    public static final ResourceKey<DamageType> HOLY = create("holy");
+    public static final ResourceKey<DamageType> DARK = create("dark");
+
+
+    private static ResourceKey<DamageType> create(String pName) {
+        return ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(CastlevaniaCraftMod.MOD_ID, pName));
     }
 
-    public static DamageSource getIceDamage() {
-        return ICE;
+    public static DamageSource source(RegistryAccess access, ResourceKey<DamageType> type, @Nullable Entity entityDirect, @Nullable Entity entityCausing) {
+        return new DamageSource(access.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(type), entityDirect, entityCausing);
     }
 
-    public static DamageSource getThunderDamage() {
-        return THUNDER;
+    public static DamageSource source(RegistryAccess access, ResourceKey<DamageType> type, @Nullable Entity entity) {
+        return new DamageSource(access.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(type), entity, null);
     }
 
-    public static DamageSource getHolyDamage() {
-        return HOLY;
+    public static DamageSource source(RegistryAccess access, ResourceKey<DamageType> type) {
+        return new DamageSource(access.registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(type), null, null);
     }
 
-    public static DamageSource getDarkDamage() {
-        return DARK;
-    }
-
-    public static DamageSource getWindDamage() {
-        return WIND;
-    }
-
-    public static DamageSource getEarthDamage() {
-        return EARTH;
+    @Override
+    public void run(BootstapContext<DamageType> pContext) {
+        pContext.register(FIRE, new DamageType("fire", DamageScaling.NEVER, 0.1F, DamageEffects.BURNING));
+        pContext.register(ICE, new DamageType("ice", DamageScaling.NEVER, 0.1F, DamageEffects.FREEZING));
+        pContext.register(THUNDER, new DamageType("thunder", DamageScaling.NEVER, 0.1F, DamageEffects.THORNS));
+        pContext.register(WATER, new DamageType("water", DamageScaling.NEVER, 0.1F, DamageEffects.DROWNING));
+        pContext.register(WIND, new DamageType("wind", DamageScaling.NEVER, 0.1F));
+        pContext.register(EARTH, new DamageType("earth", DamageScaling.NEVER, 0.1F));
+        pContext.register(HOLY, new DamageType("holy", DamageScaling.NEVER, 0.1F));
+        pContext.register(DARK, new DamageType("dark", DamageScaling.NEVER, 0.1F));
     }
 }

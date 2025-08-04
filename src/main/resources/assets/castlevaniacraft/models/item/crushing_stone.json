@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures":
   {
-    "layer0": "castlevaniacraft:items/whips/attachments/crushing_stone"
+    "layer0": "castlevaniacraft:item/crushing_stone"
   }
 }

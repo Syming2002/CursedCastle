@@ -2,7 +2,7 @@
   "parent": "item/handheld",
   "textures":
   {
-    "layer0": "castlevaniacraft:items/whips/flame_whip"
+    "layer0": "castlevaniacraft:item/flame_whip"
   },
   "display": {
     "thirdperson_righthand": {

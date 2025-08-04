@@ -2,6 +2,6 @@
     "parent": "item/generated",
     "textures":
     {
-        "layer0": "castlevaniacraft:entity/anim_diamond_holy_cross"
+        "layer0": "castlevaniacraft:item/anim_diamond_holy_cross"
     }
 }

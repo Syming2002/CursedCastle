@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures":
   {
-    "layer0": "castlevaniacraft:items/diamond_throwing_axe"
+    "layer0": "castlevaniacraft:item/diamond_throwing_axe"
   }
 }

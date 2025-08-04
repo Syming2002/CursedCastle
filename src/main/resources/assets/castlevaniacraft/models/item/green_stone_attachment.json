@@ -1,7 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures":
-  {
-    "layer0": "castlevaniacraft:items/whips/attachments/green_stone_attachment"
-  }
-}

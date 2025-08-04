@@ -2,6 +2,6 @@
     "parent": "item/generated",
     "textures":
     {
-        "layer0": "castlevaniacraft:items/holy_bible"
+        "layer0": "castlevaniacraft:item/holy_bible"
     }
 }

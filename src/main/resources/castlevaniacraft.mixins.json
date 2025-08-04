@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.syming.castlevaniacraft.mixin",
+  "plugin": "com.syming.castlevaniacraft.mixin.CastlevaniaCraftMixinPlugin",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "castlevaniacraft.refmap.json",
+  "mixins": [
+
+  ],
+  "client": [
+    "client.BossHealthOverlayMixin"
+  ]
+}

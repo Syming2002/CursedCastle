@@ -1,60 +1,86 @@
 package com.syming.castlevaniacraft;
 
-import com.syming.castlevaniacraft.proxy.CommonProxy;
-import com.syming.castlevaniacraft.util.CCReferences;
-import com.syming.castlevaniacraft.util.handlers.RegistryHandler;
-import net.minecraftforge.fluids.FluidRegistry;
+import com.syming.castlevaniacraft.block.CCBlock;
+import com.syming.castlevaniacraft.creativetab.CCCreativeModeTab;
+import com.syming.castlevaniacraft.item.CCItem;
+import com.syming.castlevaniacraft.sound.CCSound;
+import com.syming.castlevaniacraft.world.entity.CCEntity;
+import com.syming.castlevaniacraft.world.entity.client.bloodSkeleton.BloodSkeletonRenderer;
+import com.syming.castlevaniacraft.world.entity.client.dagger.DaggerRenderer;
+import com.syming.castlevaniacraft.world.entity.client.dracula.DraculaRenderer;
+import com.syming.castlevaniacraft.world.entity.client.vampirebat.VampireBatRenderer;
+import com.syming.castlevaniacraft.world.entity.mob.BloodSkeletonEntity;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Tiers;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(modid = CCReferences.MODID,
-        name = CCReferences.NAME,
-        version = CCReferences.VERSION,
-        dependencies = "required-after:llibrary@[1.7.9,);" +
-                "required-after:baubles@[1.5,);" +
-                "required-after:reachfix@[1.0.11,);" +
-                "required-after:atlaslib@[1.1.6,);" +
-                "required-after:deeperdepths@[1.0.3,);")
+// The value here should match an entry in the META-INF/mods.toml file
+@Mod(CastlevaniaCraftMod.MOD_ID)
 public class CastlevaniaCraftMod {
 
-    static
-    {
-        FluidRegistry.enableUniversalBucket();
+    public static final String MOD_ID = "castlevaniacraft";
+
+    public CastlevaniaCraftMod() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        CCBlock.register(modEventBus);
+        CCCreativeModeTab.register(modEventBus);
+        CCEntity.register(modEventBus);
+        CCItem.register(modEventBus);
+        CCSound.register(modEventBus);
+
+        modEventBus.addListener(this::commonSetup);
+
+        MinecraftForge.EVENT_BUS.register(this);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    @Mod.Instance
-    public static CastlevaniaCraftMod instance;
+    private void commonSetup(final FMLCommonSetupEvent event) {
 
-    @SidedProxy(clientSide = CCReferences.CLIENT_PROXY, serverSide = CCReferences.COMMON_PROXY)
-    public static CommonProxy proxy;
-
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
-        RegistryHandler.preInitRegistries(event);
     }
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event)
-    {
-        RegistryHandler.initRegistries(event);
+    @SubscribeEvent
+    public void onServerStarting(ServerStartingEvent event) {
     }
 
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        RegistryHandler.postInitRegistries(event);
+    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientModEvents {
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            event.enqueueWork(() -> {
+                EntityRenderers.register(CCEntity.BLOOD_SKELETON.get(), BloodSkeletonRenderer::new);
+                EntityRenderers.register(CCEntity.DRACULA.get(), DraculaRenderer::new);
+                EntityRenderers.register(CCEntity.VAMPIRE_BAT.get(), VampireBatRenderer::new);
+
+                for (Tiers tier : Tiers.values()) {
+                    EntityRenderers.register(CCEntity.DAGGER_TYPES.get(tier).get(), DaggerRenderer::new);
+                }
+
+                for (Tiers tier : Tiers.values()) {
+                    EntityRenderers.register(CCEntity.HOLY_CROSS_TYPES.get(tier).get(), ThrownItemRenderer::new);
+                }
+
+                EntityRenderers.register(CCEntity.HOLY_BIBLE.get(), ThrownItemRenderer::new);
+                EntityRenderers.register(CCEntity.HOLY_WATER.get(), ThrownItemRenderer::new);
+
+                for (Tiers tier : Tiers.values()) {
+                    EntityRenderers.register(CCEntity.THROWING_AXE_TYPES.get(tier).get(), ThrownItemRenderer::new);
+                }
+            });
+        }
     }
-
-    @Mod.EventHandler
-    public void serverInit(FMLServerStartingEvent event)
-    {
-        RegistryHandler.serverRegistries(event);
-    }
-
-
 }
