@@ -9,7 +9,7 @@
     "description": {
       "translate": "advancement.castlevaniacraft.root.description"
     },
-    "background": "deeperdepths:textures/blocks/deepslate_tile.png",
+    "background": "castlevaniacraft:textures/blocks/dracula_castle_stone.png",
     "announce_to_chat": true,
     "hidden": false
   },

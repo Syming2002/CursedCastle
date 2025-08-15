@@ -1,6 +1,7 @@
 package com.syming.castlevaniacraft.client.render.tile;
 
 import com.syming.castlevaniacraft.client.model.ModelCCHead;
+import com.syming.castlevaniacraft.client.model.ModelGrimReaperHead;
 import com.syming.castlevaniacraft.tile.TileEntityGrimReaperHead;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.model.ModelBase;
@@ -17,7 +18,7 @@ public class TileEntityGrimReaperHeadRenderer extends TileEntitySpecialRenderer<
 {
     private static final ResourceLocation GRIM_REAPER_TEXTURES = new ResourceLocation(CCReferences.MODID,"textures/entity/grim_reaper.png");
     public static TileEntityGrimReaperHeadRenderer INSTANCE = new TileEntityGrimReaperHeadRenderer();
-    private final ModelCCHead grimReaperHead = new ModelCCHead(32, 28, 64, 64);
+    private final ModelGrimReaperHead grimReaperHead = new ModelGrimReaperHead(24, 0, 24, 16, 64, 64);
 
     @Override
     public void render(TileEntityGrimReaperHead te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
@@ -28,7 +29,6 @@ public class TileEntityGrimReaperHeadRenderer extends TileEntitySpecialRenderer<
 
     public void renderGrimReaperHead(float x, float y, float z, EnumFacing facing, float rotationIn, int destroyStage)
     {
-        ModelBase modelbase = this.grimReaperHead;
 
         if (destroyStage >= 0) {
             this.bindTexture(DESTROY_STAGES[destroyStage]);
@@ -75,7 +75,7 @@ public class TileEntityGrimReaperHeadRenderer extends TileEntitySpecialRenderer<
         GlStateManager.scale(-1.0F, -1.0F, 1.0F);
         GlStateManager.enableAlpha();
 
-        modelbase.render((Entity)null, 0.0F, 0.0F, 0.0F, rotationIn, 0.0F, 0.0625F);
+        this.grimReaperHead.render((Entity)null, 0.0F, 0.0F, 0.0F, rotationIn, 0.0F, 0.0625F);
         GlStateManager.popMatrix();
 
         if (destroyStage >= 0)

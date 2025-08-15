@@ -60,7 +60,7 @@ public class EntityGrimReaper extends CCEntityMob implements IAnimatedEntity, IC
     public EntityGrimReaper(World world) {
         super(world);
         this.fall(0, 0);
-        this.setSize(1.5F, 3.0F);
+        this.setSize(1.0F, 3.0F);
         this.noClip = false;
         this.navigator = new PathNavigateFlying(this, this.world);
         this.experienceValue = 444;

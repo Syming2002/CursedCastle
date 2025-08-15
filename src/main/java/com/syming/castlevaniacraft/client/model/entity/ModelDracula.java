@@ -69,7 +69,7 @@ public class ModelDracula extends CCModel {
 		right_arm_sleve = new AdvancedModelRenderer(this);
 		right_arm_sleve.setRotationPoint(-6.0F, -30.0F, 1.0F);
 		model_core.addChild(right_arm_sleve);
-		right_arm_sleve.cubeList.add(new ModelBox(right_arm_sleve, 52, 20, -2.0F, -2.0F, -2.0F, 4, 14, 4, 0.25F, false));
+		right_arm_sleve.cubeList.add(new ModelBox(right_arm_sleve, 52, 20, -2.0F, -2.0F, -2.0F, 4, 14, 4, 0.26F, false));
 
 		left_arm = new AdvancedModelRenderer(this);
 		left_arm.setRotationPoint(6.0F, -30.0F, 1.0F);
@@ -80,7 +80,7 @@ public class ModelDracula extends CCModel {
 		left_arm_sleve.setRotationPoint(6.0F, -30.0F, 1.0F);
 		model_core.addChild(left_arm_sleve);
 		setRotationAngle(left_arm_sleve, 0.0F, 0.0F, 0.0F);
-		left_arm_sleve.cubeList.add(new ModelBox(left_arm_sleve, 0, 52, -2.0F, -2.0F, -2.0F, 4, 14, 4, 0.25F, false));
+		left_arm_sleve.cubeList.add(new ModelBox(left_arm_sleve, 0, 52, -2.0F, -2.0F, -2.0F, 4, 14, 4, 0.26F, false));
 
 		right_leg = new AdvancedModelRenderer(this);
 		right_leg.setRotationPoint(-2.0F, -15.0F, 1.0F);
@@ -90,7 +90,7 @@ public class ModelDracula extends CCModel {
 		right_pants = new AdvancedModelRenderer(this);
 		right_pants.setRotationPoint(-2.0F, -15.0F, 1.0F);
 		model_core.addChild(right_pants);
-		right_pants.cubeList.add(new ModelBox(right_pants, 48, 0, -2.0F, -1.0F, -2.0F, 4, 16, 4, 0.25F, false));
+		right_pants.cubeList.add(new ModelBox(right_pants, 48, 0, -2.0F, -1.0F, -2.0F, 4, 16, 4, 0.26F, false));
 
 		left_leg = new AdvancedModelRenderer(this);
 		left_leg.setRotationPoint(2.0F, -15.0F, 1.0F);
@@ -101,7 +101,7 @@ public class ModelDracula extends CCModel {
 		left_pants = new AdvancedModelRenderer(this);
 		left_pants.setRotationPoint(2.0F, -15.0F, 1.0F);
 		model_core.addChild(left_pants);
-		left_pants.cubeList.add(new ModelBox(left_pants, 32, 0, -2.0F, -1.0F, -2.0F, 4, 16, 4, 0.25F, false));
+		left_pants.cubeList.add(new ModelBox(left_pants, 32, 0, -2.0F, -1.0F, -2.0F, 4, 16, 4, 0.26F, false));
 
 		this.animator = ModelAnimator.create();
 		updateDefaultPose();

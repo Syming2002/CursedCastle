@@ -7,6 +7,7 @@ import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.ModelSkeleton;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -20,11 +21,10 @@ public class ModelGrimReaper extends CCModel {
     private final AdvancedModelRenderer head;
     private final AdvancedModelRenderer headWear;
     private final AdvancedModelRenderer body;
-    private final AdvancedModelRenderer bodyWear;
-    private final AdvancedModelRenderer humanoidRightArm;
-    private final AdvancedModelRenderer humanoidLeftArm;
-    private final AdvancedModelRenderer humanoidRightArmSleeve;
-    private final AdvancedModelRenderer humanoidLeftArmSleeve;
+    private final AdvancedModelRenderer rightArm;
+    private final AdvancedModelRenderer rightArmWear;
+    private final AdvancedModelRenderer leftArm;
+    private final AdvancedModelRenderer leftArmWear;
     public ArmPose rightArmPose;
 
     private ModelAnimator animator;
@@ -40,38 +40,37 @@ public class ModelGrimReaper extends CCModel {
         this.textureWidth = textureWidthIn;
         this.textureHeight = textureHeightIn;
 
-
         head = new AdvancedModelRenderer(this);
-        head.setRotationPoint(0.0F, 0.0F, 0.0F);
-        head.cubeList.add(new ModelBox(head, 32, 28, -4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F, false));
+        head.setRotationPoint(0.0F, -4.0F, 0.0F);
+        head.cubeList.add(new ModelBox(head, 24, 0, -4.0F, -4.0F, -4.0F, 8, 8, 8, 0.0F, false));
 
         headWear = new AdvancedModelRenderer(this);
-        headWear.setRotationPoint(0.0F, 0.0F, 0.0F);
-        headWear.cubeList.add(new ModelBox(headWear, 0, 28, -4.0F, -8.0F, -4.0F, 8, 8, 8, 0.5F, false));
+        headWear.setRotationPoint(0.0F, -4.0F, 0.0F);
+        headWear.cubeList.add(new ModelBox(headWear, 24, 16, -4.0F, -4.0F, -4.0F, 8, 8, 8, 0.5F, false));
 
         body = new AdvancedModelRenderer(this);
-        body.setRotationPoint(0.0F, 0.0F, 0.0F);
-        body.cubeList.add(new ModelBox(body, 0, 0, -4.0F, 0.0F, -2.0F, 8, 24, 4, 0.0F, false));
+        body.setRotationPoint(0.0F, 12.0F, 0.0F);
+        body.cubeList.add(new ModelBox(body, 0, 0, -4.0F, -12.0F, -2.0F, 8, 24, 4, 0.0F, false));
 
-        bodyWear = new AdvancedModelRenderer(this);
-        bodyWear.setRotationPoint(0.0F, 0.0F, 0.0F);
-        bodyWear.cubeList.add(new ModelBox(bodyWear, 24, 0, -4.0F, 0.0F, -2.0F, 8, 24, 4, 0.25F, false));
+        rightArm = new AdvancedModelRenderer(this);
+        rightArm.setRotationPoint(-5.0F, 1.5F, 0.0F);
+        setRotationAngle(rightArm, -0.4659F, -0.1198F, -0.2333F);
+        rightArm.cubeList.add(new ModelBox(rightArm, 0, 28, -1.0F, -1.5F, -1.0F, 2, 12, 2, 0.0F, false));
 
-        humanoidRightArm = new AdvancedModelRenderer(this);
-        humanoidRightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
-        humanoidRightArm.cubeList.add(new ModelBox(humanoidRightArm, 0, 44, -3.0F, -1.5F, -1.0F, 4, 12, 4, 0.0F, false));
+        rightArmWear = new AdvancedModelRenderer(this);
+        rightArmWear.setRotationPoint(-5.0F, 1.5F, 0.0F);
+        setRotationAngle(rightArmWear, -0.4659F, -0.1198F, -0.2333F);
+        rightArmWear.cubeList.add(new ModelBox(rightArmWear, 8, 28, -1.0F, -1.5F, -1.0F, 2, 12, 2, 0.25F, false));
 
-        humanoidLeftArm = new AdvancedModelRenderer(this);
-        humanoidLeftArm.setRotationPoint(5.0F, 2.0F, 0.0F);
-        humanoidLeftArm.cubeList.add(new ModelBox(humanoidLeftArm, 16, 44, -1.0F, -1.5F, -1.0F, 4, 12, 4, 0.0F, false));
+        leftArm = new AdvancedModelRenderer(this);
+        leftArm.setRotationPoint(5.0F, 1.5F, 0.0F);
+        setRotationAngle(leftArm, -1.0321F, 0.2261F, 0.1332F);
+        leftArm.cubeList.add(new ModelBox(leftArm, 0, 28, -1.0F, -1.5F, -1.0F, 2, 12, 2, 0.0F, true));
 
-        humanoidRightArmSleeve = new AdvancedModelRenderer(this);
-        humanoidRightArmSleeve.setRotationPoint(-5.0F, 2.0F, 0.0F);
-        humanoidRightArmSleeve.cubeList.add(new ModelBox(humanoidRightArmSleeve, 48, 0, -3.0F, -1.5F, -1.0F, 4, 12, 4, 0.0625F, false));
-
-        humanoidLeftArmSleeve = new AdvancedModelRenderer(this);
-        humanoidLeftArmSleeve.setRotationPoint(5.0F, 2.0F, 0.0F);
-        humanoidLeftArmSleeve.cubeList.add(new ModelBox(humanoidLeftArmSleeve, 32, 44, -1.0F, -1.5F, -1.0F, 4, 12, 4, 0.0625F, false));
+        leftArmWear = new AdvancedModelRenderer(this);
+        leftArmWear.setRotationPoint(5.0F, 1.5F, 0.0F);
+        setRotationAngle(leftArmWear, -1.0321F, 0.2261F, 0.1332F);
+        leftArmWear.cubeList.add(new ModelBox(leftArmWear, 8, 28, -1.0F, -1.5F, -1.0F, 2, 12, 2, 0.25F, true));
 
         this.animator = ModelAnimator.create();
         updateDefaultPose();
@@ -87,11 +86,10 @@ public class ModelGrimReaper extends CCModel {
         this.head.render(scale);
         this.headWear.render(scale);
         this.body.render(scale);
-        this.bodyWear.render(scale);
-        this.humanoidRightArm.render(scale);
-        this.humanoidRightArmSleeve.render(scale);
-        this.humanoidLeftArm.render(scale);
-        this.humanoidLeftArmSleeve.render(scale);
+        this.rightArm.render(scale);
+        this.rightArmWear.render(scale);
+        this.leftArm.render(scale);
+        this.leftArmWear.render(scale);
     }
 
     /**
@@ -112,24 +110,24 @@ public class ModelGrimReaper extends CCModel {
 
         switch (this.rightArmPose) {
             case EMPTY:
-                this.humanoidRightArm.rotateAngleY = 0.0F;
-                this.humanoidRightArmSleeve.rotateAngleY = 0.0F;
+                this.rightArm.rotateAngleY = 0.0F;
+                this.rightArmWear.rotateAngleY = 0.0F;
                 break;
             case DEATH_SCYTHE:
 
-                this.humanoidRightArm.rotateAngleX = -0.4659F;
-                this.humanoidRightArmSleeve.rotateAngleX = -0.4659F;
-                this.humanoidRightArm.rotateAngleY = -0.1198F;
-                this.humanoidRightArmSleeve.rotateAngleY = -0.1198F;
-                this.humanoidRightArm.rotateAngleZ = -0.2333F;
-                this.humanoidRightArmSleeve.rotateAngleZ = -0.2333F;
+                this.rightArm.rotateAngleX = -0.4659F;
+                this.rightArmWear.rotateAngleX = -0.4659F;
+                this.rightArm.rotateAngleY = -0.1198F;
+                this.rightArmWear.rotateAngleY = -0.1198F;
+                this.rightArm.rotateAngleZ = -0.2333F;
+                this.rightArmWear.rotateAngleZ = -0.2333F;
 
-                this.humanoidLeftArm.rotateAngleX = -1.0321F;
-                this.humanoidLeftArmSleeve.rotateAngleX = -1.0321F;
-                this.humanoidLeftArm.rotateAngleY = 0.2261F;
-                this.humanoidLeftArmSleeve.rotateAngleY = 0.2261F;
-                this.humanoidLeftArm.rotateAngleZ = 0.1332F;
-                this.humanoidLeftArmSleeve.rotateAngleZ = 0.1332F;
+                this.leftArm.rotateAngleX = -1.0321F;
+                this.leftArmWear.rotateAngleX = -1.0321F;
+                this.leftArm.rotateAngleY = 0.2261F;
+                this.leftArmWear.rotateAngleY = 0.2261F;
+                this.leftArm.rotateAngleZ = 0.1332F;
+                this.leftArmWear.rotateAngleZ = 0.1332F;
 
                 if (grimReaper.getAnimation() != EntityGrimReaper.MELEE_ATTACK_ANIMATION || grimReaper.getAnimation() != EntityGrimReaper.SCYTHE_PROJECTILE_ATTACK_ANIMATION) {
                     float waveSpeed = (float) (2 * Math.PI / 80);
@@ -139,10 +137,10 @@ public class ModelGrimReaper extends CCModel {
                     float wave = (float) Math.sin(ageInTicks * waveSpeed);
                     float animatedAngle = baseAngle + wave * waveAmplitude;
 
-                    this.humanoidRightArm.rotateAngleX = animatedAngle;
-                    this.humanoidRightArmSleeve.rotateAngleX = animatedAngle;
-                    this.humanoidLeftArm.rotateAngleX += animatedAngle;
-                    this.humanoidLeftArmSleeve.rotateAngleX += animatedAngle;
+                    this.rightArm.rotateAngleX = animatedAngle;
+                    this.rightArmWear.rotateAngleX = animatedAngle;
+                    this.leftArm.rotateAngleX += animatedAngle;
+                    this.leftArmWear.rotateAngleX += animatedAngle;
                 }
         }
 
@@ -154,7 +152,7 @@ public class ModelGrimReaper extends CCModel {
     }
 
     protected ModelRenderer getArmForSide(EnumHandSide side) {
-        return side == EnumHandSide.LEFT ? this.humanoidLeftArm : this.humanoidRightArm;
+        return side == EnumHandSide.LEFT ? this.leftArm : this.rightArm;
     }
 
     protected EnumHandSide getMainHand(Entity entityIn)
@@ -179,16 +177,16 @@ public class ModelGrimReaper extends CCModel {
         if (grimReaper.getAnimation() == EntityGrimReaper.MELEE_ATTACK_ANIMATION && grimReaper.isEntityAlive()) {
             animator.setAnimation(EntityGrimReaper.MELEE_ATTACK_ANIMATION);
             animator.startKeyframe(20);
-            this.rotate(animator, humanoidRightArm, -58.2727F, -42.4019F, -3.4223F);
-            this.rotate(animator, humanoidRightArmSleeve, -58.2727F, -42.4019F, -3.4223F);
-            this.rotate(animator, humanoidLeftArm, -83.2805F, -42.2102F, -15.1315F);
-            this.rotate(animator, humanoidLeftArmSleeve, -83.2805F, -42.2102F, -15.1315F);
+            this.rotate(animator, rightArm, -58.2727F, -42.4019F, -3.4223F);
+            this.rotate(animator, rightArmWear, -58.2727F, -42.4019F, -3.4223F);
+            this.rotate(animator, leftArm, -83.2805F, -42.2102F, -15.1315F);
+            this.rotate(animator, leftArmWear, -83.2805F, -42.2102F, -15.1315F);
             animator.endKeyframe();
             animator.startKeyframe(5);
-            this.rotate(animator, humanoidRightArm, 25.017F, 9.9853F, 20.5789F);
-            this.rotate(animator, humanoidRightArmSleeve, 25.017F, 9.9853F, 20.5789F);
-            this.rotate(animator, humanoidLeftArm, 22.9282F, -15.067F, 39.7721F);
-            this.rotate(animator, humanoidLeftArmSleeve, 22.9282F, -15.067F, 39.7721F);
+            this.rotate(animator, rightArm, 25.017F, 9.9853F, 20.5789F);
+            this.rotate(animator, rightArmWear, 25.017F, 9.9853F, 20.5789F);
+            this.rotate(animator, leftArm, 22.9282F, -15.067F, 39.7721F);
+            this.rotate(animator, leftArmWear, 22.9282F, -15.067F, 39.7721F);
             animator.endKeyframe();
             animator.resetKeyframe(10);
         }
@@ -196,51 +194,51 @@ public class ModelGrimReaper extends CCModel {
         if (grimReaper.getAnimation() == EntityGrimReaper.SCYTHE_PROJECTILE_ATTACK_ANIMATION && grimReaper.isEntityAlive()) {
             animator.setAnimation(EntityGrimReaper.SCYTHE_PROJECTILE_ATTACK_ANIMATION);
             animator.startKeyframe(20);
-            this.rotate(animator, humanoidRightArm, -60.0079F, 12.4794F, 0.7185F);
-            this.rotate(animator, humanoidRightArmSleeve, -60.0079F, 12.4794F, 0.7185F);
-            this.rotate(animator, humanoidLeftArm, -50.8617F, -91.9818F, -17.9605F);
-            this.rotate(animator, humanoidLeftArmSleeve, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
             animator.setStaticKeyframe(80);
             animator.endKeyframe();
 
             // Repeat the animation to set the arms animation static during the scythe animation
-            this.rotate(animator, humanoidRightArm, -60.0079F, 12.4794F, 0.7185F);
-            this.rotate(animator, humanoidRightArmSleeve, -60.0079F, 12.4794F, 0.7185F);
-            this.rotate(animator, humanoidLeftArm, -50.8617F, -91.9818F, -17.9605F);
-            this.rotate(animator, humanoidLeftArmSleeve, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
 
             animator.startKeyframe(80);
             animator.endKeyframe();
 
-            this.rotate(animator, humanoidRightArm, -60.0079F, 12.4794F, 0.7185F);
-            this.rotate(animator, humanoidRightArmSleeve, -60.0079F, 12.4794F, 0.7185F);
-            this.rotate(animator, humanoidLeftArm, -50.8617F, -91.9818F, -17.9605F);
-            this.rotate(animator, humanoidLeftArmSleeve, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
 
             animator.startKeyframe(20);
             animator.endKeyframe();
 
-            this.rotate(animator, humanoidRightArm, -60.0079F, 12.4794F, 0.7185F);
-            this.rotate(animator, humanoidRightArmSleeve, -60.0079F, 12.4794F, 0.7185F);
-            this.rotate(animator, humanoidLeftArm, -50.8617F, -91.9818F, -17.9605F);
-            this.rotate(animator, humanoidLeftArmSleeve, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
 
             animator.startKeyframe(20);
             animator.endKeyframe();
 
-            this.rotate(animator, humanoidRightArm, -60.0079F, 12.4794F, 0.7185F);
-            this.rotate(animator, humanoidRightArmSleeve, -60.0079F, 12.4794F, 0.7185F);
-            this.rotate(animator, humanoidLeftArm, -50.8617F, -91.9818F, -17.9605F);
-            this.rotate(animator, humanoidLeftArmSleeve, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
 
             animator.startKeyframe(20);
             animator.endKeyframe();
 
             animator.resetKeyframe(20);
-            this.rotate(animator, humanoidRightArm, 0, 0, 0);
-            this.rotate(animator, humanoidRightArmSleeve, 0, 0, 0);
-            this.rotate(animator, humanoidLeftArm, 0, 0, 0);
-            this.rotate(animator, humanoidLeftArmSleeve, 0, 0, 0);
+            this.rotate(animator, rightArm, 0, 0, 0);
+            this.rotate(animator, rightArmWear, 0, 0, 0);
+            this.rotate(animator, leftArm, 0, 0, 0);
+            this.rotate(animator, leftArmWear, 0, 0, 0);
             animator.endKeyframe();
 
         }

@@ -70,7 +70,7 @@ public class CCEntity {
         registerEntity("friendly_zombie", EntityFriendlyZombie.class, 64, 0x00AFAF, 0xD1CFCC);
         registerEntity("frozen_shade", EntityFrozenShade.class, 64, 0x0350B1, 0x1092F9);
         registerEntity("gorgon", EntityGorgon.class, 64, 0xE8B000, 0xF05850);
-        registerEntity("grim_reaper", EntityGrimReaper.class, 64, 0x1E4168, 0xF5EFEA);
+        registerEntity("grim_reaper", EntityGrimReaper.class, 64, 0x171815, 0xAAA398);
         registerEntity("harpy", EntityHarpy.class, 64, 0xF8B078, 0x08F5C6);
         registerEntity("heat_shade", EntityHeatShade.class, 64, 0xA10C05, 0xF01504);
         registerEntity("medusa", EntityMedusa.class, 64, 0x204018, 0xD8E068);
