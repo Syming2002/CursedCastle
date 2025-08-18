@@ -10,18 +10,18 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class CCBlockModelProvider extends BlockStateProvider {
-    public CCBlockModelProvider(PackOutput output, ExistingFileHelper exFileHelper) {
+public class CCBlockStateProvider extends BlockStateProvider {
+    public CCBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, CastlevaniaCraftMod.MOD_ID, exFileHelper);
     }
 
     @Override
     protected void registerStatesAndModels() {
-        blockItem(CCBlock.DRACULA_CASTLE_COBBLESTONE);
-        blockItem(CCBlock.DRACULA_CASTLE_STONE);
+        blockWithItem(CCBlock.DRACULA_CASTLE_COBBLESTONE);
+        blockWithItem(CCBlock.DRACULA_CASTLE_STONE);
     }
 
-    private void blockItem(RegistryObject<Block> blockRegistryObject) {
-        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile(CastlevaniaCraftMod.MOD_ID + ":block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));
+    private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
+        simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
     }
 }

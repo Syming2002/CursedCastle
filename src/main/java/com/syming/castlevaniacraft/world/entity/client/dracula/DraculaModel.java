@@ -69,7 +69,7 @@ public class DraculaModel extends AdvancedEntityModel<DraculaEntity> {
         this.rightArmSleeve.setPos(-6.0F, -30.0F, 0.0F);
         this.root.addChild(this.rightArmSleeve);
         this.rightArmSleeve.setTextureOffset(56, 0)
-                .addBox(-2.0F, -2.0F, -2.0F, 4.0F, 14.0F, 4.0F, 0.25F);
+                .addBox(-2.0F, -2.0F, -2.0F, 4.0F, 14.0F, 4.0F, 0.26F);
 
         this.leftArm = new AdvancedModelBox(this, "leftArm");
         this.leftArm.setPos(6.0F, -30.0F, 0.0F);
@@ -81,7 +81,7 @@ public class DraculaModel extends AdvancedEntityModel<DraculaEntity> {
         this.leftArmSleeve.setPos(6.0F, -30.0F, 0.0F);
         this.root.addChild(this.leftArmSleeve);
         this.leftArmSleeve.setTextureOffset(56, 58)
-                .addBox(-2.0F, -2.0F, -2.0F, 4.0F, 14.0F, 4.0F, 0.25F);
+                .addBox(-2.0F, -2.0F, -2.0F, 4.0F, 14.0F, 4.0F, 0.26F);
 
         this.rightLeg = new AdvancedModelBox(this, "rightLeg");
         this.rightLeg.setPos(-2.0F, -15.0F, 0.0F);
@@ -133,7 +133,7 @@ public class DraculaModel extends AdvancedEntityModel<DraculaEntity> {
         this.animator.update(dracula);
 
         // Fireballs Attack Animation
-        if (this.animator.setAnimation(DraculaEntity.FIREBALLS_ANIMATION) && (!dracula.isInvisible() && !dracula.isTeleporting())) {
+        if (this.animator.setAnimation(DraculaEntity.FIREBALLS_ANIMATION)) {
             this.animator.startKeyframe(20);
             this.animator.rotate(rightArm, 0, 0, (float) Math.toRadians(87.5F));
             this.animator.rotate(rightArmSleeve, 0, 0, (float) Math.toRadians(87.5F));
@@ -144,7 +144,7 @@ public class DraculaModel extends AdvancedEntityModel<DraculaEntity> {
 
 
         // Dark Inferno Attack Animation
-        if (this.animator.setAnimation(DraculaEntity.DARK_INFERNO_ANIMATION) && (!dracula.isInvisible() && !dracula.isTeleporting())) {
+        if (this.animator.setAnimation(DraculaEntity.DARK_INFERNO_ANIMATION)) {
             this.animator.startKeyframe(20);
             this.animator.rotate(leftArm, 0, 0, (float) Math.toRadians(-87.5F));
             this.animator.rotate(leftArmSleeve, 0, 0, (float) Math.toRadians(-87.5F));
@@ -154,7 +154,7 @@ public class DraculaModel extends AdvancedEntityModel<DraculaEntity> {
         }
 
         // Fire Pillar Attack Animation
-        if (this.animator.setAnimation(DraculaEntity.FIRE_PILLAR_ANIMATION) && (!dracula.isInvisible() && !dracula.isTeleporting())) {
+        if (this.animator.setAnimation(DraculaEntity.FIRE_PILLAR_ANIMATION)) {
             this.animator.startKeyframe(20);
             this.animator.rotate(rightArm, 0, 0, (float) Math.toRadians(87.5F));
             this.animator.rotate(rightArmSleeve, 0, 0, (float) Math.toRadians(87.5F));

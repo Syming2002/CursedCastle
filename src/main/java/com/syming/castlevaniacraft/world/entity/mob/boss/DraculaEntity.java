@@ -91,6 +91,8 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ICustomBo
     public ActionState currentState = ActionState.ATTACKING;
     private int stateTick = 0;
 
+    private boolean isAttacking = false;
+
     public DraculaEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
 
@@ -208,15 +210,15 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ICustomBo
 
         if (target != null) {
             getLookControl().setLookAt(target, 30.0F, 30.0F);
-            if ((!isTeleporting() && !isInvisible()) && getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.75F && this.fireballsCooldown <= 0 && this.currentState == ActionState.ATTACKING) {
+            if ((!isTeleporting() && !isInvisible() && isAttacking()) && getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.75F && this.fireballsCooldown <= 0 && this.currentState == ActionState.ATTACKING) {
                 setAnimation(FIREBALLS_ANIMATION);
                 this.fireballsCooldown = FIREBALLS_COOLDOWN;
             }
-            if ((!isTeleporting() && !isInvisible()) && getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.5F && this.darkInfernoCooldown <= 0 && this.currentState == ActionState.ATTACKING) {
+            if ((!isTeleporting() && !isInvisible() && isAttacking()) && getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.5F && this.darkInfernoCooldown <= 0 && this.currentState == ActionState.ATTACKING) {
                 setAnimation(DARK_INFERNO_ANIMATION);
                 this.darkInfernoCooldown = DARK_INFERNO_COOLDOWN;
             }
-            if ((!isTeleporting() && !isInvisible()) && getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.33F && this.firePillarCooldown <= 0 && this.currentState == ActionState.ATTACKING) {
+            if ((!isTeleporting() && !isInvisible() && isAttacking()) && getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.33F && this.firePillarCooldown <= 0 && this.currentState == ActionState.ATTACKING) {
                 setAnimation(FIRE_PILLAR_ANIMATION);
                 this.firePillarCooldown = FIRE_PILLAR_COOLDOWN;
             }
@@ -224,15 +226,15 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ICustomBo
 
 
 
-        if (this.fireballsCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible() && !isInvulnerable())) {
+        if (this.fireballsCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible())) {
             this.fireballsCooldown--;
         }
 
-        if (this.darkInfernoCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible() && !isInvulnerable())) {
+        if (this.darkInfernoCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible())) {
             this.darkInfernoCooldown--;
         }
 
-        if (this.firePillarCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible() && !isInvulnerable())) {
+        if (this.firePillarCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible())) {
             this.firePillarCooldown--;
         }
 
@@ -241,109 +243,117 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ICustomBo
         shouldDespawnInPeaceful();
 
         if (target != null && isAlive()) {
+            if (getAnimation() == DraculaEntity.FIREBALLS_ANIMATION && isAttacking()) {
+                if (getAnimationTick() == 40) {
+                    Vec3 underRightArmPosSmallFireballs = new Vec3(-0.5F, 1.275F, 1.0F);
+                    underRightArmPosSmallFireballs = underRightArmPosSmallFireballs.xRot((float) Math.toRadians(-getXRot()));
+                    underRightArmPosSmallFireballs = underRightArmPosSmallFireballs.yRot((float) Math.toRadians(-getYHeadRot()));
+                    underRightArmPosSmallFireballs = underRightArmPosSmallFireballs.add(getX(), getY(), getZ());
+
+
+                    double targetX = target.getX() - getX();
+                    double targetY = target.getBoundingBox().minY + (double) (target.getEyeHeight() / 2.0F) - getY();
+                    double targetZ = target.getZ() - getZ();
+
+                    float distance = Mth.sqrt((float) (targetX * targetX + targetY * targetY + targetZ * targetZ)) * 0.5F;
+
+                    double directionX = targetX / distance;
+                    double directionY = targetY / distance;
+                    double directionZ = targetZ / distance;
+
+                    double speed = 0.5F;
+
+                    launchFireball(underRightArmPosSmallFireballs.x, underRightArmPosSmallFireballs.y, underRightArmPosSmallFireballs.z, directionX + 0.2F, directionY, directionZ, speed);
+                    launchFireball(underRightArmPosSmallFireballs.x, underRightArmPosSmallFireballs.y, underRightArmPosSmallFireballs.z, directionX, directionY, directionZ, speed);
+                    launchFireball(underRightArmPosSmallFireballs.x, underRightArmPosSmallFireballs.y, underRightArmPosSmallFireballs.z, directionX - 0.2F, directionY, directionZ, speed);
+
+
+                    System.out.println("Launching Fireballs");
+                }
+            } else if (getAnimation() == DraculaEntity.DARK_INFERNO_ANIMATION && isAttacking()) {
+                if (getAnimationTick() == 40) {
+                    Vec3 underLeftArmPosFirstLargeFireball = new Vec3(0.5F, 1.275F, 1.0F);
+                    underLeftArmPosFirstLargeFireball = underLeftArmPosFirstLargeFireball.xRot((float) Math.toRadians(-getXRot()));
+                    underLeftArmPosFirstLargeFireball = underLeftArmPosFirstLargeFireball.yRot((float) Math.toRadians(-getYHeadRot()));
+                    underLeftArmPosFirstLargeFireball = underLeftArmPosFirstLargeFireball.add(getX(), getY(), getZ());
+
+                    double targetX = target.getX() - getX();
+                    double targetY = target.getBoundingBox().minY + (double) (target.getEyeHeight() / 2.0F) - getY();
+                    double targetZ = target.getZ() - getZ();
+
+                    float distance = Mth.sqrt((float) (targetX * targetX + targetY * targetY + targetZ * targetZ)) * 0.5F;
+
+                    double directionX = targetX / distance;
+                    double directionY = targetY / distance;
+                    double directionZ = targetZ / distance;
+
+                    double speed = 0.5F;
+
+                    launchLargeFireball(
+                            underLeftArmPosFirstLargeFireball.x,
+                            underLeftArmPosFirstLargeFireball.y,
+                            underLeftArmPosFirstLargeFireball.z,
+                            directionX,
+                            directionY,
+                            directionZ,
+                            speed);
+                    System.out.println("First Large Fireball is spawning!");
+                }
+                if (getAnimationTick() == 60) {
+                    Vec3 underLeftArmPosSecondLargeFireball = new Vec3(0.5F, 0.6375F, 1.0F);
+                    underLeftArmPosSecondLargeFireball = underLeftArmPosSecondLargeFireball.xRot((float) Math.toRadians(-getXRot()));
+                    underLeftArmPosSecondLargeFireball = underLeftArmPosSecondLargeFireball.yRot((float) Math.toRadians(-getYHeadRot()));
+                    underLeftArmPosSecondLargeFireball = underLeftArmPosSecondLargeFireball.add(getX(), getY(), getZ());
+
+                    double targetX = target.getX() - getX();
+                    double targetY = target.getBoundingBox().minY + (double) (target.getEyeHeight() / 2.0F) - getY();
+                    double targetZ = target.getZ() - getZ();
+
+                    float distance = Mth.sqrt((float) (targetX * targetX + targetY * targetY + targetZ * targetZ)) * 0.5F;
+
+                    double directionX = targetX / distance;
+                    double directionY = targetY / distance;
+                    double directionZ = targetZ / distance;
+
+                    double speed = 0.5F;
+
+                    launchLargeFireball(
+                            underLeftArmPosSecondLargeFireball.x,
+                            underLeftArmPosSecondLargeFireball.y,
+                            underLeftArmPosSecondLargeFireball.z,
+                            directionX,
+                            directionY,
+                            directionZ,
+                            speed);
+
+                    System.out.println("Second Large Fireball is spawning!");
+                }
+            } else if (getAnimation() == DraculaEntity.FIRE_PILLAR_ANIMATION && isAttacking()) {
+                if (getAnimationTick() == 30) {
+                    spawnFirePillar();
+                    System.out.println("Fire Pillar appearing");
+                }
+            }
             this.stateTick++;
 
             switch (this.currentState) {
-
                 case ATTACKING:
-                    if (getAnimation() == DraculaEntity.FIREBALLS_ANIMATION) {
-                        if (getAnimationTick() == 40) {
-                            Vec3 underRightArmPosSmallFireballs = new Vec3(-0.5F, 1.275F, 1.0F);
-                            underRightArmPosSmallFireballs = underRightArmPosSmallFireballs.xRot((float) Math.toRadians(-getXRot()));
-                            underRightArmPosSmallFireballs = underRightArmPosSmallFireballs.yRot((float) Math.toRadians(-getYHeadRot()));
-                            underRightArmPosSmallFireballs = underRightArmPosSmallFireballs.add(getX(), getY(), getZ());
 
+                    this.isAttacking = true;
+                    this.isTeleporting = false;
 
-                            double targetX = target.getX() - getX();
-                            double targetY = target.getBoundingBox().minY + (double) (target.getEyeHeight() / 2.0F) - getY();
-                            double targetZ = target.getZ() - getZ();
-
-                            float distance = Mth.sqrt((float) (targetX * targetX + targetY * targetY + targetZ * targetZ)) * 0.5F;
-
-                            double directionX = targetX / distance;
-                            double directionY = targetY / distance;
-                            double directionZ = targetZ / distance;
-
-                            double speed = 0.5F;
-
-                            launchFireball(underRightArmPosSmallFireballs.x, underRightArmPosSmallFireballs.y, underRightArmPosSmallFireballs.z, directionX + 0.2F, directionY, directionZ, speed);
-                            launchFireball(underRightArmPosSmallFireballs.x, underRightArmPosSmallFireballs.y, underRightArmPosSmallFireballs.z, directionX, directionY, directionZ, speed);
-                            launchFireball(underRightArmPosSmallFireballs.x, underRightArmPosSmallFireballs.y, underRightArmPosSmallFireballs.z, directionX - 0.2F, directionY, directionZ, speed);
-
-
-                            System.out.println("Launching Fireballs");
-                        }
-                    } else if (getAnimation() == DraculaEntity.DARK_INFERNO_ANIMATION) {
-                        if (getAnimationTick() == 40) {
-                            Vec3 underLeftArmPosFirstLargeFireball = new Vec3(0.5F, 1.275F, 1.0F);
-                            underLeftArmPosFirstLargeFireball = underLeftArmPosFirstLargeFireball.xRot((float) Math.toRadians(-getXRot()));
-                            underLeftArmPosFirstLargeFireball = underLeftArmPosFirstLargeFireball.yRot((float) Math.toRadians(-getYHeadRot()));
-                            underLeftArmPosFirstLargeFireball = underLeftArmPosFirstLargeFireball.add(getX(), getY(), getZ());
-
-                            double targetX = target.getX() - getX();
-                            double targetY = target.getBoundingBox().minY + (double) (target.getEyeHeight() / 2.0F) - getY();
-                            double targetZ = target.getZ() - getZ();
-
-                            float distance = Mth.sqrt((float) (targetX * targetX + targetY * targetY + targetZ * targetZ)) * 0.5F;
-
-                            double directionX = targetX / distance;
-                            double directionY = targetY / distance;
-                            double directionZ = targetZ / distance;
-
-                            double speed = 0.5F;
-
-                            launchLargeFireball(
-                                    underLeftArmPosFirstLargeFireball.x,
-                                    underLeftArmPosFirstLargeFireball.y,
-                                    underLeftArmPosFirstLargeFireball.z,
-                                    directionX,
-                                    directionY,
-                                    directionZ,
-                                    speed);
-                            System.out.println("First Large Fireball is spawning!");
-                        }
-                        if (getAnimationTick() == 60) {
-                            Vec3 underLeftArmPosSecondLargeFireball = new Vec3(0.5F, 0.6375F, 1.0F);
-                            underLeftArmPosSecondLargeFireball = underLeftArmPosSecondLargeFireball.xRot((float) Math.toRadians(-getXRot()));
-                            underLeftArmPosSecondLargeFireball = underLeftArmPosSecondLargeFireball.yRot((float) Math.toRadians(-getYHeadRot()));
-                            underLeftArmPosSecondLargeFireball = underLeftArmPosSecondLargeFireball.add(getX(), getY(), getZ());
-
-                            double targetX = target.getX() - getX();
-                            double targetY = target.getBoundingBox().minY + (double) (target.getEyeHeight() / 2.0F) - getY();
-                            double targetZ = target.getZ() - getZ();
-
-                            float distance = Mth.sqrt((float) (targetX * targetX + targetY * targetY + targetZ * targetZ)) * 0.5F;
-
-                            double directionX = targetX / distance;
-                            double directionY = targetY / distance;
-                            double directionZ = targetZ / distance;
-
-                            double speed = 0.5F;
-
-                            launchLargeFireball(
-                                    underLeftArmPosSecondLargeFireball.x,
-                                    underLeftArmPosSecondLargeFireball.y,
-                                    underLeftArmPosSecondLargeFireball.z,
-                                    directionX,
-                                    directionY,
-                                    directionZ,
-                                    speed);
-
-                            System.out.println("Second Large Fireball is spawning!");
-                        }
-                    } else if (getAnimation() == DraculaEntity.FIRE_PILLAR_ANIMATION) {
-                        if (getAnimationTick() == 30) {
-                            spawnFirePillar();
-                            System.out.println("Fire Pillar appearing");
-                        }
-                    }
-                    if (isAnAttackAnimationIsFinished()) {
+                    if (isFireballsAttackAnimationIsFinished() || isDarkInfernoAttackAnimationIsFinished() || isFirePillarAttackAnimationIsFinished()) {
                         transitionTo(ActionState.WAITING_AFTER_ATTACK);
+                        this.isAttacking = false;
                     }
                     break;
 
                 case WAITING_AFTER_ATTACK:
-                    if (this.stateTick >= 5) {
+
+                    this.isTeleporting = false;
+                    this.isAttacking = false;
+
+                    if (this.stateTick >= 20) {
                         this.teleportTick = 0;
                         transitionTo(ActionState.TELEPORTING);
                     }
@@ -352,12 +362,15 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ICustomBo
                 case TELEPORTING:
                     this.teleportTick++;
 
+                    this.isTeleporting = true;
+                    this.isAttacking = false;
+
                     if (this.teleportTick >= 70 && this.teleportTick < 100) {
                         setInvisible(true);
                         setInvulnerable(true);
                     }
 
-                    if (this.teleportTick == 80) {
+                    if (this.teleportTick >= 80 && this.teleportTick < 90) {
                         teleportAroundTarget();
                     }
 
@@ -374,7 +387,11 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ICustomBo
                     break;
 
                 case WAITING_AFTER_TELEPORT:
-                    if (this.stateTick >= 5) {
+
+                    this.isTeleporting = false;
+                    this.isAttacking = false;
+
+                    if (this.stateTick >= 20) {
                         transitionTo(ActionState.ATTACKING);
                     }
                     break;
@@ -479,7 +496,7 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ICustomBo
         if (level.hasChunkAt(pos)) {
             boolean foundGround = false;
 
-            while (!foundGround && pos.getY() > level.getMinBuildHeight()) {
+            while (!foundGround && pos.getY() > 0) {
                 BlockPos below = pos.below();
                 BlockState state = level.getBlockState(below);
 
@@ -492,7 +509,7 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ICustomBo
             }
 
             if (foundGround) {
-                this.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
+                this.setPos(this.getX(), this.getY(), this.getZ());
 
                 AABB boundingBox = this.getBoundingBox();
                 boolean noCollision = level.noCollision(this, boundingBox);
@@ -559,10 +576,20 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ICustomBo
         return this.teleportTick;
     }
 
-    public boolean isAnAttackAnimationIsFinished() {
-        return this.animationTick > FIREBALLS_ANIMATION.getDuration() ||
-                this.animationTick > DARK_INFERNO_ANIMATION.getDuration() ||
-                this.animationTick > FIRE_PILLAR_ANIMATION.getDuration();
+    public boolean isAttacking() {
+        return this.isAttacking;
+    }
+
+    public boolean isFireballsAttackAnimationIsFinished() {
+        return getAnimation() == FIREBALLS_ANIMATION && this.animationTick >= FIREBALLS_ANIMATION.getDuration() - 10;
+    }
+
+    public boolean isDarkInfernoAttackAnimationIsFinished() {
+        return getAnimation() == DARK_INFERNO_ANIMATION && this.animationTick >= DARK_INFERNO_ANIMATION.getDuration() - 10;
+    }
+
+    public boolean isFirePillarAttackAnimationIsFinished() {
+        return getAnimation() == FIRE_PILLAR_ANIMATION && this.animationTick >= FIRE_PILLAR_ANIMATION.getDuration() - 10;
     }
 
     private void transitionTo(ActionState newState) {

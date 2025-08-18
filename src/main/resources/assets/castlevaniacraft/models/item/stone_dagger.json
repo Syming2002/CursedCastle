@@ -2,7 +2,7 @@
   "parent": "minecraft:item/generated",
   "loader": "forge:separate_transforms",
   "base": {
-    "parent": "castlevaniacraft:item/stone_dagger_3d"
+    "parent": "castlevaniacraft:item/stone_dagger_2d"
   },
   "perspectives": {
     "thirdperson_righthand":{
@@ -16,18 +16,6 @@
     },
     "firstperson_lefthand": {
       "parent": "castlevaniacraft:item/stone_dagger_3d"
-    },
-    "head": {
-      "parent": "castlevaniacraft:item/stone_dagger_2d"
-    },
-    "gui": {
-      "parent": "castlevaniacraft:item/stone_dagger_2d"
-    },
-    "ground": {
-      "parent": "castlevaniacraft:item/stone_dagger_2d"
-    },
-    "fixed": {
-      "parent": "castlevaniacraft:item/stone_dagger_2d"
     }
   }
 }

@@ -22,6 +22,7 @@ public class CCCreativeModeTab {
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(CCItem.FLAME_WHIP.get());
                         output.accept(CCItem.LEATHER_WHIP.get());
+                        output.accept(CCItem.UNDEAD_KILLER_WHIP.get());
                         output.accept(CCItem.VAMPIRE_KILLER_WHIP.get());
                         output.accept(CCItem.CRUSHING_STONE_VAMPIRE_KILLER_WHIP.get());
                         output.accept(CCItem.BULLET_TIP_VAMPIRE_KILLER_WHIP.get());

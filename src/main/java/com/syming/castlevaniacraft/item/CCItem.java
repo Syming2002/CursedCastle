@@ -3,6 +3,7 @@ package com.syming.castlevaniacraft.item;
 import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.item.subweapon.*;
 import com.syming.castlevaniacraft.item.whip.LeatherWhipItem;
+import com.syming.castlevaniacraft.item.whip.UndeadKillerWhipItem;
 import com.syming.castlevaniacraft.item.whip.vampirekiller.BulletTipVampireKillerWhipItem;
 import com.syming.castlevaniacraft.item.whip.vampirekiller.CrushingStoneVampireKillerWhipItem;
 import com.syming.castlevaniacraft.item.whip.vampirekiller.VampireKillerWhipItem;
@@ -21,6 +22,8 @@ public class CCItem {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CastlevaniaCraftMod.MOD_ID);
 
+    // Whips
+
     public static final RegistryObject<Item> FLAME_WHIP = ITEMS.register("flame_whip",
             () -> new LeatherWhipItem(
                     new Item.Properties()
@@ -38,6 +41,16 @@ public class CCItem {
                     2,
                     -3.5F,
                     8.0F));
+
+    public static final RegistryObject<Item> UNDEAD_KILLER_WHIP = ITEMS.register("undead_killer_whip",
+            () -> new UndeadKillerWhipItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(200),
+                    7,
+                    -3.5F,
+                    16.0F
+            ));
 
     public static final RegistryObject<Item> VAMPIRE_KILLER_WHIP = ITEMS.register("vampire_killer_whip",
             () -> new VampireKillerWhipItem(
@@ -70,6 +83,8 @@ public class CCItem {
                     8.0F));
 
 
+    // Attachment Items
+
     public static final RegistryObject<Item> CRUSHING_STONE = ITEMS.register("crushing_stone",
             () -> new CrushingStoneItem(
                     new Item.Properties()
@@ -80,6 +95,8 @@ public class CCItem {
                     new Item.Properties()
                             .stacksTo(1)));
 
+
+    // Subweapons
 
     public static final RegistryObject<Item> WOODEN_DAGGER = ITEMS.register("wooden_dagger",
             () -> new DaggerItem(Tiers.WOOD,
@@ -200,6 +217,8 @@ public class CCItem {
                             .stacksTo(1)
                             .durability(Tiers.NETHERITE.getUses())
             ));
+
+    // Miscellaneous Items
 
     public static final RegistryObject<Item> ANIM_WOOD_HOLY_CROSS = ITEMS.register("anim_wooden_holy_cross",
             () -> new Item(new Item.Properties()));

@@ -25,7 +25,7 @@ public class CCDataGenerators {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        generator.addProvider(event.includeClient(), new CCBlockModelProvider(packOutput, existingFileHelper));
+        generator.addProvider(event.includeClient(), new CCBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new CCItemModelProvider(packOutput, existingFileHelper));
         RegistrySetBuilder registrySetBuilder = new RegistrySetBuilder();
         CCDamageSource.register(registrySetBuilder);

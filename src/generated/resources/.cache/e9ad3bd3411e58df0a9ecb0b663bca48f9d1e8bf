@@ -1,3 +1,7 @@
-// 1.20.1	2025-07-07T22:49:06.5437915	Block States: castlevaniacraft
+// 1.20.1	2025-08-18T15:01:56.7125494	Block States: castlevaniacraft
+c54fde2206ecfacbc9f5bda8823686fa15e54349 assets/castlevaniacraft/blockstates/dracula_castle_cobblestone.json
+f883dcd4f3c421fb9b1ca04327ecb92377c60a02 assets/castlevaniacraft/blockstates/dracula_castle_stone.json
+118551f1f452fdb6eb1ce3888eae5f477373b868 assets/castlevaniacraft/models/block/dracula_castle_cobblestone.json
+60cc1867f761b3cd14699e462cce4e555cf3bc78 assets/castlevaniacraft/models/block/dracula_castle_stone.json
 b32fdb71103219f253748ba0b144fc866d5a13c4 assets/castlevaniacraft/models/item/dracula_castle_cobblestone.json
 0e033b4085042668444610faa546283edb979344 assets/castlevaniacraft/models/item/dracula_castle_stone.json
