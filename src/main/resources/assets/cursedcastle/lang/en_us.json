@@ -1,0 +1,92 @@
+{
+  "block.cursedcastle.dracula_castle_cobblestone": "Dracula's Castle Cobblestone",
+  "block.cursedcastle.dracula_castle_stone": "Dracula's Castle Stone",
+  "block.cursedcastle.dracula_castle_stone_bricks": "Dracula's Castle Stone Bricks",
+
+  "entity.cursedcastle.blood_skeleton": "Blood Skeleton",
+  "entity.cursedcastle.dracula": "Dracula",
+  "entity.cursedcastle.frozen_shade": "Frozen Shade",
+  "entity.cursedcastle.ice_spike": "Ice Spike",
+  "entity.cursedcastle.vampire_bat": "Vampire Bat",
+
+  "entity.cursedcastle.holy_bible": "Holy Bible",
+
+  "entity.cursedcastle.wooden_holy_cross": "Wooden Holy Cross",
+  "entity.cursedcastle.stone_holy_cross": "Stone Holy Cross",
+  "entity.cursedcastle.iron_holy_cross": "Iron Holy Cross",
+  "entity.cursedcastle.golden_holy_cross": "Golden Holy Cross",
+  "entity.cursedcastle.diamond_holy_cross": "Diamond Holy Cross",
+  "entity.cursedcastle.netherite_holy_cross": "Netherite Holy Cross",
+
+  "entity.cursedcastle.wooden_throwing_axe": "Wooden Throwing Axe",
+  "entity.cursedcastle.stone_throwing_axe": "Stone Throwing Axe",
+  "entity.cursedcastle.iron_throwing_axe": "Iron Throwing Axe",
+  "entity.cursedcastle.golden_throwing_axe": "Golden Throwing Axe",
+  "entity.cursedcastle.diamond_throwing_axe": "Diamond Throwing Axe",
+  "entity.cursedcastle.netherite_throwing_axe": "Netherite Throwing Axe",
+
+  "entity.cursedcastle.holy_water": "Holy Water",
+
+  "item.cursedcastle.blood_skeleton_spawn_egg": "Blood Skeleton Spawn Egg",
+  "item.cursedcastle.dracula_spawn_egg": "Dracula Spawn Egg",
+  "item.cursedcastle.frozen_shade_spawn_egg": "Frozen Shade Spawn Egg",
+  "item.cursedcastle.vampire_bat_spawn_egg": "Vampire Bat Spawn Egg",
+
+  "item.cursedcastle.bullet_tip_vampire_killer_whip": "Bullet Tip Vampire Killer Whip",
+  "item.cursedcastle.crushing_stone_vampire_killer_whip": "Crushing Stone Vampire Killer Whip",
+  "item.cursedcastle.flame_whip": "Flame Whip",
+  "item.cursedcastle.leather_whip": "Leather Whip",
+  "item.cursedcastle.undead_killer_whip": "Undead Killer Whip",
+  "item.cursedcastle.vampire_killer_whip": "Vampire Killer Whip",
+
+  "item.cursedcastle.crushing_stone": "Crushing Stone",
+  "item.cursedcastle.bullet_tip": "Bullet Tip",
+
+  "item.cursedcastle.wooden_dagger": "Wooden Dagger",
+  "item.cursedcastle.stone_dagger": "Stone Dagger",
+  "item.cursedcastle.iron_dagger": "Iron Dagger",
+  "item.cursedcastle.golden_dagger": "Golden Dagger",
+  "item.cursedcastle.diamond_dagger": "Diamond Dagger",
+  "item.cursedcastle.netherite_dagger": "Netherite Dagger",
+
+  "item.cursedcastle.holy_bible": "Holy Bible",
+
+  "item.cursedcastle.wooden_holy_cross": "Wooden Holy Cross",
+  "item.cursedcastle.stone_holy_cross": "Stone Holy Cross",
+  "item.cursedcastle.iron_holy_cross": "Iron Holy Cross",
+  "item.cursedcastle.golden_holy_cross": "Golden Holy Cross",
+  "item.cursedcastle.diamond_holy_cross": "Diamond Holy Cross",
+  "item.cursedcastle.netherite_holy_cross": "Netherite Holy Cross",
+
+  "item.cursedcastle.holy_water": "Holy Water",
+
+  "item.cursedcastle.wooden_throwing_axe": "Wooden Throwing Axe",
+  "item.cursedcastle.stone_throwing_axe": "Stone Throwing Axe",
+  "item.cursedcastle.iron_throwing_axe": "Iron Throwing Axe",
+  "item.cursedcastle.golden_throwing_axe": "Golden Throwing Axe",
+  "item.cursedcastle.diamond_throwing_axe": "Diamond Throwing Axe",
+  "item.cursedcastle.netherite_throwing_axe": "Netherite Throwing Axe",
+
+  "item.cursedcastle.anim_wooden_throwing_axe": "Anim Wooden Throwing Axe",
+  "item.cursedcastle.anim_stone_throwing_axe": "Anim Stone Throwing Axe",
+  "item.cursedcastle.anim_iron_throwing_axe": "Anim Iron Throwing Axe",
+  "item.cursedcastle.anim_golden_throwing_axe": "Anim Golden Throwing Axe",
+  "item.cursedcastle.anim_diamond_throwing_axe": "Anim Diamond Throwing Axe",
+  "item.cursedcastle.anim_netherite_throwing_axe": "Anim Netherite Throwing Axe",
+
+  "item.cursedcastle.anim_wooden_holy_cross": "Anim Wooden Holy Cross",
+  "item.cursedcastle.anim_stone_holy_cross": "Anim Stone Holy Cross",
+  "item.cursedcastle.anim_iron_holy_cross": "Anim Iron Holy Cross",
+  "item.cursedcastle.anim_golden_holy_cross": "Anim Golden Holy Cross",
+  "item.cursedcastle.anim_diamond_holy_cross": "Anim Diamond Holy Cross",
+  "item.cursedcastle.anim_netherite_holy_cross": "Anim Netherite Holy Cross",
+
+  "holy_cross.damage" : "Deals %s damage to other mob",
+  "holy_cross.damageArthropods": "Deals %s damage to arthropods mob",
+  "holy_cross.damageSharpness": "Deals %s damage",
+  "holy_cross.damageSmite": "Deals %s damage to undead mob",
+  "holy_cross.knockback": "Deals %s knockback",
+  "holy_cross.fireAspect": "Deals %s seconds of fire to mob",
+
+  "creativetab.cursedcastle_tab": "Cursed Castle"
+}

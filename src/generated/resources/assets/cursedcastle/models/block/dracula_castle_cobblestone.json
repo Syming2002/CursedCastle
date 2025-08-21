@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "cursedcastle:block/dracula_castle_cobblestone"
+  }
+}

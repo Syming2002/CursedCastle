@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "castlevaniacraft:item/stone_dagger_2d"
-  }
-}
