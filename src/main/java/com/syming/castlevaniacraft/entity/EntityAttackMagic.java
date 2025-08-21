@@ -10,12 +10,10 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import java.util.List;
-
 public abstract class EntityAttackMagic extends Entity {
 
-    public EntityLivingBase caster;
-    private static final DataParameter<Integer> CASTER = EntityDataManager.createKey(EntityAttackMagic.class, DataSerializers.VARINT);
+    public EntityLivingBase shooter;
+    private static final DataParameter<Integer> SHOOTER = EntityDataManager.createKey(EntityAttackMagic.class, DataSerializers.VARINT);
     private int ticksAlive;
     protected int ticksInAir;
     public double accelerationX;
@@ -27,12 +25,12 @@ public abstract class EntityAttackMagic extends Entity {
         super(worldIn);
     }
 
-    public EntityAttackMagic(World worldIn, EntityLivingBase entityCaster, double accelX, double accelY, double accelZ)
+    public EntityAttackMagic(World worldIn, EntityLivingBase shooter, double accelX, double accelY, double accelZ)
     {
         super(worldIn);
-        caster = entityCaster;
+        this.shooter = shooter;
         this.setSize(1.0F, 1.0F);
-        this.setLocationAndAngles(caster.posX, caster.posY, caster.posZ, caster.rotationYaw, caster.rotationPitch);
+        this.setLocationAndAngles(this.shooter.posX, this.shooter.posY, this.shooter.posZ, this.shooter.rotationYaw, this.shooter.rotationPitch);
         this.setPosition(this.posX, this.posY, this.posZ);
         this.motionX = 0.0D;
         this.motionY = 0.0D;
@@ -48,15 +46,15 @@ public abstract class EntityAttackMagic extends Entity {
 
     @Override
     protected void entityInit() {
-        getDataManager().register(CASTER, -1);
+        getDataManager().register(SHOOTER, -1);
     }
 
-    public int getCasterID() {
-        return getDataManager().get(CASTER);
+    public int getShooterID() {
+        return getDataManager().get(SHOOTER);
     }
 
-    public void setCasterID(int id) {
-        getDataManager().set(CASTER, id);
+    public void setShooterID(int id) {
+        getDataManager().set(SHOOTER, id);
     }
 
     @Override
@@ -64,7 +62,7 @@ public abstract class EntityAttackMagic extends Entity {
         super.onUpdate();
 
         if (ticksExisted == 1) {
-            caster = (EntityLivingBase) world.getEntityByID(getCasterID());
+            shooter = (EntityLivingBase) world.getEntityByID(getShooterID());
         }
     }
 
@@ -108,13 +106,5 @@ public abstract class EntityAttackMagic extends Entity {
         {
             this.setDead();
         }
-    }
-
-    public List<EntityLivingBase> getEntityLivingBaseNearby(double radius) {
-        return getEntitiesNearby(EntityLivingBase.class, radius);
-    }
-
-    public <T extends Entity> List<T> getEntitiesNearby(Class<T> entityClass, double r) {
-        return world.getEntitiesWithinAABB(entityClass, getEntityBoundingBox().grow(r, r, r), e -> e != this && getDistance(e) <= r + e.width / 2f);
     }
 }

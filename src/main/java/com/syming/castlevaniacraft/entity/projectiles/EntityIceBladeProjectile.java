@@ -32,15 +32,15 @@ public class EntityIceBladeProjectile extends EntityAttackMagic {
     public void onUpdate() {
 
         if (ticksExisted == 1) {
-            caster = (EntityLivingBase) world.getEntityByID(getCasterID());
+            shooter = (EntityLivingBase) world.getEntityByID(getShooterID());
         }
 
-        if (this.world.isRemote || (this.caster == null || !this.caster.isDead) && this.world.isBlockLoaded(new BlockPos(this)))
+        if (this.world.isRemote || (this.shooter == null || !this.shooter.isDead) && this.world.isBlockLoaded(new BlockPos(this)))
         {
             super.onUpdate();
 
             ++this.ticksInAir;
-            RayTraceResult raytraceresult = ProjectileHelper.forwardsRaycast(this, true, this.ticksInAir >= 25, this.caster);
+            RayTraceResult raytraceresult = ProjectileHelper.forwardsRaycast(this, true, this.ticksInAir >= 25, this.shooter);
 
             if (raytraceresult != null && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult))
             {
@@ -97,13 +97,13 @@ public class EntityIceBladeProjectile extends EntityAttackMagic {
     protected void onImpact(RayTraceResult result) {
         if (!this.world.isRemote) {
             if (result.entityHit != null) {
-                if (result.entityHit != this.caster) {
-                    if (this.caster != null) {
-                        if (result.entityHit.attackEntityFrom(DamageSource.causeMobDamage(this.caster), 8.0F)) {
+                if (result.entityHit != this.shooter) {
+                    if (this.shooter != null) {
+                        if (result.entityHit.attackEntityFrom(DamageSource.causeMobDamage(this.shooter), 8.0F)) {
                             if (result.entityHit.isEntityAlive()) {
-                                this.applyEnchantments(this.caster, result.entityHit);
+                                this.applyEnchantments(this.shooter, result.entityHit);
                             } else {
-                                this.caster.heal(5.0F);
+                                this.shooter.heal(5.0F);
                             }
                         }
                     } else {

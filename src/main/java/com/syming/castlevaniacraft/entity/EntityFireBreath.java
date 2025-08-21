@@ -26,7 +26,7 @@ public class EntityFireBreath extends EntityAttackMagic {
         super(world);
         setSize(0, 0);
         if (!world.isRemote) {
-            this.setCasterID(caster.getEntityId());
+            this.setShooterID(caster.getEntityId());
         }
     }
 
@@ -34,13 +34,13 @@ public class EntityFireBreath extends EntityAttackMagic {
     public void onUpdate() {
         super.onUpdate();
 
-        if (this.caster != null && this.caster.isDead) {
+        if (this.shooter != null && this.shooter.isDead) {
             this.setDead();
             return;
         }
 
-        if (this.caster != null) {
-            if (this.caster instanceof EntityHeatShade heatShade) {
+        if (this.shooter != null) {
+            if (this.shooter instanceof EntityHeatShade heatShade) {
                 Vec3d headPos = new Vec3d(0, 1.5, 0);
                 headPos = headPos.rotateYaw((float) Math.toRadians((-heatShade.rotationYaw - 90)));
                 headPos = headPos.add(heatShade.getPositionVector());
@@ -59,11 +59,11 @@ public class EntityFireBreath extends EntityAttackMagic {
     }
 
     public void hitEntities() {
-        if (this.caster != null) {
-            List<EntityLivingBase> entitiesHit = getEntityLivingBaseNearby(RANGE, this.caster.getEyeHeight(), RANGE, 6);
+        if (this.shooter != null) {
+            List<EntityLivingBase> entitiesHit = getEntityLivingBaseNearby(RANGE, this.shooter.getEyeHeight(), RANGE, 6);
             float damage = 2.5F;
             for (EntityLivingBase entityHit : entitiesHit) {
-                if (entityHit != this.caster) {
+                if (entityHit != this.shooter) {
                     float entityHitYaw = (float) ((Math.atan2(entityHit.posZ - posZ, entityHit.posX - posX) * (180 / Math.PI) - 90) % 360);
                     float entityAttackingYaw = rotationYaw % 360;
                     if (entityHitYaw < 0) {
@@ -107,7 +107,7 @@ public class EntityFireBreath extends EntityAttackMagic {
     public void spawnFireParticles() {
         if (!this.world.isRemote) return;
 
-        if (this.caster instanceof EntityHeatShade) {
+        if (this.shooter instanceof EntityHeatShade) {
             float yaw = (float) Math.toRadians(-rotationYaw);
             float pitch = (float) Math.toRadians(-rotationPitch);
             float spread = 0.25f;

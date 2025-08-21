@@ -262,7 +262,7 @@ public class EntityFrozenShade extends EntityShade implements IRangedAttackMob {
 //        EntityIceBladeProjectile iceBladeRight = new EntityIceBladeProjectile(world, this, d3, d4, d5);
 
          this.iceBladeUp = new EntityIceBladeProjectile(world, this, d3, d4, d5);
-         this.iceBladeUp.setCasterID(this.getEntityId());
+         this.iceBladeUp.setShooterID(this.getEntityId());
 //        iceBladeLeft.posY = d1;
 //        iceBladeLeft.posX = d0;
 //        iceBladeLeft.posZ = d2;

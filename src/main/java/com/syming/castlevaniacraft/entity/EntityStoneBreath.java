@@ -2,8 +2,6 @@ package com.syming.castlevaniacraft.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.Vec3d;
@@ -27,7 +25,7 @@ public class EntityStoneBreath extends EntityAttackMagic {
         super(world);
         setSize(0, 0);
         if (!world.isRemote) {
-            this.setCasterID(caster.getEntityId());
+            this.setShooterID(caster.getEntityId());
         }
     }
 
@@ -35,18 +33,18 @@ public class EntityStoneBreath extends EntityAttackMagic {
     public void onUpdate() {
         super.onUpdate();
 
-        if (this.caster != null && this.caster.isDead) {
+        if (this.shooter != null && this.shooter.isDead) {
             this.setDead();
         }
 
-        if (this.caster != null) {
+        if (this.shooter != null) {
             Vec3d headPos = new Vec3d(0, 1.015625, 0);
-            headPos = headPos.rotateYaw((float) Math.toRadians((-this.caster.rotationYaw - 90)));
-            headPos = headPos.add(this.caster.getPositionVector());
+            headPos = headPos.rotateYaw((float) Math.toRadians((-this.shooter.rotationYaw - 90)));
+            headPos = headPos.add(this.shooter.getPositionVector());
             headPos = headPos.add(new Vec3d(0, 0, 1.5)
-                    .rotatePitch((float) Math.toRadians(-this.caster.rotationPitch))
-                    .rotateYaw((float) Math.toRadians(-this.caster.rotationYawHead)));
-            this.setPositionAndRotation(headPos.x, headPos.y, headPos.z, this.caster.rotationYawHead, this.caster.rotationPitch);
+                    .rotatePitch((float) Math.toRadians(-this.shooter.rotationPitch))
+                    .rotateYaw((float) Math.toRadians(-this.shooter.rotationYawHead)));
+            this.setPositionAndRotation(headPos.x, headPos.y, headPos.z, this.shooter.rotationYawHead, this.shooter.rotationPitch);
             spawnStoneBreathParticles();
         }
 
@@ -60,11 +58,11 @@ public class EntityStoneBreath extends EntityAttackMagic {
     }
 
     public void hitEntities() {
-        if (this.caster != null) {
-            List<EntityLivingBase> entitiesHit = getEntityLivingBaseNearby(RANGE, this.caster.getEyeHeight(), RANGE, 5);
+        if (this.shooter != null) {
+            List<EntityLivingBase> entitiesHit = getEntityLivingBaseNearby(RANGE, this.shooter.getEyeHeight(), RANGE, 5);
             float damage = 0.5F;
             for (EntityLivingBase entityHit : entitiesHit) {
-                if (entityHit != this.caster) {
+                if (entityHit != this.shooter) {
                     float entityHitYaw = (float) ((Math.atan2(entityHit.posZ - posZ, entityHit.posX - posX) * (180 / Math.PI) - 90) % 360);
                     float entityAttackingYaw = rotationYaw % 360;
                     if (entityHitYaw < 0) {
