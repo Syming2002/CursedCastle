@@ -14,7 +14,7 @@ public class BlockHalfDraculaCastleStoneSlab extends BlockDraculaCastleStoneSlab
         setTranslationKey(name);
         setRegistryName(name);
 
-        CCItem.ITEMS.add(new ItemSlab(this, this, CCBlock.DRACULA_CASTLE_STONE_SLAB_DOUBLE).setRegistryName(name));
+        CCItem.ITEMS.add(new ItemSlab(this, this, CCBlock.DRACULA_CASTLE_STONEBRICK_SLAB_DOUBLE).setRegistryName(name));
     }
 
     @Override

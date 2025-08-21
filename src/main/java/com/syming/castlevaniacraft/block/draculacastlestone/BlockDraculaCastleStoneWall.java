@@ -82,7 +82,7 @@ public class BlockDraculaCastleStoneWall extends Block {
         setRegistryName(name);
         setCreativeTab(CCTabs.CREATIVE_TAB);
 
-        setHardness(modelBlock.blockHardness);
+        setHardness(this.blockHardness);
         setResistance(12.0F / 3.0F);
         setSoundType(SoundType.STONE);
 

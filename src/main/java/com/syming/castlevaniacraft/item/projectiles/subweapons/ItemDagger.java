@@ -8,7 +8,7 @@ import com.syming.castlevaniacraft.DelayedTaskScheduler;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityDagger;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
-import com.syming.castlevaniacraft.util.handlers.SoundsHandler;
+import com.syming.castlevaniacraft.util.handler.SoundsHandler;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

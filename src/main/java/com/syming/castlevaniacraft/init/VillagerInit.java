@@ -112,27 +112,23 @@ public class VillagerInit {
             recipeList.add(new MerchantRecipe(emeraldStack, holyCrossToSell));
         }
 
-    }
-
-    private static int getEmeraldCostForMaterial(Item.ToolMaterial material, Random random) {
-        switch (material) {
-            case WOOD: {
-                return random.nextInt(3);
-            }
-            case STONE: {
-                return random.nextInt(5);
-            }
-            case IRON: {
-                return random.nextInt(7);
-            }
-            case GOLD: {
-                return random.nextInt(9);
-            }
-            case DIAMOND: {
-                return random.nextInt(11);
-            }
-            default: {
-                return 0;
+        private int getEmeraldCostForMaterial(Item.ToolMaterial material, Random random) {
+            switch (material) {
+                case STONE: {
+                    return random.nextInt(5);
+                }
+                case IRON: {
+                    return random.nextInt(7);
+                }
+                case GOLD: {
+                    return random.nextInt(9);
+                }
+                case DIAMOND: {
+                    return random.nextInt(11);
+                }
+                default: {
+                    return random.nextInt(3);
+                }
             }
         }
     }

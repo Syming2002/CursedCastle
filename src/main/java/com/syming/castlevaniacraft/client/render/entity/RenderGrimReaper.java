@@ -1,15 +1,15 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
 import com.syming.castlevaniacraft.client.model.entity.ModelGrimReaper;
+//import com.syming.castlevaniacraft.client.model.entity.ModelGrimReaper;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityGrimReaper;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
-public class RenderGrimReaper extends RenderLiving<EntityGrimReaper> {
+public class RenderGrimReaper extends RenderHumanoidGrimReaper<EntityGrimReaper> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(CCReferences.MODID, "textures/entity/grim_reaper.png");
 

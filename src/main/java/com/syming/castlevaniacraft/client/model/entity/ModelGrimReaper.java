@@ -1,258 +1,273 @@
 package com.syming.castlevaniacraft.client.model.entity;
 
-// Made with Blockbench 4.10.3
-// Exported for Minecraft version 1.7 - 1.12
-// Paste this class into your mod and generate all required imports
-
-
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityGrimReaper;
+import com.syming.castlevaniacraft.item.ItemDeathScythe;
 import net.ilexiconn.llibrary.client.model.ModelAnimator;
 import net.ilexiconn.llibrary.client.model.tools.AdvancedModelRenderer;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.client.model.ModelBox;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.model.ModelSkeleton;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumHandSide;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModelGrimReaper extends CCModel {
-	private final AdvancedModelRenderer model_core;
-	private final AdvancedModelRenderer head;
-	private final AdvancedModelRenderer headwear;
-	private final AdvancedModelRenderer body;
-	private final AdvancedModelRenderer jacket;
-	private final AdvancedModelRenderer right_arm;
-	private final AdvancedModelRenderer left_arm;
-	private final AdvancedModelRenderer right_arm_sleve;
-	private final AdvancedModelRenderer left_arm_sleve;
-	private final AdvancedModelRenderer scythe;
-	private final AdvancedModelRenderer cube_r1;
-	private final AdvancedModelRenderer cube_r2;
-	private final AdvancedModelRenderer cube_r3;
-	private final AdvancedModelRenderer cube_r4;
-	private final AdvancedModelRenderer cube_r5;
 
-	private ModelAnimator animator;
+    private final AdvancedModelRenderer head;
+    private final AdvancedModelRenderer headWear;
+    private final AdvancedModelRenderer body;
+    private final AdvancedModelRenderer rightArm;
+    private final AdvancedModelRenderer rightArmWear;
+    private final AdvancedModelRenderer leftArm;
+    private final AdvancedModelRenderer leftArmWear;
+    public ArmPose rightArmPose;
 
-	public ModelGrimReaper() {
-		textureWidth = 128;
-		textureHeight = 128;
+    private ModelAnimator animator;
 
-		model_core = new AdvancedModelRenderer(this);
-		model_core.setRotationPoint(0.0F, 24.0F, 0.0F);
-		
+    public ModelGrimReaper()
+    {
+        this(64, 64);
+    }
 
-		head = new AdvancedModelRenderer(this);
-		head.setRotationPoint(0.0F, -28.0F, 0.0F);
-		model_core.addChild(head);
-		head.cubeList.add(new ModelBox(head, 21, 0, -4.0F, -4.0F, -4.0F, 8, 8, 8, 0.0F, false));
+    public ModelGrimReaper(int textureWidthIn, int textureHeightIn) {
+        this.rightArmPose = ArmPose.DEATH_SCYTHE;
 
-		headwear = new AdvancedModelRenderer(this);
-		headwear.setRotationPoint(0.0F, -28.0F, 0.0F);
-		model_core.addChild(headwear);
-		headwear.cubeList.add(new ModelBox(headwear, 45, 8, -4.0F, -4.0F, -4.0F, 8, 8, 8, 0.5F, false));
+        this.textureWidth = textureWidthIn;
+        this.textureHeight = textureHeightIn;
 
-		body = new AdvancedModelRenderer(this);
-		body.setRotationPoint(0.0F, -12.0F, 0.0F);
-		model_core.addChild(body);
-		body.cubeList.add(new ModelBox(body, 24, 20, -4.0F, -12.0F, -2.0F, 8, 24, 4, 0.0F, false));
+        head = new AdvancedModelRenderer(this);
+        head.setRotationPoint(0.0F, -4.0F, 0.0F);
+        head.cubeList.add(new ModelBox(head, 24, 0, -4.0F, -4.0F, -4.0F, 8, 8, 8, 0.0F, false));
 
-		jacket = new AdvancedModelRenderer(this);
-		jacket.setRotationPoint(0.0F, -12.0F, 0.0F);
-		model_core.addChild(jacket);
-		jacket.cubeList.add(new ModelBox(jacket, 0, 20, -4.0F, -12.0F, -2.0F, 8, 24, 4, 0.25F, false));
+        headWear = new AdvancedModelRenderer(this);
+        headWear.setRotationPoint(0.0F, -4.0F, 0.0F);
+        headWear.cubeList.add(new ModelBox(headWear, 24, 16, -4.0F, -4.0F, -4.0F, 8, 8, 8, 0.5F, false));
 
-		right_arm = new AdvancedModelRenderer(this);
-		right_arm.setRotationPoint(-5.0F, -22.5F, 0.0F);
-		model_core.addChild(right_arm);
-		setRotationAngle(right_arm, -0.4659F, -0.1198F, -0.2333F);
-		right_arm.cubeList.add(new ModelBox(right_arm, 48, 24, -3.0F, -1.5F, -1.0F, 4, 12, 4, 0.0F, false));
+        body = new AdvancedModelRenderer(this);
+        body.setRotationPoint(0.0F, 12.0F, 0.0F);
+        body.cubeList.add(new ModelBox(body, 0, 0, -4.0F, -12.0F, -2.0F, 8, 24, 4, 0.0F, false));
 
-		left_arm = new AdvancedModelRenderer(this);
-		left_arm.setRotationPoint(5.0F, -22.5F, 0.0F);
-		model_core.addChild(left_arm);
-		setRotationAngle(left_arm, -1.0321F, 0.2261F, 0.1332F);
-		left_arm.cubeList.add(new ModelBox(left_arm, 16, 48, -1.0F, -1.5F, -1.0F, 4, 12, 4, 0.0F, false));
+        rightArm = new AdvancedModelRenderer(this);
+        rightArm.setRotationPoint(-5.0F, 1.5F, 0.0F);
+        setRotationAngle(rightArm, -0.4659F, -0.1198F, -0.2333F);
+        rightArm.cubeList.add(new ModelBox(rightArm, 0, 28, -1.0F, -1.5F, -1.0F, 2, 12, 2, 0.0F, false));
 
-		right_arm_sleve = new AdvancedModelRenderer(this);
-		right_arm_sleve.setRotationPoint(-5.0F, -22.5F, 0.0F);
-		model_core.addChild(right_arm_sleve);
-		setRotationAngle(right_arm_sleve, -0.4659F, -0.1198F, -0.2333F);
-		right_arm_sleve.cubeList.add(new ModelBox(right_arm_sleve, 0, 0, -3.0F, -1.5F, -1.0F, 4, 12, 4, 0.0625F, false));
+        rightArmWear = new AdvancedModelRenderer(this);
+        rightArmWear.setRotationPoint(-5.0F, 1.5F, 0.0F);
+        setRotationAngle(rightArmWear, -0.4659F, -0.1198F, -0.2333F);
+        rightArmWear.cubeList.add(new ModelBox(rightArmWear, 8, 28, -1.0F, -1.5F, -1.0F, 2, 12, 2, 0.25F, false));
 
-		left_arm_sleve = new AdvancedModelRenderer(this);
-		left_arm_sleve.setRotationPoint(5.0F, -22.5F, 0.0F);
-		model_core.addChild(left_arm_sleve);
-		setRotationAngle(left_arm_sleve, -1.0321F, 0.2261F, 0.1332F);
-		left_arm_sleve.cubeList.add(new ModelBox(left_arm_sleve, 0, 48, -1.0F, -1.5F, -1.0F, 4, 12, 4, 0.0625F, false));
+        leftArm = new AdvancedModelRenderer(this);
+        leftArm.setRotationPoint(5.0F, 1.5F, 0.0F);
+        setRotationAngle(leftArm, -1.0321F, 0.2261F, 0.1332F);
+        leftArm.cubeList.add(new ModelBox(leftArm, 0, 28, -1.0F, -1.5F, -1.0F, 2, 12, 2, 0.0F, true));
 
-		scythe = new AdvancedModelRenderer(this);
-		scythe.setRotationPoint(7.4823F, -23.5942F, -25.4402F);
-		model_core.addChild(scythe);
-		setRotationAngle(scythe, 0.0375F, 0.3473F, 0.137F);
-		
+        leftArmWear = new AdvancedModelRenderer(this);
+        leftArmWear.setRotationPoint(5.0F, 1.5F, 0.0F);
+        setRotationAngle(leftArmWear, -1.0321F, 0.2261F, 0.1332F);
+        leftArmWear.cubeList.add(new ModelBox(leftArmWear, 8, 28, -1.0F, -1.5F, -1.0F, 2, 12, 2, 0.25F, true));
 
-		cube_r1 = new AdvancedModelRenderer(this);
-		cube_r1.setRotationPoint(0.6237F, -9.4827F, -8.2443F);
-		scythe.addChild(cube_r1);
-		setRotationAngle(cube_r1, 1.309F, 0.0F, 0.9599F);
-		cube_r1.cubeList.add(new ModelBox(cube_r1, 21, 4, 6.8724F, 0.8361F, -6.4863F, 1, 1, 3, -0.375F, false));
+        this.animator = ModelAnimator.create();
+        updateDefaultPose();
+    }
 
-		cube_r2 = new AdvancedModelRenderer(this);
-		cube_r2.setRotationPoint(2.2791F, -10.6723F, -7.1496F);
-		scythe.addChild(cube_r2);
-		setRotationAngle(cube_r2, 0.8727F, 0.0F, 0.9599F);
-		cube_r2.cubeList.add(new ModelBox(cube_r2, 21, 0, 6.8724F, 2.8182F, -5.4545F, 1, 1, 3, -0.25F, false));
+    /**
+     * Sets the models various rotation angles then renders the model.
+     */
+    @Override
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        EntityGrimReaper grimReaper = (EntityGrimReaper) entityIn;
+        animate(grimReaper, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+        this.head.render(scale);
+        this.headWear.render(scale);
+        this.body.render(scale);
+        this.rightArm.render(scale);
+        this.rightArmWear.render(scale);
+        this.leftArm.render(scale);
+        this.leftArmWear.render(scale);
+    }
 
-		cube_r3 = new AdvancedModelRenderer(this);
-		cube_r3.setRotationPoint(3.6869F, -11.5856F, -5.0803F);
-		scythe.addChild(cube_r3);
-		setRotationAngle(cube_r3, 0.4363F, 0.0F, 0.9599F);
-		cube_r3.cubeList.add(new ModelBox(cube_r3, 20, 20, 6.8724F, 4.1785F, -3.6816F, 1, 1, 3, -0.0625F, false));
+    /**
+     * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
+     * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
+     * "far" arms and legs can swing at most.
+     */
+    @Override
+    @SuppressWarnings("incomplete-switch")
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
+        super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
+        EntityGrimReaper grimReaper = (EntityGrimReaper) entityIn;
 
-		cube_r4 = new AdvancedModelRenderer(this);
-		cube_r4.setRotationPoint(6.5883F, -13.8308F, 11.5707F);
-		scythe.addChild(cube_r4);
-		setRotationAngle(cube_r4, 0.1309F, 0.0F, 0.9599F);
-		cube_r4.cubeList.add(new ModelBox(cube_r4, 0, 0, 7.0474F, 5.618F, -16.1738F, 1, 1, 19, 0.125F, false));
+        resetToDefaultPose();
 
-		cube_r5 = new AdvancedModelRenderer(this);
-		cube_r5.setRotationPoint(-27.4117F, 0.1692F, 17.5707F);
-		scythe.addChild(cube_r5);
-		setRotationAngle(cube_r5, 0.1309F, 0.0F, 0.9599F);
-		cube_r5.cubeList.add(new ModelBox(cube_r5, 47, 47, 15.0974F, -31.382F, -1.9738F, 1, 45, 1, 0.0F, false));
+        this.head.rotateAngleY = netHeadYaw * 0.017453292F;
+        this.head.rotateAngleX = headPitch * 0.017453292F;
 
-		this.animator = ModelAnimator.create();
-		updateDefaultPose();
-	}
+        switch (this.rightArmPose) {
+            case EMPTY:
+                this.rightArm.rotateAngleY = 0.0F;
+                this.rightArmWear.rotateAngleY = 0.0F;
+                break;
+            case DEATH_SCYTHE:
 
-	@Override
-	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTick, float headYaw, float headPitch, float scale) {
-		EntityGrimReaper grimReaper = (EntityGrimReaper) entity;
-		animate(grimReaper, limbSwing, limbSwingAmount, ageInTick, headYaw, headPitch, scale);
-		model_core.render(scale);
-	}
+                this.rightArm.rotateAngleX = -0.4659F;
+                this.rightArmWear.rotateAngleX = -0.4659F;
+                this.rightArm.rotateAngleY = -0.1198F;
+                this.rightArmWear.rotateAngleY = -0.1198F;
+                this.rightArm.rotateAngleZ = -0.2333F;
+                this.rightArmWear.rotateAngleZ = -0.2333F;
 
-	public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float ageInTick, float headYaw, float headPitch, float scale) {
-		EntityGrimReaper grimReaper = (EntityGrimReaper) entity;
-		animator.update(grimReaper);
-		this.setRotationAngles(limbSwing, limbSwingAmount, ageInTick, headYaw, headPitch, scale, grimReaper);
+                this.leftArm.rotateAngleX = -1.0321F;
+                this.leftArmWear.rotateAngleX = -1.0321F;
+                this.leftArm.rotateAngleY = 0.2261F;
+                this.leftArmWear.rotateAngleY = 0.2261F;
+                this.leftArm.rotateAngleZ = 0.1332F;
+                this.leftArmWear.rotateAngleZ = 0.1332F;
 
-		if (grimReaper.getAnimation() == EntityGrimReaper.IDLE_ANIMATION && grimReaper.isEntityAlive()) {
-			animator.setAnimation(EntityGrimReaper.IDLE_ANIMATION);
-			animator.startKeyframe(30);
-			this.rotate(animator, right_arm, -45, 0, 0);
-			this.rotate(animator, right_arm_sleve, -45, 0, 0);
-			this.rotate(animator, left_arm, -45, 0, 0);
-			this.rotate(animator, left_arm_sleve, -45, 0, 0);
-			animator.move(scythe, -2, -8, 0.725F);
-			this.rotate(animator, scythe, -3.3205F, -12.3949F, -12.7809F);
-			animator.endKeyframe();
-			animator.resetKeyframe(30);
-		}
+                if (grimReaper.getAnimation() != EntityGrimReaper.MELEE_ATTACK_ANIMATION || grimReaper.getAnimation() != EntityGrimReaper.SCYTHE_PROJECTILE_ATTACK_ANIMATION) {
+                    float waveSpeed = (float) (2 * Math.PI / 80);
+                    float waveAmplitude = (float) Math.toRadians(10);
+                    float baseAngle = (float) Math.toRadians(-45.0F);
 
-		if (grimReaper.getAnimation() == EntityGrimReaper.MELEE_ATTACK_ANIMATION && grimReaper.isEntityAlive()) {
-			animator.setAnimation(EntityGrimReaper.MELEE_ATTACK_ANIMATION);
-			animator.startKeyframe(20);
-			this.rotate(animator, right_arm, -58.2727F, -42.4019F, -3.4223F);
-			this.rotate(animator, right_arm_sleve, -58.2727F, -42.4019F, -3.4223F);
-			this.rotate(animator, left_arm, -83.2805F, -42.2102F, 5.1315F);
-			this.rotate(animator, left_arm_sleve, -83.2805F, -42.2102F, 5.1315F);
-			animator.move(scythe, 8, -19, 9);
-			this.rotate(animator, scythe, -30.1203F, -13.9338F, -15.8417F);
-			animator.endKeyframe();
-			animator.startKeyframe(5);
-			this.rotate(animator, right_arm, -25.017F, 9.9853F, 0.5789F);
-			this.rotate(animator, right_arm_sleve, -25.017F, 9.9853F, 0.5789F);
-			this.rotate(animator, left_arm, 22.9282F, -15.067F, 9.7721F);
-			this.rotate(animator, left_arm_sleve, 22.9282F, -15.067F, 9.7721F);
-			animator.move(scythe, 8, 2, 5);
-			this.rotate(animator, scythe, -22.4054F, -9.9905F, 23.7739F);
-			animator.endKeyframe();
-			animator.resetKeyframe(10);
-		}
+                    float wave = (float) Math.sin(ageInTicks * waveSpeed);
+                    float animatedAngle = baseAngle + wave * waveAmplitude;
 
-		if (grimReaper.getAnimation() == EntityGrimReaper.SCYTHE_PROJECTILE_ATTACK_ANIMATION && grimReaper.isEntityAlive()) {
-			animator.setAnimation(EntityGrimReaper.SCYTHE_PROJECTILE_ATTACK_ANIMATION);
-			animator.startKeyframe(20);
-			this.rotate(animator, right_arm, -60.0079F, 12.4794F, 0.7185F);
-			this.rotate(animator, right_arm_sleve, -60.0079F, 12.4794F, 0.7185F);
-			this.rotate(animator, left_arm, -50.8617F, -91.9818F, -17.9605F);
-			this.rotate(animator, left_arm_sleve, -50.8617F, -91.9818F, -17.9605F);
-			animator.setStaticKeyframe(80);
+                    this.rightArm.rotateAngleX = animatedAngle;
+                    this.rightArmWear.rotateAngleX = animatedAngle;
+                    this.leftArm.rotateAngleX += animatedAngle;
+                    this.leftArmWear.rotateAngleX += animatedAngle;
+                }
+        }
 
-			animator.move(scythe, -10, 0, -13);
-			this.rotate(animator, scythe, 0, 0, -72.5F);
-			animator.endKeyframe();
+        copyModelAngles(this.head, this.headWear);
+    }
 
-			// Repeat the animation to set the arms animation static during the scythe animation
-			this.rotate(animator, right_arm, -60.0079F, 12.4794F, 0.7185F);
-			this.rotate(animator, right_arm_sleve, -60.0079F, 12.4794F, 0.7185F);
-			this.rotate(animator, left_arm, -50.8617F, -91.9818F, -17.9605F);
-			this.rotate(animator, left_arm_sleve, -50.8617F, -91.9818F, -17.9605F);
-			animator.move(scythe, -10, 0, -13);
-			this.rotate(animator, scythe, 0, 0, -72.5F);
+    public void postRenderArm(float scale, EnumHandSide side) {
+        this.getArmForSide(side).postRender(scale);
+    }
 
-			animator.startKeyframe(80);
-			animator.move(scythe, -10, 0, -13);
-			this.rotate(animator, scythe, 14.7511F, 2.3554F, -1502.5588F);
-			animator.endKeyframe();
+    protected ModelRenderer getArmForSide(EnumHandSide side) {
+        return side == EnumHandSide.LEFT ? this.leftArm : this.rightArm;
+    }
 
-//			this.rotate(animator, right_arm, -60.0079F, 12.4794F, 0.7185F);
-//			this.rotate(animator, right_arm_sleve, -60.0079F, 12.4794F, 0.7185F);
-//			this.rotate(animator, left_arm, -50.8617F, -91.9818F, -17.9605F);
-//			this.rotate(animator, left_arm_sleve, -50.8617F, -91.9818F, -17.9605F);
-//			animator.move(scythe, -10, 0, -13);
-//			this.rotate(animator, scythe, 0, 0, -72.5F);
-//
-//			animator.startKeyframe(20);
-//			animator.move(scythe, -10, 0, -13);
-//			this.rotate(animator, scythe, 14.7511F, 2.3554F, -785.13F);
-//			animator.endKeyframe();
-//
-//			this.rotate(animator, right_arm, -60.0079F, 12.4794F, 0.7185F);
-//			this.rotate(animator, right_arm_sleve, -60.0079F, 12.4794F, 0.7185F);
-//			this.rotate(animator, left_arm, -50.8617F, -91.9818F, -17.9605F);
-//			this.rotate(animator, left_arm_sleve, -50.8617F, -91.9818F, -17.9605F);
-//			animator.move(scythe, -10, 0, -13);
-//			this.rotate(animator, scythe, 0, 0, -72.5F);
-//
-//			animator.startKeyframe(20);
-//			animator.move(scythe, -10, 0, -13);
-//			this.rotate(animator, scythe, 14.7511F, 2.3554F, -1145.13F);
-//			animator.endKeyframe();
-//
-//			this.rotate(animator, right_arm, -60.0079F, 12.4794F, 0.7185F);
-//			this.rotate(animator, right_arm_sleve, -60.0079F, 12.4794F, 0.7185F);
-//			this.rotate(animator, left_arm, -50.8617F, -91.9818F, -17.9605F);
-//			this.rotate(animator, left_arm_sleve, -50.8617F, -91.9818F, -17.9605F);
-//			animator.move(scythe, -10, 0, -13);
-//			this.rotate(animator, scythe, 0, 0, -72.5F);
-//
-//			animator.startKeyframe(20);
-//			animator.move(scythe, -10, 0, -13);
-//			this.rotate(animator, scythe, 14.7511F, 2.3554F, -1502.5588F);
-//			animator.endKeyframe();
+    protected EnumHandSide getMainHand(Entity entityIn)
+    {
+        if (entityIn instanceof EntityLivingBase)
+        {
+            EntityLivingBase entitylivingbase = (EntityLivingBase)entityIn;
+            EnumHandSide enumhandside = entitylivingbase.getPrimaryHand();
+            return entitylivingbase.swingingHand == EnumHand.MAIN_HAND ? enumhandside : enumhandside.opposite();
+        }
+        else
+        {
+            return EnumHandSide.RIGHT;
+        }
+    }
 
-			animator.resetKeyframe(20);
-//			this.rotate(animator, right_arm, 0, 0, 0);
-//			this.rotate(animator, right_arm_sleve, 0, 0, 0);
-//			this.rotate(animator, left_arm, 0, 0, 0);
-//			this.rotate(animator, left_arm_sleve, 0, 0, 0);
-//			animator.move(scythe, 0, 0, 0);
-//			this.rotate(animator, scythe, 0, 0, 0);
-//			animator.endKeyframe();
-		}
+    public void animate(IAnimatedEntity entity, float limbSwing, float limbSwingAmount, float ageInTick, float headYaw, float headPitch, float scale) {
+        EntityGrimReaper grimReaper = (EntityGrimReaper) entity;
+        animator.update(grimReaper);
+        this.setRotationAngles(limbSwing, limbSwingAmount, ageInTick, headYaw, headPitch, scale, grimReaper);
 
+        if (grimReaper.getAnimation() == EntityGrimReaper.MELEE_ATTACK_ANIMATION && grimReaper.isEntityAlive()) {
+            animator.setAnimation(EntityGrimReaper.MELEE_ATTACK_ANIMATION);
+            animator.startKeyframe(20);
+            this.rotate(animator, rightArm, -58.2727F, -42.4019F, -3.4223F);
+            this.rotate(animator, rightArmWear, -58.2727F, -42.4019F, -3.4223F);
+            this.rotate(animator, leftArm, -83.2805F, -42.2102F, -15.1315F);
+            this.rotate(animator, leftArmWear, -83.2805F, -42.2102F, -15.1315F);
+            animator.endKeyframe();
+            animator.startKeyframe(5);
+            this.rotate(animator, rightArm, 25.017F, 9.9853F, 20.5789F);
+            this.rotate(animator, rightArmWear, 25.017F, 9.9853F, 20.5789F);
+            this.rotate(animator, leftArm, 22.9282F, -15.067F, 39.7721F);
+            this.rotate(animator, leftArmWear, 22.9282F, -15.067F, 39.7721F);
+            animator.endKeyframe();
+            animator.resetKeyframe(10);
+        }
 
-	}
+        if (grimReaper.getAnimation() == EntityGrimReaper.SCYTHE_PROJECTILE_ATTACK_ANIMATION && grimReaper.isEntityAlive()) {
+            animator.setAnimation(EntityGrimReaper.SCYTHE_PROJECTILE_ATTACK_ANIMATION);
+            animator.startKeyframe(20);
+            this.rotate(animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
+            animator.setStaticKeyframe(80);
+            animator.endKeyframe();
 
-	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale, Entity entity) {
-		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entity);
-		resetToDefaultPose();
+            // Repeat the animation to set the arms animation static during the scythe animation
+            this.rotate(animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
 
-		this.head.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.head.rotateAngleX = headPitch * 0.017453292F;
+            animator.startKeyframe(80);
+            animator.endKeyframe();
 
-		this.headwear.rotateAngleY = netHeadYaw * 0.017453292F;
-		this.headwear.rotateAngleX = headPitch * 0.017453292F;
-	}
+            this.rotate(animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
+
+            animator.startKeyframe(20);
+            animator.endKeyframe();
+
+            this.rotate(animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
+
+            animator.startKeyframe(20);
+            animator.endKeyframe();
+
+            this.rotate(animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
+
+            animator.startKeyframe(20);
+            animator.endKeyframe();
+
+            animator.resetKeyframe(20);
+            this.rotate(animator, rightArm, 0, 0, 0);
+            this.rotate(animator, rightArmWear, 0, 0, 0);
+            this.rotate(animator, leftArm, 0, 0, 0);
+            this.rotate(animator, leftArmWear, 0, 0, 0);
+            animator.endKeyframe();
+
+        }
+    }
+
+    /**
+     * Used for easily adding entity-dependent animations. The second and third float params here are the same second
+     * and third as in the setRotationAngles method.
+     */
+    @Override
+    public void setLivingAnimations(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTickTime)
+    {
+        this.rightArmPose = ArmPose.EMPTY;
+        ItemStack itemstack = entitylivingbaseIn.getHeldItem(EnumHand.MAIN_HAND);
+
+        if (itemstack.getItem() instanceof ItemDeathScythe)
+        {
+            if (entitylivingbaseIn.getPrimaryHand() == EnumHandSide.RIGHT)
+            {
+                this.rightArmPose = ArmPose.DEATH_SCYTHE;
+            }
+        }
+
+        super.setLivingAnimations(entitylivingbaseIn, limbSwing, limbSwingAmount, partialTickTime);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static enum ArmPose {
+        EMPTY,
+        DEATH_SCYTHE;
+    }
 }

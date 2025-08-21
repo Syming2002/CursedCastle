@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.entity.mobs.boss;
 
-import com.syming.castlevaniacraft.api.IElementalWeapon;
+import com.syming.castlevaniacraft.api.IElementalDamage;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
 import com.syming.castlevaniacraft.entity.ai.rusalka.*;
 import com.syming.castlevaniacraft.entity.mobs.CCEntityMob;
@@ -11,7 +11,6 @@ import net.ilexiconn.llibrary.server.animation.AnimationHandler;
 import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.gui.GuiBossOverlay;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -19,7 +18,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.server.SPacketUpdateBossInfo;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
@@ -237,7 +235,7 @@ public class EntityRusalka extends CCEntityMob implements IAnimatedEntity {
         EntityLivingBase living = getAttackingEntity();
         if (living != null) {
             ItemStack stack = living.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
                     return source == CCDamageSource.getThunderDamage();
@@ -252,7 +250,7 @@ public class EntityRusalka extends CCEntityMob implements IAnimatedEntity {
         EntityLivingBase living = getAttackingEntity();
         if (living != null) {
             ItemStack stack = living.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
                     return source == CCDamageSource.getWaterDamage();

@@ -37,7 +37,7 @@ public abstract class BlockDraculaCastleStoneSlab extends BlockSlab {
 
     @Override
     public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
-        return new ItemStack(CCBlock.DRACULA_CASTLE_STONE_SLAB_HALF, 1, ((DraculaCastleStoneVariant)state.getValue(VARIANT)).getMetadata());
+        return new ItemStack(CCBlock.DRACULA_CASTLE_STONEBRICK_SLAB_HALF, 1, ((DraculaCastleStoneVariant)state.getValue(VARIANT)).getMetadata());
     }
 
     /**
@@ -46,7 +46,7 @@ public abstract class BlockDraculaCastleStoneSlab extends BlockSlab {
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        return Item.getItemFromBlock(CCBlock.DRACULA_CASTLE_STONE_SLAB_HALF);
+        return Item.getItemFromBlock(CCBlock.DRACULA_CASTLE_STONEBRICK_SLAB_HALF);
     }
 
     @Override

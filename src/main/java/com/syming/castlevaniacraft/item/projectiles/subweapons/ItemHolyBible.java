@@ -3,7 +3,7 @@ package com.syming.castlevaniacraft.item.projectiles.subweapons;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityHolyBible;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.tab.CCTabs;
-import com.syming.castlevaniacraft.util.handlers.SoundsHandler;
+import com.syming.castlevaniacraft.util.handler.SoundsHandler;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;

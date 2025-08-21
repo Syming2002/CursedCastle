@@ -2,6 +2,7 @@ package com.syming.castlevaniacraft.client.model.entity;
 
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityHusk;
 
 public class ModelFriendlyZombie extends ModelZombie {
 

@@ -5,6 +5,7 @@ import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityHolyCross
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.holycross.ItemHolyCross;
 import com.syming.castlevaniacraft.util.CCReferences;
+import com.syming.castlevaniacraft.util.handler.RegistryHandler;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -15,6 +16,10 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.Objects;
+
+import static com.syming.castlevaniacraft.util.handler.RegistryHandler.NETHERITE;
 
 public class RenderHolyCross extends Render<EntityHolyCross> {
 
@@ -59,17 +64,18 @@ public class RenderHolyCross extends Render<EntityHolyCross> {
     public ItemStack getStackToRender(EntityHolyCross entityIn) {
         ItemStack stack = entityIn.getItemStack();
         if (stack.getItem() instanceof ItemHolyCross itemHolyCross) {
-            switch (itemHolyCross.getMaterial()) {
-                case WOOD:
-                    return new ItemStack(CCItem.animWoodenHolyCross);
-                case STONE:
-                    return new ItemStack(CCItem.animStoneHolyCross);
-                case IRON:
-                    return new ItemStack(CCItem.animIronHolyCross);
-                case GOLD:
-                    return new ItemStack(CCItem.animGoldenHolyCross);
-                case DIAMOND:
-                    return new ItemStack(CCItem.animDiamondHolyCross);
+            if (itemHolyCross.getMaterial() == Item.ToolMaterial.WOOD) {
+                return new ItemStack(CCItem.animWoodenHolyCross);
+            } else if (itemHolyCross.getMaterial() == Item.ToolMaterial.STONE) {
+                return new ItemStack(CCItem.animStoneHolyCross);
+            } else if (itemHolyCross.getMaterial() == Item.ToolMaterial.IRON) {
+                return new ItemStack(CCItem.animIronHolyCross);
+            } else if (itemHolyCross.getMaterial() == Item.ToolMaterial.GOLD) {
+                return new ItemStack(CCItem.animGoldenHolyCross);
+            } else if (itemHolyCross.getMaterial() == Item.ToolMaterial.DIAMOND) {
+                return new ItemStack(CCItem.animDiamondHolyCross);
+            } else if (itemHolyCross.getMaterial() == NETHERITE) {
+                return new ItemStack(RegistryHandler.animNetheriteHolyCross);
             }
         }
         return stack;

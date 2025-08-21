@@ -1,3 +1,9 @@
+# Advancements
+advancement.castlevaniacraft.root.description=Progrès de Castlevania Craft
+
+advancement.grim_reaper_death.description=Tuer la Grande Faucheuse dans la tour de l'horloge dans le château de Dracula
+advancement.grim_reaper_death.title=La Mort est Morte
+
 # Armors
 
 item.dracula_tunic.name=Tunique de Dracula
@@ -102,7 +108,9 @@ entity.heat_shade.name=Ombre Brûlante
 entity.ice_blade.name=Lame de Glace
 entity.medusa.name=Méduse
 entity.medusa_snake.name=Serpent de Méduse
+entity.poison_shade.name=Ombre Empoisonnée
 entity.rusalka.name=Rusalka
+entity.thunder_shade.name=Ombre Électrifiée
 entity.vampire_bat.name=Chauve-souris Vampire
 entity.Villager.high_priest=Grand Prêtre
 entity.Villager.leader_priest=Prêtre Chef
@@ -145,6 +153,10 @@ key.castlevaniacraft.guardian_soul_keybind=Utiliser les Âmes De Type Garde
 item.throwing_bone.name=Os Jetable
 item.scythe_projectile.name=Faux
 
+# Spell Books
+
+item.fire_book.fire_book.name=Livre de Feu
+
 # Sub Weapons
 
 item.wooden_dagger.name=Poignard en Bois
@@ -152,18 +164,28 @@ item.stone_dagger.name=Poignard en Pierre
 item.iron_dagger.name=Poignard en Fer
 item.golden_dagger.name=Poignard en Or
 item.diamond_dagger.name=Poignard en Diamant
+item.netherite_dagger.name=Poignard en Netherite
 item.holy_bible.name=Bible
 item.wooden_holy_cross.name=Croix en Bois
 item.stone_holy_cross.name=Croix en Pierre
 item.iron_holy_cross.name=Croix en Fer
 item.golden_holy_cross.name=Croix en Or
 item.diamond_holy_cross.name=Croix en Diamant
+item.netherite_holy_cross.name=Croix en Netherite
 item.holy_water.name=Eau Bénite
 item.wooden_throwing_axe.name=Hache Lançable en Bois
 item.stone_throwing_axe.name=Hache Lançable en Pierre
 item.iron_throwing_axe.name=Hache Lançable en Fer
 item.golden_throwing_axe.name=Hache Lançable en Or
 item.diamond_throwing_axe.name=Hache Lançable en Diamant
+item.netherite_throwing_axe.name=Hache Lançable en Netherite
+
+
+# Tile Entity
+
+tile.alchemy_table.name=Table d'Alchimie
+tile.dracula_head.name=Tête de Dracula
+tile.grim_reaper_head.name=Tête de La Faucheuse
 
 # Tooltips
 

@@ -30,6 +30,9 @@ public class EntityBloodSkeleton extends EntityMob implements IAnimatedEntity {
     public AnimationAI currentAnim;
     private Item lastHitItem;
 
+    private float fallSideRotation = 0;
+    private boolean initializedDeathAnimation = false;
+
     public EntityBloodSkeleton(World worldIn) {
         super(worldIn);
         this.setSize(0.6F, 1.99F);
@@ -59,8 +62,8 @@ public class EntityBloodSkeleton extends EntityMob implements IAnimatedEntity {
     }
 
     @Override
-    public void onLivingUpdate() {
-        super.onLivingUpdate();
+    public void onUpdate() {
+        super.onUpdate();
         if (getAnimation() != NO_ANIMATION) {
             animationTick++;
             if (world.isRemote && animationTick >= animation.getDuration()) {
@@ -71,24 +74,22 @@ public class EntityBloodSkeleton extends EntityMob implements IAnimatedEntity {
 
     @Override
     public void onDeath(DamageSource cause) {
-
+        super.onDeath(cause);
     }
 
     @Override
     protected void onDeathUpdate() {
-
         this.deathTime++;
+
         if (this.deathTime == 1) {
             AnimationHandler.INSTANCE.sendAnimationMessage(this, DEATH_ANIMATION);
         }
-        if (this.deathTime == 55 && !this.world.isRemote && this.lastHitItem != null) {
-            if (!(this.lastHitItem instanceof ItemUndeadKiller)) {
-                EntityBloodSkeleton bloodSkeleton = new EntityBloodSkeleton(this.world);
-                bloodSkeleton.copyLocationAndAnglesFrom(this);
-                bloodSkeleton.setHealth(10.0F);
-                this.world.spawnEntity(bloodSkeleton);
-                this.setDead();
-            }
+        if (this.deathTime == 55 && !this.world.isRemote) {
+            EntityBloodSkeleton bloodSkeleton = new EntityBloodSkeleton(this.world);
+            bloodSkeleton.copyLocationAndAnglesFrom(this);
+            bloodSkeleton.setHealth(10.0F);
+            this.world.spawnEntity(bloodSkeleton);
+            setDead();
         }
         if (this.deathTime == 20 && this.lastHitItem instanceof ItemUndeadKiller) {
             if (!this.world.isRemote && (this.isPlayer() || this.recentlyHit > 0 && this.canDropLoot() && this.world.getGameRules().getBoolean("doMobLoot"))) {
@@ -178,5 +179,16 @@ public class EntityBloodSkeleton extends EntityMob implements IAnimatedEntity {
     @Override
     public Animation[] getAnimations() {
         return ANIMATIONS;
+    }
+
+    public float getFallSideRotation() {
+        return this.fallSideRotation;
+    }
+
+    public void initDeathAnimationRandoms() {
+        if (!this.initializedDeathAnimation) {
+            this.fallSideRotation = (this.rand.nextFloat() - 0.5F) * 30.0F;
+            this.initializedDeathAnimation = true;
+        }
     }
 }

@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "castlevaniacraft:grim_reaper_head"
+    },
+    "title": {
+      "translate": "advancement.grim_reaper_death.title"
+    },
+    "description": {
+      "translate": "advancement.grim_reaper_death.description"
+    },
+    "frame": "goal"
+  },
+  "parent": "castlevaniacraft:root",
+  "criteria": {
+    "grim_reaper": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "castlevaniacraft:grim_reaper"
+        }
+      }
+    }
+  }
+}

@@ -13,23 +13,23 @@ import java.util.Random;
 public class CemeteryCreationHandler implements VillagerRegistry.IVillageCreationHandler {
 
     public static void registerCemeteryComponents() {
-        MapGenStructureIO.registerStructureComponent(StructureCemeteryPieces.class, new ResourceLocation(CCReferences.MODID,"Cemetery").toString());
+        MapGenStructureIO.registerStructureComponent(StructureCemetery.class, new ResourceLocation(CCReferences.MODID,"C").toString());
     }
 
     @Override
     public StructureVillagePieces.PieceWeight getVillagePieceWeight(Random random, int i) {
-        return new StructureVillagePieces.PieceWeight(getComponentClass(), 4, 2);
+        return new StructureVillagePieces.PieceWeight(getComponentClass(), 33, 3);
     }
 
     @Override
     public Class<? extends StructureVillagePieces.Village> getComponentClass() {
-        return StructureCemeteryPieces.class;
+        return StructureCemetery.class;
     }
 
     @Override
     @Nullable
     public StructureVillagePieces.Village buildComponent(StructureVillagePieces.PieceWeight villagePiece, StructureVillagePieces.Start startPiece, List<StructureComponent> pieces, Random random, int minX, int minY, int minZ, EnumFacing facing, int type) {
 
-        return StructureCemeteryPieces.buildComponent(startPiece, pieces, random, minX, minY, minZ, facing, type);
+        return StructureCemetery.buildComponent(startPiece, pieces, random, minX, minY, minZ, facing, type);
     }
 }

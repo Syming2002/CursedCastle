@@ -2,7 +2,7 @@ package com.syming.castlevaniacraft.block.draculacastlestone;
 
 import com.syming.castlevaniacraft.block.CCBlock;
 import com.syming.castlevaniacraft.item.CCItem;
-import com.syming.castlevaniacraft.itemblock.DraculaCastleStoneBrickItemBlock;
+import com.syming.castlevaniacraft.itemblock.ItemBlockDraculaCastleStoneBrick;
 import com.syming.castlevaniacraft.tab.CCTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -21,8 +21,8 @@ public class BlockDraculaCastleStoneBrick extends Block {
 
     public static final PropertyEnum<BlockDraculaCastleStoneBrick.EnumType> VARIANT = PropertyEnum.<BlockDraculaCastleStoneBrick.EnumType>create("variant", BlockDraculaCastleStoneBrick.EnumType.class);
     public static final int DEFAULT_META = BlockDraculaCastleStoneBrick.EnumType.DEFAULT.getMetadata();
-//    public static final int CRACKED_META = BlockDraculaCastleStoneBrick.EnumType.CRACKED.getMetadata();
-//    public static final int CHISELED_META = BlockDraculaCastleStoneBrick.EnumType.CHISELED.getMetadata();
+    public static final int CRACKED_META = BlockDraculaCastleStoneBrick.EnumType.CRACKED.getMetadata();
+    public static final int CHISELED_META = BlockDraculaCastleStoneBrick.EnumType.CHISELED.getMetadata();
 
     public BlockDraculaCastleStoneBrick(String name) {
         super(Material.ROCK, MapColor.BLACK);
@@ -38,7 +38,7 @@ public class BlockDraculaCastleStoneBrick extends Block {
         this.setRegistryName(name);
 
         CCBlock.BLOCKS.add(this);
-        CCItem.ITEMS.add(new DraculaCastleStoneBrickItemBlock(this, new String[]{"dracula_castle_default", "dracula_castle_cracked", "dracula_castle_chiseled"}).setRegistryName(this.getRegistryName()));
+        CCItem.ITEMS.add(new ItemBlockDraculaCastleStoneBrick(this, new String[]{"dracula_castle_default", "dracula_castle_cracked", "dracula_castle_chiseled"}).setRegistryName(this.getRegistryName()));
 
     }
 
@@ -85,9 +85,9 @@ public class BlockDraculaCastleStoneBrick extends Block {
 
     public static enum EnumType implements IStringSerializable
     {
-        DEFAULT(0, "dracula_castle_stonebrick_default", "dracula_castle_stonebrick_default");
-//        CRACKED(1, "dracula_castle_stonebrick_cracked", "dracula_castle_stonebrick_cracked"),
-//        CHISELED(2, "dracula_castle_stonebrick_chiseled", "dracula_castle_stonebrick_chiseled");
+        DEFAULT(0, "dracula_castle_stonebrick_default", "dracula_castle_stonebrick_default"),
+        CRACKED(1, "dracula_castle_stonebrick_cracked", "dracula_castle_stonebrick_cracked"),
+        CHISELED(2, "dracula_castle_stonebrick_chiseled", "dracula_castle_stonebrick_chiseled");
 
         private static final BlockDraculaCastleStoneBrick.EnumType[] META_LOOKUP = new BlockDraculaCastleStoneBrick.EnumType[values().length];
         private final int meta;

@@ -26,8 +26,7 @@ public class ParticlePoisonBreath extends Particle {
 
     float oSize;
 
-    public ParticlePoisonBreath(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double p_i1221_8_, double p_i1221_10_, double p_i1221_12_)
-    {
+    public ParticlePoisonBreath(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double p_i1221_8_, double p_i1221_10_, double p_i1221_12_) {
         super(worldIn, xCoordIn, yCoordIn, zCoordIn, 0.0D, 0.0D, 0.0D);
 
         this.motionX *= 0.10000000149011612D;
@@ -65,8 +64,7 @@ public class ParticlePoisonBreath extends Particle {
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
 
-        if (this.particleAge++ >= this.particleMaxAge)
-        {
+        if (this.particleAge++ >= this.particleMaxAge) {
             this.setExpired();
         }
 
@@ -77,30 +75,26 @@ public class ParticlePoisonBreath extends Particle {
         this.motionZ *= 0.9599999785423279D;
         EntityPlayer entityplayer = this.world.getClosestPlayer(this.posX, this.posY, this.posZ, 2.0D, false);
 
-        if (entityplayer != null)
-        {
+        if (entityplayer != null) {
             AxisAlignedBB axisalignedbb = entityplayer.getEntityBoundingBox();
 
-            if (this.posY > axisalignedbb.minY)
-            {
+            if (this.posY > axisalignedbb.minY) {
                 this.posY += (axisalignedbb.minY - this.posY) * 0.2D;
                 this.motionY += (entityplayer.motionY - this.motionY) * 0.2D;
                 this.setPosition(this.posX, this.posY, this.posZ);
             }
         }
 
-        if (this.onGround)
-        {
+        if (this.onGround) {
             this.motionX *= 0.699999988079071D;
             this.motionZ *= 0.699999988079071D;
         }
     }
 
     @SideOnly(Side.CLIENT)
-    public static class Factory implements IParticleFactory
-    {
-        public Particle createParticle(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_)
-        {
+    public static class Factory implements IParticleFactory {
+        @Override
+        public Particle createParticle(int particleID, World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn, int... p_178902_15_) {
             return new ParticlePoisonBreath(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
         }
     }

@@ -12,7 +12,6 @@ public class AIScytheProjectileAttack extends AnimationAI<EntityGrimReaper> {
     protected Animation animation;
     protected EntityGrimReaper grimReaper;
     protected EntityLivingBase attackTarget;
-    private double attackRange;
     private int tickCounter = 0;
 
     public AIScytheProjectileAttack(EntityGrimReaper entity, Animation animation) {
@@ -32,14 +31,6 @@ public class AIScytheProjectileAttack extends AnimationAI<EntityGrimReaper> {
     public boolean isAutomatic() {
         return true;
     }
-
-//    @Override
-//    public boolean shouldExecute() {
-//        return attackTarget != null
-//                && this.grimReaper.getEntitySenses().canSee(attackTarget)
-//                && this.grimReaper.getDistanceSq(attackTarget) > this.minTargetDistance
-//                && this.grimReaper.getDistanceSq(attackTarget) <= this.attackRange * this.attackRange;
-//    }
 
     @Override
     public void startExecuting() {
@@ -65,17 +56,19 @@ public class AIScytheProjectileAttack extends AnimationAI<EntityGrimReaper> {
                 double offsetX = radius * Math.cos(angle);
                 double offsetZ = radius * Math.sin(angle);
 
-                Vec3d randomPosition = new Vec3d(grimReaper.posX + offsetX, grimReaper.posY, grimReaper.posZ + offsetZ);
+                Vec3d randomPosition = new Vec3d(grimReaper.posX + offsetX, grimReaper.posY + grimReaper.getEyeHeight(), grimReaper.posZ + offsetZ);
 
-                Vec3d direction = attackTarget.getPositionVector().subtract(randomPosition).normalize();
+                Vec3d targetPosition = this.attackTarget.getPositionVector().add(0, this.attackTarget.getEyeHeight() * 0.5, 0);
+
+                Vec3d direction = targetPosition.subtract(randomPosition).normalize();
 
                 EntityScytheProjectile scytheProjectile = new EntityScytheProjectile(this.grimReaper.world, this.grimReaper);
-                scytheProjectile.setPosition(randomPosition.x, grimReaper.posY + grimReaper.getEyeHeight(), randomPosition.z);
-                scytheProjectile.shoot(direction.x, direction.y, direction.z, 0.75F, 1.0F);
+                scytheProjectile.setPosition(randomPosition.x, randomPosition.y, randomPosition.z);
+                scytheProjectile.shoot(direction.x, direction.y, direction.z, 0.75F, 0.1F);
 
                 this.grimReaper.world.spawnEntity(scytheProjectile);
 
-                tickCounter = 0;
+                this.tickCounter = 0;
             }
         }
     }

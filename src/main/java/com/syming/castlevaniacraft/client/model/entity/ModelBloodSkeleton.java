@@ -10,6 +10,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Random;
+
 @SideOnly(Side.CLIENT)
 public class ModelBloodSkeleton extends CCModel {
 
@@ -21,7 +23,9 @@ public class ModelBloodSkeleton extends CCModel {
     private final AdvancedModelRenderer left_arm;
     private final AdvancedModelRenderer right_leg;
     private final AdvancedModelRenderer left_leg;
+
     private ModelAnimator animator;
+
     public ModelBloodSkeleton()
     {
         textureWidth = 64;
@@ -84,41 +88,29 @@ public class ModelBloodSkeleton extends CCModel {
 
         // Death Animation
         if (bloodSkeleton.getAnimation() == EntityBloodSkeleton.DEATH_ANIMATION) {
+            bloodSkeleton.initDeathAnimationRandoms();
+            float fallRotation = bloodSkeleton.getFallSideRotation();
+
             animator.setAnimation(EntityBloodSkeleton.DEATH_ANIMATION);
 
             animator.startKeyframe(15);
-            this.rotate(animator, head, 270, 0, 0);
+            this.rotate(animator, head, 270 + fallRotation * 0.5F, 0, fallRotation);
             animator.move(head, 0, 24, -17);
-            this.rotate(animator, headwear, 270, 0, 0);
+            this.rotate(animator, headwear, 270 + fallRotation * 0.5F, 0, fallRotation);
             animator.move(headwear, 0, 22, -19);
-            this.rotate(animator, body, -90, 0, 0);
+            this.rotate(animator, body, -90, 0, fallRotation);
             animator.move(body, 0, 22, 15);
-            this.rotate(animator, right_arm, 0, 0, -90);
+            this.rotate(animator, right_arm, 0, 0, -90 + fallRotation);
             animator.move(right_arm, -11, 20, 0);
-            this.rotate(animator, left_arm, 0, 0, 90);
+            this.rotate(animator, left_arm, 0, 0, 90 + fallRotation);
             animator.move(left_arm, 10, 21, 0);
-            this.rotate(animator, right_leg, 90, 0, 0);
+            this.rotate(animator, right_leg, 90, 0, fallRotation);
             animator.move(right_leg, 0, 11, -10);
-            this.rotate(animator, left_leg, -68.25F, 0, 0);
+            this.rotate(animator, left_leg, -68.25F, 0, fallRotation);
             animator.move(left_leg, 0, 11, -10);
             animator.endKeyframe();
             animator.setStaticKeyframe(25);
-            animator.startKeyframe(15);
-            this.rotate(animator, head, 0, 0, 0);
-            animator.move(head, 0, 0, 0);
-            this.rotate(animator, headwear, 0, 0, 0);
-            animator.move(headwear, 0, 0, 0);
-            this.rotate(animator, body, 0, 0, 0);
-            animator.move(body, 0, 0, 0);
-            this.rotate(animator, right_arm, 0, 0, 0);
-            animator.move(right_arm, 0, 0, 0);
-            this.rotate(animator, left_arm, 0, 0, 90);
-            animator.move(left_arm, 0, 0, 0);
-            this.rotate(animator, right_leg, 0, 0, 0);
-            animator.move(right_leg, 0, 0, 0);
-            this.rotate(animator, left_leg, 0, 0, 0);
-            animator.move(left_leg, 0, 0, 0);
-            animator.endKeyframe();
+            animator.resetKeyframe(15);
         }
     }
 

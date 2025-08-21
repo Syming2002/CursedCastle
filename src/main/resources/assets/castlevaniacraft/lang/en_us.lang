@@ -1,3 +1,12 @@
+# Advancements
+advancement.castlevaniacraft.root.description=Castlevania Craft Advancements
+
+advancement.grim_reaper_death.description=Kill the Grim Reaper at the Clock Tower of the Dracula's Castle
+advancement.grim_reaper_death.title=Death is Dead
+
+advancement.dracula_death.description=Kill Dracula at its Room all up of the Dracula's Castle
+advancement.dracula_death.title=Die Monster You Don't Belong in this World
+
 # Armors
 
 item.dracula_tunic.name=Dracula's Tunic
@@ -106,7 +115,9 @@ entity.heat_shade.name=Heat Shade
 entity.ice_blade.name=Ice Blade
 entity.medusa.name=Medusa
 entity.medusa_snake.name=Medusa Snake
+entity.poison_shade.name=Poison Shade
 entity.rusalka.name=Rusalka
+entity.thunder_shade.name=Thunder Shade
 entity.vampire_bat.name=Vampire Bat
 entity.Villager.high_priest=High Priest
 entity.Villager.leader_priest=Leader Priest
@@ -150,6 +161,10 @@ key.castlevaniacraft.guardian_soul_keybind=Use Guardian Souls
 item.throwing_bone.name=Throwing Bone
 item.scythe_projectile.name=Scythe Projectile
 
+# Spell Books
+
+item.fire_book.fire_book.name=Fire Book
+
 # Sub Weapons
 
 item.wooden_dagger.name=Wooden Dagger
@@ -157,22 +172,27 @@ item.stone_dagger.name=Stone Dagger
 item.iron_dagger.name=Iron Dagger
 item.golden_dagger.name=Golden Dagger
 item.diamond_dagger.name=Diamond Dagger
+item.netherite_dagger.name=Netherite Dagger
 item.holy_bible.name=Holy Bible
 item.wooden_holy_cross.name=Wooden Holy Cross
 item.stone_holy_cross.name=Stone Holy Cross
 item.iron_holy_cross.name=Iron Holy Cross
 item.golden_holy_cross.name=Golden Holy Cross
 item.diamond_holy_cross.name=Diamond Holy Cross
+item.netherite_holy_cross.name=Netherite Holy Cross
 item.holy_water.name=Holy Water
 item.wooden_throwing_axe.name=Wooden Throwing Axe
 item.stone_throwing_axe.name=Stone Throwing Axe
 item.iron_throwing_axe.name=Iron Throwing Axe
 item.golden_throwing_axe.name=Golden Throwing Axe
 item.diamond_throwing_axe.name=Diamond Throwing Axe
+item.netherite_throwing_axe.name=Netherite Throwing Axe
 
 # Tile Entity
 
 tile.alchemy_table.name=Alchemy Table
+tile.dracula_head.name=Dracula's Head
+tile.grim_reaper_head.name=Grim Reaper's Head
 
 # Tooltips
 

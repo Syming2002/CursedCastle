@@ -64,7 +64,6 @@ public class AIBatsAttack extends AnimationAI<EntityDracula> {
             EntityVampireBat aggressiveBat = new EntityVampireBat(this.dracula.world);
             aggressiveBat.setLocationAndAngles(x + offsetX, y, z + offsetZ, this.dracula.rotationYaw, this.dracula.rotationPitch);
             this.dracula.world.spawnEntity(aggressiveBat);
-            System.out.println("Aggressive bats are spawning!");
         }
     }
 }

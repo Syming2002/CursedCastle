@@ -1,6 +1,7 @@
 {
-    "parent": "block/cube_all",
+    "parent": "block/cube_column",
     "textures": {
-        "all": "castlevaniacraft:blocks/dracula_castle_stonebrick_chiseled"
+        "end": "castlevaniacraft:blocks/dracula_castle_stonebrick_default",
+        "side": "castlevaniacraft:blocks/dracula_castle_stonebrick_chiseled"
     }
 }

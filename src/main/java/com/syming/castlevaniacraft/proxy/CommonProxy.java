@@ -1,14 +1,19 @@
 package com.syming.castlevaniacraft.proxy;
 
+import com.syming.castlevaniacraft.tile.TileEntityAlchemyTable;
+import com.syming.castlevaniacraft.tile.TileEntityDraculaHead;
+import com.syming.castlevaniacraft.tile.TileEntityGrimReaperHead;
+import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
 
@@ -56,5 +61,11 @@ public class CommonProxy {
 
     public void postInit(FMLPostInitializationEvent event) {
 
+    }
+
+    public void registerTileEntities() {
+        GameRegistry.registerTileEntity(TileEntityAlchemyTable.class, new ResourceLocation(CCReferences.MODID,"alchemy_table"));
+        GameRegistry.registerTileEntity(TileEntityDraculaHead.class, new ResourceLocation(CCReferences.MODID,"dracula_head"));
+        GameRegistry.registerTileEntity(TileEntityGrimReaperHead.class, new ResourceLocation(CCReferences.MODID,"grim_reaper_head"));
     }
 }

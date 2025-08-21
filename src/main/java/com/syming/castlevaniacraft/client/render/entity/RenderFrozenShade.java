@@ -1,7 +1,7 @@
 package com.syming.castlevaniacraft.client.render.entity;
 
 import com.syming.castlevaniacraft.client.model.entity.ModelFrozenShade;
-import com.syming.castlevaniacraft.entity.mobs.EntityFrozenShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
 import com.syming.castlevaniacraft.util.CCReferences;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

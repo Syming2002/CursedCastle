@@ -1,9 +1,8 @@
 package com.syming.castlevaniacraft.entity.mobs;
 
-import com.syming.castlevaniacraft.api.IElementalWeapon;
+import com.syming.castlevaniacraft.api.IElementalDamage;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
-import com.syming.castlevaniacraft.entity.ai.AIFlyTowardsTarget;
-import com.syming.castlevaniacraft.entity.ai.AIRandomFly;
+import com.syming.castlevaniacraft.entity.ai.AIFlyOverTarget;
 import com.syming.castlevaniacraft.entity.ai.harpy.AIDaggerAttack;
 import com.syming.castlevaniacraft.entity.ai.harpy.AIFeatherAttack;
 import net.ilexiconn.llibrary.server.animation.Animation;
@@ -14,7 +13,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityFlying;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,8 +53,7 @@ public class EntityHarpy extends CCEntityMob implements IAnimatedEntity, EntityF
         this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityPlayer>(this, EntityPlayer.class, true));
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<EntityVillager>(this, EntityVillager.class, true));
-        this.tasks.addTask(2, new AIRandomFly(this));
-        this.tasks.addTask(5, new AIFlyTowardsTarget(this, 8.0D));
+        this.tasks.addTask(2, new AIFlyOverTarget(this, 3.0, 1.2));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityVillager.class, 8.0F));
     }
@@ -77,7 +74,7 @@ public class EntityHarpy extends CCEntityMob implements IAnimatedEntity, EntityF
         if (player != null) {
             System.out.println("player is not null");
             ItemStack stack = player.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 System.out.println("item implements IElementalWeapon");
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
@@ -94,7 +91,7 @@ public class EntityHarpy extends CCEntityMob implements IAnimatedEntity, EntityF
         EntityPlayer player = (EntityPlayer) getAttackingEntity();
         if (player != null) {
             ItemStack stack = player.getHeldItemMainhand();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getAttackTarget(), getAttackingEntity());
                     System.out.println("source damage detected");

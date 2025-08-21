@@ -5,6 +5,10 @@ import com.syming.castlevaniacraft.entity.mobs.*;
 import com.syming.castlevaniacraft.entity.mobs.boss.*;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
 import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityHeatShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityPoisonShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityThunderShade;
 import com.syming.castlevaniacraft.entity.projectiles.*;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.*;
 import com.syming.castlevaniacraft.item.CCItem;
@@ -66,12 +70,14 @@ public class CCEntity {
         registerEntity("friendly_zombie", EntityFriendlyZombie.class, 64, 0x00AFAF, 0xD1CFCC);
         registerEntity("frozen_shade", EntityFrozenShade.class, 64, 0x0350B1, 0x1092F9);
         registerEntity("gorgon", EntityGorgon.class, 64, 0xE8B000, 0xF05850);
-        registerEntity("grim_reaper", EntityGrimReaper.class, 64, 0x1E4168, 0xF5EFEA);
+        registerEntity("grim_reaper", EntityGrimReaper.class, 64, 0x171815, 0xAAA398);
         registerEntity("harpy", EntityHarpy.class, 64, 0xF8B078, 0x08F5C6);
         registerEntity("heat_shade", EntityHeatShade.class, 64, 0xA10C05, 0xF01504);
         registerEntity("medusa", EntityMedusa.class, 64, 0x204018, 0xD8E068);
         registerEntity("medusa_snake", EntityMedusaSnake.class, 64, 0xD8E068, 0xB23434);
+        registerEntity("poison_shade", EntityPoisonShade.class, 64, 0x45F248, 0x319E3D);
         registerEntity("rusalka", EntityRusalka.class, 64, 0x002080, 0x00F878);
+        registerEntity("thunder_shade", EntityThunderShade.class,64, 0xFFFF75,0xB3B334);
         registerEntity("zephyr", EntityZephyr.class, 64, 0x4D1366 , 0x86BABA);
 
         registerCrucifix("crucifix", EntityCrucifix.class, BlockPlanks.EnumType.OAK);

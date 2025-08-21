@@ -3,12 +3,17 @@ package com.syming.castlevaniacraft.proxy;
 import com.syming.castlevaniacraft.CastlevaniaCraftMod;
 import com.syming.castlevaniacraft.block.draculacastlestone.BlockDraculaCastleStoneBrick;
 import com.syming.castlevaniacraft.client.gui.CCGui;
-import com.syming.castlevaniacraft.client.render.entity.RenderDagger;
-import com.syming.castlevaniacraft.client.render.entity.RenderFireHolyCross;
-import com.syming.castlevaniacraft.client.render.entity.RenderHolyCross;
-import com.syming.castlevaniacraft.client.render.entity.RenderThrowingAxe;
-import com.syming.castlevaniacraft.entity.projectiles.EntityScytheProjectile;
-import com.syming.castlevaniacraft.entity.projectiles.EntityThrowingBoneProjectile;
+import com.syming.castlevaniacraft.client.render.entity.*;
+import com.syming.castlevaniacraft.entity.EntityCrucifix;
+import com.syming.castlevaniacraft.entity.mobs.*;
+import com.syming.castlevaniacraft.entity.mobs.boss.*;
+import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyBat;
+import com.syming.castlevaniacraft.entity.mobs.friendly.EntityFriendlyZombie;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityFrozenShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityHeatShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityPoisonShade;
+import com.syming.castlevaniacraft.entity.mobs.shade.EntityThunderShade;
+import com.syming.castlevaniacraft.entity.projectiles.*;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.*;
 import com.syming.castlevaniacraft.entity.projectiles.subweapons.EntityHolyCross;
 import com.syming.castlevaniacraft.block.CCBlock;
@@ -16,8 +21,10 @@ import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.integration.jer.CCJerIntegration;
 import com.syming.castlevaniacraft.item.souls.EnumBulletSoul;
 import com.syming.castlevaniacraft.item.souls.EnumGuardianSoul;
+import com.syming.castlevaniacraft.particle.ParticleHoly;
 import com.syming.castlevaniacraft.particle.ParticlePoisonBreath;
 import com.syming.castlevaniacraft.util.CCReferences;
+import com.syming.castlevaniacraft.util.handler.RenderHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.particle.ParticleManager;
@@ -67,6 +74,31 @@ public class ClientProxy extends CommonProxy {
 
         RenderingRegistry.registerEntityRenderingHandler(EntityScytheProjectile.class, new RenderSnowball<EntityScytheProjectile>(Minecraft.getMinecraft().getRenderManager(), CCItem.animScytheProjectile, Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityThrowingBoneProjectile.class, new RenderSnowball<EntityThrowingBoneProjectile>(Minecraft.getMinecraft().getRenderManager(), CCItem.throwingBone, Minecraft.getMinecraft().getRenderItem()));
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityVampireBat.class, RenderVampireBat::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityBloodSkeleton.class, RenderBloodSkeleton::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCatoblepas.class, RenderCatoblepas::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCrucifix.class, RenderCrucifix::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityDracula.class, RenderDracula::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityDraculaSecondForm.class, RenderDraculaSecondForm::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityFireHydra.class, RenderFireHydra::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityFlameDemon.class, RenderFlameDemon::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityFleaMan.class, RenderFleaMan::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityFriendlyBat.class, RenderFriendlyBat::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityFriendlyZombie.class, RenderFriendlyZombie::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityFrozenShade.class, RenderFrozenShade::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityGorgon.class, RenderGorgon::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityGrimReaper.class, RenderGrimReaper::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHarpy.class, RenderHarpy::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHarpyFeather.class, RenderHarpyFeather::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHeatShade.class, RenderHeatShade::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityIceBladeProjectile.class, RenderIceBlade::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityMedusa.class, RenderMedusa::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityMedusaSnake.class, RenderMedusaSnake::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityPoisonShade.class, RenderPoisonShade::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityRusalka.class, RenderRusalka::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityThunderShade.class, RenderThunderShade::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityZephyr.class, RenderZephyr::new);
     }
 
 
@@ -133,6 +165,8 @@ public class ClientProxy extends CommonProxy {
         super.init(event);
 
         CCJerIntegration.init();
+
+        RenderHandler.registerTileEntityRenderers();
     }
 
     @Override

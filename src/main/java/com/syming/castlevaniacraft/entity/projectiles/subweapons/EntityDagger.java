@@ -4,6 +4,7 @@ import baubles.api.BaublesApi;
 import baubles.api.cap.BaublesContainer;
 import com.syming.castlevaniacraft.item.CCItem;
 import com.syming.castlevaniacraft.item.projectiles.subweapons.ItemDagger;
+import com.syming.castlevaniacraft.util.handler.RegistryHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -35,6 +36,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+
+import java.util.Objects;
+
+import static com.syming.castlevaniacraft.util.handler.RegistryHandler.NETHERITE;
 
 public class EntityDagger extends EntityArrow {
 
@@ -228,16 +233,6 @@ public class EntityDagger extends EntityArrow {
                 {
                     EntityLivingBase entitylivingbase = (EntityLivingBase)entity;
 
-                    if (this.knockbackStrength > 0)
-                    {
-                        float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-
-                        if (f1 > 0.0F)
-                        {
-                            entitylivingbase.addVelocity(this.motionX * (double)this.knockbackStrength * 0.6000000238418579D / (double)f1, 0.1D, this.motionZ * (double)this.knockbackStrength * 0.6000000238418579D / (double)f1);
-                        }
-                    }
-
                     if (this.shootingEntity instanceof EntityLivingBase)
                     {
                         EnchantmentHelper.applyThornEnchantments(entitylivingbase, this.shootingEntity);
@@ -353,17 +348,18 @@ public class EntityDagger extends EntityArrow {
     protected ItemStack getArrowStack() {
         ItemStack stack = this.getItemStack();
         if (stack.getItem() instanceof ItemDagger itemDagger) {
-            switch (itemDagger.getMaterial()) {
-                case WOOD:
-                    return new ItemStack(CCItem.woodenDagger);
-                case STONE:
-                    return new ItemStack(CCItem.stoneDagger);
-                case IRON:
-                    return new ItemStack(CCItem.ironDagger);
-                case GOLD:
-                    return new ItemStack(CCItem.goldenDagger);
-                case DIAMOND:
-                    return new ItemStack(CCItem.diamondDagger);
+            if (Objects.requireNonNull(itemDagger.getMaterial()) == Item.ToolMaterial.WOOD) {
+                return new ItemStack(CCItem.woodenDagger);
+            } else if (itemDagger.getMaterial() == Item.ToolMaterial.STONE) {
+                return new ItemStack(CCItem.stoneDagger);
+            } else if (itemDagger.getMaterial() == Item.ToolMaterial.IRON) {
+                return new ItemStack(CCItem.ironDagger);
+            } else if (itemDagger.getMaterial() == Item.ToolMaterial.GOLD) {
+                return new ItemStack(CCItem.goldenDagger);
+            } else if (itemDagger.getMaterial() == Item.ToolMaterial.DIAMOND) {
+                return new ItemStack(CCItem.diamondDagger);
+            } else if (itemDagger.getMaterial() == NETHERITE) {
+                return new ItemStack(RegistryHandler.netheriteDagger);
             }
         }
         return stack;
@@ -405,10 +401,6 @@ public class EntityDagger extends EntityArrow {
             }
         }
     }
-
-//    public void setInited() {
-//        dataManager.set(INITIATED, true);
-//    }
 
     protected float getMotionFactor()
     {

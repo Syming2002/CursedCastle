@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.entity.projectiles.subweapons;
 
-import com.syming.castlevaniacraft.api.IElementalWeapon;
+import com.syming.castlevaniacraft.api.IElementalDamage;
 import com.syming.castlevaniacraft.damagesource.CCDamageSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -14,14 +14,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import java.util.List;
 import java.util.Objects;
 
-public class EntityFireHolyCross extends EntityHolyCross implements IElementalWeapon {
+public class EntityFireHolyCross extends EntityHolyCross implements IElementalDamage {
 
     private boolean spinning = false;
     private final int maxFireballs = 1;
