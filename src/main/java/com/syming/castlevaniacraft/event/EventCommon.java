@@ -5,6 +5,8 @@ import com.syming.castlevaniacraft.entity.mobs.boss.EntityDracula;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityDraculaHead;
 import com.syming.castlevaniacraft.entity.mobs.boss.EntityGrimReaper;
 import com.syming.castlevaniacraft.world.gen.structure.cave.RusalkaCave;
+import com.syming.castlevaniacraft.world.gen.structure.draculcastle.MapGenDraculaCastle;
+import com.syming.castlevaniacraft.world.gen.structure.draculcastle.StructureDraculaCastle;
 import lumien.bloodmoon.Bloodmoon;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -89,6 +92,13 @@ public class EventCommon {
         IAttributeInstance instance = entity.getEntityAttribute(attribute);
         if (instance != null && instance.getBaseValue() != value) {
             instance.setBaseValue(value);
+        }
+    }
+
+    @SubscribeEvent
+    public void onMapGen(InitMapGenEvent event) {
+        if (event.getType() == InitMapGenEvent.EventType.SCATTERED_FEATURE) {
+            event.setNewGen(new MapGenDraculaCastle());
         }
     }
 }

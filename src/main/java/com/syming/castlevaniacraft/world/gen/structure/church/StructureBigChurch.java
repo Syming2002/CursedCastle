@@ -1153,30 +1153,30 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
         // Foundation
 
         for (int i = 1; i < 12; ++i) {
-            for (int k = -3; k < 4; ++k) {
+            for (int k = 0; k < 7; ++k) {
                 this.clearCurrentPositionBlocksUpwards(world, i, 42, k, structureBoundingBoxIn);
                 this.replaceAirAndLiquidDownwards(world, cobblestone, i, -1, k, structureBoundingBoxIn);
             }
         }
 
         for (int i = 4; i < 9; ++i) {
-            for (int k = 4; k < 34; ++k) {
+            for (int k = 7; k < 37; ++k) {
                 this.clearCurrentPositionBlocksUpwards(world, i, 42, k, structureBoundingBoxIn);
                 this.replaceAirAndLiquidDownwards(world, cobblestone, i, -1, k, structureBoundingBoxIn);
             }
         }
 
-        for (int k = 8; k < 29; ++k) {
+        for (int k = 11; k < 32; ++k) {
             this.clearCurrentPositionBlocksUpwards(world, 1, 42, k, structureBoundingBoxIn);
             this.replaceAirAndLiquidDownwards(world, cobblestone, 1, -1, k, structureBoundingBoxIn);
         }
 
-        for (int k = 7; k < 31; ++k) {
+        for (int k = 10; k < 34; ++k) {
             this.clearCurrentPositionBlocksUpwards(world, 2, 42, k, structureBoundingBoxIn);
             this.replaceAirAndLiquidDownwards(world, cobblestone, 2, -1, k, structureBoundingBoxIn);
         }
 
-        for (int k = 6; k < 33; ++k) {
+        for (int k = 9; k < 36; ++k) {
             this.clearCurrentPositionBlocksUpwards(world, 3, 42, k, structureBoundingBoxIn);
             this.replaceAirAndLiquidDownwards(world, cobblestone, 3, -1, k, structureBoundingBoxIn);
         }
@@ -1184,16 +1184,16 @@ public class StructureBigChurch extends StructureVillagePieces.Village {
 
 
 
-        for (int k = 6; k < 33; ++k) {
+        for (int k = 9; k < 36; ++k) {
             this.clearCurrentPositionBlocksUpwards(world, 9, 42, k, structureBoundingBoxIn);
             this.replaceAirAndLiquidDownwards(world, cobblestone, 9, -1, k, structureBoundingBoxIn);
         }
-        for (int k = 7; k < 31; ++k) {
+        for (int k = 10; k < 34; ++k) {
             this.clearCurrentPositionBlocksUpwards(world, 10, 42, k, structureBoundingBoxIn);
             this.replaceAirAndLiquidDownwards(world, cobblestone, 10, -1, k, structureBoundingBoxIn);
         }
 
-        for (int k = 8; k < 29; ++k) {
+        for (int k = 11; k < 32; ++k) {
             this.clearCurrentPositionBlocksUpwards(world, 11, 42, k, structureBoundingBoxIn);
             this.replaceAirAndLiquidDownwards(world, cobblestone, 11, -1, k, structureBoundingBoxIn);
         }

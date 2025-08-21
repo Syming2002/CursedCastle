@@ -72,10 +72,10 @@ dependencies {
 //    implementation rfg.deobf("curse.maven:redstone-flux-270789:2920436")
 
     // Atlas Lib
-    implementation rfg.deobf("curse.maven:atlas-lib-463826:5877784")
+//    implementation rfg.deobf("curse.maven:atlas-lib-463826:5877784")
 
     // Deeper Depths
-    implementation rfg.deobf("curse.maven:deeper-depths-1101129:6447597")
+//    implementation rfg.deobf("curse.maven:deeper-depths-1101129:6447597")
 
     // Village Names
     implementation rfg.deobf("curse.maven:village-names-259230:5886882")

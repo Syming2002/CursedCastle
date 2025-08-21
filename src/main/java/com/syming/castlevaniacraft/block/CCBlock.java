@@ -21,10 +21,10 @@ public class CCBlock {
     public static final Block DRACULA_CASTLE_STONE = new BlockDraculaCastleStone("dracula_castle_stone");
     public static final Block DRACULA_CASTLE_COBBLESTONE = new BlockDraculaCastleCobblestone("dracula_castle_cobblestone");
     public static final Block DRACULA_CASTLE_STONE_BRICK = new BlockDraculaCastleStoneBrick("dracula_castle_stonebrick");
-    public static final BlockStairs DRACULA_CASTLE_STONE_STAIRS = new BlockDraculaCastleStoneStairs("dracula_castle_stonebrick_stairs", CCBlock.DRACULA_CASTLE_STONE_BRICK.getDefaultState().withProperty(BlockDraculaCastleStoneBrick.VARIANT, BlockDraculaCastleStoneBrick.EnumType.DEFAULT));
-    public static final BlockSlab DRACULA_CASTLE_STONE_SLAB_DOUBLE = new BlockDoubleDraculaCastleStoneSlab("dracula_castle_stonebrick_slab_double");
-    public static final BlockSlab DRACULA_CASTLE_STONE_SLAB_HALF = new BlockHalfDraculaCastleStoneSlab("dracula_castle_stonebrick_slab_half");
-    public static final BlockDraculaCastleStoneWall DRACULA_CASTLE_STONE_WALL = new BlockDraculaCastleStoneWall("dracula_castle_stonebrick_wall", CCBlock.DRACULA_CASTLE_STONE_BRICK);
+    public static final BlockStairs DRACULA_CASTLE_STONEBRICK_STAIRS = new BlockDraculaCastleStoneStairs("dracula_castle_stonebrick_stairs", CCBlock.DRACULA_CASTLE_STONE_BRICK.getDefaultState().withProperty(BlockDraculaCastleStoneBrick.VARIANT, BlockDraculaCastleStoneBrick.EnumType.DEFAULT));
+    public static final BlockSlab DRACULA_CASTLE_STONEBRICK_SLAB_DOUBLE = new BlockDoubleDraculaCastleStoneSlab("dracula_castle_stonebrick_slab_double");
+    public static final BlockSlab DRACULA_CASTLE_STONEBRICK_SLAB_HALF = new BlockHalfDraculaCastleStoneSlab("dracula_castle_stonebrick_slab_half");
+    public static final BlockDraculaCastleStoneWall DRACULA_CASTLE_STONEBRICK_WALL = new BlockDraculaCastleStoneWall("dracula_castle_stonebrick_wall", CCBlock.DRACULA_CASTLE_STONE_BRICK);
 
     // Fluids
 

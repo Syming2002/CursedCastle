@@ -1,6 +1,6 @@
 package com.syming.castlevaniacraft.item;
 
-import com.syming.castlevaniacraft.item.armors.*;
+//import com.syming.castlevaniacraft.item.armors.*;
 import com.syming.castlevaniacraft.item.projectiles.ItemAnimScytheProjectile;
 import com.syming.castlevaniacraft.item.projectiles.ItemScytheProjectile;
 import com.syming.castlevaniacraft.item.projectiles.ItemThrowingBone;
@@ -191,25 +191,25 @@ public class CCItem {
     public static Item fireBook = new ItemFireBook("fire_book");
 
     // Armors
-    public static Item draculaTunic = new ItemDraculaTunicArmor("dracula_tunic", DRACULA_TUNIC_ARMOR, 1, EntityEquipmentSlot.CHEST);
-
-    public static Item justeBelmontChest = new ItemJusteBelmontArmor("juste_belmont_chest", JUSTE_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
-    public static Item justeBelmontLeggings = new ItemJusteBelmontArmor("juste_belmont_leggings", JUSTE_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
-    public static Item justeBelmontBoots = new ItemJusteBelmontArmor("juste_belmont_boots", JUSTE_BELMONT_ARMOR, 2, EntityEquipmentSlot.FEET);
-
-    public static Item leonBelmontChest = new ItemLeonBelmontArmor("leon_belmont_chest", LEON_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
-    public static Item leonBelmontLeggings = new ItemLeonBelmontArmor("leon_belmont_leggings", LEON_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
-    public static Item leonBelmontBoots = new ItemLeonBelmontArmor("leon_belmont_boots", LEON_BELMONT_ARMOR, 1, EntityEquipmentSlot.FEET);
-
-    public static Item olroxSuit = new ItemOlroxSuitArmor("olrox_suit", OLROX_SUIT_ARMOR, 1, EntityEquipmentSlot.CHEST);
-
-    public static Item richterBelmontChest = new ItemRichterBelmontArmor("richter_belmont_chest", RICHTER_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
-    public static Item richterBelmontLeggings = new ItemRichterBelmontArmor("richter_belmont_leggings", RICHTER_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
-    public static Item richterBelmontBoots = new ItemRichterBelmontArmor("richter_belmont_boots", RICHTER_BELMONT_ARMOR, 2, EntityEquipmentSlot.FEET);
-
-    public static Item simonBelmontChest = new ItemSimonBelmontArmor("simon_belmont_chest", SIMON_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
-    public static Item simonBelmontLeggings = new ItemSimonBelmontArmor("simon_belmont_leggings", SIMON_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
-    public static Item simonBelmontBoots = new ItemSimonBelmontArmor("simon_belmont_boots", SIMON_BELMONT_ARMOR, 1, EntityEquipmentSlot.FEET);
+//    public static Item draculaTunic = new ItemDraculaTunicArmor("dracula_tunic", DRACULA_TUNIC_ARMOR, 1, EntityEquipmentSlot.CHEST);
+//
+//    public static Item justeBelmontChest = new ItemJusteBelmontArmor("juste_belmont_chest", JUSTE_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
+//    public static Item justeBelmontLeggings = new ItemJusteBelmontArmor("juste_belmont_leggings", JUSTE_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
+//    public static Item justeBelmontBoots = new ItemJusteBelmontArmor("juste_belmont_boots", JUSTE_BELMONT_ARMOR, 2, EntityEquipmentSlot.FEET);
+//
+//    public static Item leonBelmontChest = new ItemLeonBelmontArmor("leon_belmont_chest", LEON_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
+//    public static Item leonBelmontLeggings = new ItemLeonBelmontArmor("leon_belmont_leggings", LEON_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
+//    public static Item leonBelmontBoots = new ItemLeonBelmontArmor("leon_belmont_boots", LEON_BELMONT_ARMOR, 1, EntityEquipmentSlot.FEET);
+//
+//    public static Item olroxSuit = new ItemOlroxSuitArmor("olrox_suit", OLROX_SUIT_ARMOR, 1, EntityEquipmentSlot.CHEST);
+//
+//    public static Item richterBelmontChest = new ItemRichterBelmontArmor("richter_belmont_chest", RICHTER_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
+//    public static Item richterBelmontLeggings = new ItemRichterBelmontArmor("richter_belmont_leggings", RICHTER_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
+//    public static Item richterBelmontBoots = new ItemRichterBelmontArmor("richter_belmont_boots", RICHTER_BELMONT_ARMOR, 2, EntityEquipmentSlot.FEET);
+//
+//    public static Item simonBelmontChest = new ItemSimonBelmontArmor("simon_belmont_chest", SIMON_BELMONT_ARMOR, 1, EntityEquipmentSlot.CHEST);
+//    public static Item simonBelmontLeggings = new ItemSimonBelmontArmor("simon_belmont_leggings", SIMON_BELMONT_ARMOR, 2, EntityEquipmentSlot.LEGS);
+//    public static Item simonBelmontBoots = new ItemSimonBelmontArmor("simon_belmont_boots", SIMON_BELMONT_ARMOR, 1, EntityEquipmentSlot.FEET);
 
 
     // Misc Items

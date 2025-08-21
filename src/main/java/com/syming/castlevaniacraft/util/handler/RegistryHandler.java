@@ -171,6 +171,8 @@ public class RegistryHandler {
         CCFluid.registerFluids();
         CCNetworking.registerSimpleNetworking();
 
+        WorldGenInit.initStructure();
+
         CCLog.init(event.getModLog());
 
         if (ModLoadedUtils.Forestry.isModLoaded()) {

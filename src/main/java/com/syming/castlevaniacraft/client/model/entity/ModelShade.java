@@ -122,7 +122,7 @@ public abstract class ModelShade extends CCModel {
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
         this.head.rotateAngleX = headPitch * 0.017453292F;
 
-        if (shade.getAnimation() != EntityPoisonShade.REPULSE_ATTACK_ANIMATION) {
+        if (shade.getAnimation() != EntityShade.REPULSE_ATTACK_ANIMATION) {
             float animationSpeed = (float) (2 * Math.PI / 40);
             float wave = (float) Math.sin(ageInTicks * animationSpeed);
             float waveAmount = (float) Math.toRadians(5);

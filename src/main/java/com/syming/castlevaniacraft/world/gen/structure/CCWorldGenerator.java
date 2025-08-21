@@ -34,13 +34,5 @@ public class CCWorldGenerator implements IWorldGenerator {
             RUSALKA_CAVE.generate(world, random, pos);
             System.out.println("A Rusalka Cave has spawn at " + x + ", " + z);
         }
-
-        if (random.nextInt(1500) == 0) {
-            BlockPos pos = new BlockPos(x, 64, z);
-
-//            StructureDraculaCastle.(world, pos, "dracula_castle_entrance", Rotation.NONE);
-
-            System.out.println("A Dracula Castle has spawn at " + x + ", " + z);
-        }
     }
 }
