@@ -11,7 +11,9 @@ import com.syming.cursedcastle.world.entity.client.dracula.DraculaRenderer;
 import com.syming.cursedcastle.world.entity.client.icespike.IceSpikeRender;
 import com.syming.cursedcastle.world.entity.client.shade.FrozenShadeRenderer;
 import com.syming.cursedcastle.world.entity.client.vampirebat.VampireBatRenderer;
+import com.syming.cursedcastle.world.entity.villager.CCVillager;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.api.distmarker.Dist;
@@ -40,6 +42,7 @@ public class CursedCastleMod {
         CCEntity.register(modEventBus);
         CCItem.register(modEventBus);
         CCSound.register(modEventBus);
+        CCVillager.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -64,6 +67,7 @@ public class CursedCastleMod {
                 EntityRenderers.register(CCEntity.BLOOD_SKELETON.get(), BloodSkeletonRenderer::new);
                 EntityRenderers.register(CCEntity.DRACULA.get(), DraculaRenderer::new);
                 EntityRenderers.register(CCEntity.FROZEN_SHADE.get(), FrozenShadeRenderer::new);
+                EntityRenderers.register(CCEntity.ICE_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.ICE_SPIKE.get(), IceSpikeRender::new);
                 EntityRenderers.register(CCEntity.VAMPIRE_BAT.get(), VampireBatRenderer::new);
 

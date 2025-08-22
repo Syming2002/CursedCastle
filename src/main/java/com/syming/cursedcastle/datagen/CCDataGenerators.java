@@ -31,6 +31,8 @@ public class CCDataGenerators {
         CCDamageSource.register(registrySetBuilder);
         DatapackBuiltinEntriesProvider datapackBuiltinEntriesProvider = new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, registrySetBuilder, Set.of(CursedCastleMod.MOD_ID));
         generator.addProvider(event.includeServer(), datapackBuiltinEntriesProvider);
+
+        generator.addProvider(event.includeServer(), new CCPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
     }
 
 }

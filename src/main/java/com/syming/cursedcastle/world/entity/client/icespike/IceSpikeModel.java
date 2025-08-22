@@ -3,14 +3,19 @@ package com.syming.cursedcastle.world.entity.client.icespike;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.world.entity.magic.IceSpikeEntity;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.SkullModelBase;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec3;
 
-public class IceSpikeModel extends SkullModelBase {
+public class IceSpikeModel extends EntityModel<IceSpikeEntity> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(CursedCastleMod.MOD_ID, "ice_spike_layer"), "main");
     private final ModelPart iceSpike;
@@ -29,7 +34,7 @@ public class IceSpikeModel extends SkullModelBase {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition iceSpike = partdefinition.addOrReplaceChild("iceSpike", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 3.75F));
+        PartDefinition iceSpike = partdefinition.addOrReplaceChild("iceSpike", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
         PartDefinition bottomIceSpike = iceSpike.addOrReplaceChild("bottomIceSpike", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -2.0F, -3.5F, 4.0F, 4.0F, 7.0F, new CubeDeformation(-1.25F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -41,13 +46,13 @@ public class IceSpikeModel extends SkullModelBase {
     }
 
     @Override
-    public void setupAnim(float pMouthAnimation, float pYRot, float pXRot) {
-        this.iceSpike.yRot = pYRot * ((float) Math.PI / 180.0F);
-        this.iceSpike.xRot = pXRot * ((float) Math.PI / 180.0F);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        this.iceSpike.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        this.iceSpike.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+    public void setupAnim(IceSpikeEntity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+        this.iceSpike.yRot = (pEntity.getYRot() + 180.0F) * ((float)Math.PI / 180F);
+        this.iceSpike.xRot = pEntity.getXRot() * ((float)Math.PI / 180F);
     }
 }

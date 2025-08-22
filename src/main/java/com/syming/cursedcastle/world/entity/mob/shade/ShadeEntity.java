@@ -1,6 +1,7 @@
 package com.syming.cursedcastle.world.entity.mob.shade;
 
 import com.github.alexthe666.citadel.animation.Animation;
+import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -94,15 +95,18 @@ public abstract class ShadeEntity extends FlyingMob implements IAnimatedEntity, 
         }
 
         if (this.repulseAnimationCooldown > 0) this.repulseAnimationCooldown--;
+
+        AnimationHandler.INSTANCE.updateAnimations(this);
+
         shouldDespawnInPeaceful();
     }
 
     @Override
     public float getEyeHeight(Pose pPose) {
         if (isRepulseAnimation()) {
-            return EntityDimensions.scalable(0.5F, 1.875F).height * 0.75F;
+            return getBbHeight() * 0.75F;
         } else {
-            return 1.875F;
+            return 1.62F;
         }
     }
 

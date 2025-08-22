@@ -29,7 +29,7 @@ public class IceSpikeRender extends EntityRenderer<IceSpikeEntity> {
         float f = Mth.rotLerp(pPartialTick, pEntity.yRotO, pEntity.getYRot());
         float f1 = Mth.lerp(pPartialTick, pEntity.xRotO, pEntity.getXRot());
         VertexConsumer vertexconsumer = pBuffer.getBuffer(this.iceSpikeModel.renderType(getTextureLocation(pEntity)));
-        this.iceSpikeModel.setupAnim(0.0F, f, f1);
+        this.iceSpikeModel.setupAnim(pEntity, 0.0F, 0.0F, pPartialTick, f, f1);
         this.iceSpikeModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         pPoseStack.popPose();
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);

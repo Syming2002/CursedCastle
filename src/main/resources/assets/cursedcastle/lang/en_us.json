@@ -3,6 +3,9 @@
   "block.cursedcastle.dracula_castle_stone": "Dracula's Castle Stone",
   "block.cursedcastle.dracula_castle_stone_bricks": "Dracula's Castle Stone Bricks",
 
+  "creativetab.cursedcastle_tab": "Cursed Castle",
+
+
   "entity.cursedcastle.blood_skeleton": "Blood Skeleton",
   "entity.cursedcastle.dracula": "Dracula",
   "entity.cursedcastle.frozen_shade": "Frozen Shade",
@@ -26,6 +29,15 @@
   "entity.cursedcastle.netherite_throwing_axe": "Netherite Throwing Axe",
 
   "entity.cursedcastle.holy_water": "Holy Water",
+
+  "entity.minecraft.villager.cursedcastle.high_priest": "High Priest",
+
+  "holy_cross.damage" : "Deals %s damage to other mob",
+  "holy_cross.damageArthropods": "Deals %s damage to arthropods mob",
+  "holy_cross.damageSharpness": "Deals %s damage",
+  "holy_cross.damageSmite": "Deals %s damage to undead mob",
+  "holy_cross.knockback": "Deals %s knockback",
+  "holy_cross.fireAspect": "Deals %s seconds of fire to mob",
 
   "item.cursedcastle.blood_skeleton_spawn_egg": "Blood Skeleton Spawn Egg",
   "item.cursedcastle.dracula_spawn_egg": "Dracula Spawn Egg",
@@ -79,14 +91,6 @@
   "item.cursedcastle.anim_iron_holy_cross": "Anim Iron Holy Cross",
   "item.cursedcastle.anim_golden_holy_cross": "Anim Golden Holy Cross",
   "item.cursedcastle.anim_diamond_holy_cross": "Anim Diamond Holy Cross",
-  "item.cursedcastle.anim_netherite_holy_cross": "Anim Netherite Holy Cross",
+  "item.cursedcastle.anim_netherite_holy_cross": "Anim Netherite Holy Cross"
 
-  "holy_cross.damage" : "Deals %s damage to other mob",
-  "holy_cross.damageArthropods": "Deals %s damage to arthropods mob",
-  "holy_cross.damageSharpness": "Deals %s damage",
-  "holy_cross.damageSmite": "Deals %s damage to undead mob",
-  "holy_cross.knockback": "Deals %s knockback",
-  "holy_cross.fireAspect": "Deals %s seconds of fire to mob",
-
-  "creativetab.cursedcastle_tab": "Cursed Castle"
 }
