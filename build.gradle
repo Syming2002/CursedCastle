@@ -86,6 +86,9 @@ minecraft {
         client {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
 
         server {
@@ -145,6 +148,15 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    maven {
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
+    }
+
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
 }
 
 dependencies {
@@ -172,6 +184,24 @@ dependencies {
     // at runtime, use the full JEI jar for Forge
     runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
 
+    // JER
+    implementation fg.deobf("curse.maven:just-enough-resources-jer-${just_enough_resources_jer_id}")
+
+
+
+    // EMI
+//    compileOnly fg.deobf("dev.emi:emi-forge:${emi_version}:api")
+//    runtimeOnly fg.deobf("dev.emi:emi-forge:${emi_version}")
+
+    // Kotlin For Forge
+//    implementation fg.deobf("curse.maven:kotlin-for-forge-${kotlin_for_forge_id}")
+
+
+    // EMI Loot
+//    implementation fg.deobf("curse.maven:fzzy-config-${fzzy_config_id}")
+//    implementation fg.deobf("curse.maven:emi-loot-${emi_loot_id}")
+
+
     implementation fg.deobf("curse.maven:the-one-probe-245211:4629624")
 
     // Apply Mixin AP
@@ -184,10 +214,20 @@ dependencies {
     implementation fg.deobf("curse.maven:corgilib-${corgilib_id}")
 //    runtimeOnly(fg.deobf("curse.maven:data-anchor-${data_anchor_id}"))
     implementation fg.deobf("curse.maven:enhanced-celestials-${enhanced_celestials_id}")
+    implementation fg.deobf("curse.maven:productivebees-${productivebees_id}")
 
+    // Torcherino Unofficial
+//    implementation fg.deobf("curse.maven:torcherino-unofficial-${torcherino_unofficial_id}")
+
+
+    // Curios
+    // Compile against only the API artifact
+    compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
+    // Use the full Curios API jar at runtime
+    runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
 
     // Xaeros's Minimap
-    implementation fg.deobf("curse.maven:xaeros-minimap-263420:6515024")
+    implementation fg.deobf("curse.maven:xaeros-minimap-263420:6778028")
 
 
 

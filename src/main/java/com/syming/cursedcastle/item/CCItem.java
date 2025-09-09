@@ -1,22 +1,30 @@
 package com.syming.cursedcastle.item;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.item.soul.Soul;
+import com.syming.cursedcastle.item.soul.SoulBulletItem;
+import com.syming.cursedcastle.item.soul.SoulGuardianItem;
 import com.syming.cursedcastle.item.subweapon.*;
+import com.syming.cursedcastle.item.whip.FlameWhipItem;
 import com.syming.cursedcastle.item.whip.LeatherWhipItem;
 import com.syming.cursedcastle.item.whip.UndeadKillerWhipItem;
-import com.syming.cursedcastle.item.whip.vampirekiller.BulletTipVampireKillerWhipItem;
-import com.syming.cursedcastle.item.whip.vampirekiller.CrushingStoneVampireKillerWhipItem;
+import com.syming.cursedcastle.item.whip.vampirekiller.VampireKillerBulletTipWhipItem;
+import com.syming.cursedcastle.item.whip.vampirekiller.VampireKillerCrushingStoneTipWhipItem;
+import com.syming.cursedcastle.item.whip.vampirekiller.VampireKillerRedStoneTipWhipItem;
 import com.syming.cursedcastle.item.whip.vampirekiller.VampireKillerWhipItem;
-import com.syming.cursedcastle.item.whip.vampirekiller.attachment.BulletTipItem;
-import com.syming.cursedcastle.item.whip.vampirekiller.attachment.CrushingStoneItem;
-import com.syming.cursedcastle.world.entity.CCEntity;
+import com.syming.cursedcastle.item.whip.vampirekiller.tip.BulletTipItem;
+import com.syming.cursedcastle.item.whip.vampirekiller.tip.CrushingStoneTipItem;
+import com.syming.cursedcastle.item.whip.vampirekiller.tip.RedStoneTipItem;
+import com.syming.cursedcastle.entity.CCEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class CCItem {
 
@@ -25,7 +33,7 @@ public class CCItem {
     // Whips
 
     public static final RegistryObject<Item> FLAME_WHIP = ITEMS.register("flame_whip",
-            () -> new LeatherWhipItem(
+            () -> new FlameWhipItem(
                     new Item.Properties()
                             .stacksTo(1)
                             .durability(250),
@@ -61,8 +69,8 @@ public class CCItem {
                     -3.5F,
                     8.0F));
 
-    public static final RegistryObject<Item> CRUSHING_STONE_VAMPIRE_KILLER_WHIP = ITEMS.register("crushing_stone_vampire_killer_whip",
-            () -> new CrushingStoneVampireKillerWhipItem(
+    public static final RegistryObject<Item> VAMPIRE_KILLER_CRUSHING_STONE_TIP_WHIP = ITEMS.register("vampire_killer_crushing_stone_tip_whip",
+            () -> new VampireKillerCrushingStoneTipWhipItem(
                     new Item.Properties()
                             .stacksTo(1)
                             .durability(900)
@@ -72,8 +80,8 @@ public class CCItem {
                     8.0F,
                     5.0F));
 
-    public static final RegistryObject<Item> BULLET_TIP_VAMPIRE_KILLER_WHIP = ITEMS.register("bullet_tip_vampire_killer_whip",
-            () -> new BulletTipVampireKillerWhipItem(
+    public static final RegistryObject<Item> VAMPIRE_KILLER_BULLET_TIP_WHIP = ITEMS.register("vampire_killer_bullet_tip_whip",
+            () -> new VampireKillerBulletTipWhipItem(
                     new Item.Properties()
                             .stacksTo(1)
                             .durability(950)
@@ -82,16 +90,30 @@ public class CCItem {
                     -3.5F,
                     8.0F));
 
-
-    // Attachment Items
-
-    public static final RegistryObject<Item> CRUSHING_STONE = ITEMS.register("crushing_stone",
-            () -> new CrushingStoneItem(
+    public static final RegistryObject<Item> VAMPIRE_KILLER_RED_STONE_TIP_WHIP = ITEMS.register("vampire_killer_red_stone_tip_whip",
+            () -> new VampireKillerRedStoneTipWhipItem(
                     new Item.Properties()
-                            .stacksTo(1)));
+                            .stacksTo(1)
+                            .durability(1150),
+                    10,
+                    -3.5F,
+                    8.0F));
+
+
+    // Tip Items
 
     public static final RegistryObject<Item> BULLET_TIP = ITEMS.register("bullet_tip",
             () -> new BulletTipItem(
+                    new Item.Properties()
+                            .stacksTo(1)));
+
+    public static final RegistryObject<Item> CRUSHING_STONE_TIP = ITEMS.register("crushing_stone_tip",
+            () -> new CrushingStoneTipItem(
+                    new Item.Properties()
+                            .stacksTo(1)));
+
+    public static final RegistryObject<Item> RED_STONE_TIP = ITEMS.register("red_stone_tip",
+            () -> new RedStoneTipItem(
                     new Item.Properties()
                             .stacksTo(1)));
 
@@ -247,6 +269,15 @@ public class CCItem {
     public static final RegistryObject<Item> ANIM_NETHERITE_THROWING_AXE = ITEMS.register("anim_netherite_throwing_axe",
             () -> new Item(new Item.Properties()));
 
+    // Souls
+
+    public static final RegistryObject<SoulGuardianItem> BAT_SOUL = ITEMS.register("bat_soul",
+            () -> new SoulGuardianItem(Soul.BAT, new Item.Properties().stacksTo(9).defaultDurability(0).rarity(Rarity.UNCOMMON)));
+
+    public static final RegistryObject<SoulBulletItem> ZOMBIE_SOUL = ITEMS.register("zombie_soul",
+            () -> new SoulBulletItem(Soul.ZOMBIE, new Item.Properties().stacksTo(9).defaultDurability(0).rarity(Rarity.UNCOMMON)));
+
+
     // Spawn Eggs
 
     public static final RegistryObject<Item> BLOOD_SKELETON_SPAWN_EGG = ITEMS.register("blood_skeleton_spawn_egg",
@@ -263,11 +294,39 @@ public class CCItem {
                     0xBF3030,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> FAMILIAR_BAT_SPAWN_EGG = ITEMS.register("familiar_bat_spawn_egg",
+            () -> new ForgeSpawnEggItem(
+                    CCEntity.FAMILIAR_BAT,
+                    0x4C3E30,
+                    0x5A84FF,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> FROZEN_SHADE_SPAWN_EGG = ITEMS.register("frozen_shade_spawn_egg",
             () -> new ForgeSpawnEggItem(
                     CCEntity.FROZEN_SHADE,
                     0x0350B1,
                     0x1092F9,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> HEAT_SHADE_SPAWN_EGG = ITEMS.register("heat_shade_spawn_egg",
+            () -> new ForgeSpawnEggItem(
+                    CCEntity.HEAT_SHADE,
+                    0xA10C05,
+                    0xF01504,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> POISON_SHADE_SPAWN_EGG = ITEMS.register("poison_shade_spawn_egg",
+            () -> new ForgeSpawnEggItem(
+                    CCEntity.POISON_SHADE,
+                    0x45F248,
+                    0x319E3D,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> THUNDER_SHADE_SPAWN_EGG = ITEMS.register("thunder_shade_spawn_egg",
+            () -> new ForgeSpawnEggItem(
+                    CCEntity.THUNDER_SHADE,
+                    0xFFFF75,
+                    0xB3B334,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> VAMPIRE_BAT_SPAWN_EGG = ITEMS.register("vampire_bat_spawn_egg",

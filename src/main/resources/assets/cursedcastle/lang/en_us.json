@@ -8,8 +8,13 @@
 
   "entity.cursedcastle.blood_skeleton": "Blood Skeleton",
   "entity.cursedcastle.dracula": "Dracula",
+  "entity.cursedcastle.familiar_bat": "Familiar Bat",
+  "entity.cursedcastle.friendly_zombie": "Friendly Zombie",
   "entity.cursedcastle.frozen_shade": "Frozen Shade",
+  "entity.cursedcastle.heat_shade": "Heat Shade",
   "entity.cursedcastle.ice_spike": "Ice Spike",
+  "entity.cursedcastle.poison_shade": "Poison Shade",
+  "entity.cursedcastle.thunder_shade": "Thunder Shade",
   "entity.cursedcastle.vampire_bat": "Vampire Bat",
 
   "entity.cursedcastle.holy_bible": "Holy Bible",
@@ -42,6 +47,9 @@
   "item.cursedcastle.blood_skeleton_spawn_egg": "Blood Skeleton Spawn Egg",
   "item.cursedcastle.dracula_spawn_egg": "Dracula Spawn Egg",
   "item.cursedcastle.frozen_shade_spawn_egg": "Frozen Shade Spawn Egg",
+  "item.cursedcastle.heat_shade_spawn_egg": "Heat Shade Spawn Egg",
+  "item.cursedcastle.poison_shade_spawn_egg": "Poison Shade Spawn Egg",
+  "item.cursedcastle.thunder_shade_spawn_egg": "Thunder Shade Spawn Egg",
   "item.cursedcastle.vampire_bat_spawn_egg": "Vampire Bat Spawn Egg",
 
   "item.cursedcastle.bullet_tip_vampire_killer_whip": "Bullet Tip Vampire Killer Whip",
@@ -91,6 +99,9 @@
   "item.cursedcastle.anim_iron_holy_cross": "Anim Iron Holy Cross",
   "item.cursedcastle.anim_golden_holy_cross": "Anim Golden Holy Cross",
   "item.cursedcastle.anim_diamond_holy_cross": "Anim Diamond Holy Cross",
-  "item.cursedcastle.anim_netherite_holy_cross": "Anim Netherite Holy Cross"
+  "item.cursedcastle.anim_netherite_holy_cross": "Anim Netherite Holy Cross",
+
+  "item.cursedcastle.bat_soul": "Bat Soul",
+  "item.cursedcastle.zombie_soul": "Zombie Soul"
 
 }

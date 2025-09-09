@@ -1,6 +1,6 @@
 package com.syming.cursedcastle.item.subweapon;
 
-import com.syming.cursedcastle.world.entity.projectile.subweapon.HolyWaterEntity;
+import com.syming.cursedcastle.entity.projectile.subweapon.HolyWaterEntity;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;

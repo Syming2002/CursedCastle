@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures":
   {
-    "layer0": "cursedcastle:item/bullet_tip"
+    "layer0": "cursedcastle:item/whip/tip/bullet_tip"
   }
 }

@@ -1,18 +1,29 @@
 package com.syming.cursedcastle.client.event;
 
 import com.syming.cursedcastle.CursedCastleMod;
-import com.syming.cursedcastle.world.entity.client.dagger.DaggerModel;
-import com.syming.cursedcastle.world.entity.client.icespike.IceSpikeModel;
-import net.minecraftforge.client.event.EntityRenderersEvent;
+import com.syming.cursedcastle.client.CCKeybinding;
+import com.syming.cursedcastle.network.CCPacketHandler;
+import com.syming.cursedcastle.network.CCSpawnFamiliarBat;
+import com.syming.cursedcastle.network.CCSpawnFriendlyZombie;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = CursedCastleMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = CursedCastleMod.MOD_ID, value = Dist.CLIENT)
 public class CCClientEvent {
 
     @SubscribeEvent
-    public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(DaggerModel.LAYER_LOCATION, DaggerModel::createBodyLayer);
-        event.registerLayerDefinition(IceSpikeModel.LAYER_LOCATION, IceSpikeModel::createBodyLayer);
+    public static void onKeybindingPressed(TickEvent.ClientTickEvent event) {
+        if (event.phase == TickEvent.Phase.END) {
+            while (CCKeybinding.INSTANCE.BULLET_SOUL_KEY.consumeClick()) {
+                CCPacketHandler.sendToServer(new CCSpawnFriendlyZombie());
+            }
+
+            while (CCKeybinding.INSTANCE.GUARDIAN_SOUL_KEY.consumeClick()) {
+                CCPacketHandler.sendToServer(new CCSpawnFamiliarBat());
+            }
+        }
     }
+
 }

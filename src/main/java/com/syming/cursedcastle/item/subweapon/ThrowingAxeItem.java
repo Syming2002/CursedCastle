@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.item.subweapon;
 
 import com.syming.cursedcastle.sound.CCSound;
-import com.syming.cursedcastle.world.entity.projectile.subweapon.ThrowingAxeEntity;
+import com.syming.cursedcastle.entity.projectile.subweapon.ThrowingAxeEntity;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;

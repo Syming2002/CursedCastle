@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.network;
 
 import com.syming.cursedcastle.api.ISyncHurtMultipart;
-import com.syming.cursedcastle.world.entity.mob.boss.dracula.DraculaEntity;
+import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;

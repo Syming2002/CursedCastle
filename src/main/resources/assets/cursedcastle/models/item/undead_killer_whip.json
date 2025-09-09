@@ -2,7 +2,7 @@
   "parent": "item/handheld",
   "textures":
   {
-    "layer0": "cursedcastle:item/undead_killer_whip"
+    "layer0": "cursedcastle:item/whip/undead_killer_whip"
   },
   "display": {
     "thirdperson_righthand": {

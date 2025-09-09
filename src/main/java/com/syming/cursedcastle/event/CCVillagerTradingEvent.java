@@ -2,7 +2,7 @@ package com.syming.cursedcastle.event;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.item.CCItem;
-import com.syming.cursedcastle.world.entity.villager.CCVillager;
+import com.syming.cursedcastle.entity.villager.CCVillager;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;

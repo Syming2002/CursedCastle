@@ -20,14 +20,21 @@ public class CCCreativeModeTab {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(CCItem.LEATHER_WHIP.get()))
                     .title(Component.translatable("creativetab.cursedcastle_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
+                        // Whips
                         output.accept(CCItem.FLAME_WHIP.get());
                         output.accept(CCItem.LEATHER_WHIP.get());
                         output.accept(CCItem.UNDEAD_KILLER_WHIP.get());
                         output.accept(CCItem.VAMPIRE_KILLER_WHIP.get());
-                        output.accept(CCItem.CRUSHING_STONE_VAMPIRE_KILLER_WHIP.get());
-                        output.accept(CCItem.BULLET_TIP_VAMPIRE_KILLER_WHIP.get());
-                        output.accept(CCItem.CRUSHING_STONE.get());
+                        output.accept(CCItem.VAMPIRE_KILLER_CRUSHING_STONE_TIP_WHIP.get());
+                        output.accept(CCItem.VAMPIRE_KILLER_BULLET_TIP_WHIP.get());
+                        output.accept(CCItem.VAMPIRE_KILLER_RED_STONE_TIP_WHIP.get());
+
+                        // Whip Tips
                         output.accept(CCItem.BULLET_TIP.get());
+                        output.accept(CCItem.CRUSHING_STONE_TIP.get());
+                        output.accept(CCItem.RED_STONE_TIP.get());
+
+                        // Subweapons
                         output.accept(CCItem.WOODEN_DAGGER.get());
                         output.accept(CCItem.STONE_DAGGER.get());
                         output.accept(CCItem.IRON_DAGGER.get());
@@ -48,13 +55,25 @@ public class CCCreativeModeTab {
                         output.accept(CCItem.NETHERITE_HOLY_CROSS.get());
                         output.accept(CCItem.HOLY_BIBLE.get());
                         output.accept(CCItem.HOLY_WATER.get());
-                        output.accept(CCItem.BLOOD_SKELETON_SPAWN_EGG.get());
-                        output.accept(CCItem.DRACULA_SPAWN_EGG.get());
-                        output.accept(CCItem.FROZEN_SHADE_SPAWN_EGG.get());
-                        output.accept(CCItem.VAMPIRE_BAT_SPAWN_EGG.get());
+
+                        // Blocks
                         output.accept(CCBlock.DRACULA_CASTLE_COBBLESTONE.get());
                         output.accept(CCBlock.DRACULA_CASTLE_STONE.get());
                         output.accept(CCBlock.DRACULA_CASTLE_STONE_BRICKS.get());
+
+                        // Souls
+                        output.accept(CCItem.BAT_SOUL.get());
+                        output.accept(CCItem.ZOMBIE_SOUL.get());
+
+                        // Spawn Eggs
+                        output.accept(CCItem.BLOOD_SKELETON_SPAWN_EGG.get());
+                        output.accept(CCItem.DRACULA_SPAWN_EGG.get());
+                        output.accept(CCItem.FAMILIAR_BAT_SPAWN_EGG.get());
+                        output.accept(CCItem.FROZEN_SHADE_SPAWN_EGG.get());
+                        output.accept(CCItem.HEAT_SHADE_SPAWN_EGG.get());
+                        output.accept(CCItem.POISON_SHADE_SPAWN_EGG.get());
+                        output.accept(CCItem.THUNDER_SHADE_SPAWN_EGG.get());
+                        output.accept(CCItem.VAMPIRE_BAT_SPAWN_EGG.get());
                     })
                     .build());
 

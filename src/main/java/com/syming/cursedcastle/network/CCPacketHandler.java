@@ -34,6 +34,18 @@ public class CCPacketHandler {
                 .decoder(CCMessageHurtMultiPart::read)
                 .consumerMainThread(CCMessageHurtMultiPart.Handler::handle)
                 .add();
+
+        INSTANCE.messageBuilder(CCSpawnFriendlyZombie.class, id++)
+                .encoder(CCSpawnFriendlyZombie::encode)
+                .decoder(CCSpawnFriendlyZombie::decode)
+                .consumerMainThread(CCSpawnFriendlyZombie.Handler::handle)
+                .add();
+
+        INSTANCE.messageBuilder(CCSpawnFamiliarBat.class, id++)
+                .encoder(CCSpawnFamiliarBat::encode)
+                .decoder(CCSpawnFamiliarBat::decode)
+                .consumerMainThread(CCSpawnFamiliarBat.Handler::handle)
+                .add();
     }
 
     public static void sendToPlayer(Object message, ServerPlayer player) {

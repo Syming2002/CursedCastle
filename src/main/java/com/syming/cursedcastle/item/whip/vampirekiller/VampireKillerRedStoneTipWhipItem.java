@@ -1,0 +1,65 @@
+package com.syming.cursedcastle.item.whip.vampirekiller;
+
+import com.syming.cursedcastle.api.IElementalWeapon;
+import com.syming.cursedcastle.damagesource.CCDamageSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ForgeMod;
+
+import static net.minecraft.core.particles.ParticleTypes.FLAME;
+
+public class VampireKillerRedStoneTipWhipItem extends VampireKillerWhipItem implements IElementalWeapon {
+    public VampireKillerRedStoneTipWhipItem(Properties pProperties, int pAttackDamageModifier, float pAttackSpeedModifier, float pReachModifier) {
+        super(pProperties, pAttackDamageModifier, pAttackSpeedModifier, pReachModifier);
+    }
+
+
+    @Override
+    public DamageSource getElementalDamageSource(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        return CCDamageSource.source(attacker.level().registryAccess(), CCDamageSource.FIRE);
+    }
+
+    @Override
+    public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
+        pTarget.setSecondsOnFire(5);
+        getElementalDamageSource(pStack, pTarget, pAttacker);
+        return super.hurtEnemy(pStack, pTarget, pAttacker);
+    }
+
+    @Override
+    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+        super.onEntitySwing(stack, entity);
+
+        entity.level().playSound((Player) entity,
+                entity.getX(),
+                entity.getY(),
+                entity.getZ(),
+                SoundEvents.BLAZE_SHOOT,
+                SoundSource.MASTER,
+                1.0F, 0.5F);
+        if (entity.level().isClientSide()) {
+            Vec3 look = entity.getLookAngle();
+            float reach = (float) entity.getAttributeValue(ForgeMod.ENTITY_REACH.get());
+            double stepSize = 0.5D;
+            double maxSteps = reach / stepSize;
+
+            for (int i = 0; i <= maxSteps; i++) {
+                double factor = i * stepSize;
+                double spawnX = entity.getX() + look.x * factor;
+                double spawnY = entity.getY() + entity.getEyeHeight() + look.y * factor;
+                double spawnZ = entity.getZ() + look.z * factor;
+                entity.level().addParticle(FLAME, spawnX, spawnY, spawnZ, 0.0D, 0.0D, 0.0D);
+            }
+        }
+        return false;
+    }
+}

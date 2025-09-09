@@ -1,0 +1,30 @@
+{
+  "primaryColor": "#292929",
+  "secondaryColor": "#8D1D20",
+  "particleColor": "#8D1D20",
+  "description": "Bee that sucked out blood from dark flowers",
+  "beeTexture": "productivebees:textures/entity/bee/vampire/bee",
+  "createComb": true,
+  "flowerBlock": "minecraft:wither_rose",
+  "size:": 1.0,
+  "fireproof": true,
+  "draconic": true,
+  "withered": true,
+  "attributes": {
+    "temper": 3,
+    "endurance": 1,
+    "behavior": 1,
+    "productivity": 0,
+    "weather_tolerance": 2
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "productivebees"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "cursedcastle"
+    }
+  ]
+}

@@ -2,7 +2,7 @@ package com.syming.cursedcastle.item.subweapon;
 
 import com.syming.cursedcastle.sound.CCSound;
 import com.syming.cursedcastle.util.HolyCrossUtil;
-import com.syming.cursedcastle.world.entity.projectile.subweapon.HolyCrossEntity;
+import com.syming.cursedcastle.entity.projectile.subweapon.HolyCrossEntity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
