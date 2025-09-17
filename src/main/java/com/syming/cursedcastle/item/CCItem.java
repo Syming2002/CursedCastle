@@ -1,6 +1,7 @@
 package com.syming.cursedcastle.item;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.soul.SoulBulletItem;
 import com.syming.cursedcastle.item.soul.SoulGuardianItem;
@@ -8,17 +9,10 @@ import com.syming.cursedcastle.item.subweapon.*;
 import com.syming.cursedcastle.item.whip.FlameWhipItem;
 import com.syming.cursedcastle.item.whip.LeatherWhipItem;
 import com.syming.cursedcastle.item.whip.UndeadKillerWhipItem;
-import com.syming.cursedcastle.item.whip.vampirekiller.VampireKillerBulletTipWhipItem;
-import com.syming.cursedcastle.item.whip.vampirekiller.VampireKillerCrushingStoneTipWhipItem;
-import com.syming.cursedcastle.item.whip.vampirekiller.VampireKillerRedStoneTipWhipItem;
-import com.syming.cursedcastle.item.whip.vampirekiller.VampireKillerWhipItem;
-import com.syming.cursedcastle.item.whip.vampirekiller.tip.BulletTipItem;
-import com.syming.cursedcastle.item.whip.vampirekiller.tip.CrushingStoneTipItem;
-import com.syming.cursedcastle.item.whip.vampirekiller.tip.RedStoneTipItem;
+import com.syming.cursedcastle.item.whip.vampirekiller.*;
+import com.syming.cursedcastle.item.whip.vampirekiller.tip.*;
 import com.syming.cursedcastle.entity.CCEntity;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -94,7 +88,28 @@ public class CCItem {
             () -> new VampireKillerRedStoneTipWhipItem(
                     new Item.Properties()
                             .stacksTo(1)
-                            .durability(1150),
+                            .durability(1150)
+                            .craftRemainder(CCItem.VAMPIRE_KILLER_WHIP.get()),
+                    10,
+                    -3.5F,
+                    8.0F));
+
+    public static final RegistryObject<Item> VAMPIRE_KILLER_BLUE_STONE_TIP_WHIP = ITEMS.register("vampire_killer_blue_stone_tip_whip",
+            () -> new VampireKillerBlueStoneTipWhipItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(1150)
+                            .craftRemainder(CCItem.VAMPIRE_KILLER_WHIP.get()),
+                    10,
+                    -3.5F,
+                    8.0F));
+
+    public static final RegistryObject<Item> VAMPIRE_KILLER_GREEN_STONE_TIP_WHIP = ITEMS.register("vampire_killer_green_stone_tip_whip",
+            () -> new VampireKillerGreenStoneTipWhipItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(1150)
+                            .craftRemainder(CCItem.VAMPIRE_KILLER_WHIP.get()),
                     10,
                     -3.5F,
                     8.0F));
@@ -114,6 +129,16 @@ public class CCItem {
 
     public static final RegistryObject<Item> RED_STONE_TIP = ITEMS.register("red_stone_tip",
             () -> new RedStoneTipItem(
+                    new Item.Properties()
+                            .stacksTo(1)));
+
+    public static final RegistryObject<Item> BLUE_STONE_TIP = ITEMS.register("blue_stone_tip",
+            () -> new BlueStoneTipItem(
+                    new Item.Properties()
+                            .stacksTo(1)));
+
+    public static final RegistryObject<Item> GREEN_STONE_TIP = ITEMS.register("green_stone_tip",
+            () -> new GreenStoneTipItem(
                     new Item.Properties()
                             .stacksTo(1)));
 
@@ -269,6 +294,15 @@ public class CCItem {
     public static final RegistryObject<Item> ANIM_NETHERITE_THROWING_AXE = ITEMS.register("anim_netherite_throwing_axe",
             () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> BLOOD_SKELETON_BONE = ITEMS.register("blood_skeleton_bone",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> THROWING_BONE = ITEMS.register("throwing_bone",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLOOD_BUCKET = ITEMS.register("blood_bucket",
+            () -> new BucketItem(CCFluid.SOURCE_BLOOD.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
     // Souls
 
     public static final RegistryObject<SoulGuardianItem> BAT_SOUL = ITEMS.register("bat_soul",
@@ -319,6 +353,13 @@ public class CCItem {
             () -> new ForgeSpawnEggItem(
                     CCEntity.POISON_SHADE,
                     0x45F248,
+                    0x319E3D,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> SKELETON_SPAWN_EGG = ITEMS.register("skeleton_spawn_egg",
+            () -> new ForgeSpawnEggItem(
+                    CCEntity.SKELETON,
+                    0x828282,
                     0x319E3D,
                     new Item.Properties()));
 

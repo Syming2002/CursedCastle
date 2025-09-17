@@ -1,11 +1,13 @@
 package com.syming.cursedcastle.entity.mob.shade;
 
+import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.api.IElementalWeapon;
 import com.syming.cursedcastle.damagesource.CCDamageSource;
 import com.syming.cursedcastle.entity.magic.IceBreathEntity;
 import com.syming.cursedcastle.entity.magic.IceSpikeEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -192,6 +194,11 @@ public class FrozenShadeEntity extends ShadeEntity {
             return super.hurt(pSource, pAmount * pAmount);
         }
         return super.hurt(pSource, pAmount);
+    }
+
+    @Override
+    protected ResourceLocation getDefaultLootTable() {
+        return new ResourceLocation(CursedCastleMod.MOD_ID, "entities/frozen_shade");
     }
 
     private Vec3 getRandomFrontOffset(RandomSource pRandom) {

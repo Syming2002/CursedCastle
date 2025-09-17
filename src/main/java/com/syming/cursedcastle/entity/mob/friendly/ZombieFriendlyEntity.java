@@ -44,7 +44,7 @@ public class ZombieFriendlyEntity extends Zombie {
     protected void addBehaviourGoals() {
         this.goalSelector.addGoal(2, new ZombieAttackGoal(this, (double)1.0F, false));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, (double)1.0F));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 5, false, true, (livingEntity) -> {
+        this.goalSelector.addGoal(2, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 5, false, true, (livingEntity) -> {
             return !(livingEntity instanceof ZombieFriendlyEntity);
         }));
     }

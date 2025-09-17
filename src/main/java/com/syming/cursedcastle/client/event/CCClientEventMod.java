@@ -1,14 +1,11 @@
 package com.syming.cursedcastle.client.event;
 
 import com.syming.cursedcastle.CursedCastleMod;
-import com.syming.cursedcastle.client.CCKeybinding;
 import com.syming.cursedcastle.entity.client.dagger.DaggerModel;
-import com.syming.cursedcastle.entity.client.familiarbat.FamiliarBatModel;
+import com.syming.cursedcastle.entity.client.bat.familiarbat.FamiliarBatModel;
 import com.syming.cursedcastle.entity.client.icespike.IceSpikeModel;
-import com.syming.cursedcastle.entity.client.vampirebat.VampireBatModel;
-import com.syming.cursedcastle.network.CCPacketHandler;
+import com.syming.cursedcastle.entity.client.bat.vampirebat.VampireBatModel;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 

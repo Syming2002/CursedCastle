@@ -1,10 +1,13 @@
 package com.syming.cursedcastle.block;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.item.CCItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -18,6 +21,9 @@ import java.util.function.Supplier;
 public class CCBlock {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CursedCastleMod.MOD_ID);
+
+    public static final RegistryObject<LiquidBlock> BLOOD_BLOCK = registerBlock("blood_block",
+            () -> new LiquidBlock(CCFluid.SOURCE_BLOOD, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
     public static final RegistryObject<Block> DRACULA_CASTLE_COBBLESTONE = registerBlock("dracula_castle_cobblestone",
             () -> new DraculaCastleCobblestoneBlock(

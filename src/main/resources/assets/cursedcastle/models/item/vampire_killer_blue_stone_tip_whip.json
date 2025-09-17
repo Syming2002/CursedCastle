@@ -1,0 +1,7 @@
+{
+  "parent": "item/handheld",
+  "textures":
+  {
+    "layer0": "cursedcastle:item/whip/vampire_killer_blue_stone_tip_whip"
+  }
+}

@@ -1,6 +1,6 @@
 package com.syming.cursedcastle.network;
 
-import com.syming.cursedcastle.entity.mob.friendly.FamiliarBatEntity;
+import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.soul.SoulGuardianItem;
@@ -55,10 +55,10 @@ public class CCSpawnFamiliarBat {
             ctx.get().setPacketHandled(true);
         }
 
-        private static void spawnFamiliarBat(ServerPlayer player, int maxBat) {
+        private static void spawnFamiliarBat(ServerPlayer player, int maxBats) {
             int currentBat = player.level().getEntitiesOfClass(FamiliarBatEntity.class, new AABB(player.blockPosition()).inflate(32)).size();
 
-            if (currentBat < maxBat) {
+            if (currentBat < maxBats) {
                 Vec3 dir = player.getLookAngle();
                 double x = player.getX() + dir.x * -2.0D;
                 double y = player.getY() + 0.5D;
@@ -66,7 +66,6 @@ public class CCSpawnFamiliarBat {
 
                 FamiliarBatEntity familiarBat = new FamiliarBatEntity(player.level());
                 familiarBat.setPosRaw(x, y, z);
-                familiarBat.setCustomNameVisible(false);
                 player.level().addFreshEntity(familiarBat);
             }
         }

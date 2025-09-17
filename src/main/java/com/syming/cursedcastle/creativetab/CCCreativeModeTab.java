@@ -28,11 +28,15 @@ public class CCCreativeModeTab {
                         output.accept(CCItem.VAMPIRE_KILLER_CRUSHING_STONE_TIP_WHIP.get());
                         output.accept(CCItem.VAMPIRE_KILLER_BULLET_TIP_WHIP.get());
                         output.accept(CCItem.VAMPIRE_KILLER_RED_STONE_TIP_WHIP.get());
+                        output.accept(CCItem.VAMPIRE_KILLER_BLUE_STONE_TIP_WHIP.get());
+                        output.accept(CCItem.VAMPIRE_KILLER_GREEN_STONE_TIP_WHIP.get());
 
                         // Whip Tips
                         output.accept(CCItem.BULLET_TIP.get());
                         output.accept(CCItem.CRUSHING_STONE_TIP.get());
                         output.accept(CCItem.RED_STONE_TIP.get());
+                        output.accept(CCItem.BLUE_STONE_TIP.get());
+                        output.accept(CCItem.GREEN_STONE_TIP.get());
 
                         // Subweapons
                         output.accept(CCItem.WOODEN_DAGGER.get());
@@ -72,8 +76,13 @@ public class CCCreativeModeTab {
                         output.accept(CCItem.FROZEN_SHADE_SPAWN_EGG.get());
                         output.accept(CCItem.HEAT_SHADE_SPAWN_EGG.get());
                         output.accept(CCItem.POISON_SHADE_SPAWN_EGG.get());
+                        output.accept(CCItem.SKELETON_SPAWN_EGG.get());
                         output.accept(CCItem.THUNDER_SHADE_SPAWN_EGG.get());
                         output.accept(CCItem.VAMPIRE_BAT_SPAWN_EGG.get());
+
+                        // Miscellaneous Items
+                        output.accept(CCItem.BLOOD_SKELETON_BONE.get());
+                        output.accept(CCItem.BLOOD_BUCKET.get());
                     })
                     .build());
 

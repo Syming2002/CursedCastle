@@ -2,11 +2,13 @@ package com.syming.cursedcastle.entity;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.magic.*;
-import com.syming.cursedcastle.entity.mob.friendly.FamiliarBatEntity;
+import com.syming.cursedcastle.entity.mob.skeleton.SkeletonEntity;
+import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
+import com.syming.cursedcastle.entity.projectile.ThrowingBoneEntity;
 import com.syming.cursedcastle.entity.projectile.subweapon.*;
-import com.syming.cursedcastle.entity.mob.BloodSkeletonEntity;
-import com.syming.cursedcastle.entity.mob.VampireBatEntity;
+import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
+import com.syming.cursedcastle.entity.mob.bat.VampireBatEntity;
 import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
 import com.syming.cursedcastle.entity.mob.shade.FrozenShadeEntity;
 import com.syming.cursedcastle.entity.mob.shade.HeatShadeEntity;
@@ -32,28 +34,24 @@ public class CCEntity {
 
     // Entity Living
     public static final RegistryObject<EntityType<BloodSkeletonEntity>> BLOOD_SKELETON = ENTITY_TYPES.register("blood_skeleton", () -> EntityType.Builder.<BloodSkeletonEntity>of(BloodSkeletonEntity::new, MobCategory.MONSTER)
-            .sized(0.6F, 1.99F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("blood_skeleton"));
 
     public static final RegistryObject<EntityType<DraculaEntity>> DRACULA = ENTITY_TYPES.register("dracula", () -> EntityType.Builder.<DraculaEntity>of(DraculaEntity::new, MobCategory.MONSTER)
-            .sized(1.0F, 2.5F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("dracula"));
 
     public static final RegistryObject<EntityType<FamiliarBatEntity>> FAMILIAR_BAT = ENTITY_TYPES.register("familiar_bat", () -> EntityType.Builder.<FamiliarBatEntity>of(FamiliarBatEntity::new, MobCategory.MONSTER)
-            .sized(0.25F, 0.375F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("familiar_bat"));
 
     public static final RegistryObject<EntityType<ZombieFriendlyEntity>> FRIENDLY_ZOMBIE = ENTITY_TYPES.register("friendly_zombie", () -> EntityType.Builder.<ZombieFriendlyEntity>of(ZombieFriendlyEntity::new, MobCategory.CREATURE)
-            .sized(0.6F, 1.95F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
@@ -67,28 +65,30 @@ public class CCEntity {
             .build("frozen_shade"));
 
     public static final RegistryObject<EntityType<HeatShadeEntity>> HEAT_SHADE = ENTITY_TYPES.register("heat_shade", () -> EntityType.Builder.<HeatShadeEntity>of(HeatShadeEntity::new, MobCategory.MONSTER)
-            .sized(0.5F, 1.875F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("heat_shade"));
 
     public static final RegistryObject<EntityType<PoisonShadeEntity>> POISON_SHADE = ENTITY_TYPES.register("poison_shade", () -> EntityType.Builder.<PoisonShadeEntity>of(PoisonShadeEntity::new, MobCategory.MONSTER)
-            .sized(0.5F, 1.875F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("poison_shade"));
 
+    public static final RegistryObject<EntityType<SkeletonEntity>> SKELETON = ENTITY_TYPES.register("skeleton", () -> EntityType.Builder.<SkeletonEntity>of(SkeletonEntity::new, MobCategory.MONSTER)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .build("skeleton"));
+
     public static final RegistryObject<EntityType<ThunderShadeEntity>> THUNDER_SHADE = ENTITY_TYPES.register("thunder_shade", () -> EntityType.Builder.<ThunderShadeEntity>of(ThunderShadeEntity::new, MobCategory.MONSTER)
-            .sized(0.5F, 1.875F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("thunder_shade"));
 
     public static final RegistryObject<EntityType<VampireBatEntity>> VAMPIRE_BAT = ENTITY_TYPES.register("vampire_bat", () -> EntityType.Builder.<VampireBatEntity>of(VampireBatEntity::new, MobCategory.MONSTER)
-            .sized(0.25F, 0.375F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
@@ -137,7 +137,6 @@ public class CCEntity {
 
     public static final RegistryObject<EntityType<HolyBibleEntity>> HOLY_BIBLE = ENTITY_TYPES.register("holy_bible",
             () -> EntityType.Builder.<HolyBibleEntity>of(HolyBibleEntity::new, MobCategory.MISC)
-                    .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
                     .updateInterval(20)
                     .setCustomClientFactory(((spawnEntity, level) -> new HolyBibleEntity(level)))
@@ -147,13 +146,19 @@ public class CCEntity {
 
     public static final RegistryObject<EntityType<HolyWaterEntity>> HOLY_WATER = ENTITY_TYPES.register("holy_water",
             () -> EntityType.Builder.<HolyWaterEntity>of(HolyWaterEntity::new, MobCategory.MISC)
-                    .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
                     .updateInterval(20)
                     .setCustomClientFactory(((spawnEntity, level) -> new HolyWaterEntity(level)))
                     .build("holy_water"));
 
     public static final Map<Tier, RegistryObject<EntityType<ThrowingAxeEntity>>> THROWING_AXE_TYPES = new HashMap<>();
+
+    public static final RegistryObject<EntityType<ThrowingBoneEntity>> THROWING_BONE = ENTITY_TYPES.register("throwing_bone",
+            () -> EntityType.Builder.<ThrowingBoneEntity>of(ThrowingBoneEntity::new, MobCategory.MISC)
+                    .clientTrackingRange(4)
+                    .updateInterval(20)
+                    .setCustomClientFactory(((spawnEntity, level) -> new ThrowingBoneEntity(level)))
+                    .build("throwing_bone"));
 
     static {
         for (Tiers tier : Tiers.values()) {

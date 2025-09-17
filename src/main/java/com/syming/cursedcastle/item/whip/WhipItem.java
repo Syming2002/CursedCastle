@@ -85,33 +85,35 @@ public abstract class WhipItem extends Item {
 
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-        float reach = (float) entity.getAttributeValue(ForgeMod.ENTITY_REACH.get());
-        double reachSqr = reach * reach;
+        if (entity instanceof Player player) {
+            float reach = (float) player.getAttributeValue(ForgeMod.ENTITY_REACH.get());
+            double reachSqr = reach * reach;
 
-        Vec3 view = entity.getViewVector(1.0F);
-        Vec3 eye = entity.getEyePosition(1.0F);
-        Vec3 targetVec = eye.add(view.x * reach, view.y * reach, view.z * reach);
+            Vec3 view = player.getViewVector(1.0F);
+            Vec3 eye = player.getEyePosition(1.0F);
+            Vec3 targetVec = eye.add(view.x * reach, view.y * reach, view.z * reach);
 
-        EntityHitResult result = new EntityHitResult(entity, targetVec);
+            EntityHitResult result = new EntityHitResult(player, targetVec);
 
-        if (result == null || !(result.getEntity() instanceof LivingEntity)) {
-            return false;
-        }
+            if (result == null || !(result.getEntity() instanceof LivingEntity)) {
+                return false;
+            }
 
-        LivingEntity target = (LivingEntity) result.getEntity();
+            LivingEntity target = (LivingEntity) result.getEntity();
 
-        double distanceToTargetSqr = entity.distanceToSqr(target);
+            double distanceToTargetSqr = player.distanceToSqr(target);
 
-        boolean hitResult = (result != null ? target : null) != null;
+            boolean hitResult = (result != null ? target : null) != null;
 
-        if (hitResult) {
-            if (entity instanceof Player player) {
+            if (hitResult) {
                 if (target != player) {
                     if (reachSqr >= distanceToTargetSqr) {
                         target.hurt(player.damageSources().playerAttack(player), this.attackDamage);
                     }
                 }
             }
+        } else {
+            return super.onEntitySwing(stack, entity);
         }
         return super.onEntitySwing(stack, entity);
     }

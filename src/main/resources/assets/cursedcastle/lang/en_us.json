@@ -5,6 +5,7 @@
 
   "creativetab.cursedcastle_tab": "Cursed Castle",
 
+  "effect.cursedcastle.anti_blood_skeleton": "Kill Blood Skeleton",
 
   "entity.cursedcastle.blood_skeleton": "Blood Skeleton",
   "entity.cursedcastle.dracula": "Dracula",
@@ -46,6 +47,7 @@
 
   "item.cursedcastle.blood_skeleton_spawn_egg": "Blood Skeleton Spawn Egg",
   "item.cursedcastle.dracula_spawn_egg": "Dracula Spawn Egg",
+  "item.cursedcastle.familiar_bat_spawn_egg": "Familiar Bat Spawn Egg",
   "item.cursedcastle.frozen_shade_spawn_egg": "Frozen Shade Spawn Egg",
   "item.cursedcastle.heat_shade_spawn_egg": "Heat Shade Spawn Egg",
   "item.cursedcastle.poison_shade_spawn_egg": "Poison Shade Spawn Egg",
@@ -58,9 +60,18 @@
   "item.cursedcastle.leather_whip": "Leather Whip",
   "item.cursedcastle.undead_killer_whip": "Undead Killer Whip",
   "item.cursedcastle.vampire_killer_whip": "Vampire Killer Whip",
+  "item.cursedcastle.vampire_killer_crushing_stone_tip_whip": "Vampire Killer Crushing Stone Tip Whip",
+  "item.cursedcastle.vampire_killer_bullet_tip_whip": "Vampire Killer Bullet Tip Whip",
+  "item.cursedcastle.vampire_killer_red_stone_tip_whip": "Vampire Killer Red Stone Tip Whip",
+  "item.cursedcastle.vampire_killer_blue_stone_tip_whip": "Vampire Killer Blue Stone Tip Whip",
+  "item.cursedcastle.vampire_killer_green_stone_tip_whip": "Vampire Killer Green Stone Tip Whip",
 
-  "item.cursedcastle.crushing_stone": "Crushing Stone",
+
+  "item.cursedcastle.crushing_stone_tip": "Crushing Stone Tip",
   "item.cursedcastle.bullet_tip": "Bullet Tip",
+  "item.cursedcastle.red_stone_tip": "Red Stone Tip",
+  "item.cursedcastle.blue_stone_tip": "Blue Stone Tip",
+  "item.cursedcastle.green_stone_tip": "Green Stone Tip",
 
   "item.cursedcastle.wooden_dagger": "Wooden Dagger",
   "item.cursedcastle.stone_dagger": "Stone Dagger",
@@ -101,7 +112,29 @@
   "item.cursedcastle.anim_diamond_holy_cross": "Anim Diamond Holy Cross",
   "item.cursedcastle.anim_netherite_holy_cross": "Anim Netherite Holy Cross",
 
+  "item.cursedcastle.blood_skeleton_bone": "Blood Skeleton Bone",
+  "item.cursedcastle.blood_bucket": "Blood Bucket",
+
+
   "item.cursedcastle.bat_soul": "Bat Soul",
-  "item.cursedcastle.zombie_soul": "Zombie Soul"
+  "item.cursedcastle.zombie_soul": "Zombie Soul",
+
+  "item.minecraft.lingering_potion.effect.anti_blood_skeleton": "Lingering Potion of Anti-Blood Skeleton",
+  "item.minecraft.lingering_potion.effect.long_anti_blood_skeleton": "Lingering Potion of Anti-Blood Skeleton",
+  "item.minecraft.lingering_potion.effect.strong_anti_blood_skeleton": "Lingering Potion of Anti-Blood Skeleton",
+
+  "item.minecraft.potion.effect.anti_blood_skeleton": "Potion of Anti-Blood Skeleton",
+  "item.minecraft.potion.effect.long_anti_blood_skeleton": "Potion of Anti-Blood Skeleton",
+  "item.minecraft.potion.effect.strong_anti_blood_skeleton": "Potion of Anti-Blood Skeleton",
+
+  "item.minecraft.splash_potion.effect.anti_blood_skeleton": "Splash Potion of Anti-Blood Skeleton",
+  "item.minecraft.splash_potion.effect.long_anti_blood_skeleton": "Splash Potion of Anti-Blood Skeleton",
+  "item.minecraft.splash_potion.effect.strong_anti_blood_skeleton": "Splash Potion of Anti-Blood Skeleton",
+
+  "item.minecraft.tipped_arrow.effect.anti_blood_skeleton": "Arrow of Anti-Blood Skeleton",
+  "item.minecraft.tipped_arrow.effect.long_anti_blood_skeleton": "Arrow of Anti-Blood Skeleton",
+  "item.minecraft.tipped_arrow.effect.strong_anti_blood_skeleton": "Arrow of Anti-Blood Skeleton"
+
+
 
 }
