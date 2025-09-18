@@ -6,6 +6,7 @@
   "creativetab.cursedcastle_tab": "Cursed Castle",
 
   "effect.cursedcastle.anti_blood_skeleton": "Kill Blood Skeleton",
+  "effect.cursedcastle.freeze": "Freeze",
 
   "entity.cursedcastle.blood_skeleton": "Blood Skeleton",
   "entity.cursedcastle.dracula": "Dracula",
@@ -37,6 +38,8 @@
   "entity.cursedcastle.holy_water": "Holy Water",
 
   "entity.minecraft.villager.cursedcastle.high_priest": "High Priest",
+
+  "fluid_type.cursedcastle.blood": "Blood",
 
   "holy_cross.damage" : "Deals %s damage to other mob",
   "holy_cross.damageArthropods": "Deals %s damage to arthropods mob",
@@ -133,8 +136,24 @@
 
   "item.minecraft.tipped_arrow.effect.anti_blood_skeleton": "Arrow of Anti-Blood Skeleton",
   "item.minecraft.tipped_arrow.effect.long_anti_blood_skeleton": "Arrow of Anti-Blood Skeleton",
-  "item.minecraft.tipped_arrow.effect.strong_anti_blood_skeleton": "Arrow of Anti-Blood Skeleton"
+  "item.minecraft.tipped_arrow.effect.strong_anti_blood_skeleton": "Arrow of Anti-Blood Skeleton",
 
+  "item.minecraft.lingering_potion.effect.freeze": "Lingering Potion of Freeze",
+  "item.minecraft.lingering_potion.effect.long_freeze": "Lingering Potion of Freeze",
 
+  "item.minecraft.potion.effect.freeze": "Potion of Freeze",
+  "item.minecraft.potion.effect.long_freeze": "Potion of Freeze",
 
+  "item.minecraft.splash_potion.effect.freeze": "Splash Potion of Freeze",
+  "item.minecraft.splash_potion.effect.long_freeze": "Splash Potion of Freeze",
+
+  "item.minecraft.tipped_arrow.effect.freeze": "Arrow of Freeze",
+  "item.minecraft.tipped_arrow.effect.long_freeze": "Arrow of Freeze",
+
+  "throwing_axe.damage" : "Deals %s damage to other mob",
+  "throwing_axe.damageArthropods": "Deals %s damage to arthropods mob",
+  "throwing_axe.damageSharpness": "Deals %s damage",
+  "throwing_axe.damageSmite": "Deals %s damage to undead mob",
+  "throwing_axe.knockback": "Deals %s knockback",
+  "throwing_axe.fireAspect": "Deals %s seconds of fire to mob"
 }

@@ -2,14 +2,19 @@
   "primaryColor": "#292929",
   "secondaryColor": "#8D1D20",
   "particleColor": "#8D1D20",
-  "description": "Bee that sucked out blood from dark flowers",
-  "beeTexture": "productivebees:textures/entity/bee/vampire/bee",
-  "createComb": true,
-  "flowerBlock": "minecraft:wither_rose",
+  "description": "Bee that sucked out blood blood source",
+  "createComb": false,
+  "flowerBlock": "cursedcastle:blood_block",
   "size:": 1.0,
-  "fireproof": true,
-  "draconic": true,
-  "withered": true,
+  "fireproof": false,
+  "breeding_items": [
+    {
+      "item": "blood_skeleton_bone"
+    },
+    {
+      "item": "blood_skeleton_bone"
+    }
+  ],
   "attributes": {
     "temper": 3,
     "endurance": 1,

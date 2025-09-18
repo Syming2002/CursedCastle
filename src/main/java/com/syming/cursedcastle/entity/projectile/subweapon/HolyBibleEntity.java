@@ -89,7 +89,7 @@ public class HolyBibleEntity extends CCThrowableWeapon {
         if (!this.level().isClientSide() && getOwner() != null) {
             if (!stack.isEmpty()) {
                  if (target instanceof LivingEntity livingEntity && getOwner() instanceof LivingEntity shooter) {
-                    applyEntityHitEnchantments(target);
+                    applyEntityHitEnchantments(livingEntity);
                     if (!stack.isEnchanted()) {
                         livingEntity.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage());
                     }

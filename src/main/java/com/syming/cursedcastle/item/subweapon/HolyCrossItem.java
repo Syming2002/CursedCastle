@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,7 +70,13 @@ public class HolyCrossItem extends Item {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return super.canApplyAtEnchantingTable(stack, enchantment);
+        return enchantment == Enchantments.SHARPNESS
+                || enchantment == Enchantments.SMITE
+                || enchantment == Enchantments.BANE_OF_ARTHROPODS
+                || enchantment == Enchantments.FIRE_ASPECT
+                || enchantment == Enchantments.MOB_LOOTING
+                || enchantment == Enchantments.KNOCKBACK
+                || enchantment == Enchantments.UNBREAKING;
     }
 
     @Override

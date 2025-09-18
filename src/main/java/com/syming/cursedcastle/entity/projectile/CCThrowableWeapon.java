@@ -1,16 +1,20 @@
 package com.syming.cursedcastle.entity.projectile;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.Map;
 
 public abstract class CCThrowableWeapon extends ThrowableItemProjectile {
 
@@ -67,16 +71,43 @@ public abstract class CCThrowableWeapon extends ThrowableItemProjectile {
             int fireAspect = EnchantmentHelper.getFireAspect(shooter);
             if (fireAspect > 0) {
                 target.setSecondsOnFire(fireAspect);
+                System.out.println("Has Fire Aspect");
             }
 
             int knockback = EnchantmentHelper.getKnockbackBonus(shooter);
             if (knockback > 0) {
                 target.knockback(knockback, -Mth.sin(getYRot() * 0.017453292F), -Mth.cos(getYRot() * 0.017453292F));
+                System.out.println("Has Knockback");
             }
 
-            float damageBonus = EnchantmentHelper.getDamageBonus(getItem(), target.getMobType());
-            if (damageBonus > 0) {
-                target.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage() + damageBonus);
+            int mobLooting = EnchantmentHelper.getMobLooting(shooter);
+            if (mobLooting > 0) {
+                target.hurt(target.damageSources().mobProjectile(this, shooter), getImpactDamage());
+                System.out.println("Has Looting Aspect");
+            }
+
+
+
+            float damage = getImpactDamage();
+            float damageBonus = EnchantmentHelper.getDamageBonus(getItemRaw(), target.getMobType());
+            float totalDamage = damage + damageBonus;
+
+            int sharpnessLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.SHARPNESS, shooter);
+            if (sharpnessLevel > 0) {
+                target.hurt(target.damageSources().mobProjectile(this, shooter), totalDamage);
+                System.out.println("Has Sharpness");
+            }
+
+            int smiteLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.SMITE, shooter);
+            if (smiteLevel > 0 && target.getMobType() == MobType.UNDEAD) {
+                target.hurt(target.damageSources().mobProjectile(this, shooter), totalDamage);
+                System.out.println("Has Smite");
+            }
+
+            int arthropodsLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, shooter);
+            if (arthropodsLevel > 0 && target.getMobType() == MobType.ARTHROPOD) {
+                target.hurt(target.damageSources().mobProjectile(this, shooter), totalDamage);
+                System.out.println("Has Bane of Arthropods");
             }
         }
     }

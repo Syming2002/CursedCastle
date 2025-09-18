@@ -113,7 +113,7 @@ public class HolyCrossEntity extends CCThrowableWeapon {
                         System.out.println("Thrower is Hit");
                     }
                 } else if (target instanceof LivingEntity livingEntity && getOwner() instanceof LivingEntity shooter) {
-                    applyEntityHitEnchantments(target);
+                    applyEntityHitEnchantments(livingEntity);
                     if (!stack.isEnchanted()) {
                         livingEntity.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage());
                     }

@@ -23,11 +23,11 @@ public class HolyCrossUtil {
                     pTooltips.add(Component.translatable("holy_cross.damageSharpness", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.UNDEFINED) + 2.0F).withStyle(ChatFormatting.GOLD));
                 } else if (pStack.getAllEnchantments().containsKey(Enchantments.SMITE)) {
                     pTooltips.add(Component.translatable("holy_cross.damageSmite", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.UNDEAD) + 2.0F).withStyle(ChatFormatting.GOLD));
-                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+//                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
 
                 } else if (pStack.getAllEnchantments().containsKey(Enchantments.BANE_OF_ARTHROPODS)) {
                     pTooltips.add(Component.translatable("holy_cross.damageArthropods", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.ARTHROPOD) + 2.0F).withStyle(ChatFormatting.GOLD));
-                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+//                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
                 }
                 if (pStack.getAllEnchantments().containsKey(Enchantments.KNOCKBACK)) {
                     if (knockback > 0) {
@@ -39,7 +39,7 @@ public class HolyCrossUtil {
                         pTooltips.add(Component.translatable("holy_cross.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
                     }
                 }
-            } else {
+            } else if (!pStack.isEnchanted()) {
                 pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
             }
         } else if (pTier == Tiers.STONE) {
@@ -48,11 +48,11 @@ public class HolyCrossUtil {
                     pTooltips.add(Component.translatable("holy_cross.damageSharpness", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.UNDEFINED) + 2.0F).withStyle(ChatFormatting.GOLD));
                 } else if (pStack.getAllEnchantments().containsKey(Enchantments.SMITE)) {
                     pTooltips.add(Component.translatable("holy_cross.damageSmite", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.UNDEAD) + 2.0F).withStyle(ChatFormatting.GOLD));
-                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+//                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
 
                 } else if (pStack.getAllEnchantments().containsKey(Enchantments.BANE_OF_ARTHROPODS)) {
                     pTooltips.add(Component.translatable("holy_cross.damageArthropods", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.ARTHROPOD) + 2.0F).withStyle(ChatFormatting.GOLD));
-                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+//                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
 
                 }
                 if (pStack.getAllEnchantments().containsKey(Enchantments.KNOCKBACK)) {
@@ -65,7 +65,7 @@ public class HolyCrossUtil {
                         pTooltips.add(Component.translatable("holy_cross.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
                     }
                 }
-            } else {
+            } else if (!pStack.isEnchanted()) {
                 pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
             }
         } else if (pTier == Tiers.IRON) {
@@ -74,11 +74,11 @@ public class HolyCrossUtil {
                     pTooltips.add(Component.translatable("holy_cross.damageSharpness", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.UNDEFINED) + 2.0F).withStyle(ChatFormatting.GOLD));
                 } else if (pStack.getAllEnchantments().containsKey(Enchantments.SMITE)) {
                     pTooltips.add(Component.translatable("holy_cross.damageSmite", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.UNDEAD) + 2.0F).withStyle(ChatFormatting.GOLD));
-                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+//                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
 
                 } else if (pStack.getAllEnchantments().containsKey(Enchantments.BANE_OF_ARTHROPODS)) {
                     pTooltips.add(Component.translatable("holy_cross.damageArthropods", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.ARTHROPOD) + 2.0F).withStyle(ChatFormatting.GOLD));
-                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+//                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
 
                 }
                 if (pStack.getAllEnchantments().containsKey(Enchantments.KNOCKBACK)) {
@@ -91,7 +91,7 @@ public class HolyCrossUtil {
                         pTooltips.add(Component.translatable("holy_cross.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
                     }
                 }
-            } else {
+            } else if (!pStack.isEnchanted()) {
                 pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
             }
         } else if (pTier == Tiers.GOLD) {
@@ -100,11 +100,11 @@ public class HolyCrossUtil {
                     pTooltips.add(Component.translatable("holy_cross.damageSharpness", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.UNDEFINED) + 2.0F).withStyle(ChatFormatting.GOLD));
                 } else if (pStack.getAllEnchantments().containsKey(Enchantments.SMITE)) {
                     pTooltips.add(Component.translatable("holy_cross.damageSmite", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.UNDEAD) + 2.0F).withStyle(ChatFormatting.GOLD));
-                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+//                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
 
                 } else if (pStack.getAllEnchantments().containsKey(Enchantments.BANE_OF_ARTHROPODS)) {
                     pTooltips.add(Component.translatable("holy_cross.damageArthropods", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.ARTHROPOD) + 2.0F).withStyle(ChatFormatting.GOLD));
-                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+//                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
 
                 }
                 if (pStack.getAllEnchantments().containsKey(Enchantments.KNOCKBACK)) {
@@ -117,7 +117,7 @@ public class HolyCrossUtil {
                         pTooltips.add(Component.translatable("holy_cross.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
                     }
                 }
-            } else {
+            } else if (!pStack.isEnchanted()) {
                 pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
             }
         } else if (pTier == Tiers.DIAMOND) {
@@ -126,11 +126,11 @@ public class HolyCrossUtil {
                     pTooltips.add(Component.translatable("holy_cross.damageSharpness", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.UNDEFINED) + 2.0F).withStyle(ChatFormatting.GOLD));
                 } else if (pStack.getAllEnchantments().containsKey(Enchantments.SMITE)) {
                     pTooltips.add(Component.translatable("holy_cross.damageSmite", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.UNDEAD) + 2.0F).withStyle(ChatFormatting.GOLD));
-                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+//                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
 
                 } else if (pStack.getAllEnchantments().containsKey(Enchantments.BANE_OF_ARTHROPODS)) {
                     pTooltips.add(Component.translatable("holy_cross.damageArthropods", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.ARTHROPOD) + 2.0F).withStyle(ChatFormatting.GOLD));
-                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+//                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
 
                 }
                 if (pStack.getAllEnchantments().containsKey(Enchantments.KNOCKBACK)) {
@@ -143,7 +143,7 @@ public class HolyCrossUtil {
                         pTooltips.add(Component.translatable("holy_cross.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
                     }
                 }
-            } else {
+            } else if (!pStack.isEnchanted()) {
                 pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
             }
         } else if (pTier == Tiers.NETHERITE) {
@@ -152,11 +152,11 @@ public class HolyCrossUtil {
                     pTooltips.add(Component.translatable("holy_cross.damageSharpness", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.UNDEFINED) + 2.0F).withStyle(ChatFormatting.GOLD));
                 } else if (pStack.getAllEnchantments().containsKey(Enchantments.SMITE)) {
                     pTooltips.add(Component.translatable("holy_cross.damageSmite", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.UNDEAD) + 2.0F).withStyle(ChatFormatting.GOLD));
-                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+//                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
 
                 } else if (pStack.getAllEnchantments().containsKey(Enchantments.BANE_OF_ARTHROPODS)) {
                     pTooltips.add(Component.translatable("holy_cross.damageArthropods", pTier.getAttackDamageBonus() + EnchantmentHelper.getDamageBonus(pStack, MobType.ARTHROPOD) + 2.0F).withStyle(ChatFormatting.GOLD));
-                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+//                    pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
 
                 }
                 if (pStack.getAllEnchantments().containsKey(Enchantments.KNOCKBACK)) {
@@ -169,7 +169,7 @@ public class HolyCrossUtil {
                         pTooltips.add(Component.translatable("holy_cross.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
                     }
                 }
-            } else {
+            } else if (!pStack.isEnchanted()) {
                 pTooltips.add(Component.translatable("holy_cross.damage", pTier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
             }
         }
