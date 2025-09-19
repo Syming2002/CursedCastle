@@ -4,6 +4,7 @@ import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.client.CCKeybinding;
 import com.syming.cursedcastle.creativetab.CCCreativeModeTab;
 import com.syming.cursedcastle.effect.CCEffect;
+import com.syming.cursedcastle.enchantment.CCEnchantment;
 import com.syming.cursedcastle.entity.client.bat.familiarbat.FamiliarBatRender;
 import com.syming.cursedcastle.entity.client.friendlyzombie.ZombieFriendlyRender;
 import com.syming.cursedcastle.entity.client.skeleton.SkeletonRender;
@@ -52,6 +53,7 @@ public class CursedCastleMod {
         CCBlock.register(modEventBus);
         CCCreativeModeTab.register(modEventBus);
         CCEffect.register(modEventBus);
+        CCEnchantment.register(modEventBus);
         CCEntity.register(modEventBus);
         CCFluid.register(modEventBus);
         CCFluidType.register(modEventBus);

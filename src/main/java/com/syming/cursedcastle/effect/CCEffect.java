@@ -11,7 +11,6 @@ public class CCEffect {
 
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, CursedCastleMod.MOD_ID);
 
-    public static final RegistryObject<MobEffect> ANTI_BLOOD_SKELETON = EFFECTS.register("anti_blood_skeleton", AntiBloodSkeletonEffect::new);
     public static final RegistryObject<MobEffect> FREEZE = EFFECTS.register("freeze", FreezeEffect::new);
 
 

@@ -14,10 +14,6 @@ import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 public class BrewingStandRecipe {
 
     public static void registerRecipes() {
-        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)), Ingredient.of(CCItem.BLOOD_SKELETON_BONE.get()), PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.ANTI_BLOOD_SKELETON.get())));
-        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.ANTI_BLOOD_SKELETON.get())), Ingredient.of(Items.REDSTONE), PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.LONG_ANTI_BLOOD_SKELETON.get())));
-        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.ANTI_BLOOD_SKELETON.get())), Ingredient.of(Items.GLOWSTONE_DUST), PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.STRONG_ANTI_BLOOD_SKELETON.get())));
-
         BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)), Ingredient.of(Items.PACKED_ICE), PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.FREEZE.get())));
         BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.FREEZE.get())), Ingredient.of(Items.REDSTONE), PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.LONG_FREEZE.get())));
 

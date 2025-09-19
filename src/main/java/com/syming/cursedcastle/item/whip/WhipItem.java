@@ -2,6 +2,7 @@ package com.syming.cursedcastle.item.whip;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.syming.cursedcastle.enchantment.CCEnchantment;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,6 +12,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.EntityHitResult;
@@ -81,6 +84,24 @@ public abstract class WhipItem extends Item {
     @Override
     public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
         return ToolActions.DEFAULT_SWORD_ACTIONS.contains(toolAction);
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack pStack) {
+        return true;
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment == Enchantments.SHARPNESS
+                || enchantment == Enchantments.SMITE
+                || enchantment == Enchantments.BANE_OF_ARTHROPODS
+                || enchantment == Enchantments.FIRE_ASPECT
+                || enchantment == Enchantments.MOB_LOOTING
+                || enchantment == Enchantments.KNOCKBACK
+                || enchantment == Enchantments.UNBREAKING
+                || enchantment == CCEnchantment.BLOOD_SKELETON_KILLER.get()
+                || super.canApplyAtEnchantingTable(stack, enchantment);
     }
 
     @Override

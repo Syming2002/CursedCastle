@@ -4,6 +4,7 @@ import com.github.alexthe666.citadel.repack.jaad.aac.syntax.PCE;
 import com.syming.cursedcastle.api.IElementalWeapon;
 import com.syming.cursedcastle.damagesource.CCDamageSource;
 import com.syming.cursedcastle.effect.CCEffect;
+import com.syming.cursedcastle.enchantment.CCEnchantment;
 import com.syming.cursedcastle.item.whip.UndeadKillerWhipItem;
 import com.syming.cursedcastle.entity.CCEntity;
 import net.minecraft.core.BlockPos;
@@ -27,7 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BloodSkeletonEntity extends CCSkeletonEntity {
 
-    private Item lastHitItem;
+    private ItemStack lastHitItem;
 
     public BloodSkeletonEntity(EntityType<? extends AbstractSkeleton> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -62,14 +63,14 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
     public void tickDeath() {
         super.tickDeath();
 
-        if (this.deathTime == 55 && !this.level().isClientSide() && (!(this.lastHitItem instanceof UndeadKillerWhipItem) || !hasEffect(CCEffect.ANTI_BLOOD_SKELETON.get()))) {
+        if (this.deathTime == 55 && !this.level().isClientSide() && (!(this.lastHitItem.getItem() instanceof UndeadKillerWhipItem || this.lastHitItem.getEnchantmentLevel(CCEnchantment.BLOOD_SKELETON_KILLER.get()) == 1))) {
             BloodSkeletonEntity bloodSkeleton = new BloodSkeletonEntity(this.level());
             bloodSkeleton.copyPosition(this);
             bloodSkeleton.setHealth(10.0F);
             this.level().addFreshEntity(bloodSkeleton);
             discard();
         }
-        if (this.deathTime >= 20 && (this.lastHitItem instanceof UndeadKillerWhipItem || hasEffect(CCEffect.ANTI_BLOOD_SKELETON.get()))) {
+        if (this.deathTime >= 20 && (this.lastHitItem.getItem() instanceof UndeadKillerWhipItem || this.lastHitItem.getEnchantmentLevel(CCEnchantment.BLOOD_SKELETON_KILLER.get()) == 1)) {
             this.level().broadcastEntityEvent(this, (byte) 60);
             this.remove(Entity.RemovalReason.KILLED);
         }
@@ -98,7 +99,7 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
         if (pSource.getDirectEntity() instanceof Player attackingPlayer) {
             ItemStack heldItem = attackingPlayer.getMainHandItem();
             if (!heldItem.isEmpty()) {
-                this.lastHitItem = heldItem.getItem();
+                this.lastHitItem = heldItem;
             } else {
                 this.lastHitItem = null;
             }
