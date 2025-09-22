@@ -18,6 +18,8 @@ public class CCBlockStateProvider extends BlockStateProvider {
         blockWithItem(CCBlock.DRACULA_CASTLE_COBBLESTONE);
         blockWithItem(CCBlock.DRACULA_CASTLE_STONE);
         blockWithItem(CCBlock.DRACULA_CASTLE_STONE_BRICKS);
+
+        slabBlock(CCBlock.DRACULA_CASTLE_STONE_BRICKS_SLAB.get(), blockTexture(CCBlock.DRACULA_CASTLE_STONE_BRICKS.get()), blockTexture(CCBlock.DRACULA_CASTLE_STONE_BRICKS.get()));
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

@@ -18,7 +18,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import top.theillusivec4.curios.api.CuriosApi;
 
 public class CCItem {
 
@@ -356,11 +355,11 @@ public class CCItem {
                     0x319E3D,
                     new Item.Properties()));
 
-    public static final RegistryObject<Item> SKELETON_SPAWN_EGG = ITEMS.register("skeleton_spawn_egg",
+    public static final RegistryObject<Item> SKELETON_SPAWN_EGG = ITEMS.register("throwing_bone_skeleton_spawn_egg",
             () -> new ForgeSpawnEggItem(
-                    CCEntity.SKELETON,
+                    CCEntity.THROWING_BONE_SKELETON,
                     0x828282,
-                    0x319E3D,
+                    0xA8A8A8,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> THUNDER_SHADE_SPAWN_EGG = ITEMS.register("thunder_shade_spawn_egg",

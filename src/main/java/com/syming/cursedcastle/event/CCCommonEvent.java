@@ -3,7 +3,7 @@ package com.syming.cursedcastle.event;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
-import com.syming.cursedcastle.entity.mob.skeleton.SkeletonEntity;
+import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.network.CCPacketHandler;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
@@ -35,7 +35,7 @@ public class CCCommonEvent {
         event.put(CCEntity.FRIENDLY_ZOMBIE.get(), ZombieFriendlyEntity.createMobAttributes().build());
         event.put(CCEntity.HEAT_SHADE.get(), ShadeEntity.createMobAttributes().build());
         event.put(CCEntity.POISON_SHADE.get(), ShadeEntity.createMobAttributes().build());
-        event.put(CCEntity.SKELETON.get(), SkeletonEntity.createMobAttributes().build());
+        event.put(CCEntity.THROWING_BONE_SKELETON.get(), ThrowingBoneSkeletonEntity.createMobAttributes().build());
         event.put(CCEntity.THUNDER_SHADE.get(), ShadeEntity.createMobAttributes().build());
         event.put(CCEntity.VAMPIRE_BAT.get(), VampireBatEntity.createMobAttributes().build());
     }

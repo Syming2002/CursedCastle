@@ -2,6 +2,7 @@
   "block.cursedcastle.dracula_castle_cobblestone": "Dracula's Castle Cobblestone",
   "block.cursedcastle.dracula_castle_stone": "Dracula's Castle Stone",
   "block.cursedcastle.dracula_castle_stone_bricks": "Dracula's Castle Stone Bricks",
+  "block.cursedcastle.dracula_castle_stone_bricks_slab": "Dracula's Castle Stone Bricks Slab",
 
   "creativetab.cursedcastle_tab": "Cursed Castle",
 
@@ -18,6 +19,7 @@
   "entity.cursedcastle.heat_shade": "Heat Shade",
   "entity.cursedcastle.ice_spike": "Ice Spike",
   "entity.cursedcastle.poison_shade": "Poison Shade",
+  "entity.cursedcastle.throwing_bone_skeleton": "Throwing Bone Skeleton",
   "entity.cursedcastle.thunder_shade": "Thunder Shade",
   "entity.cursedcastle.vampire_bat": "Vampire Bat",
 
@@ -56,6 +58,7 @@
   "item.cursedcastle.frozen_shade_spawn_egg": "Frozen Shade Spawn Egg",
   "item.cursedcastle.heat_shade_spawn_egg": "Heat Shade Spawn Egg",
   "item.cursedcastle.poison_shade_spawn_egg": "Poison Shade Spawn Egg",
+  "item.cursedcastle.throwing_bone_skeleton_spawn_egg": "Throwing Bone Skeleton Spawn Egg",
   "item.cursedcastle.thunder_shade_spawn_egg": "Thunder Shade Spawn Egg",
   "item.cursedcastle.vampire_bat_spawn_egg": "Vampire Bat Spawn Egg",
 

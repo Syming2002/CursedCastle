@@ -9,7 +9,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.CCSkeletonEntity;
-import com.syming.cursedcastle.entity.mob.skeleton.SkeletonEntity;
+import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import net.minecraft.util.Mth;
 
 public class SkeletonModel extends AdvancedEntityModel<CCSkeletonEntity> {
@@ -110,8 +110,8 @@ public class SkeletonModel extends AdvancedEntityModel<CCSkeletonEntity> {
         this.animator.update(pEntity);
 
         // Throwing Bone Animation
-        if (pEntity instanceof SkeletonEntity) {
-            if (this.animator.setAnimation(SkeletonEntity.THROWING_BONE_ANIMATION)) {
+        if (pEntity instanceof ThrowingBoneSkeletonEntity) {
+            if (this.animator.setAnimation(ThrowingBoneSkeletonEntity.THROWING_BONE_ANIMATION)) {
                 this.animator.startKeyframe(20);
                 this.rotate(this.animator, this.rightArm, -102.5F, 27.5F, 0.0F);
                 this.animator.endKeyframe();
@@ -150,7 +150,7 @@ public class SkeletonModel extends AdvancedEntityModel<CCSkeletonEntity> {
             this.animator.resetKeyframe(15);
         }
 
-        if (pEntity.getAnimation() != SkeletonEntity.THROWING_BONE_ANIMATION) {
+        if (pEntity.getAnimation() != ThrowingBoneSkeletonEntity.THROWING_BONE_ANIMATION) {
             this.rightArm.rotateAngleX = Mth.cos(pLimbSwing * 0.6662F + (float) Math.PI) * 1.4F * pLimbSwingAmount;
         }
         this.leftArm.rotateAngleX = Mth.cos(pLimbSwing * 0.6662F) * 1.4F * pLimbSwingAmount;

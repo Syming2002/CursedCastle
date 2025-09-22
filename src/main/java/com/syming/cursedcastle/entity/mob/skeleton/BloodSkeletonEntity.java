@@ -1,6 +1,7 @@
 package com.syming.cursedcastle.entity.mob.skeleton;
 
 import com.github.alexthe666.citadel.repack.jaad.aac.syntax.PCE;
+import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.api.IElementalWeapon;
 import com.syming.cursedcastle.damagesource.CCDamageSource;
 import com.syming.cursedcastle.effect.CCEffect;
@@ -8,6 +9,7 @@ import com.syming.cursedcastle.enchantment.CCEnchantment;
 import com.syming.cursedcastle.item.whip.UndeadKillerWhipItem;
 import com.syming.cursedcastle.entity.CCEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -91,9 +93,6 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
         return EntityDimensions.scalable(0.6F, 1.99F);
     }
 
-    /**
-     * Called when the entity is attacked.
-     */
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (pSource.getDirectEntity() instanceof Player attackingPlayer) {
@@ -105,6 +104,11 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
             }
         }
         return super.hurt(pSource, pAmount);
+    }
+
+    @Override
+    protected ResourceLocation getDefaultLootTable() {
+        return new ResourceLocation(CursedCastleMod.MOD_ID, "entities/blood_skeleton");
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.syming.cursedcastle.item.subweapon;
 
 import com.syming.cursedcastle.sound.CCSound;
 import com.syming.cursedcastle.entity.projectile.subweapon.ThrowingAxeEntity;
-import com.syming.cursedcastle.util.HolyCrossUtil;
 import com.syming.cursedcastle.util.ThrowingAxeUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;

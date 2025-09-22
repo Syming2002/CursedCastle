@@ -5,10 +5,7 @@ import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.item.CCItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -41,6 +38,13 @@ public class CCBlock {
 
     public static final RegistryObject<Block> DRACULA_CASTLE_STONE_BRICKS = registerBlock("dracula_castle_stone_bricks",
             () -> new DraculaCastleStoneBrickBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_BLACK)
+                            .strength(2.0F, 12.0F)
+                            .sound(SoundType.STONE)));
+
+    public static final RegistryObject<SlabBlock> DRACULA_CASTLE_STONE_BRICKS_SLAB = registerBlock("dracula_castle_stone_bricks_slab",
+            () -> new SlabBlock(
                     BlockBehaviour.Properties.of()
                             .mapColor(MapColor.COLOR_BLACK)
                             .strength(2.0F, 12.0F)

@@ -15,7 +15,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.ai.goal.RestrictSunGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
@@ -23,7 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class SkeletonEntity extends CCSkeletonEntity implements RangedAttackMob {
+public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements RangedAttackMob {
 
     public static final Animation THROWING_BONE_ANIMATION = Animation.create(40);
     private int throwingBoneCooldown = 0;
@@ -31,12 +30,12 @@ public class SkeletonEntity extends CCSkeletonEntity implements RangedAttackMob 
 
     private static final Animation[] ANIMATIONS = {THROWING_BONE_ANIMATION, DEATH_ANIMATION};
 
-    public SkeletonEntity(EntityType<? extends CCSkeletonEntity> pEntityType, Level pLevel) {
+    public ThrowingBoneSkeletonEntity(EntityType<? extends CCSkeletonEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    public SkeletonEntity(Level pLevel) {
-        super(CCEntity.SKELETON.get(), pLevel);
+    public ThrowingBoneSkeletonEntity(Level pLevel) {
+        super(CCEntity.THROWING_BONE_SKELETON.get(), pLevel);
     }
 
     @Override

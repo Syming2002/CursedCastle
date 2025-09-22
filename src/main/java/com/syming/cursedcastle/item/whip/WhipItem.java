@@ -92,6 +92,11 @@ public abstract class WhipItem extends Item {
     }
 
     @Override
+    public int getEnchantmentValue(ItemStack stack) {
+        return 12;
+    }
+
+    @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         return enchantment == Enchantments.SHARPNESS
                 || enchantment == Enchantments.SMITE

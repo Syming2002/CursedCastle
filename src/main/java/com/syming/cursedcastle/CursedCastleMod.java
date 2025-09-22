@@ -39,7 +39,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.joml.Vector3f;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(CursedCastleMod.MOD_ID)
@@ -98,7 +97,7 @@ public class CursedCastleMod {
                 EntityRenderers.register(CCEntity.ICE_SPIKE.get(), IceSpikeRender::new);
                 EntityRenderers.register(CCEntity.POISON_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.POISON_SHADE.get(), ShadeRender::new);
-                EntityRenderers.register(CCEntity.SKELETON.get(), SkeletonRender::new);
+                EntityRenderers.register(CCEntity.THROWING_BONE_SKELETON.get(), SkeletonRender::new);
                 EntityRenderers.register(CCEntity.THUNDER_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.THUNDER_SHADE.get(), ShadeRender::new);
                 EntityRenderers.register(CCEntity.VAMPIRE_BAT.get(), VampireBatRender::new);

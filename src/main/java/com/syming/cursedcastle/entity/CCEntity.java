@@ -2,7 +2,7 @@ package com.syming.cursedcastle.entity;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.magic.*;
-import com.syming.cursedcastle.entity.mob.skeleton.SkeletonEntity;
+import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
 import com.syming.cursedcastle.entity.projectile.ThrowingBoneEntity;
@@ -76,11 +76,11 @@ public class CCEntity {
             .updateInterval(1)
             .build("poison_shade"));
 
-    public static final RegistryObject<EntityType<SkeletonEntity>> SKELETON = ENTITY_TYPES.register("skeleton", () -> EntityType.Builder.<SkeletonEntity>of(SkeletonEntity::new, MobCategory.MONSTER)
+    public static final RegistryObject<EntityType<ThrowingBoneSkeletonEntity>> THROWING_BONE_SKELETON = ENTITY_TYPES.register("throwing_bone_skeleton", () -> EntityType.Builder.<ThrowingBoneSkeletonEntity>of(ThrowingBoneSkeletonEntity::new, MobCategory.MONSTER)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
-            .build("skeleton"));
+            .build("throwing_bone_skeleton"));
 
     public static final RegistryObject<EntityType<ThunderShadeEntity>> THUNDER_SHADE = ENTITY_TYPES.register("thunder_shade", () -> EntityType.Builder.<ThunderShadeEntity>of(ThunderShadeEntity::new, MobCategory.MONSTER)
             .setTrackingRange(64)

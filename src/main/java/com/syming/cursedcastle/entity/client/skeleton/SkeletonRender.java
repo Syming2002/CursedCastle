@@ -3,7 +3,7 @@ package com.syming.cursedcastle.entity.client.skeleton;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.CCSkeletonEntity;
-import com.syming.cursedcastle.entity.mob.skeleton.SkeletonEntity;
+import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +25,7 @@ public class SkeletonRender extends MobRenderer<CCSkeletonEntity, SkeletonModel>
 
     @Override
     public ResourceLocation getTextureLocation(CCSkeletonEntity pEntity) {
-        if (pEntity instanceof SkeletonEntity) {
+        if (pEntity instanceof ThrowingBoneSkeletonEntity) {
             return SKELETON_TEXTURE;
         } else if (pEntity instanceof BloodSkeletonEntity) {
             return BLOOD_SKELETON_TEXTURE;
