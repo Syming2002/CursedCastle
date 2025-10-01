@@ -47,7 +47,7 @@ public abstract class WhipItem extends Item {
         this.defaultModifiers = builder.build();
     }
 
-    public float getDamage() {
+    public float getAttackDamage() {
         return this.attackDamage;
     }
 

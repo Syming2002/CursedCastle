@@ -58,6 +58,7 @@ public class BloodFluidType extends FluidType {
 
     @Override
     public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+        System.out.println("InitializeClient called for " + this);
         consumer.accept(new IClientFluidTypeExtensions() {
             @Override
             public int getTintColor() {
