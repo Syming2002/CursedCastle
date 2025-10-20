@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.entity.projectile.subweapon;
 
 import com.syming.cursedcastle.item.CCItem;
-import com.syming.cursedcastle.item.subweapon.DaggerItem;
+import com.syming.cursedcastle.item.projectile.subweapon.DaggerItem;
 import com.syming.cursedcastle.entity.CCEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;

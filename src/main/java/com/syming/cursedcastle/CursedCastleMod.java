@@ -7,6 +7,7 @@ import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.enchantment.CCEnchantment;
 import com.syming.cursedcastle.entity.client.bat.familiarbat.FamiliarBatRender;
 import com.syming.cursedcastle.entity.client.friendlyzombie.ZombieFriendlyRender;
+import com.syming.cursedcastle.entity.client.grimreaper.GrimReaperRender;
 import com.syming.cursedcastle.entity.client.skeleton.SkeletonRender;
 import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.fluid.CCFluidType;
@@ -92,6 +93,7 @@ public class CursedCastleMod {
                 EntityRenderers.register(CCEntity.FIRE_PILLAR.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.FRIENDLY_ZOMBIE.get(), ZombieFriendlyRender::new);
                 EntityRenderers.register(CCEntity.FROZEN_SHADE.get(), ShadeRender::new);
+                EntityRenderers.register(CCEntity.GRIM_REAPER.get(), GrimReaperRender::new);
                 EntityRenderers.register(CCEntity.HEAT_SHADE.get(), ShadeRender::new);
                 EntityRenderers.register(CCEntity.ICE_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.ICE_SPIKE.get(), IceSpikeRender::new);

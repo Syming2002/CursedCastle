@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.entity.projectile.subweapon;
 
 import com.syming.cursedcastle.item.CCItem;
-import com.syming.cursedcastle.item.subweapon.HolyCrossItem;
+import com.syming.cursedcastle.item.projectile.subweapon.HolyCrossItem;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.projectile.CCThrowableWeapon;
 import net.minecraft.nbt.CompoundTag;

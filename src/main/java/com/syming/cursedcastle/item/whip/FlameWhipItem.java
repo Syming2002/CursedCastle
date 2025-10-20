@@ -28,7 +28,7 @@ public class FlameWhipItem extends WhipItem implements IElementalWeapon {
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
         super.hurtEnemy(pStack, pTarget, pAttacker);
         pTarget.setSecondsOnFire(3);
-        pStack.hurtAndBreak(1, pAttacker, (p_43296_) -> p_43296_.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+        pStack.hurtAndBreak(1, pAttacker, (livingEntity) -> livingEntity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         getElementalDamageSource(pStack, pTarget, pAttacker);
         return true;
     }

@@ -2,9 +2,11 @@ package com.syming.cursedcastle.entity;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.magic.*;
+import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
+import com.syming.cursedcastle.entity.projectile.ScytheProjectileEntity;
 import com.syming.cursedcastle.entity.projectile.ThrowingBoneEntity;
 import com.syming.cursedcastle.entity.projectile.subweapon.*;
 import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
@@ -63,6 +65,13 @@ public class CCEntity {
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("frozen_shade"));
+
+    public static final RegistryObject<EntityType<GrimReaperEntity>> GRIM_REAPER = ENTITY_TYPES.register("grim_reaper", () -> EntityType.Builder.<GrimReaperEntity>of(GrimReaperEntity::new, MobCategory.MONSTER)
+            .sized(0.5F, 1.875F)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .build("grim_reaper"));
 
     public static final RegistryObject<EntityType<HeatShadeEntity>> HEAT_SHADE = ENTITY_TYPES.register("heat_shade", () -> EntityType.Builder.<HeatShadeEntity>of(HeatShadeEntity::new, MobCategory.MONSTER)
             .setTrackingRange(64)
@@ -204,6 +213,12 @@ public class CCEntity {
             );
         }
     }
+
+    public static final RegistryObject<EntityType<ScytheProjectileEntity>> SCYTHE_PROJECTILE = ENTITY_TYPES.register("scythe_projectile", () -> EntityType.Builder.<ScytheProjectileEntity>of(ScytheProjectileEntity::new, MobCategory.MISC)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .build("scythe_projectile"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

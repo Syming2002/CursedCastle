@@ -2,10 +2,11 @@ package com.syming.cursedcastle.item;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.fluid.CCFluid;
+import com.syming.cursedcastle.item.projectile.ScytheProjectileItem;
+import com.syming.cursedcastle.item.projectile.subweapon.*;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.soul.SoulBulletItem;
 import com.syming.cursedcastle.item.soul.SoulGuardianItem;
-import com.syming.cursedcastle.item.subweapon.*;
 import com.syming.cursedcastle.item.whip.FlameWhipItem;
 import com.syming.cursedcastle.item.whip.LeatherWhipItem;
 import com.syming.cursedcastle.item.whip.UndeadKillerWhipItem;
@@ -302,6 +303,12 @@ public class CCItem {
     public static final RegistryObject<Item> BLOOD_BUCKET = ITEMS.register("blood_bucket",
             () -> new BucketItem(CCFluid.SOURCE_BLOOD.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
+    public static final RegistryObject<Item> SCYTHE_PROJECTILE_ITEM = ITEMS.register("scythe_projectile", ScytheProjectileItem::new);
+
+    public static final RegistryObject<Item> ANIM_SCYTHE_PROJECTILE_ITEM = ITEMS.register("anim_scythe_projectile", () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> DEATH_SCYTHE = ITEMS.register("death_scythe", DeathScytheItem::new);
+
     // Souls
 
     public static final RegistryObject<SoulGuardianItem> BAT_SOUL = ITEMS.register("bat_soul",
@@ -339,6 +346,13 @@ public class CCItem {
                     CCEntity.FROZEN_SHADE,
                     0x0350B1,
                     0x1092F9,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> GRIM_REAPER_SPAWN_EGG = ITEMS.register("grim_reaper_spawn_egg",
+            () -> new ForgeSpawnEggItem(
+                    CCEntity.GRIM_REAPER,
+                    0x171815,
+                    0xAAA398,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> HEAT_SHADE_SPAWN_EGG = ITEMS.register("heat_shade_spawn_egg",

@@ -75,6 +75,7 @@ public class CCCreativeModeTab {
                         output.accept(CCItem.DRACULA_SPAWN_EGG.get());
                         output.accept(CCItem.FAMILIAR_BAT_SPAWN_EGG.get());
                         output.accept(CCItem.FROZEN_SHADE_SPAWN_EGG.get());
+                        output.accept(CCItem.GRIM_REAPER_SPAWN_EGG.get());
                         output.accept(CCItem.HEAT_SHADE_SPAWN_EGG.get());
                         output.accept(CCItem.POISON_SHADE_SPAWN_EGG.get());
                         output.accept(CCItem.SKELETON_SPAWN_EGG.get());
@@ -84,6 +85,8 @@ public class CCCreativeModeTab {
                         // Miscellaneous Items
                         output.accept(CCItem.BLOOD_SKELETON_BONE.get());
                         output.accept(CCItem.BLOOD_BUCKET.get());
+                        output.accept(CCItem.SCYTHE_PROJECTILE_ITEM.get());
+                        output.accept(CCItem.DEATH_SCYTHE.get());
                     })
                     .build());
 

@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.syming.cursedcastle.CursedCastleMod;
-import com.syming.cursedcastle.item.subweapon.DaggerItem;
+import com.syming.cursedcastle.item.projectile.subweapon.DaggerItem;
 import com.syming.cursedcastle.entity.projectile.subweapon.DaggerEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;

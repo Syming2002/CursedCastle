@@ -1,4 +1,4 @@
-package com.syming.cursedcastle.item.subweapon;
+package com.syming.cursedcastle.item.projectile.subweapon;
 
 import com.syming.cursedcastle.sound.CCSound;
 import com.syming.cursedcastle.util.HolyCrossUtil;

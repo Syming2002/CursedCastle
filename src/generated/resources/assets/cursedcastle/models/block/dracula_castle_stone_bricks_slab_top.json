@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "cursedcastle:block/dracula_castle_stone_bricks",
+    "side": "cursedcastle:block/dracula_castle_stone_bricks",
+    "top": "cursedcastle:block/dracula_castle_stone_bricks"
+  }
+}
