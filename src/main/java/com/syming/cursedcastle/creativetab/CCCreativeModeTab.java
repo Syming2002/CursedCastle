@@ -65,6 +65,8 @@ public class CCCreativeModeTab {
                         output.accept(CCBlock.DRACULA_CASTLE_STONE.get());
                         output.accept(CCBlock.DRACULA_CASTLE_STONE_BRICKS.get());
                         output.accept(CCBlock.DRACULA_CASTLE_STONE_BRICKS_SLAB.get());
+                        output.accept(CCBlock.DRACULA_HEAD.get());
+
 
                         // Souls
                         output.accept(CCItem.BAT_SOUL.get());

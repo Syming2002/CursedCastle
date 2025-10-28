@@ -67,7 +67,7 @@ public class CCEntity {
             .build("frozen_shade"));
 
     public static final RegistryObject<EntityType<GrimReaperEntity>> GRIM_REAPER = ENTITY_TYPES.register("grim_reaper", () -> EntityType.Builder.<GrimReaperEntity>of(GrimReaperEntity::new, MobCategory.MONSTER)
-            .sized(0.5F, 1.875F)
+            .sized(0.5F, 1.99F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
@@ -86,6 +86,7 @@ public class CCEntity {
             .build("poison_shade"));
 
     public static final RegistryObject<EntityType<ThrowingBoneSkeletonEntity>> THROWING_BONE_SKELETON = ENTITY_TYPES.register("throwing_bone_skeleton", () -> EntityType.Builder.<ThrowingBoneSkeletonEntity>of(ThrowingBoneSkeletonEntity::new, MobCategory.MONSTER)
+            .sized(0.5F, 1.99F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
@@ -164,6 +165,7 @@ public class CCEntity {
 
     public static final RegistryObject<EntityType<ThrowingBoneEntity>> THROWING_BONE = ENTITY_TYPES.register("throwing_bone",
             () -> EntityType.Builder.<ThrowingBoneEntity>of(ThrowingBoneEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
                     .updateInterval(20)
                     .setCustomClientFactory(((spawnEntity, level) -> new ThrowingBoneEntity(level)))
@@ -214,11 +216,15 @@ public class CCEntity {
         }
     }
 
-    public static final RegistryObject<EntityType<ScytheProjectileEntity>> SCYTHE_PROJECTILE = ENTITY_TYPES.register("scythe_projectile", () -> EntityType.Builder.<ScytheProjectileEntity>of(ScytheProjectileEntity::new, MobCategory.MISC)
-            .setTrackingRange(64)
-            .setShouldReceiveVelocityUpdates(true)
-            .updateInterval(1)
-            .build("scythe_projectile"));
+    public static final RegistryObject<EntityType<ScytheProjectileEntity>> SCYTHE_PROJECTILE = ENTITY_TYPES.register("scythe_projectile",
+            () -> EntityType.Builder.<ScytheProjectileEntity>of(ScytheProjectileEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .setTrackingRange(64)
+                    .clientTrackingRange(4)
+                    .setShouldReceiveVelocityUpdates(true)
+                    .updateInterval(1)
+                    .setCustomClientFactory(((spawnEntity, level) -> new ScytheProjectileEntity(level)))
+                    .build("scythe_projectile"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

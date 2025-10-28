@@ -2,7 +2,6 @@ package com.syming.cursedcastle.entity.client.icespike;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.magic.IceSpikeEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -13,13 +12,13 @@ import net.minecraft.util.Mth;
 
 public class IceSpikeRender extends EntityRenderer<IceSpikeEntity> {
 
-    public static final ResourceLocation ICE_SPIKE_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/ice_spike.png");
+    public static final ResourceLocation ICE_SPIKE_TEXTURE = new ResourceLocation("textures/block/packed_ice.png");
     private final IceSpikeModel iceSpikeModel;
 
     public IceSpikeRender(EntityRendererProvider.Context pContext) {
         super(pContext);
 
-        this.iceSpikeModel = new IceSpikeModel(pContext.bakeLayer(IceSpikeModel.LAYER_LOCATION));
+        this.iceSpikeModel = new IceSpikeModel(pContext.bakeLayer(IceSpikeModel.ICE_SPIKE_LAYER));
     }
 
     @Override

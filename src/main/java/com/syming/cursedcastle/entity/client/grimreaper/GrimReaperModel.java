@@ -177,6 +177,7 @@ public class GrimReaperModel extends AdvancedEntityModel<GrimReaperEntity> imple
     @Override
     public void setupAnim(GrimReaperEntity grimReaperEntity,float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         animate(grimReaperEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+        faceTarget(pNetHeadYaw, pHeadPitch, 1.0F, this.head, this.headWear);
     }
 
     @Override
@@ -249,6 +250,48 @@ public class GrimReaperModel extends AdvancedEntityModel<GrimReaperEntity> imple
             this.rotate(this.animator, this.leftArmWear, 22.9282F, -15.067F, 39.7721F);
             this.animator.endKeyframe();
             this.animator.resetKeyframe(10);
+        } else if (this.animator.setAnimation(GrimReaperEntity.SCYTHE_ATTACK_ANIMATION)) {
+            this.animator.startKeyframe(20);
+            this.rotate(this.animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(this.animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(this.animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(this.animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
+            this.animator.setStaticKeyframe(80);
+            this.animator.endKeyframe();
+
+            this.rotate(this.animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(this.animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(this.animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(this.animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
+
+            this.animator.startKeyframe(80);
+            this.animator.endKeyframe();
+
+            this.rotate(this.animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(this.animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(this.animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(this.animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
+
+            this.animator.startKeyframe(20);
+            this.animator.endKeyframe();
+
+            this.rotate(this.animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(this.animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(this.animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(this.animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
+
+            this.animator.startKeyframe(20);
+            this.animator.endKeyframe();
+
+            this.rotate(this.animator, rightArm, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(this.animator, rightArmWear, -60.0079F, 12.4794F, 0.7185F);
+            this.rotate(this.animator, leftArm, -50.8617F, -91.9818F, -17.9605F);
+            this.rotate(this.animator, leftArmWear, -50.8617F, -91.9818F, -17.9605F);
+
+            this.animator.startKeyframe(20);
+            this.animator.endKeyframe();
+
+            this.animator.resetKeyframe(20);
         }
     }
 

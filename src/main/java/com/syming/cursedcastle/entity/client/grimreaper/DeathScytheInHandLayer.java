@@ -3,28 +3,21 @@ package com.syming.cursedcastle.entity.client.grimreaper;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import static net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY;
-
 @OnlyIn(Dist.CLIENT)
-public class DeathScytheInHandLayer extends RenderLayer<GrimReaperEntity, GrimReaperModel> {
+public class DeathScytheInHandLayer extends ItemInHandLayer<GrimReaperEntity, GrimReaperModel> {
     private final ItemInHandRenderer itemInHandRenderer;
 
     public DeathScytheInHandLayer(RenderLayerParent<GrimReaperEntity, GrimReaperModel> pRenderer, ItemInHandRenderer pItemInHandRenderer) {
-        super(pRenderer);
+        super(pRenderer, pItemInHandRenderer);
 
         this.itemInHandRenderer = pItemInHandRenderer;
     }
@@ -45,8 +38,7 @@ public class DeathScytheInHandLayer extends RenderLayer<GrimReaperEntity, GrimRe
 
             pPoseStack.scale(1.25F,1.25F, 1.25F);
 
-            ItemInHandRenderer inHandRenderer = Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer();
-            inHandRenderer.renderItem(pLivingEntity, stack, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, false, pPoseStack, pBuffer, pPackedLight);
+            this.itemInHandRenderer.renderItem(pLivingEntity, stack, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, false, pPoseStack, pBuffer, pPackedLight);
 
             pPoseStack.popPose();
         }

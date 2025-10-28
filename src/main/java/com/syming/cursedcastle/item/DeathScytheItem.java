@@ -5,9 +5,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class DeathScytheItem extends Item {
-    public DeathScytheItem() {
-        super(new Properties().stacksTo(1));
+public class DeathScytheItem extends CCWeaponItem {
+    public DeathScytheItem(Properties pProperties, int pAttackDamageModifier, float pAttackSpeedModifier, float pReachModifier) {
+        super(pProperties, pAttackDamageModifier, pAttackSpeedModifier, pReachModifier);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class DeathScytheItem extends Item {
         if (pAttacker.getRandom().nextFloat() < 0.1F) {
             pTarget.hurt(pTarget.damageSources().generic(), 16.0F);
         } else {
-            pTarget.hurt(pTarget.damageSources().generic(), 8.0F);
+            pTarget.hurt(pTarget.damageSources().generic(), this.attackDamage);
         }
 
         pStack.hurtAndBreak(1, pAttacker, (livingEntity) -> livingEntity.broadcastBreakEvent(EquipmentSlot.MAINHAND));

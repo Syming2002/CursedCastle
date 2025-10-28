@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class IceSpikeModel extends EntityModel<IceSpikeEntity> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(CursedCastleMod.MOD_ID, "ice_spike_layer"), "main");
+    public static final ModelLayerLocation ICE_SPIKE_LAYER = new ModelLayerLocation(new ResourceLocation(CursedCastleMod.MOD_ID, "ice_spike_layer"), "main");
     private final ModelPart iceSpike;
     private final ModelPart bottomIceSpike;
     private final ModelPart middleIceSpike;

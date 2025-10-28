@@ -6,7 +6,7 @@ import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.api.ICustomBossBar;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
-import com.syming.cursedcastle.network.CCBossInfoPacket;
+//import com.syming.cursedcastle.network.CCBossInfoPacket;
 import com.syming.cursedcastle.network.CCPacketHandler;
 import com.syming.cursedcastle.entity.magic.FirePillarEntity;
 import net.minecraft.core.BlockPos;
@@ -43,7 +43,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.entity.PartEntity;
 import org.jetbrains.annotations.Nullable;
 
-public class DraculaEntity extends Monster implements IAnimatedEntity, ICustomBossBar, ILivingEntityStrengthWeakness {
+public class DraculaEntity extends Monster implements IAnimatedEntity, ILivingEntityStrengthWeakness {
     private static final EntityDataAccessor<Integer> TARGET_ID = SynchedEntityData.defineId(DraculaEntity.class, EntityDataSerializers.INT);
 
     private Animation animation;
@@ -159,16 +159,12 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ICustomBo
     public void startSeenByPlayer(ServerPlayer pServerPlayer) {
         super.startSeenByPlayer(pServerPlayer);
 
-        CCPacketHandler.sendToPlayer(new CCBossInfoPacket.Display(this.bossEvent.getId(), getId()), pServerPlayer);
-
         this.bossEvent.addPlayer(pServerPlayer);
     }
 
     @Override
     public void stopSeenByPlayer(ServerPlayer pServerPlayer) {
         super.stopSeenByPlayer(pServerPlayer);
-
-        CCPacketHandler.sendToPlayer(new CCBossInfoPacket.Remove(this.bossEvent.getId(), getId()), pServerPlayer);
 
         this.bossEvent.removePlayer(pServerPlayer);
     }
@@ -612,11 +608,6 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ICustomBo
     @Override
     public Animation[] getAnimations() {
         return ANIMATIONS;
-    }
-
-    @Override
-    public @Nullable ResourceLocation getCustomBossBar() {
-        return new ResourceLocation(CursedCastleMod.MOD_ID, "textures/gui/dracula_boss_bar.png");
     }
 
     @Override

@@ -1,13 +1,22 @@
 package com.syming.cursedcastle;
 
 import com.syming.cursedcastle.block.CCBlock;
+import com.syming.cursedcastle.block.blockentity.CCBlockEntity;
+import com.syming.cursedcastle.block.head.CCHeadBlock;
 import com.syming.cursedcastle.client.CCKeybinding;
+import com.syming.cursedcastle.client.render.blockentity.CCHeadBlockEntityRender;
 import com.syming.cursedcastle.creativetab.CCCreativeModeTab;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.enchantment.CCEnchantment;
+import com.syming.cursedcastle.entity.client.CCHeadLayer;
+import com.syming.cursedcastle.entity.client.bat.familiarbat.FamiliarBatModel;
 import com.syming.cursedcastle.entity.client.bat.familiarbat.FamiliarBatRender;
+import com.syming.cursedcastle.entity.client.bat.vampirebat.VampireBatModel;
+import com.syming.cursedcastle.entity.client.dagger.DaggerModel;
+import com.syming.cursedcastle.entity.client.dracula.DraculaHeadModel;
 import com.syming.cursedcastle.entity.client.friendlyzombie.ZombieFriendlyRender;
 import com.syming.cursedcastle.entity.client.grimreaper.GrimReaperRender;
+import com.syming.cursedcastle.entity.client.icespike.IceSpikeModel;
 import com.syming.cursedcastle.entity.client.skeleton.SkeletonRender;
 import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.fluid.CCFluidType;
@@ -26,11 +35,11 @@ import com.syming.cursedcastle.entity.villager.CCVillager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.NoopRenderer;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -51,6 +60,7 @@ public class CursedCastleMod {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         CCBlock.register(modEventBus);
+        CCBlockEntity.register(modEventBus);
         CCCreativeModeTab.register(modEventBus);
         CCEffect.register(modEventBus);
         CCEnchantment.register(modEventBus);
@@ -120,6 +130,7 @@ public class CursedCastleMod {
                 }
 
                 EntityRenderers.register(CCEntity.THROWING_BONE.get(), ThrownItemRenderer::new);
+                EntityRenderers.register(CCEntity.SCYTHE_PROJECTILE.get(), ThrownItemRenderer::new);
 
                 // Fluids Render
                 ItemBlockRenderTypes.setRenderLayer(CCFluid.SOURCE_BLOOD.get(), RenderType.translucent());
@@ -132,6 +143,37 @@ public class CursedCastleMod {
                     return 0xFFFFFFFF;
                 }, CCItem.BLOOD_BUCKET.get());
             });
+        }
+
+        @SubscribeEvent
+        public static void registerBlockRenderers(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(CCBlockEntity.CC_HEAD.get(), CCHeadBlockEntityRender::new);
+        }
+
+        @SubscribeEvent
+        public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(DaggerModel.LAYER_LOCATION, DaggerModel::createBodyLayer);
+            event.registerLayerDefinition(FamiliarBatModel.FAMILIAR_BAT_LAYER, FamiliarBatModel::createBodyLayer);
+            event.registerLayerDefinition(IceSpikeModel.ICE_SPIKE_LAYER, IceSpikeModel::createBodyLayer);
+            event.registerLayerDefinition(VampireBatModel.VAMPIRE_BAT_LAYER, VampireBatModel::createBodyLayer);
+
+            event.registerLayerDefinition(CCHeadBlockEntityRender.DRACULA_HEAD_LAYER, DraculaHeadModel::createDraculaHeadLayer);
+        }
+
+        @SubscribeEvent
+        public static void registerCCHeadLayers(EntityRenderersEvent.AddLayers event) {
+            if (event.getSkin("default") instanceof PlayerRenderer playerRenderer) {
+                playerRenderer.addLayer(new CCHeadLayer<>(playerRenderer, Minecraft.getInstance().getEntityModels(), Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer()));
+            }
+
+            if (event.getSkin("slim") instanceof PlayerRenderer playerRenderer) {
+                playerRenderer.addLayer(new CCHeadLayer<>(playerRenderer, Minecraft.getInstance().getEntityModels(), Minecraft.getInstance().getEntityRenderDispatcher().getItemInHandRenderer()));
+            }
+        }
+
+        @SubscribeEvent
+        public static void createSkullModels(EntityRenderersEvent.CreateSkullModels event) {
+            event.registerSkullModel(CCHeadBlock.CCHeadTypes.DRACULA, new DraculaHeadModel(event.getEntityModelSet().bakeLayer(CCHeadBlockEntityRender.DRACULA_HEAD_LAYER)));
         }
 
         @SubscribeEvent

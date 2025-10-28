@@ -1,6 +1,7 @@
 package com.syming.cursedcastle.client.event;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.block.blockentity.CCBlockEntity;
 import com.syming.cursedcastle.client.CCKeybinding;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.network.CCPacketHandler;
@@ -8,6 +9,7 @@ import com.syming.cursedcastle.network.CCSpawnFamiliarBat;
 import com.syming.cursedcastle.network.CCSpawnFriendlyZombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,5 +41,4 @@ public class CCClientEvent {
             event.getInput().shiftKeyDown = false;
         }
     }
-
 }

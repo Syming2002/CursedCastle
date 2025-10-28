@@ -1,7 +1,9 @@
 package com.syming.cursedcastle.item;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.fluid.CCFluid;
+import com.syming.cursedcastle.item.head.CCHeadItem;
 import com.syming.cursedcastle.item.projectile.ScytheProjectileItem;
 import com.syming.cursedcastle.item.projectile.subweapon.*;
 import com.syming.cursedcastle.item.soul.Soul;
@@ -13,6 +15,7 @@ import com.syming.cursedcastle.item.whip.UndeadKillerWhipItem;
 import com.syming.cursedcastle.item.whip.vampirekiller.*;
 import com.syming.cursedcastle.item.whip.vampirekiller.tip.*;
 import com.syming.cursedcastle.entity.CCEntity;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -307,7 +310,7 @@ public class CCItem {
 
     public static final RegistryObject<Item> ANIM_SCYTHE_PROJECTILE_ITEM = ITEMS.register("anim_scythe_projectile", () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> DEATH_SCYTHE = ITEMS.register("death_scythe", DeathScytheItem::new);
+    public static final RegistryObject<Item> DEATH_SCYTHE = ITEMS.register("death_scythe", () -> new DeathScytheItem(new Item.Properties().stacksTo(1), 8, -3.6F, 5.0F));
 
     // Souls
 
@@ -317,6 +320,9 @@ public class CCItem {
     public static final RegistryObject<SoulBulletItem> ZOMBIE_SOUL = ITEMS.register("zombie_soul",
             () -> new SoulBulletItem(Soul.ZOMBIE, new Item.Properties().stacksTo(9).defaultDurability(0).rarity(Rarity.UNCOMMON)));
 
+
+    public static final RegistryObject<CCHeadItem> DRACULA_HEAD = ITEMS.register("dracula_head",
+            () -> new CCHeadItem(CCBlock.DRACULA_HEAD.get(), CCBlock.DRACULA_WALL_HEAD.get(), Direction.DOWN));
 
     // Spawn Eggs
 

@@ -1,18 +1,26 @@
 package com.syming.cursedcastle.block;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.block.head.CCHeadBlock;
+import com.syming.cursedcastle.block.head.CCWallHeadBlock;
+import com.syming.cursedcastle.client.render.item.CCHeadItemRender;
 import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.item.head.CCHeadItem;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class CCBlock {
@@ -49,6 +57,13 @@ public class CCBlock {
                             .mapColor(MapColor.COLOR_BLACK)
                             .strength(2.0F, 12.0F)
                             .sound(SoundType.STONE)));
+
+    public static final RegistryObject<Block> DRACULA_HEAD = BLOCKS.register("dracula_head",
+            () -> new CCHeadBlock(CCHeadBlock.CCHeadTypes.DRACULA));
+
+
+    public static final RegistryObject<Block> DRACULA_WALL_HEAD = BLOCKS.register("dracula_wall_head",
+            () -> new CCWallHeadBlock(CCHeadBlock.CCHeadTypes.DRACULA));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> registry = BLOCKS.register(name, block);

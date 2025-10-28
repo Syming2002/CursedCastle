@@ -7,14 +7,22 @@ import com.github.alexthe666.citadel.client.model.basic.BasicModelPart;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.CCSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class SkeletonModel extends AdvancedEntityModel<CCSkeletonEntity> {
 
-    protected final AdvancedModelBox skeleton;
+    public static final ModelLayerLocation SKELETON_LAYER = new ModelLayerLocation(new ResourceLocation(CursedCastleMod.MOD_ID, "skeleton"), "main");
+
+//    protected final AdvancedModelBox skeleton;
     protected final AdvancedModelBox head;
     protected final AdvancedModelBox headWear;
     protected final AdvancedModelBox body;
@@ -27,66 +35,81 @@ public class SkeletonModel extends AdvancedEntityModel<CCSkeletonEntity> {
 
     public SkeletonModel() {
         this.texWidth = 64;
-        this.texHeight = 64;
+        this.texHeight = 32;
 
-        this.skeleton = new AdvancedModelBox(this, "skeleton");
-        this.skeleton.setPos(0.0F, 24.0F, 0.0F);
+//        this.skeleton = new AdvancedModelBox(this, "skeleton");
+//        this.skeleton.setPos(0.0F, 24.0F, 0.0F);
 
         this.head = new AdvancedModelBox(this, "head");
-        this.head.setPos(0.0F, -28.0F, 0.0F);
+        this.head.setPos(0.0F, 0.0F, 0.0F);
         this.head.setTextureOffset(0, 0)
-                .addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F);
-        this.skeleton.addChild(this.head);
+                .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F);
 
         this.headWear = new AdvancedModelBox(this, "headWear");
-        this.headWear.setPos(0.0F, -28.0F, 0.0F);
-        this.headWear.setTextureOffset(0, 16)
-                .addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.5F);
-        this.skeleton.addChild(this.headWear);
+        this.headWear.setPos(0.0F, 0.0F, 0.0F);
+        this.headWear.setTextureOffset(32, 0)
+                .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.5F);
 
         this.body = new AdvancedModelBox(this, "body");
-        this.body.setPos(0.0F, -18.0F, 0.0F);
-        this.body.setTextureOffset(0, 32)
-                .addBox(-4.0F, -6.0F, -2.0F, 8.0F, 12.0F, 4.0F);
-        this.skeleton.addChild(this.body);
+        this.body.setPos(0.0F, 0.0F, 0.0F);
+        this.body.setTextureOffset(16, 16)
+                .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, 0.0F);
 
         this.rightArm = new AdvancedModelBox(this, "rightArm");
-        this.rightArm.setPos(-5.0F, -22.0F, 0.0F);
-        this.rightArm.setTextureOffset(32, 0)
+        this.rightArm.setPos(-5.0F, 2.0F, 0.0F);
+        this.rightArm.setTextureOffset(40, 16)
                 .addBox(-1.0F, -2.0F, -1.0F, 2.0F, 12.0F, 2.0F);
-        this.skeleton.addChild(this.rightArm);
 
         this.leftArm = new AdvancedModelBox(this, "leftArm");
-        this.leftArm.setPos(5.0F, -22.0F, 0.0F);
-        this.leftArm.setTextureOffset(32, 14)
+        this.leftArm.setPos(5.0F, 2.0F, 0.0F);
+        this.leftArm.setTextureOffset(40, 16)
                 .addBox(-1.0F, -2.0F, -1.0F, 2.0F, 12.0F, 2.0F);
-        this.skeleton.addChild(this.leftArm);
+        this.leftArm.mirror = true;
 
         this.rightLeg = new AdvancedModelBox(this, "rightLeg");
-        this.rightLeg.setPos(-2.0F, -12.0F, 0.0F);
-        this.rightLeg.setTextureOffset(24, 32)
+        this.rightLeg.setPos(-2.0F, 12.0F, 0.0F);
+        this.rightLeg.setTextureOffset(0, 16)
                 .addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F);
-        this.skeleton.addChild(this.rightLeg);
 
         this.leftLeg = new AdvancedModelBox(this, "leftLeg");
-        this.leftLeg.setPos(2.0F, -12.0F, 0.0F);
-        this.leftLeg.setTextureOffset(32, 28)
+        this.leftLeg.setPos(2.0F, 12.0F, 0.0F);
+        this.leftLeg.setTextureOffset(0, 16)
                 .addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F);
-        this.skeleton.addChild(this.leftLeg);
+        this.leftLeg.mirror = true;
 
         this.animator = ModelAnimator.create();
         updateDefaultPose();
     }
 
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+        partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE), PartPose.offset(0.0F, 0.0F, 0.0F));
+        partdefinition.addOrReplaceChild("headWear", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE.extend(0.5F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE), PartPose.offset(0.0F, 0.0F, 0.0F));
+        partdefinition.addOrReplaceChild("rightArm", CubeListBuilder.create().texOffs(40, 16).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offset(-5.0F, 2.0F, 0.0F));
+        partdefinition.addOrReplaceChild("leftArm", CubeListBuilder.create().texOffs(40, 16).mirror().addBox(-1.0F, -2.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offset(5.0F, 2.0F, 0.0F));
+        partdefinition.addOrReplaceChild("rightLeg", CubeListBuilder.create().texOffs(0, 16).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offset(-2.0F, 12.0F, 0.0F));
+        partdefinition.addOrReplaceChild("leftLeg", CubeListBuilder.create().texOffs(0, 16).mirror().addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F), PartPose.offset(2.0F, 12.0F, 0.0F));
+        return LayerDefinition.create(meshdefinition, 64, 32);
+    }
+
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        this.skeleton.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        this.head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        this.headWear.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        this.body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        this.rightArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        this.leftArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        this.rightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        this.leftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
     @Override
     public Iterable<AdvancedModelBox> getAllParts() {
         return ImmutableList.of(
                 this.head,
+                this.headWear,
                 this.body,
                 this.rightArm,
                 this.leftArm,
@@ -97,7 +120,13 @@ public class SkeletonModel extends AdvancedEntityModel<CCSkeletonEntity> {
 
     @Override
     public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(this.skeleton);
+        return ImmutableList.of(this.head,
+                this.headWear,
+                this.body,
+                this.rightArm,
+                this.leftArm,
+                this.rightLeg,
+                this.leftLeg);
     }
 
     @Override

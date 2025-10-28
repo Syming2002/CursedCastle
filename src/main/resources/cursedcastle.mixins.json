@@ -9,6 +9,5 @@
 
   ],
   "client": [
-    "client.BossHealthOverlayMixin"
   ]
 }

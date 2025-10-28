@@ -13,6 +13,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -65,16 +67,18 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
     public void tickDeath() {
         super.tickDeath();
 
-        if (this.deathTime == 55 && !this.level().isClientSide() && (!(this.lastHitItem.getItem() instanceof UndeadKillerWhipItem || this.lastHitItem.getEnchantmentLevel(CCEnchantment.BLOOD_SKELETON_KILLER.get()) == 1))) {
+        if (this.deathTime == 55 && this.getLastDamageSource() == damageSources().onFire() && !this.level().isClientSide() && (!(this.lastHitItem.getItem() instanceof UndeadKillerWhipItem || this.lastHitItem.getEnchantmentLevel(CCEnchantment.BLOOD_SKELETON_KILLER.get()) == 1))) {
             BloodSkeletonEntity bloodSkeleton = new BloodSkeletonEntity(this.level());
             bloodSkeleton.copyPosition(this);
             bloodSkeleton.setHealth(10.0F);
             this.level().addFreshEntity(bloodSkeleton);
             discard();
         }
-        if (this.deathTime >= 20 && (this.lastHitItem.getItem() instanceof UndeadKillerWhipItem || this.lastHitItem.getEnchantmentLevel(CCEnchantment.BLOOD_SKELETON_KILLER.get()) == 1)) {
-            this.level().broadcastEntityEvent(this, (byte) 60);
-            this.remove(Entity.RemovalReason.KILLED);
+        if (this.lastHitItem != null) {
+            if (this.deathTime >= 20 || (this.lastHitItem.getItem() instanceof UndeadKillerWhipItem || this.lastHitItem.getEnchantmentLevel(CCEnchantment.BLOOD_SKELETON_KILLER.get()) == 1)) {
+                this.level().broadcastEntityEvent(this, (byte) 60);
+                this.remove(Entity.RemovalReason.KILLED);
+            }
         }
     }
 

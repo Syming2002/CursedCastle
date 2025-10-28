@@ -8,7 +8,6 @@ import com.syming.cursedcastle.api.IElementalWeapon;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
 import com.syming.cursedcastle.damagesource.CCDamageSource;
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
 import com.syming.cursedcastle.entity.projectile.ScytheProjectileEntity;
 import com.syming.cursedcastle.item.CCItem;
 import net.minecraft.core.BlockPos;
@@ -16,8 +15,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerBossEvent;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.DifficultyInstance;
@@ -25,31 +23,38 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
-import net.minecraft.world.entity.animal.FlyingAnimal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public class GrimReaperEntity extends Monster implements IAnimatedEntity, ICustomBossBar, ILivingEntityStrengthWeakness, FlyingAnimal {
+import java.util.EnumSet;
+
+public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntity, ICustomBossBar, ILivingEntityStrengthWeakness, RangedAttackMob {
     private Animation animation;
 
     public static final Animation MELEE_ATTACK_ANIMATION = Animation.create(35);
     private int meleeAttackCooldownTick = 0;
     public static final int MELEE_ATTACK_COOLDOWN = 40;
 
-    public static final Animation SCYTHE_ATTACK_ANIMATION = Animation.create(200);
+    public static final Animation SCYTHE_ATTACK_ANIMATION = Animation.create(260);
     private int scytheAttackCooldownTick = 0;
     public static final int SCYTHE_PROJECTILE_ATTACK_COOLDOWN = 100;
 
@@ -58,37 +63,73 @@ public class GrimReaperEntity extends Monster implements IAnimatedEntity, ICusto
     private int animationTick;
     private int tickCounter = 0;
 
+    private double lockedTargetX;
+    private double lockedTargetY;
+    private double lockedTargetZ;
+    private boolean hasLockedTargetPos = false;
+
     private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.cursedcastle.grim_reaper"), BossEvent.BossBarColor.WHITE, BossEvent.BossBarOverlay.PROGRESS);
 
-    public GrimReaperEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
+    public GrimReaperEntity(EntityType<? extends FlyingMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
 
         this.navigation = new FlyingPathNavigation(this, pLevel);
+
+        this.moveControl = new FlyingMoveControl(this, 10, true);
+
+        this.xpReward = 444;
     }
 
     public GrimReaperEntity(Level pLevel) {
         this(CCEntity.GRIM_REAPER.get(), pLevel);
     }
 
+    @Override
+    protected PathNavigation createNavigation(Level pLevel) {
+        return this.navigation;
+    }
+
     public static AttributeSupplier.Builder createMobAttributes() {
         return PathfinderMob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH,  444.0D)
-                .add(Attributes.FOLLOW_RANGE, 40.0D)
+                .add(Attributes.FOLLOW_RANGE, 100.0D)
                 .add(Attributes.ATTACK_SPEED, 1.2D)
-                .add(Attributes.MOVEMENT_SPEED, 0.5D)
+                .add(Attributes.MOVEMENT_SPEED, 1.0D)
                 .add(Attributes.ATTACK_DAMAGE, 10.0D)
-                .add(Attributes.FLYING_SPEED, 0.5D);
+                .add(Attributes.FLYING_SPEED, 1.0D);
     }
 
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(5, new FloatGoal(this));
-//        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+
+        this.goalSelector.addGoal(5, new RandomFloatGoal(this, 5.0D, 8.0D));
+        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Villager>(this, Villager.class, true));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false));
+        this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.2D, 100, 16.0F));
 
+    }
+
+    @Override
+    public void startSeenByPlayer(ServerPlayer pServerPlayer) {
+        super.startSeenByPlayer(pServerPlayer);
+
+        this.bossEvent.addPlayer(pServerPlayer);
+    }
+
+    @Override
+    public void stopSeenByPlayer(ServerPlayer pServerPlayer) {
+        super.stopSeenByPlayer(pServerPlayer);
+
+        this.bossEvent.removePlayer(pServerPlayer);
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+
+        this.bossEvent.setProgress(getHealth() / getMaxHealth());
     }
 
     @Override
@@ -142,11 +183,25 @@ public class GrimReaperEntity extends Monster implements IAnimatedEntity, ICusto
             if (getAnimation() == GrimReaperEntity.MELEE_ATTACK_ANIMATION) {
 
                 double distToEnemySqr = distanceToSqr(target);
-                double attackReachSqr = getMeleeAttackRangeSqr(target);
+                double attackReachSqr = getMeleeAttackRangeSqr(target) * 5.0D;
                 int animationTick = getAnimationTick();
 
-                if (animationTick < 25) {
-                    this.getNavigation().moveTo(target, 2.5D);
+                if (animationTick == 1 && !this.hasLockedTargetPos) {
+
+                    this.lockedTargetX = target.getX();
+                    this.lockedTargetY = target.getY();
+                    this.lockedTargetZ = target.getZ();
+                    this.hasLockedTargetPos = true;
+
+
+                    double boostedSpeed = 1.5D;
+                    getNavigation().moveTo(target, boostedSpeed);
+                }
+
+                if (animationTick < 25 && this.hasLockedTargetPos) {
+                    Vec3 targetPos = new Vec3(this.lockedTargetX, this.lockedTargetY, this.lockedTargetZ);
+                    Vec3 dir = targetPos.subtract(position()).normalize();
+                    setDeltaMovement(dir.scale(0.6D));
                 }
 
                 if (animationTick == 25 && distToEnemySqr <= attackReachSqr) {
@@ -171,8 +226,12 @@ public class GrimReaperEntity extends Monster implements IAnimatedEntity, ICusto
                         double retreatY = getY() + y * 2.5D;
                         double retreatZ = getZ() + z * 2.5D;
 
-                        getMoveControl().setWantedPosition(retreatX, retreatY, retreatZ, 5.0F);
+                        getNavigation().moveTo(retreatX, retreatY, retreatZ, 10.0D);
                     }
+                }
+
+                if (getNavigation().isDone() && this.hasLockedTargetPos) {
+                    this.hasLockedTargetPos = false;
                 }
 
             } else if (getAnimation() == GrimReaperEntity.SCYTHE_ATTACK_ANIMATION) {
@@ -192,7 +251,7 @@ public class GrimReaperEntity extends Monster implements IAnimatedEntity, ICusto
 
                         Vec3 direction = targetPosition.subtract(randomPosition).normalize();
 
-                        ScytheProjectileEntity scytheProjectile = new ScytheProjectileEntity(this.level());
+                        ScytheProjectileEntity scytheProjectile = new ScytheProjectileEntity(this, this.level());
                         scytheProjectile.setPos(randomPosition.x, randomPosition.y, randomPosition.z);
                         scytheProjectile.shoot(direction.x, direction.y, direction.z, 0.75F, 0.1F);
 
@@ -223,7 +282,7 @@ public class GrimReaperEntity extends Monster implements IAnimatedEntity, ICusto
 
     @Override
     public void setAnimation(Animation animation) {
-
+        this.animation = animation;
     }
 
     @Override
@@ -253,11 +312,6 @@ public class GrimReaperEntity extends Monster implements IAnimatedEntity, ICusto
     }
 
     @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return true;
-    }
-
-    @Override
     public boolean hasStrength(DamageSource source, float damageAmount) {
         LivingEntity attacker = getLastAttacker();
         LivingEntity target = getTarget();
@@ -273,9 +327,71 @@ public class GrimReaperEntity extends Monster implements IAnimatedEntity, ICusto
         return false;
     }
 
+    @Override
+    public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
+        return false;
+    }
 
     @Override
-    public boolean isFlying() {
-        return !onGround();
+    protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {
+
+    }
+
+    @Override
+    public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
+
+    }
+
+    static class RandomFloatGoal extends Goal {
+        private final GrimReaperEntity grimReaper;
+        private final double speed;
+        private final double radius;
+        private double targetX;
+        private double targetY;
+        private double targetZ;
+        private int cooldown;
+
+        public RandomFloatGoal(GrimReaperEntity grimReaper, double speed, double radius) {
+            this.grimReaper = grimReaper;
+            this.speed = speed;
+            this.radius = radius;
+            this.setFlags(EnumSet.of(Flag.MOVE));
+        }
+
+        @Override
+        public boolean canUse() {
+            if (this.grimReaper.getAnimation() != GrimReaperEntity.MELEE_ATTACK_ANIMATION || this.grimReaper.getAnimation() != GrimReaperEntity.SCYTHE_ATTACK_ANIMATION) {
+                if (this.grimReaper.isVehicle()) return false;
+                if (--this.cooldown > 0) return false;
+                this.cooldown = this.grimReaper.getRandom().nextInt(40) + 20; // every 1–3 seconds
+
+                Vec3 randomPos = getRandomPosition();
+                if (randomPos == null) return false;
+
+                this.targetX = randomPos.x;
+                this.targetY = randomPos.y;
+                this.targetZ = randomPos.z;
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return !this.grimReaper.getNavigation().isDone();
+        }
+
+        @Override
+        public void start() {
+            this.grimReaper.getNavigation().moveTo(this.targetX, this.targetY, this.targetZ, this.speed);
+        }
+
+        private Vec3 getRandomPosition() {
+            double x = this.grimReaper.getX() + (this.grimReaper.getRandom().nextDouble() * 2 - 1) * this.radius;
+            double y = this.grimReaper.getY() + (this.grimReaper.getRandom().nextDouble() * 2 - 1) * (this.radius / 2);
+            double z = this.grimReaper.getZ() + (this.grimReaper.getRandom().nextDouble() * 2 - 1) * this.radius;
+            return new Vec3(x, y, z);
+        }
     }
 }

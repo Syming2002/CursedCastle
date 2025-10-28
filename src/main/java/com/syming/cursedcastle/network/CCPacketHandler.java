@@ -17,17 +17,17 @@ public class CCPacketHandler {
     private static int id;
 
     public static synchronized void register() {
-        INSTANCE.messageBuilder(CCBossInfoPacket.Display.class, id++)
-                .encoder(CCBossInfoPacket.Display::encode)
-                .decoder(CCBossInfoPacket.Display::decode)
-                .consumerMainThread(CCBossInfoPacket.Display::handle)
-                .add();
-
-        INSTANCE.messageBuilder(CCBossInfoPacket.Remove.class, id++)
-                .encoder(CCBossInfoPacket.Remove::encode)
-                .decoder(CCBossInfoPacket.Remove::decode)
-                .consumerMainThread(CCBossInfoPacket.Remove::handle)
-                .add();
+//        INSTANCE.messageBuilder(CCBossInfoPacket.Display.class, id++)
+//                .encoder(CCBossInfoPacket.Display::encode)
+//                .decoder(CCBossInfoPacket.Display::decode)
+//                .consumerMainThread(CCBossInfoPacket.Display::handle)
+//                .add();
+//
+//        INSTANCE.messageBuilder(CCBossInfoPacket.Remove.class, id++)
+//                .encoder(CCBossInfoPacket.Remove::encode)
+//                .decoder(CCBossInfoPacket.Remove::decode)
+//                .consumerMainThread(CCBossInfoPacket.Remove::handle)
+//                .add();
 
         INSTANCE.messageBuilder(CCMessageHurtMultiPart.class, id++)
                 .encoder(CCMessageHurtMultiPart::write)
