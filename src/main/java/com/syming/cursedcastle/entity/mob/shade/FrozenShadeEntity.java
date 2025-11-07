@@ -143,7 +143,7 @@ public class FrozenShadeEntity extends ShadeEntity {
                         Vec3 pos = getRandomFrontOffset(this.random);
                         IceSpikeEntity iceSpike = new IceSpikeEntity(this.level());
                         iceSpike.setOwner(this);
-                        iceSpike.setPosRaw(pos.x, pos.y, pos.z);
+                        iceSpike.setPos(pos.x, pos.y, pos.z);
                         this.level().addFreshEntity(iceSpike);
 
                         this.iceSpikes.add(iceSpike);
@@ -153,15 +153,29 @@ public class FrozenShadeEntity extends ShadeEntity {
                     }
                 }
 
-                if (this.iceSpikesSpawned == 3 && this.iceSpikeSpawnTimer == 0) {
+                if (this.iceSpikesSpawned == 3 && this.iceSpikeSpawnTimer <= 0) {
                     if (!this.iceSpikes.isEmpty()) {
                         for (IceSpikeEntity iceSpike : this.iceSpikes) {
                             if (iceSpike.isAlive()) {
                                 Vec3 headAim = target.position().add(0, target.getEyeHeight() * 0.8D, 0);
                                 Vec3 direction = headAim.subtract(iceSpike.position()).normalize().scale(0.5D);
+
+                                double dx = direction.x;
+                                double dy = direction.y;
+                                double dz = direction.z;
+
+                                float yaw = (float)(Mth.atan2(dz, dx) * (180F / Math.PI)) - 90F;
+                                float pitch = (float)(-(Mth.atan2(dy, Math.sqrt(dx * dx + dz * dz)) * (180F / Math.PI)));
+
+                                iceSpike.setYRot(yaw);
+                                iceSpike.setXRot(pitch);
+                                iceSpike.yRotO = yaw;
+                                iceSpike.xRotO = pitch;
+
+                                iceSpike.setLaunched(true);
+
                                 iceSpike.setDeltaMovement(direction);
                                 iceSpike.hasImpulse = true;
-                                iceSpike.lockRotation();
                             }
                         }
                         this.iceSpikes.clear();

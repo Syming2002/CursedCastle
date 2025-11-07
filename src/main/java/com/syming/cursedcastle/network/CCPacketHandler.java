@@ -46,6 +46,12 @@ public class CCPacketHandler {
                 .decoder(CCSpawnFamiliarBat::decode)
                 .consumerMainThread(CCSpawnFamiliarBat.Handler::handle)
                 .add();
+
+        INSTANCE.messageBuilder(CCTeleportEntity.class, id++)
+                .encoder(CCTeleportEntity::encode)
+                .decoder(CCTeleportEntity::decode)
+                .consumerMainThread(CCTeleportEntity.Handler::handle)
+                .add();
     }
 
     public static void sendToPlayer(Object message, ServerPlayer player) {

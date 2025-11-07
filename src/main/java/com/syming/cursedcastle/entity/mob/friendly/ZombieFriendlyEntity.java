@@ -1,6 +1,7 @@
 package com.syming.cursedcastle.entity.mob.friendly;
 
 import com.syming.cursedcastle.entity.CCEntity;
+import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -44,8 +45,8 @@ public class ZombieFriendlyEntity extends Zombie {
     protected void addBehaviourGoals() {
         this.goalSelector.addGoal(2, new ZombieAttackGoal(this, (double)1.0F, false));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, (double)1.0F));
-        this.goalSelector.addGoal(2, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 5, false, true, (livingEntity) -> {
-            return !(livingEntity instanceof ZombieFriendlyEntity);
+        this.goalSelector.addGoal(2, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 10, true, false, (livingEntity) -> {
+            return !(livingEntity instanceof ZombieFriendlyEntity) && !(livingEntity instanceof FamiliarBatEntity);
         }));
     }
 

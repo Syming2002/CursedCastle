@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "cursedCastle": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "cursedcastle:textures/block/dracula_castle_stone_bricks.png",
+    "description": {
+      "translate": "advancements.cursedcastle.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "cursedcastle:dracula_castle_stone_bricks"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.cursedcastle.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "cursedCastle"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

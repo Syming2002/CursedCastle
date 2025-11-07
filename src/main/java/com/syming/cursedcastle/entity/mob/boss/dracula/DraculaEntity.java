@@ -458,7 +458,7 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ILivingEn
             double d1 = target.getY() + (double)(this.random.nextInt(16) - 8);
             double d2 = target.getZ() + (this.random.nextDouble() - 0.5D) * radius;
 
-            this.teleportTo(d0, d1, d2);
+            this.randomTeleport(d0, d1, d2, true);
         }
     }
 

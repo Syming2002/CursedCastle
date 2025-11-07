@@ -3,24 +3,18 @@ package com.syming.cursedcastle.block;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.block.head.CCHeadBlock;
 import com.syming.cursedcastle.block.head.CCWallHeadBlock;
-import com.syming.cursedcastle.client.render.item.CCHeadItemRender;
 import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.item.CCItem;
-import com.syming.cursedcastle.item.head.CCHeadItem;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class CCBlock {

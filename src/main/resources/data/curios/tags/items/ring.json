@@ -1,4 +1,4 @@
 {
   "replace": false,
-  "values": ["cursedcastle:zombie_soul", "cursedcastle:bat_soul"]
+  "values": ["cursedcastle:bat_soul", "cursedcastle:enderman_soul", "cursedcastle:zombie_soul"]
 }

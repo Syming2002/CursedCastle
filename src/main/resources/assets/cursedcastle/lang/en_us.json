@@ -1,4 +1,11 @@
 {
+  "advancements.cursedcastle.root.title": "Welcome to Cursed Castle",
+  "advancements.cursedcastle.root.description": "Join a world with Cursed Castle installed",
+
+  "advancements.cursedcastle.leatherWhip.title": "A leather weapon",
+  "advancements.cursedcastle.leatherWhip.description": "Get a leather whip",
+
+
   "block.cursedcastle.dracula_castle_cobblestone": "Dracula's Castle Cobblestone",
   "block.cursedcastle.dracula_castle_stone": "Dracula's Castle Stone",
   "block.cursedcastle.dracula_castle_stone_bricks": "Dracula's Castle Stone Bricks",

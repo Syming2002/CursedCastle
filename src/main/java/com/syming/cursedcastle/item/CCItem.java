@@ -7,8 +7,8 @@ import com.syming.cursedcastle.item.head.CCHeadItem;
 import com.syming.cursedcastle.item.projectile.ScytheProjectileItem;
 import com.syming.cursedcastle.item.projectile.subweapon.*;
 import com.syming.cursedcastle.item.soul.Soul;
-import com.syming.cursedcastle.item.soul.SoulBulletItem;
-import com.syming.cursedcastle.item.soul.SoulGuardianItem;
+import com.syming.cursedcastle.item.soul.SoulItem;
+import com.syming.cursedcastle.item.soul.SoulType;
 import com.syming.cursedcastle.item.whip.FlameWhipItem;
 import com.syming.cursedcastle.item.whip.LeatherWhipItem;
 import com.syming.cursedcastle.item.whip.UndeadKillerWhipItem;
@@ -22,6 +22,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CCItem {
 
@@ -314,11 +317,13 @@ public class CCItem {
 
     // Souls
 
-    public static final RegistryObject<SoulGuardianItem> BAT_SOUL = ITEMS.register("bat_soul",
-            () -> new SoulGuardianItem(Soul.BAT, new Item.Properties().stacksTo(9).defaultDurability(0).rarity(Rarity.UNCOMMON)));
+    public static final Map<Soul, RegistryObject<SoulItem>> SOUL_TYPES = new HashMap<>();
 
-    public static final RegistryObject<SoulBulletItem> ZOMBIE_SOUL = ITEMS.register("zombie_soul",
-            () -> new SoulBulletItem(Soul.ZOMBIE, new Item.Properties().stacksTo(9).defaultDurability(0).rarity(Rarity.UNCOMMON)));
+    static {
+        for (Soul soul : Soul.values()) {
+            SOUL_TYPES.put(soul, ITEMS.register(soul.getName() + '_' + "soul", () -> new SoulItem(soul, new Item.Properties().stacksTo(16).rarity(soul.getRarity()))));
+        }
+    }
 
 
     public static final RegistryObject<CCHeadItem> DRACULA_HEAD = ITEMS.register("dracula_head",
@@ -359,6 +364,13 @@ public class CCItem {
                     CCEntity.GRIM_REAPER,
                     0x171815,
                     0xAAA398,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> HARPY_SPAWN_EGG = ITEMS.register("harpy_spawn_egg",
+            () -> new ForgeSpawnEggItem(
+                    CCEntity.HARPY,
+                    0xFFDEB5,
+                    0x006B6B,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> HEAT_SHADE_SPAWN_EGG = ITEMS.register("heat_shade_spawn_egg",

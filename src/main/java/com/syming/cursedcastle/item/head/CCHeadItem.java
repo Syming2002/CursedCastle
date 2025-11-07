@@ -1,6 +1,6 @@
 package com.syming.cursedcastle.item.head;
 
-import com.syming.cursedcastle.client.render.item.CCHeadItemRender;
+import com.syming.cursedcastle.client.renderer.item.CCHeadItemRender;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.Rarity;

@@ -1,0 +1,39 @@
+{
+  "parent": "cursedcastle:root",
+  "criteria": {
+    "leatherWhip": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cursedcastle:leather_whip"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.cursedcastle.leatherWhip.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "cursedcastle:leather_whip",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.cursedcastle.leatherWhip.title"
+    }
+  },
+  "requirements": [
+    [
+      "leatherWhip"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

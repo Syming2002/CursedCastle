@@ -1,6 +1,7 @@
 package com.syming.cursedcastle.event;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.entity.mob.HarpyEntity;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
 import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
@@ -35,6 +36,7 @@ public class CCCommonEvent {
         event.put(CCEntity.FROZEN_SHADE.get(), ShadeEntity.createMobAttributes().build());
         event.put(CCEntity.FRIENDLY_ZOMBIE.get(), ZombieFriendlyEntity.createMobAttributes().build());
         event.put(CCEntity.GRIM_REAPER.get(), GrimReaperEntity.createMobAttributes().build());
+        event.put(CCEntity.HARPY.get(), HarpyEntity.createHarpyAttributes().build());
         event.put(CCEntity.HEAT_SHADE.get(), ShadeEntity.createMobAttributes().build());
         event.put(CCEntity.POISON_SHADE.get(), ShadeEntity.createMobAttributes().build());
         event.put(CCEntity.THROWING_BONE_SKELETON.get(), ThrowingBoneSkeletonEntity.createMobAttributes().build());

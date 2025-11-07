@@ -2,6 +2,7 @@ package com.syming.cursedcastle.datagen;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.loot.AddSoulModifier;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +23,6 @@ public class CCGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                 new LootTableIdCondition.Builder(new ResourceLocation("entities/zombie")).build(),
                 LootItemKilledByPlayerCondition.killedByPlayer().build(),
                 LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(1.0F, 0.33F).build()
-        }, CCItem.ZOMBIE_SOUL.get()));
+        }, CCItem.SOUL_TYPES.get(Soul.ZOMBIE).get()));
     }
 }

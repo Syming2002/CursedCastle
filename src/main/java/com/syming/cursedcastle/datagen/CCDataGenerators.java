@@ -24,6 +24,7 @@ public class CCDataGenerators {
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        DataGenerator.PackGenerator packGenerator = generator.getVanillaPack(true);
 
         generator.addProvider(event.includeClient(), new CCBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new CCBlockModelProvider(packOutput, existingFileHelper));
@@ -39,6 +40,8 @@ public class CCDataGenerators {
 
         generator.addProvider(event.includeServer(), new CCPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
 
+        // Advancements
+        packGenerator.addProvider(output -> new CCAdvancementGenerator(output, existingFileHelper));
 //        generator.addProvider(event.includeServer(), new CCGlobalLootModifiersProvider(packOutput));
     }
 }

@@ -2,6 +2,7 @@ package com.syming.cursedcastle.entity.mob.bat.familiar;
 
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.mob.bat.CCBatEntity;
+import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -29,6 +30,7 @@ public class FamiliarBatEntity extends CCBatEntity implements OwnableEntity {
     public FamiliarBatEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.summoner = pLevel.getPlayerByUUID(getUUID());
+        this.noPhysics = true;
 
     }
 
@@ -42,15 +44,15 @@ public class FamiliarBatEntity extends CCBatEntity implements OwnableEntity {
 
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, true));
         this.goalSelector.addGoal(2, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(2, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 5, false, true, (livingEntity) -> {
-            return !(livingEntity instanceof FamiliarBatEntity);
+        this.goalSelector.addGoal(2, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 10, true, false, (livingEntity) -> {
+            return !(livingEntity instanceof FamiliarBatEntity) && !(livingEntity instanceof ZombieFriendlyEntity);
         }));
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return PathfinderMob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 2.0D)
-                .add(Attributes.ATTACK_SPEED, 0.2D)
+                .add(Attributes.ATTACK_SPEED, 1.2D)
                 .add(Attributes.ATTACK_DAMAGE, 1.0D);
     }
 

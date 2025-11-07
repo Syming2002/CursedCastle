@@ -58,7 +58,7 @@ public class FireBreathEntity extends MagicAttackEntity {
 
                 for (LivingEntity entityHit : entitiesHit) {
                     if (isYawCheck(entityHit)) {
-                        entityHit.hurt(entityHit.damageSources().magic(), 1.0F);
+                        entityHit.hurt(entityHit.damageSources().onFire(), 1.0F);
                         entityHit.setSecondsOnFire(4);
                         System.out.println("Target is Damaged and Burned");
                     }

@@ -72,7 +72,7 @@ public abstract class ShadeEntity extends FlyingMob implements IAnimatedEntity, 
 
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Villager>(this, Villager.class, true));
-        this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 100, 15.0F));
+        this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 100, 16.0F));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
     }
@@ -91,7 +91,6 @@ public abstract class ShadeEntity extends FlyingMob implements IAnimatedEntity, 
         LivingEntity target = getTarget();
 
         if (target != null) {
-            getLookControl().setLookAt(target, 30.0F, 30.0F);
             if (this instanceof ThunderShadeEntity ? distanceToSqr(target) <= 2.5F : distanceToSqr(target) <= 6.0F && getAnimation() == NO_ANIMATION && this.repulseAnimationCooldown <= 0 && isAlive()) {
                 setAnimation(REPULSE_ATTACK_ANIMATION);
                 this.repulseAnimationCooldown = REPULSE_ATTACK_COOLDOWN;

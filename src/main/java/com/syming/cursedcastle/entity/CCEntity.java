@@ -2,6 +2,7 @@ package com.syming.cursedcastle.entity;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.magic.*;
+import com.syming.cursedcastle.entity.mob.HarpyEntity;
 import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
@@ -73,6 +74,13 @@ public class CCEntity {
             .updateInterval(1)
             .build("grim_reaper"));
 
+    public static final RegistryObject<EntityType<HarpyEntity>> HARPY = ENTITY_TYPES.register("harpy", () -> EntityType.Builder.<HarpyEntity>of(HarpyEntity::new, MobCategory.MONSTER)
+            .sized(0.6875F, 2.625F)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .build("harpy"));
+
     public static final RegistryObject<EntityType<HeatShadeEntity>> HEAT_SHADE = ENTITY_TYPES.register("heat_shade", () -> EntityType.Builder.<HeatShadeEntity>of(HeatShadeEntity::new, MobCategory.MONSTER)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
@@ -118,6 +126,15 @@ public class CCEntity {
             .updateInterval(1)
             .build("fire_pillar"));
 
+    public static final RegistryObject<EntityType<HarpyFeatherEntity>> HARPY_FEATHER = ENTITY_TYPES.register("harpy_feather", () -> EntityType.Builder.<HarpyFeatherEntity>of(HarpyFeatherEntity::new, MobCategory.MISC)
+            .sized(0.5F, 0.5F)
+            .setTrackingRange(64)
+            .clientTrackingRange(4)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .setCustomClientFactory(((spawnEntity, level) -> new HarpyFeatherEntity(level)))
+            .build("harpy_feather"));
+
     public static final RegistryObject<EntityType<IceBreathEntity>> ICE_BREATH = ENTITY_TYPES.register("ice_breath", () -> EntityType.Builder.<IceBreathEntity>of(IceBreathEntity::new, MobCategory.MISC)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
@@ -125,9 +142,12 @@ public class CCEntity {
             .build("ice_breath"));
 
     public static final RegistryObject<EntityType<IceSpikeEntity>> ICE_SPIKE = ENTITY_TYPES.register("ice_spike", () -> EntityType.Builder.<IceSpikeEntity>of(IceSpikeEntity::new, MobCategory.MISC)
+            .sized(0.5F, 0.5F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
+            .clientTrackingRange(4)
             .updateInterval(1)
+            .setCustomClientFactory(((spawnEntity, level) -> new IceSpikeEntity(level)))
             .build("ice_spike"));
 
     public static final RegistryObject<EntityType<PoisonBreathEntity>> POISON_BREATH = ENTITY_TYPES.register("poison_breath", () -> EntityType.Builder.<PoisonBreathEntity>of(PoisonBreathEntity::new, MobCategory.MISC)

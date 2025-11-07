@@ -2,6 +2,7 @@ package com.syming.cursedcastle.datagen;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.tag.CCTag;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -23,8 +24,8 @@ public class CCItemTagGenerator extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(CCTag.Items.BULLET_SOULS)
-                .add(CCItem.ZOMBIE_SOUL.get());
+                .add(CCItem.SOUL_TYPES.get(Soul.ZOMBIE).get());
         tag(CCTag.Items.GUARDIAN_SOULS)
-                .add(CCItem.BAT_SOUL.get());
+                .add(CCItem.SOUL_TYPES.get(Soul.BAT).get());
     }
 }

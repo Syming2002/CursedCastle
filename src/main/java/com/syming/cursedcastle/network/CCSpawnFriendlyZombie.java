@@ -3,14 +3,13 @@ package com.syming.cursedcastle.network;
 import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.soul.Soul;
-import com.syming.cursedcastle.item.soul.SoulBulletItem;
+import com.syming.cursedcastle.item.soul.SoulItem;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkEvent;
-import org.apache.logging.log4j.core.jmx.Server;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.function.Supplier;
@@ -36,10 +35,10 @@ public class CCSpawnFriendlyZombie {
             ctx.get().enqueueWork(() -> {
                 ServerPlayer player = ctx.get().getSender();
                 if (player != null) {
-                    CuriosApi.getCuriosHelper().findEquippedCurio(CCItem.ZOMBIE_SOUL.get(), player).ifPresent(slotResult -> {
+                    CuriosApi.getCuriosHelper().findEquippedCurio(CCItem.SOUL_TYPES.get(Soul.ZOMBIE).get(), player).ifPresent(slotResult -> {
                         ItemStack stack = slotResult.getRight();
 
-                        if (((SoulBulletItem) stack.getItem()).getSoul() == Soul.ZOMBIE) {
+                        if (((SoulItem) stack.getItem()).getSoul() == Soul.ZOMBIE) {
                             int count = stack.getCount();
 
                             if (count > 0 && count <= 3) {

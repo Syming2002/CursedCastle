@@ -4,33 +4,26 @@ import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.block.blockentity.CCBlockEntity;
 import com.syming.cursedcastle.block.head.CCHeadBlock;
 import com.syming.cursedcastle.client.CCKeybinding;
-import com.syming.cursedcastle.client.render.blockentity.CCHeadBlockEntityRender;
-import com.syming.cursedcastle.creativetab.CCCreativeModeTab;
+import com.syming.cursedcastle.client.model.*;
+import com.syming.cursedcastle.client.renderer.blockentity.CCHeadBlockEntityRender;
+import com.syming.cursedcastle.client.renderer.entity.*;
+import com.syming.cursedcastle.client.renderer.entity.SkeletonRenderer;
+import com.syming.cursedcastle.creativetab.CCCreativeTab;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.enchantment.CCEnchantment;
-import com.syming.cursedcastle.entity.client.CCHeadLayer;
-import com.syming.cursedcastle.entity.client.bat.familiarbat.FamiliarBatModel;
-import com.syming.cursedcastle.entity.client.bat.familiarbat.FamiliarBatRender;
-import com.syming.cursedcastle.entity.client.bat.vampirebat.VampireBatModel;
-import com.syming.cursedcastle.entity.client.dagger.DaggerModel;
-import com.syming.cursedcastle.entity.client.dracula.DraculaHeadModel;
-import com.syming.cursedcastle.entity.client.friendlyzombie.ZombieFriendlyRender;
-import com.syming.cursedcastle.entity.client.grimreaper.GrimReaperRender;
-import com.syming.cursedcastle.entity.client.icespike.IceSpikeModel;
-import com.syming.cursedcastle.entity.client.skeleton.SkeletonRender;
+import com.syming.cursedcastle.client.layer.CCHeadLayer;
+import com.syming.cursedcastle.entity.mob.HarpyEntity;
 import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.fluid.CCFluidType;
 import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.item.soul.Soul;
+import com.syming.cursedcastle.item.soul.SoulItem;
+import com.syming.cursedcastle.item.soul.SoulType;
 import com.syming.cursedcastle.loot.CCLootModifier;
 import com.syming.cursedcastle.potion.CCPotion;
 import com.syming.cursedcastle.recipe.BrewingStandRecipe;
 import com.syming.cursedcastle.sound.CCSound;
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.client.dagger.DaggerRender;
-import com.syming.cursedcastle.entity.client.dracula.DraculaRender;
-import com.syming.cursedcastle.entity.client.icespike.IceSpikeRender;
-import com.syming.cursedcastle.entity.client.shade.ShadeRender;
-import com.syming.cursedcastle.entity.client.bat.vampirebat.VampireBatRender;
 import com.syming.cursedcastle.entity.villager.CCVillager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -40,6 +33,7 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -61,7 +55,7 @@ public class CursedCastleMod {
 
         CCBlock.register(modEventBus);
         CCBlockEntity.register(modEventBus);
-        CCCreativeModeTab.register(modEventBus);
+        CCCreativeTab.register(modEventBus);
         CCEffect.register(modEventBus);
         CCEnchantment.register(modEventBus);
         CCEntity.register(modEventBus);
@@ -96,26 +90,28 @@ public class CursedCastleMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
-                EntityRenderers.register(CCEntity.BLOOD_SKELETON.get(), SkeletonRender::new);
-                EntityRenderers.register(CCEntity.DRACULA.get(), DraculaRender::new);
-                EntityRenderers.register(CCEntity.FAMILIAR_BAT.get(), FamiliarBatRender::new);
+                EntityRenderers.register(CCEntity.BLOOD_SKELETON.get(), SkeletonRenderer::new);
+                EntityRenderers.register(CCEntity.DRACULA.get(), DraculaRenderer::new);
+                EntityRenderers.register(CCEntity.FAMILIAR_BAT.get(), FamiliarBatRenderer::new);
                 EntityRenderers.register(CCEntity.FIRE_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.FIRE_PILLAR.get(), NoopRenderer::new);
-                EntityRenderers.register(CCEntity.FRIENDLY_ZOMBIE.get(), ZombieFriendlyRender::new);
-                EntityRenderers.register(CCEntity.FROZEN_SHADE.get(), ShadeRender::new);
-                EntityRenderers.register(CCEntity.GRIM_REAPER.get(), GrimReaperRender::new);
-                EntityRenderers.register(CCEntity.HEAT_SHADE.get(), ShadeRender::new);
+                EntityRenderers.register(CCEntity.FRIENDLY_ZOMBIE.get(), ZombieFriendlyRenderer::new);
+                EntityRenderers.register(CCEntity.FROZEN_SHADE.get(), ShadeRenderer::new);
+                EntityRenderers.register(CCEntity.GRIM_REAPER.get(), GrimReaperRenderer::new);
+                EntityRenderers.register(CCEntity.HARPY.get(), HarpyRenderer::new);
+                EntityRenderers.register(CCEntity.HARPY_FEATHER.get(), HarpyFeatherRenderer::new);
+                EntityRenderers.register(CCEntity.HEAT_SHADE.get(), ShadeRenderer::new);
                 EntityRenderers.register(CCEntity.ICE_BREATH.get(), NoopRenderer::new);
-                EntityRenderers.register(CCEntity.ICE_SPIKE.get(), IceSpikeRender::new);
+                EntityRenderers.register(CCEntity.ICE_SPIKE.get(), IceSpikeRenderer::new);
                 EntityRenderers.register(CCEntity.POISON_BREATH.get(), NoopRenderer::new);
-                EntityRenderers.register(CCEntity.POISON_SHADE.get(), ShadeRender::new);
-                EntityRenderers.register(CCEntity.THROWING_BONE_SKELETON.get(), SkeletonRender::new);
+                EntityRenderers.register(CCEntity.POISON_SHADE.get(), ShadeRenderer::new);
+                EntityRenderers.register(CCEntity.THROWING_BONE_SKELETON.get(), SkeletonRenderer::new);
                 EntityRenderers.register(CCEntity.THUNDER_BREATH.get(), NoopRenderer::new);
-                EntityRenderers.register(CCEntity.THUNDER_SHADE.get(), ShadeRender::new);
-                EntityRenderers.register(CCEntity.VAMPIRE_BAT.get(), VampireBatRender::new);
+                EntityRenderers.register(CCEntity.THUNDER_SHADE.get(), ShadeRenderer::new);
+                EntityRenderers.register(CCEntity.VAMPIRE_BAT.get(), VampireBatRenderer::new);
 
                 for (Tiers tier : Tiers.values()) {
-                    EntityRenderers.register(CCEntity.DAGGER_TYPES.get(tier).get(), DaggerRender::new);
+                    EntityRenderers.register(CCEntity.DAGGER_TYPES.get(tier).get(), DaggerRenderer::new);
                 }
 
                 for (Tiers tier : Tiers.values()) {
@@ -152,8 +148,9 @@ public class CursedCastleMod {
 
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            event.registerLayerDefinition(DaggerModel.LAYER_LOCATION, DaggerModel::createBodyLayer);
+            event.registerLayerDefinition(DaggerModel.DAGGER_LAYER, DaggerModel::createBodyLayer);
             event.registerLayerDefinition(FamiliarBatModel.FAMILIAR_BAT_LAYER, FamiliarBatModel::createBodyLayer);
+            event.registerLayerDefinition(HarpyFeatherModel.HARPY_FEATHER_LAYER, HarpyFeatherModel::createBodyLayer);
             event.registerLayerDefinition(IceSpikeModel.ICE_SPIKE_LAYER, IceSpikeModel::createBodyLayer);
             event.registerLayerDefinition(VampireBatModel.VAMPIRE_BAT_LAYER, VampireBatModel::createBodyLayer);
 
@@ -180,6 +177,14 @@ public class CursedCastleMod {
         public static void registerKeys(RegisterKeyMappingsEvent event) {
             event.register(CCKeybinding.INSTANCE.BULLET_SOUL_KEY);
             event.register(CCKeybinding.INSTANCE.GUARDIAN_SOUL_KEY);
+        }
+
+        @SubscribeEvent
+        public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
+            for (Soul soul : Soul.values()) {
+                SoulItem soulItem = CCItem.SOUL_TYPES.get(soul).get();
+                event.register((pStack, pTintIndex) -> pTintIndex == 0 ? soul.getColor().getRGB() : 0xFFFFFFFF, soulItem);
+            }
         }
     }
 }

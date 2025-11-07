@@ -3,7 +3,7 @@ package com.syming.cursedcastle.network;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.soul.Soul;
-import com.syming.cursedcastle.item.soul.SoulGuardianItem;
+import com.syming.cursedcastle.item.soul.SoulItem;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -35,10 +35,10 @@ public class CCSpawnFamiliarBat {
             ctx.get().enqueueWork(() -> {
                 ServerPlayer player = ctx.get().getSender();
                 if (player != null) {
-                    CuriosApi.getCuriosHelper().findEquippedCurio(CCItem.BAT_SOUL.get(), player).ifPresent(slotResult -> {
+                    CuriosApi.getCuriosHelper().findEquippedCurio(CCItem.SOUL_TYPES.get(Soul.BAT).get(), player).ifPresent(slotResult -> {
                         ItemStack stack = slotResult.getRight();
 
-                        if (((SoulGuardianItem) stack.getItem()).getSoul() == Soul.BAT) {
+                        if (((SoulItem) stack.getItem()).getSoul() == Soul.BAT) {
                             int count = stack.getCount();
 
                             if (count > 0 && count <= 3) {
