@@ -20,14 +20,10 @@ import java.util.function.Predicate;
 public class ZombieFriendlyEntity extends Zombie {
     public ZombieFriendlyEntity(EntityType<? extends Zombie> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-
-        refreshDimensions();
     }
 
     public ZombieFriendlyEntity(Level pLevel) {
         super(CCEntity.FRIENDLY_ZOMBIE.get(), pLevel);
-
-        refreshDimensions();
     }
 
     @Override
@@ -57,11 +53,6 @@ public class ZombieFriendlyEntity extends Zombie {
                 .add(Attributes.MOVEMENT_SPEED, 0.23D)
                 .add(Attributes.ATTACK_DAMAGE, 3.0D)
                 .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE, 0.0D);
-    }
-
-    @Override
-    public EntityDimensions getDimensions(Pose pPose) {
-        return EntityDimensions.scalable(0.6F, 1.95F);
     }
 
     @Override

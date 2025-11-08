@@ -22,9 +22,13 @@ public class CCCreativeTab {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(CCItem.LEATHER_WHIP.get()))
                     .title(Component.translatable("creativetab.cursedcastle_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
+                        // Materials
+                        output.accept(CCItem.LEATHER_STRING.get());
+
                         // Whips
                         output.accept(CCItem.FLAME_WHIP.get());
                         output.accept(CCItem.LEATHER_WHIP.get());
+                        output.accept(CCItem.ROSE_STEM_WHIP.get());
                         output.accept(CCItem.UNDEAD_KILLER_WHIP.get());
                         output.accept(CCItem.VAMPIRE_KILLER_WHIP.get());
                         output.accept(CCItem.VAMPIRE_KILLER_CRUSHING_STONE_TIP_WHIP.get());

@@ -255,7 +255,6 @@ public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, IL
                 this.level().addFreshEntity(dagger);
             }
         }
-        System.out.println("Dagger is launching");
     }
 
     private void launchHarpyFeather(Vec3 pFeatherPos, float pPitch, float pYaw) {

@@ -27,7 +27,6 @@ public abstract class CCBatEntity extends Monster implements FlyingAnimal, ILivi
     public CCBatEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
 
-        refreshDimensions();
         setCustomNameVisible(false);
         setCustomName(null);
     }
@@ -208,10 +207,5 @@ public abstract class CCBatEntity extends Monster implements FlyingAnimal, ILivi
     @Override
     public int getExperienceReward() {
         return 1;
-    }
-
-    @Override
-    public EntityDimensions getDimensions(Pose pPose) {
-        return EntityDimensions.scalable(0.25F, 0.20625F);
     }
 }

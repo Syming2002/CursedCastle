@@ -10,6 +10,7 @@
   "block.cursedcastle.dracula_castle_stone": "Dracula's Castle Stone",
   "block.cursedcastle.dracula_castle_stone_bricks": "Dracula's Castle Stone Bricks",
   "block.cursedcastle.dracula_castle_stone_bricks_slab": "Dracula's Castle Stone Bricks Slab",
+  "block.cursedcastle.dracula_head": "Dracula's Head",
 
   "creativetab.cursedcastle_tab": "Cursed Castle",
 
@@ -24,6 +25,8 @@
   "entity.cursedcastle.friendly_zombie": "Friendly Zombie",
   "entity.cursedcastle.frozen_shade": "Frozen Shade",
   "entity.cursedcastle.grim_reaper": "Grim Reaper",
+  "entity.cursedcastle.harpy": "Harpy",
+  "entity.cursedcastle.harpy_feather": "Harpy Feather",
   "entity.cursedcastle.heat_shade": "Heat Shade",
   "entity.cursedcastle.ice_spike": "Ice Spike",
   "entity.cursedcastle.poison_shade": "Poison Shade",
@@ -64,6 +67,8 @@
   "item.cursedcastle.dracula_spawn_egg": "Dracula Spawn Egg",
   "item.cursedcastle.familiar_bat_spawn_egg": "Familiar Bat Spawn Egg",
   "item.cursedcastle.frozen_shade_spawn_egg": "Frozen Shade Spawn Egg",
+  "item.cursedcastle.grim_reaper_spawn_egg": "Grim Reaper Spawn Egg",
+  "item.cursedcastle.harpy_spawn_egg": "Harpy Shade Spawn Egg",
   "item.cursedcastle.heat_shade_spawn_egg": "Heat Shade Spawn Egg",
   "item.cursedcastle.poison_shade_spawn_egg": "Poison Shade Spawn Egg",
   "item.cursedcastle.throwing_bone_skeleton_spawn_egg": "Throwing Bone Skeleton Spawn Egg",
@@ -74,6 +79,7 @@
   "item.cursedcastle.crushing_stone_vampire_killer_whip": "Crushing Stone Vampire Killer Whip",
   "item.cursedcastle.flame_whip": "Flame Whip",
   "item.cursedcastle.leather_whip": "Leather Whip",
+  "item.cursedcastle.rose_stem_whip": "Rose Stem Whip",
   "item.cursedcastle.undead_killer_whip": "Undead Killer Whip",
   "item.cursedcastle.vampire_killer_whip": "Vampire Killer Whip",
   "item.cursedcastle.vampire_killer_crushing_stone_tip_whip": "Vampire Killer Crushing Stone Tip Whip",
@@ -128,11 +134,20 @@
   "item.cursedcastle.anim_diamond_holy_cross": "Anim Diamond Holy Cross",
   "item.cursedcastle.anim_netherite_holy_cross": "Anim Netherite Holy Cross",
 
+  "item.cursedcastle.scythe_projectile": "Scythe Projectile",
+  "item.cursedcastle.death_scythe": "Death Scythe",
+
+
+  "item.cursedcastle.leather_string": "Leather String",
+
+
+
   "item.cursedcastle.blood_skeleton_bone": "Blood Skeleton Bone",
   "item.cursedcastle.blood_bucket": "Blood Bucket",
 
 
   "item.cursedcastle.bat_soul": "Bat Soul",
+  "item.cursedcastle.enderman_soul": "Enderman Soul",
   "item.cursedcastle.zombie_soul": "Zombie Soul",
 
   "item.minecraft.lingering_potion.effect.anti_blood_skeleton": "Lingering Potion of Anti-Blood Skeleton",

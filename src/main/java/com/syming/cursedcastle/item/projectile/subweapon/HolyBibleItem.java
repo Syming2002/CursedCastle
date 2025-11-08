@@ -20,7 +20,7 @@ public class HolyBibleItem extends Item {
         ItemStack throwStack = pPlayer.getItemInHand(pUsedHand);
         pLevel.playSound(pPlayer, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), CCSound.HOLY_CROSS_THROW.get(), SoundSource.MASTER, 0.5F, 1.0F);
         if (!pLevel.isClientSide()) {
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 40; i++) {
                 HolyBibleEntity holyBible = new HolyBibleEntity(pPlayer, pLevel, throwStack);
                 holyBible.setPos(pPlayer.getX(), pPlayer.getY() + pPlayer.getEyeHeight() / 2, pPlayer.getZ());
                 pLevel.addFreshEntity(holyBible);

@@ -11,6 +11,7 @@ import com.syming.cursedcastle.item.soul.SoulItem;
 import com.syming.cursedcastle.item.soul.SoulType;
 import com.syming.cursedcastle.item.whip.FlameWhipItem;
 import com.syming.cursedcastle.item.whip.LeatherWhipItem;
+import com.syming.cursedcastle.item.whip.RoseStemWhipItem;
 import com.syming.cursedcastle.item.whip.UndeadKillerWhipItem;
 import com.syming.cursedcastle.item.whip.vampirekiller.*;
 import com.syming.cursedcastle.item.whip.vampirekiller.tip.*;
@@ -29,6 +30,13 @@ import java.util.Map;
 public class CCItem {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CursedCastleMod.MOD_ID);
+
+
+    // Materials
+
+    public static final RegistryObject<Item> LEATHER_STRING = ITEMS.register("leather_string",
+            () -> new Item(new Item.Properties()));
+
 
     // Whips
 
@@ -50,11 +58,21 @@ public class CCItem {
                     -3.5F,
                     8.0F));
 
+    public static final RegistryObject<Item> ROSE_STEM_WHIP = ITEMS.register("rose_stem_whip",
+            () -> new RoseStemWhipItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(200),
+                    6,
+                    -3.5F,
+                    8.0F
+            ));
+
     public static final RegistryObject<Item> UNDEAD_KILLER_WHIP = ITEMS.register("undead_killer_whip",
             () -> new UndeadKillerWhipItem(
                     new Item.Properties()
                             .stacksTo(1)
-                            .durability(200),
+                            .durability(300),
                     7,
                     -3.5F,
                     16.0F

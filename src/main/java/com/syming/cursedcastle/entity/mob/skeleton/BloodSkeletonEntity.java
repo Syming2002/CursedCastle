@@ -36,14 +36,10 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
 
     public BloodSkeletonEntity(EntityType<? extends AbstractSkeleton> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-
-        refreshDimensions();
     }
 
     public BloodSkeletonEntity(Level pLevel) {
         super(CCEntity.BLOOD_SKELETON.get(), pLevel);
-
-        refreshDimensions();
     }
 
     @Override
@@ -67,7 +63,7 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
     public void tickDeath() {
         super.tickDeath();
 
-        if (this.deathTime == 55 && this.getLastDamageSource() == damageSources().onFire() && !this.level().isClientSide() && (!(this.lastHitItem.getItem() instanceof UndeadKillerWhipItem || this.lastHitItem.getEnchantmentLevel(CCEnchantment.BLOOD_SKELETON_KILLER.get()) == 1))) {
+        if (this.deathTime == 55 && !this.level().isClientSide() && (!(this.lastHitItem.getItem() instanceof UndeadKillerWhipItem || this.lastHitItem.getEnchantmentLevel(CCEnchantment.BLOOD_SKELETON_KILLER.get()) == 1))) {
             BloodSkeletonEntity bloodSkeleton = new BloodSkeletonEntity(this.level());
             bloodSkeleton.copyPosition(this);
             bloodSkeleton.setHealth(10.0F);
@@ -90,11 +86,6 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
     @Override
     public void aiStep() {
         super.aiStep();
-    }
-
-    @Override
-    public EntityDimensions getDimensions(Pose pPose) {
-        return EntityDimensions.scalable(0.6F, 1.99F);
     }
 
     @Override

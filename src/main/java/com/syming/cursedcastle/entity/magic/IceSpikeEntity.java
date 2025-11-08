@@ -23,23 +23,15 @@ public class IceSpikeEntity extends Projectile {
 
     public IceSpikeEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-
-        refreshDimensions();
     }
 
     public IceSpikeEntity(Level pLevel) {
-        this(CCEntity.ICE_SPIKE.get(), pLevel);
-
-        refreshDimensions();
+        super(CCEntity.ICE_SPIKE.get(), pLevel);
     }
 
     @Override
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-
-        if (pResult.getType() == HitResult.Type.ENTITY) {
-            this.onHitEntity((EntityHitResult) pResult);
-        }
     }
 
     @Override
@@ -49,31 +41,20 @@ public class IceSpikeEntity extends Projectile {
 
     @Override
     protected void onHitEntity(EntityHitResult pEntityHitResult) {
-        System.out.println("On Hit Entity");
-
         if (!this.level().isClientSide()) {
             Entity hitEntity = pEntityHitResult.getEntity();
-
             if (hitEntity != null && hitEntity != this.getOwner()) {
-                System.out.println("Target != Owner");
                 if (this.getOwner() instanceof FrozenShadeEntity frozenShade) {
-                        System.out.println("Owner == Frozen Shade");
-                        if (hitEntity.isAlive()) {
-                            System.out.println("Target is Alive");
-                            hitEntity.hurt(this.damageSources().mobAttack(frozenShade), 8.0F);
-                            frozenShade.heal(5.0F);
-                            if (hitEntity instanceof LivingEntity livingTarget) {
-                                livingTarget.addEffect(new MobEffectInstance(CCEffect.FREEZE.get(), 200, 1));
-                            }
+                    if (hitEntity.isAlive()) {
+                        hitEntity.hurt(this.damageSources().mobAttack(frozenShade), 8.0F);
+                        frozenShade.heal(5.0F);
+                        if (hitEntity instanceof LivingEntity livingTarget) {
+                            livingTarget.addEffect(new MobEffectInstance(CCEffect.FREEZE.get(), 200, 1));
                         }
+                    }
                 }
             }
         }
-    }
-
-    @Override
-    public EntityDimensions getDimensions(Pose pPose) {
-        return EntityDimensions.scalable(0.5F, 0.5F);
     }
 
     @Override
@@ -103,24 +84,6 @@ public class IceSpikeEntity extends Projectile {
             if (!frozenShade.isAlive()) {
                 discard();
             }
-
-//            LivingEntity target = frozenShade.getTarget();
-//            if (target != null && !this.isLaunched) {
-//                Vec3 spikePos = this.position();
-//                Vec3 targetPos = target.getEyePosition();
-//
-//                double dx = targetPos.x - spikePos.x;
-//                double dy = targetPos.y - spikePos.y;
-//                double dz = targetPos.z - spikePos.z;
-//
-//                float desiredYaw = (float)(Mth.atan2(dz, dx) * (180F / Math.PI)) - 90F;
-//                float desiredPitch = (float)(-(Mth.atan2(dy, Math.sqrt(dx * dx + dz * dz)) * (180F / Math.PI)));
-//
-//                this.setYRot(Mth.rotLerp(0.2F, getYRot(), desiredYaw));
-//                this.setXRot(Mth.rotLerp(0.2F, getXRot(), desiredPitch));
-//                this.yRotO = this.getYRot();
-//                this.xRotO = this.getXRot();
-//            }
         }
     }
 

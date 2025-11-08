@@ -14,6 +14,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
@@ -46,6 +47,8 @@ public abstract class CCSkeletonEntity extends AbstractSkeleton implements IAnim
     @Override
     protected void registerGoals() {
         super.registerGoals();
+
+        this.goalSelector.addGoal(0, new FloatGoal(this));
     }
 
     @Override

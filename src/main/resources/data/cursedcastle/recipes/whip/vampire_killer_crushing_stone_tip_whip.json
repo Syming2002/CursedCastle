@@ -10,5 +10,6 @@
   ],
   "result": {
     "item": "cursedcastle:vampire_killer_crushing_stone_tip_whip"
-  }
+  },
+  "show_notification": true
 }

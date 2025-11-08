@@ -84,8 +84,6 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ILivingEn
         super(pEntityType, pLevel);
 
         this.head = new DraculaHeadPartEntity(this, "head", 0.7F, 0.6F);
-
-        refreshDimensions();
     }
 
     @Override
@@ -578,11 +576,6 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ILivingEn
     private void transitionTo(ActionState newState) {
         this.currentState = newState;
         this.stateTick = 0;
-    }
-
-    @Override
-    public EntityDimensions getDimensions(Pose pPose) {
-        return EntityDimensions.scalable(0.6F, 2.5F);
     }
 
     @Override
