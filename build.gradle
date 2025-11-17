@@ -157,6 +157,8 @@ repositories {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
     }
+
+    maven { url = "https://api.modrinth.com/maven" }
 }
 
 dependencies {
@@ -202,7 +204,9 @@ dependencies {
 //    implementation fg.deobf("curse.maven:emi-loot-${emi_loot_id}")
 
 
-    implementation fg.deobf("curse.maven:the-one-probe-245211:4629624")
+    implementation fg.deobf("maven.modrinth:jade:${project.jade_version}")
+    implementation fg.deobf("curse.maven:jade-addons-${jade_addons_id}")
+
 
     // Apply Mixin AP
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

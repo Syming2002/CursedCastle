@@ -87,6 +87,7 @@ public class CCCreativeTab {
                         output.accept(CCItem.GRIM_REAPER_SPAWN_EGG.get());
                         output.accept(CCItem.HARPY_SPAWN_EGG.get());
                         output.accept(CCItem.HEAT_SHADE_SPAWN_EGG.get());
+                        output.accept(CCItem.MEDUSA_SPAWN_EGG.get());
                         output.accept(CCItem.POISON_SHADE_SPAWN_EGG.get());
                         output.accept(CCItem.SKELETON_SPAWN_EGG.get());
                         output.accept(CCItem.THUNDER_SHADE_SPAWN_EGG.get());
@@ -95,6 +96,7 @@ public class CCCreativeTab {
                         // Miscellaneous Items
                         output.accept(CCItem.BLOOD_SKELETON_BONE.get());
                         output.accept(CCItem.BLOOD_BUCKET.get());
+                        output.accept(CCItem.HOLY_WATER_BUCKET.get());
                         output.accept(CCItem.SCYTHE_PROJECTILE_ITEM.get());
                         output.accept(CCItem.DEATH_SCYTHE.get());
                     })

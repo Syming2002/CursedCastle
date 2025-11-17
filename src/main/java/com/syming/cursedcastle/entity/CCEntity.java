@@ -4,6 +4,7 @@ import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.magic.*;
 import com.syming.cursedcastle.entity.mob.HarpyEntity;
 import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
+import com.syming.cursedcastle.entity.mob.boss.MedusaEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
@@ -91,6 +92,13 @@ public class CCEntity {
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("heat_shade"));
+
+    public static final RegistryObject<EntityType<MedusaEntity>> MEDUSA = ENTITY_TYPES.register("medusa", () -> EntityType.Builder.<MedusaEntity>of(MedusaEntity::new, MobCategory.MONSTER)
+            .sized(0.5F, 1.75F)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .build("medusa"));
 
     public static final RegistryObject<EntityType<PoisonShadeEntity>> POISON_SHADE = ENTITY_TYPES.register("poison_shade", () -> EntityType.Builder.<PoisonShadeEntity>of(PoisonShadeEntity::new, MobCategory.MONSTER)
             .sized(0.5F, 1.875F)

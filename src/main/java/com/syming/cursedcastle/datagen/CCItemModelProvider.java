@@ -28,6 +28,7 @@ public class CCItemModelProvider extends ItemModelProvider {
         withExistingParent(CCItem.GRIM_REAPER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(CCItem.HARPY_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(CCItem.HEAT_SHADE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(CCItem.MEDUSA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(CCItem.POISON_SHADE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(CCItem.SKELETON_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(CCItem.THUNDER_SHADE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

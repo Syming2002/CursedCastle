@@ -6,11 +6,13 @@
   "advancements.cursedcastle.leatherWhip.description": "Get a leather whip",
 
 
+  "block.cursedcastle.blood_block": "Blood Block",
   "block.cursedcastle.dracula_castle_cobblestone": "Dracula's Castle Cobblestone",
   "block.cursedcastle.dracula_castle_stone": "Dracula's Castle Stone",
   "block.cursedcastle.dracula_castle_stone_bricks": "Dracula's Castle Stone Bricks",
   "block.cursedcastle.dracula_castle_stone_bricks_slab": "Dracula's Castle Stone Bricks Slab",
   "block.cursedcastle.dracula_head": "Dracula's Head",
+  "block.cursedcastle.holy_water_block": "Holy Water Block",
 
   "creativetab.cursedcastle_tab": "Cursed Castle",
 
@@ -55,6 +57,7 @@
   "entity.minecraft.villager.cursedcastle.high_priest": "High Priest",
 
   "fluid_type.cursedcastle.blood": "Blood",
+  "fluid_type.cursedcastle.holy_water": "Holy Water",
 
   "holy_cross.damage" : "Deals %s damage to other mob",
   "holy_cross.damageArthropods": "Deals %s damage to arthropods mob",
@@ -144,6 +147,7 @@
 
   "item.cursedcastle.blood_skeleton_bone": "Blood Skeleton Bone",
   "item.cursedcastle.blood_bucket": "Blood Bucket",
+  "item.cursedcastle.holy_water_bucket": "Holy Water Bucket",
 
 
   "item.cursedcastle.bat_soul": "Bat Soul",

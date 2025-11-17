@@ -103,6 +103,7 @@ public class CursedCastleMod {
                 EntityRenderers.register(CCEntity.HEAT_SHADE.get(), ShadeRenderer::new);
                 EntityRenderers.register(CCEntity.ICE_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.ICE_SPIKE.get(), IceSpikeRenderer::new);
+                EntityRenderers.register(CCEntity.MEDUSA.get(), MedusaRenderer::new);
                 EntityRenderers.register(CCEntity.POISON_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.POISON_SHADE.get(), ShadeRenderer::new);
                 EntityRenderers.register(CCEntity.THROWING_BONE_SKELETON.get(), SkeletonRenderer::new);
@@ -129,15 +130,22 @@ public class CursedCastleMod {
                 EntityRenderers.register(CCEntity.SCYTHE_PROJECTILE.get(), ThrownItemRenderer::new);
 
                 // Fluids Render
-                ItemBlockRenderTypes.setRenderLayer(CCFluid.SOURCE_BLOOD.get(), RenderType.translucent());
-                ItemBlockRenderTypes.setRenderLayer(CCFluid.FLOWING_BLOOD.get(), RenderType.translucent());
+//                ItemBlockRenderTypes.setRenderLayer(CCFluid.SOURCE_BLOOD.get(), RenderType.translucent());
+//                ItemBlockRenderTypes.setRenderLayer(CCFluid.FLOWING_BLOOD.get(), RenderType.translucent());
+//
+//                ItemBlockRenderTypes.setRenderLayer(CCFluid.SOURCE_HOLY_WATER.get(), RenderType.translucent());
+//                ItemBlockRenderTypes.setRenderLayer(CCFluid.FLOWING_HOLY_WATER.get(), RenderType.translucent());
 
                 Minecraft.getInstance().getItemColors().register((pStack, pTintIndex) -> {
-                    if (pStack.getItem() == CCItem.BLOOD_BUCKET.get() && pTintIndex == 1) {
+                    if ((pStack.getItem() == CCItem.BLOOD_BUCKET.get() || pStack.getItem() == CCBlock.BLOOD_BLOCK.get().asItem()) && pTintIndex == 1) {
                         return 0xFF701914;
                     }
+                    if (pStack.getItem() == CCItem.HOLY_WATER_BUCKET.get() && pTintIndex == 1) {
+                        return 0xFF6783BD;
+                    }
                     return 0xFFFFFFFF;
-                }, CCItem.BLOOD_BUCKET.get());
+                }, CCItem.BLOOD_BUCKET.get(), CCBlock.BLOOD_BLOCK.get().asItem(),
+                        CCItem.HOLY_WATER_BUCKET.get());
             });
         }
 

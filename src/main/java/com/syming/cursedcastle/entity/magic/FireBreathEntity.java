@@ -49,7 +49,7 @@ public class FireBreathEntity extends MagicAttackEntity {
 
                     headPos = headPos.add(lookVec);
 
-                    setPosRaw(headPos.x, headPos.y, headPos.z);
+                    setPos(headPos.x, headPos.y, headPos.z);
 
                 }
 

@@ -65,7 +65,7 @@ public class CCSpawnFriendlyZombie {
                 double z = player.getZ() + dir.z * 1.5D;
 
                 ZombieFriendlyEntity zombie = new ZombieFriendlyEntity(player.level());
-                zombie.setPosRaw(x, y, z);
+                zombie.setPos(x, y, z);
                 player.level().addFreshEntity(zombie);
             }
         }

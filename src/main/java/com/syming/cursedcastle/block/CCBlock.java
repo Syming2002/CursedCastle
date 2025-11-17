@@ -24,6 +24,9 @@ public class CCBlock {
     public static final RegistryObject<LiquidBlock> BLOOD_BLOCK = registerBlock("blood_block",
             () -> new LiquidBlock(CCFluid.SOURCE_BLOOD, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
+    public static final RegistryObject<LiquidBlock> HOLY_WATER_BLOCK = registerBlock("holy_water_block",
+            () -> new LiquidBlock(CCFluid.SOURCE_HOLY_WATER, BlockBehaviour.Properties.copy(Blocks.WATER).lightLevel(blockState -> 7)));
+
     public static final RegistryObject<Block> DRACULA_CASTLE_COBBLESTONE = registerBlock("dracula_castle_cobblestone",
             () -> new DraculaCastleCobblestoneBlock(
                     BlockBehaviour.Properties.of()

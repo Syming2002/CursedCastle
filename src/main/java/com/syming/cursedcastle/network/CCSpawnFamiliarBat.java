@@ -65,7 +65,7 @@ public class CCSpawnFamiliarBat {
                 double z = player.getZ() + dir.z * -2.0D;
 
                 FamiliarBatEntity familiarBat = new FamiliarBatEntity(player.level());
-                familiarBat.setPosRaw(x, y, z);
+                familiarBat.setPos(x, y, z);
                 player.level().addFreshEntity(familiarBat);
             }
         }

@@ -327,6 +327,9 @@ public class CCItem {
     public static final RegistryObject<Item> BLOOD_BUCKET = ITEMS.register("blood_bucket",
             () -> new BucketItem(CCFluid.SOURCE_BLOOD.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
+    public static final RegistryObject<Item> HOLY_WATER_BUCKET = ITEMS.register("holy_water_bucket",
+            () -> new BucketItem(CCFluid.SOURCE_HOLY_WATER.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
     public static final RegistryObject<Item> SCYTHE_PROJECTILE_ITEM = ITEMS.register("scythe_projectile", ScytheProjectileItem::new);
 
     public static final RegistryObject<Item> ANIM_SCYTHE_PROJECTILE_ITEM = ITEMS.register("anim_scythe_projectile", () -> new Item(new Item.Properties()));
@@ -396,6 +399,13 @@ public class CCItem {
                     CCEntity.HEAT_SHADE,
                     0xA10C05,
                     0xF01504,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> MEDUSA_SPAWN_EGG = ITEMS.register("medusa_spawn_egg",
+            () -> new ForgeSpawnEggItem(
+                    CCEntity.MEDUSA,
+                    0x7A8750,
+                    0x4A5B3E,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> POISON_SHADE_SPAWN_EGG = ITEMS.register("poison_shade_spawn_egg",

@@ -102,7 +102,7 @@ public class HeatShadeEntity extends ShadeEntity {
 
                         this.fireBreath = new FireBreathEntity(this.level());
                         this.fireBreath.setOwner(this);
-                        this.fireBreath.setPosRaw(headPos.x, headPos.y, headPos.z);
+                        this.fireBreath.setPos(headPos.x, headPos.y, headPos.z);
                         this.level().addFreshEntity(this.fireBreath);
                         System.out.println("Fire Breath is Launching at " + this.fireBreath.getX() + " " + this.fireBreath.getY() + " " + this.fireBreath.getZ());
                     }

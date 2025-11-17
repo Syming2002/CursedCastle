@@ -36,6 +36,16 @@ public class BloodFluidType extends FluidType {
         this.fogColor = fogColor;
     }
 
+    @Override
+    public int getDensity() {
+        return 16;
+    }
+
+    @Override
+    public int getViscosity() {
+        return 4;
+    }
+
     public ResourceLocation getStillTexture() {
         return this.stillTexture;
     }
@@ -58,7 +68,6 @@ public class BloodFluidType extends FluidType {
 
     @Override
     public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
-        System.out.println("InitializeClient called for " + this);
         consumer.accept(new IClientFluidTypeExtensions() {
             @Override
             public int getTintColor() {
