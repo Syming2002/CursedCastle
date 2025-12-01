@@ -6,7 +6,7 @@ import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.api.ICustomBossBar;
 import com.syming.cursedcastle.api.IElementalWeapon;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
-import com.syming.cursedcastle.damagesource.CCDamageSource;
+import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.projectile.ScytheProjectileEntity;
 import com.syming.cursedcastle.item.CCItem;
@@ -24,17 +24,13 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.monster.Ghast;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
@@ -304,7 +300,7 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDamageSource.HOLY);
+                    return source.is(CCDatapackBuiltinEntriesProvider.HOLY);
                 }
             }
         }
@@ -320,7 +316,7 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDamageSource.DARK);
+                    return source.is(CCDatapackBuiltinEntriesProvider.DARK);
                 }
             }
         }

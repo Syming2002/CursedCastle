@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.item.whip;
 
 import com.syming.cursedcastle.api.IElementalWeapon;
-import com.syming.cursedcastle.damagesource.CCDamageSource;
+import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,7 +21,7 @@ public class FlameWhipItem extends WhipItem implements IElementalWeapon {
 
     @Override
     public DamageSource getElementalDamageSource(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        return CCDamageSource.source(attacker.level().registryAccess(), CCDamageSource.FIRE);
+        return CCDatapackBuiltinEntriesProvider.source(attacker.level().registryAccess(), CCDatapackBuiltinEntriesProvider.FIRE);
     }
 
     @Override

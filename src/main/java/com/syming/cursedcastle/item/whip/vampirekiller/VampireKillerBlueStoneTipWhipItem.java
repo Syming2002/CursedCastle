@@ -1,19 +1,14 @@
 package com.syming.cursedcastle.item.whip.vampirekiller;
 
 import com.syming.cursedcastle.api.IElementalWeapon;
-import com.syming.cursedcastle.damagesource.CCDamageSource;
-import com.syming.cursedcastle.effect.CCEffect;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 
-import static net.minecraft.core.particles.ParticleTypes.FLAME;
 import static net.minecraft.core.particles.ParticleTypes.SNOWFLAKE;
 
 public class VampireKillerBlueStoneTipWhipItem extends VampireKillerWhipItem implements IElementalWeapon {
@@ -26,7 +21,7 @@ public class VampireKillerBlueStoneTipWhipItem extends VampireKillerWhipItem imp
 
     @Override
     public DamageSource getElementalDamageSource(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        return CCDamageSource.source(attacker.level().registryAccess(), CCDamageSource.ICE);
+        return CCDatapackBuiltinEntriesProvider.source(attacker.level().registryAccess(), CCDatapackBuiltinEntriesProvider.ICE);
     }
 
     @Override

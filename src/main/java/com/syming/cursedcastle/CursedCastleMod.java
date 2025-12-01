@@ -4,31 +4,28 @@ import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.block.blockentity.CCBlockEntity;
 import com.syming.cursedcastle.block.head.CCHeadBlock;
 import com.syming.cursedcastle.client.CCKeybinding;
+import com.syming.cursedcastle.client.layer.CCHeadLayer;
 import com.syming.cursedcastle.client.model.*;
 import com.syming.cursedcastle.client.renderer.blockentity.CCHeadBlockEntityRender;
 import com.syming.cursedcastle.client.renderer.entity.*;
-import com.syming.cursedcastle.client.renderer.entity.SkeletonRenderer;
 import com.syming.cursedcastle.creativetab.CCCreativeTab;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.enchantment.CCEnchantment;
-import com.syming.cursedcastle.client.layer.CCHeadLayer;
-import com.syming.cursedcastle.entity.mob.HarpyEntity;
+import com.syming.cursedcastle.entity.CCEntity;
+import com.syming.cursedcastle.entity.villager.CCVillager;
 import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.fluid.CCFluidType;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.soul.SoulItem;
-import com.syming.cursedcastle.item.soul.SoulType;
 import com.syming.cursedcastle.loot.CCLootModifier;
 import com.syming.cursedcastle.potion.CCPotion;
 import com.syming.cursedcastle.recipe.BrewingStandRecipe;
 import com.syming.cursedcastle.sound.CCSound;
-import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.villager.CCVillager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.*;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.NoopRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.api.distmarker.Dist;
@@ -70,7 +67,6 @@ public class CursedCastleMod {
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
-
 //        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 

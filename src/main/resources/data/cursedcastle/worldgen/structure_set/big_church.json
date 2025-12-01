@@ -1,0 +1,15 @@
+{
+  "structures": [
+    {
+      "structure": "cursedcastle:big_church",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 64,
+    "separation": 48,
+    "spread_type": "linear",
+    "salt": 5485262
+  }
+}

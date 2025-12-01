@@ -1,5 +1,6 @@
 package com.syming.cursedcastle.event;
 
+import com.mojang.datafixers.util.Pair;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.mob.HarpyEntity;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
@@ -13,10 +14,23 @@ import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.bat.VampireBatEntity;
 import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
 import com.syming.cursedcastle.entity.mob.shade.ShadeEntity;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
+import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
+import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = CursedCastleMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CCCommonEvent {

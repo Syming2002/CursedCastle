@@ -2,7 +2,7 @@ package com.syming.cursedcastle.entity.mob.bat;
 
 import com.syming.cursedcastle.api.IElementalWeapon;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
-import com.syming.cursedcastle.damagesource.CCDamageSource;
+import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
@@ -39,7 +39,7 @@ public abstract class CCBatEntity extends Monster implements FlyingAnimal, ILivi
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getTarget(), getLastAttacker());
-                    return source.is(CCDamageSource.FIRE);
+                    return source.is(CCDatapackBuiltinEntriesProvider.FIRE);
                 }
             }
         }
@@ -54,7 +54,7 @@ public abstract class CCBatEntity extends Monster implements FlyingAnimal, ILivi
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getTarget(), getLastAttacker());
-                    return source.is(CCDamageSource.DARK);
+                    return source.is(CCDatapackBuiltinEntriesProvider.DARK);
                 }
             }
         }

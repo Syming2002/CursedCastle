@@ -2,7 +2,7 @@ package com.syming.cursedcastle.entity.mob.shade;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.api.IElementalWeapon;
-import com.syming.cursedcastle.damagesource.CCDamageSource;
+import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.magic.IceBreathEntity;
 import com.syming.cursedcastle.entity.magic.IceSpikeEntity;
 import net.minecraft.core.BlockPos;
@@ -72,7 +72,7 @@ public class FrozenShadeEntity extends ShadeEntity {
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDamageSource.FIRE) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
+                    return source.is(CCDatapackBuiltinEntriesProvider.FIRE) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
                 }
             }
         }
@@ -88,7 +88,7 @@ public class FrozenShadeEntity extends ShadeEntity {
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDamageSource.ICE);
+                    return source.is(CCDatapackBuiltinEntriesProvider.ICE);
                 }
             }
         }

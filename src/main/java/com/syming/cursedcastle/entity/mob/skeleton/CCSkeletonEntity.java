@@ -5,26 +5,16 @@ import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.api.IElementalWeapon;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
-import com.syming.cursedcastle.damagesource.CCDamageSource;
-import it.unimi.dsi.fastutil.booleans.AbstractBooleanSet;
+import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AbstractBannerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class CCSkeletonEntity extends AbstractSkeleton implements IAnimatedEntity, ILivingEntityStrengthWeakness {
@@ -131,7 +121,7 @@ public abstract class CCSkeletonEntity extends AbstractSkeleton implements IAnim
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDamageSource.FIRE) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
+                    return source.is(CCDatapackBuiltinEntriesProvider.FIRE) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
                 }
             }
         }
@@ -147,7 +137,7 @@ public abstract class CCSkeletonEntity extends AbstractSkeleton implements IAnim
             if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDamageSource.DARK);
+                    return source.is(CCDatapackBuiltinEntriesProvider.DARK);
                 }
             }
         }
