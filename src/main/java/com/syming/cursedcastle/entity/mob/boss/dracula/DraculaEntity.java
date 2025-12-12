@@ -5,12 +5,16 @@ import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.api.ICustomBossBar;
+import com.syming.cursedcastle.api.IElementalWeapon;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
 //import com.syming.cursedcastle.network.CCBossInfoPacket;
+import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.network.CCPacketHandler;
 import com.syming.cursedcastle.entity.magic.FirePillarEntity;
+import com.syming.cursedcastle.util.ColorUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -36,12 +40,15 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.entity.projectile.SmallFireball;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.entity.PartEntity;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class DraculaEntity extends Monster implements IAnimatedEntity, ILivingEntityStrengthWeakness {
     private static final EntityDataAccessor<Integer> TARGET_ID = SynchedEntityData.defineId(DraculaEntity.class, EntityDataSerializers.INT);
@@ -605,12 +612,46 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ILivingEn
 
     @Override
     public boolean hasWeakness(DamageSource source, float damageAmount) {
+        LivingEntity attacker = getLastAttacker();
+        LivingEntity target = getTarget();
+        if (attacker != null && target != null) {
+            ItemStack stack = attacker.getMainHandItem();
+            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+                if (elementalWeapon != null) {
+                    source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
+                    return source.is(CCDatapackBuiltinEntriesProvider.FIRE) || source.is(CCDatapackBuiltinEntriesProvider.HOLY) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
+                }
+            }
+        }
         return false;
     }
 
     @Override
     public boolean hasStrength(DamageSource source, float damageAmount) {
+        LivingEntity attacker = getLastAttacker();
+        LivingEntity target = getTarget();
+        if (attacker != null && target != null) {
+            ItemStack stack = attacker.getMainHandItem();
+            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+                if (elementalWeapon != null) {
+                    source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
+                    return source.is(CCDatapackBuiltinEntriesProvider.DARK);
+                }
+            }
+        }
         return false;
+    }
+
+    @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of(
+                Component.translatable("entity.cursedcastle.fire_weakness_description").setStyle(Style.EMPTY.withColor(ColorUtil.FIRE_COLOR)),
+                Component.translatable("entity.cursedcastle.holy_weakness_description").setStyle(Style.EMPTY.withColor(ColorUtil.HOLY_COLOR)));
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of(Component.translatable("entity.cursedcastle.dark_strength_description").setStyle(Style.EMPTY.withColor(ColorUtil.DARK_COLOR)));
     }
 
     public enum ActionState {

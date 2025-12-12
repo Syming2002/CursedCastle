@@ -12,7 +12,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -20,8 +23,13 @@ import net.minecraft.world.level.block.state.BlockState;
 public abstract class CCSkeletonEntity extends AbstractSkeleton implements IAnimatedEntity, ILivingEntityStrengthWeakness {
 
     protected Animation animation;
-    public static final Animation DEATH_ANIMATION = Animation.create(55);
-    protected static final Animation[] ANIMATIONS = {DEATH_ANIMATION};
+    public static final Animation DEATH_ANIMATION = Animation.create(95);
+
+    public static final Animation THROWING_BONE_ANIMATION = Animation.create(40);
+    protected int throwingBoneCooldown = 0;
+    public static final int THROWING_BONE_COOLDOWN = 60;
+
+    protected static final Animation[] ANIMATIONS = {DEATH_ANIMATION, THROWING_BONE_ANIMATION};
     protected int animationTick;
 
 
@@ -39,27 +47,26 @@ public abstract class CCSkeletonEntity extends AbstractSkeleton implements IAnim
         super.registerGoals();
 
         this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<Player>(this, Player.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<Villager>(this, Villager.class, true));
     }
 
     @Override
-    public void aiStep() {
-        super.aiStep();
-    }
+    public void tick() {
+        super.tick();
 
-    @Override
-    public void tickDeath() {
-        this.deathTime++;
+        if (getTarget() != null) {
+            if (getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.5F && this.throwingBoneCooldown <= 0) {
+                setAnimation(THROWING_BONE_ANIMATION);
+                this.throwingBoneCooldown = THROWING_BONE_COOLDOWN - this.random.nextInt(16);
+            }
+        }
 
         AnimationHandler.INSTANCE.updateAnimations(this);
 
-        if (this.deathTime == 1) {
-            setAnimation(DEATH_ANIMATION);
+        if (this.throwingBoneCooldown > 0 && getAnimation() == NO_ANIMATION) {
+            this.throwingBoneCooldown--;
         }
-    }
-
-    @Override
-    public void die(DamageSource pDamageSource) {
-        super.die(pDamageSource);
     }
 
     @Override
@@ -110,38 +117,6 @@ public abstract class CCSkeletonEntity extends AbstractSkeleton implements IAnim
     @Override
     public Animation[] getAnimations() {
         return ANIMATIONS;
-    }
-
-    @Override
-    public boolean hasWeakness(DamageSource source, float damageAmount) {
-        LivingEntity attacker = getLastAttacker();
-        LivingEntity target = getTarget();
-        if (attacker != null && target != null) {
-            ItemStack stack = attacker.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
-                if (elementalWeapon != null) {
-                    source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.FIRE) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasStrength(DamageSource source, float damageAmount) {
-        LivingEntity attacker = getLastAttacker();
-        LivingEntity target = getTarget();
-        if (attacker != null && target != null) {
-            ItemStack stack = attacker.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
-                if (elementalWeapon != null) {
-                    source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.DARK);
-                }
-            }
-        }
-        return false;
     }
 
     public void initDeathAnimationRandoms() {

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "cursedcastle:blood_skeleton_bone"
+          "name": "cursedcastle:blood_bone"
         }
       ],
       "functions": [],

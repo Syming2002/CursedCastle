@@ -6,6 +6,7 @@ import com.syming.cursedcastle.api.IElementalWeapon;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.projectile.ThrowingBoneEntity;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RestrictSunGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
@@ -22,13 +24,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
+
 public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements RangedAttackMob {
 
-    public static final Animation THROWING_BONE_ANIMATION = Animation.create(40);
-    private int throwingBoneCooldown = 0;
-    public static final int THROWING_BONE_COOLDOWN = 60;
-
-    private static final Animation[] ANIMATIONS = {THROWING_BONE_ANIMATION, DEATH_ANIMATION};
 
     public ThrowingBoneSkeletonEntity(EntityType<? extends CCSkeletonEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -42,7 +41,7 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements Rang
     protected void registerGoals() {
         super.registerGoals();
 
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<Player>(this, Player.class, true));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false));
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
     }
 
@@ -55,7 +54,9 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements Rang
         return PathfinderMob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.FOLLOW_RANGE, 16.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D);
+                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.ATTACK_SPEED, 1.2D)
+                .add(Attributes.ATTACK_DAMAGE, 2.0D);
     }
 
     @Override
@@ -96,18 +97,28 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements Rang
     }
 
     @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of();
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of();
+    }
+
+    @Override
     public void tick() {
         super.tick();
 
         if (this.getTarget() != null) {
             if (getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.5F && this.throwingBoneCooldown <= 0) {
-                setAnimation(THROWING_BONE_ANIMATION);
-                this.throwingBoneCooldown = THROWING_BONE_COOLDOWN - this.random.nextInt(16);
+                AnimationHandler.INSTANCE.sendAnimationMessage(this, THROWING_BONE_ANIMATION);
+                this.throwingBoneCooldown = THROWING_BONE_COOLDOWN + this.random.nextInt(16);
             }
 
             if (getAnimation() == THROWING_BONE_ANIMATION) {
                 if (getAnimationTick() == 32) {
-                    if (!this.level().isClientSide()) {
+                    if (!this.level().isClientSide() && this instanceof ThrowingBoneSkeletonEntity) {
                         ThrowingBoneEntity throwingBone = new ThrowingBoneEntity(this, this.level());
                         throwingBone.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 0.5F, 0.2F);
                         playSound(SoundEvents.SNOWBALL_THROW, 1.0F, 0.5F);
@@ -117,8 +128,6 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements Rang
             }
         }
 
-        AnimationHandler.INSTANCE.updateAnimations(this);
-
         if (this.throwingBoneCooldown > 0 && getAnimation() == NO_ANIMATION) {
             this.throwingBoneCooldown--;
         }
@@ -126,9 +135,13 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements Rang
 
     @Override
     public void tickDeath() {
-        super.tickDeath();
+        ++this.deathTime;
 
-        if (this.deathTime >= 20) {
+        if (this.deathTime == 1) {
+            AnimationHandler.INSTANCE.sendAnimationMessage(this, DEATH_ANIMATION);
+        }
+
+        if (this.deathTime >= 20 && !this.level().isClientSide() && !isRemoved()) {
             this.level().broadcastEntityEvent(this, (byte)60);
             this.remove(Entity.RemovalReason.KILLED);
         }
@@ -161,6 +174,6 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements Rang
 
     @Override
     public Animation[] getAnimations() {
-        return ANIMATIONS;
+        return super.getAnimations();
     }
 }

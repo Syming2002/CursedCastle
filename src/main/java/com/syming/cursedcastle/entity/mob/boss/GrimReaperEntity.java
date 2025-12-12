@@ -10,9 +10,11 @@ import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.projectile.ScytheProjectileEntity;
 import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.util.ColorUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
@@ -42,6 +44,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
+import java.util.List;
 
 public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntity, ICustomBossBar, ILivingEntityStrengthWeakness, RangedAttackMob {
     private Animation animation;
@@ -321,6 +324,16 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of(Component.translatable("entity.cursedcastle.holy_weakness_description").setStyle(Style.EMPTY.withColor(ColorUtil.HOLY_COLOR)));
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of(Component.translatable("entity.cursedcastle.dark_strength_description").setStyle(Style.EMPTY.withColor(ColorUtil.DARK_COLOR)));
     }
 
     @Override

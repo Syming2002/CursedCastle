@@ -99,7 +99,6 @@ public class ShadeModel extends AdvancedEntityModel<ShadeEntity> {
 
     @Override
     public void setupAnim(ShadeEntity pEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        resetToDefaultPose();
         animate(pEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
     }
 
@@ -108,14 +107,14 @@ public class ShadeModel extends AdvancedEntityModel<ShadeEntity> {
         this.shade.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
-    public void animate(ShadeEntity shade, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+    public void animate(ShadeEntity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         resetToDefaultPose();
-        this.animator.update(shade);
+        this.animator.update(pEntity);
 
         this.head.rotateAngleY = pNetHeadYaw * 0.017453292F;
         this.head.rotateAngleX = pHeadPitch * 0.017453292F;
 
-        if (shade.getAnimation() != ShadeEntity.REPULSE_ATTACK_ANIMATION && shade.isAlive()) {
+        if (pEntity.getAnimation() != ShadeEntity.REPULSE_ATTACK_ANIMATION && pEntity.isAlive()) {
             float animationSpeed = (float) (2 * Math.PI / 40);
             float wave = (float) Math.sin(pAgeInTicks * animationSpeed);
             float waveAmount = (float) Math.toRadians(5);
@@ -125,7 +124,7 @@ public class ShadeModel extends AdvancedEntityModel<ShadeEntity> {
         }
 
         // Repulse Attack Animation
-        if (this.animator.setAnimation(ShadeEntity.REPULSE_ATTACK_ANIMATION) && shade.isAlive()) {
+        if (this.animator.setAnimation(ShadeEntity.REPULSE_ATTACK_ANIMATION) && pEntity.isAlive()) {
 
             animator.startKeyframe(30);
             animator.move(head, 0, 1, -1.5F);
@@ -158,7 +157,7 @@ public class ShadeModel extends AdvancedEntityModel<ShadeEntity> {
             animator.resetKeyframe(20);
         }
 
-        if (shade instanceof ThunderShadeEntity thunderShade) {
+        if (pEntity instanceof ThunderShadeEntity thunderShade) {
             if (this.animator.setAnimation(ThunderShadeEntity.LIGHTNING_BOLT_ATTACK_ANIMATION) && thunderShade.isAlive()) {
                 animator.startKeyframe(40);
 

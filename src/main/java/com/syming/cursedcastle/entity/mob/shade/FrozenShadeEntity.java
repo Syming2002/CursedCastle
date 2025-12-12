@@ -5,8 +5,11 @@ import com.syming.cursedcastle.api.IElementalWeapon;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.magic.IceBreathEntity;
 import com.syming.cursedcastle.entity.magic.IceSpikeEntity;
+import com.syming.cursedcastle.util.ColorUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -93,6 +96,16 @@ public class FrozenShadeEntity extends ShadeEntity {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of(Component.translatable("entity.cursedcastle.fire_weakness_description").setStyle(Style.EMPTY.withColor(ColorUtil.FIRE_COLOR)));
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of(Component.translatable("entity.cursedcastle.ice_strength_description").setStyle(Style.EMPTY.withColor(ColorUtil.ICE_COLOR)));
     }
 
     @Override

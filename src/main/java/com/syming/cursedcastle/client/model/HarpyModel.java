@@ -172,7 +172,6 @@ public class HarpyModel extends AdvancedEntityModel<HarpyEntity> {
 
     @Override
     public void setupAnim(HarpyEntity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        resetToDefaultPose();
         animate(pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
     }
 

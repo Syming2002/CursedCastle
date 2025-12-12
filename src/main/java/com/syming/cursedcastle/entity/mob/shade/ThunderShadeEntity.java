@@ -3,6 +3,7 @@ package com.syming.cursedcastle.entity.mob.shade;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.syming.cursedcastle.entity.magic.ThunderBreathEntity;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -13,6 +14,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class ThunderShadeEntity extends ShadeEntity {
     public static final Animation LIGHTNING_BOLT_ATTACK_ANIMATION = Animation.create(100);
@@ -37,6 +40,16 @@ public class ThunderShadeEntity extends ShadeEntity {
     @Override
     public boolean hasStrength(DamageSource source, float damageAmount) {
         return false;
+    }
+
+    @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of();
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of();
     }
 
     @Override

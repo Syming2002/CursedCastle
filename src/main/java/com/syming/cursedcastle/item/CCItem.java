@@ -8,11 +8,9 @@ import com.syming.cursedcastle.item.projectile.ScytheProjectileItem;
 import com.syming.cursedcastle.item.projectile.subweapon.*;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.soul.SoulItem;
-import com.syming.cursedcastle.item.soul.SoulType;
-import com.syming.cursedcastle.item.whip.FlameWhipItem;
-import com.syming.cursedcastle.item.whip.LeatherWhipItem;
-import com.syming.cursedcastle.item.whip.RoseStemWhipItem;
-import com.syming.cursedcastle.item.whip.UndeadKillerWhipItem;
+import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
+import com.syming.cursedcastle.item.spellbook.SpellBookItem;
+import com.syming.cursedcastle.item.whip.*;
 import com.syming.cursedcastle.item.whip.vampirekiller.*;
 import com.syming.cursedcastle.item.whip.vampirekiller.tip.*;
 import com.syming.cursedcastle.entity.CCEntity;
@@ -45,7 +43,16 @@ public class CCItem {
                     new Item.Properties()
                             .stacksTo(1)
                             .durability(250),
-                    (int) 6.5F,
+                    7,
+                    -3.5F,
+                    12.0F));
+
+    public static final RegistryObject<Item> HOLY_WHIP = ITEMS.register("holy_whip",
+            () -> new HolyWhipItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(400),
+                    8,
                     -3.5F,
                     12.0F));
 
@@ -318,10 +325,19 @@ public class CCItem {
     public static final RegistryObject<Item> ANIM_NETHERITE_THROWING_AXE = ITEMS.register("anim_netherite_throwing_axe",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> BLOOD_SKELETON_BONE = ITEMS.register("blood_skeleton_bone",
+    public static final RegistryObject<Item> BLOOD_BONE = ITEMS.register("blood_bone",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> BLOOD_THROWING_BONE = ITEMS.register("blood_throwing_bone",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> GOLDEN_BONE = ITEMS.register("golden_bone",
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> THROWING_BONE = ITEMS.register("throwing_bone",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> GOLDEN_THROWING_BONE = ITEMS.register("golden_throwing_bone",
             () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> BLOOD_BUCKET = ITEMS.register("blood_bucket",
@@ -342,7 +358,7 @@ public class CCItem {
 
     static {
         for (Soul soul : Soul.values()) {
-            SOUL_TYPES.put(soul, ITEMS.register(soul.getName() + '_' + "soul", () -> new SoulItem(soul, new Item.Properties().stacksTo(16).rarity(soul.getRarity()))));
+            SOUL_TYPES.put(soul, ITEMS.register(soul.getName() + '_' + "soul", () -> new SoulItem(soul)));
         }
     }
 
@@ -350,87 +366,112 @@ public class CCItem {
     public static final RegistryObject<CCHeadItem> DRACULA_HEAD = ITEMS.register("dracula_head",
             () -> new CCHeadItem(CCBlock.DRACULA_HEAD.get(), CCBlock.DRACULA_WALL_HEAD.get(), Direction.DOWN));
 
+
+    // Spell Books
+
+    public static final Map<SpellBookElementType, RegistryObject<SpellBookItem>> SPELL_BOOK_TYPES = new HashMap<>();
+
+    static {
+        for (SpellBookElementType spellBookElementType : SpellBookElementType.values()) {
+            SPELL_BOOK_TYPES.put(spellBookElementType, ITEMS.register(spellBookElementType.getName() + '_' + "spell_book", () -> new SpellBookItem(spellBookElementType)));
+        }
+    }
+
     // Spawn Eggs
 
     public static final RegistryObject<Item> BLOOD_SKELETON_SPAWN_EGG = ITEMS.register("blood_skeleton_spawn_egg",
-            () -> new ForgeSpawnEggItem(
+            () -> new CCSpawnEggItem(
                     CCEntity.BLOOD_SKELETON,
                     0x8F0000,
                     0x420000,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> CLEAR_BONE_SKELETON_SPAWN_EGG = ITEMS.register("clear_bone_skeleton_spawn_egg",
+            () -> new CCSpawnEggItem(
+                    CCEntity.CLEAR_BONE_SKELETON,
+                    0xA0A0B0,
+                    0xF8F8F8,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> DRACULA_SPAWN_EGG = ITEMS.register("dracula_spawn_egg",
-            () -> new ForgeSpawnEggItem(
+            () -> new CCSpawnEggItem(
                     CCEntity.DRACULA,
                     0x000000,
                     0xBF3030,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> FAMILIAR_BAT_SPAWN_EGG = ITEMS.register("familiar_bat_spawn_egg",
-            () -> new ForgeSpawnEggItem(
+            () -> new CCSpawnEggItem(
                     CCEntity.FAMILIAR_BAT,
                     0x4C3E30,
                     0x5A84FF,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> FROZEN_SHADE_SPAWN_EGG = ITEMS.register("frozen_shade_spawn_egg",
-            () -> new ForgeSpawnEggItem(
+            () -> new CCSpawnEggItem(
                     CCEntity.FROZEN_SHADE,
                     0x0350B1,
                     0x1092F9,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> GOLDEN_SKELETON_SPAWN_EGG = ITEMS.register("golden_skeleton_spawn_egg",
+            () -> new CCSpawnEggItem(
+                    CCEntity.GOLDEN_SKELETON,
+                    0xEFBF04,
+                    0xD4AF37,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> GRIM_REAPER_SPAWN_EGG = ITEMS.register("grim_reaper_spawn_egg",
-            () -> new ForgeSpawnEggItem(
+            () -> new CCSpawnEggItem(
                     CCEntity.GRIM_REAPER,
                     0x171815,
                     0xAAA398,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> HARPY_SPAWN_EGG = ITEMS.register("harpy_spawn_egg",
-            () -> new ForgeSpawnEggItem(
+            () -> new CCSpawnEggItem(
                     CCEntity.HARPY,
                     0xFFDEB5,
                     0x006B6B,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> HEAT_SHADE_SPAWN_EGG = ITEMS.register("heat_shade_spawn_egg",
-            () -> new ForgeSpawnEggItem(
+            () -> new CCSpawnEggItem(
                     CCEntity.HEAT_SHADE,
                     0xA10C05,
                     0xF01504,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> MEDUSA_SPAWN_EGG = ITEMS.register("medusa_spawn_egg",
-            () -> new ForgeSpawnEggItem(
+            () -> new CCSpawnEggItem(
                     CCEntity.MEDUSA,
                     0x7A8750,
                     0x4A5B3E,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> POISON_SHADE_SPAWN_EGG = ITEMS.register("poison_shade_spawn_egg",
-            () -> new ForgeSpawnEggItem(
+            () -> new CCSpawnEggItem(
                     CCEntity.POISON_SHADE,
                     0x45F248,
                     0x319E3D,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> SKELETON_SPAWN_EGG = ITEMS.register("throwing_bone_skeleton_spawn_egg",
-            () -> new ForgeSpawnEggItem(
+            () -> new CCSpawnEggItem(
                     CCEntity.THROWING_BONE_SKELETON,
                     0x828282,
                     0xA8A8A8,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> THUNDER_SHADE_SPAWN_EGG = ITEMS.register("thunder_shade_spawn_egg",
-            () -> new ForgeSpawnEggItem(
+            () -> new CCSpawnEggItem(
                     CCEntity.THUNDER_SHADE,
                     0xFFFF75,
                     0xB3B334,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> VAMPIRE_BAT_SPAWN_EGG = ITEMS.register("vampire_bat_spawn_egg",
-            () -> new ForgeSpawnEggItem(
+            () -> new CCSpawnEggItem(
                     CCEntity.VAMPIRE_BAT,
                     0x393939,
                     0x8C0808,

@@ -9,6 +9,9 @@ import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.magic.HarpyFeatherEntity;
 import com.syming.cursedcastle.entity.projectile.subweapon.DaggerEntity;
 import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.util.ColorUtil;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -30,6 +33,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.BiConsumer;
 
 public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, ILivingEntityStrengthWeakness, RangedAttackMob {
@@ -206,6 +210,16 @@ public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, IL
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of(Component.translatable("entity.cursedcastle.ice_weakness_description").setStyle(Style.EMPTY.withColor(ColorUtil.ICE_COLOR)));
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of(Component.translatable("entity.cursedcastle.wind_strength_description").setStyle(Style.EMPTY.withColor(ColorUtil.WIND_COLOR)));
     }
 
     @Override

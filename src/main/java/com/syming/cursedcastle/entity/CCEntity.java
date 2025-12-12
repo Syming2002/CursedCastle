@@ -5,11 +5,15 @@ import com.syming.cursedcastle.entity.magic.*;
 import com.syming.cursedcastle.entity.mob.HarpyEntity;
 import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
 import com.syming.cursedcastle.entity.mob.boss.MedusaEntity;
+import com.syming.cursedcastle.entity.mob.skeleton.ClearBoneSkeletonEntity;
+import com.syming.cursedcastle.entity.mob.skeleton.GoldenSkeleton;
 import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
 import com.syming.cursedcastle.entity.projectile.ScytheProjectileEntity;
+import com.syming.cursedcastle.entity.projectile.ThrowingBloodBoneEntity;
 import com.syming.cursedcastle.entity.projectile.ThrowingBoneEntity;
+import com.syming.cursedcastle.entity.projectile.ThrowingGoldenBoneEntity;
 import com.syming.cursedcastle.entity.projectile.subweapon.*;
 import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.bat.VampireBatEntity;
@@ -44,6 +48,13 @@ public class CCEntity {
             .updateInterval(1)
             .build("blood_skeleton"));
 
+    public static final RegistryObject<EntityType<ClearBoneSkeletonEntity>> CLEAR_BONE_SKELETON = ENTITY_TYPES.register("clear_bone_skeleton", () -> EntityType.Builder.<ClearBoneSkeletonEntity>of(ClearBoneSkeletonEntity::new, MobCategory.MONSTER)
+            .sized(0.5F, 1.99F)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .build("clear_bone_skeleton"));
+
     public static final RegistryObject<EntityType<DraculaEntity>> DRACULA = ENTITY_TYPES.register("dracula", () -> EntityType.Builder.<DraculaEntity>of(DraculaEntity::new, MobCategory.MONSTER)
             .sized(0.6F, 2.5F)
             .setTrackingRange(64)
@@ -71,6 +82,13 @@ public class CCEntity {
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("frozen_shade"));
+
+    public static final RegistryObject<EntityType<GoldenSkeleton>> GOLDEN_SKELETON = ENTITY_TYPES.register("golden_skeleton", () -> EntityType.Builder.<GoldenSkeleton>of(GoldenSkeleton::new, MobCategory.MONSTER)
+            .sized(0.5F, 1.99F)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .build("golden_skeleton"));
 
     public static final RegistryObject<EntityType<GrimReaperEntity>> GRIM_REAPER = ENTITY_TYPES.register("grim_reaper", () -> EntityType.Builder.<GrimReaperEntity>of(GrimReaperEntity::new, MobCategory.MONSTER)
             .sized(0.5F, 1.99F)
@@ -207,6 +225,22 @@ public class CCEntity {
                     .updateInterval(20)
                     .setCustomClientFactory(((spawnEntity, level) -> new ThrowingBoneEntity(level)))
                     .build("throwing_bone"));
+
+    public static final RegistryObject<EntityType<ThrowingBloodBoneEntity>> THROWING_BLOOD_BONE = ENTITY_TYPES.register("blood_throwing_bone",
+            () -> EntityType.Builder.<ThrowingBloodBoneEntity>of(ThrowingBloodBoneEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .updateInterval(20)
+                    .setCustomClientFactory(((spawnEntity, level) -> new ThrowingBloodBoneEntity(level)))
+                    .build("blood_throwing_bone"));
+
+    public static final RegistryObject<EntityType<ThrowingGoldenBoneEntity>> THROWING_GOLDEN_BONE = ENTITY_TYPES.register("golden_throwing_bone",
+            () -> EntityType.Builder.<ThrowingGoldenBoneEntity>of(ThrowingGoldenBoneEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .updateInterval(20)
+                    .setCustomClientFactory(((spawnEntity, level) -> new ThrowingGoldenBoneEntity(level)))
+                    .build("golden_throwing_bone"));
 
     static {
         for (Tiers tier : Tiers.values()) {

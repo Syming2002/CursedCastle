@@ -10,10 +10,10 @@ public enum Soul {
     ZOMBIE("zombie", SoulType.BULLET, new Color(0x3E692D), Rarity.UNCOMMON);
 
 
-    private String name;
-    private SoulType soulType;
-    private Color color;
-    private Rarity rarity;
+    private final String name;
+    private final SoulType soulType;
+    private final Color color;
+    private final Rarity rarity;
 
     Soul(String pName, SoulType pSoulType, Color pColor, Rarity pRarity) {
         this.name = pName;

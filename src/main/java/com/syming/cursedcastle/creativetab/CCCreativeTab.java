@@ -4,7 +4,7 @@ import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.soul.Soul;
-import com.syming.cursedcastle.item.soul.SoulType;
+import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -27,6 +27,7 @@ public class CCCreativeTab {
 
                         // Whips
                         output.accept(CCItem.FLAME_WHIP.get());
+                        output.accept(CCItem.HOLY_WHIP.get());
                         output.accept(CCItem.LEATHER_WHIP.get());
                         output.accept(CCItem.ROSE_STEM_WHIP.get());
                         output.accept(CCItem.UNDEAD_KILLER_WHIP.get());
@@ -79,11 +80,18 @@ public class CCCreativeTab {
                             output.accept(CCItem.SOUL_TYPES.get(soul).get());
                         }
 
+                        // Spell Books
+                        for (SpellBookElementType spellBookElementType : SpellBookElementType.values()) {
+                            output.accept(CCItem.SPELL_BOOK_TYPES.get(spellBookElementType).get());
+                        }
+
                         // Spawn Eggs
                         output.accept(CCItem.BLOOD_SKELETON_SPAWN_EGG.get());
+                        output.accept(CCItem.CLEAR_BONE_SKELETON_SPAWN_EGG.get());
                         output.accept(CCItem.DRACULA_SPAWN_EGG.get());
                         output.accept(CCItem.FAMILIAR_BAT_SPAWN_EGG.get());
                         output.accept(CCItem.FROZEN_SHADE_SPAWN_EGG.get());
+                        output.accept(CCItem.GOLDEN_SKELETON_SPAWN_EGG.get());
                         output.accept(CCItem.GRIM_REAPER_SPAWN_EGG.get());
                         output.accept(CCItem.HARPY_SPAWN_EGG.get());
                         output.accept(CCItem.HEAT_SHADE_SPAWN_EGG.get());
@@ -94,8 +102,9 @@ public class CCCreativeTab {
                         output.accept(CCItem.VAMPIRE_BAT_SPAWN_EGG.get());
 
                         // Miscellaneous Items
-                        output.accept(CCItem.BLOOD_SKELETON_BONE.get());
+                        output.accept(CCItem.BLOOD_BONE.get());
                         output.accept(CCItem.BLOOD_BUCKET.get());
+                        output.accept(CCItem.GOLDEN_BONE.get());
                         output.accept(CCItem.HOLY_WATER_BUCKET.get());
                         output.accept(CCItem.SCYTHE_PROJECTILE_ITEM.get());
                         output.accept(CCItem.DEATH_SCYTHE.get());

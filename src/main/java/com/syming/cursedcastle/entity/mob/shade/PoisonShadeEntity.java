@@ -2,6 +2,7 @@ package com.syming.cursedcastle.entity.mob.shade;
 
 import com.syming.cursedcastle.entity.magic.PoisonBreathEntity;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,6 +12,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class PoisonShadeEntity extends ShadeEntity {
 
@@ -28,6 +31,16 @@ public class PoisonShadeEntity extends ShadeEntity {
     @Override
     public boolean hasStrength(DamageSource source, float damageAmount) {
         return false;
+    }
+
+    @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of();
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of();
     }
 
     @Override

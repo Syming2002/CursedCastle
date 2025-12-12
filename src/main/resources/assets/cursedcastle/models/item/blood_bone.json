@@ -2,6 +2,6 @@
     "parent": "item/generated",
     "textures":
     {
-        "layer0": "cursedcastle:item/blood_skeleton_bone"
+        "layer0": "cursedcastle:item/blood_bone"
     }
 }

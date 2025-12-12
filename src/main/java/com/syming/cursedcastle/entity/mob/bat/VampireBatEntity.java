@@ -2,6 +2,7 @@ package com.syming.cursedcastle.entity.mob.bat;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.CCEntity;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -16,6 +17,8 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+
+import java.util.List;
 
 public class VampireBatEntity extends CCBatEntity {
 
@@ -77,5 +80,15 @@ public class VampireBatEntity extends CCBatEntity {
     @Override
     protected ResourceLocation getDefaultLootTable() {
         return new ResourceLocation(CursedCastleMod.MOD_ID, "entities/vampire_bat");
+    }
+
+    @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of();
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of();
     }
 }

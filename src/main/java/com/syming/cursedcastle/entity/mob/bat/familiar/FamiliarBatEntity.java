@@ -3,6 +3,7 @@ package com.syming.cursedcastle.entity.mob.bat.familiar;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.mob.bat.CCBatEntity;
 import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.UUID;
 
 public class FamiliarBatEntity extends CCBatEntity implements OwnableEntity {
@@ -146,5 +148,15 @@ public class FamiliarBatEntity extends CCBatEntity implements OwnableEntity {
 
     private boolean isBehindSummoner() {
         return this.isBehindSummoner;
+    }
+
+    @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of();
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of();
     }
 }

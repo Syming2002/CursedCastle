@@ -26,6 +26,7 @@
   "entity.cursedcastle.familiar_bat": "Familiar Bat",
   "entity.cursedcastle.friendly_zombie": "Friendly Zombie",
   "entity.cursedcastle.frozen_shade": "Frozen Shade",
+  "entity.cursedcastle.golden_skeleton": "Golden Skeleton",
   "entity.cursedcastle.grim_reaper": "Grim Reaper",
   "entity.cursedcastle.harpy": "Harpy",
   "entity.cursedcastle.harpy_feather": "Harpy Feather",
@@ -54,6 +55,24 @@
 
   "entity.cursedcastle.holy_water": "Holy Water",
 
+  "entity.cursedcastle.fire_weakness_description": "Has fire weakness",
+  "entity.cursedcastle.ice_weakness_description": "Has ice weakness",
+  "entity.cursedcastle.water_weakness_description": "Has water weakness",
+  "entity.cursedcastle.thunder_weakness_description": "Has thunder weakness",
+  "entity.cursedcastle.earth_weakness_description": "Has earth weakness",
+  "entity.cursedcastle.wind_weakness_description": "Has wind weakness",
+  "entity.cursedcastle.holy_weakness_description": "Has holy weakness",
+  "entity.cursedcastle.dark_weakness_description": "Has dark weakness",
+  "entity.cursedcastle.fire_strength_description": "Has fire strength",
+  "entity.cursedcastle.ice_strength_description": "Has ice strength",
+  "entity.cursedcastle.water_strength_description": "Has water strength",
+  "entity.cursedcastle.thunder_strength_description": "Has thunder strength",
+  "entity.cursedcastle.earth_strength_description": "Has earth strength",
+  "entity.cursedcastle.wind_strength_description": "Has wind strength",
+  "entity.cursedcastle.holy_strength_description": "Has holy strength",
+  "entity.cursedcastle.dark_strength_description": "Has dark strength",
+
+
   "entity.minecraft.villager.cursedcastle.high_priest": "High Priest",
 
   "fluid_type.cursedcastle.blood": "Blood",
@@ -70,6 +89,7 @@
   "item.cursedcastle.dracula_spawn_egg": "Dracula Spawn Egg",
   "item.cursedcastle.familiar_bat_spawn_egg": "Familiar Bat Spawn Egg",
   "item.cursedcastle.frozen_shade_spawn_egg": "Frozen Shade Spawn Egg",
+  "item.cursedcastle.golden_skeleton_spawn_egg": "Golden Skeleton Spawn Egg",
   "item.cursedcastle.grim_reaper_spawn_egg": "Grim Reaper Spawn Egg",
   "item.cursedcastle.harpy_spawn_egg": "Harpy Shade Spawn Egg",
   "item.cursedcastle.heat_shade_spawn_egg": "Heat Shade Spawn Egg",
@@ -137,6 +157,9 @@
   "item.cursedcastle.anim_diamond_holy_cross": "Anim Diamond Holy Cross",
   "item.cursedcastle.anim_netherite_holy_cross": "Anim Netherite Holy Cross",
 
+  "item.cursedcastle.throwing_bone": "Throwing Bone",
+  "item.cursedcastle.blood_throwing_bone": "Blood Throwing Bone",
+  "item.cursedcastle.golden_throwing_bone": "Golden Throwing Bone",
   "item.cursedcastle.scythe_projectile": "Scythe Projectile",
   "item.cursedcastle.death_scythe": "Death Scythe",
 
@@ -145,7 +168,9 @@
 
 
 
-  "item.cursedcastle.blood_skeleton_bone": "Blood Skeleton Bone",
+  "item.cursedcastle.blood_bone": "Blood Bone",
+  "item.cursedcastle.golden_bone": "Golden Bone",
+
   "item.cursedcastle.blood_bucket": "Blood Bucket",
   "item.cursedcastle.holy_water_bucket": "Holy Water Bucket",
 

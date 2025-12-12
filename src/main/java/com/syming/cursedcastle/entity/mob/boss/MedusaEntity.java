@@ -2,9 +2,15 @@ package com.syming.cursedcastle.entity.mob.boss;
 
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
+import com.syming.cursedcastle.api.IElementalWeapon;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
+import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.util.ColorUtil;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -14,7 +20,10 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+
+import java.util.List;
 
 public class MedusaEntity extends Monster implements IAnimatedEntity, ILivingEntityStrengthWeakness {
     protected Animation animation;
@@ -75,11 +84,43 @@ public class MedusaEntity extends Monster implements IAnimatedEntity, ILivingEnt
 
     @Override
     public boolean hasWeakness(DamageSource source, float damageAmount) {
+        LivingEntity attacker = getLastAttacker();
+        LivingEntity target = getTarget();
+        if (attacker != null && target != null) {
+            ItemStack stack = attacker.getMainHandItem();
+            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+                if (elementalWeapon != null) {
+                    source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
+                    return source.is(CCDatapackBuiltinEntriesProvider.HOLY);
+                }
+            }
+        }
         return false;
     }
 
     @Override
     public boolean hasStrength(DamageSource source, float damageAmount) {
+        LivingEntity attacker = getLastAttacker();
+        LivingEntity target = getTarget();
+        if (attacker != null && target != null) {
+            ItemStack stack = attacker.getMainHandItem();
+            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+                if (elementalWeapon != null) {
+                    source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
+                    return source.is(CCDatapackBuiltinEntriesProvider.DARK);
+                }
+            }
+        }
         return false;
+    }
+
+    @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of(Component.translatable("entity.cursedcastle.holy_weakness_description").setStyle(Style.EMPTY.withColor(ColorUtil.HOLY_COLOR)));
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of(Component.translatable("entity.cursedcastle.dark_strength_description").setStyle(Style.EMPTY.withColor(ColorUtil.DARK_COLOR)));
     }
 }

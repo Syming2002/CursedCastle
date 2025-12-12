@@ -11,8 +11,8 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 public class SoulItem extends Item implements ICurioItem {
     private final Soul soul;
 
-    public SoulItem(Soul pSoul, Properties pProperties) {
-        super(pProperties);
+    public SoulItem(Soul pSoul) {
+        super(new Properties().stacksTo(16).rarity(pSoul.getRarity()));
         this.soul = pSoul;
     }
 

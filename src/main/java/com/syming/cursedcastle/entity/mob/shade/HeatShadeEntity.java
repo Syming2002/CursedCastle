@@ -4,6 +4,8 @@ import com.syming.cursedcastle.api.IElementalWeapon;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.magic.FireBreathEntity;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,6 +16,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class HeatShadeEntity extends ShadeEntity {
 
@@ -53,6 +57,16 @@ public class HeatShadeEntity extends ShadeEntity {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of(Component.translatable("entity.cursedcastle.ice_weakness_description").setStyle(Style.EMPTY.withColor(0xB9E8EA)));
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of(Component.translatable("entity.cursedcastle.fire_strength_description").setStyle(Style.EMPTY.withColor(0xEB0306)));
     }
 
     @Override

@@ -10,6 +10,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.CCSkeletonEntity;
+import com.syming.cursedcastle.entity.mob.skeleton.GoldenSkeleton;
 import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.PartPose;
@@ -119,7 +120,8 @@ public class SkeletonModel extends AdvancedEntityModel<CCSkeletonEntity> {
 
     @Override
     public Iterable<BasicModelPart> parts() {
-        return ImmutableList.of(this.head,
+        return ImmutableList.of(
+                this.head,
                 this.headWear,
                 this.body,
                 this.rightArm,
@@ -138,23 +140,22 @@ public class SkeletonModel extends AdvancedEntityModel<CCSkeletonEntity> {
         this.animator.update(pEntity);
 
         // Throwing Bone Animation
-        if (pEntity instanceof ThrowingBoneSkeletonEntity) {
-            if (this.animator.setAnimation(ThrowingBoneSkeletonEntity.THROWING_BONE_ANIMATION)) {
-                this.animator.startKeyframe(20);
-                this.rotate(this.animator, this.rightArm, -102.5F, 27.5F, 0.0F);
-                this.animator.endKeyframe();
-                this.animator.startKeyframe(10);
-                this.rotate(this.animator, this.rightArm, -206.4031859401F, 7.9813342888F, -74.3751051883F);
-                this.animator.endKeyframe();
-                this.animator.startKeyframe(2);
-                this.rotate(this.animator, this.rightArm, -86.4F, 7.98F, -74.38F);
-                this.animator.endKeyframe();
-                this.animator.resetKeyframe(8);
-            }
+        if (this.animator.setAnimation(CCSkeletonEntity.THROWING_BONE_ANIMATION) && !pEntity.isInvulnerable()) {
+            this.animator.startKeyframe(20);
+            this.rotate(this.animator, this.rightArm, -102.5F, 27.5F, 0.0F);
+            this.animator.endKeyframe();
+            this.animator.startKeyframe(10);
+            this.rotate(this.animator, this.rightArm, -206.4031859401F, 7.9813342888F, -74.3751051883F);
+            this.animator.endKeyframe();
+            this.animator.startKeyframe(2);
+            this.rotate(this.animator, this.rightArm, -86.4F, 7.98F, -74.38F);
+            this.animator.endKeyframe();
+            this.animator.resetKeyframe(8);
         }
 
+
         // Death Animation
-        if (this.animator.setAnimation(BloodSkeletonEntity.DEATH_ANIMATION)) {
+        if (this.animator.setAnimation(CCSkeletonEntity.DEATH_ANIMATION)) {
             pEntity.initDeathAnimationRandoms();
             float fallRotation = pEntity.getFallSideRotation();
 
@@ -174,7 +175,7 @@ public class SkeletonModel extends AdvancedEntityModel<CCSkeletonEntity> {
             this.rotate(animator, leftLeg, -68.25F, 0, fallRotation);
             this.animator.move(leftLeg, 0, 11, -10);
             this.animator.endKeyframe();
-            this.animator.setStaticKeyframe(25);
+            this.animator.setStaticKeyframe(65);
             this.animator.resetKeyframe(15);
         }
 

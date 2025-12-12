@@ -1,6 +1,8 @@
 package com.syming.cursedcastle.entity.projectile;
 
 import com.syming.cursedcastle.entity.CCEntity;
+import com.syming.cursedcastle.entity.mob.skeleton.ClearBoneSkeletonEntity;
+import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.item.CCItem;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -39,7 +41,7 @@ public class ThrowingBoneEntity extends CCThrowableWeapon {
 
     @Override
     public float getImpactDamage() {
-        return 2.0F;
+        return getOwner() instanceof ClearBoneSkeletonEntity ? 16.0F : 4.0F;
     }
 
     @Override
@@ -109,8 +111,8 @@ public class ThrowingBoneEntity extends CCThrowableWeapon {
         Entity target = pResult.getEntity();
 
         if (!this.level().isClientSide() && getOwner() != null) {
-            if (target instanceof LivingEntity livingEntity && getOwner() instanceof LivingEntity shooter) {
-                livingEntity.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage());
+            if (target instanceof LivingEntity livingEntity && (getOwner() instanceof ThrowingBoneSkeletonEntity || getOwner() instanceof ClearBoneSkeletonEntity)) {
+                livingEntity.hurt(this.damageSources().mobProjectile(this, (LivingEntity) getOwner()), getImpactDamage());
                 System.out.println("Entity is Hit");
             }
         }

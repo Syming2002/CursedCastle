@@ -87,12 +87,14 @@ public class CursedCastleMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 EntityRenderers.register(CCEntity.BLOOD_SKELETON.get(), SkeletonRenderer::new);
+                EntityRenderers.register(CCEntity.CLEAR_BONE_SKELETON.get(), SkeletonRenderer::new);
                 EntityRenderers.register(CCEntity.DRACULA.get(), DraculaRenderer::new);
                 EntityRenderers.register(CCEntity.FAMILIAR_BAT.get(), FamiliarBatRenderer::new);
                 EntityRenderers.register(CCEntity.FIRE_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.FIRE_PILLAR.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.FRIENDLY_ZOMBIE.get(), ZombieFriendlyRenderer::new);
                 EntityRenderers.register(CCEntity.FROZEN_SHADE.get(), ShadeRenderer::new);
+                EntityRenderers.register(CCEntity.GOLDEN_SKELETON.get(), SkeletonRenderer::new);
                 EntityRenderers.register(CCEntity.GRIM_REAPER.get(), GrimReaperRenderer::new);
                 EntityRenderers.register(CCEntity.HARPY.get(), HarpyRenderer::new);
                 EntityRenderers.register(CCEntity.HARPY_FEATHER.get(), HarpyFeatherRenderer::new);
@@ -123,6 +125,8 @@ public class CursedCastleMod {
                 }
 
                 EntityRenderers.register(CCEntity.THROWING_BONE.get(), ThrownItemRenderer::new);
+                EntityRenderers.register(CCEntity.THROWING_BLOOD_BONE.get(), ThrownItemRenderer::new);
+                EntityRenderers.register(CCEntity.THROWING_GOLDEN_BONE.get(), ThrownItemRenderer::new);
                 EntityRenderers.register(CCEntity.SCYTHE_PROJECTILE.get(), ThrownItemRenderer::new);
 
                 // Fluids Render
