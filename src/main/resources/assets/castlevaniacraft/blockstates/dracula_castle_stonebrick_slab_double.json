@@ -1,6 +1,0 @@
-{
-  "variants":
-  {
-    "variant=dracula_castle_stonebrick_default": { "model": "castlevaniacraft:dracula_castle_stonebrick_slab_double" }
-  }
-}

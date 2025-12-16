@@ -1,6 +1,0 @@
-{
-  "parent": "castlevaniacraft:item/guardian_soul",
-  "textures": {
-    "layer0": "castlevaniacraft:items/souls/guardians/guardian_soul.bat_soul"
-  }
-}
