@@ -187,8 +187,6 @@ dependencies {
     implementation fg.deobf("curse.maven:architectury-api-${architectury_api_id}")
     implementation fg.deobf("curse.maven:cloth-config-${cloth_config_id}")
 
-    implementation fg.deobf("curse.maven:repurposed-structures-368293:6797349")
-
     // compile against the JEI API but do not include it at runtime
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
     // at runtime, use the full JEI jar for Forge

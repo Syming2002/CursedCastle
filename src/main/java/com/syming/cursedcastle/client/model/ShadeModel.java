@@ -32,10 +32,10 @@ public class ShadeModel extends AdvancedEntityModel<ShadeEntity> {
 
         this.head = new AdvancedModelBox(this, "head");
         this.head.setPos(-4.0F, 24.0F, -4.0F);
-        this.head.setRotationPoint(0.0F, -28.0F, 0.0F);
+        this.head.setRotationPoint(0.0F, -24.0F, 0.0F);
         this.shade.addChild(this.head);
         this.head.setTextureOffset(0, 0)
-                .addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F);
+                .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F);
 
         this.body = new AdvancedModelBox(this, "body");
         this.body.setPos(-4.0F, 12.0F, -2.0F);
