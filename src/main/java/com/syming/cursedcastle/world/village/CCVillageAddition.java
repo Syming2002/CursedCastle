@@ -20,9 +20,7 @@ import net.minecraftforge.event.level.ChunkEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Mod.EventBusSubscriber(modid = CursedCastleMod.MOD_ID)
 public class CCVillageAddition {
@@ -83,17 +81,32 @@ public class CCVillageAddition {
         if (event.phase != TickEvent.Phase.END) return;
         if (!(event.level instanceof ServerLevel server)) return;
 
+        StructureTemplate templatePlains = server.getStructureManager()
+                .get(new ResourceLocation(CursedCastleMod.MOD_ID, "village/plains/big_church"))
+                .orElse(null);
+
+
+        StructureTemplate templateDesert = server.getStructureManager()
+                .get(new ResourceLocation(CursedCastleMod.MOD_ID, "village/desert/big_church"))
+                .orElse(null);
+
         Iterator<PendingChurch> iterator = pendingChurches.iterator();
         while (iterator.hasNext()) {
             PendingChurch pending = iterator.next();
             if (!pending.server.equals(server)) continue;
 
-            boolean allLoaded = areChunksLoaded(server, pending.center, 96);
+            boolean allLoaded = areChunksLoaded(server, pending.center, 80);
             if (!allLoaded) continue;
 
             switch (pending.type) {
-                case PLAINS -> spawnPlainsBuildingNearVillage(server, pending.center);
-                case DESERT -> spawnDesertBuildingNearVillage(server, pending.center);
+                case PLAINS -> {
+                    spawnBuildingNearVillage(server, pending.center, pending.type, templatePlains);
+                    System.out.println("Structure big church " + pending.type + "has spawned at: " + pending.center);
+                }
+                case DESERT -> {
+                    spawnBuildingNearVillage(server, pending.center, pending.type, templateDesert);
+                    System.out.println("Structure big church " + pending.type + "has spawned at: " + pending.center);
+                }
             }
 
             iterator.remove();
@@ -124,8 +137,10 @@ public class CCVillageAddition {
         return n == 0 ? null : new BlockPos(x / n, y / n, z / n);
     }
 
-    private static void spawnPlainsBuildingNearVillage(ServerLevel level, BlockPos center) {
-        int radius = 96;
+    private static void spawnBuildingNearVillage(ServerLevel level, BlockPos center, ChurchType churchType, StructureTemplate template) {
+        if (template == null) return;
+
+        int radius = 80;
         long seed = center.asLong();
         double angle = (seed % 360) * (Math.PI / 180.0);
 
@@ -133,19 +148,7 @@ public class CCVillageAddition {
         int dz = (int) Math.round(Math.sin(angle) * radius);
 
         BlockPos offset = center.offset(dx, 0, dz);
-        placePlainsBigChurchStructure(level, offset);
-    }
-
-    private static void spawnDesertBuildingNearVillage(ServerLevel level, BlockPos center) {
-        int radius = 96;
-        long seed = center.asLong();
-        double angle = (seed % 360) * (Math.PI / 180.0);
-
-        int dx = (int) Math.round(Math.cos(angle) * radius);
-        int dz = (int) Math.round(Math.sin(angle) * radius);
-
-        BlockPos offset = center.offset(dx, 0, dz);
-        placeDesertBigChurchStructure(level, offset);
+        placeBigChurchStructure(level, offset, churchType, template);
     }
 
     private static BlockPos getSurfacePos(ServerLevel level, BlockPos pos, StructureTemplate template) {
@@ -160,12 +163,7 @@ public class CCVillageAddition {
         return new BlockPos(pos.getX(), maxY, pos.getZ());
     }
 
-    private static void placePlainsBigChurchStructure(ServerLevel level, BlockPos pos) {
-        StructureTemplate template = level.getStructureManager()
-                .get(new ResourceLocation(CursedCastleMod.MOD_ID, "village/plains/big_church_plains"))
-                .orElse(null);
-        if (template == null) return;
-
+    private static void placeBigChurchStructure(ServerLevel level, BlockPos pos, ChurchType churchType, StructureTemplate template) {
         StructureProcessorList processorList = level.registryAccess()
                 .registryOrThrow(Registries.PROCESSOR_LIST)
                 .get(new ResourceLocation(CursedCastleMod.MOD_ID, "big_church"));
@@ -180,80 +178,61 @@ public class CCVillageAddition {
 
         BlockPos correctedPos = getSurfacePos(level, pos, template);
         template.placeInWorld(level, correctedPos, correctedPos, settings, level.random, 2);
-        buildPlainsFoundation(level, correctedPos, template);
+        buildFoundation(level, correctedPos, churchType, template, settings);
     }
 
-    private static void placeDesertBigChurchStructure(ServerLevel level, BlockPos pos) {
-        StructureTemplate template = level.getStructureManager()
-                .get(new ResourceLocation(CursedCastleMod.MOD_ID, "village/desert/big_church_desert"))
-                .orElse(null);
-        if (template == null) return;
-
-        StructureProcessorList processorList = level.registryAccess()
-                .registryOrThrow(Registries.PROCESSOR_LIST)
-                .get(new ResourceLocation(CursedCastleMod.MOD_ID, "big_church"));
-        if (processorList == null) return;
-
-        StructurePlaceSettings settings = new StructurePlaceSettings()
-                .addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK)
-                .setIgnoreEntities(false)
-                .setRotation(Rotation.getRandom(level.random));
-
-        for (StructureProcessor processor : processorList.list()) settings.addProcessor(processor);
-
-        BlockPos correctedPos = getSurfacePos(level, pos, template);
-        template.placeInWorld(level, correctedPos, correctedPos, settings, level.random, 2);
-        buildDesertFoundation(level, correctedPos, template);
-    }
-
-    private static void buildPlainsFoundation(ServerLevel level, BlockPos origin, StructureTemplate template) {
+    private static void buildFoundation(ServerLevel level, BlockPos origin, ChurchType churchType, StructureTemplate template, StructurePlaceSettings settings) {
         Vec3i size = template.getSize();
         RandomSource rand = level.random;
 
         for (int x = 0; x < size.getX(); x++) {
-            for (int y = 0; y < size.getY(); y++) {
-                for (int z = 0; z < size.getZ(); z++) {
-                    BlockPos blockPos = origin.offset(x, y, z);
-                    BlockState block = level.getBlockState(blockPos);
-                    if (block.is(Blocks.COBBLESTONE) || block.is(Blocks.MOSSY_COBBLESTONE)
-                            || block.is(Blocks.COBBLESTONE_STAIRS) || block.is(Blocks.MOSSY_COBBLESTONE_STAIRS)) {
-                        BlockPos below = blockPos.below();
-                        while (below.getY() > level.getMinBuildHeight()) {
-                            BlockState stateBelow = level.getBlockState(below);
-                            if (!stateBelow.canBeReplaced()) break;
-                            BlockState support = rand.nextFloat() < 0.5F
-                                    ? Blocks.MOSSY_COBBLESTONE.defaultBlockState()
-                                    : Blocks.COBBLESTONE.defaultBlockState();
-                            level.setBlock(below, support, 2);
-                            below = below.below();
-                        }
+            for (int z = 0; z < size.getZ(); z++) {
+
+                BlockPos lowestBlockPos = null;
+                BlockState lowestBlockState = null;
+
+                for (int y = 0; y < size.getY(); y++) {
+                    BlockPos local = new BlockPos(x, y, z);
+                    BlockPos worldPos = StructureTemplate
+                            .calculateRelativePosition(settings, local)
+                            .offset(origin);
+
+                    BlockState state = level.getBlockState(worldPos);
+
+                    if (!state.isAir()) {
+                        lowestBlockPos = worldPos;
+                        lowestBlockState = state;
+                        break;
                     }
                 }
+
+                if (lowestBlockPos == null) continue;
+
+                if (!isFoundationBlock(lowestBlockState, churchType)) continue;
+
+                BlockPos start = lowestBlockPos.below();
+
+                BlockState support = null;
+
+                switch (churchType) {
+                    case PLAINS -> support = rand.nextFloat() < 0.5F ? Blocks.MOSSY_COBBLESTONE.defaultBlockState() : Blocks.COBBLESTONE.defaultBlockState();
+                    case DESERT -> support = Blocks.SANDSTONE.defaultBlockState();
+                }
+
+
+
+                replaceAirAndLiquidDownwards(level, start, support);
             }
         }
     }
 
-    private static void buildDesertFoundation(ServerLevel level, BlockPos origin, StructureTemplate template) {
-        Vec3i size = template.getSize();
-
-        for (int x = 0; x < size.getX(); x++) {
-            for (int y = 0; y < size.getY(); y++) {
-                for (int z = 0; z < size.getZ(); z++) {
-                    BlockPos blockPos = origin.offset(x, y, z);
-                    BlockState block = level.getBlockState(blockPos);
-                    if (block.is(Blocks.SANDSTONE) || block.is(Blocks.SANDSTONE_STAIRS)) {
-                        BlockPos below = blockPos.below();
-                        while (below.getY() > level.getMinBuildHeight()) {
-                            BlockState stateBelow = level.getBlockState(below);
-                            if (!stateBelow.canBeReplaced()) break;
-                            BlockState support = Blocks.SANDSTONE.defaultBlockState();
-                            level.setBlock(below, support, 2);
-                            below = below.below();
-                        }
-                    }
-                }
-            }
+    private static boolean isFoundationBlock(BlockState state, ChurchType churchType) {
+        if (churchType == ChurchType.PLAINS) {
+            return state.is(Blocks.COBBLESTONE) || state.is(Blocks.MOSSY_COBBLESTONE) || state.is(Blocks.COBBLESTONE_STAIRS) || state.is(Blocks.MOSSY_COBBLESTONE_STAIRS);
+        } else if (churchType == ChurchType.DESERT) {
+            return state.is(Blocks.SANDSTONE) || state.is(Blocks.SMOOTH_SANDSTONE_STAIRS);
         }
+        return false;
     }
 
     private static boolean areChunksLoaded(ServerLevel server, BlockPos center, int radius) {
@@ -269,6 +248,21 @@ public class CCVillageAddition {
             }
         }
         return true;
+    }
+
+    private static void replaceAirAndLiquidDownwards(ServerLevel level, BlockPos startPos, BlockState blockState) {
+        BlockPos.MutableBlockPos pos = startPos.mutable();
+
+        while (pos.getY() > level.getMinBuildHeight()) {
+            BlockState current = level.getBlockState(pos);
+
+            if (!current.isAir() && !current.getFluidState().isSource() && !current.canBeReplaced()) {
+                break;
+            }
+
+            level.setBlock(pos, blockState, 2);
+            pos.move(0, -1, 0);
+        }
     }
 
     private enum ChurchType {
