@@ -16,6 +16,7 @@ import com.syming.cursedcastle.item.whip.vampirekiller.tip.*;
 import com.syming.cursedcastle.entity.CCEntity;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -351,6 +352,17 @@ public class CCItem {
     public static final RegistryObject<Item> ANIM_SCYTHE_PROJECTILE_ITEM = ITEMS.register("anim_scythe_projectile", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> DEATH_SCYTHE = ITEMS.register("death_scythe", () -> new DeathScytheItem(new Item.Properties().stacksTo(1), 8, -3.6F, 5.0F));
+
+    // Crucifixes
+
+//    public static final Map<WoodType, RegistryObject<CrucifixItem>> CRUCIFIX_TYPES = new HashMap<>();
+//
+//    static {
+//        for (WoodType woodType : WoodType.values().toList()) {
+//            CRUCIFIX_TYPES.put(woodType, ITEMS.register(woodType.name() + '_' + "crucifix", () -> new CrucifixItem(woodType, new Item.Properties().stacksTo(1))));
+//        }
+//    }
+
 
     // Souls
 

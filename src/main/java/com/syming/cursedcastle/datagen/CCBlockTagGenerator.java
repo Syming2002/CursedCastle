@@ -1,12 +1,14 @@
 package com.syming.cursedcastle.datagen;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.tag.CCTag;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -20,6 +22,9 @@ public class CCBlockTagGenerator extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-
+        for (WoodType woodType : WoodType.values().toList()) {
+            tag(CCTag.Blocks.CRUCIFIX_BLOCKS)
+                    .add(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get());
+        }
     }
 }

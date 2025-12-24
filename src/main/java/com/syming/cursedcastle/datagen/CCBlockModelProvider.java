@@ -2,10 +2,12 @@ package com.syming.cursedcastle.datagen;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.block.CCBlock;
+import com.syming.cursedcastle.block.CrucifixBlock;
 import com.syming.cursedcastle.block.head.CCHeadBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;

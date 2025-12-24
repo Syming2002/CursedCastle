@@ -26,6 +26,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -54,6 +55,19 @@ public class CCEntity {
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("clear_bone_skeleton"));
+
+//    public static final Map<WoodType, RegistryObject<EntityType<CrucifixEntity>>> CRUCIFIX_WOOD_TYPE = new HashMap<>();
+//
+//    static {
+//        for (WoodType woodType : WoodType.values().toList()) {
+//            CRUCIFIX_WOOD_TYPE.put(woodType, ENTITY_TYPES.register(woodType.name() + '_' + "crucifix", () -> EntityType.Builder.<CrucifixEntity>of((pEntityType, pLevel) -> new CrucifixEntity(woodType, pLevel), MobCategory.MISC)
+//                    .sized(0.5F, 2.5F)
+//                    .setTrackingRange(64)
+//                    .setShouldReceiveVelocityUpdates(true)
+//                    .updateInterval(1)
+//                    .build(woodType.name() + '_' + "crucifix")));
+//        }
+//    }
 
     public static final RegistryObject<EntityType<DraculaEntity>> DRACULA = ENTITY_TYPES.register("dracula", () -> EntityType.Builder.<DraculaEntity>of(DraculaEntity::new, MobCategory.MONSTER)
             .sized(0.6F, 2.5F)

@@ -12,6 +12,7 @@ public class CCTag {
 
     public static class Blocks {
         public static final TagKey<Block> ALL_BLOCKS = tag("all_blocks");
+        public static final TagKey<Block> CRUCIFIX_BLOCKS = tag("crucifixes");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(CursedCastleMod.MOD_ID, name));

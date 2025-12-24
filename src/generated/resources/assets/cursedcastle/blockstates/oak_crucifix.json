@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "cursedcastle:block/oak_crucifix",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "cursedcastle:block/oak_crucifix"
+    },
+    "facing=south": {
+      "model": "cursedcastle:block/oak_crucifix",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "cursedcastle:block/oak_crucifix",
+      "y": 270
+    }
+  }
+}

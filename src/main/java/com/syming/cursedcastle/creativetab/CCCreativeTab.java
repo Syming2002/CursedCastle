@@ -9,6 +9,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
@@ -74,6 +75,16 @@ public class CCCreativeTab {
                         output.accept(CCBlock.DRACULA_CASTLE_STONE_BRICKS_SLAB.get());
                         output.accept(CCBlock.DRACULA_HEAD.get());
 
+
+                        // Crucifixes Items
+//                        for (WoodType woodType : WoodType.values().toList()) {
+//                            output.accept(CCItem.CRUCIFIX_TYPES.get(woodType).get());
+//                        }
+
+                        // Crucifixes Blocks
+                        for (WoodType woodType : WoodType.values().toList()) {
+                            output.accept(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get());
+                        }
 
                         // Souls
                         for (Soul soul : Soul.values()) {

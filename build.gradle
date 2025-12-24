@@ -233,7 +233,10 @@ dependencies {
 
 //    implementation fg.deobf("curse.maven:p1nero-better-structure-block-${p1nero_better_structure_block_id}")
 
-    implementation fg.deobf("curse.maven:commandstructures-${command_structures_id}")
+    // Repurposed Structures
+    implementation fg.deobf("curse.maven:repurposed-structures-${repurposed_structures_id}")
+
+
 
     // Torcherino Unofficial
 //    implementation fg.deobf("curse.maven:torcherino-unofficial-${torcherino_unofficial_id}")

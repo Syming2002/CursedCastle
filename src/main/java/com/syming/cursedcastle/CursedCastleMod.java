@@ -28,6 +28,7 @@ import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -88,6 +89,11 @@ public class CursedCastleMod {
             event.enqueueWork(() -> {
                 EntityRenderers.register(CCEntity.BLOOD_SKELETON.get(), SkeletonRenderer::new);
                 EntityRenderers.register(CCEntity.CLEAR_BONE_SKELETON.get(), SkeletonRenderer::new);
+
+//                for (WoodType woodType : WoodType.values().toList()) {
+//                    EntityRenderers.register(CCEntity.CRUCIFIX_WOOD_TYPE.get(woodType).get(), CrucifixRenderer::new);
+//                }
+
                 EntityRenderers.register(CCEntity.DRACULA.get(), DraculaRenderer::new);
                 EntityRenderers.register(CCEntity.FAMILIAR_BAT.get(), FamiliarBatRenderer::new);
                 EntityRenderers.register(CCEntity.FIRE_BREATH.get(), NoopRenderer::new);
@@ -156,6 +162,7 @@ public class CursedCastleMod {
 
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+//            event.registerLayerDefinition(CrucifixModel.CRUCIFIX_LAYER, CrucifixModel::createBodyLayer);
             event.registerLayerDefinition(DaggerModel.DAGGER_LAYER, DaggerModel::createBodyLayer);
             event.registerLayerDefinition(FamiliarBatModel.FAMILIAR_BAT_LAYER, FamiliarBatModel::createBodyLayer);
             event.registerLayerDefinition(HarpyFeatherModel.HARPY_FEATHER_LAYER, HarpyFeatherModel::createBodyLayer);

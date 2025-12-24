@@ -9,23 +9,42 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class CCBlock {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CursedCastleMod.MOD_ID);
 
+    // Liquid Block
+
     public static final RegistryObject<LiquidBlock> BLOOD_BLOCK = registerBlock("blood_block",
             () -> new LiquidBlock(CCFluid.SOURCE_BLOOD, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
     public static final RegistryObject<LiquidBlock> HOLY_WATER_BLOCK = registerBlock("holy_water_block",
             () -> new LiquidBlock(CCFluid.SOURCE_HOLY_WATER, BlockBehaviour.Properties.copy(Blocks.WATER).lightLevel(blockState -> 7)));
+
+
+    // Blocks
+
+    public static final Map<WoodType, RegistryObject<Block>> CRUCIFIX_BLOCK_TYPES = new HashMap<>();
+
+    static {
+        for (WoodType woodType : WoodType.values().toList()) {
+            CRUCIFIX_BLOCK_TYPES.put(woodType, registerBlock(woodType.name() + '_' + "crucifix",
+                    () -> new CrucifixBlock(BlockBehaviour.Properties.of()
+                            .sound(SoundType.WOOD).noOcclusion(), woodType)));
+        }
+    }
+
 
     public static final RegistryObject<Block> DRACULA_CASTLE_COBBLESTONE = registerBlock("dracula_castle_cobblestone",
             () -> new DraculaCastleCobblestoneBlock(

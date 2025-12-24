@@ -21,6 +21,20 @@
 
   "enchantment.cursedcastle.blood_skeleton_killer": "Blood Skeleton Killer",
 
+  "entity.cursedcastle.oak_crucifix": "Oak Crucifix",
+  "entity.cursedcastle.spruce_crucifix": "Spruce Crucifix",
+  "entity.cursedcastle.birch_crucifix": "Birch Crucifix",
+  "entity.cursedcastle.acacia_crucifix": "Acacia Crucifix",
+  "entity.cursedcastle.cherry_crucifix": "Cherry Crucifix",
+  "entity.cursedcastle.jungle_crucifix": "Jungle Crucifix",
+  "entity.cursedcastle.dark_oak_crucifix": "Dark Oak Crucifix",
+  "entity.cursedcastle.crimson_crucifix": "Crimson Crucifix",
+  "entity.cursedcastle.warped_crucifix": "Warped Crucifix",
+  "entity.cursedcastle.mangrove_crucifix": "Mangrove Crucifix",
+  "entity.cursedcastle.bamboo_crucifix": "Bamboo Crucifix",
+
+
+
   "entity.cursedcastle.blood_skeleton": "Blood Skeleton",
   "entity.cursedcastle.dracula": "Dracula",
   "entity.cursedcastle.familiar_bat": "Familiar Bat",
@@ -84,6 +98,18 @@
   "holy_cross.damageSmite": "Deals %s damage to undead mob",
   "holy_cross.knockback": "Deals %s knockback",
   "holy_cross.fireAspect": "Deals %s seconds of fire to mob",
+
+  "item.cursedcastle.oak_crucifix": "Oak Crucifix",
+  "item.cursedcastle.spruce_crucifix": "Spruce Crucifix",
+  "item.cursedcastle.birch_crucifix": "Birch Crucifix",
+  "item.cursedcastle.acacia_crucifix": "Acacia Crucifix",
+  "item.cursedcastle.cherry_crucifix": "Cherry Crucifix",
+  "item.cursedcastle.jungle_crucifix": "Jungle Crucifix",
+  "item.cursedcastle.dark_oak_crucifix": "Dark Oak Crucifix",
+  "item.cursedcastle.crimson_crucifix": "Crimson Crucifix",
+  "item.cursedcastle.warped_crucifix": "Warped Crucifix",
+  "item.cursedcastle.mangrove_crucifix": "Mangrove Crucifix",
+  "item.cursedcastle.bamboo_crucifix": "Bamboo Crucifix",
 
   "item.cursedcastle.blood_skeleton_spawn_egg": "Blood Skeleton Spawn Egg",
   "item.cursedcastle.dracula_spawn_egg": "Dracula Spawn Egg",
