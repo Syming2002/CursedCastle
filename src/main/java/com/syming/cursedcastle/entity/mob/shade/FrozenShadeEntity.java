@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.entity.mob.shade;
 
 import com.syming.cursedcastle.CursedCastleMod;
-import com.syming.cursedcastle.api.IElementalWeapon;
+import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.magic.IceBreathEntity;
 import com.syming.cursedcastle.entity.magic.IceSpikeEntity;
@@ -72,7 +72,7 @@ public class FrozenShadeEntity extends ShadeEntity {
         LivingEntity target = getTarget();
         if (attacker != null && target != null) {
             ItemStack stack = attacker.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
                     return source.is(CCDatapackBuiltinEntriesProvider.FIRE) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
@@ -88,7 +88,7 @@ public class FrozenShadeEntity extends ShadeEntity {
         LivingEntity target = getTarget();
         if (attacker != null && target != null) {
             ItemStack stack = attacker.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
                     return source.is(CCDatapackBuiltinEntriesProvider.ICE);

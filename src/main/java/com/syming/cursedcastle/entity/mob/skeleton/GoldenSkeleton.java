@@ -3,7 +3,7 @@ package com.syming.cursedcastle.entity.mob.skeleton;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.syming.cursedcastle.CursedCastleMod;
-import com.syming.cursedcastle.api.IElementalWeapon;
+import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.projectile.ThrowingGoldenBoneEntity;
 import net.minecraft.network.chat.Component;
@@ -101,7 +101,7 @@ public class GoldenSkeleton extends CCSkeletonEntity {
         LivingEntity target = getTarget();
         if (attacker != null && target != null) {
             ItemStack stack = attacker.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     pSource = elementalWeapon.getElementalDamageSource(stack, target, attacker);
                     return pSource.is(CCDatapackBuiltinEntriesProvider.DARK);
@@ -127,7 +127,7 @@ public class GoldenSkeleton extends CCSkeletonEntity {
         LivingEntity target = getTarget();
         if (attacker != null && target != null) {
             ItemStack stack = attacker.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     pSource = elementalWeapon.getElementalDamageSource(stack, target, attacker);
                     return pSource.is(CCDatapackBuiltinEntriesProvider.FIRE)

@@ -1,11 +1,16 @@
 package com.syming.cursedcastle.entity.projectile.subweapon;
 
+import com.syming.cursedcastle.effect.CCEffect;
+import com.syming.cursedcastle.entity.projectile.HolyFireEntity;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.sound.CCSound;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.projectile.CCThrowableWeapon;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,15 +45,20 @@ public class HolyWaterEntity extends CCThrowableWeapon {
         super.onHitBlock(pResult);
         if (getOwner() != null) {
             if (!this.level().isClientSide()) {
-                BlockPos pos = pResult.getBlockPos().offset(pResult.getDirection().getNormal());
-                if (this.level().isEmptyBlock(pos)) {
-                    this.level().setBlock(pos, Blocks.FIRE.defaultBlockState(), 3);
-                    discard();
-                    System.out.println("Fire is Set");
-                }
+                HolyFireEntity holyFire = new HolyFireEntity(this.level(), this.getX(), this.getY(), this.getZ());
+                holyFire.setFixedColor(0x66CCFF);
+                holyFire.setRadius(2.25F);
+                holyFire.setRadiusOnUse(-0.5F);
+                holyFire.setRadiusPerTick(-0.03F);
+                holyFire.setParticle(ParticleTypes.EFFECT);
+                this.level().addFreshEntity(holyFire);
+                discard();
+                System.out.println("Holy fire is set");
+            } else {
+                discard();
             }
-            this.level().playSound((Player) getOwner(), pResult.getBlockPos(), CCSound.HOLY_WATER_IMPACT.get(), SoundSource.NEUTRAL, 0.5F, 1.0F);
         }
+        this.level().playSound((Player) getOwner(), pResult.getBlockPos(), CCSound.HOLY_WATER_IMPACT.get(), SoundSource.NEUTRAL, 0.5F, 1.0F);
         System.out.println("Block is Hit");
     }
 
@@ -63,7 +73,7 @@ public class HolyWaterEntity extends CCThrowableWeapon {
                 if (!stack.isEmpty()) {
                     if (target instanceof Mob mob && getOwner() instanceof LivingEntity shooter) {
                         target.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage());
-                        mob.setSecondsOnFire(5);
+                        mob.addEffect(new MobEffectInstance(CCEffect.HOLY.get(), 200));
                         discard();
                     }
                 }

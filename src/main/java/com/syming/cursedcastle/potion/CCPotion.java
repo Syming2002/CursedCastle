@@ -16,6 +16,9 @@ public class CCPotion {
     public static final RegistryObject<Potion> FREEZE = POTIONS.register("freeze", () -> new Potion(new MobEffectInstance(CCEffect.FREEZE.get(), 100)));
     public static final RegistryObject<Potion> LONG_FREEZE = POTIONS.register("long_freeze", () -> new Potion(new MobEffectInstance(CCEffect.FREEZE.get(), 200)));
 
+    public static final RegistryObject<Potion> HOLY = POTIONS.register("holy", () -> new Potion(new MobEffectInstance(CCEffect.HOLY.get(), 100)));
+    public static final RegistryObject<Potion> LONG_HOLY = POTIONS.register("long_holy", () -> new Potion(new MobEffectInstance(CCEffect.HOLY.get(), 200)));
+
     public static void register(IEventBus eventBus) {
         POTIONS.register(eventBus);
     }

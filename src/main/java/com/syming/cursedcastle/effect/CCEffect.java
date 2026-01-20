@@ -12,6 +12,7 @@ public class CCEffect {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, CursedCastleMod.MOD_ID);
 
     public static final RegistryObject<MobEffect> FREEZE = EFFECTS.register("freeze", FreezeEffect::new);
+    public static final RegistryObject<MobEffect> HOLY = EFFECTS.register("holy", HolyEffect::new);
 
 
     public static void register(IEventBus eventBus) {

@@ -3,7 +3,7 @@ package com.syming.cursedcastle.entity.mob;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
-import com.syming.cursedcastle.api.IElementalWeapon;
+import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.magic.HarpyFeatherEntity;
@@ -186,7 +186,7 @@ public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, IL
         LivingEntity target = getTarget();
         if (attacker != null && target != null) {
             ItemStack stack = attacker.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
                     return source.is(CCDatapackBuiltinEntriesProvider.ICE);
@@ -202,7 +202,7 @@ public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, IL
         LivingEntity target = getTarget();
         if (attacker != null && target != null) {
             ItemStack stack = attacker.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
                     return source.is(CCDatapackBuiltinEntriesProvider.WIND);

@@ -5,6 +5,15 @@
   "advancements.cursedcastle.leatherWhip.title": "A leather weapon",
   "advancements.cursedcastle.leatherWhip.description": "Get a leather whip",
 
+  "allele.forestry.bee_species.cursedcastle.bee_dracula": "Dracula",
+  "allele.forestry.bee_species.cursedcastle.bee_frozen_shade": "Frozen Shade",
+  "allele.forestry.bee_species.cursedcastle.bee_heat_shade": "Heat Shade",
+  "allele.forestry.bee_species.cursedcastle.bee_vampire": "Vampire",
+
+
+  "allele.forestry.flower_type.cursedcastle.flower_type_blood": "Blood",
+  "allele.forestry.flower_type.cursedcastle.flower_type_fire": "Fire",
+  "allele.forestry.flower_type.cursedcastle.flower_type_ice": "Ice",
 
   "block.cursedcastle.blood_block": "Blood Block",
   "block.cursedcastle.dracula_castle_cobblestone": "Dracula's Castle Cobblestone",
@@ -16,8 +25,8 @@
 
   "creativetab.cursedcastle_tab": "Cursed Castle",
 
-  "effect.cursedcastle.anti_blood_skeleton": "Kill Blood Skeleton",
   "effect.cursedcastle.freeze": "Freeze",
+  "effect.cursedcastle.holy": "Holy",
 
   "enchantment.cursedcastle.blood_skeleton_killer": "Blood Skeleton Killer",
 
@@ -99,6 +108,13 @@
   "holy_cross.knockback": "Deals %s knockback",
   "holy_cross.fireAspect": "Deals %s seconds of fire to mob",
 
+  "item.cursedcastle.bee_comb_blood": "Blood Comb",
+  "item.cursedcastle.bee_comb_bone": "Bone Comb",
+  "item.cursedcastle.bee_comb_frozen": "Frozen Comb",
+  "item.cursedcastle.bee_comb_holy": "Holy Comb",
+  "item.cursedcastle.bee_comb_rotten": "Rotten Comb",
+  "item.cursedcastle.bee_comb_warmed": "Warmed Comb",
+
   "item.cursedcastle.oak_crucifix": "Oak Crucifix",
   "item.cursedcastle.spruce_crucifix": "Spruce Crucifix",
   "item.cursedcastle.birch_crucifix": "Birch Crucifix",
@@ -127,6 +143,7 @@
   "item.cursedcastle.bullet_tip_vampire_killer_whip": "Bullet Tip Vampire Killer Whip",
   "item.cursedcastle.crushing_stone_vampire_killer_whip": "Crushing Stone Vampire Killer Whip",
   "item.cursedcastle.flame_whip": "Flame Whip",
+  "item.cursedcastle.holy_whip": "Holy Whip",
   "item.cursedcastle.leather_whip": "Leather Whip",
   "item.cursedcastle.rose_stem_whip": "Rose Stem Whip",
   "item.cursedcastle.undead_killer_whip": "Undead Killer Whip",
@@ -192,8 +209,6 @@
 
   "item.cursedcastle.leather_string": "Leather String",
 
-
-
   "item.cursedcastle.blood_bone": "Blood Bone",
   "item.cursedcastle.golden_bone": "Golden Bone",
 
@@ -204,6 +219,8 @@
   "item.cursedcastle.bat_soul": "Bat Soul",
   "item.cursedcastle.enderman_soul": "Enderman Soul",
   "item.cursedcastle.zombie_soul": "Zombie Soul",
+
+  "item.cursedcastle.potion.holy": "Potion of God, feel the effect of holy",
 
   "item.minecraft.lingering_potion.effect.anti_blood_skeleton": "Lingering Potion of Anti-Blood Skeleton",
   "item.minecraft.lingering_potion.effect.long_anti_blood_skeleton": "Lingering Potion of Anti-Blood Skeleton",
@@ -232,6 +249,18 @@
 
   "item.minecraft.tipped_arrow.effect.freeze": "Arrow of Freeze",
   "item.minecraft.tipped_arrow.effect.long_freeze": "Arrow of Freeze",
+
+  "item.minecraft.lingering_potion.effect.holy": "Lingering Potion of Holy",
+  "item.minecraft.lingering_potion.effect.long_holy": "Lingering Potion of Holy",
+
+  "item.minecraft.potion.effect.holy": "Potion of Holy",
+  "item.minecraft.potion.effect.long_holy": "Potion of Holy",
+
+  "item.minecraft.splash_potion.effect.holy": "Splash Potion of Holy",
+  "item.minecraft.splash_potion.effect.long_holy": "Splash Potion of Holy",
+
+  "item.minecraft.tipped_arrow.effect.holy": "Arrow of Holy",
+  "item.minecraft.tipped_arrow.effect.long_holy": "Arrow of Holy",
 
   "throwing_axe.damage" : "Deals %s damage to other mob",
   "throwing_axe.damageArthropods": "Deals %s damage to arthropods mob",

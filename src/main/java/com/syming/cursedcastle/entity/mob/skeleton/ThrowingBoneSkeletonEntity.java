@@ -2,7 +2,7 @@ package com.syming.cursedcastle.entity.mob.skeleton;
 
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
-import com.syming.cursedcastle.api.IElementalWeapon;
+import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.projectile.ThrowingBoneEntity;
@@ -18,9 +18,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RestrictSunGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
@@ -70,7 +68,7 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements Rang
         LivingEntity target = getTarget();
         if (attacker != null && target != null) {
             ItemStack stack = attacker.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
                     return source.is(CCDatapackBuiltinEntriesProvider.FIRE) || source.is(CCDatapackBuiltinEntriesProvider.HOLY) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
@@ -86,7 +84,7 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements Rang
         LivingEntity target = getTarget();
         if (attacker != null && target != null) {
             ItemStack stack = attacker.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
                     return source.is(CCDatapackBuiltinEntriesProvider.DARK);

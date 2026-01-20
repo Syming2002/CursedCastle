@@ -1,6 +1,6 @@
 package com.syming.cursedcastle.item.whip.vampirekiller;
 
-import com.syming.cursedcastle.api.IElementalWeapon;
+import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,7 +13,7 @@ import net.minecraftforge.common.ForgeMod;
 
 import static net.minecraft.core.particles.ParticleTypes.FLAME;
 
-public class VampireKillerRedStoneTipWhipItem extends VampireKillerWhipItem implements IElementalWeapon {
+public class VampireKillerRedStoneTipWhipItem extends VampireKillerWhipItem implements IElementalDamage {
     public VampireKillerRedStoneTipWhipItem(Properties pProperties, int pAttackDamageModifier, float pAttackSpeedModifier, float pReachModifier) {
         super(pProperties, pAttackDamageModifier, pAttackSpeedModifier, pReachModifier);
     }

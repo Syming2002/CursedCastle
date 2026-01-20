@@ -1,6 +1,6 @@
 package com.syming.cursedcastle.item.whip.vampirekiller;
 
-import com.syming.cursedcastle.api.IElementalWeapon;
+import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,7 +11,7 @@ import net.minecraftforge.common.ForgeMod;
 
 import static net.minecraft.core.particles.ParticleTypes.SNOWFLAKE;
 
-public class VampireKillerBlueStoneTipWhipItem extends VampireKillerWhipItem implements IElementalWeapon {
+public class VampireKillerBlueStoneTipWhipItem extends VampireKillerWhipItem implements IElementalDamage {
 
 
     public VampireKillerBlueStoneTipWhipItem(Properties pProperties, int pAttackDamageModifier, float pAttackSpeedModifier, float pReachModifier) {

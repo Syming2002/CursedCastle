@@ -1,6 +1,6 @@
 package com.syming.cursedcastle.entity.mob.bat;
 
-import com.syming.cursedcastle.api.IElementalWeapon;
+import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import net.minecraft.core.BlockPos;
@@ -36,7 +36,7 @@ public abstract class CCBatEntity extends Monster implements FlyingAnimal, ILivi
         LivingEntity living = getLastAttacker();
         if (living != null) {
             ItemStack stack = living.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getTarget(), getLastAttacker());
                     return source.is(CCDatapackBuiltinEntriesProvider.FIRE);
@@ -51,7 +51,7 @@ public abstract class CCBatEntity extends Monster implements FlyingAnimal, ILivi
         LivingEntity living = getLastAttacker();
         if (living != null) {
             ItemStack stack = living.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getTarget(), getLastAttacker());
                     return source.is(CCDatapackBuiltinEntriesProvider.DARK);

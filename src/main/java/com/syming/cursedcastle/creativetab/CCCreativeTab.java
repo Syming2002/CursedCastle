@@ -2,9 +2,15 @@ package com.syming.cursedcastle.creativetab;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.block.CCBlock;
+import com.syming.cursedcastle.compat.forestry.CCBeesApicultureItems;
+import com.syming.cursedcastle.compat.forestry.CCBeesEnumHoneyComb;
+import com.syming.cursedcastle.compat.forestry.CCBeesItemHoneyComb;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
+import forestry.api.apiculture.genetics.IBeeSpecies;
+import forestry.api.genetics.ILifeStage;
+import forestry.core.utils.SpeciesUtil;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -83,7 +89,19 @@ public class CCCreativeTab {
 
                         // Crucifixes Blocks
                         for (WoodType woodType : WoodType.values().toList()) {
-                            output.accept(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get());
+                            if (woodType == WoodType.OAK
+                                    || woodType == WoodType.SPRUCE
+                                    || woodType == WoodType.BIRCH
+                                    || woodType == WoodType.JUNGLE
+                                    || woodType == WoodType.ACACIA
+                                    || woodType == WoodType.DARK_OAK
+                                    || woodType == WoodType.CRIMSON
+                                    || woodType == WoodType.WARPED
+                                    || woodType == WoodType.MANGROVE
+                                    || woodType == WoodType.CHERRY
+                                    || woodType == WoodType.BAMBOO) {
+                                output.accept(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get());
+                            }
                         }
 
                         // Souls
@@ -119,6 +137,21 @@ public class CCCreativeTab {
                         output.accept(CCItem.HOLY_WATER_BUCKET.get());
                         output.accept(CCItem.SCYTHE_PROJECTILE_ITEM.get());
                         output.accept(CCItem.DEATH_SCYTHE.get());
+
+                        // Bees
+                        for (ILifeStage stage : SpeciesUtil.BEE_TYPE.get().getLifeStages()) {
+                            for (IBeeSpecies species : SpeciesUtil.getAllBeeSpecies()) {
+                                if (species.id().toString().contains("cursedcastle")) {
+                                    System.out.println("Cursed castle found");
+                                    output.accept(species.createStack(stage));
+                                }
+                            }
+                        }
+
+                        // Combs
+                        for (CCBeesItemHoneyComb comb : CCBeesApicultureItems.CC_BEES_COMB.getItems()) {
+                            output.accept(comb);
+                        }
                     })
                     .build());
 

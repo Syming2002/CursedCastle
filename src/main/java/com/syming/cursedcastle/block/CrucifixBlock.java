@@ -23,7 +23,7 @@ public class CrucifixBlock extends HorizontalDirectionalBlock implements EntityB
 
     public static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 32.0D, 16.0D);
 
-    private WoodType woodType;
+    private final WoodType woodType;
 
     public CrucifixBlock(Properties pProperties, WoodType pWoodType) {
         super(pProperties);

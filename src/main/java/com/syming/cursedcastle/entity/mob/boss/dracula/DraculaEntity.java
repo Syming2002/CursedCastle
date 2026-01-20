@@ -3,13 +3,10 @@ package com.syming.cursedcastle.entity.mob.boss.dracula;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
-import com.syming.cursedcastle.CursedCastleMod;
-import com.syming.cursedcastle.api.ICustomBossBar;
-import com.syming.cursedcastle.api.IElementalWeapon;
+import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
 //import com.syming.cursedcastle.network.CCBossInfoPacket;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
-import com.syming.cursedcastle.network.CCPacketHandler;
 import com.syming.cursedcastle.entity.magic.FirePillarEntity;
 import com.syming.cursedcastle.util.ColorUtil;
 import net.minecraft.core.BlockPos;
@@ -21,7 +18,6 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -616,7 +612,7 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ILivingEn
         LivingEntity target = getTarget();
         if (attacker != null && target != null) {
             ItemStack stack = attacker.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
                     return source.is(CCDatapackBuiltinEntriesProvider.FIRE) || source.is(CCDatapackBuiltinEntriesProvider.HOLY) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
@@ -632,7 +628,7 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ILivingEn
         LivingEntity target = getTarget();
         if (attacker != null && target != null) {
             ItemStack stack = attacker.getMainHandItem();
-            if (stack != null && stack.getItem() instanceof IElementalWeapon elementalWeapon) {
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
                     return source.is(CCDatapackBuiltinEntriesProvider.DARK);

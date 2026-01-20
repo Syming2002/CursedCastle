@@ -1,6 +1,6 @@
 package com.syming.cursedcastle.item.whip;
 
-import com.syming.cursedcastle.api.IElementalWeapon;
+import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,7 +14,7 @@ import net.minecraftforge.common.ForgeMod;
 
 import static net.minecraft.core.particles.ParticleTypes.FLAME;
 
-public class FlameWhipItem extends WhipItem implements IElementalWeapon {
+public class FlameWhipItem extends WhipItem implements IElementalDamage {
     public FlameWhipItem(Properties pProperties, int pAttackDamageModifier, float pAttackSpeedModifier, float pReachModifier) {
         super(pProperties, pAttackDamageModifier, pAttackSpeedModifier, pReachModifier);
     }

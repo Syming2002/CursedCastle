@@ -17,6 +17,8 @@ public class BrewingStandRecipe {
         BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)), Ingredient.of(Items.PACKED_ICE), PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.FREEZE.get())));
         BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.FREEZE.get())), Ingredient.of(Items.REDSTONE), PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.LONG_FREEZE.get())));
 
+        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD)), Ingredient.of(Items.ENCHANTED_GOLDEN_APPLE), PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.HOLY.get())));
+        BrewingRecipeRegistry.addRecipe(new BrewingRecipe(Ingredient.of(PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.HOLY.get())), Ingredient.of(Items.REDSTONE), PotionUtils.setPotion(new ItemStack(Items.POTION), CCPotion.LONG_HOLY.get())));
     }
 
 }

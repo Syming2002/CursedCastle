@@ -15,5 +15,7 @@ public class ColorUtil {
     public static final int HOLY_COLOR = new Color(0x97B9E0).getRGB();
     public static final int DARK_COLOR = new Color(0x320064).getRGB();
 
+    // Potions
+    public static final int HOLY_GOLD_COLOR = new Color(0xDAA520).getRGB();
 
 }

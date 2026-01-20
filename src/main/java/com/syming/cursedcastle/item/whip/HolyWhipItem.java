@@ -1,12 +1,12 @@
 package com.syming.cursedcastle.item.whip;
 
-import com.syming.cursedcastle.api.IElementalWeapon;
+import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-public class HolyWhipItem extends WhipItem implements IElementalWeapon {
+public class HolyWhipItem extends WhipItem implements IElementalDamage {
     public HolyWhipItem(Properties pProperties, int pAttackDamageModifier, float pAttackSpeedModifier, float pReachModifier) {
         super(pProperties, pAttackDamageModifier, pAttackSpeedModifier, pReachModifier);
     }

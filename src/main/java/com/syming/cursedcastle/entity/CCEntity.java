@@ -10,10 +10,7 @@ import com.syming.cursedcastle.entity.mob.skeleton.GoldenSkeleton;
 import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
-import com.syming.cursedcastle.entity.projectile.ScytheProjectileEntity;
-import com.syming.cursedcastle.entity.projectile.ThrowingBloodBoneEntity;
-import com.syming.cursedcastle.entity.projectile.ThrowingBoneEntity;
-import com.syming.cursedcastle.entity.projectile.ThrowingGoldenBoneEntity;
+import com.syming.cursedcastle.entity.projectile.*;
 import com.syming.cursedcastle.entity.projectile.subweapon.*;
 import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.bat.VampireBatEntity;
@@ -311,6 +308,16 @@ public class CCEntity {
                     .setCustomClientFactory(((spawnEntity, level) -> new ScytheProjectileEntity(level)))
                     .build("scythe_projectile"));
 
+    // Misc
+    public static final RegistryObject<EntityType<HolyFireEntity>> HOLY_FIRE = ENTITY_TYPES.register("holy_fire",
+            () -> EntityType.Builder.<HolyFireEntity>of(HolyFireEntity::new, MobCategory.MISC)
+                    .setTrackingRange(64)
+                    .clientTrackingRange(4)
+                    .setShouldReceiveVelocityUpdates(true)
+                    .updateInterval(1)
+                    .setCustomClientFactory(((spawnEntity, level) -> new HolyFireEntity(level)))
+                    .build("holy_fire"))
+            ;
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
     }

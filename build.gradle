@@ -163,6 +163,11 @@ repositories {
     maven {
         url = "https://nexus.resourcefulbees.com/repository/telepathicgrunt/"
     }
+    maven {
+        name = 'ModKit'
+        url = 'https://jitpack.io'
+        content { includeGroup 'com.github.thedarkcolour' }
+    }
 }
 
 dependencies {
@@ -236,7 +241,14 @@ dependencies {
     // Repurposed Structures
     implementation fg.deobf("curse.maven:repurposed-structures-${repurposed_structures_id}")
 
+    // ModKit DEV ONLY
+    implementation fg.deobf('com.github.thedarkcolour:ModKit:cc8f1c11ec')
 
+    // Patchouli
+    implementation fg.deobf("curse.maven:patchouli-${patchouli_id}")
+
+    // Forestry Community Edition
+    implementation fg.deobf("curse.maven:forestry-community-edition-${forestry_community_edition}")
 
     // Torcherino Unofficial
 //    implementation fg.deobf("curse.maven:torcherino-unofficial-${torcherino_unofficial_id}")
@@ -288,6 +300,9 @@ tasks.named('processResources', ProcessResources).configure {
     filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
         expand replaceProperties + [project: project]
     }
+
+    from "src/main/templates"
+    into "build/generated/sources/modMetadata"
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
