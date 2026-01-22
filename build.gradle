@@ -225,7 +225,7 @@ dependencies {
     // Apply Mixin AP
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("curse.maven:citadel-331936:6002521")
+    implementation fg.deobf("curse.maven:citadel-331936:7476570")
 
     implementation fg.deobf("curse.maven:attributefix-280510:4911084")
 

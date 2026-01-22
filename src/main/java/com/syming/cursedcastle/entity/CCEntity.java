@@ -5,6 +5,7 @@ import com.syming.cursedcastle.entity.magic.*;
 import com.syming.cursedcastle.entity.mob.HarpyEntity;
 import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
 import com.syming.cursedcastle.entity.mob.boss.MedusaEntity;
+import com.syming.cursedcastle.entity.mob.boss.RusalkaEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.ClearBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.GoldenSkeleton;
 import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
@@ -23,7 +24,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -135,6 +135,13 @@ public class CCEntity {
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("poison_shade"));
+
+    public static final RegistryObject<EntityType<RusalkaEntity>> RUSALKA = ENTITY_TYPES.register("rusalka", () -> EntityType.Builder.<RusalkaEntity>of(RusalkaEntity::new, MobCategory.MONSTER)
+            .sized(0.5F, 1.99F)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .build("rusalka"));
 
     public static final RegistryObject<EntityType<ThrowingBoneSkeletonEntity>> THROWING_BONE_SKELETON = ENTITY_TYPES.register("throwing_bone_skeleton", () -> EntityType.Builder.<ThrowingBoneSkeletonEntity>of(ThrowingBoneSkeletonEntity::new, MobCategory.MONSTER)
             .sized(0.5F, 1.99F)

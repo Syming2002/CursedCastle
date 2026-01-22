@@ -11,6 +11,7 @@ import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 
 public class DraculaModel extends AdvancedEntityModel<DraculaEntity> {
@@ -129,6 +130,16 @@ public class DraculaModel extends AdvancedEntityModel<DraculaEntity> {
     public void setupAnim(DraculaEntity dracula, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         animate(dracula, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
         faceTarget(pNetHeadYaw, pHeadPitch, 1.0F, this.head, this.headWear);
+
+        float f = 1.0F;
+
+        this.rightArm.rotateAngleX = Mth.cos(pLimbSwing * 0.6662F + (float)Math.PI) * 2.0F * pLimbSwingAmount * 0.5F / f;
+        this.leftArm.rotateAngleX = Mth.cos(pLimbSwing * 0.6662F) * 2.0F * pLimbSwingAmount * 0.5F / f;
+        this.rightArm.rotateAngleZ = 0.0F;
+        this.leftArm.rotateAngleZ = 0.0F;
+
+        this.rightArm.rotateAngleY = 0.0F;
+        this.leftArm.rotateAngleY = 0.0F;
     }
 
     public void animate(DraculaEntity dracula, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {

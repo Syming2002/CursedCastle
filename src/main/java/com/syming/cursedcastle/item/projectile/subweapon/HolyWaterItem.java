@@ -23,7 +23,7 @@ public class HolyWaterItem extends Item {
         if (!pLevel.isClientSide()) {
             HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
             holyWater.setItem(throwStack);
-            holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
+            holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), -20.0F, 0.5F, 1.0F);
             pLevel.addFreshEntity(holyWater);
             pPlayer.getCooldowns().addCooldown(this, 40);
         }

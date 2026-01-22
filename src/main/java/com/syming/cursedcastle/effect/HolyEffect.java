@@ -16,7 +16,7 @@ public class HolyEffect extends MobEffect {
     public static final UUID ATTACK_SPEED_UUID = UUID.fromString("853d5396-2b26-4c39-a3bf-e422f783155c");
 
     public HolyEffect() {
-        super(MobEffectCategory.BENEFICIAL, 0xF8F8F4);
+        super(MobEffectCategory.BENEFICIAL, 0x66CCFF);
     }
 
     @Override

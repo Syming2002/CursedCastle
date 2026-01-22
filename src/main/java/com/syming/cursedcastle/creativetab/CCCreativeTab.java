@@ -126,6 +126,7 @@ public class CCCreativeTab {
                         output.accept(CCItem.HEAT_SHADE_SPAWN_EGG.get());
                         output.accept(CCItem.MEDUSA_SPAWN_EGG.get());
                         output.accept(CCItem.POISON_SHADE_SPAWN_EGG.get());
+                        output.accept(CCItem.RUSALKA_SPAWN_EGG.get());
                         output.accept(CCItem.SKELETON_SPAWN_EGG.get());
                         output.accept(CCItem.THUNDER_SHADE_SPAWN_EGG.get());
                         output.accept(CCItem.VAMPIRE_BAT_SPAWN_EGG.get());

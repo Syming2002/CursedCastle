@@ -120,6 +120,7 @@ public class CursedCastleMod {
                 EntityRenderers.register(CCEntity.MEDUSA.get(), MedusaRenderer::new);
                 EntityRenderers.register(CCEntity.POISON_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.POISON_SHADE.get(), ShadeRenderer::new);
+                EntityRenderers.register(CCEntity.RUSALKA.get(), RusalkaRenderer::new);
                 EntityRenderers.register(CCEntity.THROWING_BONE_SKELETON.get(), SkeletonRenderer::new);
                 EntityRenderers.register(CCEntity.THUNDER_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.THUNDER_SHADE.get(), ShadeRenderer::new);

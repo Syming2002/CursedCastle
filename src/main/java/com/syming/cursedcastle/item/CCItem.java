@@ -468,6 +468,13 @@ public class CCItem {
                     0x319E3D,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> RUSALKA_SPAWN_EGG = ITEMS.register("rusalka_spawn_egg",
+            () -> new CCSpawnEggItem(
+                    CCEntity.RUSALKA,
+                    0xD6CCC3,
+                    0x355F4B,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> SKELETON_SPAWN_EGG = ITEMS.register("throwing_bone_skeleton_spawn_egg",
             () -> new CCSpawnEggItem(
                     CCEntity.THROWING_BONE_SKELETON,
