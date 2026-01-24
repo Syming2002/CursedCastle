@@ -8,6 +8,7 @@ import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.util.ColorUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,10 +23,11 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MedusaEntity extends Monster implements IAnimatedEntity, ILivingEntityStrengthWeakness {
+public class MedusaEntity extends CCBossEntity implements IAnimatedEntity {
     protected Animation animation;
 
     public static final Animation STARE_ATTACK_ANIMATION = Animation.create(120);
@@ -122,5 +124,15 @@ public class MedusaEntity extends Monster implements IAnimatedEntity, ILivingEnt
     @Override
     public List<Component> getStrengthDescription() {
         return List.of(Component.translatable("entity.cursedcastle.dark_strength_description").setStyle(Style.EMPTY.withColor(ColorUtil.DARK_COLOR)));
+    }
+
+    @Override
+    public @Nullable ResourceLocation getCustomBossBarBackground() {
+        return null;
+    }
+
+    @Override
+    public @Nullable ResourceLocation getCustomBossBar() {
+        return null;
     }
 }

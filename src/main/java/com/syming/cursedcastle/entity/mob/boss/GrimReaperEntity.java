@@ -290,6 +290,11 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
     }
 
     @Override
+    public @Nullable ResourceLocation getCustomBossBarBackground() {
+        return null;
+    }
+
+    @Override
     public @Nullable ResourceLocation getCustomBossBar() {
         return null;
     }

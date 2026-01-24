@@ -8,6 +8,7 @@ import com.syming.cursedcastle.client.layer.CCHeadLayer;
 import com.syming.cursedcastle.client.model.*;
 import com.syming.cursedcastle.client.renderer.blockentity.CCHeadBlockEntityRender;
 import com.syming.cursedcastle.client.renderer.entity.*;
+import com.syming.cursedcastle.client.renderer.entity.rusalka.RusalkaRenderer;
 import com.syming.cursedcastle.creativetab.CCCreativeTab;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.enchantment.CCEnchantment;
@@ -23,23 +24,16 @@ import com.syming.cursedcastle.potion.CCPotion;
 import com.syming.cursedcastle.recipe.BrewingStandRecipe;
 import com.syming.cursedcastle.sound.CCSound;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tiers;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -47,8 +41,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-import java.util.List;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(CursedCastleMod.MOD_ID)

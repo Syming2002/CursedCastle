@@ -6,6 +6,9 @@ import org.jetbrains.annotations.Nullable;
 public interface ICustomBossBar {
 
     @Nullable
+    ResourceLocation getCustomBossBarBackground();
+
+    @Nullable
     ResourceLocation getCustomBossBar();
 
 }

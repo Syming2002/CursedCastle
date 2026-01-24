@@ -15,19 +15,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
-public class RusalkaModel extends AdvancedEntityModel<RusalkaEntity> {
+public class RusalkaModel<T extends RusalkaEntity> extends AdvancedEntityModel<T> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation RUSALKA_LAYER = new ModelLayerLocation(new ResourceLocation(CursedCastleMod.MOD_ID, "rusalka"), "main");
     private final AdvancedModelBox rusalka;
     private final AdvancedModelBox head;
-
-    private AdvancedModelBox hair;
-
-    private float hairOffsetX;
-    private float hairOffsetY;
-    private float hairOffsetZ;
-    private boolean hairInitialized = false;
-
     private final AdvancedModelBox body;
     private final AdvancedModelBox rightArm;
     private final AdvancedModelBox rightLeg;
@@ -48,18 +40,6 @@ public class RusalkaModel extends AdvancedEntityModel<RusalkaEntity> {
         this.head.setTextureOffset(0, 0)
                 .addBox(-3.5083F, -8.0F, -4.2357F, 8, 8, 8, 0.0F);
         this.rusalka.addChild(this.head);
-
-
-        this.hair = new AdvancedModelBox(this, "hair");
-        this.hair.setTextureOffset(0, 46)
-                .addBox(2.0F, 2.0F, -2.5F, 5, 5, 5, 0.0F);
-
-        this.head.addChild(this.hair);
-
-        this.hair.setScale(0.0F, 0.0F, 0.0F);
-
-
-
 
         this.body = new AdvancedModelBox(this, "body");
         this.body.setPos(-0.4917F, -18.0F, 1.7357F);
@@ -123,43 +103,14 @@ public class RusalkaModel extends AdvancedEntityModel<RusalkaEntity> {
         animate(pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
         faceTarget(pNetHeadYaw, pHeadPitch, 1.0F, this.head);
 
-        if (pEntity.getTarget() != null) {
+        float idleSpeed = 0.09F;
+        float idleAmount = 0.05F;
 
-            if (!this.hairInitialized) {
-                RandomSource rand = RandomSource.create(pEntity.getId());
+        this.rightArm.rotateAngleX += Mth.cos(pAgeInTicks * idleSpeed) * idleAmount;
+        this.leftArm.rotateAngleX  += Mth.cos(pAgeInTicks * idleSpeed) * idleAmount;
 
-                this.hairOffsetX = Mth.nextFloat(rand, -3.0F, 3.0F);
-                this.hairOffsetY = Mth.nextFloat(rand, -8.0F, -4.0F);
-                this.hairOffsetZ = Mth.nextFloat(rand, -3.5F, 3.5F);
-
-                this.hairInitialized = true;
-            }
-
-            this.hair.setPos(this.hairOffsetX, this.hairOffsetY, this.hairOffsetZ);
-
-
-            int tick = pEntity.getAnimationTick();
-
-            if (pEntity.getAnimation() == RusalkaEntity.HAIR_ATTACK_ANIMATION) {
-
-                float distance = pEntity.distanceTo(pEntity.getTarget());
-                float maxLength = Mth.clamp(distance * 0.2F, 1.0F, 6.0F);
-
-                if (tick >= 10 && tick < 20) {
-                    float progress = (tick - 10) / 10.0F;
-                    float scaleZ = Mth.lerp(progress, 0.0F, maxLength);
-
-                    this.hair.setScale(1.0F, 1.0F, scaleZ);
-                }
-
-                if (tick >= 20 && tick < 35) {
-                    float progress = (tick - 20) / 15.0F;
-                    float scaleZ = Mth.lerp(progress, maxLength, 0.0F);
-
-                    this.hair.setScale(1.0F, 1.0F, scaleZ);
-                }
-            }
-        }
+        this.rightArm.rotateAngleZ += Mth.sin(pAgeInTicks * idleSpeed) * 0.02F;
+        this.leftArm.rotateAngleZ  -= Mth.sin(pAgeInTicks * idleSpeed) * 0.02F;
     }
 
     public void animate(RusalkaEntity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {

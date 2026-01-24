@@ -3,6 +3,7 @@ package com.syming.cursedcastle.entity.mob.bat;
 import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.entity.mob.CCMonster;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
@@ -19,7 +20,7 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
-public abstract class CCBatEntity extends Monster implements FlyingAnimal, ILivingEntityStrengthWeakness {
+public abstract class CCBatEntity extends CCMonster implements FlyingAnimal {
     public static final int TICKS_PER_FLAP = Mth.ceil(2.4166098F);
     @Nullable
     private BlockPos targetPosition;

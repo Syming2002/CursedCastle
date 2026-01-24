@@ -8,6 +8,7 @@ import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
 //import com.syming.cursedcastle.network.CCBossInfoPacket;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.magic.FirePillarEntity;
+import com.syming.cursedcastle.entity.mob.boss.CCBossEntity;
 import com.syming.cursedcastle.util.ColorUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -18,6 +19,7 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -46,9 +48,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DraculaEntity extends Monster implements IAnimatedEntity, ILivingEntityStrengthWeakness {
-    private static final EntityDataAccessor<Integer> TARGET_ID = SynchedEntityData.defineId(DraculaEntity.class, EntityDataSerializers.INT);
-
+public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
     private Animation animation;
 
     public static final Animation FIREBALLS_ANIMATION = Animation.create(80);
@@ -103,21 +103,17 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ILivingEn
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(TARGET_ID,-1);
     }
 
     @Override
     public void setTarget(@Nullable LivingEntity living) {
         super.setTarget(living);
-        this.entityData.set(TARGET_ID, living == null ? -1 : living.getId());
     }
 
     @Override
     @Nullable
     public LivingEntity getTarget() {
-        int id = this.entityData.get(TARGET_ID);
-        Entity entity = this.level().getEntity(id);
-        return (entity instanceof LivingEntity living) ? living : null;
+        return super.getTarget();
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -648,6 +644,16 @@ public class DraculaEntity extends Monster implements IAnimatedEntity, ILivingEn
     @Override
     public List<Component> getStrengthDescription() {
         return List.of(Component.translatable("entity.cursedcastle.dark_strength_description").setStyle(Style.EMPTY.withColor(ColorUtil.DARK_COLOR)));
+    }
+
+    @Override
+    public @Nullable ResourceLocation getCustomBossBarBackground() {
+        return null;
+    }
+
+    @Override
+    public @Nullable ResourceLocation getCustomBossBar() {
+        return null;
     }
 
     public enum ActionState {
