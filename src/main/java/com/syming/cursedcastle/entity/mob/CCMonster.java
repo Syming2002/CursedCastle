@@ -40,5 +40,4 @@ public abstract class CCMonster extends Monster implements ILivingEntityStrength
         Entity entity = this.level().getEntity(id);
         return (entity instanceof LivingEntity living) ? living : null;
     }
-
 }

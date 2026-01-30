@@ -13,8 +13,6 @@ public class RusalkaEyesLayer<T extends RusalkaEntity> extends EyesLayer<T, Rusa
 
     public RusalkaEyesLayer(RenderLayerParent<T, RusalkaModel<T>> pRenderer) {
         super(pRenderer);
-
-        System.out.println("RusalkaEyesLayer");
     }
 
     @Override

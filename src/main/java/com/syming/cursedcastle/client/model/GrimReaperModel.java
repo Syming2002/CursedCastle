@@ -16,7 +16,7 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class GrimReaperModel extends AdvancedEntityModel<GrimReaperEntity> implements ArmedModel {
+public class GrimReaperModel<T extends GrimReaperEntity> extends AdvancedEntityModel<T> implements ArmedModel {
 
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final ModelLayerLocation GRIM_REAPER_LAYER = new ModelLayerLocation(new ResourceLocation(CursedCastleMod.MOD_ID, "grim_reaper"), "main");

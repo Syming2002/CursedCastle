@@ -17,7 +17,7 @@ public class CCBossBar {
     public static void drawDraculaBossHealthBar(GuiGraphics guiGraphics, int x, int y, LerpingBossEvent bossEvent) {
         int entityID = BOSS_EVENT.get(bossEvent.getId());
         if (Minecraft.getInstance().level != null && Minecraft.getInstance().level.getEntity(entityID) instanceof DraculaEntity dracula) {
-//            drawDraculaBar(guiGraphics, x, y, bossEvent, dracula);
+            drawDraculaBar(guiGraphics, x, y, bossEvent, dracula);
         }
     }
 
@@ -28,16 +28,16 @@ public class CCBossBar {
         }
     }
 
-//    public static void drawDraculaBar(GuiGraphics guiGraphics, int x, int y, BossEvent bossEvent, DraculaEntity dracula) {
-//        if (dracula.getCustomBossBar() != null) {
-//            x -= 37;
-//            guiGraphics.blit(dracula.getCustomBossBar(), x, y, -90, 0, 166, 256, 90, 256, 256);
-//            int health = (int) (bossEvent.getProgress() * 256.0F);
-//            if (health > 0) {
-//                guiGraphics.blit(dracula.getCustomBossBar(), x, y, -90, 0, 0, health, 90, 256, 256);
-//            }
-//        }
-//    }
+    public static void drawDraculaBar(GuiGraphics guiGraphics, int x, int y, BossEvent bossEvent, DraculaEntity dracula) {
+        if (dracula.getCustomBossBar() != null && dracula.getCustomBossBarBackground() != null) {
+            x -= 37;
+            guiGraphics.blit(dracula.getCustomBossBarBackground(), x, y, 0, 0, 248, 48, 248, 48);
+            int health = (int) (bossEvent.getProgress() * 150.0F);
+            if (health > 0) {
+                guiGraphics.blit(dracula.getCustomBossBar(), x + 49, y, 49, 0, health, 48, 248, 48);
+            }
+        }
+    }
 
     public static void drawRusalkaBar(GuiGraphics guiGraphics, int x, int y, BossEvent bossEvent, RusalkaEntity rusalka) {
         if (rusalka.getCustomBossBarBackground() != null && rusalka.getCustomBossBar() != null) {
@@ -48,6 +48,10 @@ public class CCBossBar {
                 guiGraphics.blit(rusalka.getCustomBossBar(), x + 43, y, 43, 0, health, 59, 256, 59);
             }
         }
+    }
+
+    public static boolean isDraculaBossBar(UUID uuid) {
+        return BOSS_EVENT.containsKey(uuid);
     }
 
     public static boolean isRusalkaBossBar(UUID uuid) {

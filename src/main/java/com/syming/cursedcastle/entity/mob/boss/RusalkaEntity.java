@@ -114,7 +114,7 @@ public class RusalkaEntity extends CCBossEntity implements IAnimatedEntity {
     public void startSeenByPlayer(ServerPlayer pServerPlayer) {
         super.startSeenByPlayer(pServerPlayer);
 
-        CCPacketHandler.sendToPlayer(new CCBossInfoPacket.Display(this.bossEvent.getId(), this.getId()), pServerPlayer);
+//        CCPacketHandler.sendToPlayer(new CCBossInfoPacket.Display(this.bossEvent.getId(), this.getId()), pServerPlayer);
         this.bossEvent.addPlayer(pServerPlayer);
     }
 
@@ -122,7 +122,7 @@ public class RusalkaEntity extends CCBossEntity implements IAnimatedEntity {
     public void stopSeenByPlayer(ServerPlayer pServerPlayer) {
         super.stopSeenByPlayer(pServerPlayer);
 
-        CCPacketHandler.sendToPlayer(new CCBossInfoPacket.Remove(this.bossEvent.getId(), this.getId()), pServerPlayer);
+//        CCPacketHandler.sendToPlayer(new CCBossInfoPacket.Remove(this.bossEvent.getId(), this.getId()), pServerPlayer);
         this.bossEvent.removePlayer(pServerPlayer);
     }
 
@@ -341,11 +341,11 @@ public class RusalkaEntity extends CCBossEntity implements IAnimatedEntity {
 
     @Override
     public @Nullable ResourceLocation getCustomBossBarBackground() {
-        return new ResourceLocation(CursedCastleMod.MOD_ID, "textures/gui/rusalka_boss_bar_background.png");
+        return null;
     }
 
     @Override
     public @Nullable ResourceLocation getCustomBossBar() {
-        return new ResourceLocation(CursedCastleMod.MOD_ID, "textures/gui/rusalka_boss_bar.png");
+        return null;
     }
 }

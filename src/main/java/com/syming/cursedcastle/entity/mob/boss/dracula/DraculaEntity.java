@@ -3,12 +3,15 @@ package com.syming.cursedcastle.entity.mob.boss.dracula;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
+import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
 //import com.syming.cursedcastle.network.CCBossInfoPacket;
 import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
 import com.syming.cursedcastle.entity.magic.FirePillarEntity;
 import com.syming.cursedcastle.entity.mob.boss.CCBossEntity;
+import com.syming.cursedcastle.network.CCBossInfoPacket;
+import com.syming.cursedcastle.network.CCPacketHandler;
 import com.syming.cursedcastle.util.ColorUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -156,6 +159,7 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
     public void startSeenByPlayer(ServerPlayer pServerPlayer) {
         super.startSeenByPlayer(pServerPlayer);
 
+//        CCPacketHandler.sendToPlayer(new CCBossInfoPacket.Display(this.bossEvent.getId(), this.getId()), pServerPlayer);
         this.bossEvent.addPlayer(pServerPlayer);
     }
 
@@ -163,6 +167,7 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
     public void stopSeenByPlayer(ServerPlayer pServerPlayer) {
         super.stopSeenByPlayer(pServerPlayer);
 
+//        CCPacketHandler.sendToPlayer(new CCBossInfoPacket.Remove(this.bossEvent.getId(), this.getId()), pServerPlayer);
         this.bossEvent.removePlayer(pServerPlayer);
     }
 

@@ -8,6 +8,7 @@ import com.syming.cursedcastle.client.layer.CCHeadLayer;
 import com.syming.cursedcastle.client.model.*;
 import com.syming.cursedcastle.client.renderer.blockentity.CCHeadBlockEntityRender;
 import com.syming.cursedcastle.client.renderer.entity.*;
+import com.syming.cursedcastle.client.renderer.entity.grimreaper.GrimReaperRenderer;
 import com.syming.cursedcastle.client.renderer.entity.rusalka.RusalkaRenderer;
 import com.syming.cursedcastle.creativetab.CCCreativeTab;
 import com.syming.cursedcastle.effect.CCEffect;

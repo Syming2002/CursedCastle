@@ -15,7 +15,7 @@ public class RusalkaRenderer extends MobRenderer<RusalkaEntity, RusalkaModel<Rus
     public static final ResourceLocation RUSALKA_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/rusalka/rusalka.png");
 
     public RusalkaRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new RusalkaModel(), 0.25F);
+        super(pContext, new RusalkaModel<>(), 0.25F);
         addLayer(new RusalkaEyesLayer<>(this));
     }
 

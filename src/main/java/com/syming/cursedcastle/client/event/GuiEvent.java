@@ -21,6 +21,9 @@ public class GuiEvent {
         if (CCBossBar.isRusalkaBossBar(bossUUID)) {
             CCBossBar.drawRusalkaBossHealthBar(guiGraphics, event.getX(), event.getY(), bossEvent);
         }
+        if (CCBossBar.isDraculaBossBar(bossUUID)) {
+            CCBossBar.drawDraculaBossHealthBar(guiGraphics, event.getX(), event.getY(), bossEvent);
+        }
     }
 
 }

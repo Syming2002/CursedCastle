@@ -23,6 +23,8 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
@@ -148,6 +150,12 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
     public void tick() {
         super.tick();
 
+        AttributeInstance attributeKnockback = getAttribute(Attributes.KNOCKBACK_RESISTANCE);
+
+        if (attributeKnockback != null) {
+            attributeKnockback.setBaseValue(0.0D);
+        }
+
         LivingEntity target = getTarget();
 
         if (!isAlive() && target == null) return;
@@ -176,14 +184,16 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
 
         AnimationHandler.INSTANCE.updateAnimations(this);
 
-        shouldDespawnInPeaceful();
-
         if (target != null && isAlive()) {
             if (getAnimation() == GrimReaperEntity.MELEE_ATTACK_ANIMATION) {
 
                 double distToEnemySqr = distanceToSqr(target);
                 double attackReachSqr = getMeleeAttackRangeSqr(target) * 5.0D;
                 int animationTick = getAnimationTick();
+
+                if (attributeKnockback != null) {
+                    attributeKnockback.setBaseValue(1.0D);
+                }
 
                 if (animationTick == 1 && !this.hasLockedTargetPos) {
 
@@ -262,6 +272,11 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
 
             }
         }
+    }
+
+    @Override
+    protected boolean shouldDespawnInPeaceful() {
+        return true;
     }
 
     @Override

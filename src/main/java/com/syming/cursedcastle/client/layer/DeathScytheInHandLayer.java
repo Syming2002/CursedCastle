@@ -14,10 +14,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class DeathScytheInHandLayer extends ItemInHandLayer<GrimReaperEntity, GrimReaperModel> {
+public class DeathScytheInHandLayer extends ItemInHandLayer<GrimReaperEntity, GrimReaperModel<GrimReaperEntity>> {
     private final ItemInHandRenderer itemInHandRenderer;
 
-    public DeathScytheInHandLayer(RenderLayerParent<GrimReaperEntity, GrimReaperModel> pRenderer, ItemInHandRenderer pItemInHandRenderer) {
+    public DeathScytheInHandLayer(RenderLayerParent<GrimReaperEntity, GrimReaperModel<GrimReaperEntity>> pRenderer, ItemInHandRenderer pItemInHandRenderer) {
         super(pRenderer, pItemInHandRenderer);
 
         this.itemInHandRenderer = pItemInHandRenderer;
