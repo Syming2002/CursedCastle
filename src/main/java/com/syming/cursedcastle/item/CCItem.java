@@ -57,6 +57,15 @@ public class CCItem {
                     -3.5F,
                     12.0F));
 
+    public static final RegistryObject<Item> ICE_WHIP = ITEMS.register("ice_whip",
+            () -> new IceWhipItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(100),
+                    10,
+                    -3.5F,
+                    12.0F));
+
     public static final RegistryObject<Item> LEATHER_WHIP = ITEMS.register("leather_whip",
             () -> new LeatherWhipItem(
                     new Item.Properties()

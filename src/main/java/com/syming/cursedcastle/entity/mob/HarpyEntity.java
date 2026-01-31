@@ -5,7 +5,7 @@ import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
-import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.magic.HarpyFeatherEntity;
 import com.syming.cursedcastle.entity.projectile.subweapon.DaggerEntity;
 import com.syming.cursedcastle.item.CCItem;
@@ -189,7 +189,7 @@ public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, IL
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.ICE);
+                    return source.is(CCDamageType.ICE);
                 }
             }
         }
@@ -205,7 +205,7 @@ public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, IL
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.WIND);
+                    return source.is(CCDamageType.WIND);
                 }
             }
         }

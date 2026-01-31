@@ -1,8 +1,7 @@
 package com.syming.cursedcastle.entity.mob.bat;
 
 import com.syming.cursedcastle.api.IElementalDamage;
-import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
-import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.mob.CCMonster;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -40,7 +39,7 @@ public abstract class CCBatEntity extends CCMonster implements FlyingAnimal {
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getTarget(), getLastAttacker());
-                    return source.is(CCDatapackBuiltinEntriesProvider.FIRE);
+                    return source.is(CCDamageType.FIRE);
                 }
             }
         }
@@ -55,7 +54,7 @@ public abstract class CCBatEntity extends CCMonster implements FlyingAnimal {
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, getTarget(), getLastAttacker());
-                    return source.is(CCDatapackBuiltinEntriesProvider.DARK);
+                    return source.is(CCDamageType.DARK);
                 }
             }
         }

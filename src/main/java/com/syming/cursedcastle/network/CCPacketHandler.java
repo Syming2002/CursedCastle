@@ -3,6 +3,7 @@ package com.syming.cursedcastle.network;
 import com.syming.cursedcastle.CursedCastleMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
@@ -17,6 +18,12 @@ public class CCPacketHandler {
     private static int id;
 
     public static synchronized void register() {
+        INSTANCE.messageBuilder(CCSpawnParticle.class, id++)
+                .encoder(CCSpawnParticle::encode)
+                .decoder(CCSpawnParticle::decode)
+                .consumerMainThread(CCSpawnParticle.Handler::handle)
+                .add();
+
         INSTANCE.messageBuilder(CCBossInfoPacket.Display.class, id++)
                 .encoder(CCBossInfoPacket.Display::encode)
                 .decoder(CCBossInfoPacket.Display::decode)
@@ -60,6 +67,10 @@ public class CCPacketHandler {
 
     public static void sendToServer(Object message) {
         INSTANCE.sendToServer(message);
+    }
+
+    public static void sendToEntity(Object message, Entity targetEntity) {
+        INSTANCE.send(PacketDistributor.TRACKING_ENTITY.with(() -> targetEntity), message);
     }
 
 }

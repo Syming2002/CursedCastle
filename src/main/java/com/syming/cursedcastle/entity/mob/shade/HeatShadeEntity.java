@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.entity.mob.shade;
 
 import com.syming.cursedcastle.api.IElementalDamage;
-import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.magic.FireBreathEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -36,7 +36,7 @@ public class HeatShadeEntity extends ShadeEntity {
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.ICE);
+                    return source.is(CCDamageType.ICE);
                 }
             }
         }
@@ -52,7 +52,7 @@ public class HeatShadeEntity extends ShadeEntity {
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.FIRE) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
+                    return source.is(CCDamageType.FIRE) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
                 }
             }
         }

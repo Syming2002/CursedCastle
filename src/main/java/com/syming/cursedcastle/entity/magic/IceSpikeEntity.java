@@ -6,6 +6,7 @@ import com.syming.cursedcastle.entity.mob.shade.FrozenShadeEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -16,10 +17,11 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class IceSpikeEntity extends Projectile {
 
-    private boolean isLaunched = false;
+    public boolean lockedRotation;
 
     public IceSpikeEntity(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -81,8 +83,27 @@ public class IceSpikeEntity extends Projectile {
         }
 
         if (getOwner() instanceof FrozenShadeEntity frozenShade) {
-            if (!frozenShade.isAlive()) {
-                discard();
+            if (frozenShade.getTarget() != null) {
+                if (this.getDeltaMovement() == Vec3.ZERO) {
+                    Vec3 spikePos = position();
+                    Vec3 targetPos = frozenShade.getTarget().getEyePosition();
+
+                    double dx = targetPos.x - spikePos.x;
+                    double dy = targetPos.y - spikePos.y;
+                    double dz = targetPos.z - spikePos.z;
+
+                    float targetYaw = (float) (Mth.atan2(dz, dx) * (180F / Math.PI)) - 90F;
+                    float targetPitch = (float) (-(Mth.atan2(dy, Math.sqrt(dx * dx + dz * dz)) * (180F / Math.PI)));
+
+                    this.setYRot(Mth.rotLerp(0.2F, getYRot(), targetYaw));
+                    this.setXRot(Mth.rotLerp(0.2F, getXRot(), targetPitch));
+
+
+                }
+
+                if (!frozenShade.isAlive()) {
+                    discard();
+                }
             }
         }
     }
@@ -116,7 +137,7 @@ public class IceSpikeEntity extends Projectile {
         return super.getAddEntityPacket();
     }
 
-    public void setLaunched(boolean isLaunched) {
-        this.isLaunched = isLaunched;
+    public boolean isLockedRotation() {
+        return this.lockedRotation;
     }
 }

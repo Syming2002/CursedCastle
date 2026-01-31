@@ -2,9 +2,12 @@ package com.syming.cursedcastle.entity.mob.shade;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.api.IElementalDamage;
-import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.magic.IceBreathEntity;
 import com.syming.cursedcastle.entity.magic.IceSpikeEntity;
+import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.network.CCPacketHandler;
+import com.syming.cursedcastle.network.CCSpawnParticle;
 import com.syming.cursedcastle.util.ColorUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -17,6 +20,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -75,7 +79,7 @@ public class FrozenShadeEntity extends ShadeEntity {
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.FIRE) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
+                    return source.is(CCDamageType.FIRE) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
                 }
             }
         }
@@ -91,7 +95,7 @@ public class FrozenShadeEntity extends ShadeEntity {
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.ICE);
+                    return source.is(CCDamageType.ICE);
                 }
             }
         }
@@ -147,8 +151,7 @@ public class FrozenShadeEntity extends ShadeEntity {
                         System.out.println("Ice Breath is Launching at " + this.iceBreath.getX() + " " + this.iceBreath.getY() + " " + this.iceBreath.getZ());
                     }
                 }
-            }
-            if (getAnimation() != ShadeEntity.REPULSE_ATTACK_ANIMATION) {
+            } else if (getAnimation() == NO_ANIMATION) {
                 if (this.iceSpikeSpawnTimer > 0) {
                     this.iceSpikeSpawnTimer--;
 
@@ -167,44 +170,29 @@ public class FrozenShadeEntity extends ShadeEntity {
                 }
 
                 if (this.iceSpikesSpawned == 3 && this.iceSpikeSpawnTimer <= 0) {
-                    if (!this.iceSpikes.isEmpty()) {
-                        for (IceSpikeEntity iceSpike : this.iceSpikes) {
-                            if (iceSpike.isAlive()) {
-                                Vec3 headAim = target.position().add(0, target.getEyeHeight() * 0.8D, 0);
-                                Vec3 direction = headAim.subtract(iceSpike.position()).normalize().scale(0.5D);
+                    for (IceSpikeEntity iceSpike : this.iceSpikes) {
+                        Vec3 headAim = target.position().add(0, target.getEyeHeight() * 0.8D, 0);
+                        Vec3 direction = headAim.subtract(iceSpike.position()).normalize().scale(0.5D);
 
-                                double dx = direction.x;
-                                double dy = direction.y;
-                                double dz = direction.z;
-
-                                float yaw = (float)(Mth.atan2(dz, dx) * (180F / Math.PI)) - 90F;
-                                float pitch = (float)(-(Mth.atan2(dy, Math.sqrt(dx * dx + dz * dz)) * (180F / Math.PI)));
-
-                                iceSpike.setYRot(yaw);
-                                iceSpike.setXRot(pitch);
-                                iceSpike.yRotO = yaw;
-                                iceSpike.xRotO = pitch;
-
-                                iceSpike.setLaunched(true);
-
-                                iceSpike.setDeltaMovement(direction);
-                                iceSpike.hasImpulse = true;
-                            }
-                        }
-                        this.iceSpikes.clear();
+                        iceSpike.setDeltaMovement(direction);
+                        iceSpike.hasImpulse = true;
+                        iceSpike.lockedRotation = true;
                     }
+                    this.iceSpikes.clear();
                 }
             }
         }
 
-        if (getHealth() < getMaxHealth() && this.level().isRaining() && this.level().getBiome(new BlockPos((int) getX(), (int) getY(), (int) getZ())).get().coldEnoughToSnow(new BlockPos((int) getX(), (int) getY(), (int) getZ()))){
-            onShadeHeal(this);
-            if (this.level().isClientSide()) {
-                for (int i = 0; i < 2; ++i) {
-                    double d0 = this.random.nextGaussian() * 0.02D;
-                    double d1 = this.random.nextGaussian() * 0.02D;
-                    double d2 = this.random.nextGaussian() * 0.02D;
-                    this.level().addParticle(ParticleTypes.HEART, getRandomX(0.25D), this.getRandomY() + 0.25D, getRandomZ(0.25D), d0, d1, d2);
+        if (getHealth() < getMaxHealth()) {
+            if (this.level().isRaining() && this.level().getBiome(new BlockPos((int) getX(), (int) getY(), (int) getZ())).get().coldEnoughToSnow(new BlockPos((int) getX(), (int) getY(), (int) getZ()))) {
+                onShadeHeal(this);
+                if (this.level().isClientSide()) {
+                    for (int i = 0; i < 2; ++i) {
+                        double d0 = this.random.nextGaussian() * 0.02D;
+                        double d1 = this.random.nextGaussian() * 0.02D;
+                        double d2 = this.random.nextGaussian() * 0.02D;
+                        this.level().addParticle(ParticleTypes.HEART, getRandomX(0.25D), this.getRandomY() + 0.25D, getRandomZ(0.25D), d0, d1, d2);
+                    }
                 }
             }
         }
@@ -212,9 +200,27 @@ public class FrozenShadeEntity extends ShadeEntity {
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (hasStrength(pSource, pAmount)) {
-            System.out.println("Has Ice Strength");
-            return super.hurt(pSource, pAmount / pAmount);
+        Player player = (Player) pSource.getEntity();
+        if (player != null) {
+            ItemStack stack = player.getMainHandItem();
+            if (stack.getItem() instanceof IElementalDamage elementalWeapon && stack.getItem() == CCItem.ICE_WHIP.get()) {
+                pSource = elementalWeapon.getElementalDamageSource(stack, getTarget(), player);
+                if (hasStrength(pSource, pAmount) && pSource.is(CCDamageType.ICE)) {
+                    if (pSource.is(CCDamageType.ICE)) {
+                        if (stack.getItem() == CCItem.ICE_WHIP.get()) {
+                            if (elementalWeapon != null) {
+                                if (pSource != null) {
+                                    System.out.println(this.getName());
+                                    CCPacketHandler.sendToEntity(new CCSpawnParticle(getId()), this);
+                                    return super.hurt(pSource, 0);
+                                }
+                            }
+                        }
+                    } else {
+                        return super.hurt(pSource, pAmount / pAmount);
+                    }
+                }
+            }
         }
         if (hasWeakness(pSource, pAmount)) {
             System.out.println("Has Fire Weakness");

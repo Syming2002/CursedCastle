@@ -3,8 +3,7 @@ package com.syming.cursedcastle.entity.mob.boss;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.api.IElementalDamage;
-import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
-import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.util.ColorUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -93,7 +92,7 @@ public class MedusaEntity extends CCBossEntity implements IAnimatedEntity {
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.HOLY);
+                    return source.is(CCDamageType.HOLY);
                 }
             }
         }
@@ -109,7 +108,7 @@ public class MedusaEntity extends CCBossEntity implements IAnimatedEntity {
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.DARK);
+                    return source.is(CCDamageType.DARK);
                 }
             }
         }

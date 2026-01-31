@@ -35,6 +35,7 @@ public class CCCreativeTab {
                         // Whips
                         output.accept(CCItem.FLAME_WHIP.get());
                         output.accept(CCItem.HOLY_WHIP.get());
+                        output.accept(CCItem.ICE_WHIP.get());
                         output.accept(CCItem.LEATHER_WHIP.get());
                         output.accept(CCItem.ROSE_STEM_WHIP.get());
                         output.accept(CCItem.UNDEAD_KILLER_WHIP.get());

@@ -4,7 +4,7 @@ import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.api.IElementalDamage;
-import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.enchantment.CCEnchantment;
 import com.syming.cursedcastle.entity.projectile.ThrowingBloodBoneEntity;
 import com.syming.cursedcastle.item.whip.UndeadKillerWhipItem;
@@ -150,7 +150,7 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.FIRE) || source.is(CCDatapackBuiltinEntriesProvider.HOLY) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
+                    return source.is(CCDamageType.FIRE) || source.is(CCDamageType.HOLY) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
                 }
             }
         }
@@ -166,7 +166,7 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.DARK) || source.is(CCDatapackBuiltinEntriesProvider.ICE);
+                    return source.is(CCDamageType.DARK) || source.is(CCDamageType.ICE);
                 }
             }
         }

@@ -1,7 +1,6 @@
 package com.syming.cursedcastle.item.spellbook;
 
-import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
-
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.item.Rarity;
@@ -9,10 +8,10 @@ import net.minecraft.world.item.Rarity;
 import org.jetbrains.annotations.Nullable;
 
 public enum SpellBookElementType {
-    FIRE("fire", CCDatapackBuiltinEntriesProvider.FIRE, Rarity.UNCOMMON),
-    ICE("ice", CCDatapackBuiltinEntriesProvider.ICE, Rarity.UNCOMMON),
-    BOLT("bolt", CCDatapackBuiltinEntriesProvider.THUNDER, Rarity.RARE),
-    WIND("wind", CCDatapackBuiltinEntriesProvider.WIND, Rarity.RARE),
+    FIRE("fire", CCDamageType.FIRE, Rarity.UNCOMMON),
+    ICE("ice", CCDamageType.ICE, Rarity.UNCOMMON),
+    BOLT("bolt", CCDamageType.THUNDER, Rarity.RARE),
+    WIND("wind", CCDamageType.WIND, Rarity.RARE),
     SUMMONING("summoning", null, Rarity.EPIC);
 
 

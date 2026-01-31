@@ -4,7 +4,7 @@ import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.api.IElementalDamage;
-import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.projectile.ThrowingGoldenBoneEntity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -104,7 +104,7 @@ public class GoldenSkeleton extends CCSkeletonEntity {
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     pSource = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return pSource.is(CCDatapackBuiltinEntriesProvider.DARK);
+                    return pSource.is(CCDamageType.DARK);
                 }
             }
         }
@@ -130,10 +130,10 @@ public class GoldenSkeleton extends CCSkeletonEntity {
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     pSource = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return pSource.is(CCDatapackBuiltinEntriesProvider.FIRE)
+                    return pSource.is(CCDamageType.FIRE)
                             || pSource == target.damageSources().onFire()
                             || pSource == target.damageSources().inFire()
-                            || pSource.is(CCDatapackBuiltinEntriesProvider.HOLY);
+                            || pSource.is(CCDamageType.HOLY);
                 }
             }
         }

@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.entity.magic;
 
 import com.syming.cursedcastle.api.IElementalDamage;
-import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.entity.CCEntity;
 import net.minecraft.core.particles.ParticleTypes;
@@ -55,6 +55,6 @@ public class HolyFireEntity extends AreaEffectCloud implements IElementalDamage 
 
     @Override
     public DamageSource getElementalDamageSource(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        return CCDatapackBuiltinEntriesProvider.source(attacker.level().registryAccess(), CCDatapackBuiltinEntriesProvider.HOLY);
+        return CCDamageType.causeHolyDamage(target);
     }
 }

@@ -1,10 +1,12 @@
 package com.syming.cursedcastle.datagen;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -34,7 +36,9 @@ public class CCDataGenerators {
 
         generator.addProvider(event.includeServer(), new CCPoiTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
 
-        generator.addProvider(event.includeServer(), new CCDatapackBuiltinEntriesProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new CCDamageType.CCDamageTypeProvider(packOutput, lookupProvider));
+
+        generator.addProvider(event.includeServer(), (DataProvider.Factory<CCDamageType.CCDamageTypeTagsProvider>) output -> new CCDamageType.CCDamageTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
 
         // Advancements
         packGenerator.addProvider(output -> new CCAdvancementGenerator(output, existingFileHelper));

@@ -3,7 +3,7 @@ package com.syming.cursedcastle.entity.mob.skeleton;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.syming.cursedcastle.api.IElementalDamage;
-import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.projectile.ThrowingBoneEntity;
 import net.minecraft.network.chat.Component;
@@ -71,7 +71,7 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements Rang
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.FIRE) || source.is(CCDatapackBuiltinEntriesProvider.HOLY) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
+                    return source.is(CCDamageType.FIRE) || source.is(CCDamageType.HOLY) || source == target.damageSources().onFire() || source == target.damageSources().inFire();
                 }
             }
         }
@@ -87,7 +87,7 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements Rang
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.DARK);
+                    return source.is(CCDamageType.DARK);
                 }
             }
         }

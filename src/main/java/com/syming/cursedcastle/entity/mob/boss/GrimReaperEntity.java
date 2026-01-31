@@ -6,7 +6,7 @@ import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.api.ICustomBossBar;
 import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
-import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.projectile.ScytheProjectileEntity;
 import com.syming.cursedcastle.item.CCItem;
@@ -23,7 +23,6 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -323,7 +322,7 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.HOLY);
+                    return source.is(CCDamageType.HOLY);
                 }
             }
         }
@@ -339,7 +338,7 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
             if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
                 if (elementalWeapon != null) {
                     source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
-                    return source.is(CCDatapackBuiltinEntriesProvider.DARK);
+                    return source.is(CCDamageType.DARK);
                 }
             }
         }

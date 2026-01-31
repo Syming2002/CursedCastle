@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.item.whip.vampirekiller;
 
 import com.syming.cursedcastle.api.IElementalDamage;
-import com.syming.cursedcastle.datagen.CCDatapackBuiltinEntriesProvider;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,7 +19,7 @@ public class VampireKillerGreenStoneTipWhipItem extends VampireKillerWhipItem im
 
     @Override
     public DamageSource getElementalDamageSource(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        return CCDatapackBuiltinEntriesProvider.source(attacker.level().registryAccess(), CCDatapackBuiltinEntriesProvider.WIND);
+        return CCDamageType.causeWindDamage(target);
     }
 
     @Override

@@ -1,18 +1,24 @@
 package com.syming.cursedcastle.event;
 
-import com.github.alexthe666.citadel.repack.jaad.aac.syntax.PCE;
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.api.IElementalDamage;
+import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.effect.CCEffect;
+import com.syming.cursedcastle.entity.mob.shade.FrozenShadeEntity;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.whip.FlameWhipItem;
 import com.syming.cursedcastle.item.whip.vampirekiller.VampireKillerRedStoneTipWhipItem;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
