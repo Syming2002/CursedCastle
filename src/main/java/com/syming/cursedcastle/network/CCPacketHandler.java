@@ -59,6 +59,12 @@ public class CCPacketHandler {
                 .decoder(CCTeleportEntity::decode)
                 .consumerMainThread(CCTeleportEntity.Handler::handle)
                 .add();
+
+        INSTANCE.messageBuilder(CCLuckEffect.class, id++)
+                .encoder(CCLuckEffect::encode)
+                .decoder(CCLuckEffect::decode)
+                .consumerMainThread(CCLuckEffect.Handler::handle)
+                .add();
     }
 
     public static void sendToPlayer(Object message, ServerPlayer player) {

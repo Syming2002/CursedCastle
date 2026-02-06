@@ -55,17 +55,7 @@ public class CCClientEvent {
             CuriosApi.getCuriosHelper()
                     .findEquippedCurio(CCItem.SOUL_TYPES.get(Soul.ENDERMAN).get(), player)
                     .ifPresent(stringIntegerItemStackImmutableTriple -> {
-                        for (int i = 0; i < 2; ++i) {
-                            double offsetX = (level.random.nextDouble() - 0.5D) * 0.6D;
-                            double offsetY = level.random.nextDouble() * 1.0D;
-                            double offsetZ = (level.random.nextDouble() - 0.5D) * 0.6D;
 
-                            double x = player.getX() + offsetX;
-                            double y = player.getY() + offsetY + 0.5D;
-                            double z = player.getZ() + offsetZ;
-
-                            level.addParticle(ParticleTypes.PORTAL, x, y, z, 0, 0, 0);
-                        }
                     });
         }
     }

@@ -10,7 +10,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.syming.cursedcastle.entity.mob.shade.ShadeEntity;
 import com.syming.cursedcastle.entity.mob.shade.ThunderShadeEntity;
 
-public class ShadeModel extends AdvancedEntityModel<ShadeEntity> {
+public class ShadeModel<T extends ShadeEntity> extends AdvancedEntityModel<T> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 //    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(CursedCastleMod.MOD_ID, "shade_layer"), "main");
     private final AdvancedModelBox shade;

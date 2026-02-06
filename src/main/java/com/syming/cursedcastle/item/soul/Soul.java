@@ -7,6 +7,7 @@ import java.awt.*;
 public enum Soul {
     BAT("bat", SoulType.GUARDIAN, new Color(0x222222), Rarity.UNCOMMON),
     ENDERMAN("enderman", SoulType.GUARDIAN, new Color(0xC800FA), Rarity.RARE),
+    GHOST_DANCER("ghost_dancer", SoulType.ENCHANTED, new Color(0x68C0A8), Rarity.RARE),
     ZOMBIE("zombie", SoulType.BULLET, new Color(0x3E692D), Rarity.UNCOMMON);
 
 

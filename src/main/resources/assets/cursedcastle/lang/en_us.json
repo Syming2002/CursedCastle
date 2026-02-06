@@ -23,6 +23,18 @@
   "block.cursedcastle.dracula_head": "Dracula's Head",
   "block.cursedcastle.holy_water_block": "Holy Water Block",
 
+  "block.cursedcastle.oak_crucifix": "Oak Crucifix",
+  "block.cursedcastle.spruce_crucifix": "Spruce Crucifix",
+  "block.cursedcastle.birch_crucifix": "Birch Crucifix",
+  "block.cursedcastle.acacia_crucifix": "Acacia Crucifix",
+  "block.cursedcastle.cherry_crucifix": "Cherry Crucifix",
+  "block.cursedcastle.jungle_crucifix": "Jungle Crucifix",
+  "block.cursedcastle.dark_oak_crucifix": "Dark Oak Crucifix",
+  "block.cursedcastle.crimson_crucifix": "Crimson Crucifix",
+  "block.cursedcastle.warped_crucifix": "Warped Crucifix",
+  "block.cursedcastle.mangrove_crucifix": "Mangrove Crucifix",
+  "block.cursedcastle.bamboo_crucifix": "Bamboo Crucifix",
+
   "creativetab.cursedcastle_tab": "Cursed Castle",
 
   "effect.cursedcastle.freeze": "Freeze",
@@ -30,17 +42,7 @@
 
   "enchantment.cursedcastle.blood_skeleton_killer": "Blood Skeleton Killer",
 
-  "entity.cursedcastle.oak_crucifix": "Oak Crucifix",
-  "entity.cursedcastle.spruce_crucifix": "Spruce Crucifix",
-  "entity.cursedcastle.birch_crucifix": "Birch Crucifix",
-  "entity.cursedcastle.acacia_crucifix": "Acacia Crucifix",
-  "entity.cursedcastle.cherry_crucifix": "Cherry Crucifix",
-  "entity.cursedcastle.jungle_crucifix": "Jungle Crucifix",
-  "entity.cursedcastle.dark_oak_crucifix": "Dark Oak Crucifix",
-  "entity.cursedcastle.crimson_crucifix": "Crimson Crucifix",
-  "entity.cursedcastle.warped_crucifix": "Warped Crucifix",
-  "entity.cursedcastle.mangrove_crucifix": "Mangrove Crucifix",
-  "entity.cursedcastle.bamboo_crucifix": "Bamboo Crucifix",
+
 
 
 

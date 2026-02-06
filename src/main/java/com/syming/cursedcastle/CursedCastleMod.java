@@ -107,7 +107,7 @@ public class CursedCastleMod {
                 EntityRenderers.register(CCEntity.GRIM_REAPER.get(), GrimReaperRenderer::new);
                 EntityRenderers.register(CCEntity.HARPY.get(), HarpyRenderer::new);
                 EntityRenderers.register(CCEntity.HARPY_FEATHER.get(), HarpyFeatherRenderer::new);
-                EntityRenderers.register(CCEntity.HEAT_SHADE.get(), ShadeRenderer::new);
+                EntityRenderers.register(CCEntity.HEAT_SHADE.get(), HeatShadeRenderer::new);
                 EntityRenderers.register(CCEntity.ICE_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.ICE_SPIKE.get(), IceSpikeRenderer::new);
                 EntityRenderers.register(CCEntity.MEDUSA.get(), MedusaRenderer::new);
