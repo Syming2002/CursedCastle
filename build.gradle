@@ -249,6 +249,7 @@ dependencies {
 
     // Forestry Community Edition
     implementation fg.deobf("curse.maven:forestry-community-edition-${forestry_community_edition}")
+    implementation fg.deobf("curse.maven:mo-bees-${mo_bees_id}")
 
     // Torcherino Unofficial
 //    implementation fg.deobf("curse.maven:torcherino-unofficial-${torcherino_unofficial_id}")

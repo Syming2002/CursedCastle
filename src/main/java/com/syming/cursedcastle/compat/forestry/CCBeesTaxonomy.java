@@ -11,7 +11,7 @@ public class CCBeesTaxonomy {
         geneticRegistration.defineTaxon(ForestryTaxa.CLASS_INSECTS, ForestryTaxa.ORDER_HYMNOPTERA, order -> {
             order.defineSubTaxon(ForestryTaxa.FAMILY_BEES, family -> {
                 family.defineSubTaxon(CCTaxa.GENUS_UNDEAD, taxon -> {
-                    taxon.setDefaultChromosome(BeeChromosomes.TEMPERATURE_TOLERANCE, ForestryAlleles.TOLERANCE_BOTH_5);
+                    taxon.setDefaultChromosome(BeeChromosomes.TEMPERATURE_TOLERANCE, ForestryAlleles.TOLERANCE_DOWN_3);
                     taxon.setDefaultChromosome(BeeChromosomes.FERTILITY, ForestryAlleles.FERTILITY_1);
                     taxon.setDefaultChromosome(BeeChromosomes.TOLERATES_RAIN, ForestryAlleles.TRUE);
                     taxon.setDefaultChromosome(BeeChromosomes.EFFECT, ForestryAlleles.EFFECT_AGGRESSIVE);

@@ -132,6 +132,9 @@ public class CCCreativeTab {
                         output.accept(CCItem.THUNDER_SHADE_SPAWN_EGG.get());
                         output.accept(CCItem.VAMPIRE_BAT_SPAWN_EGG.get());
 
+                        // Swords
+                        output.accept(CCItem.TYRFING.get());
+
                         // Miscellaneous Items
                         output.accept(CCItem.BLOOD_BONE.get());
                         output.accept(CCItem.BLOOD_BUCKET.get());

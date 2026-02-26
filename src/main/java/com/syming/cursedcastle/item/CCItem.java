@@ -10,6 +10,7 @@ import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.soul.SoulItem;
 import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
 import com.syming.cursedcastle.item.spellbook.SpellBookItem;
+import com.syming.cursedcastle.item.sword.TyrfingItem;
 import com.syming.cursedcastle.item.whip.*;
 import com.syming.cursedcastle.item.whip.vampirekiller.*;
 import com.syming.cursedcastle.item.whip.vampirekiller.tip.*;
@@ -305,6 +306,17 @@ public class CCItem {
                             .stacksTo(1)
                             .durability(Tiers.NETHERITE.getUses())
             ));
+
+    // Swords
+
+    public static final RegistryObject<Item> TYRFING = ITEMS.register("tyrfing",
+            () -> new TyrfingItem(
+                    new Item.Properties()
+                            .stacksTo(1)
+                            .durability(500),
+                    0,
+                    -2.4F,
+                    3));
 
     // Miscellaneous Items
 

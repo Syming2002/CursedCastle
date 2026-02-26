@@ -37,22 +37,22 @@ public class SoulItem extends Item implements ICurioItem {
                             while (CCKeybinding.INSTANCE.GUARDIAN_SOUL_KEY.consumeClick()) {
                                 teleportSoulOwner(player, count);
                             }
+
+                            if (level.isClientSide()) {
+                                for (int i = 0; i < 2; ++i) {
+                                    double offsetX = (level.random.nextDouble() - 0.5D) * 0.6D;
+                                    double offsetY = level.random.nextDouble();
+                                    double offsetZ = (level.random.nextDouble() - 0.5D) * 0.6D;
+
+                                    double x = player.getX() + offsetX;
+                                    double y = player.getY() + offsetY + 0.5D;
+                                    double z = player.getZ() + offsetZ;
+
+                                    level.addParticle(ParticleTypes.PORTAL, x, y, z, 0, 0, 0);
+                                }
+                            }
                         }
             });
-
-            if (level.isClientSide()) {
-                for (int i = 0; i < 2; ++i) {
-                    double offsetX = (level.random.nextDouble() - 0.5D) * 0.6D;
-                    double offsetY = level.random.nextDouble();
-                    double offsetZ = (level.random.nextDouble() - 0.5D) * 0.6D;
-
-                    double x = player.getX() + offsetX;
-                    double y = player.getY() + offsetY + 0.5D;
-                    double z = player.getZ() + offsetZ;
-
-                    level.addParticle(ParticleTypes.PORTAL, x, y, z, 0, 0, 0);
-                }
-            }
 
             CuriosApi.getCuriosHelper()
                     .findEquippedCurio(CCItem.SOUL_TYPES.get(Soul.GHOST_DANCER).get(), player)
