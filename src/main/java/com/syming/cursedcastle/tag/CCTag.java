@@ -12,7 +12,7 @@ public class CCTag {
 
     public static class Blocks {
         public static final TagKey<Block> ALL_BLOCKS = tag("all_blocks");
-        public static final TagKey<Block> CRUCIFIX_BLOCKS = tag("crucifixes");
+        public static final TagKey<Block> CRUCIFIX_BLOCKS = tag("crucifix");
         public static final TagKey<Block> BLOOD_BLOCKS = tag("blood");
         public static final TagKey<Block> ICE_BLOCKS = tag("ice");
         public static final TagKey<Block> FIRE_BLOCKS = tag("fire");

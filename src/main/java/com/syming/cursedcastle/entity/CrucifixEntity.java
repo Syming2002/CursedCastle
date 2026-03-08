@@ -234,27 +234,27 @@
 //
 //    private void dropBlock() {
 //        this.playBrokenSound();
-//        if (this.getWoodType() == OAK) {
+//        if (this.getBlockTags() == OAK) {
 //            Block.popResource(this.level(), this.blockPosition(), new ItemStack(CCItem.CRUCIFIX_TYPES.get(OAK).get()));
-//        } else if (this.getWoodType() == SPRUCE) {
+//        } else if (this.getBlockTags() == SPRUCE) {
 //            Block.popResource(this.level(), this.blockPosition(), new ItemStack(CCItem.CRUCIFIX_TYPES.get(SPRUCE).get()));
-//        } else if (this.getWoodType() == BIRCH) {
+//        } else if (this.getBlockTags() == BIRCH) {
 //            Block.popResource(this.level(), this.blockPosition(), new ItemStack(CCItem.CRUCIFIX_TYPES.get(BIRCH).get()));
-//        } else if (this.getWoodType() == ACACIA) {
+//        } else if (this.getBlockTags() == ACACIA) {
 //            Block.popResource(this.level(), this.blockPosition(), new ItemStack(CCItem.CRUCIFIX_TYPES.get(ACACIA).get()));
-//        } else if (this.getWoodType() == CHERRY) {
+//        } else if (this.getBlockTags() == CHERRY) {
 //            Block.popResource(this.level(), this.blockPosition(), new ItemStack(CCItem.CRUCIFIX_TYPES.get(CHERRY).get()));
-//        } else if (this.getWoodType() == JUNGLE) {
+//        } else if (this.getBlockTags() == JUNGLE) {
 //            Block.popResource(this.level(), this.blockPosition(), new ItemStack(CCItem.CRUCIFIX_TYPES.get(JUNGLE).get()));
-//        } else if (this.getWoodType() == DARK_OAK) {
+//        } else if (this.getBlockTags() == DARK_OAK) {
 //            Block.popResource(this.level(), this.blockPosition(), new ItemStack(CCItem.CRUCIFIX_TYPES.get(DARK_OAK).get()));
-//        } else if (this.getWoodType() == CRIMSON) {
+//        } else if (this.getBlockTags() == CRIMSON) {
 //            Block.popResource(this.level(), this.blockPosition(), new ItemStack(CCItem.CRUCIFIX_TYPES.get(CRIMSON).get()));
-//        } else if (this.getWoodType() == WARPED) {
+//        } else if (this.getBlockTags() == WARPED) {
 //            Block.popResource(this.level(), this.blockPosition(), new ItemStack(CCItem.CRUCIFIX_TYPES.get(WARPED).get()));
-//        } else if (this.getWoodType() == MANGROVE) {
+//        } else if (this.getBlockTags() == MANGROVE) {
 //            Block.popResource(this.level(), this.blockPosition(), new ItemStack(CCItem.CRUCIFIX_TYPES.get(MANGROVE).get()));
-//        } else if (this.getWoodType() == BAMBOO) {
+//        } else if (this.getBlockTags() == BAMBOO) {
 //            Block.popResource(this.level(), this.blockPosition(), new ItemStack(CCItem.CRUCIFIX_TYPES.get(BAMBOO).get()));
 //        }
 //    }
@@ -299,27 +299,27 @@
 //
 //    private void showBreakingParticles() {
 //        if (this.level() instanceof ServerLevel) {
-//            if (this.getWoodType() == OAK) {
+//            if (this.getBlockTags() == OAK) {
 //                ((ServerLevel) this.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.OAK_PLANKS.defaultBlockState()), this.getX(), this.getY(0.6666666666666666D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
-//            } else if (this.getWoodType() == SPRUCE) {
+//            } else if (this.getBlockTags() == SPRUCE) {
 //                ((ServerLevel) this.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.SPRUCE_PLANKS.defaultBlockState()), this.getX(), this.getY(0.6666666666666666D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
-//            } else if (this.getWoodType() == BIRCH) {
+//            } else if (this.getBlockTags() == BIRCH) {
 //                ((ServerLevel) this.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.BIRCH_PLANKS.defaultBlockState()), this.getX(), this.getY(0.6666666666666666D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
-//            } else if (this.getWoodType() == ACACIA) {
+//            } else if (this.getBlockTags() == ACACIA) {
 //                ((ServerLevel) this.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.ACACIA_PLANKS.defaultBlockState()), this.getX(), this.getY(0.6666666666666666D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
-//            } else if (this.getWoodType() == CHERRY) {
+//            } else if (this.getBlockTags() == CHERRY) {
 //                ((ServerLevel) this.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.CHERRY_PLANKS.defaultBlockState()), this.getX(), this.getY(0.6666666666666666D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
-//            } else if (this.getWoodType() == JUNGLE) {
+//            } else if (this.getBlockTags() == JUNGLE) {
 //                ((ServerLevel) this.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.JUNGLE_PLANKS.defaultBlockState()), this.getX(), this.getY(0.6666666666666666D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
-//            } else if (this.getWoodType() == DARK_OAK) {
+//            } else if (this.getBlockTags() == DARK_OAK) {
 //                ((ServerLevel) this.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DARK_OAK_PLANKS.defaultBlockState()), this.getX(), this.getY(0.6666666666666666D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
-//            } else if (this.getWoodType() == CRIMSON) {
+//            } else if (this.getBlockTags() == CRIMSON) {
 //                ((ServerLevel) this.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.CRIMSON_PLANKS.defaultBlockState()), this.getX(), this.getY(0.6666666666666666D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
-//            } else if (this.getWoodType() == WARPED) {
+//            } else if (this.getBlockTags() == WARPED) {
 //                ((ServerLevel) this.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.WARPED_PLANKS.defaultBlockState()), this.getX(), this.getY(0.6666666666666666D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
-//            } else if (this.getWoodType() == MANGROVE) {
+//            } else if (this.getBlockTags() == MANGROVE) {
 //                ((ServerLevel) this.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.MANGROVE_PLANKS.defaultBlockState()), this.getX(), this.getY(0.6666666666666666D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
-//            } else if (this.getWoodType() == BAMBOO) {
+//            } else if (this.getBlockTags() == BAMBOO) {
 //                ((ServerLevel) this.level()).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.BAMBOO_PLANKS.defaultBlockState()), this.getX(), this.getY(0.6666666666666666D), this.getZ(), 10, (double) (this.getBbWidth() / 4.0F), (double) (this.getBbHeight() / 4.0F), (double) (this.getBbWidth() / 4.0F), 0.05D);
 //            }
 //        }
@@ -350,7 +350,7 @@
 //        return VANILLA_WOOD.get(id);
 //    }
 //
-//    public WoodType getWoodType() {
+//    public WoodType getBlockTags() {
 //        return CrucifixEntity.byId(this.entityData.get(WOOD_TYPE));
 //    }
 //

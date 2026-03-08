@@ -6,10 +6,16 @@ import com.syming.cursedcastle.block.CrucifixBlock;
 import com.syming.cursedcastle.block.head.CCHeadBlock;
 import com.syming.cursedcastle.block.head.CCWallHeadBlock;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.WallSkullBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -36,7 +42,19 @@ public class CCBlockStateProvider extends BlockStateProvider {
         skullWall(CCBlock.DRACULA_WALL_HEAD);
 
         for (WoodType woodType : WoodType.values().toList()) {
-            crucifixBlock(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get(), woodType);
+            if (woodType == WoodType.OAK
+                    || woodType == WoodType.SPRUCE
+                    || woodType == WoodType.BIRCH
+                    || woodType == WoodType.JUNGLE
+                    || woodType == WoodType.ACACIA
+                    || woodType == WoodType.DARK_OAK
+                    || woodType == WoodType.CRIMSON
+                    || woodType == WoodType.WARPED
+                    || woodType == WoodType.MANGROVE
+                    || woodType == WoodType.CHERRY
+                    || woodType == WoodType.BAMBOO) {
+                crucifixBlock(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get(), woodType);
+            }
         }
     }
 

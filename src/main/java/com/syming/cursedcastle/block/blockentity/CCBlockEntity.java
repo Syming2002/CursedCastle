@@ -3,7 +3,14 @@ package com.syming.cursedcastle.block.blockentity;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.block.CrucifixBlock;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -25,8 +32,20 @@ public class CCBlockEntity {
 
     static {
         for (WoodType woodType : WoodType.values().toList()) {
-            CRUCIFIX_BLOCK_ENTITY_TYPES.put(woodType, BLOCK_ENTITIES.register(woodType.name() + '_' + "crucifix", () -> BlockEntityType.Builder.of(((pPos, pState) -> new CrucifixBlockEntity(pPos, pState, woodType)),
-                    CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get()).build(null)));
+            if (woodType == WoodType.OAK
+                    || woodType == WoodType.SPRUCE
+                    || woodType == WoodType.BIRCH
+                    || woodType == WoodType.JUNGLE
+                    || woodType == WoodType.ACACIA
+                    || woodType == WoodType.DARK_OAK
+                    || woodType == WoodType.CRIMSON
+                    || woodType == WoodType.WARPED
+                    || woodType == WoodType.MANGROVE
+                    || woodType == WoodType.CHERRY
+                    || woodType == WoodType.BAMBOO) {
+                CRUCIFIX_BLOCK_ENTITY_TYPES.put(woodType, BLOCK_ENTITIES.register(woodType.name() + '_' + "crucifix", () -> BlockEntityType.Builder.of(((pPos, pState) -> new CrucifixBlockEntity(pPos, pState, woodType)),
+                        CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get()).build(null)));
+            }
         }
     }
 

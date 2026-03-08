@@ -1,18 +1,18 @@
 {
-  "primaryColor": "#292929",
-  "secondaryColor": "#8D1D20",
-  "particleColor": "#8D1D20",
-  "description": "Bee that sucked out blood blood source",
-  "createComb": false,
-  "flowerBlock": "cursedcastle:blood_block",
+  "primaryColor": "#F44211",
+  "secondaryColor": "#C41105",
+  "particleColor": "#C41105",
+  "description": "Bee that harvest fire from fire block",
+  "createComb": true,
+  "flowerBlock": "minecraft:magma_block",
   "size:": 1.0,
-  "fireproof": false,
+  "fireproof": true,
   "breeding_items": [
     {
-      "item": "blood_skeleton_bone"
+      "item": "magma_block"
     },
     {
-      "item": "blood_skeleton_bone"
+      "item": "magma_block"
     }
   ],
   "attributes": {
@@ -20,7 +20,7 @@
     "endurance": 1,
     "behavior": 1,
     "productivity": 0,
-    "weather_tolerance": 2
+    "weather_tolerance": 0
   },
   "conditions": [
     {

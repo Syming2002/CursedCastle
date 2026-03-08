@@ -1,0 +1,35 @@
+{
+  "primaryColor": "#9C231C",
+  "secondaryColor": "#7C1C16",
+  "particleColor": "#7C1C16",
+  "description": "Bee that sucked out blood from blood source",
+  "createComb": true,
+  "flowerBlock": "cursedcastle:blood_block",
+  "size:": 0.3,
+  "fireproof": false,
+  "breeding_items": [
+    {
+      "item": "blood_skeleton_bone"
+    },
+    {
+      "item": "blood_skeleton_bone"
+    }
+  ],
+  "attributes": {
+    "temper": 3,
+    "endurance": 1,
+    "behavior": 1,
+    "productivity": 0,
+    "weather_tolerance": 0
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "productivebees"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "cursedcastle"
+    }
+  ]
+}

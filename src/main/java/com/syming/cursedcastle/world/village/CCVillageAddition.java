@@ -83,7 +83,7 @@ public class CCVillageAddition {
             PendingChurch pending = iterator.next();
             if (!pending.server.equals(server)) continue;
 
-            if (!areChunksLoaded(server, pending.center, 80)) continue;
+            if (!areChunksLoaded(server, pending.center, 120)) continue;
 
             StructureTemplate template = switch (pending.type) {
                 case DESERT -> templateDesert;

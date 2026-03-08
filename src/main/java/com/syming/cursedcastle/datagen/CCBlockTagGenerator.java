@@ -4,7 +4,9 @@ import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.tag.CCTag;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -21,16 +23,29 @@ public class CCBlockTagGenerator extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         for (WoodType woodType : WoodType.values().toList()) {
-            tag(CCTag.Blocks.CRUCIFIX_BLOCKS)
-                    .add(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get());
+            if (woodType == WoodType.OAK
+                    || woodType == WoodType.SPRUCE
+                    || woodType == WoodType.BIRCH
+                    || woodType == WoodType.JUNGLE
+                    || woodType == WoodType.ACACIA
+                    || woodType == WoodType.DARK_OAK
+                    || woodType == WoodType.CRIMSON
+                    || woodType == WoodType.WARPED
+                    || woodType == WoodType.MANGROVE
+                    || woodType == WoodType.CHERRY
+                    || woodType == WoodType.BAMBOO) {
+                tag(CCTag.Blocks.CRUCIFIX_BLOCKS)
+                        .add(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get());
+            }
+
+            tag(CCTag.Blocks.BLOOD_BLOCKS)
+                    .add(CCBlock.BLOOD_BLOCK.get());
+
+            tag(CCTag.Blocks.ICE_BLOCKS)
+                    .add(Blocks.ICE, Blocks.BLUE_ICE, Blocks.FROSTED_ICE, Blocks.PACKED_ICE);
+
+            tag(CCTag.Blocks.FIRE_BLOCKS)
+                    .add(Blocks.MAGMA_BLOCK, Blocks.FIRE, Blocks.SOUL_FIRE, Blocks.LAVA);
         }
-        tag(CCTag.Blocks.BLOOD_BLOCKS)
-                .add(CCBlock.BLOOD_BLOCK.get());
-
-        tag(CCTag.Blocks.ICE_BLOCKS)
-                .add(Blocks.ICE, Blocks.BLUE_ICE, Blocks.FROSTED_ICE, Blocks.PACKED_ICE);
-
-        tag(CCTag.Blocks.FIRE_BLOCKS)
-                .add(Blocks.MAGMA_BLOCK, Blocks.FIRE, Blocks.SOUL_FIRE, Blocks.LAVA);
     }
 }

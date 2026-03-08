@@ -443,8 +443,8 @@ public class CCItem {
     public static final RegistryObject<Item> FROZEN_SHADE_SPAWN_EGG = ITEMS.register("frozen_shade_spawn_egg",
             () -> new CCSpawnEggItem(
                     CCEntity.FROZEN_SHADE,
-                    0x0350B1,
-                    0x1092F9,
+                    0x9BB8CD,
+                    0xFFFFFF,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> GOLDEN_SKELETON_SPAWN_EGG = ITEMS.register("golden_skeleton_spawn_egg",
@@ -471,8 +471,8 @@ public class CCItem {
     public static final RegistryObject<Item> HEAT_SHADE_SPAWN_EGG = ITEMS.register("heat_shade_spawn_egg",
             () -> new CCSpawnEggItem(
                     CCEntity.HEAT_SHADE,
-                    0xA10C05,
-                    0xF01504,
+                    0x360908,
+                    0xF24A18,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> MEDUSA_SPAWN_EGG = ITEMS.register("medusa_spawn_egg",
@@ -485,8 +485,8 @@ public class CCItem {
     public static final RegistryObject<Item> POISON_SHADE_SPAWN_EGG = ITEMS.register("poison_shade_spawn_egg",
             () -> new CCSpawnEggItem(
                     CCEntity.POISON_SHADE,
-                    0x45F248,
-                    0x319E3D,
+                    0x204040,
+                    0x9C3CFF,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> RUSALKA_SPAWN_EGG = ITEMS.register("rusalka_spawn_egg",
@@ -506,8 +506,8 @@ public class CCItem {
     public static final RegistryObject<Item> THUNDER_SHADE_SPAWN_EGG = ITEMS.register("thunder_shade_spawn_egg",
             () -> new CCSpawnEggItem(
                     CCEntity.THUNDER_SHADE,
-                    0xFFFF75,
-                    0xB3B334,
+                    0x111218,
+                    0x3F97C1,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> VAMPIRE_BAT_SPAWN_EGG = ITEMS.register("vampire_bat_spawn_egg",

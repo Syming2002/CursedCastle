@@ -39,9 +39,21 @@ public class CCBlock {
 
     static {
         for (WoodType woodType : WoodType.values().toList()) {
-            CRUCIFIX_BLOCK_TYPES.put(woodType, registerBlock(woodType.name() + '_' + "crucifix",
-                    () -> new CrucifixBlock(BlockBehaviour.Properties.of()
-                            .sound(SoundType.WOOD).noOcclusion(), woodType)));
+            if (woodType == WoodType.OAK
+                    || woodType == WoodType.SPRUCE
+                    || woodType == WoodType.BIRCH
+                    || woodType == WoodType.JUNGLE
+                    || woodType == WoodType.ACACIA
+                    || woodType == WoodType.DARK_OAK
+                    || woodType == WoodType.CRIMSON
+                    || woodType == WoodType.WARPED
+                    || woodType == WoodType.MANGROVE
+                    || woodType == WoodType.CHERRY
+                    || woodType == WoodType.BAMBOO) {
+                CRUCIFIX_BLOCK_TYPES.put(woodType, registerBlock(woodType.name() + '_' + "crucifix",
+                        () -> new CrucifixBlock(BlockBehaviour.Properties.of()
+                                .sound(SoundType.WOOD).noOcclusion(), woodType)));
+            }
         }
     }
 

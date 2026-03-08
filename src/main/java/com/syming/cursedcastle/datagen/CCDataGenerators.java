@@ -3,8 +3,6 @@ package com.syming.cursedcastle.datagen;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.damagetype.CCDamageType;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.RegistrySetBuilder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -29,6 +27,7 @@ public class CCDataGenerators {
         generator.addProvider(event.includeClient(), new CCBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new CCBlockModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new CCItemModelProvider(packOutput, existingFileHelper));
+        generator.addProvider(event.includeClient(), new CCLangENProvider(packOutput, "en_us"));
 
         CCBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(), new CCBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
 

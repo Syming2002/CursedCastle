@@ -279,6 +279,9 @@ dependencies {
     // Euphoria Patches
     implementation fg.deobf("curse.maven:euphoria-patches-915902:6987509")
 
+    implementation fg.deobf("curse.maven:just-enough-professions-jep-417645:4587024")
+
+
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html

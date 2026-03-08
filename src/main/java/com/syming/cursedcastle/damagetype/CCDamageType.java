@@ -22,6 +22,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
@@ -35,6 +36,8 @@ public class CCDamageType {
     public static final ResourceKey<DamageType> EARTH = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(CursedCastleMod.MOD_ID, "earth"));
     public static final ResourceKey<DamageType> HOLY = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(CursedCastleMod.MOD_ID, "holy"));
     public static final ResourceKey<DamageType> DARK = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(CursedCastleMod.MOD_ID, "dark"));
+
+    public static List<ResourceKey<DamageType>> DAMAGE_TYPES_LIST = List.of(FIRE, ICE, THUNDER, WATER, WIND, EARTH, HOLY, DARK);
 
     public static DamageSource causeFireDamage(@Nullable Entity entity) {
         Holder<DamageType> holder = entity.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolder(FIRE).get();

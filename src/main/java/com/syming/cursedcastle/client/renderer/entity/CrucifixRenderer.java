@@ -96,7 +96,7 @@
 //
 //    @Override
 //    public ResourceLocation getTextureLocation(CrucifixEntity pEntity) {
-//        WoodType woodType = pEntity.getWoodType();
+//        WoodType woodType = pEntity.getBlockTags();
 //        if (woodType == OAK) {
 //            return OAK_CRUCIFIX_TEXTURE;
 //        } else if (woodType == SPRUCE) {

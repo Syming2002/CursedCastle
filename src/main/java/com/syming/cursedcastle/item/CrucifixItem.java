@@ -39,7 +39,7 @@
 //        this.woodType = pWoodtype;
 //    }
 //
-//    public WoodType getWoodType() {
+//    public WoodType getBlockTags() {
 //        return this.woodType;
 //    }
 //
