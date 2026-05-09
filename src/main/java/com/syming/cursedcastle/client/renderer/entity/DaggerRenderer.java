@@ -27,7 +27,7 @@ public class DaggerRenderer extends EntityRenderer<DaggerEntity> {
     public static final ResourceLocation DIAMOND_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/diamond_dagger.png");
     public static final ResourceLocation NETHERITE_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/netherite_dagger.png");
 
-    protected DaggerModel model;
+    protected DaggerModel<?> model;
 
     public DaggerRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
@@ -39,9 +39,6 @@ public class DaggerRenderer extends EntityRenderer<DaggerEntity> {
     @Override
     public void render(DaggerEntity daggerEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
         pPoseStack.pushPose();
-//        pPoseStack.translate(daggerEntity.getX() - daggerEntity.xo * pPartialTick,
-//                daggerEntity.getY() - daggerEntity.yo * pPartialTick,
-//                daggerEntity.getZ() - daggerEntity.zo * pPartialTick);
 
         pPoseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(pPartialTick, daggerEntity.yRotO, daggerEntity.getYRot()) - 90.0F));
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pPartialTick, daggerEntity.xRotO, daggerEntity.getXRot())));

@@ -4,6 +4,7 @@ import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.projectile.subweapon.HolyCrossItem;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.projectile.CCThrowableWeapon;
+import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -12,6 +13,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class HolyCrossEntity extends CCThrowableWeapon {
 
@@ -28,6 +31,10 @@ public class HolyCrossEntity extends CCThrowableWeapon {
     protected static final EntityDataAccessor<Float> THROWER_YAW = SynchedEntityData.defineId(HolyCrossEntity.class, EntityDataSerializers.FLOAT);
 
     private Tier tier;
+
+    public HolyCrossEntity(EntityType<? extends HolyCrossEntity> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
+    }
 
     public HolyCrossEntity(Level pLevel, Tier pTier) {
         super(CCEntity.HOLY_CROSS_TYPES.get(pTier).get(), pLevel);
@@ -215,20 +222,22 @@ public class HolyCrossEntity extends CCThrowableWeapon {
     @Override
     public ItemStack getItem() {
         ItemStack stack = this.getItemRaw();
-        if (stack.getItem() instanceof HolyCrossItem holyCrossItem) {
-            Tier holyCrossItemTier = holyCrossItem.getTier();
-            if (holyCrossItemTier == Tiers.WOOD) {
-                return new ItemStack(CCItem.ANIM_WOOD_HOLY_CROSS.get());
-            } else if (holyCrossItemTier == Tiers.STONE) {
-                return new ItemStack(CCItem.ANIM_STONE_HOLY_CROSS.get());
-            } else if (holyCrossItemTier == Tiers.IRON) {
-                return new ItemStack(CCItem.ANIM_IRON_HOLY_CROSS.get());
-            } else if (holyCrossItemTier == Tiers.GOLD) {
-                return new ItemStack(CCItem.ANIM_GOLD_HOLY_CROSS.get());
-            } else if (holyCrossItemTier == Tiers.DIAMOND) {
-                return new ItemStack(CCItem.ANIM_DIAMOND_HOLY_CROSS.get());
-            } else if (holyCrossItemTier == Tiers.NETHERITE) {
-                return new ItemStack(CCItem.ANIM_NETHERITE_HOLY_CROSS.get());
+        if (getOwner() != null) {
+            if (stack.getItem() instanceof HolyCrossItem holyCrossItem) {
+                Tier holyCrossItemTier = holyCrossItem.getTier();
+                if (holyCrossItemTier == Tiers.WOOD) {
+                    return new ItemStack(CCItem.ANIM_WOOD_HOLY_CROSS.get());
+                } else if (holyCrossItemTier == Tiers.STONE) {
+                    return new ItemStack(CCItem.ANIM_STONE_HOLY_CROSS.get());
+                } else if (holyCrossItemTier == Tiers.IRON) {
+                    return new ItemStack(CCItem.ANIM_IRON_HOLY_CROSS.get());
+                } else if (holyCrossItemTier == Tiers.GOLD) {
+                    return new ItemStack(CCItem.ANIM_GOLD_HOLY_CROSS.get());
+                } else if (holyCrossItemTier == Tiers.DIAMOND) {
+                    return new ItemStack(CCItem.ANIM_DIAMOND_HOLY_CROSS.get());
+                } else if (holyCrossItemTier == Tiers.NETHERITE) {
+                    return new ItemStack(CCItem.ANIM_NETHERITE_HOLY_CROSS.get());
+                }
             }
         }
         return new ItemStack(CCItem.ANIM_WOOD_HOLY_CROSS.get());

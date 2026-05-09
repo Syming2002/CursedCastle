@@ -1,0 +1,54 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "minecraft:block/cobblestone",
+		"1": "minecraft:block/crimson_planks",
+		"particle": "minecraft:block/crimson_planks"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 2, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 1, 8]},
+			"color": 8,
+			"faces": {
+				"north": {"uv": [0, 2, 16, 4], "texture": "#0"},
+				"east": {"uv": [0, 2, 16, 4], "texture": "#0"},
+				"south": {"uv": [0, 2, 16, 4], "texture": "#0"},
+				"west": {"uv": [0, 2, 16, 4], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 2, 7],
+			"to": [9, 16, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 2, 7]},
+			"color": 8,
+			"faces": {
+				"north": {"uv": [0, 0, 2, 14], "texture": "#1"},
+				"east": {"uv": [0, 0, 2, 14], "texture": "#1"},
+				"south": {"uv": [0, 0, 2, 14], "texture": "#1"},
+				"west": {"uv": [0, 0, 2, 14], "texture": "#1"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "#1"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "base",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0]
+		},
+		{
+			"name": "mainBottomBeam",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [1]
+		}
+	]
+}

@@ -17,6 +17,8 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.WallSkullBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -73,7 +75,8 @@ public class CCBlockStateProvider extends BlockStateProvider {
     private void crucifixBlock(Block crucifixBlock, WoodType woodType) {
         getVariantBuilder(crucifixBlock)
                 .forAllStates(state -> {
-                    Direction direction = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+                    Direction direction = state.getValue(CrucifixBlock.FACING);
+                    DoubleBlockHalf half = state.getValue(CrucifixBlock.HALF);
                     int yRot = switch (direction) {
                         case NORTH -> 0;
                         case SOUTH -> 180;
@@ -82,10 +85,10 @@ public class CCBlockStateProvider extends BlockStateProvider {
                         default -> 0;
                     };
                     return ConfiguredModel.builder()
-                            .modelFile(new ModelFile.UncheckedModelFile(modLoc("block/" + woodType.name() + '_' + "crucifix")))
+                            .modelFile(new ModelFile.UncheckedModelFile(modLoc(half == DoubleBlockHalf.LOWER ? "block/"+ woodType.name() + '_' + "crucifix" + '_' + "bottom" : "block/" + woodType.name() + '_' + "crucifix" + '_' + "top"))) // for the block crucifix
                             .rotationY(yRot)
                             .build();
                 });
-        simpleBlockItem(crucifixBlock, new ModelFile.UncheckedModelFile(modLoc("block/" + woodType.name() + '_' + "crucifix")));
+        simpleBlockItem(crucifixBlock, new ModelFile.UncheckedModelFile(modLoc("block/" + woodType.name() + '_' + "crucifix"))); // For the item crucifix
     }
 }

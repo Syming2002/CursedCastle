@@ -114,13 +114,11 @@ public class HolyBibleEntity extends CCThrowableWeapon {
         super.tick();
 
         if (getOwner() != null) {
-            setCoordinates(getOwner().getX(), getOwner().getY() + getOwner().getEyeHeight() / 2, getOwner().getZ());
-
             double throwerX = getOwner().getX();
             double throwerY = getOwner().getY() + getOwner().getEyeHeight() / 2;
             double throwerZ = getOwner().getZ();
 
-            setCoordinates(getOwner().getX(), getOwner().getY() + getOwner().getEyeHeight() / 2, getOwner().getZ());
+            setCoordinates(throwerX,  throwerY, throwerZ);
 
             double angle = this.random.nextDouble() * Math.PI * 2;
             double distance = this.spiralTicks * 0.0078125;

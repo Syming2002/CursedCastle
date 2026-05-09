@@ -126,15 +126,20 @@ repositories {
     //     dir 'libs'
     // }
 
-    maven {
-        // location of the maven that hosts JEI files before January 2023
-        name = "Progwml6's maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
+//    maven {
+//        // location of the maven that hosts JEI files before January 2023
+//        name = "Progwml6's maven"
+//        url = "https://dvs1.progwml6.com/files/maven/"
+//    }
     maven {
         // location of the maven that hosts JEI files since January 2023
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // EMI
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
     }
     maven {
         // location of a maven mirror for JEI files, as a fallback
@@ -151,11 +156,6 @@ repositories {
     maven {
         name = "Illusive Soulworks maven"
         url = "https://maven.theillusivec4.top/"
-    }
-
-    maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
     }
 
     maven { url = "https://api.modrinth.com/maven" }
@@ -200,6 +200,10 @@ dependencies {
     // JER
     implementation fg.deobf("curse.maven:just-enough-resources-jer-${just_enough_resources_jer_id}")
 
+    implementation fg.deobf("dev.emi:emi-forge:1.1.13+${minecraft_version}")
+    implementation fg.deobf("curse.maven:txnilib-1104882:6533724")
+    implementation fg.deobf("curse.maven:forgified-fabric-api-889079:6885853")
+    implementation fg.deobf("curse.maven:distraction-free-recipes-1167848:6110178")
 
     // TOP
     implementation fg.deobf("curse.maven:the-one-probe-${the_one_probe_id}")

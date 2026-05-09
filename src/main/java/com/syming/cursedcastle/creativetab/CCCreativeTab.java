@@ -6,6 +6,7 @@ import com.syming.cursedcastle.compat.forestry.CCBeesApicultureItems;
 import com.syming.cursedcastle.compat.forestry.CCBeesEnumHoneyComb;
 import com.syming.cursedcastle.compat.forestry.CCBeesItemHoneyComb;
 import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.item.CCSpawnEggItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
 import forestry.api.apiculture.genetics.IBeeSpecies;
@@ -16,6 +17,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -84,12 +86,6 @@ public class CCCreativeTab {
                         output.accept(CCBlock.DRACULA_CASTLE_STONE_BRICKS_SLAB.get());
                         output.accept(CCBlock.DRACULA_HEAD.get());
 
-
-                        // Crucifixes Items
-//                        for (WoodType woodType : WoodType.values().toList()) {
-//                            output.accept(CCItem.CRUCIFIX_TYPES.get(woodType).get());
-//                        }
-
                         // Crucifixes Blocks
                         for (WoodType woodType : WoodType.values().toList()) {
                             if (woodType == WoodType.OAK
@@ -118,21 +114,11 @@ public class CCCreativeTab {
                         }
 
                         // Spawn Eggs
-                        output.accept(CCItem.BLOOD_SKELETON_SPAWN_EGG.get());
-                        output.accept(CCItem.CLEAR_BONE_SKELETON_SPAWN_EGG.get());
-                        output.accept(CCItem.DRACULA_SPAWN_EGG.get());
-                        output.accept(CCItem.FAMILIAR_BAT_SPAWN_EGG.get());
-                        output.accept(CCItem.FROZEN_SHADE_SPAWN_EGG.get());
-                        output.accept(CCItem.GOLDEN_SKELETON_SPAWN_EGG.get());
-                        output.accept(CCItem.GRIM_REAPER_SPAWN_EGG.get());
-                        output.accept(CCItem.HARPY_SPAWN_EGG.get());
-                        output.accept(CCItem.HEAT_SHADE_SPAWN_EGG.get());
-                        output.accept(CCItem.MEDUSA_SPAWN_EGG.get());
-                        output.accept(CCItem.POISON_SHADE_SPAWN_EGG.get());
-                        output.accept(CCItem.RUSALKA_SPAWN_EGG.get());
-                        output.accept(CCItem.SKELETON_SPAWN_EGG.get());
-                        output.accept(CCItem.THUNDER_SHADE_SPAWN_EGG.get());
-                        output.accept(CCItem.VAMPIRE_BAT_SPAWN_EGG.get());
+                        for (RegistryObject<Item> itemRegistryObject : CCItem.ITEMS.getEntries()) {
+                            if (itemRegistryObject.get() instanceof CCSpawnEggItem spawnEggItem) {
+                                output.accept(spawnEggItem);
+                            }
+                        }
 
                         // Swords
                         output.accept(CCItem.TYRFING.get());
@@ -144,6 +130,9 @@ public class CCCreativeTab {
                         output.accept(CCItem.HOLY_WATER_BUCKET.get());
                         output.accept(CCItem.SCYTHE_PROJECTILE_ITEM.get());
                         output.accept(CCItem.DEATH_SCYTHE.get());
+
+                        output.accept(CCItem.ANIM_FIRE_HOLY_CROSS.get());
+                        output.accept(CCItem.ANIM_ICE_HOLY_CROSS.get());
 
                         // Bees
                         for (ILifeStage stage : SpeciesUtil.BEE_TYPE.get().getLifeStages()) {

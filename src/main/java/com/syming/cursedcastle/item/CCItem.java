@@ -334,6 +334,13 @@ public class CCItem {
             () -> new Item(new Item.Properties()));
 
 
+    public static final RegistryObject<Item> ANIM_FIRE_HOLY_CROSS = ITEMS.register("anim_fire_holy_cross",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> ANIM_ICE_HOLY_CROSS = ITEMS.register("anim_ice_holy_cross",
+            () -> new Item(new Item.Properties()));
+
+
     public static final RegistryObject<Item> ANIM_WOOD_THROWING_AXE = ITEMS.register("anim_wooden_throwing_axe",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ANIM_STONE_THROWING_AXE = ITEMS.register("anim_stone_throwing_axe",
@@ -440,6 +447,20 @@ public class CCItem {
                     0x5A84FF,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> FIRE_ZOMBIE_SPAWN_EGG = ITEMS.register("fire_zombie_spawn_egg",
+            () -> new CCSpawnEggItem(
+                    CCEntity.FIRE_ZOMBIE,
+                    0x282523,
+                    0x761D10,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> FROST_ZOMBIE_SPAWN_EGG = ITEMS.register("frost_zombie_spawn_egg",
+            () -> new CCSpawnEggItem(
+                    CCEntity.FROST_ZOMBIE,
+                    0xFFFFFF,
+                    0xAFC8D9,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> FROZEN_SHADE_SPAWN_EGG = ITEMS.register("frozen_shade_spawn_egg",
             () -> new CCSpawnEggItem(
                     CCEntity.FROZEN_SHADE,
@@ -485,8 +506,8 @@ public class CCItem {
     public static final RegistryObject<Item> POISON_SHADE_SPAWN_EGG = ITEMS.register("poison_shade_spawn_egg",
             () -> new CCSpawnEggItem(
                     CCEntity.POISON_SHADE,
-                    0x204040,
-                    0x9C3CFF,
+                    0x1A440A,
+                    0x87A703,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> RUSALKA_SPAWN_EGG = ITEMS.register("rusalka_spawn_egg",
@@ -506,8 +527,8 @@ public class CCItem {
     public static final RegistryObject<Item> THUNDER_SHADE_SPAWN_EGG = ITEMS.register("thunder_shade_spawn_egg",
             () -> new CCSpawnEggItem(
                     CCEntity.THUNDER_SHADE,
-                    0x111218,
-                    0x3F97C1,
+                    0x0C2550,
+                    0x64BDF4,
                     new Item.Properties()));
 
     public static final RegistryObject<Item> VAMPIRE_BAT_SPAWN_EGG = ITEMS.register("vampire_bat_spawn_egg",

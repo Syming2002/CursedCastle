@@ -15,13 +15,32 @@ import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.ClearBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.GoldenSkeleton;
 import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
+import com.syming.cursedcastle.entity.mob.zombie.CCZombieEntity;
 import com.syming.cursedcastle.entity.villager.CCVillager;
+import com.syming.cursedcastle.mp.PlayerMP;
+import com.syming.cursedcastle.mp.PlayerMPProvider;
 import com.syming.cursedcastle.network.CCPacketHandler;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.registries.RegistryObject;
+import org.spongepowered.asm.mixin.MixinEnvironment;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = CursedCastleMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CCCommonEvent {
@@ -38,22 +57,10 @@ public class CCCommonEvent {
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(CCEntity.BLOOD_SKELETON.get(), BloodSkeletonEntity.createMobAttributes().build());
         event.put(CCEntity.CLEAR_BONE_SKELETON.get(), ClearBoneSkeletonEntity.createMobAttributes().build());
-
-//        Map<WoodType, AttributeSupplier> CRUCIFIX_ATTRIBUTES_TYPE = new HashMap<>();
-//
-//        AttributeSupplier attributes = LivingEntity.createLivingAttributes().build();
-//
-//        for (WoodType woodType : WoodType.values().toList()) {
-//
-//            EntityType<? extends LivingEntity> type = CCEntity.CRUCIFIX_WOOD_TYPE.get(woodType).get();
-//
-//            event.put(type, attributes);
-//
-//            CRUCIFIX_ATTRIBUTES_TYPE.put(woodType, attributes);
-//        }
-
         event.put(CCEntity.DRACULA.get(), DraculaEntity.createMobAttributes().build());
         event.put(CCEntity.FAMILIAR_BAT.get(), FamiliarBatEntity.createMobAttributes().build());
+        event.put(CCEntity.FIRE_ZOMBIE.get(), CCZombieEntity.createZombieAttributes().build());
+        event.put(CCEntity.FROST_ZOMBIE.get(), CCZombieEntity.createZombieAttributes().build());
         event.put(CCEntity.FROZEN_SHADE.get(), ShadeEntity.createMobAttributes().build());
         event.put(CCEntity.GOLDEN_SKELETON.get(), GoldenSkeleton.createMobAttributes().build());
         event.put(CCEntity.FRIENDLY_ZOMBIE.get(), ZombieFriendlyEntity.createMobAttributes().build());

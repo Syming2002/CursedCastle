@@ -65,6 +65,18 @@ public class CCPacketHandler {
                 .decoder(CCLuckEffect::decode)
                 .consumerMainThread(CCLuckEffect.Handler::handle)
                 .add();
+
+        INSTANCE.messageBuilder(CCMPPacket.class, id++)
+                .encoder(CCMPPacket::toBytes)
+                .decoder(CCMPPacket::new)
+                .consumerMainThread(CCMPPacket::handle)
+                .add();
+
+        INSTANCE.messageBuilder(CCMPData.class, id++)
+                .encoder(CCMPData::toBytes)
+                .decoder(CCMPData::new)
+                .consumerMainThread(CCMPData::handle)
+                .add();
     }
 
     public static void sendToPlayer(Object message, ServerPlayer player) {

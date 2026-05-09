@@ -11,6 +11,8 @@ import com.syming.cursedcastle.entity.mob.skeleton.GoldenSkeleton;
 import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
+import com.syming.cursedcastle.entity.mob.zombie.FireZombieEntity;
+import com.syming.cursedcastle.entity.mob.zombie.FrostZombieEntity;
 import com.syming.cursedcastle.entity.projectile.*;
 import com.syming.cursedcastle.entity.projectile.subweapon.*;
 import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
@@ -53,19 +55,6 @@ public class CCEntity {
             .updateInterval(1)
             .build("clear_bone_skeleton"));
 
-//    public static final Map<WoodType, RegistryObject<EntityType<CrucifixEntity>>> CRUCIFIX_WOOD_TYPE = new HashMap<>();
-//
-//    static {
-//        for (WoodType woodType : WoodType.values().toList()) {
-//            CRUCIFIX_WOOD_TYPE.put(woodType, ENTITY_TYPES.register(woodType.name() + '_' + "crucifix", () -> EntityType.Builder.<CrucifixEntity>of((pEntityType, pLevel) -> new CrucifixEntity(woodType, pLevel), MobCategory.MISC)
-//                    .sized(0.5F, 2.5F)
-//                    .setTrackingRange(64)
-//                    .setShouldReceiveVelocityUpdates(true)
-//                    .updateInterval(1)
-//                    .build(woodType.name() + '_' + "crucifix")));
-//        }
-//    }
-
     public static final RegistryObject<EntityType<DraculaEntity>> DRACULA = ENTITY_TYPES.register("dracula", () -> EntityType.Builder.<DraculaEntity>of(DraculaEntity::new, MobCategory.MONSTER)
             .sized(0.6F, 2.5F)
             .setTrackingRange(64)
@@ -80,12 +69,26 @@ public class CCEntity {
             .updateInterval(1)
             .build("familiar_bat"));
 
+    public static final RegistryObject<EntityType<FireZombieEntity>> FIRE_ZOMBIE = ENTITY_TYPES.register("fire_zombie", () -> EntityType.Builder.<FireZombieEntity>of(FireZombieEntity::new, MobCategory.MONSTER)
+            .sized(0.5F, 1.99F)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .build("fire_zombie"));
+
     public static final RegistryObject<EntityType<ZombieFriendlyEntity>> FRIENDLY_ZOMBIE = ENTITY_TYPES.register("friendly_zombie", () -> EntityType.Builder.<ZombieFriendlyEntity>of(ZombieFriendlyEntity::new, MobCategory.CREATURE)
             .sized(0.6F, 1.95F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("friendly_zombie"));
+
+    public static final RegistryObject<EntityType<FrostZombieEntity>> FROST_ZOMBIE = ENTITY_TYPES.register("frost_zombie", () -> EntityType.Builder.<FrostZombieEntity>of(FrostZombieEntity::new, MobCategory.MONSTER)
+            .sized(0.5F, 1.99F)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .build("frost_zombie"));
 
     public static final RegistryObject<EntityType<FrozenShadeEntity>> FROZEN_SHADE = ENTITY_TYPES.register("frozen_shade", () -> EntityType.Builder.<FrozenShadeEntity>of(FrozenShadeEntity::new, MobCategory.MONSTER)
             .sized(0.5F, 1.875F)
@@ -219,6 +222,7 @@ public class CCEntity {
 
     public static final RegistryObject<EntityType<HolyBibleEntity>> HOLY_BIBLE = ENTITY_TYPES.register("holy_bible",
             () -> EntityType.Builder.<HolyBibleEntity>of(HolyBibleEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
                     .updateInterval(20)
                     .setCustomClientFactory(((spawnEntity, level) -> new HolyBibleEntity(level)))
@@ -233,6 +237,8 @@ public class CCEntity {
                     .updateInterval(20)
                     .setCustomClientFactory(((spawnEntity, level) -> new HolyWaterEntity(level)))
                     .build("holy_water"));
+
+
 
     public static final Map<Tier, RegistryObject<EntityType<ThrowingAxeEntity>>> THROWING_AXE_TYPES = new HashMap<>();
 
@@ -268,7 +274,7 @@ public class CCEntity {
                                     MobCategory.MISC)
                             .sized(0.5F, 0.5F)
                             .clientTrackingRange(4)
-                            .updateInterval(20)
+                            .updateInterval(1)
                             .setCustomClientFactory(((spawnEntity, level) -> new DaggerEntity(level, tier)))
                             .build(tier.name().toLowerCase(Locale.ROOT) + '_' + "dagger"))
             );
@@ -289,6 +295,25 @@ public class CCEntity {
             );
         }
     }
+
+    public static final RegistryObject<EntityType<FireHolyCrossEntity>> FIRE_HOLY_CROSS = ENTITY_TYPES.register("fire_holy_cross",
+            () -> EntityType.Builder.<FireHolyCrossEntity>of(FireHolyCrossEntity::new, MobCategory.MISC)
+                    .setTrackingRange(64)
+                    .clientTrackingRange(4)
+                    .setShouldReceiveVelocityUpdates(true)
+                    .updateInterval(1)
+                    .setCustomClientFactory(((spawnEntity, level) -> new FireHolyCrossEntity(level)))
+                    .build("fire_holy_cross"));
+
+    public static final RegistryObject<EntityType<IceHolyCrossEntity>> ICE_HOLY_CROSS = ENTITY_TYPES.register("ice_holy_cross",
+            () -> EntityType.Builder.<IceHolyCrossEntity>of(IceHolyCrossEntity::new, MobCategory.MISC)
+                    .setTrackingRange(64)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .setShouldReceiveVelocityUpdates(true)
+                    .updateInterval(1)
+                    .setCustomClientFactory(((spawnEntity, level) -> new IceHolyCrossEntity(level)))
+                    .build("ice_holy_cross"));
 
     static {
         for (Tiers tier : Tiers.values()) {

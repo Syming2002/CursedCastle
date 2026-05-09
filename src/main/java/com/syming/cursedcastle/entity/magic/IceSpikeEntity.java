@@ -3,6 +3,8 @@ package com.syming.cursedcastle.entity.magic;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.mob.shade.FrozenShadeEntity;
+import com.syming.cursedcastle.entity.projectile.subweapon.IceHolyCrossEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -11,13 +13,17 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
 
 public class IceSpikeEntity extends Projectile {
 
@@ -43,17 +49,37 @@ public class IceSpikeEntity extends Projectile {
 
     @Override
     protected void onHitEntity(EntityHitResult pEntityHitResult) {
+        super.onHitEntity(pEntityHitResult);
         if (!this.level().isClientSide()) {
             Entity hitEntity = pEntityHitResult.getEntity();
             if (hitEntity != null && hitEntity != this.getOwner()) {
-                if (this.getOwner() instanceof FrozenShadeEntity frozenShade) {
-                    if (hitEntity.isAlive()) {
+
+                if (hitEntity.isAlive()) {
+                    if (this.getOwner() instanceof IceHolyCrossEntity) {
+                        hitEntity.hurt(this.damageSources().magic(), 8.0F);
+                        discard();
+                    }
+                    if (this.getOwner() instanceof FrozenShadeEntity frozenShade) {
                         hitEntity.hurt(this.damageSources().mobAttack(frozenShade), 8.0F);
                         frozenShade.heal(5.0F);
                         if (hitEntity instanceof LivingEntity livingTarget) {
                             livingTarget.addEffect(new MobEffectInstance(CCEffect.FREEZE.get(), 200, 1));
                         }
                     }
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onHitBlock(BlockHitResult pResult) {
+        super.onHitBlock(pResult);
+        BlockPos hitPos = pResult.getBlockPos();
+
+        if (!this.level().isClientSide()) {
+            if (hitPos != null) {
+                if (this.getOwner() instanceof IceHolyCrossEntity) {
+                    discard();
                 }
             }
         }
@@ -104,6 +130,23 @@ public class IceSpikeEntity extends Projectile {
                 if (!frozenShade.isAlive()) {
                     discard();
                 }
+            }
+        }
+        if (getOwner() instanceof IceHolyCrossEntity) {
+            List<Monster> monsters = this.level().getEntitiesOfClass(Monster.class, this.getBoundingBox().inflate(10.0D), LivingEntity::isAlive);
+            for (Monster monster : monsters) {
+                Vec3 spikePos = position();
+                Vec3 targetPos = monster.getEyePosition();
+
+                double dx = targetPos.x - spikePos.x;
+                double dy = targetPos.y - spikePos.y;
+                double dz = targetPos.z - spikePos.z;
+
+                float targetYaw = (float) (Mth.atan2(dz, dx) * (180F / Math.PI)) - 90F;
+                float targetPitch = (float) (-(Mth.atan2(dy, Math.sqrt(dx * dx + dz * dz)) * (180F / Math.PI)));
+
+                this.setYRot(Mth.rotLerp(0.2F, getYRot(), targetYaw));
+                this.setXRot(Mth.rotLerp(0.2F, getXRot(), targetPitch));
             }
         }
     }

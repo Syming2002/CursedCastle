@@ -200,11 +200,11 @@ public class FrozenShadeEntity extends ShadeEntity {
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        Player player = (Player) pSource.getEntity();
-        if (player != null) {
-            ItemStack stack = player.getMainHandItem();
+        LivingEntity livingEntity = (LivingEntity) pSource.getEntity();
+        if (livingEntity != null) {
+            ItemStack stack = livingEntity.getMainHandItem();
             if (stack.getItem() instanceof IElementalDamage elementalWeapon && stack.getItem() == CCItem.ICE_WHIP.get()) {
-                pSource = elementalWeapon.getElementalDamageSource(stack, getTarget(), player);
+                pSource = elementalWeapon.getElementalDamageSource(stack, getTarget(), livingEntity);
                 if (hasStrength(pSource, pAmount) && pSource.is(CCDamageType.ICE)) {
                     if (pSource.is(CCDamageType.ICE)) {
                         if (stack.getItem() == CCItem.ICE_WHIP.get()) {
@@ -263,7 +263,7 @@ public class FrozenShadeEntity extends ShadeEntity {
         double maxY = this.getY() + this.getBbHeight();
         double maxZ = this.getZ() + this.getBbWidth() * 0.5;
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i <= 1; i++) {
             double posX = minX + this.random.nextDouble() * (maxX - minX);
             double posY = minY + this.random.nextDouble() * (maxY - minY);
             double posZ = minZ + this.random.nextDouble() * (maxZ - minZ);

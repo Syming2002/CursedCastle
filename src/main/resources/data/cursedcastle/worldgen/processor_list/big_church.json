@@ -17,6 +17,19 @@
           }
         },
         {
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "input_predicate": {
+            "predicate_type": "minecraft:random_block_match",
+            "block": "minecraft:terracotta",
+            "probability": 0.5
+          },
+          "output_state": {
+            "Name": "minecraft:orange_terracotta"
+          }
+        },
+        {
           "input_predicate": {
             "predicate_type": "minecraft:random_blockstate_match",
             "block_state": {

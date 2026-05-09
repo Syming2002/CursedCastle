@@ -29,6 +29,7 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -42,6 +43,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.RegistryObject;
+
+import javax.swing.text.html.parser.Entity;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(CursedCastleMod.MOD_ID)
@@ -93,15 +97,13 @@ public class CursedCastleMod {
                 EntityRenderers.register(CCEntity.BLOOD_SKELETON.get(), SkeletonRenderer::new);
                 EntityRenderers.register(CCEntity.CLEAR_BONE_SKELETON.get(), SkeletonRenderer::new);
 
-//                for (WoodType woodType : WoodType.values().toList()) {
-//                    EntityRenderers.register(CCEntity.CRUCIFIX_WOOD_TYPE.get(woodType).get(), CrucifixRenderer::new);
-//                }
-
                 EntityRenderers.register(CCEntity.DRACULA.get(), DraculaRenderer::new);
                 EntityRenderers.register(CCEntity.FAMILIAR_BAT.get(), FamiliarBatRenderer::new);
+                EntityRenderers.register(CCEntity.FIRE_ZOMBIE.get(), FireZombieRenderer::new);
                 EntityRenderers.register(CCEntity.FIRE_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.FIRE_PILLAR.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.FRIENDLY_ZOMBIE.get(), ZombieFriendlyRenderer::new);
+                EntityRenderers.register(CCEntity.FROST_ZOMBIE.get(), FrostZombieRenderer::new);
                 EntityRenderers.register(CCEntity.FROZEN_SHADE.get(), ShadeRenderer::new);
                 EntityRenderers.register(CCEntity.GOLDEN_SKELETON.get(), SkeletonRenderer::new);
                 EntityRenderers.register(CCEntity.GRIM_REAPER.get(), GrimReaperRenderer::new);
@@ -119,34 +121,57 @@ public class CursedCastleMod {
                 EntityRenderers.register(CCEntity.THUNDER_SHADE.get(), ShadeRenderer::new);
                 EntityRenderers.register(CCEntity.VAMPIRE_BAT.get(), VampireBatRenderer::new);
 
-                for (Tiers tier : Tiers.values()) {
-                    EntityRenderers.register(CCEntity.DAGGER_TYPES.get(tier).get(), DaggerRenderer::new);
+                EntityRenderers.register(CCEntity.FIRE_HOLY_CROSS.get(), FireHolyCrossRenderer::new);
+
+                EntityRenderers.register(CCEntity.ICE_HOLY_CROSS.get(), IceHolyCrossRenderer::new);
+
+
+                for (RegistryObject<EntityType<?>> entityThrownItem : CCEntity.ENTITY_TYPES.getEntries()) {
+
+
+
+                    for (Tiers tier : Tiers.values()) {
+                        if (entityThrownItem.get() == CCEntity.DAGGER_TYPES.get(tier).get()) {
+                            EntityRenderers.register(CCEntity.DAGGER_TYPES.get(tier).get(), DaggerRenderer::new);
+                        }
+
+                        if (entityThrownItem.get() == CCEntity.HOLY_CROSS_TYPES.get(tier).get()) {
+                            EntityRenderers.register(CCEntity.HOLY_CROSS_TYPES.get(tier).get(), ThrownItemRenderer::new);
+                        }
+
+
+
+                        if (entityThrownItem.get() == CCEntity.THROWING_AXE_TYPES.get(tier).get()) {
+                            EntityRenderers.register(CCEntity.THROWING_AXE_TYPES.get(tier).get(), ThrownItemRenderer::new);
+                        }
+
+                        if (entityThrownItem.get() == CCEntity.HOLY_BIBLE.get()) {
+                            EntityRenderers.register(CCEntity.HOLY_BIBLE.get(), ThrownItemRenderer::new);
+                        }
+
+                        if (entityThrownItem.get() == CCEntity.HOLY_WATER.get()) {
+                            EntityRenderers.register(CCEntity.HOLY_WATER.get(), ThrownItemRenderer::new);
+                        }
+
+                        if (entityThrownItem.get() == CCEntity.THROWING_BONE.get()) {
+                            EntityRenderers.register(CCEntity.THROWING_BONE.get(), ThrownItemRenderer::new);
+                        }
+
+                        if (entityThrownItem.get() == CCEntity.THROWING_BLOOD_BONE.get()) {
+                            EntityRenderers.register(CCEntity.THROWING_BLOOD_BONE.get(), ThrownItemRenderer::new);
+                        }
+
+                        if (entityThrownItem.get() == CCEntity.THROWING_GOLDEN_BONE.get()) {
+                            EntityRenderers.register(CCEntity.THROWING_GOLDEN_BONE.get(), ThrownItemRenderer::new);
+                        }
+
+                        if (entityThrownItem.get() == CCEntity.SCYTHE_PROJECTILE.get()) {
+                            EntityRenderers.register(CCEntity.SCYTHE_PROJECTILE.get(), ThrownItemRenderer::new);
+                        }
+                    }
                 }
-
-                for (Tiers tier : Tiers.values()) {
-                    EntityRenderers.register(CCEntity.HOLY_CROSS_TYPES.get(tier).get(), ThrownItemRenderer::new);
-                }
-
-                EntityRenderers.register(CCEntity.HOLY_BIBLE.get(), ThrownItemRenderer::new);
-                EntityRenderers.register(CCEntity.HOLY_WATER.get(), ThrownItemRenderer::new);
-
-                for (Tiers tier : Tiers.values()) {
-                    EntityRenderers.register(CCEntity.THROWING_AXE_TYPES.get(tier).get(), ThrownItemRenderer::new);
-                }
-
-                EntityRenderers.register(CCEntity.THROWING_BONE.get(), ThrownItemRenderer::new);
-                EntityRenderers.register(CCEntity.THROWING_BLOOD_BONE.get(), ThrownItemRenderer::new);
-                EntityRenderers.register(CCEntity.THROWING_GOLDEN_BONE.get(), ThrownItemRenderer::new);
-                EntityRenderers.register(CCEntity.SCYTHE_PROJECTILE.get(), ThrownItemRenderer::new);
 
                 EntityRenderers.register(CCEntity.HOLY_FIRE.get(), NoopRenderer::new);
-
-                // Fluids Render
-//                ItemBlockRenderTypes.setRenderLayer(CCFluid.SOURCE_BLOOD.get(), RenderType.translucent());
-//                ItemBlockRenderTypes.setRenderLayer(CCFluid.FLOWING_BLOOD.get(), RenderType.translucent());
-//
-//                ItemBlockRenderTypes.setRenderLayer(CCFluid.SOURCE_HOLY_WATER.get(), RenderType.translucent());
-//                ItemBlockRenderTypes.setRenderLayer(CCFluid.FLOWING_HOLY_WATER.get(), RenderType.translucent());
 
                 Minecraft.getInstance().getItemColors().register((pStack, pTintIndex) -> {
                     if ((pStack.getItem() == CCItem.BLOOD_BUCKET.get() || pStack.getItem() == CCBlock.BLOOD_BLOCK.get().asItem()) && pTintIndex == 1) {
@@ -168,7 +193,6 @@ public class CursedCastleMod {
 
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-//            event.registerLayerDefinition(CrucifixModel.CRUCIFIX_LAYER, CrucifixModel::createBodyLayer);
             event.registerLayerDefinition(DaggerModel.DAGGER_LAYER, DaggerModel::createBodyLayer);
             event.registerLayerDefinition(FamiliarBatModel.FAMILIAR_BAT_LAYER, FamiliarBatModel::createBodyLayer);
             event.registerLayerDefinition(HarpyFeatherModel.HARPY_FEATHER_LAYER, HarpyFeatherModel::createBodyLayer);

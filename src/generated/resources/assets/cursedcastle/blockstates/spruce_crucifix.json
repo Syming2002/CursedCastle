@@ -1,18 +1,33 @@
 {
   "variants": {
-    "facing=east": {
-      "model": "cursedcastle:block/spruce_crucifix",
+    "facing=east,half=lower": {
+      "model": "cursedcastle:block/spruce_crucifix_bottom",
       "y": 90
     },
-    "facing=north": {
-      "model": "cursedcastle:block/spruce_crucifix"
+    "facing=east,half=upper": {
+      "model": "cursedcastle:block/spruce_crucifix_top",
+      "y": 90
     },
-    "facing=south": {
-      "model": "cursedcastle:block/spruce_crucifix",
+    "facing=north,half=lower": {
+      "model": "cursedcastle:block/spruce_crucifix_bottom"
+    },
+    "facing=north,half=upper": {
+      "model": "cursedcastle:block/spruce_crucifix_top"
+    },
+    "facing=south,half=lower": {
+      "model": "cursedcastle:block/spruce_crucifix_bottom",
       "y": 180
     },
-    "facing=west": {
-      "model": "cursedcastle:block/spruce_crucifix",
+    "facing=south,half=upper": {
+      "model": "cursedcastle:block/spruce_crucifix_top",
+      "y": 180
+    },
+    "facing=west,half=lower": {
+      "model": "cursedcastle:block/spruce_crucifix_bottom",
+      "y": 270
+    },
+    "facing=west,half=upper": {
+      "model": "cursedcastle:block/spruce_crucifix_top",
       "y": 270
     }
   }

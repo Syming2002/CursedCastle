@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "cursedcastle:golden_bone"
+    }
+  ],
+  "result": {
+    "item": "minecraft:gold_nugget",
+    "count": 4
+  },
+  "show_notification": true
+}

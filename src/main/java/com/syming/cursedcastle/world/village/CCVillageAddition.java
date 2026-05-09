@@ -77,6 +77,9 @@ public class CCVillageAddition {
         StructureTemplate templateJungle = getTemplate(server, "jungle");
         StructureTemplate templateCherry = getTemplate(server, "cherry");
         StructureTemplate templateSwamp = getTemplate(server, "swamp");
+        StructureTemplate templateBamboo = getTemplate(server, "bamboo");
+        StructureTemplate templateBadlands = getTemplate(server, "badlands");
+        StructureTemplate templateDarkForest = getTemplate(server, "darkforest");
 
         Iterator<PendingChurch> iterator = pendingChurches.iterator();
         while (iterator.hasNext()) {
@@ -93,6 +96,9 @@ public class CCVillageAddition {
                 case JUNGLE -> templateJungle;
                 case CHERRY -> templateCherry;
                 case SWAMP -> templateSwamp;
+                case BAMBOO -> templateBamboo;
+                case BADLANDS -> templateBadlands;
+                case DARK_FOREST -> templateDarkForest;
                 default -> templatePlains;
             };
 
@@ -134,24 +140,29 @@ public class CCVillageAddition {
         placeBigChurchStructure(level, offset, center, churchType, template);
     }
 
-    private static BlockPos getSurfacePos(ServerLevel level, BlockPos pos, StructureTemplate template) {
-        int x = pos.getX();
-        int z = pos.getZ();
+    private static BlockPos getSurfacePos(ServerLevel level, BlockPos origin, StructureTemplate template) {
+        Vec3i size = template.getSize();
 
-        int y = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
+        int startX = origin.getX();
+        int startZ = origin.getZ();
 
-        while (y > level.getMinBuildHeight()) {
-            BlockPos below = new BlockPos(x, y - 1, z);
-            BlockState stateBelow = level.getBlockState(below);
-            BlockState stateHere = level.getBlockState(new BlockPos(x, y, z));
+        int maxY = level.getMaxBuildHeight();
 
-            if (!stateBelow.isAir() && stateHere.isAir()) {
-                break;
+        for (int x = 0; x < size.getX(); x++) {
+            for (int z = 0; z < size.getZ(); z++) {
+                int worldX = startX + x;
+                int worldZ = startZ + z;
+
+                int surfaceY = level.getHeight(
+                        Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                        worldX,
+                        worldZ
+                );
+
+                maxY = Math.min(maxY, surfaceY);
             }
-            y--;
         }
-
-        return new BlockPos(x, y, z);
+        return new BlockPos(startX, maxY, startZ);
     }
 
     private static void placeBigChurchStructure(ServerLevel level, BlockPos pos, BlockPos villageCenter, ChurchType churchType, StructureTemplate template) {
@@ -208,7 +219,8 @@ public class CCVillageAddition {
                 BlockState support = null;
 
                 switch (churchType) {
-                    case PLAINS, SAVANNA, TAIGA, SNOWY, JUNGLE, CHERRY, SWAMP -> support = rand.nextFloat() < 0.5F ? Blocks.MOSSY_COBBLESTONE.defaultBlockState() : Blocks.COBBLESTONE.defaultBlockState();
+                    case BADLANDS -> support = Blocks.TERRACOTTA.defaultBlockState();
+                    case BAMBOO, CHERRY, DARK_FOREST, JUNGLE, PLAINS, SAVANNA, SNOWY, SWAMP, TAIGA  -> support = rand.nextFloat() < 0.5F ? Blocks.MOSSY_COBBLESTONE.defaultBlockState() : Blocks.COBBLESTONE.defaultBlockState();
                     case DESERT -> support = Blocks.SANDSTONE.defaultBlockState();
                 }
 
@@ -220,14 +232,18 @@ public class CCVillageAddition {
     }
 
     private static boolean isFoundationBlock(BlockState state, ChurchType churchType) {
-        if (churchType == ChurchType.PLAINS
-                || churchType == ChurchType.SAVANNA
-                || churchType == ChurchType.TAIGA
-                || churchType == ChurchType.SNOWY
-                || churchType == ChurchType.JUNGLE
+        if (churchType == ChurchType.BAMBOO
                 || churchType == ChurchType.CHERRY
-                || churchType == ChurchType.SWAMP) {
+                || churchType == ChurchType.DARK_FOREST
+                || churchType == ChurchType.JUNGLE
+                || churchType == ChurchType.PLAINS
+                || churchType == ChurchType.SAVANNA
+                || churchType == ChurchType.SNOWY
+                || churchType == ChurchType.SWAMP
+                || churchType == ChurchType.TAIGA) {
             return state.is(Blocks.COBBLESTONE) || state.is(Blocks.MOSSY_COBBLESTONE) || state.is(Blocks.COBBLESTONE_STAIRS) || state.is(Blocks.MOSSY_COBBLESTONE_STAIRS);
+        } else if (churchType == ChurchType.BADLANDS) {
+            return state.is(Blocks.TERRACOTTA) || state.is(Blocks.SMOOTH_RED_SANDSTONE_STAIRS);
         } else if (churchType == ChurchType.DESERT) {
             return state.is(Blocks.SANDSTONE) || state.is(Blocks.SMOOTH_SANDSTONE_STAIRS);
         }
@@ -292,6 +308,9 @@ public class CCVillageAddition {
             String type = path.substring("village_".length());
 
             return switch (type) {
+                case "badlands" -> ChurchType.BADLANDS;
+                case "bamboo" -> ChurchType.BAMBOO;
+                case "dark_forest" -> ChurchType.DARK_FOREST;
                 case "jungle" -> ChurchType.JUNGLE;
                 case "cherry" -> ChurchType.CHERRY;
                 case "swamp" -> ChurchType.SWAMP;
@@ -315,13 +334,16 @@ public class CCVillageAddition {
     }
 
     private enum ChurchType {
-        PLAINS,
-        DESERT,
-        SAVANNA,
-        TAIGA,
-        SNOWY,
-        JUNGLE,
+        BADLANDS,
+        BAMBOO,
         CHERRY,
-        SWAMP
+        DARK_FOREST,
+        DESERT,
+        JUNGLE,
+        PLAINS,
+        SAVANNA,
+        SNOWY,
+        SWAMP,
+        TAIGA,
     }
 }

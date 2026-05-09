@@ -25,7 +25,7 @@ public class ShadeModel<T extends ShadeEntity> extends AdvancedEntityModel<T> {
 
     public ShadeModel() {
         this.texWidth = 64;
-        this.texHeight = 64;
+        this.texHeight = 32;
 
         this.shade = new AdvancedModelBox(this,"shade");
         this.shade.setPos(0.0F, 24.0F, 0.0F);
@@ -41,14 +41,14 @@ public class ShadeModel<T extends ShadeEntity> extends AdvancedEntityModel<T> {
         this.body.setPos(-4.0F, 12.0F, -2.0F);
         this.body.setRotationPoint(0.0F, -18.0F, 0.0F);
         this.shade.addChild(this.body);
-        this.body.setTextureOffset(0, 16)
+        this.body.setTextureOffset(14, 16)
                 .addBox(-4.0F, -6.0F, -2.0F, 8.0F, 12.0F, 4.0F);
 
         this.rightArm = new AdvancedModelBox(this, "rightArm");
         this.rightArm.setPos(4.0F, 12.0F, -2.0F);
         this.rightArm.setRotationPoint(-5.5F, -22.5F, 0.0F);
         this.shade.addChild(this.rightArm);
-        this.rightArm.setTextureOffset(32, 0)
+        this.rightArm.setTextureOffset(0, 16)
                 .addBox(-1.5F, -1.5F, -2.0F, 3.0F, 12.0F, 4.0F);
 
         this.rightArm.rotateAngleZ = 1.5708F;
@@ -57,8 +57,8 @@ public class ShadeModel<T extends ShadeEntity> extends AdvancedEntityModel<T> {
         this.leftArm.setPos(-7.0F, 12.0F, -2.0F);
         this.leftArm.setRotationPoint(5.5F, -22.5F, 0.0F);
         this.shade.addChild(this.leftArm);
-        this.leftArm.setTextureOffset(16, 32)
-                .addBox(-1.5F, -1.5F, -2.0F, 3.0F, 12.0F, 4.0F);
+        this.leftArm.setTextureOffset(0, 16)
+                .addBox(-1.5F, -1.5F, -2.0F, 3.0F, 12.0F, 4.0F, true);
 
         this.leftArm.rotateAngleZ = -1.5708F;
 
@@ -66,15 +66,15 @@ public class ShadeModel<T extends ShadeEntity> extends AdvancedEntityModel<T> {
         this.rightLeg.setPos(0.0F, 0.0F, -2.0F);
         this.rightLeg.setRotationPoint(-2.0F, -10.0F, 0.0F);
         this.shade.addChild(this.rightLeg);
-        this.rightLeg.setTextureOffset(24, 16)
+        this.rightLeg.setTextureOffset(38, 16)
                 .addBox(-2.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F);
 
         this.leftLeg = new AdvancedModelBox(this, "leftLeg");
         this.leftLeg.setPos(-4.0F, 0.0F, -2.0F);
         this.leftLeg.setRotationPoint(2.0F, -10.0F, 0.0F);
         this.shade.addChild(this.leftLeg);
-        this.leftLeg.setTextureOffset(0, 32)
-                .addBox(-2.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F);
+        this.leftLeg.setTextureOffset(38, 16)
+                .addBox(-2.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, true);
 
         this.animator = ModelAnimator.create();
         updateDefaultPose();
