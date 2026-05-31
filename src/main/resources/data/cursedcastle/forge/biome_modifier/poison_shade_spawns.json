@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": ["minecraft:jungle", "minecraft:sparse_jungle", "minecraft:bamboo_jungle"],
+  "spawners": {
+    "type": "cursedcastle:poison_shade",
+    "weight": 100,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}

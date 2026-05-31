@@ -1,6 +1,10 @@
 package com.syming.cursedcastle.item.projectile.subweapon;
 
 import com.syming.cursedcastle.entity.projectile.subweapon.HolyWaterEntity;
+import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
+import com.syming.cursedcastle.mp.PlayerMP;
+import com.syming.cursedcastle.mp.PlayerMPProvider;
+import com.syming.cursedcastle.util.SpellBookUtil;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -21,11 +25,22 @@ public class HolyWaterItem extends Item {
         ItemStack throwStack = pPlayer.getItemInHand(pUsedHand);
         pLevel.playSound(pPlayer, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SPLASH_POTION_THROW, SoundSource.MASTER, 0.5F, 1.0F);
         if (!pLevel.isClientSide()) {
-            HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
-            holyWater.setItem(throwStack);
-            holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), -20.0F, 0.5F, 1.0F);
-            pLevel.addFreshEntity(holyWater);
-            pPlayer.getCooldowns().addCooldown(this, 40);
+
+            if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.WIND, pPlayer)) {
+                HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
+                holyWater.setOwner(pPlayer);
+                holyWater.setItem(throwStack);
+                holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), -20.0F, 0.5F, 1.0F);
+                pLevel.addFreshEntity(holyWater);
+                PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
+                playerMP.removeMP(50);
+            } else {
+                HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
+                holyWater.setItem(throwStack);
+                holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), -20.0F, 0.5F, 1.0F);
+                pLevel.addFreshEntity(holyWater);
+                pPlayer.getCooldowns().addCooldown(this, 40);
+            }
         }
         pPlayer.awardStat(Stats.ITEM_USED.get(this));
         if (!pPlayer.getAbilities().instabuild) {

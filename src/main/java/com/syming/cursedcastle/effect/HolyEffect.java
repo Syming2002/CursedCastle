@@ -2,10 +2,13 @@ package com.syming.cursedcastle.effect;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.UUID;
@@ -29,8 +32,8 @@ public class HolyEffect extends MobEffect {
             }
             addAttributeModifier(Attributes.ATTACK_SPEED, ATTACK_SPEED_UUID.toString(), 0.4D, AttributeModifier.Operation.ADDITION);
         }
-        if (pLivingEntity instanceof Mob mob) {
-            mob.setSecondsOnFire(30);
+        if (pLivingEntity instanceof Monster monster) {
+            monster.addEffect(new MobEffectInstance(MobEffects.WITHER, 20, 2, false, true));
         }
     }
 

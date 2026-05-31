@@ -3,10 +3,13 @@ package com.syming.cursedcastle.entity.projectile.subweapon;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.entity.magic.HolyFireEntity;
 import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
 import com.syming.cursedcastle.sound.CCSound;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.projectile.CCThrowableWeapon;
+import com.syming.cursedcastle.util.SpellBookUtil;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -20,8 +23,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+
+import java.util.UUID;
 
 public class HolyWaterEntity extends CCThrowableWeapon {
+
+    public static int rainingCooldown = 0;
+    public static final int RAINING_COOLDOWN = 200;
+    public static UUID rainCaster;
+    public static int holyRainTicks = 0;
+
     public HolyWaterEntity(Level pLevel) {
         super(CCEntity.HOLY_WATER.get(), pLevel);
     }
@@ -39,18 +51,42 @@ public class HolyWaterEntity extends CCThrowableWeapon {
     }
 
     @Override
+    public void onHit(HitResult pResult) {
+        super.onHit(pResult);
+        if (getOwner() != null) {
+            if (getOwner() instanceof Player player) {
+                if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.WIND, player)) {
+                    if (player.getServer() != null) {
+                        rainCaster = player.getUUID();
+
+                        holyRainTicks = RAINING_COOLDOWN;
+
+                        player.getServer().overworld().setWeatherParameters(0, holyRainTicks, true, false);
+//                        player.getServer().overworld().setRainLevel(1.0F);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
     protected void onHitBlock(BlockHitResult pResult) {
         super.onHitBlock(pResult);
         if (getOwner() != null) {
-            if (!this.level().isClientSide()) {
-                HolyFireEntity holyFire = new HolyFireEntity(this.level(), this.getX(), this.getY(), this.getZ());
-                this.level().addFreshEntity(holyFire);
-                this.level().playSound(null, pResult.getBlockPos(), SoundEvents.SPLASH_POTION_BREAK, SoundSource.NEUTRAL, 1.0F, 1.0F);
-                discard();
-                System.out.println("Holy fire is set");
+            if (getOwner() instanceof Player player) {
+                if (!this.level().isClientSide()) {
+                    HolyFireEntity holyFire = new HolyFireEntity(this.level(), this.getX(), this.getY(), this.getZ());
+                    this.level().addFreshEntity(holyFire);
+                    this.level().playSound(null, pResult.getBlockPos(), SoundEvents.SPLASH_POTION_BREAK, SoundSource.NEUTRAL, 1.0F, 1.0F);
+                    discard();
+                }
             }
         }
-        System.out.println("Block is Hit");
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
     }
 
     @Override

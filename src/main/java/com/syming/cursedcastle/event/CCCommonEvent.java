@@ -1,6 +1,7 @@
 package com.syming.cursedcastle.event;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.mob.HarpyEntity;
 import com.syming.cursedcastle.entity.mob.bat.VampireBatEntity;
@@ -10,26 +11,35 @@ import com.syming.cursedcastle.entity.mob.boss.MedusaEntity;
 import com.syming.cursedcastle.entity.mob.boss.RusalkaEntity;
 import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
 import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
+import com.syming.cursedcastle.entity.mob.shade.FrozenShadeEntity;
 import com.syming.cursedcastle.entity.mob.shade.ShadeEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.ClearBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.GoldenSkeleton;
 import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.zombie.CCZombieEntity;
+import com.syming.cursedcastle.entity.projectile.subweapon.HolyWaterEntity;
 import com.syming.cursedcastle.entity.villager.CCVillager;
 import com.syming.cursedcastle.mp.PlayerMP;
 import com.syming.cursedcastle.mp.PlayerMPProvider;
 import com.syming.cursedcastle.network.CCPacketHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
@@ -73,5 +83,11 @@ public class CCCommonEvent {
         event.put(CCEntity.THROWING_BONE_SKELETON.get(), ThrowingBoneSkeletonEntity.createMobAttributes().build());
         event.put(CCEntity.THUNDER_SHADE.get(), ShadeEntity.createMobAttributes().build());
         event.put(CCEntity.VAMPIRE_BAT.get(), VampireBatEntity.createMobAttributes().build());
+    }
+
+    @SubscribeEvent
+    public static void entitySpawnsPlacement(SpawnPlacementRegisterEvent event) {
+        event.register(CCEntity.FROZEN_SHADE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ShadeEntity::checkShadeSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        event.register(CCEntity.POISON_SHADE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ShadeEntity::checkShadeSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 }

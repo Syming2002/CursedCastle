@@ -3,6 +3,7 @@ package com.syming.cursedcastle.entity.mob.shade;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.damagetype.CCDamageType;
+import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.magic.IceBreathEntity;
 import com.syming.cursedcastle.entity.magic.IceSpikeEntity;
 import com.syming.cursedcastle.item.CCItem;
@@ -14,22 +15,29 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.minecraft.world.entity.monster.Monster.*;
 
 public class FrozenShadeEntity extends ShadeEntity {
 

@@ -13,6 +13,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -30,6 +32,7 @@ public class DaggerEntity extends AbstractArrow {
 
     public static final EntityDataAccessor<ItemStack> ITEM_STACK = SynchedEntityData.defineId(DaggerEntity.class, EntityDataSerializers.ITEM_STACK);
     private Tier tier;
+    private boolean isLaunched = false;
 
     public DaggerEntity(Level pLevel, Tier pTier) {
         super(CCEntity.DAGGER_TYPES.get(pTier).get(), pLevel);
@@ -73,25 +76,58 @@ public class DaggerEntity extends AbstractArrow {
     public void tick() {
         super.tick();
         if (getOwner() != null) {
+
+
+
             if (getOwner() instanceof Player player) {
-                if (onGround() && (!player.isCreative() || !player.isSpectator())) {
+
+
+                if (onGround() && (!player.isCreative() || !player.isSpectator()) && !(SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, player)
+                        || SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, player)
+                        || SpellBookUtil.isWearingSpellBook(SpellBookElementType.WIND, player))) {
                     this.pickup = Pickup.ALLOWED;
                 }
-            }
 
-            if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, (Player) getOwner())) {
-                if (this.level().isClientSide()) {
-                    double offsetX = (this.random.nextDouble() - 0.5D) * 0.5D;
-                    double offsetY = this.random.nextDouble() * 0.02D;
-                    double offsetZ = (this.random.nextDouble() - 0.5D) * 0.5D;
+                if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, player)) {
+                    if (this.level().isClientSide()) {
+                        double offsetX = (this.random.nextDouble() - 0.5D) * 0.5D;
+                        double offsetY = this.random.nextDouble() * 0.02D;
+                        double offsetZ = (this.random.nextDouble() - 0.5D) * 0.5D;
 
-                    double particleX = this.getX() + offsetX;
-                    double particleY = this.getY() + offsetY;
-                    double particleZ = this.getZ() + offsetZ;
+                        double particleX = this.getX() + offsetX;
+                        double particleY = this.getY() + offsetY;
+                        double particleZ = this.getZ() + offsetZ;
 
-                    double motionY = 0.02D + this.random.nextDouble() * 0.02D;
+                        double motionY = 0.02D + this.random.nextDouble() * 0.02D;
 
-                    this.level().addParticle(ParticleTypes.FLAME, particleX, particleY, particleZ, 0.0D, motionY, 0.0D);
+                        this.level().addParticle(ParticleTypes.FLAME, particleX, particleY, particleZ, 0.0D, motionY, 0.0D);
+                    }
+                } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, player)) {
+                    if (this.level().isClientSide()) {
+                        double offsetX = (this.random.nextDouble() - 0.5D) * 0.5D;
+                        double offsetY = this.random.nextDouble() * 0.02D;
+                        double offsetZ = (this.random.nextDouble() - 0.5D) * 0.5D;
+
+                        double particleX = this.getX() + offsetX;
+                        double particleY = this.getY() + offsetY;
+                        double particleZ = this.getZ() + offsetZ;
+
+                        double motionY = 0.02D + this.random.nextDouble() * 0.02D;
+
+                        this.level().addParticle(ParticleTypes.SNOWFLAKE, particleX, particleY, particleZ, 0.0D, motionY, 0.0D);
+                    }
+                } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.WIND, player)) {
+                    if (!this.isLaunched) {
+                        if (this.tickCount <= 1 && !onGround()) {
+                            double posX = player.getX();
+                            double posY = player.getY() + player.getEyeHeight();
+                            double posZ = player.getZ();
+
+                            setPos(posX, posY, posZ);
+                        } else {
+                            this.isLaunched = true;
+                        }
+                    }
                 }
             }
         }
@@ -102,9 +138,11 @@ public class DaggerEntity extends AbstractArrow {
         super.onHitEntity(pResult);
 
         if (getOwner() != null) {
-            if (pResult.getEntity() != getOwner()) {
+            if (pResult.getEntity() != getOwner() && pResult.getEntity() instanceof LivingEntity living) {
                 if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, (Player) getOwner())) {
-                    pResult.getEntity().setSecondsOnFire(5);
+                    living.setSecondsOnFire(5);
+                } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, (Player) getOwner())) {
+                    living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1, false, true));
                 }
             }
         }
@@ -120,7 +158,7 @@ public class DaggerEntity extends AbstractArrow {
     @Override
     public void playerTouch(Player pPlayer) {
 
-        if (onGround() && (!pPlayer.isCreative() || !pPlayer.isSpectator())) {
+        if (onGround() && (!pPlayer.isCreative() || !pPlayer.isSpectator()) && !(SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, pPlayer) || SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, pPlayer) || SpellBookUtil.isWearingSpellBook(SpellBookElementType.WIND, pPlayer))) {
             ItemStack stack = getItemRaw();
 
             if (!this.level().isClientSide()) {
@@ -228,6 +266,6 @@ public class DaggerEntity extends AbstractArrow {
 
     @Override
     public boolean isNoGravity() {
-        return SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, (Player) getOwner());
+        return SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, (Player) getOwner()) || SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, (Player) getOwner());
     }
 }

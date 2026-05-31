@@ -112,6 +112,34 @@
           ]
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "cursedcastle:frozen_heart",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 0,
+                "max": 1
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "minecraft:killed_by_player"
+            },
+            {
+              "condition": "minecraft:random_chance_with_looting",
+              "chance": 0.05,
+              "looting_multiplier": 0.1
+            }
+          ]
+        }
+      ]
     }
   ]
 }

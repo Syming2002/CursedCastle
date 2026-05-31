@@ -1,6 +1,8 @@
 package com.syming.cursedcastle.event;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.effect.CCEffect;
+import com.syming.cursedcastle.entity.projectile.subweapon.HolyWaterEntity;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.mp.PlayerMP;
@@ -10,14 +12,19 @@ import com.syming.cursedcastle.network.CCMPData;
 import com.syming.cursedcastle.network.CCPacketHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
@@ -32,10 +39,6 @@ import java.util.List;
 public class CCCommonEventForge {
 
     private static final List<ScheduledTask> tasks = new ArrayList<>();
-
-    public static void schedule(Runnable task, int delay) {
-        tasks.add(new ScheduledTask(task, delay));
-    }
 
     @SubscribeEvent
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
@@ -105,6 +108,32 @@ public class CCCommonEventForge {
                 task.runnable.run();
                 iterator.remove();
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRainingEvent(TickEvent.LevelTickEvent event) {
+        Level level = event.level;
+
+        if (level.isClientSide()) return;
+
+        if (HolyWaterEntity.holyRainTicks > 0) {
+            HolyWaterEntity.holyRainTicks--;
+        }
+
+        if (HolyWaterEntity.holyRainTicks <= 0) {
+            HolyWaterEntity.rainCaster = null;
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRainingEffectEvent(LivingEvent.LivingTickEvent event) {
+        LivingEntity living = event.getEntity();
+
+        if (living.level().isClientSide()) return;
+
+        if (living instanceof Monster monster && monster.level().isRainingAt(monster.blockPosition()) && HolyWaterEntity.rainCaster != null) {
+            monster.addEffect(new MobEffectInstance(CCEffect.HOLY.get(), HolyWaterEntity.RAINING_COOLDOWN, 1, false, false, true));
         }
     }
 

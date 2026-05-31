@@ -1,5 +1,6 @@
 package com.syming.cursedcastle.client.model;
 
+import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.github.alexthe666.citadel.client.model.AdvancedEntityModel;
 import com.github.alexthe666.citadel.client.model.AdvancedModelBox;
 import com.github.alexthe666.citadel.client.model.ModelAnimator;
@@ -131,15 +132,25 @@ public class DraculaModel extends AdvancedEntityModel<DraculaEntity> {
         animate(dracula, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
         faceTarget(pNetHeadYaw, pHeadPitch, 1.0F, this.head, this.headWear);
 
-        float f = 1.0F;
+        if (dracula.getAnimation() == IAnimatedEntity.NO_ANIMATION || dracula.hurtMarked) {
+            float f = 1.0F;
 
-        this.rightArm.rotateAngleX = Mth.cos(pLimbSwing * 0.6662F + (float)Math.PI) * 2.0F * pLimbSwingAmount * 0.5F / f;
-        this.leftArm.rotateAngleX = Mth.cos(pLimbSwing * 0.6662F) * 2.0F * pLimbSwingAmount * 0.5F / f;
-        this.rightArm.rotateAngleZ = 0.0F;
-        this.leftArm.rotateAngleZ = 0.0F;
+            this.rightArm.rotateAngleX = Mth.cos(pLimbSwing * 0.6662F + (float) Math.PI) * 2.0F * pLimbSwingAmount * 0.5F / f;
+            this.leftArm.rotateAngleX = Mth.cos(pLimbSwing * 0.6662F) * 2.0F * pLimbSwingAmount * 0.5F / f;
+            this.rightArm.rotateAngleZ = 0.0F;
+            this.leftArm.rotateAngleZ = 0.0F;
 
-        this.rightArm.rotateAngleY = 0.0F;
-        this.leftArm.rotateAngleY = 0.0F;
+            this.rightArm.rotateAngleY = 0.0F;
+            this.leftArm.rotateAngleY = 0.0F;
+
+            this.rightArmWear.rotateAngleX = Mth.cos(pLimbSwing * 0.6662F + (float) Math.PI) * 2.0F * pLimbSwingAmount * 0.5F / f;
+            this.leftArmWear.rotateAngleX = Mth.cos(pLimbSwing * 0.6662F) * 2.0F * pLimbSwingAmount * 0.5F / f;
+            this.rightArmWear.rotateAngleZ = 0.0F;
+            this.leftArmWear.rotateAngleZ = 0.0F;
+
+            this.rightArmWear.rotateAngleY = 0.0F;
+            this.leftArmWear.rotateAngleY = 0.0F;
+        }
     }
 
     public void animate(DraculaEntity dracula, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {

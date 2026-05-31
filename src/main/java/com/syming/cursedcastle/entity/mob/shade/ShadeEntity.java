@@ -4,9 +4,12 @@ import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -19,7 +22,11 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
+
+import static net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn;
 
 public abstract class ShadeEntity extends FlyingMob implements IAnimatedEntity, Enemy, ILivingEntityStrengthWeakness, RangedAttackMob {
     private static final EntityDataAccessor<Integer> TARGET_ID = SynchedEntityData.defineId(ShadeEntity.class, EntityDataSerializers.INT);
@@ -156,5 +163,14 @@ public abstract class ShadeEntity extends FlyingMob implements IAnimatedEntity, 
             shade.heal(2.0F);
             this.healTickCounter = 0;
         }
+    }
+
+    public static boolean checkShadeSpawnRules(EntityType<? extends ShadeEntity> pType, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        BlockPos blockpos = pPos.below();
+        return pSpawnType == MobSpawnType.SPAWNER || pLevel.getBlockState(blockpos).isValidSpawn(pLevel, blockpos, pType) && checkMonsterSpawnRules(pType, (ServerLevelAccessor) pLevel, pSpawnType, pPos, pRandom);
+    }
+
+    public static boolean checkMonsterSpawnRules(EntityType<? extends ShadeEntity> pType, ServerLevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        return pLevel.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(pLevel, pPos, pRandom) && checkMobSpawnRules(pType, pLevel, pSpawnType, pPos, pRandom);
     }
 }

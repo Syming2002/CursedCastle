@@ -6,6 +6,7 @@ import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.item.head.CCHeadItem;
 import com.syming.cursedcastle.item.projectile.ScytheProjectileItem;
 import com.syming.cursedcastle.item.projectile.subweapon.*;
+import com.syming.cursedcastle.item.relic.FrozenHeartItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.soul.SoulItem;
 import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
@@ -381,16 +382,10 @@ public class CCItem {
 
     public static final RegistryObject<Item> DEATH_SCYTHE = ITEMS.register("death_scythe", () -> new DeathScytheItem(new Item.Properties().stacksTo(1), 8, -3.6F, 5.0F));
 
-    // Crucifixes
 
-//    public static final Map<WoodType, RegistryObject<CrucifixItem>> CRUCIFIX_TYPES = new HashMap<>();
-//
-//    static {
-//        for (WoodType woodType : WoodType.values().toList()) {
-//            CRUCIFIX_TYPES.put(woodType, ITEMS.register(woodType.name() + '_' + "crucifix", () -> new CrucifixItem(woodType, new Item.Properties().stacksTo(1))));
-//        }
-//    }
+    // Relics
 
+    public static final RegistryObject<Item> FROZEN_HEART = ITEMS.register("frozen_heart", () -> new FrozenHeartItem(new Item.Properties()));
 
     // Souls
 
