@@ -23,7 +23,7 @@ public class DraculaRenderer extends MobRenderer<DraculaEntity, DraculaModel> {
 
 
     public DraculaRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new DraculaModel(), 0.5F);
+        super(pContext, new DraculaModel(pContext.bakeLayer(DraculaModel.DRACULA_LAYER)), 0.5F);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class DraculaRenderer extends MobRenderer<DraculaEntity, DraculaModel> {
                 && ((pEntity.getTeleportTick() >= 50 && pEntity.getTeleportTick() < 70)
                 || (pEntity.getTeleportTick() >= 100 && pEntity.getTeleportTick() < 120))) {
             renderLaserBeam(pEntity, pPoseStack, pBuffer);
-            System.out.println("Rendering Laser Beam");
+//            System.out.println("Rendering Laser Beam");
         }
     }
 

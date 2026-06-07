@@ -21,6 +21,7 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.ticks.ScheduledTick;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,6 +123,7 @@ public class DaggerItem extends Item {
                     for (int i = 0; i < 20; i++) {
                         DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
 
+
                         if (dagger.isAlive()) {
                             executorService.schedule(() -> {
                                 pLevel.addFreshEntity(dagger);
@@ -132,9 +134,10 @@ public class DaggerItem extends Item {
                                         2.5F,
                                         0.8F
                                 );
-                                dagger.hasImpulse = true;
+
                             }, 100 * i, TimeUnit.MILLISECONDS);
                         }
+                        dagger.hasImpulse = true;
                     }
                     PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
                     playerMP.removeMP(40);

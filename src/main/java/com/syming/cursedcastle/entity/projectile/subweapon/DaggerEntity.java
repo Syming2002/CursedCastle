@@ -76,9 +76,6 @@ public class DaggerEntity extends AbstractArrow {
     public void tick() {
         super.tick();
         if (getOwner() != null) {
-
-
-
             if (getOwner() instanceof Player player) {
 
 

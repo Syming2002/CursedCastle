@@ -44,18 +44,20 @@ public class CCBlockStateProvider extends BlockStateProvider {
         skullWall(CCBlock.DRACULA_WALL_HEAD);
 
         for (WoodType woodType : WoodType.values().toList()) {
-            if (woodType == WoodType.OAK
-                    || woodType == WoodType.SPRUCE
-                    || woodType == WoodType.BIRCH
-                    || woodType == WoodType.JUNGLE
-                    || woodType == WoodType.ACACIA
-                    || woodType == WoodType.DARK_OAK
-                    || woodType == WoodType.CRIMSON
-                    || woodType == WoodType.WARPED
-                    || woodType == WoodType.MANGROVE
-                    || woodType == WoodType.CHERRY
-                    || woodType == WoodType.BAMBOO) {
-                crucifixBlock(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get(), woodType);
+            if (woodType != null) {
+                if (woodType == WoodType.OAK
+                        || woodType == WoodType.SPRUCE
+                        || woodType == WoodType.BIRCH
+                        || woodType == WoodType.JUNGLE
+                        || woodType == WoodType.ACACIA
+                        || woodType == WoodType.DARK_OAK
+                        || woodType == WoodType.CRIMSON
+                        || woodType == WoodType.WARPED
+                        || woodType == WoodType.MANGROVE
+                        || woodType == WoodType.CHERRY
+                        || woodType == WoodType.BAMBOO) {
+                    crucifixBlock(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get(), woodType);
+                }
             }
         }
     }

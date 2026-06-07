@@ -285,6 +285,9 @@ dependencies {
 
     implementation fg.deobf("curse.maven:just-enough-professions-jep-417645:4587024")
 
+    implementation fg.deobf("curse.maven:mob-amputation-reborn-1528056:8081780")
+
+
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

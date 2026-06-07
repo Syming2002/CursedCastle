@@ -8,6 +8,7 @@ import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
 import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.CCEntity;
+import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
 import com.syming.cursedcastle.entity.projectile.ScytheProjectileEntity;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.util.ColorUtil;
@@ -15,6 +16,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,6 +38,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
@@ -47,20 +52,42 @@ import org.jetbrains.annotations.Nullable;
 import java.util.EnumSet;
 import java.util.List;
 
-public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntity, ICustomBossBar, ILivingEntityStrengthWeakness, RangedAttackMob {
-    private Animation animation;
+public class GrimReaperEntity extends CCBossEntity implements /*, IAnimatedEntity,*/ ICustomBossBar, ILivingEntityStrengthWeakness, RangedAttackMob {
+//    private Animation animation;
+//
+//    public static final Animation MELEE_ATTACK_ANIMATION = Animation.create(35);
+//    private int meleeAttackCooldownTick = 0;
+//    public static final int MELEE_ATTACK_COOLDOWN = 40;
+//
+//    public static final Animation SCYTHE_ATTACK_ANIMATION = Animation.create(260);
+//    private int scytheAttackCooldownTick = 0;
+//    public static final int SCYTHE_PROJECTILE_ATTACK_COOLDOWN = 100;
+//
+//    private static final Animation[] ANIMATIONS = {MELEE_ATTACK_ANIMATION, SCYTHE_ATTACK_ANIMATION};
+//
+//    private int animationTick;
 
-    public static final Animation MELEE_ATTACK_ANIMATION = Animation.create(35);
-    private int meleeAttackCooldownTick = 0;
-    public static final int MELEE_ATTACK_COOLDOWN = 40;
+    private static final EntityDataAccessor<Byte> ANIMATION = SynchedEntityData.defineId(DraculaEntity.class, EntityDataSerializers.BYTE);
 
-    public static final Animation SCYTHE_ATTACK_ANIMATION = Animation.create(260);
-    private int scytheAttackCooldownTick = 0;
-    public static final int SCYTHE_PROJECTILE_ATTACK_COOLDOWN = 100;
+    public static final byte IDLE_ANIMATION = 0;
+    public static final float IDLE_ANIMATION_LENGTH_IN_SECONDS = 2.0F;
+    public static final int IDLE_ANIMATION_LENGTH_IN_TICKS = (int) (IDLE_ANIMATION_LENGTH_IN_SECONDS * 20);
 
-    private static final Animation[] ANIMATIONS = {MELEE_ATTACK_ANIMATION, SCYTHE_ATTACK_ANIMATION};
+    public static final byte FAST_MELEE_ATTACK_ANIMATION = 1;
+    public static final float FAST_MELEE_ATTACK_ANIMATION_LENGTH_IN_SECONDS = 1.75F;
+    public static final int FAST_MELEE_ATTACK_ANIMATION_LENGTH_IN_TICKS = (int) (FAST_MELEE_ATTACK_ANIMATION_LENGTH_IN_SECONDS * 20);
 
-    private int animationTick;
+    public static final byte SCYTHE_PROJECTILE_ATTACK_ANIMATION = 2;
+    public static final float SCYTHE_PROJECTILE_ATTACK_ANIMATION_LENGTH_IN_SECONDS = 13.0F;
+    public static final int SCYTHE_PROJECTILE_ATTACK_ANIMATION_LENGTH_IN_TICKS = (int) (SCYTHE_PROJECTILE_ATTACK_ANIMATION_LENGTH_IN_SECONDS * 20);
+
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState fastMeleeAttackAnimationState = new AnimationState();
+    public final AnimationState scytheProjectileAttackAnimationState = new AnimationState();
+
+    private int fastMeleeAttackAnimationTick = 0;
+    private int scytheProjectileAttackAnimationTick = 0;
+
     private int tickCounter = 0;
 
     private double lockedTargetX;
@@ -70,7 +97,7 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
 
     private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.cursedcastle.grim_reaper"), BossEvent.BossBarColor.WHITE, BossEvent.BossBarOverlay.PROGRESS);
 
-    public GrimReaperEntity(EntityType<? extends FlyingMob> pEntityType, Level pLevel) {
+    public GrimReaperEntity(EntityType<? extends CCBossEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
 
         this.navigation = new FlyingPathNavigation(this, pLevel);
@@ -87,6 +114,21 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
     @Override
     protected PathNavigation createNavigation(Level pLevel) {
         return this.navigation;
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+
+        this.entityData.define(ANIMATION, IDLE_ANIMATION);
+    }
+
+    public void setAnimation(byte pAnimation) {
+        this.entityData.set(ANIMATION, pAnimation);
+    }
+
+    public byte getAnimation() {
+        return this.entityData.get(ANIMATION);
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -147,6 +189,11 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
 
     @Override
     public void tick() {
+
+        if (this.level().isClientSide()) {
+            this.idleAnimationState.animateWhen(getAnimation() == IDLE_ANIMATION && (this.fastMeleeAttackAnimationTick <= 0 || this.scytheProjectileAttackAnimationTick <= 0), this.tickCount);
+        }
+
         super.tick();
 
         AttributeInstance attributeKnockback = getAttribute(Attributes.KNOCKBACK_RESISTANCE);
@@ -157,34 +204,23 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
 
         LivingEntity target = getTarget();
 
-        if (!isAlive() && target == null) return;
-
-        if (target != null) {
-            getLookControl().setLookAt(target, 30.0F, 30.0F);
-            if (getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.75F && this.meleeAttackCooldownTick <= 0) {
-                setAnimation(MELEE_ATTACK_ANIMATION);
-                this.meleeAttackCooldownTick = MELEE_ATTACK_COOLDOWN;
-            }
-            if (getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.5F && this.scytheAttackCooldownTick <= 0) {
-                setAnimation(SCYTHE_ATTACK_ANIMATION);
-                this.scytheAttackCooldownTick = SCYTHE_PROJECTILE_ATTACK_COOLDOWN;
-            }
+        if (target == null) {
+            setAnimation(IDLE_ANIMATION);
+            this.fastMeleeAttackAnimationTick = 0;
+            this.scytheProjectileAttackAnimationTick = 0;
         }
-
-
-
-        if (this.meleeAttackCooldownTick > 0 && getAnimation() == NO_ANIMATION) {
-            this.meleeAttackCooldownTick--;
-        }
-
-        if (this.scytheAttackCooldownTick > 0 && getAnimation() == NO_ANIMATION) {
-            this.scytheAttackCooldownTick--;
-        }
-
-        AnimationHandler.INSTANCE.updateAnimations(this);
 
         if (target != null && isAlive()) {
-            if (getAnimation() == GrimReaperEntity.MELEE_ATTACK_ANIMATION) {
+
+            getLookControl().setLookAt(target, 30.0F, 30.0F);
+            if (getAnimation() == IDLE_ANIMATION && (getRandom().nextFloat() <= 0.5F && getRandom().nextFloat() > 0.33F)) {
+                setAnimation(FAST_MELEE_ATTACK_ANIMATION);
+            }
+            if (getAnimation() == IDLE_ANIMATION && getRandom().nextFloat() < 0.5F && this.scytheAttackCooldownTick <= 0) {
+                setAnimation(SCYTHE_PROJECTILE_ATTACK_ANIMATION);
+            }
+
+            if (getAnimation() == GrimReaperEntity.FAST_MELEE_ATTACK_ANIMATION) {
 
                 double distToEnemySqr = distanceToSqr(target);
                 double attackReachSqr = getMeleeAttackRangeSqr(target) * 5.0D;
@@ -279,31 +315,6 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
     }
 
     @Override
-    public int getAnimationTick() {
-        return this.animationTick;
-    }
-
-    @Override
-    public void setAnimationTick(int tick) {
-        this.animationTick = tick;
-    }
-
-    @Override
-    public Animation getAnimation() {
-        return this.animation;
-    }
-
-    @Override
-    public void setAnimation(Animation animation) {
-        this.animation = animation;
-    }
-
-    @Override
-    public Animation[] getAnimations() {
-        return ANIMATIONS;
-    }
-
-    @Override
     public @Nullable ResourceLocation getCustomBossBarBackground() {
         return null;
     }
@@ -362,7 +373,45 @@ public class GrimReaperEntity extends FlyingMob implements Enemy, IAnimatedEntit
 
     @Override
     protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {
+    }
 
+    @Override
+    public void travel(Vec3 pTravelVector) {
+        if (this.isControlledByLocalInstance()) {
+            if (this.isInWater()) {
+                this.moveRelative(0.02F, pTravelVector);
+                this.move(MoverType.SELF, this.getDeltaMovement());
+                this.setDeltaMovement(this.getDeltaMovement().scale((double)0.8F));
+            } else if (this.isInLava()) {
+                this.moveRelative(0.02F, pTravelVector);
+                this.move(MoverType.SELF, this.getDeltaMovement());
+                this.setDeltaMovement(this.getDeltaMovement().scale(0.5D));
+            } else {
+                BlockPos ground = getBlockPosBelowThatAffectsMyMovement();
+                float f = 0.91F;
+                if (this.onGround()) {
+                    f = this.level().getBlockState(ground).getFriction(this.level(), ground, this) * 0.91F;
+                }
+
+                float f1 = 0.16277137F / (f * f * f);
+                f = 0.91F;
+                if (this.onGround()) {
+                    f = this.level().getBlockState(ground).getFriction(this.level(), ground, this) * 0.91F;
+                }
+
+                this.moveRelative(this.onGround() ? 0.1F * f1 : 0.02F, pTravelVector);
+                this.move(MoverType.SELF, this.getDeltaMovement());
+                this.setDeltaMovement(this.getDeltaMovement().scale((double)f));
+            }
+        }
+
+        this.calculateEntityAnimation(false);
+    }
+
+
+    @Override
+    public boolean onClimbable() {
+        return false;
     }
 
     @Override

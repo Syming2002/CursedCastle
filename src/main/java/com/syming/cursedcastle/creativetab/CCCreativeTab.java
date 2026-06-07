@@ -88,18 +88,20 @@ public class CCCreativeTab {
 
                         // Crucifixes Blocks
                         for (WoodType woodType : WoodType.values().toList()) {
-                            if (woodType == WoodType.OAK
-                                    || woodType == WoodType.SPRUCE
-                                    || woodType == WoodType.BIRCH
-                                    || woodType == WoodType.JUNGLE
-                                    || woodType == WoodType.ACACIA
-                                    || woodType == WoodType.DARK_OAK
-                                    || woodType == WoodType.CRIMSON
-                                    || woodType == WoodType.WARPED
-                                    || woodType == WoodType.MANGROVE
-                                    || woodType == WoodType.CHERRY
-                                    || woodType == WoodType.BAMBOO) {
-                                output.accept(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get());
+                            if (woodType != null) {
+                                if (woodType == WoodType.OAK
+                                        || woodType == WoodType.SPRUCE
+                                        || woodType == WoodType.BIRCH
+                                        || woodType == WoodType.JUNGLE
+                                        || woodType == WoodType.ACACIA
+                                        || woodType == WoodType.DARK_OAK
+                                        || woodType == WoodType.CRIMSON
+                                        || woodType == WoodType.WARPED
+                                        || woodType == WoodType.MANGROVE
+                                        || woodType == WoodType.CHERRY
+                                        || woodType == WoodType.BAMBOO) {
+                                    output.accept(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get());
+                                }
                             }
                         }
 

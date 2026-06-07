@@ -32,19 +32,21 @@ public class CCBlockEntity {
 
     static {
         for (WoodType woodType : WoodType.values().toList()) {
-            if (woodType == WoodType.OAK
-                    || woodType == WoodType.SPRUCE
-                    || woodType == WoodType.BIRCH
-                    || woodType == WoodType.JUNGLE
-                    || woodType == WoodType.ACACIA
-                    || woodType == WoodType.DARK_OAK
-                    || woodType == WoodType.CRIMSON
-                    || woodType == WoodType.WARPED
-                    || woodType == WoodType.MANGROVE
-                    || woodType == WoodType.CHERRY
-                    || woodType == WoodType.BAMBOO) {
-                CRUCIFIX_BLOCK_ENTITY_TYPES.put(woodType, BLOCK_ENTITIES.register(woodType.name() + '_' + "crucifix", () -> BlockEntityType.Builder.of(((pPos, pState) -> new CrucifixBlockEntity(pPos, pState, woodType)),
-                        CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get()).build(null)));
+            if (woodType != null) {
+                if (woodType == WoodType.OAK
+                        || woodType == WoodType.SPRUCE
+                        || woodType == WoodType.BIRCH
+                        || woodType == WoodType.JUNGLE
+                        || woodType == WoodType.ACACIA
+                        || woodType == WoodType.DARK_OAK
+                        || woodType == WoodType.CRIMSON
+                        || woodType == WoodType.WARPED
+                        || woodType == WoodType.MANGROVE
+                        || woodType == WoodType.CHERRY
+                        || woodType == WoodType.BAMBOO) {
+                    CRUCIFIX_BLOCK_ENTITY_TYPES.put(woodType, BLOCK_ENTITIES.register(woodType.name() + '_' + "crucifix", () -> BlockEntityType.Builder.of(((pPos, pState) -> new CrucifixBlockEntity(pPos, pState, woodType)),
+                            CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get()).build(null)));
+                }
             }
         }
     }

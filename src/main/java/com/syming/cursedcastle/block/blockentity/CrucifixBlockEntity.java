@@ -21,6 +21,7 @@ public class CrucifixBlockEntity extends BlockEntity implements BlockEntityTicke
 
     @Override
     public BlockEntityType<?> getType() {
+        if (this.woodType == null) return null;
         return CCBlockEntity.CRUCIFIX_BLOCK_ENTITY_TYPES.get(this.woodType).get();
     }
 

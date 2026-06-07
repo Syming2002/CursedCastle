@@ -15,11 +15,15 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -43,29 +47,38 @@ import net.minecraftforge.entity.PartEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Random;
 
-public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
-    private Animation animation;
+public class DraculaEntity extends CCBossEntity {
 
-    public static final Animation FIREBALLS_ANIMATION = Animation.create(80);
-    private int fireballsCooldown = 0;
-    public static final int FIREBALLS_COOLDOWN = 100;
+    private static final EntityDataAccessor<Byte> ANIMATION = SynchedEntityData.defineId(DraculaEntity.class, EntityDataSerializers.BYTE);
 
-    public static final Animation DARK_INFERNO_ANIMATION = Animation.create(80);
-    private int darkInfernoCooldown = 0;
-    public static final int DARK_INFERNO_COOLDOWN = 200;
+    public static final byte IDLE_ANIMATION = 0;
+    public static final float IDLE_ANIMATION_LENGTH_IN_SECONDS = 2.0F;
+    public static final int IDLE_ANIMATION_LENGTH_IN_TICKS = (int) (IDLE_ANIMATION_LENGTH_IN_SECONDS * 20);
 
-    public static final Animation FIRE_PILLAR_ANIMATION = Animation.create(60);
-    private int firePillarCooldown = 0;
-    public static final int FIRE_PILLAR_COOLDOWN = 250;
+    public static final byte FIREBALLS_ANIMATION = 1;
+    public static final float FIREBALLS_ANIMATION_LENGTH_IN_SECONDS = 4.0F;
+    public static final int FIREBALLS_ANIMATION_LENGTH_IN_TICKS = (int) (FIREBALLS_ANIMATION_LENGTH_IN_SECONDS * 20);
 
-    public static final Animation BATS_ATTACK_ANIMATION = Animation.create(55);
-    private int batsAttackCooldown = 0;
-    public static final int BATS_ATTACK_COOLDOWN = 225;
+    public static final byte DARK_INFERNO_ANIMATION = 2;
+    public static final float DARK_INFERNO_ANIMATION_LENGTH_IN_SECONDS = 4.0F;
+    public static final int DARK_INFERNO_ANIMATION_LENGTH_IN_TICKS = (int) (DARK_INFERNO_ANIMATION_LENGTH_IN_SECONDS * 20);
 
-    private static final Animation[] ANIMATIONS = {FIREBALLS_ANIMATION, DARK_INFERNO_ANIMATION, FIRE_PILLAR_ANIMATION, BATS_ATTACK_ANIMATION};
+    public static final byte FIRE_PILLAR_ANIMATION = 3;
+    public static final float FIRE_PILLAR_ANIMATION_LENGTH_IN_SECONDS = 3.0F;
+    public static final int FIRE_PILLAR_ANIMATION_LENGTH_IN_TICKS = (int) (FIRE_PILLAR_ANIMATION_LENGTH_IN_SECONDS * 20);
 
-    private int animationTick;
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState fireballsAnimationState = new AnimationState();
+    public final AnimationState darkInfernoAnimationState = new AnimationState();
+    public final AnimationState firePillarAnimationState = new AnimationState();
+    public final AnimationState batsAttackAnimationState = new AnimationState();
+
+    private int fireballsAnimationTick = 0;
+    private int darkInfernoAnimationTick = 0;
+    private int firePillarAnimationTick = 0;
+    private int batsAttackAnimationTick = 0;
 
     private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.cursedcastle.dracula"), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.PROGRESS);
 
@@ -99,6 +112,16 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
+
+        this.entityData.define(ANIMATION, IDLE_ANIMATION);
+    }
+
+    public void setAnimation(byte pAnimation) {
+        this.entityData.set(ANIMATION, pAnimation);
+    }
+
+    public byte getAnimation() {
+        return this.entityData.get(ANIMATION);
     }
 
     @Override
@@ -124,10 +147,10 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
                 .add(Attributes.ARMOR_TOUGHNESS, 0.0D);
     }
 
-    @Override
-    public boolean fireImmune() {
-        return true;
-    }
+//    @Override
+//    public boolean fireImmune() {
+//        return true;
+//    }
 
     protected void updateHead() {
         moveHead(this.head, 0, 2.0F, 0);
@@ -166,11 +189,17 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
 
     @Override
     public void tick() {
+
+        if (this.level().isClientSide()) {
+            this.idleAnimationState.animateWhen(!isAttacking() && getAnimation() == IDLE_ANIMATION && (this.fireballsAnimationTick <= 0 || this.darkInfernoAnimationTick <= 0 || this.firePillarAnimationTick <= 0), this.tickCount);
+            this.fireballsAnimationState.animateWhen(isAttacking() && !isTeleporting() && getAnimation() == FIREBALLS_ANIMATION, this.tickCount);
+            this.darkInfernoAnimationState.animateWhen(isAttacking() && !isTeleporting() && getAnimation() == DARK_INFERNO_ANIMATION, this.tickCount);
+            this.firePillarAnimationState.animateWhen(isAttacking() && !isTeleporting() && getAnimation() == FIRE_PILLAR_ANIMATION, this.tickCount);
+        }
+
         super.tick();
 
         LivingEntity target = getTarget();
-
-        if (!isAlive() && target == null) return;
 
         if (this.level().isDay() && !this.level().isClientSide()) {
             float lightness = getLightLevelDependentMagicValue();
@@ -188,41 +217,34 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
 
         if (target != null) {
             getLookControl().setLookAt(target, 30.0F, 30.0F);
-            if ((!isTeleporting() && !isInvisible() && isAttacking()) && getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.75F && this.fireballsCooldown <= 0 && this.currentState == ActionState.ATTACKING) {
+            if ((!isTeleporting() && !isInvisible() && isAttacking()) && getAnimation() == IDLE_ANIMATION && (getRandom().nextFloat() <= 0.75F && getRandom().nextFloat() > 0.5F) && this.currentState == ActionState.ATTACKING) {
                 setAnimation(FIREBALLS_ANIMATION);
-                this.fireballsCooldown = FIREBALLS_COOLDOWN;
             }
-            if ((!isTeleporting() && !isInvisible() && isAttacking()) && getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.5F && this.darkInfernoCooldown <= 0 && this.currentState == ActionState.ATTACKING) {
+            if ((!isTeleporting() && !isInvisible() && isAttacking()) && getAnimation() == IDLE_ANIMATION && (getRandom().nextFloat() <= 0.5F && getRandom().nextFloat() > 0.33F) && this.currentState == ActionState.ATTACKING) {
                 setAnimation(DARK_INFERNO_ANIMATION);
-                this.darkInfernoCooldown = DARK_INFERNO_COOLDOWN;
             }
-            if ((!isTeleporting() && !isInvisible() && isAttacking()) && getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.33F && this.firePillarCooldown <= 0 && this.currentState == ActionState.ATTACKING) {
+            if ((!isTeleporting() && !isInvisible() && isAttacking()) && getAnimation() == IDLE_ANIMATION && (getRandom().nextFloat() <= 0.33F && getRandom().nextFloat() > 0.0F) && this.currentState == ActionState.ATTACKING) {
                 setAnimation(FIRE_PILLAR_ANIMATION);
-                this.firePillarCooldown = FIRE_PILLAR_COOLDOWN;
             }
+        } else {
+            setAnimation(IDLE_ANIMATION);
+            this.fireballsAnimationTick = 0;
+            this.darkInfernoAnimationTick = 0;
+            this.firePillarAnimationTick = 0;
+            this.batsAttackAnimationTick = 0;
+            this.isAttacking = false;
+            this.isTeleporting = false;
+            setInvisible(false);
+            setInvulnerable(false);
         }
-
-
-
-        if (this.fireballsCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible())) {
-            this.fireballsCooldown--;
-        }
-
-        if (this.darkInfernoCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible())) {
-            this.darkInfernoCooldown--;
-        }
-
-        if (this.firePillarCooldown > 0 && getAnimation() == NO_ANIMATION && (!isTeleporting() && !isInvisible())) {
-            this.firePillarCooldown--;
-        }
-
-        AnimationHandler.INSTANCE.updateAnimations(this);
 
         shouldDespawnInPeaceful();
 
+        System.out.println("Current Animation is: " + getAnimation());
+
         if (target != null && isAlive()) {
-            if (getAnimation() == DraculaEntity.FIREBALLS_ANIMATION && isAttacking()) {
-                if (getAnimationTick() == 40) {
+            if (getAnimation() == DraculaEntity.FIREBALLS_ANIMATION) {
+                if (this.fireballsAnimationTick == 40) {
                     Vec3 underRightArmPosSmallFireballs = new Vec3(-0.5F, 1.275F, 1.0F);
                     underRightArmPosSmallFireballs = underRightArmPosSmallFireballs.xRot((float) Math.toRadians(-getXRot()));
                     underRightArmPosSmallFireballs = underRightArmPosSmallFireballs.yRot((float) Math.toRadians(-getYHeadRot()));
@@ -248,8 +270,8 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
 
                     System.out.println("Launching Fireballs");
                 }
-            } else if (getAnimation() == DraculaEntity.DARK_INFERNO_ANIMATION && isAttacking()) {
-                if (getAnimationTick() == 40) {
+            } else if (getAnimation() == DraculaEntity.DARK_INFERNO_ANIMATION) {
+                if (this.darkInfernoAnimationTick == 40) {
                     Vec3 underLeftArmPosFirstLargeFireball = new Vec3(0.5F, 1.275F, 1.0F);
                     underLeftArmPosFirstLargeFireball = underLeftArmPosFirstLargeFireball.xRot((float) Math.toRadians(-getXRot()));
                     underLeftArmPosFirstLargeFireball = underLeftArmPosFirstLargeFireball.yRot((float) Math.toRadians(-getYHeadRot()));
@@ -277,7 +299,7 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
                             speed);
                     System.out.println("First Large Fireball is spawning!");
                 }
-                if (getAnimationTick() == 60) {
+                if (this.darkInfernoAnimationTick == 60) {
                     Vec3 underLeftArmPosSecondLargeFireball = new Vec3(0.5F, 0.6375F, 1.0F);
                     underLeftArmPosSecondLargeFireball = underLeftArmPosSecondLargeFireball.xRot((float) Math.toRadians(-getXRot()));
                     underLeftArmPosSecondLargeFireball = underLeftArmPosSecondLargeFireball.yRot((float) Math.toRadians(-getYHeadRot()));
@@ -306,12 +328,14 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
 
                     System.out.println("Second Large Fireball is spawning!");
                 }
-            } else if (getAnimation() == DraculaEntity.FIRE_PILLAR_ANIMATION && isAttacking()) {
-                if (getAnimationTick() == 30) {
+            } else if (getAnimation() == DraculaEntity.FIRE_PILLAR_ANIMATION) {
+                if (this.firePillarAnimationTick == 30) {
                     spawnFirePillar();
                     System.out.println("Fire Pillar appearing");
                 }
             }
+
+
             this.stateTick++;
 
             switch (this.currentState) {
@@ -320,14 +344,25 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
                     this.isAttacking = true;
                     this.isTeleporting = false;
 
-                    if (isFireballsAttackAnimationIsFinished() || isDarkInfernoAttackAnimationIsFinished() || isFirePillarAttackAnimationIsFinished()) {
+                    if (getAnimation() == FIREBALLS_ANIMATION) this.fireballsAnimationTick++;
+                    if (getAnimation() == DARK_INFERNO_ANIMATION) this.darkInfernoAnimationTick++;
+                    if (getAnimation() == FIRE_PILLAR_ANIMATION) this.firePillarAnimationTick++;
+
+                    if (this.fireballsAnimationTick >= FIREBALLS_ANIMATION_LENGTH_IN_TICKS
+                            || this.darkInfernoAnimationTick >= DARK_INFERNO_ANIMATION_LENGTH_IN_TICKS
+                            || this.firePillarAnimationTick >= FIRE_PILLAR_ANIMATION_LENGTH_IN_TICKS) {
                         transitionTo(ActionState.WAITING_AFTER_ATTACK);
-                        this.isAttacking = false;
+
+
                     }
                     break;
 
                 case WAITING_AFTER_ATTACK:
 
+                    this.fireballsAnimationTick = 0;
+                    this.darkInfernoAnimationTick = 0;
+                    this.firePillarAnimationTick = 0;
+                    setAnimation(IDLE_ANIMATION);
                     this.isTeleporting = false;
                     this.isAttacking = false;
 
@@ -361,7 +396,6 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
                         this.teleportTick = 0;
                         transitionTo(ActionState.WAITING_AFTER_TELEPORT);
                     }
-                    System.out.println(this.teleportTick);
                     break;
 
                 case WAITING_AFTER_TELEPORT:
@@ -558,46 +592,9 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
         return this.isAttacking;
     }
 
-    public boolean isFireballsAttackAnimationIsFinished() {
-        return getAnimation() == FIREBALLS_ANIMATION && this.animationTick >= FIREBALLS_ANIMATION.getDuration() - 10;
-    }
-
-    public boolean isDarkInfernoAttackAnimationIsFinished() {
-        return getAnimation() == DARK_INFERNO_ANIMATION && this.animationTick >= DARK_INFERNO_ANIMATION.getDuration() - 10;
-    }
-
-    public boolean isFirePillarAttackAnimationIsFinished() {
-        return getAnimation() == FIRE_PILLAR_ANIMATION && this.animationTick >= FIRE_PILLAR_ANIMATION.getDuration() - 10;
-    }
-
     private void transitionTo(ActionState newState) {
         this.currentState = newState;
         this.stateTick = 0;
-    }
-
-    @Override
-    public int getAnimationTick() {
-        return this.animationTick;
-    }
-
-    @Override
-    public void setAnimationTick(int tick) {
-        this.animationTick = tick;
-    }
-
-    @Override
-    public Animation getAnimation() {
-        return this.animation;
-    }
-
-    @Override
-    public void setAnimation(Animation animation) {
-        this.animation = animation;
-    }
-
-    @Override
-    public Animation[] getAnimations() {
-        return ANIMATIONS;
     }
 
     @Override
@@ -652,6 +649,10 @@ public class DraculaEntity extends CCBossEntity implements IAnimatedEntity {
     @Override
     public @Nullable ResourceLocation getCustomBossBar() {
         return null;
+    }
+
+    public boolean isAttackingAnimation() {
+        return getAnimation() == FIREBALLS_ANIMATION || getAnimation() == DARK_INFERNO_ANIMATION || getAnimation() == FIRE_PILLAR_ANIMATION;
     }
 
     public enum ActionState {
