@@ -146,7 +146,7 @@ public class CCVillageAddition {
         int startX = origin.getX();
         int startZ = origin.getZ();
 
-        int maxY = level.getMaxBuildHeight();
+        int minBuildHeight = level.getMinBuildHeight();
 
         for (int x = 0; x < size.getX(); x++) {
             for (int z = 0; z < size.getZ(); z++) {
@@ -154,18 +154,50 @@ public class CCVillageAddition {
                 int worldZ = startZ + z;
 
                 int surfaceY = level.getHeight(
-                        Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                        Heightmap.Types.WORLD_SURFACE_WG,
                         worldX,
                         worldZ
                 );
 
-                maxY = Math.min(maxY, surfaceY);
+                minBuildHeight = Math.max(minBuildHeight, surfaceY);
             }
         }
-        return new BlockPos(startX, maxY, startZ);
+        return new BlockPos(startX, minBuildHeight, startZ);
+    }
+
+    private static boolean isTerrainFlatEnough(ServerLevel serverLevel, BlockPos origin, StructureTemplate template) {
+        Vec3i size = template.getSize();
+
+        List<Integer> heights = new ArrayList<>();
+
+        for (int x = 0; x < size.getX(); x++) {
+            for (int z = 0; z < size.getZ(); z++) {
+                heights.add(serverLevel.getHeight(
+                        Heightmap.Types.WORLD_SURFACE_WG,
+                        origin.getX() + x,
+                        origin.getZ() + z
+                ));
+            }
+        }
+
+        Collections.sort(heights);
+
+        int median = heights.get(heights.size() / 2);
+
+        int flatCount = 0;
+
+        for (int h : heights) {
+            if (Math.abs(h - median) <= 1) {
+                flatCount++;
+            }
+        }
+
+        return (double) flatCount / heights.size() >= 0.5D;
     }
 
     private static void placeBigChurchStructure(ServerLevel level, BlockPos pos, BlockPos villageCenter, ChurchType churchType, StructureTemplate template) {
+        if (!isTerrainFlatEnough(level, pos, template)) return;
+
         StructureProcessorList processorList = level.registryAccess()
                 .registryOrThrow(Registries.PROCESSOR_LIST)
                 .get(new ResourceLocation(CursedCastleMod.MOD_ID, "big_church"));

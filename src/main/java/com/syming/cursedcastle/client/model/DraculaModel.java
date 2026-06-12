@@ -1,11 +1,6 @@
 package com.syming.cursedcastle.client.model;
 
-import com.github.alexthe666.citadel.animation.IAnimatedEntity;
-import com.github.alexthe666.citadel.client.model.AdvancedEntityModel;
-import com.github.alexthe666.citadel.client.model.AdvancedModelBox;
 import com.github.alexthe666.citadel.client.model.ModelAnimator;
-import com.github.alexthe666.citadel.client.model.basic.BasicModelPart;
-import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.syming.cursedcastle.CursedCastleMod;
@@ -122,8 +117,8 @@ public class DraculaModel extends HierarchicalModel<DraculaEntity> {
 //        updateDefaultPose();
 //    }
 
-    public DraculaModel(ModelPart root) {
-        this.dracula = root.getChild("dracula");
+    public DraculaModel(ModelPart pRoot) {
+        this.dracula = pRoot.getChild("dracula");
 
         this.head = this.dracula.getChild("head");
         this.headWear = this.dracula.getChild("headWear");

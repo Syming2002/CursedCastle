@@ -3,6 +3,7 @@ package com.syming.cursedcastle.event;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.entity.projectile.subweapon.HolyWaterEntity;
+import com.syming.cursedcastle.entity.villager.CCVillager;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.mp.PlayerMP;
@@ -17,7 +18,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
@@ -134,6 +138,18 @@ public class CCCommonEventForge {
 
         if (living instanceof Monster monster && monster.level().isRainingAt(monster.blockPosition()) && HolyWaterEntity.rainCaster != null) {
             monster.addEffect(new MobEffectInstance(CCEffect.HOLY.get(), HolyWaterEntity.RAINING_COOLDOWN, 1, false, false, true));
+        }
+    }
+
+    @SubscribeEvent
+    public static void onCCVillagerJoinWorld(EntityJoinLevelEvent event) {
+        Entity entity = event.getEntity();
+        Level level = event.getLevel();
+
+        if (level instanceof ServerLevel serverLevel) {
+            if (entity instanceof Villager villager) {
+                serverLevel.getPoiManager().find(poiTypeHolder -> poiTypeHolder.is(CCVillager.PRIEST_POI.getKey() != null ? CCVillager.PRIEST_POI.getKey() : null), blockPos -> true, villager.blockPosition(), 128, PoiManager.Occupancy.HAS_SPACE);
+            }
         }
     }
 

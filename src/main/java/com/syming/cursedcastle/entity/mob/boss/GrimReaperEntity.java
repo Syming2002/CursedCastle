@@ -52,7 +52,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.EnumSet;
 import java.util.List;
 
-public class GrimReaperEntity extends CCBossEntity implements /*, IAnimatedEntity,*/ ICustomBossBar, ILivingEntityStrengthWeakness, RangedAttackMob {
+public class GrimReaperEntity extends CCBossEntity implements ICustomBossBar, ILivingEntityStrengthWeakness, RangedAttackMob {
 //    private Animation animation;
 //
 //    public static final Animation MELEE_ATTACK_ANIMATION = Animation.create(35);
@@ -67,10 +67,10 @@ public class GrimReaperEntity extends CCBossEntity implements /*, IAnimatedEntit
 //
 //    private int animationTick;
 
-    private static final EntityDataAccessor<Byte> ANIMATION = SynchedEntityData.defineId(DraculaEntity.class, EntityDataSerializers.BYTE);
+    private static final EntityDataAccessor<Byte> ANIMATION = SynchedEntityData.defineId(GrimReaperEntity.class, EntityDataSerializers.BYTE);
 
     public static final byte IDLE_ANIMATION = 0;
-    public static final float IDLE_ANIMATION_LENGTH_IN_SECONDS = 2.0F;
+    public static final float IDLE_ANIMATION_LENGTH_IN_SECONDS = 4.0F;
     public static final int IDLE_ANIMATION_LENGTH_IN_TICKS = (int) (IDLE_ANIMATION_LENGTH_IN_SECONDS * 20);
 
     public static final byte FAST_MELEE_ATTACK_ANIMATION = 1;
@@ -88,7 +88,7 @@ public class GrimReaperEntity extends CCBossEntity implements /*, IAnimatedEntit
     private int fastMeleeAttackAnimationTick = 0;
     private int scytheProjectileAttackAnimationTick = 0;
 
-    private int tickCounter = 0;
+    private int scytheTickCounter = 0;
 
     private double lockedTargetX;
     private double lockedTargetY;
@@ -192,6 +192,8 @@ public class GrimReaperEntity extends CCBossEntity implements /*, IAnimatedEntit
 
         if (this.level().isClientSide()) {
             this.idleAnimationState.animateWhen(getAnimation() == IDLE_ANIMATION && (this.fastMeleeAttackAnimationTick <= 0 || this.scytheProjectileAttackAnimationTick <= 0), this.tickCount);
+            this.fastMeleeAttackAnimationState.animateWhen(getAnimation() == FAST_MELEE_ATTACK_ANIMATION, this.tickCount);
+            this.scytheProjectileAttackAnimationState.animateWhen(getAnimation() == SCYTHE_PROJECTILE_ATTACK_ANIMATION, this.tickCount);
         }
 
         super.tick();
@@ -204,19 +206,18 @@ public class GrimReaperEntity extends CCBossEntity implements /*, IAnimatedEntit
 
         LivingEntity target = getTarget();
 
-        if (target == null) {
-            setAnimation(IDLE_ANIMATION);
-            this.fastMeleeAttackAnimationTick = 0;
-            this.scytheProjectileAttackAnimationTick = 0;
-        }
+        if (getAnimation() == FAST_MELEE_ATTACK_ANIMATION) this.fastMeleeAttackAnimationTick++;
+        if (getAnimation() == SCYTHE_PROJECTILE_ATTACK_ANIMATION) this.scytheProjectileAttackAnimationTick++;
 
-        if (target != null && isAlive()) {
+        System.out.println("The current animation is: " + getAnimation());
+
+        if (target != null) {
 
             getLookControl().setLookAt(target, 30.0F, 30.0F);
-            if (getAnimation() == IDLE_ANIMATION && (getRandom().nextFloat() <= 0.5F && getRandom().nextFloat() > 0.33F)) {
+            if (getAnimation() == IDLE_ANIMATION && (getRandom().nextFloat() <= 0.75F && getRandom().nextFloat() > 0.33F)) {
                 setAnimation(FAST_MELEE_ATTACK_ANIMATION);
             }
-            if (getAnimation() == IDLE_ANIMATION && getRandom().nextFloat() < 0.5F && this.scytheAttackCooldownTick <= 0) {
+            if (getAnimation() == IDLE_ANIMATION && getRandom().nextFloat() <= 0.33F && getRandom().nextFloat() > 0.0F) {
                 setAnimation(SCYTHE_PROJECTILE_ATTACK_ANIMATION);
             }
 
@@ -224,13 +225,12 @@ public class GrimReaperEntity extends CCBossEntity implements /*, IAnimatedEntit
 
                 double distToEnemySqr = distanceToSqr(target);
                 double attackReachSqr = getMeleeAttackRangeSqr(target) * 5.0D;
-                int animationTick = getAnimationTick();
 
                 if (attributeKnockback != null) {
                     attributeKnockback.setBaseValue(1.0D);
                 }
 
-                if (animationTick == 1 && !this.hasLockedTargetPos) {
+                if (this.fastMeleeAttackAnimationTick == 1 && !this.hasLockedTargetPos) {
 
                     this.lockedTargetX = target.getX();
                     this.lockedTargetY = target.getY();
@@ -242,17 +242,17 @@ public class GrimReaperEntity extends CCBossEntity implements /*, IAnimatedEntit
                     getNavigation().moveTo(target, boostedSpeed);
                 }
 
-                if (animationTick < 25 && this.hasLockedTargetPos) {
+                if (this.fastMeleeAttackAnimationTick < 25 && this.hasLockedTargetPos) {
                     Vec3 targetPos = new Vec3(this.lockedTargetX, this.lockedTargetY, this.lockedTargetZ);
                     Vec3 dir = targetPos.subtract(position()).normalize();
                     setDeltaMovement(dir.scale(0.6D));
                 }
 
-                if (animationTick == 25 && distToEnemySqr <= attackReachSqr) {
+                if (this.fastMeleeAttackAnimationTick == 25 && distToEnemySqr <= attackReachSqr) {
                     doHurtTarget(target);
                 }
 
-                if (animationTick > 25) {
+                if (this.fastMeleeAttackAnimationTick > 25) {
                     double minDistanceSq = 4.0D;
                     if (distToEnemySqr < minDistanceSq) {
                         double x = getX() - target.getX();
@@ -278,11 +278,16 @@ public class GrimReaperEntity extends CCBossEntity implements /*, IAnimatedEntit
                     this.hasLockedTargetPos = false;
                 }
 
-            } else if (getAnimation() == GrimReaperEntity.SCYTHE_ATTACK_ANIMATION) {
+                if (this.fastMeleeAttackAnimationTick >= FAST_MELEE_ATTACK_ANIMATION_LENGTH_IN_TICKS) {
+                    setAnimation(IDLE_ANIMATION);
+                    this.fastMeleeAttackAnimationTick = 0;
+                }
 
-                if (getAnimationTick() > 20 && getAnimationTick() <= 180) {
-                    this.tickCounter++;
-                    if (this.tickCounter >= 20) {
+            } else if (getAnimation() == GrimReaperEntity.SCYTHE_PROJECTILE_ATTACK_ANIMATION) {
+
+                if (this.scytheProjectileAttackAnimationTick > 20 && this.scytheProjectileAttackAnimationTick <= 180) {
+                    this.scytheTickCounter++;
+                    if (this.scytheTickCounter >= 20) {
 
                         double radius = 2.0;
                         double angle = Math.random() * 2 * Math.PI;
@@ -301,11 +306,18 @@ public class GrimReaperEntity extends CCBossEntity implements /*, IAnimatedEntit
 
                         this.level().addFreshEntity(scytheProjectile);
 
-                        this.tickCounter = 0;
+                        this.scytheTickCounter = 0;
                     }
                 }
-
+                if (this.scytheProjectileAttackAnimationTick >= SCYTHE_PROJECTILE_ATTACK_ANIMATION_LENGTH_IN_TICKS) {
+                    setAnimation(IDLE_ANIMATION);
+                    this.scytheProjectileAttackAnimationTick = 0;
+                }
             }
+        } else if (this.fastMeleeAttackAnimationTick >= FAST_MELEE_ATTACK_ANIMATION_LENGTH_IN_TICKS || this.scytheProjectileAttackAnimationTick >= SCYTHE_PROJECTILE_ATTACK_ANIMATION_LENGTH_IN_TICKS) {
+            setAnimation(IDLE_ANIMATION);
+            this.fastMeleeAttackAnimationTick = 0;
+            this.scytheProjectileAttackAnimationTick = 0;
         }
     }
 
@@ -437,10 +449,10 @@ public class GrimReaperEntity extends CCBossEntity implements /*, IAnimatedEntit
 
         @Override
         public boolean canUse() {
-            if (this.grimReaper.getAnimation() != GrimReaperEntity.MELEE_ATTACK_ANIMATION || this.grimReaper.getAnimation() != GrimReaperEntity.SCYTHE_ATTACK_ANIMATION) {
+            if (this.grimReaper.getAnimation() != GrimReaperEntity.FAST_MELEE_ATTACK_ANIMATION || this.grimReaper.getAnimation() != GrimReaperEntity.SCYTHE_PROJECTILE_ATTACK_ANIMATION) {
                 if (this.grimReaper.isVehicle()) return false;
                 if (--this.cooldown > 0) return false;
-                this.cooldown = this.grimReaper.getRandom().nextInt(40) + 20; // every 1–3 seconds
+                this.cooldown = this.grimReaper.getRandom().nextInt(40) + 20;
 
                 Vec3 randomPos = getRandomPosition();
                 if (randomPos == null) return false;

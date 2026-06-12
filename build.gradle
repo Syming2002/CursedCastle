@@ -287,6 +287,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:mob-amputation-reborn-1528056:8081780")
 
+    implementation files("libs/improved-village-placement-1.1.2.jar")
 
 
     // For more info:
