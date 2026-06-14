@@ -147,11 +147,6 @@ public class DraculaEntity extends CCBossEntity {
                 .add(Attributes.ARMOR_TOUGHNESS, 0.0D);
     }
 
-//    @Override
-//    public boolean fireImmune() {
-//        return true;
-//    }
-
     protected void updateHead() {
         moveHead(this.head, 0, 2.0F, 0);
     }

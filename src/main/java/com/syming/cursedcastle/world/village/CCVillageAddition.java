@@ -3,10 +3,12 @@ package com.syming.cursedcastle.world.village;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.telepathicgrunt.repurposedstructures.RepurposedStructures;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -153,16 +155,12 @@ public class CCVillageAddition {
                 int worldX = startX + x;
                 int worldZ = startZ + z;
 
-                int surfaceY = level.getHeight(
-                        Heightmap.Types.WORLD_SURFACE_WG,
-                        worldX,
-                        worldZ
-                );
+                int y = getHighestGround(level, worldX, worldZ);
 
-                minBuildHeight = Math.max(minBuildHeight, surfaceY);
+                minBuildHeight = Math.max(minBuildHeight, y);
             }
         }
-        return new BlockPos(startX, minBuildHeight, startZ);
+        return new BlockPos(startX, minBuildHeight + 1, startZ);
     }
 
     private static boolean isTerrainFlatEnough(ServerLevel serverLevel, BlockPos origin, StructureTemplate template) {
@@ -193,6 +191,38 @@ public class CCVillageAddition {
         }
 
         return (double) flatCount / heights.size() >= 0.5D;
+    }
+
+    private static int getHighestGround(ServerLevel level, int x, int z) {
+
+        int y = level.getHeight(
+                Heightmap.Types.WORLD_SURFACE_WG,
+                x,
+                z
+        );
+
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(x, y, z);
+
+        while (pos.getY() > level.getMinBuildHeight()) {
+
+            BlockState state = level.getBlockState(pos);
+
+            if (isValidGround(state)) {
+                return pos.getY();
+            }
+
+            pos.move(Direction.DOWN);
+        }
+
+        return level.getMinBuildHeight();
+    }
+
+    private static boolean isValidGround(BlockState state) {
+        return state.blocksMotion()
+                && state.getFluidState().isEmpty()
+                && !state.is(BlockTags.LEAVES)
+                && !state.is(BlockTags.LOGS)
+                && !state.canBeReplaced();
     }
 
     private static void placeBigChurchStructure(ServerLevel level, BlockPos pos, BlockPos villageCenter, ChurchType churchType, StructureTemplate template) {
@@ -251,7 +281,7 @@ public class CCVillageAddition {
                 BlockState support = null;
 
                 switch (churchType) {
-                    case BADLANDS -> support = Blocks.TERRACOTTA.defaultBlockState();
+                    case BADLANDS -> support = rand.nextFloat() < 0.5F ? Blocks.TERRACOTTA.defaultBlockState() : Blocks.ORANGE_TERRACOTTA.defaultBlockState();
                     case BAMBOO, CHERRY, DARK_FOREST, JUNGLE, PLAINS, SAVANNA, SNOWY, SWAMP, TAIGA  -> support = rand.nextFloat() < 0.5F ? Blocks.MOSSY_COBBLESTONE.defaultBlockState() : Blocks.COBBLESTONE.defaultBlockState();
                     case DESERT -> support = Blocks.SANDSTONE.defaultBlockState();
                 }

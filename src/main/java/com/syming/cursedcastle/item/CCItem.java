@@ -414,6 +414,13 @@ public class CCItem {
 
     // Spawn Eggs
 
+    public static final RegistryObject<Item> ARACHNE_SPAWN_EGG = ITEMS.register("arachne_spawn_egg",
+            () -> new CCSpawnEggItem(
+                    CCEntity.ARACHNE,
+                    0x2D242C,
+                    0x392D36,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> BLOOD_SKELETON_SPAWN_EGG = ITEMS.register("blood_skeleton_spawn_egg",
             () -> new CCSpawnEggItem(
                     CCEntity.BLOOD_SKELETON,

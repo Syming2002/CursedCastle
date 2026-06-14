@@ -3,6 +3,7 @@ package com.syming.cursedcastle.event;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.entity.CCEntity;
+import com.syming.cursedcastle.entity.mob.ArachneEntity;
 import com.syming.cursedcastle.entity.mob.HarpyEntity;
 import com.syming.cursedcastle.entity.mob.bat.VampireBatEntity;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
@@ -65,6 +66,7 @@ public class CCCommonEvent {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(CCEntity.ARACHNE.get(), ArachneEntity.createArachneAttributes().build());
         event.put(CCEntity.BLOOD_SKELETON.get(), BloodSkeletonEntity.createMobAttributes().build());
         event.put(CCEntity.CLEAR_BONE_SKELETON.get(), ClearBoneSkeletonEntity.createMobAttributes().build());
         event.put(CCEntity.DRACULA.get(), DraculaEntity.createMobAttributes().build());

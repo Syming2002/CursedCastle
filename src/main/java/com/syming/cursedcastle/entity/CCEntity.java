@@ -2,6 +2,7 @@ package com.syming.cursedcastle.entity;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.magic.*;
+import com.syming.cursedcastle.entity.mob.ArachneEntity;
 import com.syming.cursedcastle.entity.mob.HarpyEntity;
 import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
 import com.syming.cursedcastle.entity.mob.boss.MedusaEntity;
@@ -41,6 +42,13 @@ public class CCEntity {
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, CursedCastleMod.MOD_ID);
 
     // Entity Living
+    public static final RegistryObject<EntityType<ArachneEntity>> ARACHNE = ENTITY_TYPES.register("arachne", () -> EntityType.Builder.<ArachneEntity>of(ArachneEntity::new, MobCategory.MONSTER)
+            .sized(0.75F, 1.625F)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .build("arachne"));
+
     public static final RegistryObject<EntityType<BloodSkeletonEntity>> BLOOD_SKELETON = ENTITY_TYPES.register("blood_skeleton", () -> EntityType.Builder.<BloodSkeletonEntity>of(BloodSkeletonEntity::new, MobCategory.MONSTER)
             .sized(0.6F, 1.99F)
             .setTrackingRange(64)
@@ -168,6 +176,15 @@ public class CCEntity {
             .build("vampire_bat"));
 
     // Magic Effect Entity
+
+    public static final RegistryObject<EntityType<CobwebProjectileEntity>> COBWEB_PROJECTILE = ENTITY_TYPES.register("cobweb_projectile", () -> EntityType.Builder.<CobwebProjectileEntity>of(CobwebProjectileEntity::new, MobCategory.MISC)
+            .sized(0.5F, 0.5F)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .clientTrackingRange(4)
+            .setCustomClientFactory(((spawnEntity, level) -> new CobwebProjectileEntity(level)))
+            .build("cobweb_projectile"));
 
     public static final RegistryObject<EntityType<FireBreathEntity>> FIRE_BREATH = ENTITY_TYPES.register("fire_breath", () -> EntityType.Builder.<FireBreathEntity>of(FireBreathEntity::new, MobCategory.MISC)
             .setTrackingRange(64)

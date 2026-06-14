@@ -94,9 +94,10 @@ public class CursedCastleMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
+                EntityRenderers.register(CCEntity.ARACHNE.get(), ArachneRenderer::new);
                 EntityRenderers.register(CCEntity.BLOOD_SKELETON.get(), SkeletonRenderer::new);
                 EntityRenderers.register(CCEntity.CLEAR_BONE_SKELETON.get(), SkeletonRenderer::new);
-
+                EntityRenderers.register(CCEntity.COBWEB_PROJECTILE.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.DRACULA.get(), DraculaRenderer::new);
                 EntityRenderers.register(CCEntity.FAMILIAR_BAT.get(), FamiliarBatRenderer::new);
                 EntityRenderers.register(CCEntity.FIRE_ZOMBIE.get(), FireZombieRenderer::new);
@@ -193,6 +194,7 @@ public class CursedCastleMod {
 
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(ArachneModel.ARACHNE_LAYER, ArachneModel::createBodyLayer);
             event.registerLayerDefinition(DaggerModel.DAGGER_LAYER, DaggerModel::createBodyLayer);
             event.registerLayerDefinition(DraculaModel.DRACULA_LAYER, DraculaModel::createBodyLayer);
             event.registerLayerDefinition(FamiliarBatModel.FAMILIAR_BAT_LAYER, FamiliarBatModel::createBodyLayer);
