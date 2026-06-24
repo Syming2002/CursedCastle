@@ -1,12 +1,12 @@
 {
-  "name": "cursedcastle:big_church",
+  "name": "cursedcastle:village/plains/big_church",
   "elements": [
     {
       "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "cursedcastle:big_church",
+        "location": "cursedcastle:village/plains/big_church",
         "processors": "cursedcastle:big_church"
       }
     }
