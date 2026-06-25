@@ -1,23 +1,17 @@
 package com.syming.cursedcastle.item.relic;
 
-import com.syming.cursedcastle.client.CCKeybinding;
 import com.syming.cursedcastle.item.CCItem;
-import com.syming.cursedcastle.item.soul.Soul;
-import com.syming.cursedcastle.item.soul.SoulItem;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-public class FrozenHeartItem extends Item implements ICurioItem {
-    public FrozenHeartItem(Properties pProperties) {
+public class FrozenHeartRelicItem extends Item implements ICurioItem {
+    public FrozenHeartRelicItem(Properties pProperties) {
         super(pProperties);
     }
 

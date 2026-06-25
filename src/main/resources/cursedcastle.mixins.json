@@ -9,6 +9,7 @@
     "client.BossHealthOverlayMixin",
     "client.PotionItemMixin",
     "client.LingeringPotionItemMixin",
+    "LivingEntityMixin",
     "client.TippedArrowItemMixin"
   ],
   "client": [

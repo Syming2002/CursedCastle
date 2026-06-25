@@ -6,7 +6,8 @@ import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.item.head.CCHeadItem;
 import com.syming.cursedcastle.item.projectile.ScytheProjectileItem;
 import com.syming.cursedcastle.item.projectile.subweapon.*;
-import com.syming.cursedcastle.item.relic.FrozenHeartItem;
+import com.syming.cursedcastle.item.relic.FrozenHeartRelicItem;
+import com.syming.cursedcastle.item.relic.SpiderClawRelicItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.soul.SoulItem;
 import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
@@ -18,8 +19,6 @@ import com.syming.cursedcastle.item.whip.vampirekiller.tip.*;
 import com.syming.cursedcastle.entity.CCEntity;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -385,7 +384,9 @@ public class CCItem {
 
     // Relics
 
-    public static final RegistryObject<Item> FROZEN_HEART = ITEMS.register("frozen_heart", () -> new FrozenHeartItem(new Item.Properties()));
+    public static final RegistryObject<Item> FROZEN_HEART = ITEMS.register("frozen_heart", () -> new FrozenHeartRelicItem(new Item.Properties()));
+    public static final RegistryObject<Item> SPIDER_CLAW = ITEMS.register("spider_claw", () -> new SpiderClawRelicItem(new Item.Properties()));
+
 
     // Souls
 

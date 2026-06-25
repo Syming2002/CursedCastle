@@ -107,6 +107,7 @@ public class CCCreativeTab {
 
                         // Relics
                         output.accept(CCItem.FROZEN_HEART.get());
+                        output.accept(CCItem.SPIDER_CLAW.get());
 
                         // Souls
                         for (Soul soul : Soul.values()) {
