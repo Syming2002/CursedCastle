@@ -13,26 +13,17 @@ import java.util.Set;
 public class VillageBigChurchData extends SavedData {
 
     private static final String DATA_NAME = "big_church_data";
-    private final Set<Long> processed = new HashSet<>();
+    private boolean churchGenerated = false;
 
     public static VillageBigChurchData load(CompoundTag tag) {
         VillageBigChurchData data = new VillageBigChurchData();
-
-        ListTag list = tag.getList("villages", Tag.TAG_LONG);
-        for (Tag t : list) {
-            data.processed.add(((LongTag)t).getAsLong());
-        }
-
+        data.churchGenerated = tag.getBoolean("ChurchGenerated");
         return data;
     }
 
     @Override
     public CompoundTag save(CompoundTag tag) {
-        ListTag list = new ListTag();
-        for (Long id : processed) {
-            list.add(LongTag.valueOf(id));
-        }
-        tag.put("villages", list);
+        tag.putBoolean("ChurchGenerated", this.churchGenerated);
         return tag;
     }
 
@@ -44,13 +35,12 @@ public class VillageBigChurchData extends SavedData {
         );
     }
 
-    public boolean hasVillage(long id) {
-        return processed.contains(id);
+    public boolean hasChurchGenerated() {
+        return this.churchGenerated;
     }
 
-    public void markVillage(long id) {
-        processed.add(id);
+    public void setChurchGenerated() {
+        this.churchGenerated = true;
         setDirty();
     }
-
 }
