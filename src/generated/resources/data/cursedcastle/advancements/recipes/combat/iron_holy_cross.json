@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_iron_holy_cross": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cursedcastle:iron_holy_cross"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cursedcastle:iron_holy_cross"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_holy_cross",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cursedcastle:iron_holy_cross"
+    ]
+  },
+  "sends_telemetry_event": false
+}

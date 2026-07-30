@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cursedcastle:item/whip/tip/yellow_stone_tip"
+  }
+}

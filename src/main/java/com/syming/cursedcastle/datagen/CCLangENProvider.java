@@ -135,7 +135,7 @@ public class CCLangENProvider extends LanguageProvider {
         add("throwing_axe.fireAspect", "Deals %s seconds of fire to mob");
     }
 
-    private static String getEntityDisplayName(ResourceLocation id) {
+    private String getEntityDisplayName(ResourceLocation id) {
         String raw = id.getPath();
         String[] parts = raw.split("_");
         StringBuilder builder = new StringBuilder();
@@ -149,7 +149,7 @@ public class CCLangENProvider extends LanguageProvider {
         return builder.toString();
     }
 
-    private static String getFluidTypeDisplayName(RegistryObject<FluidType> fluidType) {
+    private String getFluidTypeDisplayName(RegistryObject<FluidType> fluidType) {
         String raw = fluidType.getId().getPath();
         String[] parts = raw.split("_");
         StringBuilder builder = new StringBuilder();
@@ -163,7 +163,7 @@ public class CCLangENProvider extends LanguageProvider {
         return builder.toString();
     }
 
-    private static String getCCHoneyCombDisplayName(CCBeesEnumHoneyComb ccBeesEnumHoneyComb) {
+    private String getCCHoneyCombDisplayName(CCBeesEnumHoneyComb ccBeesEnumHoneyComb) {
         String raw = ccBeesEnumHoneyComb.getSerializedName();
         String[] parts = raw.split("_");
         StringBuilder builder = new StringBuilder();
@@ -177,7 +177,7 @@ public class CCLangENProvider extends LanguageProvider {
         return builder.toString();
     }
 
-    private static String getItemDisplayName(RegistryObject<Item> item) {
+    private String getItemDisplayName(RegistryObject<Item> item) {
         String raw = item.getId().getPath();
         String[] parts = raw.split("_");
         StringBuilder builder = new StringBuilder();
@@ -191,7 +191,7 @@ public class CCLangENProvider extends LanguageProvider {
         return builder.toString();
     }
 
-    private static String getVillagerProfessionName(RegistryObject<VillagerProfession> villagerProfession) {
+    private String getVillagerProfessionName(RegistryObject<VillagerProfession> villagerProfession) {
         String raw = villagerProfession.getId().getPath();
         String[] parts = raw.split("_");
         StringBuilder builder = new StringBuilder();

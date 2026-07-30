@@ -1,0 +1,5 @@
+{
+  "parent": "forge:item/bucket",
+  "fluid": "cursedcastle:source_holy_water",
+  "loader": "forge:fluid_container"
+}

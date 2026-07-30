@@ -9,13 +9,16 @@
     "client.BossHealthOverlayMixin",
     "client.PotionItemMixin",
     "client.LingeringPotionItemMixin",
-    "LivingEntityMixin",
-    "client.TippedArrowItemMixin"
+    "client.TippedArrowItemMixin",
+    "LivingEntityMixin"
   ],
   "client": [
     "client.BossHealthOverlayMixin",
     "client.PotionItemMixin",
     "client.LingeringPotionItemMixin",
     "client.TippedArrowItemMixin"
-  ]
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

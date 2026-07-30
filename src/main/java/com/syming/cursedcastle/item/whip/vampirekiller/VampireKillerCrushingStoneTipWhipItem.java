@@ -2,9 +2,13 @@ package com.syming.cursedcastle.item.whip.vampirekiller;
 
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.whip.WhipToolItem;
+import com.syming.cursedcastle.tag.CCTag;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class VampireKillerCrushingStoneTipWhipItem extends WhipToolItem {
     public VampireKillerCrushingStoneTipWhipItem(Properties pProperties, int pAttackDamageModifier, float pAttackSpeedModifier, float pReachModifier, float pSpeed) {
@@ -26,5 +30,15 @@ public class VampireKillerCrushingStoneTipWhipItem extends WhipToolItem {
         if (!pStack.isDamaged()) {
             super.onCraftedBy(pStack, pLevel, pPlayer);
         }
+    }
+
+    @Override
+    public boolean isCorrectToolForDrops(ItemStack stack, BlockState state) {
+        return true;
+    }
+
+    @Override
+    public float getDestroySpeed(ItemStack pStack, BlockState pState) {
+        return super.getDestroySpeed(pStack, pState);
     }
 }

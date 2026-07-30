@@ -39,6 +39,8 @@ public class CCDataGenerators {
 
         generator.addProvider(event.includeServer(), (DataProvider.Factory<CCDamageType.CCDamageTypeTagsProvider>) output -> new CCDamageType.CCDamageTypeTagsProvider(packOutput, lookupProvider, existingFileHelper));
 
+        generator.addProvider(event.includeServer(), new CCRecipeProvider(packOutput));
+
         // Advancements
         packGenerator.addProvider(output -> new CCAdvancementGenerator(output, existingFileHelper));
 //        generator.addProvider(event.includeServer(), new CCGlobalLootModifiersProvider(packOutput));

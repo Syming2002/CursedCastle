@@ -79,5 +79,8 @@ local.properties
 *~
 
 run/
+run-data/
 
 logs/
+
+.cache/

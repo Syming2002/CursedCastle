@@ -4,13 +4,20 @@ import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.tag.CCTag;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -22,6 +29,10 @@ public class CCBlockTagGenerator extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        for (Block block : ForgeRegistries.BLOCKS.getValues()) {
+            tag(CCTag.Blocks.ALL_BLOCKS).add(block);
+        }
+
         for (WoodType woodType : WoodType.values().toList()) {
             if (woodType != null) {
                 if (woodType == WoodType.OAK
@@ -37,9 +48,13 @@ public class CCBlockTagGenerator extends BlockTagsProvider {
                         || woodType == WoodType.BAMBOO) {
                     tag(CCTag.Blocks.CRUCIFIX_BLOCKS)
                             .add(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get());
+                    tag(BlockTags.MINEABLE_WITH_AXE).add(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get());
                 }
             }
         }
+
+        tag(BlockTags.NEEDS_STONE_TOOL).add(CCBlock.CHURCH_ALTAR.get());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(CCBlock.CHURCH_ALTAR.get());
 
         tag(CCTag.Blocks.BLOOD_BLOCKS)
                 .add(CCBlock.BLOOD_BLOCK.get());

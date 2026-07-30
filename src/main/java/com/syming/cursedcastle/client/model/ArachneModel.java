@@ -4,14 +4,13 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.client.animation.CCAnimation;
-import com.syming.cursedcastle.entity.mob.ArachneEntity;
+import com.syming.cursedcastle.entity.mob.arachne.ArachneEntity;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 
 public class ArachneModel extends HierarchicalModel<ArachneEntity> {
 
@@ -131,7 +130,7 @@ public class ArachneModel extends HierarchicalModel<ArachneEntity> {
         this.head.yRot = pNetHeadYaw * ((float)Math.PI / 180F);
         this.head.xRot = pHeadPitch * ((float)Math.PI / 180F);
 
-        this.animateWalk(CCAnimation.ARACHNE_WALK_ANIMATION, pLimbSwing, pLimbSwingAmount, 2.0F, 2.5F);
+        this.animateWalk(CCAnimation.ARACHNE_WALK_ANIMATION, pLimbSwing * 1.75F, pLimbSwingAmount, 2.0F, 2.5F);
         this.animate(pEntity.idleAnimationState, CCAnimation.ARACHNE_IDLE_ANIMATION, pAgeInTicks);
         this.animate(pEntity.clawsAttackAnimationState, CCAnimation.ARACHNE_CLAWS_ATTACK_ANIMATION, pAgeInTicks);
         this.animate(pEntity.webAttackAnimationState, CCAnimation.ARACHNE_WEB_ATTACK_ANIMATION, pAgeInTicks);

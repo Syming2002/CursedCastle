@@ -8,6 +8,7 @@ import com.syming.cursedcastle.entity.mob.shade.FrozenShadeEntity;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.whip.FlameWhipItem;
 import com.syming.cursedcastle.item.whip.vampirekiller.VampireKillerRedStoneTipWhipItem;
+import com.syming.cursedcastle.item.whip.vampirekiller.tip.TipType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.damagesource.DamageSource;
@@ -46,7 +47,7 @@ public class CCWhipEvent {
     @SubscribeEvent
     public static void onWhipBlueStoneTipAttack(LivingAttackEvent event) {
         if (event.getSource().getEntity() instanceof LivingEntity attacker) {
-            if (attacker.getMainHandItem().is(CCItem.VAMPIRE_KILLER_BLUE_STONE_TIP_WHIP.get())) {
+            if (attacker.getMainHandItem().is(CCItem.VAMPIRE_KILLER_ELEMENTAL_WHIP.get(TipType.BLUE).get())) {
                 event.getEntity().addEffect(new MobEffectInstance(CCEffect.FREEZE.get(), 50,1));
                 System.out.println("Entity Living is frozen");
             }

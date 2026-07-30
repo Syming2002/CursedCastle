@@ -2,7 +2,7 @@ package com.syming.cursedcastle.entity;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.magic.*;
-import com.syming.cursedcastle.entity.mob.ArachneEntity;
+import com.syming.cursedcastle.entity.mob.arachne.ArachneEntity;
 import com.syming.cursedcastle.entity.mob.HarpyEntity;
 import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
 import com.syming.cursedcastle.entity.mob.boss.MedusaEntity;
@@ -43,7 +43,7 @@ public class CCEntity {
 
     // Entity Living
     public static final RegistryObject<EntityType<ArachneEntity>> ARACHNE = ENTITY_TYPES.register("arachne", () -> EntityType.Builder.<ArachneEntity>of(ArachneEntity::new, MobCategory.MONSTER)
-            .sized(0.75F, 1.625F)
+            .sized(0.625F, 1.25F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)

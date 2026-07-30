@@ -1,7 +1,0 @@
-{
-  "parent": "item/handheld",
-  "textures":
-  {
-    "layer0": "cursedcastle:item/whip/rose_stem_whip"
-  }
-}

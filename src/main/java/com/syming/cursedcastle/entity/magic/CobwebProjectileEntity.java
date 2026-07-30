@@ -1,10 +1,7 @@
 package com.syming.cursedcastle.entity.magic;
 
-import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.mob.ArachneEntity;
-import com.syming.cursedcastle.entity.mob.shade.FrozenShadeEntity;
-import com.syming.cursedcastle.entity.projectile.subweapon.IceHolyCrossEntity;
+import com.syming.cursedcastle.entity.mob.arachne.ArachneEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -31,25 +28,12 @@ public class CobwebProjectileEntity extends MagicAttackEntity {
     public void tick() {
         super.tick();
 
-        System.out.println("Cobweb Projectile tick...");
-
         if (this.level().isClientSide()) {
             this.level().addParticle(ParticleTypes.CLOUD, getX(), getY(), getZ(), 0.0D, 0.0D, 0.0D);
         }
 
 
         setPos(getX() + getDeltaMovement().x, getY() + getDeltaMovement().y, getZ() + getDeltaMovement().z);
-
-        if (getOwner() != null) {
-            if (getOwner() instanceof ArachneEntity arachne) {
-                Vec3 headPos = arachne.position().add(0.0D, arachne.getEyeHeight() * 0.5, 0.0D);
-                Vec3 lookVec = arachne.getLookAngle();
-
-                headPos = headPos.add(lookVec);
-
-                setPos(headPos.x, headPos.y, headPos.z);
-            }
-        }
     }
 
     @Override
@@ -76,12 +60,20 @@ public class CobwebProjectileEntity extends MagicAttackEntity {
         BlockPos hitPos = pResult.getBlockPos();
 
         if (!this.level().isClientSide()) {
-            if (hitPos != null) {
-                if (this.getOwner() instanceof ArachneEntity) {
-                    this.level().setBlock(hitPos.above(), Blocks.COBWEB.defaultBlockState(), 3);
-                    discard();
+
+            BlockPos placePos = pResult.getBlockPos().relative(pResult.getDirection());
+
+            if (this.getOwner() instanceof ArachneEntity) {
+                if (this.level().isEmptyBlock(placePos)) {
+                    this.level().setBlock(placePos, Blocks.COBWEB.defaultBlockState(), 3);
                 }
+                discard();
             }
         }
+    }
+
+    @Override
+    public boolean isNoGravity() {
+        return true;
     }
 }

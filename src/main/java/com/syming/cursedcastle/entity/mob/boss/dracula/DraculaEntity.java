@@ -235,8 +235,6 @@ public class DraculaEntity extends CCBossEntity {
 
         shouldDespawnInPeaceful();
 
-        System.out.println("Current Animation is: " + getAnimation());
-
         if (target != null && isAlive()) {
             if (getAnimation() == DraculaEntity.FIREBALLS_ANIMATION) {
                 if (this.fireballsAnimationTick == 40) {

@@ -3,6 +3,7 @@ package com.syming.cursedcastle.datagen;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.block.CrucifixBlock;
+import com.syming.cursedcastle.block.DraculaCastleStoneBrickBlock;
 import com.syming.cursedcastle.block.head.CCHeadBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -26,7 +27,7 @@ public class CCBlockModelProvider extends BlockModelProvider {
             final Block block = registryObject.get();
             final String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
             if (block instanceof CCHeadBlock ccHeadBlock) {
-                SkullBlock.Type type =  ccHeadBlock.getType();
+                SkullBlock.Type type = ccHeadBlock.getType();
                 if (type == CCHeadBlock.CCHeadTypes.DRACULA) {
                     registerDraculaHeadBlock(path);
                 }

@@ -10,7 +10,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-public class FrozenHeartRelicItem extends Item implements ICurioItem {
+public class FrozenHeartRelicItem extends CCRelicItem {
     public FrozenHeartRelicItem(Properties pProperties) {
         super(pProperties);
     }

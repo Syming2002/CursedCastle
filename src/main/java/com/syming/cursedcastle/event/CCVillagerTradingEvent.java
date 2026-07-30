@@ -8,6 +8,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -40,6 +41,31 @@ public class CCVillagerTradingEvent {
                     new ItemStack(CCItem.HOLY_WATER_BUCKET.get(), 1),
                     new ItemStack(Items.EMERALD, pRandom.nextInt(3) + 1),
                     1, 50, 0.0F));
+        }
+
+        if (event.getType() == CCVillager.LEADER_PRIEST.get()) {
+            Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
+
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    pRandom.nextBoolean() ?
+                            new ItemStack(CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.STONE).get(), 1) :
+                            new ItemStack(CCItem.THROWING_AXE_ITEM_TYPES.get(Tiers.STONE).get(), 1),
+                    new ItemStack(Items.EMERALD, pRandom.nextInt(4) + 1),
+                    5, 20, 0.0F));
+
+            trades.get(2).add((pTrader, pRandom) -> new MerchantOffer(
+                    pRandom.nextBoolean() ?
+                            new ItemStack(CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.IRON).get(), 1) :
+                            new ItemStack(CCItem.THROWING_AXE_ITEM_TYPES.get(Tiers.IRON).get(), 1) ,
+                    new ItemStack(Items.EMERALD, pRandom.nextInt(5,8) + 1),
+                    4, 30, 0.0F));
+
+            trades.get(3).add((pTrader, pRandom) -> new MerchantOffer(
+                    pRandom.nextBoolean() ?
+                            new ItemStack(CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.NETHERITE).get(), 1) :
+                            new ItemStack(CCItem.THROWING_AXE_ITEM_TYPES.get(Tiers.NETHERITE).get(), 1),
+                    new ItemStack(Items.EMERALD, pRandom.nextInt(9, 12) + 1),
+                    2, 50, 0.0F));
         }
     }
 }

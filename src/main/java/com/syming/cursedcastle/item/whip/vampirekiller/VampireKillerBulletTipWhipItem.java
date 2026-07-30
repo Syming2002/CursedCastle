@@ -2,6 +2,7 @@ package com.syming.cursedcastle.item.whip.vampirekiller;
 
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.whip.WhipItem;
+import com.syming.cursedcastle.item.whip.vampirekiller.tip.TipType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -38,7 +39,7 @@ public class VampireKillerBulletTipWhipItem extends WhipItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack heldItem = pPlayer.getItemInHand(pUsedHand);
-        if (heldItem.is(CCItem.VAMPIRE_KILLER_BULLET_TIP_WHIP.get())) {
+        if (heldItem.is(CCItem.VAMPIRE_KILLER_ELEMENTAL_WHIP.get(TipType.BULLET).get())) {
             if (!pLevel.isClientSide()) {
                 SmallFireball smallFireball = new SmallFireball(EntityType.SMALL_FIREBALL, pLevel);
                 Vec3 lookVec = pPlayer.getLookAngle();

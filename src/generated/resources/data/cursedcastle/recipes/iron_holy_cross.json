@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "pattern": [
+    " M ",
+    "MMM",
+    " M "
+  ],
+  "result": {
+    "item": "cursedcastle:iron_holy_cross"
+  },
+  "show_notification": true
+}

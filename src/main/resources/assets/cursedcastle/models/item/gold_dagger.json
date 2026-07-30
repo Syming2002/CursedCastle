@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "cursedcastle:item/gold_dagger_2d"
+  },
+  "perspectives": {
+    "thirdperson_righthand":{
+      "parent": "cursedcastle:item/gold_dagger_3d"
+    },
+    "thirdperson_lefthand": {
+      "parent": "cursedcastle:item/gold_dagger_3d"
+    },
+    "firstperson_righthand": {
+      "parent": "cursedcastle:item/gold_dagger_3d"
+    },
+    "firstperson_lefthand": {
+      "parent": "cursedcastle:item/gold_dagger_3d"
+    }
+  }
+}

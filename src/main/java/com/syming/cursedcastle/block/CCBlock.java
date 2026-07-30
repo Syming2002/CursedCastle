@@ -26,14 +26,18 @@ public class CCBlock {
 
     // Liquid Block
 
-    public static final RegistryObject<LiquidBlock> BLOOD_BLOCK = registerBlock("blood_block",
+    public static final RegistryObject<LiquidBlock> BLOOD_BLOCK = registerLiquidBlock("blood_block",
             () -> new LiquidBlock(CCFluid.SOURCE_BLOOD, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
-    public static final RegistryObject<LiquidBlock> HOLY_WATER_BLOCK = registerBlock("holy_water_block",
+    public static final RegistryObject<LiquidBlock> HOLY_WATER_BLOCK = registerLiquidBlock("holy_water_block",
             () -> new LiquidBlock(CCFluid.SOURCE_HOLY_WATER, BlockBehaviour.Properties.copy(Blocks.WATER).lightLevel(blockState -> 7)));
 
 
     // Blocks
+
+    public static final RegistryObject<Block> CHURCH_ALTAR = registerBlock("church_altar", () -> new ChurchAltarBlock(BlockBehaviour.Properties.of()
+            .requiresCorrectToolForDrops()
+            .destroyTime(1.0F)));
 
     public static final Map<WoodType, RegistryObject<Block>> CRUCIFIX_BLOCK_TYPES = new HashMap<>();
 
@@ -53,7 +57,7 @@ public class CCBlock {
                         || woodType == WoodType.BAMBOO) {
                     CRUCIFIX_BLOCK_TYPES.put(woodType, registerBlock(woodType.name() + '_' + "crucifix",
                             () -> new CrucifixBlock(BlockBehaviour.Properties.of()
-                                    .sound(SoundType.WOOD).noOcclusion(), woodType)));
+                                    .sound(SoundType.WOOD).noOcclusion().destroyTime(1.0F), woodType)));
                 }
             }
         }
@@ -99,6 +103,10 @@ public class CCBlock {
         RegistryObject<T> registry = BLOCKS.register(name, block);
         registerItemBlock(name, registry);
         return registry;
+    }
+
+    private static <T extends Block> RegistryObject<T> registerLiquidBlock(String name, Supplier<T> block) {
+        return BLOCKS.register(name, block);
     }
 
     private static  <T extends Block> RegistryObject<Item> registerItemBlock(String name, RegistryObject<T> block) {

@@ -200,10 +200,11 @@ dependencies {
     // JER
     implementation fg.deobf("curse.maven:just-enough-resources-jer-${just_enough_resources_jer_id}")
 
-    implementation fg.deobf("dev.emi:emi-forge:1.1.13+${minecraft_version}")
-    implementation fg.deobf("curse.maven:txnilib-1104882:6533724")
-    implementation fg.deobf("curse.maven:forgified-fabric-api-889079:6885853")
-    implementation fg.deobf("curse.maven:distraction-free-recipes-1167848:6110178")
+//    implementation fg.deobf("dev.emi:emi-forge:1.1.13+${minecraft_version}")
+
+    implementation fg.deobf("curse.maven:just-enough-threads-${jei_threads_id}")
+    implementation fg.deobf("curse.maven:jeioptimizer-${jei_optimizer_id}")
+
 
     // TOP
     implementation fg.deobf("curse.maven:the-one-probe-${the_one_probe_id}")
@@ -245,6 +246,12 @@ dependencies {
     // Repurposed Structures
     implementation fg.deobf("curse.maven:repurposed-structures-${repurposed_structures_id}")
 
+    // Lithostitched
+    implementation fg.deobf("curse.maven:lithostitched-${lithostitched_id}")
+
+    // CTOV
+    implementation fg.deobf("curse.maven:choicetheorems-overhauled-village-${ctov_id}")
+
     // ModKit DEV ONLY
     implementation fg.deobf('com.github.thedarkcolour:ModKit:cc8f1c11ec')
 
@@ -266,7 +273,7 @@ dependencies {
     runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
 
     // Xaeros's Minimap
-    implementation fg.deobf("curse.maven:xaeros-minimap-263420:6778028")
+    implementation fg.deobf("curse.maven:xaeros-minimap-263420:8231196")
 
     // Ferrite Core
     implementation fg.deobf("curse.maven:ferritecore-429235:4810975")

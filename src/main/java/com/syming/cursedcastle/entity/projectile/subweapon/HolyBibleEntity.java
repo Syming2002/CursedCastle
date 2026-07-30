@@ -11,6 +11,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -88,10 +89,10 @@ public class HolyBibleEntity extends CCThrowableWeapon {
 
         if (!this.level().isClientSide() && getOwner() != null) {
             if (!stack.isEmpty()) {
-                 if (target instanceof LivingEntity livingEntity && getOwner() instanceof LivingEntity shooter) {
-                    applyEntityHitEnchantments(livingEntity);
+                 if (target instanceof Monster monster && getOwner() instanceof LivingEntity shooter) {
+                    applyEntityHitEnchantments(monster);
                     if (!stack.isEnchanted()) {
-                        livingEntity.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage());
+                        monster.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage());
                     }
                 }
             }

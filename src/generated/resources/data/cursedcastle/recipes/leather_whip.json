@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "cursedcastle:leather_string"
+    }
+  },
+  "pattern": [
+    "  L",
+    " L ",
+    "L  "
+  ],
+  "result": {
+    "item": "cursedcastle:leather_whip"
+  },
+  "show_notification": true
+}

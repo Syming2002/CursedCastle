@@ -1,43 +1,46 @@
 package com.syming.cursedcastle.event;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.block.CrucifixBlock;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.entity.projectile.subweapon.HolyWaterEntity;
 import com.syming.cursedcastle.entity.villager.CCVillager;
-import com.syming.cursedcastle.item.CCItem;
-import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.mp.PlayerMP;
 import com.syming.cursedcastle.mp.PlayerMPProvider;
-import com.syming.cursedcastle.network.CCLuckEffect;
 import com.syming.cursedcastle.network.CCMPData;
 import com.syming.cursedcastle.network.CCPacketHandler;
-import net.minecraft.network.chat.Component;
+import com.syming.cursedcastle.tag.CCTag;
+import com.syming.cursedcastle.world.village.CCVillage;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.Villager;
-import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosApi;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Mod.EventBusSubscriber(modid = CursedCastleMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CCCommonEventForge {
@@ -139,17 +142,63 @@ public class CCCommonEventForge {
         if (living instanceof Monster monster && monster.level().isRainingAt(monster.blockPosition()) && HolyWaterEntity.rainCaster != null) {
             monster.addEffect(new MobEffectInstance(CCEffect.HOLY.get(), HolyWaterEntity.RAINING_COOLDOWN, 1, false, false, true));
         }
+
+        BlockPos crucifixPos = findNearestCrucifix(living);
+
+        if (living instanceof Villager villager) {
+            Level level = villager.level();
+            Monster nearestMonster = findNearestMonster(villager, level);
+            if (nearestMonster != null) {
+
+                if (crucifixPos != null) {
+                    villagerMoveToCrucifixBlock(villager, crucifixPos);
+                }
+            }
+        }
+        if (living instanceof Monster monster) {
+
+            if (crucifixPos != null) {
+                monsterMoveAwayFromCrucifixBlock(monster, crucifixPos);
+            }
+        }
     }
 
-    @SubscribeEvent
-    public static void onCCVillagerJoinWorld(EntityJoinLevelEvent event) {
-        Entity entity = event.getEntity();
-        Level level = event.getLevel();
+    private static Monster findNearestMonster(Villager villager, Level level) {
+        List<Monster> monsters = level.getNearbyEntities(Monster.class, TargetingConditions.DEFAULT, villager, villager.getBoundingBox().inflate(10.0D));
+        if (monsters.isEmpty()) return null;
+        return monsters.get(0);
+    }
 
-        if (level instanceof ServerLevel serverLevel) {
-            if (entity instanceof Villager villager) {
-                serverLevel.getPoiManager().find(poiTypeHolder -> poiTypeHolder.is(CCVillager.PRIEST_POI.getKey() != null ? CCVillager.PRIEST_POI.getKey() : null), blockPos -> true, villager.blockPosition(), 128, PoiManager.Occupancy.HAS_SPACE);
-            }
+    @Nullable
+    private static BlockPos findNearestCrucifix(LivingEntity living) {
+        if (living.level().isClientSide()) return null;
+
+        ServerLevel level = (ServerLevel) living.level();
+        PoiManager poiManager = level.getPoiManager();
+
+        Optional<BlockPos> nearest = poiManager.findClosest(
+                poiTypeHolder -> {
+                    if (CCVillager.LEADER_PRIEST_POI.getKey() != null) {
+                        return poiTypeHolder.is(CCVillager.LEADER_PRIEST_POI.getKey());
+                    }
+                    return false;
+                },
+                living.blockPosition(),
+                16,
+                PoiManager.Occupancy.ANY
+        );
+
+        return nearest.orElse(null);
+    }
+
+    private static void villagerMoveToCrucifixBlock(Villager villager, BlockPos pos) {
+        villager.getNavigation().moveTo(pos.getX(), pos.getY(), pos.getZ(), 0.5D);
+    }
+
+    private static void monsterMoveAwayFromCrucifixBlock(Monster monster, BlockPos pos) {
+        Vec3 away = DefaultRandomPos.getPosAway(monster, 4, 2, Vec3.atCenterOf(pos));
+        if (away != null) {
+            monster.getNavigation().moveTo(away.x, away.y, away.z, 1.2D);
         }
     }
 

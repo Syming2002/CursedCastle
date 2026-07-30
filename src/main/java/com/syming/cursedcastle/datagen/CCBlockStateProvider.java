@@ -2,7 +2,9 @@ package com.syming.cursedcastle.datagen;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.block.CCBlock;
+import com.syming.cursedcastle.block.ChurchAltarBlock;
 import com.syming.cursedcastle.block.CrucifixBlock;
+import com.syming.cursedcastle.block.TripleBlockPart;
 import com.syming.cursedcastle.block.head.CCHeadBlock;
 import com.syming.cursedcastle.block.head.CCWallHeadBlock;
 import net.minecraft.core.Direction;
@@ -60,6 +62,8 @@ public class CCBlockStateProvider extends BlockStateProvider {
                 }
             }
         }
+
+        altarChurchBlock(CCBlock.CHURCH_ALTAR.get());
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
@@ -72,6 +76,26 @@ public class CCBlockStateProvider extends BlockStateProvider {
 
     private void skullWall(RegistryObject<Block> skullBlock) {
         simpleBlock(skullBlock.get(), models().getExistingFile(mcLoc("block/skull")));
+    }
+
+    private void altarChurchBlock(Block altarBlock) {
+        getVariantBuilder(altarBlock)
+                .forAllStates(blockState -> {
+                    Direction direction = blockState.getValue(ChurchAltarBlock.FACING);
+                    TripleBlockPart part = blockState.getValue(ChurchAltarBlock.PART);
+
+                    int yRot = switch (direction) {
+                        case SOUTH -> 180;
+                        case EAST -> 90;
+                        case WEST -> 270;
+                        default -> 0;
+                    };
+                    return ConfiguredModel.builder()
+                            .modelFile(new ModelFile.UncheckedModelFile(modLoc(part == TripleBlockPart.LEFT ? "block/left_church_altar" : part == TripleBlockPart.RIGHT ? "block/right_church_altar" : "block/middle_church_altar")))
+                            .rotationY(yRot)
+                            .build();
+                });
+        simpleBlockItem(altarBlock, new ModelFile.UncheckedModelFile(modLoc("block/church_altar")));
     }
 
     private void crucifixBlock(Block crucifixBlock, WoodType woodType) {
@@ -87,7 +111,7 @@ public class CCBlockStateProvider extends BlockStateProvider {
                         default -> 0;
                     };
                     return ConfiguredModel.builder()
-                            .modelFile(new ModelFile.UncheckedModelFile(modLoc(half == DoubleBlockHalf.LOWER ? "block/"+ woodType.name() + '_' + "crucifix" + '_' + "bottom" : "block/" + woodType.name() + '_' + "crucifix" + '_' + "top"))) // for the block crucifix
+                            .modelFile(new ModelFile.UncheckedModelFile(modLoc(half == DoubleBlockHalf.LOWER ? "block/" + woodType.name() + '_' + "crucifix" + '_' + "bottom" : "block/" + woodType.name() + '_' + "crucifix" + '_' + "top"))) // for the block crucifix
                             .rotationY(yRot)
                             .build();
                 });

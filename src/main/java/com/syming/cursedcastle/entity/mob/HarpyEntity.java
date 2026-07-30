@@ -228,15 +228,15 @@ public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, IL
     }
 
     private void launchDagger(double posX, double posY, double posZ, double speed) {
-        ItemStack woodenStack = new ItemStack(CCItem.WOODEN_DAGGER.get());
-        ItemStack stoneStack = new ItemStack(CCItem.STONE_DAGGER.get());
-        ItemStack ironStack = new ItemStack(CCItem.IRON_DAGGER.get());
-        ItemStack goldenStack = new ItemStack(CCItem.GOLDEN_DAGGER.get());
-        ItemStack diamondStack = new ItemStack(CCItem.DIAMOND_DAGGER.get());
-        ItemStack netheriteStack = new ItemStack(CCItem.NETHERITE_DAGGER.get());
+        ItemStack woodenStack = new ItemStack(CCItem.DAGGER_ITEM_TYPES.get(Tiers.WOOD).get());
+        ItemStack stoneStack = new ItemStack(CCItem.DAGGER_ITEM_TYPES.get(Tiers.STONE).get());
+        ItemStack ironStack = new ItemStack(CCItem.DAGGER_ITEM_TYPES.get(Tiers.IRON).get());
+        ItemStack goldenStack = new ItemStack(CCItem.DAGGER_ITEM_TYPES.get(Tiers.GOLD).get());
+        ItemStack diamondStack = new ItemStack(CCItem.DAGGER_ITEM_TYPES.get(Tiers.DIAMOND).get());
+        ItemStack netheriteStack = new ItemStack(CCItem.DAGGER_ITEM_TYPES.get(Tiers.NETHERITE).get());
 
 
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide()) {
             if (getRandom().nextFloat() < 0.33F) {
                 DaggerEntity dagger = new DaggerEntity(this, this.level(),  woodenStack, Tiers.WOOD);
                 dagger.setPos(posX, posY, posZ);

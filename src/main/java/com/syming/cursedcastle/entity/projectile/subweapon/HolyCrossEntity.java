@@ -247,20 +247,9 @@ public class HolyCrossEntity extends CCThrowableWeapon {
     protected Item getDefaultItem() {
         ItemStack stack = this.getItemRaw();
         if (stack.isEmpty()) {
-            if (stack.getItem() instanceof HolyCrossItem holyCrossItem) {
-                Tier holyCrossItemTier = holyCrossItem.getTier();
-                if (holyCrossItemTier == Tiers.WOOD) {
-                    return CCItem.WOODEN_HOLY_CROSS.get();
-                } else if (holyCrossItemTier == Tiers.STONE) {
-                    return CCItem.STONE_HOLY_CROSS.get();
-                } else if (holyCrossItemTier == Tiers.IRON) {
-                    return CCItem.IRON_HOLY_CROSS.get();
-                } else if (holyCrossItemTier == Tiers.GOLD) {
-                    return CCItem.GOLDEN_HOLY_CROSS.get();
-                } else if (holyCrossItemTier == Tiers.DIAMOND) {
-                    return CCItem.DIAMOND_HOLY_CROSS.get();
-                } else if (holyCrossItemTier == Tiers.NETHERITE) {
-                    return CCItem.NETHERITE_HOLY_CROSS.get();
+            if (stack.getItem() instanceof HolyCrossItem) {
+                for (Tier tier : Tiers.values()) {
+                    return CCItem.HOLY_CROSS_ITEM_TYPES.get(tier).get();
                 }
             }
         }

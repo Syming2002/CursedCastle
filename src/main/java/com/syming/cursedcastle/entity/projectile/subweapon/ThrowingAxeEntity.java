@@ -71,20 +71,9 @@ public class ThrowingAxeEntity extends CCThrowableWeapon {
     protected Item getDefaultItem() {
         ItemStack stack = this.getItemRaw();
         if (stack.isEmpty()) {
-            if (stack.getItem() instanceof ThrowingAxeItem throwingAxeItem) {
-                Tier throwingAxeItemTier = throwingAxeItem.getTier();
-                if (throwingAxeItemTier == Tiers.WOOD) {
-                    return CCItem.WOODEN_THROWING_AXE.get();
-                } else if (throwingAxeItemTier == Tiers.STONE) {
-                    return CCItem.STONE_THROWING_AXE.get();
-                } else if (throwingAxeItemTier == Tiers.IRON) {
-                    return CCItem.IRON_THROWING_AXE.get();
-                } else if (throwingAxeItemTier == Tiers.GOLD) {
-                    return CCItem.GOLDEN_THROWING_AXE.get();
-                } else if (throwingAxeItemTier == Tiers.DIAMOND) {
-                    return CCItem.DIAMOND_THROWING_AXE.get();
-                } else if (throwingAxeItemTier == Tiers.NETHERITE) {
-                    return CCItem.NETHERITE_THROWING_AXE.get();
+            if (stack.getItem() instanceof ThrowingAxeItem) {
+                for (Tier tier : Tiers.values()) {
+                    CCItem.THROWING_AXE_ITEM_TYPES.get(tier).get();
                 }
             }
         }

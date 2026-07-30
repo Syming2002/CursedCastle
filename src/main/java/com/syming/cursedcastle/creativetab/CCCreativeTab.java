@@ -3,22 +3,18 @@ package com.syming.cursedcastle.creativetab;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.compat.forestry.CCBeesApicultureItems;
-import com.syming.cursedcastle.compat.forestry.CCBeesEnumHoneyComb;
 import com.syming.cursedcastle.compat.forestry.CCBeesItemHoneyComb;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.CCSpawnEggItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
+import com.syming.cursedcastle.item.whip.vampirekiller.tip.TipType;
 import forestry.api.apiculture.genetics.IBeeSpecies;
 import forestry.api.genetics.ILifeStage;
 import forestry.core.utils.SpeciesUtil;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -44,42 +40,26 @@ public class CCCreativeTab {
                         output.accept(CCItem.ROSE_STEM_WHIP.get());
                         output.accept(CCItem.UNDEAD_KILLER_WHIP.get());
                         output.accept(CCItem.VAMPIRE_KILLER_WHIP.get());
-                        output.accept(CCItem.VAMPIRE_KILLER_CRUSHING_STONE_TIP_WHIP.get());
-                        output.accept(CCItem.VAMPIRE_KILLER_BULLET_TIP_WHIP.get());
-                        output.accept(CCItem.VAMPIRE_KILLER_RED_STONE_TIP_WHIP.get());
-                        output.accept(CCItem.VAMPIRE_KILLER_BLUE_STONE_TIP_WHIP.get());
-                        output.accept(CCItem.VAMPIRE_KILLER_GREEN_STONE_TIP_WHIP.get());
 
                         // Whip Tips
-                        output.accept(CCItem.BULLET_TIP.get());
-                        output.accept(CCItem.CRUSHING_STONE_TIP.get());
-                        output.accept(CCItem.RED_STONE_TIP.get());
-                        output.accept(CCItem.BLUE_STONE_TIP.get());
-                        output.accept(CCItem.GREEN_STONE_TIP.get());
+                        for (TipType tipType : TipType.values()) {
+                            output.accept(CCItem.TIP_TYPES.get(tipType).get());
+                            output.accept(CCItem.VAMPIRE_KILLER_ELEMENTAL_WHIP.get(tipType).get());
+                        }
 
                         // Subweapons
-                        output.accept(CCItem.WOODEN_DAGGER.get());
-                        output.accept(CCItem.STONE_DAGGER.get());
-                        output.accept(CCItem.IRON_DAGGER.get());
-                        output.accept(CCItem.GOLDEN_DAGGER.get());
-                        output.accept(CCItem.DIAMOND_DAGGER.get());
-                        output.accept(CCItem.NETHERITE_DAGGER.get());
-                        output.accept(CCItem.WOODEN_THROWING_AXE.get());
-                        output.accept(CCItem.STONE_THROWING_AXE.get());
-                        output.accept(CCItem.IRON_THROWING_AXE.get());
-                        output.accept(CCItem.GOLDEN_THROWING_AXE.get());
-                        output.accept(CCItem.DIAMOND_THROWING_AXE.get());
-                        output.accept(CCItem.NETHERITE_THROWING_AXE.get());
-                        output.accept(CCItem.WOODEN_HOLY_CROSS.get());
-                        output.accept(CCItem.STONE_HOLY_CROSS.get());
-                        output.accept(CCItem.IRON_HOLY_CROSS.get());
-                        output.accept(CCItem.GOLDEN_HOLY_CROSS.get());
-                        output.accept(CCItem.DIAMOND_HOLY_CROSS.get());
-                        output.accept(CCItem.NETHERITE_HOLY_CROSS.get());
+                        for (Tier tier : Tiers.values()) {
+                            output.accept(CCItem.DAGGER_ITEM_TYPES.get(tier).get());
+                            output.accept(CCItem.HOLY_CROSS_ITEM_TYPES.get(tier).get());
+                            output.accept(CCItem.THROWING_AXE_ITEM_TYPES.get(tier).get());
+                        }
+
                         output.accept(CCItem.HOLY_BIBLE.get());
                         output.accept(CCItem.HOLY_WATER.get());
 
                         // Blocks
+                        output.accept(CCBlock.CHURCH_ALTAR.get());
+
                         output.accept(CCBlock.DRACULA_CASTLE_COBBLESTONE.get());
                         output.accept(CCBlock.DRACULA_CASTLE_STONE.get());
                         output.accept(CCBlock.DRACULA_CASTLE_STONE_BRICKS.get());

@@ -23,7 +23,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "cursedcastle:wooden_holy_cross",
+          "name": "cursedcastle:wood_holy_cross",
           "conditions": [],
           "functions": [
             {

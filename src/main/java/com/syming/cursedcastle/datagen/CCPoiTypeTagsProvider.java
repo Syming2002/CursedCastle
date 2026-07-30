@@ -19,6 +19,7 @@ public class CCPoiTypeTagsProvider extends PoiTypeTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(PoiTypeTags.ACQUIRABLE_JOB_SITE)
-                .addOptional(new ResourceLocation(CursedCastleMod.MOD_ID, "priest_poi"));
+                .addOptional(new ResourceLocation(CursedCastleMod.MOD_ID, "leader_priest_poi"))
+                .addOptional(new ResourceLocation(CursedCastleMod.MOD_ID, "high_priest_poi"));
     }
 }

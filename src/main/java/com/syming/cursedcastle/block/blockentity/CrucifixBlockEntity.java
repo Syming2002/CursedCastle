@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
-public class CrucifixBlockEntity extends BlockEntity implements BlockEntityTicker<CrucifixBlockEntity> {
+public class CrucifixBlockEntity extends BlockEntity {
 
     private WoodType woodType;
 
@@ -25,12 +25,11 @@ public class CrucifixBlockEntity extends BlockEntity implements BlockEntityTicke
         return CCBlockEntity.CRUCIFIX_BLOCK_ENTITY_TYPES.get(this.woodType).get();
     }
 
-    public WoodType getWoodType() {
-        return this.woodType;
+    public <T extends BlockEntity> void tick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntityType) {
+        if (pLevel.isClientSide()) return;
     }
 
-    @Override
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, CrucifixBlockEntity pBlockEntity) {
-
+    public WoodType getWoodType() {
+        return this.woodType;
     }
 }

@@ -176,16 +176,11 @@ public class DaggerEntity extends AbstractArrow {
     }
 
     public void setItem(ItemStack pStack) {
-        if (!pStack.is(CCItem.WOODEN_DAGGER.get())
-                || !pStack.is(CCItem.STONE_DAGGER.get())
-                || !pStack.is(CCItem.IRON_DAGGER.get())
-                || !pStack.is(CCItem.GOLDEN_DAGGER.get())
-                || !pStack.is(CCItem.DIAMOND_DAGGER.get())
-                || !pStack.is(CCItem.NETHERITE_DAGGER.get())
-                || pStack.hasTag()) {
-            this.getEntityData().set(ITEM_STACK, pStack.copyWithCount(1));
+        for (Tier tier : Tiers.values()) {
+            if (!pStack.is(CCItem.DAGGER_ITEM_TYPES.get(tier).get()) || pStack.hasTag()) {
+                this.getEntityData().set(ITEM_STACK, pStack.copyWithCount(1));
+            }
         }
-
     }
 
     protected ItemStack getItemRaw() {
@@ -195,45 +190,23 @@ public class DaggerEntity extends AbstractArrow {
     @Override
     public ItemStack getPickupItem() {
         ItemStack stack = getItemRaw();
-        if (stack != null && stack.getItem() instanceof DaggerItem daggerItem) {
-            Tier daggerItemTier = daggerItem.getTier();
-            if (daggerItemTier == Tiers.WOOD) {
-                return new ItemStack(CCItem.WOODEN_DAGGER.get());
-            } else if (daggerItemTier == Tiers.STONE) {
-                return new ItemStack(CCItem.STONE_DAGGER.get());
-            } else if (daggerItemTier == Tiers.IRON) {
-                return new ItemStack(CCItem.IRON_DAGGER.get());
-            } else if (daggerItemTier == Tiers.GOLD) {
-                return new ItemStack(CCItem.GOLDEN_DAGGER.get());
-            } else if (daggerItemTier == Tiers.DIAMOND) {
-                return new ItemStack(CCItem.DIAMOND_DAGGER.get());
-            } else if (daggerItemTier == Tiers.NETHERITE) {
-                return new ItemStack(CCItem.NETHERITE_DAGGER.get());
+        if (stack != null && stack.getItem() instanceof DaggerItem) {
+            for (Tier tier : Tiers.values()) {
+                return new ItemStack(CCItem.DAGGER_ITEM_TYPES.get(tier).get());
             }
         }
-        return new ItemStack(CCItem.WOODEN_DAGGER.get());
+        return ItemStack.EMPTY;
     }
 
     @Override
     public @Nullable ItemStack getPickResult() {
         ItemStack stack = getPickupItem();
-        if (stack.getItem() instanceof DaggerItem daggerItem) {
-            Tier daggerItemTier = daggerItem.getTier();
-            if (daggerItemTier == Tiers.WOOD) {
-                return new ItemStack(CCItem.WOODEN_DAGGER.get());
-            } else if (daggerItemTier == Tiers.STONE) {
-                return new ItemStack(CCItem.STONE_DAGGER.get());
-            } else if (daggerItemTier == Tiers.IRON) {
-                return new ItemStack(CCItem.IRON_DAGGER.get());
-            } else if (daggerItemTier == Tiers.GOLD) {
-                return new ItemStack(CCItem.GOLDEN_DAGGER.get());
-            } else if (daggerItemTier == Tiers.DIAMOND) {
-                return new ItemStack(CCItem.DIAMOND_DAGGER.get());
-            } else if (daggerItemTier == Tiers.NETHERITE) {
-                return new ItemStack(CCItem.NETHERITE_DAGGER.get());
+        if (stack.getItem() instanceof DaggerItem) {
+            for (Tier tier : Tiers.values()) {
+                return new ItemStack(CCItem.DAGGER_ITEM_TYPES.get(tier).get());
             }
         }
-        return new ItemStack(CCItem.WOODEN_DAGGER.get());
+        return ItemStack.EMPTY;
     }
 
     @Override

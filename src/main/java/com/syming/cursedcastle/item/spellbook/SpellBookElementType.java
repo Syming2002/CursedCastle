@@ -2,12 +2,13 @@ package com.syming.cursedcastle.item.spellbook;
 
 import com.syming.cursedcastle.damagetype.CCDamageType;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.item.Rarity;
 
 import org.jetbrains.annotations.Nullable;
 
-public enum SpellBookElementType {
+public enum SpellBookElementType implements StringRepresentable {
     FIRE("fire", CCDamageType.FIRE, Rarity.UNCOMMON),
     ICE("ice", CCDamageType.ICE, Rarity.UNCOMMON),
     BOLT("bolt", CCDamageType.THUNDER, Rarity.RARE),
@@ -25,15 +26,16 @@ public enum SpellBookElementType {
         this.rarity = pRarity;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
     public ResourceKey<DamageType> getResourceKeyDamageType() {
         return this.resourceKeyDamageType;
     }
 
     public Rarity getRarity() {
         return this.rarity;
+    }
+
+    @Override
+    public String getSerializedName() {
+        return this.name;
     }
 }

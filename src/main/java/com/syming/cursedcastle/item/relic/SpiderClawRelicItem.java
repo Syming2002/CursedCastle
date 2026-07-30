@@ -6,7 +6,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-public class SpiderClawRelicItem extends Item implements ICurioItem {
+public class SpiderClawRelicItem extends CCRelicItem {
 
     public SpiderClawRelicItem(Properties pProperties) {
         super(pProperties);
