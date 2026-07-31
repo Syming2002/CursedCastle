@@ -207,8 +207,10 @@ dependencies {
 
 
     // TOP
-    implementation fg.deobf("curse.maven:the-one-probe-${the_one_probe_id}")
+//    implementation fg.deobf("curse.maven:the-one-probe-${the_one_probe_id}")
 
+    // Jade
+    implementation fg.deobf("curse.maven:jade-${jade_id}")
 
     // EMI
 //    compileOnly fg.deobf("dev.emi:emi-forge:${emi_version}:api")
@@ -238,6 +240,9 @@ dependencies {
 //    runtimeOnly(fg.deobf("curse.maven:data-anchor-${data_anchor_id}"))
     implementation fg.deobf("curse.maven:enhanced-celestials-${enhanced_celestials_id}")
     implementation fg.deobf("curse.maven:productivebees-${productivebees_id}")
+
+    implementation fg.deobf("curse.maven:enhanced-celestials-shader-support-${enhanced_celestials_shader_support_id}")
+
 
     implementation fg.deobf("curse.maven:building-wands-${building_wands_id}")
 

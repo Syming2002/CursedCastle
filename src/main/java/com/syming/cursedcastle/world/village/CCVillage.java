@@ -83,8 +83,10 @@ public class CCVillage {
 
             if (biomeId.getNamespace().equals("minecraft")) {
                 switch (modId) {
-                    case "minecraft" ->
-                            addBuildingToPool(templatePoolRegistry, processorListRegistry, biomeId.withPath("village/" + biomeId.getPath() + "/streets"), CursedCastleMod.MOD_ID + ":village/" + biomeId.getPath() + "/big_church", 4);
+                    case "minecraft" -> {
+                        addBuildingToPool(templatePoolRegistry, processorListRegistry, biomeId.withPath("village/" + biomeId.getPath() + "/streets"), CursedCastleMod.MOD_ID + ":village/" + biomeId.getPath() + "/big_church", 4);
+                        addBuildingToPool(templatePoolRegistry, processorListRegistry, biomeId.withPath("village/snowy/streets"), CursedCastleMod.MOD_ID + ":village/snowy/big_church", 2);
+                    }
                     case "repurposed_structures" -> {
                         if (biomeId.getPath().equals("bamboo_jungle")) {
                             addBuildingToPool(templatePoolRegistry, processorListRegistry, new ResourceLocation("repurposed_structures:villages/bamboo/streets"), CursedCastleMod.MOD_ID + ":village/" + biomeId.getPath() + "/big_church", 2);
@@ -94,8 +96,10 @@ public class CCVillage {
                             addBuildingToPool(templatePoolRegistry, processorListRegistry, new ResourceLocation("repurposed_structures:villages/" + biomeId.getPath() + "/streets"), CursedCastleMod.MOD_ID + ":village/" + biomeId.getPath() + "/big_church", 2);
                         }
                     }
-                    case "ctov" ->
-                            addBuildingToPool(templatePoolRegistry, processorListRegistry, new ResourceLocation("ctov:village/" + biomeId.getPath() + "/roads"), CursedCastleMod.MOD_ID + ":village/" + biomeId.getPath() + "/big_church", 1);
+                    case "ctov" -> {
+                        addBuildingToPool(templatePoolRegistry, processorListRegistry, new ResourceLocation("ctov:village/" + biomeId.getPath() + "/roads"), CursedCastleMod.MOD_ID + ":village/" + biomeId.getPath() + "/big_church", 1);
+                        addBuildingToPool(templatePoolRegistry, processorListRegistry, new ResourceLocation("ctov:village/snowy_igloo/roads"), CursedCastleMod.MOD_ID + ":village/snowy/big_church", 1);
+                    }
                 }
             }
         }
