@@ -2,8 +2,8 @@ package com.syming.cursedcastle.item.projectile.subweapon;
 
 import com.syming.cursedcastle.entity.projectile.subweapon.HolyWaterEntity;
 import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
-import com.syming.cursedcastle.mp.PlayerMP;
-import com.syming.cursedcastle.mp.PlayerMPProvider;
+import com.syming.cursedcastle.data.mp.PlayerMP;
+import com.syming.cursedcastle.data.mp.PlayerMPProvider;
 import com.syming.cursedcastle.util.SpellBookUtil;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -27,13 +27,15 @@ public class HolyWaterItem extends Item {
         if (!pLevel.isClientSide()) {
 
             if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.WIND, pPlayer)) {
-                HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
-                holyWater.setOwner(pPlayer);
-                holyWater.setItem(throwStack);
-                holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), -20.0F, 0.5F, 1.0F);
-                pLevel.addFreshEntity(holyWater);
                 PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
-                playerMP.removeMP(50);
+                if (playerMP.getCurrentMP() >= 50) {
+                    HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
+                    holyWater.setOwner(pPlayer);
+                    holyWater.setItem(throwStack);
+                    holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), -20.0F, 0.5F, 1.0F);
+                    pLevel.addFreshEntity(holyWater);
+                    playerMP.removeMP(50);
+                }
             } else {
                 HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
                 holyWater.setItem(throwStack);

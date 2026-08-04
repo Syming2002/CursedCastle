@@ -1,16 +1,19 @@
 package com.syming.cursedcastle.event;
 
 import com.syming.cursedcastle.CursedCastleMod;
-import com.syming.cursedcastle.block.CrucifixBlock;
+import com.syming.cursedcastle.damagetype.CCDamageType;
+import com.syming.cursedcastle.data.IPlayerData;
+import com.syming.cursedcastle.data.PlayerData;
+import com.syming.cursedcastle.data.PlayerDataProvider;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.entity.projectile.subweapon.HolyWaterEntity;
 import com.syming.cursedcastle.entity.villager.CCVillager;
-import com.syming.cursedcastle.mp.PlayerMP;
-import com.syming.cursedcastle.mp.PlayerMPProvider;
+import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.data.mp.PlayerMP;
+import com.syming.cursedcastle.data.mp.PlayerMPProvider;
 import com.syming.cursedcastle.network.CCMPData;
 import com.syming.cursedcastle.network.CCPacketHandler;
-import com.syming.cursedcastle.tag.CCTag;
-import com.syming.cursedcastle.world.village.CCVillage;
+import com.syming.cursedcastle.network.CCPlayerData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -18,13 +21,13 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
@@ -56,7 +59,11 @@ public class CCCommonEventForge {
     public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
             if (!event.getObject().getCapability(PlayerMPProvider.PLAYER_MP).isPresent()) {
-                event.addCapability(new ResourceLocation(CursedCastleMod.MOD_ID, "properties"), new PlayerMPProvider());
+                event.addCapability(new ResourceLocation(CursedCastleMod.MOD_ID, "mp_properties"), new PlayerMPProvider());
+            }
+
+            if (!event.getObject().getCapability(PlayerDataProvider.PLAYER_DATA).isPresent()) {
+                event.addCapability(new ResourceLocation(CursedCastleMod.MOD_ID, "data_properties"), new PlayerDataProvider());
             }
         }
     }
@@ -69,28 +76,69 @@ public class CCCommonEventForge {
                     newMP.copyFrom(oldMP);
                 });
             });
+
+            event.getOriginal().getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(oldData -> {
+                event.getEntity().getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(newData -> {
+                    newData.setHolyBeamTicks(oldData.getHolyBeamTicks());
+                    newData.setBoltAttackEnabled(oldData.isBoltAttackEnabled());
+                });
+            });
         }
     }
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        Player player = event.player;
+
+        double beamX = player.getX();
+        double beamY = player.getY();
+        double beamZ = player.getZ();
+
         if (event.side == LogicalSide.SERVER) {
-            event.player.getCapability(PlayerMPProvider.PLAYER_MP).ifPresent(mp -> {
-                if (mp.getCurrentMP() < mp.getMaxMP() && event.player.tickCount % 20 == 0) {
-                    if (event.player.experienceLevel <= 10) {
+            player.getCapability(PlayerMPProvider.PLAYER_MP).ifPresent(mp -> {
+                if (mp.getCurrentMP() < mp.getMaxMP() && player.tickCount % 20 == 0) {
+                    if (player.experienceLevel <= 10) {
                         mp.addMP(1);
-                    } else if (event.player.experienceLevel <= 20) {
+                    } else if (player.experienceLevel <= 20) {
                         mp.addMP(2);
-                    } else if (event.player.experienceLevel <= 30) {
+                    } else if (player.experienceLevel <= 30) {
                         mp.addMP(3);
-                    } else if (event.player.experienceLevel <= 40) {
+                    } else if (player.experienceLevel <= 40) {
                         mp.addMP(4);
-                    } else if (event.player.experienceLevel <= 50) {
+                    } else if (player.experienceLevel <= 50) {
                         mp.addMP(5);
                     }
-                    CCPacketHandler.sendToPlayer(new CCMPData(mp.getCurrentMP()), (ServerPlayer) event.player);
+                    CCPacketHandler.sendToPlayer(new CCMPData(mp.getCurrentMP()), (ServerPlayer) player);
                 }
             });
+
+            IPlayerData data = player.getCapability(PlayerDataProvider.PLAYER_DATA).orElseGet(PlayerData::new);
+
+            if (data.isBoltAttackEnabled()) {
+                CCPacketHandler.sendToPlayer(new CCPlayerData(data), (ServerPlayer) player);
+
+                player.setInvulnerable(true);
+
+                ((ServerPlayer) player).teleportTo(beamX, data.getHolyBeamTicks() == 299 ? beamY + 2.0D : beamY, beamZ);
+
+                List<Monster> monsters = player.level().getNearbyEntities(Monster.class, TargetingConditions.DEFAULT, player, player.getBoundingBox().inflate(2.0D));
+
+                for (Monster monster : monsters) {
+                    monster.hurt(CCDamageType.causeThunderDamage(monster), 10.0F);
+                }
+
+                if (data.getHolyBeamTicks() > 0) {
+                    data.setHolyBeamTicks(data.getHolyBeamTicks() - 1);
+                }
+
+                if (data.getHolyBeamTicks() <= 0) {
+                    player.setDeltaMovement(player.getDeltaMovement());
+                    data.setBoltAttackEnabled(false);
+                    CCPacketHandler.sendToPlayer(new CCPlayerData(data), (ServerPlayer) player);
+                    data.setHolyBeamTicks(300);
+                    player.setInvulnerable(false);
+                }
+            }
         }
     }
 
@@ -99,6 +147,10 @@ public class CCCommonEventForge {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             serverPlayer.getCapability(PlayerMPProvider.PLAYER_MP).ifPresent(mp -> {
                 CCPacketHandler.sendToPlayer(new CCMPData(mp.getCurrentMP()), serverPlayer);
+            });
+
+            serverPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(data -> {
+                CCPacketHandler.sendToPlayer(new CCPlayerData(data), serverPlayer);
             });
         }
     }

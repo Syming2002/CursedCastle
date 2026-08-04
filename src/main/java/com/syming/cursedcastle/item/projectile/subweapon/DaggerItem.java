@@ -1,9 +1,8 @@
 package com.syming.cursedcastle.item.projectile.subweapon;
 
-import com.syming.cursedcastle.event.CCCommonEventForge;
 import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
-import com.syming.cursedcastle.mp.PlayerMP;
-import com.syming.cursedcastle.mp.PlayerMPProvider;
+import com.syming.cursedcastle.data.mp.PlayerMP;
+import com.syming.cursedcastle.data.mp.PlayerMPProvider;
 import com.syming.cursedcastle.sound.CCSound;
 import com.syming.cursedcastle.entity.projectile.subweapon.DaggerEntity;
 import com.syming.cursedcastle.util.SpellBookUtil;
@@ -14,19 +13,13 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.schedule.Schedule;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.ticks.ScheduledTick;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -61,6 +54,8 @@ public class DaggerItem extends Item {
             int loading = getUseDuration(pStack) - pTimeCharged;
             if (loading > 0) {
                 if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, player)) {
+                    PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
+                    if (playerMP.getCurrentMP() >= 60) {
                     for (int i = 0; i < 8; i++) {
                         DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
                         if (dagger.isAlive()) {
@@ -81,66 +76,70 @@ public class DaggerItem extends Item {
                             dagger.hasImpulse = true;
                         }
                     }
-                    PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
                     playerMP.removeMP(60);
+                }
                 } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, player)) {
-                    Vec3 look = player.getLookAngle().normalize();
-
-                    Vec3 side = new Vec3(-look.z, 0, look.x).normalize();
-
-                    double sideOffset = 1.0D;
-
-                    for (int i = 0; i < 2; i++) {
-
-                        DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
-
-                        if (dagger.isAlive()) {
-                            double direction = (i == 0) ? -1.0D : 1.0D;
-
-                            Vec3 spawnPos = player.position()
-                                    .add(0, player.getEyeHeight() - 0.2D, 0)
-                                    .add(side.scale(direction * sideOffset));
-
-                            dagger.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
-
-                            pLevel.addFreshEntity(dagger);
-
-                            dagger.shoot(
-                                    look.x,
-                                    look.y,
-                                    look.z,
-                                    1.8F,
-                                    0.5F
-                            );
-
-                            dagger.hasImpulse = true;
-                        }
-                    }
                     PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
-                    playerMP.removeMP(30);
-                } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.WIND, player)) {
-                    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-                    for (int i = 0; i < 20; i++) {
-                        DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
+                    if (playerMP.getCurrentMP() >= 30) {
+                        Vec3 look = player.getLookAngle().normalize();
 
+                        Vec3 side = new Vec3(-look.z, 0, look.x).normalize();
 
-                        if (dagger.isAlive()) {
-                            executorService.schedule(() -> {
+                        double sideOffset = 1.0D;
+
+                        for (int i = 0; i < 2; i++) {
+
+                            DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
+
+                            if (dagger.isAlive()) {
+                                double direction = (i == 0) ? -1.0D : 1.0D;
+
+                                Vec3 spawnPos = player.position()
+                                        .add(0, player.getEyeHeight() - 0.2D, 0)
+                                        .add(side.scale(direction * sideOffset));
+
+                                dagger.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
+
                                 pLevel.addFreshEntity(dagger);
+
                                 dagger.shoot(
-                                        player.getLookAngle().x,
-                                        player.getLookAngle().y,
-                                        player.getLookAngle().z,
-                                        2.5F,
-                                        0.8F
+                                        look.x,
+                                        look.y,
+                                        look.z,
+                                        1.8F,
+                                        0.5F
                                 );
 
-                            }, 100 * i, TimeUnit.MILLISECONDS);
+                                dagger.hasImpulse = true;
+                            }
                         }
-                        dagger.hasImpulse = true;
+                        playerMP.removeMP(30);
                     }
+                } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.WIND, player)) {
                     PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
-                    playerMP.removeMP(40);
+                    if (playerMP.getCurrentMP() >= 40) {
+                        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+                        for (int i = 0; i < 20; i++) {
+                            DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
+
+
+                            if (dagger.isAlive()) {
+                                executorService.schedule(() -> {
+                                    pLevel.addFreshEntity(dagger);
+                                    dagger.shoot(
+                                            player.getLookAngle().x,
+                                            player.getLookAngle().y,
+                                            player.getLookAngle().z,
+                                            2.5F,
+                                            0.8F
+                                    );
+
+                                }, 100 * i, TimeUnit.MILLISECONDS);
+                            }
+                            dagger.hasImpulse = true;
+                        }
+                        playerMP.removeMP(40);
+                    }
                 } else {
                     if (!pLevel.isClientSide()) {
                         DaggerEntity daggerEntity = new DaggerEntity(player, pLevel, pStack, getTier());

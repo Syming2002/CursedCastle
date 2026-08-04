@@ -39,7 +39,7 @@ public class CCPacketHandler {
         INSTANCE.messageBuilder(CCMessageHurtMultiPart.class, id++)
                 .encoder(CCMessageHurtMultiPart::write)
                 .decoder(CCMessageHurtMultiPart::read)
-                .consumerMainThread(CCMessageHurtMultiPart.Handler::handle)
+                .consumerMainThread(CCMessageHurtMultiPart::handle)
                 .add();
 
         INSTANCE.messageBuilder(CCSpawnFriendlyZombie.class, id++)
@@ -76,6 +76,12 @@ public class CCPacketHandler {
                 .encoder(CCMPData::toBytes)
                 .decoder(CCMPData::new)
                 .consumerMainThread(CCMPData::handle)
+                .add();
+
+        INSTANCE.messageBuilder(CCPlayerData.class, id++)
+                .encoder(CCPlayerData::toBytes)
+                .decoder(CCPlayerData::new)
+                .consumerMainThread(CCPlayerData::handle)
                 .add();
     }
 

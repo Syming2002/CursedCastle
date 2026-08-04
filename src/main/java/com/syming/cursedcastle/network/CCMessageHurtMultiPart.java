@@ -55,42 +55,36 @@ public class CCMessageHurtMultiPart {
         buf.writeUtf(message.damageType);
     }
 
-    public static class Handler {
-        public Handler() {
-        }
+    public static void handle(CCMessageHurtMultiPart message, Supplier<NetworkEvent.Context> context) {
+        context.get().setPacketHandled(true);
+        context.get().enqueueWork(() -> {
+            Player player = context.get().getSender();
+            if (context.get().getDirection().getReceptionSide() == LogicalSide.CLIENT) {
+                player = Minecraft.getInstance().player;
+            }
 
-        public static void handle(CCMessageHurtMultiPart message, Supplier<NetworkEvent.Context> context) {
-            context.get().setPacketHandled(true);
-            context.get().enqueueWork(() -> {
-                Player player = context.get().getSender();
-                if (context.get().getDirection().getReceptionSide() == LogicalSide.CLIENT) {
-                    player = Minecraft.getInstance().player;
-                }
-
-                if (player != null) {
-                    if (player.level() != null) {
-                        PartEntity<?> part = (PartEntity<?>) player.level().getEntity(message.part);
-                        Entity parent = player.level().getEntity(message.parent);
-                        Registry<DamageType> registry = player.level().registryAccess().registry(Registries.DAMAGE_TYPE).get();
-                        DamageType dmg = registry.get(new ResourceLocation(message.damageType));
-                        if (dmg != null) {
-                            Holder<DamageType> holder = registry.getHolder(registry.getId(dmg)).orElseGet(null);
-                            if (holder != null) {
-                                DamageSource source = new DamageSource(registry.getHolder(registry.getId(dmg)).get());
-                                if (part instanceof ISyncHurtMultipart && parent instanceof LivingEntity) {
-                                    ((ISyncHurtMultipart) part).onServerMultipartAttack((LivingEntity) parent, source, message.damage);
-                                }
-                                if (part != null && parent != null && parent.isMultipartEntity() && parent instanceof DraculaEntity dracula) {
-                                    dracula.hurtHead(part, source, message.damage);
-                                } else if (part != null && parent != null && parent.isMultipartEntity() && parent instanceof ArachneEntity arachne) {
-                                    arachne.hurtHumanBody(part, source, message.damage);
-                                }
+            if (player != null) {
+                if (player.level() != null) {
+                    PartEntity<?> part = (PartEntity<?>) player.level().getEntity(message.part);
+                    Entity parent = player.level().getEntity(message.parent);
+                    Registry<DamageType> registry = player.level().registryAccess().registry(Registries.DAMAGE_TYPE).get();
+                    DamageType dmg = registry.get(new ResourceLocation(message.damageType));
+                    if (dmg != null) {
+                        Holder<DamageType> holder = registry.getHolder(registry.getId(dmg)).orElseGet(null);
+                        if (holder != null) {
+                            DamageSource source = new DamageSource(registry.getHolder(registry.getId(dmg)).get());
+                            if (part instanceof ISyncHurtMultipart && parent instanceof LivingEntity) {
+                                ((ISyncHurtMultipart) part).onServerMultipartAttack((LivingEntity) parent, source, message.damage);
+                            }
+                            if (part != null && parent != null && parent.isMultipartEntity() && parent instanceof DraculaEntity dracula) {
+                                dracula.hurtHead(part, source, message.damage);
+                            } else if (part != null && parent != null && parent.isMultipartEntity() && parent instanceof ArachneEntity arachne) {
+                                arachne.hurtHumanBody(part, source, message.damage);
                             }
                         }
                     }
                 }
-            });
-        }
+            }
+        });
     }
-
 }

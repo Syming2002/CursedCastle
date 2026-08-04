@@ -1,12 +1,17 @@
 package com.syming.cursedcastle.item.projectile.subweapon;
 
+import com.syming.cursedcastle.data.IPlayerData;
+import com.syming.cursedcastle.data.PlayerData;
+import com.syming.cursedcastle.data.PlayerDataProvider;
 import com.syming.cursedcastle.entity.projectile.subweapon.FireHolyCrossEntity;
 import com.syming.cursedcastle.entity.projectile.subweapon.IceHolyCrossEntity;
-import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.event.CCCommonEventForge;
 import com.syming.cursedcastle.item.CCThrowableItem;
 import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
-import com.syming.cursedcastle.mp.PlayerMP;
-import com.syming.cursedcastle.mp.PlayerMPProvider;
+import com.syming.cursedcastle.data.mp.PlayerMP;
+import com.syming.cursedcastle.data.mp.PlayerMPProvider;
+import com.syming.cursedcastle.network.CCPacketHandler;
+import com.syming.cursedcastle.network.CCPlayerData;
 import com.syming.cursedcastle.sound.CCSound;
 import com.syming.cursedcastle.util.HolyCrossUtil;
 import com.syming.cursedcastle.entity.projectile.subweapon.HolyCrossEntity;
@@ -22,7 +27,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.List;
 
@@ -48,15 +52,28 @@ public class HolyCrossItem extends CCThrowableItem {
         if (!pLevel.isClientSide()) {
             ItemStack thrownStackCopy = throwStack.copy();
             if (isWearingSpellBook(SpellBookElementType.FIRE, pPlayer)) {
-                FireHolyCrossEntity fireHolyCross = new FireHolyCrossEntity(pLevel, pPlayer);
-                pLevel.addFreshEntity(fireHolyCross);
                 PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
-                playerMP.removeMP(50);
+                if (playerMP.getCurrentMP() >= 50) {
+                    FireHolyCrossEntity fireHolyCross = new FireHolyCrossEntity(pLevel, pPlayer);
+                    pLevel.addFreshEntity(fireHolyCross);
+                    playerMP.removeMP(50);
+                }
             } else if (isWearingSpellBook(SpellBookElementType.ICE, pPlayer)) {
-                IceHolyCrossEntity iceHolyCross = new IceHolyCrossEntity(pLevel, pPlayer);
-                pLevel.addFreshEntity(iceHolyCross);
                 PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
-                playerMP.removeMP(30);
+                if (playerMP.getCurrentMP() >= 30) {
+                    IceHolyCrossEntity iceHolyCross = new IceHolyCrossEntity(pLevel, pPlayer);
+                    pLevel.addFreshEntity(iceHolyCross);
+                    playerMP.removeMP(30);
+                }
+            } else if (isWearingSpellBook(SpellBookElementType.BOLT, pPlayer)) {
+                PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
+                if (playerMP.getCurrentMP() >= 60) {
+                    IPlayerData playerData = pPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).orElseGet(PlayerData::new);
+                    playerData.setHolyBeamTicks(300);
+                    playerData.setBoltAttackEnabled(true);
+                    CCPacketHandler.sendToPlayer(new CCPlayerData(playerData), (ServerPlayer) pPlayer);
+                    playerMP.removeMP(60);
+                }
             } else {
                 HolyCrossEntity holyCross = new HolyCrossEntity(pPlayer, pLevel, thrownStackCopy, getTier());
                 pLevel.addFreshEntity(holyCross);
@@ -106,5 +123,13 @@ public class HolyCrossItem extends CCThrowableItem {
         return true;
     }
 
+    @Override
+    public UseAnim getUseAnimation(ItemStack pStack) {
+        return UseAnim.NONE;
+    }
 
+    @Override
+    public int getUseDuration(ItemStack pStack) {
+        return 100;
+    }
 }

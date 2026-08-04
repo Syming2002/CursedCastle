@@ -1,5 +1,8 @@
 package com.syming.cursedcastle;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.block.blockentity.CCBlockEntity;
 import com.syming.cursedcastle.block.head.CCHeadBlock;
@@ -14,6 +17,7 @@ import com.syming.cursedcastle.creativetab.CCCreativeTab;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.enchantment.CCEnchantment;
 import com.syming.cursedcastle.entity.CCEntity;
+import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
 import com.syming.cursedcastle.entity.villager.CCVillager;
 import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.fluid.CCFluidType;
@@ -25,16 +29,21 @@ import com.syming.cursedcastle.potion.CCPotion;
 import com.syming.cursedcastle.recipe.BrewingStandRecipe;
 import com.syming.cursedcastle.sound.CCSound;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -44,6 +53,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegistryObject;
+import org.joml.Matrix4f;
 
 import javax.swing.text.html.parser.Entity;
 
@@ -52,7 +62,6 @@ import javax.swing.text.html.parser.Entity;
 public class CursedCastleMod {
 
     public static final String MOD_ID = "cursedcastle";
-
 
 
     public CursedCastleMod() {
@@ -130,7 +139,6 @@ public class CursedCastleMod {
                 for (RegistryObject<EntityType<?>> entityThrownItem : CCEntity.ENTITY_TYPES.getEntries()) {
 
 
-
                     for (Tiers tier : Tiers.values()) {
                         if (entityThrownItem.get() == CCEntity.DAGGER_TYPES.get(tier).get()) {
                             EntityRenderers.register(CCEntity.DAGGER_TYPES.get(tier).get(), DaggerRenderer::new);
@@ -139,7 +147,6 @@ public class CursedCastleMod {
                         if (entityThrownItem.get() == CCEntity.HOLY_CROSS_TYPES.get(tier).get()) {
                             EntityRenderers.register(CCEntity.HOLY_CROSS_TYPES.get(tier).get(), ThrownItemRenderer::new);
                         }
-
 
 
                         if (entityThrownItem.get() == CCEntity.THROWING_AXE_TYPES.get(tier).get()) {
@@ -175,14 +182,14 @@ public class CursedCastleMod {
                 EntityRenderers.register(CCEntity.HOLY_FIRE.get(), NoopRenderer::new);
 
                 Minecraft.getInstance().getItemColors().register((pStack, pTintIndex) -> {
-                    if ((pStack.getItem() == CCItem.BLOOD_BUCKET.get() || pStack.getItem() == CCBlock.BLOOD_BLOCK.get().asItem()) && pTintIndex == 1) {
-                        return 0xFF701914;
-                    }
-                    if (pStack.getItem() == CCItem.HOLY_WATER_BUCKET.get() && pTintIndex == 1) {
-                        return 0xFF6783BD;
-                    }
-                    return 0xFFFFFFFF;
-                }, CCItem.BLOOD_BUCKET.get(), CCBlock.BLOOD_BLOCK.get().asItem(),
+                            if ((pStack.getItem() == CCItem.BLOOD_BUCKET.get() || pStack.getItem() == CCBlock.BLOOD_BLOCK.get().asItem()) && pTintIndex == 1) {
+                                return 0xFF701914;
+                            }
+                            if (pStack.getItem() == CCItem.HOLY_WATER_BUCKET.get() && pTintIndex == 1) {
+                                return 0xFF6783BD;
+                            }
+                            return 0xFFFFFFFF;
+                        }, CCItem.BLOOD_BUCKET.get(), CCBlock.BLOOD_BLOCK.get().asItem(),
                         CCItem.HOLY_WATER_BUCKET.get());
             });
         }

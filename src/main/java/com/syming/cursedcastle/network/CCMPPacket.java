@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.network;
 
-import com.syming.cursedcastle.mp.PlayerMP;
-import com.syming.cursedcastle.mp.PlayerMPProvider;
+import com.syming.cursedcastle.data.mp.PlayerMP;
+import com.syming.cursedcastle.data.mp.PlayerMPProvider;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,7 +30,7 @@ public class CCMPPacket {
 
             if (playerMP.getCurrentMP() < playerMP.getMaxMP()) {
                 player.getCapability(PlayerMPProvider.PLAYER_MP).ifPresent(mp -> {
-                    mp.addMP(5);
+//                    mp.addMP(5);
                     CCPacketHandler.sendToPlayer(new CCMPData(mp.getCurrentMP()), player);
                 });
             }

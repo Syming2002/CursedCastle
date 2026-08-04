@@ -35,7 +35,6 @@ public class DraculaRenderer extends MobRenderer<DraculaEntity, DraculaModel> {
                 && ((pEntity.getTeleportTick() >= 50 && pEntity.getTeleportTick() < 70)
                 || (pEntity.getTeleportTick() >= 100 && pEntity.getTeleportTick() < 120))) {
             renderLaserBeam(pEntity, pPoseStack, pBuffer);
-//            System.out.println("Rendering Laser Beam");
         }
     }
 

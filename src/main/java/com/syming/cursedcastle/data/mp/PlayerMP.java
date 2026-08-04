@@ -1,4 +1,4 @@
-package com.syming.cursedcastle.mp;
+package com.syming.cursedcastle.data.mp;
 
 import net.minecraft.nbt.CompoundTag;
 
