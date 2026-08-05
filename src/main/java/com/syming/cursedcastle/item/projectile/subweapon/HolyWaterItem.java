@@ -27,15 +27,18 @@ public class HolyWaterItem extends Item {
         if (!pLevel.isClientSide()) {
 
             if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.WIND, pPlayer)) {
-                PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
-                if (playerMP.getCurrentMP() >= 50) {
-                    HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
-                    holyWater.setOwner(pPlayer);
-                    holyWater.setItem(throwStack);
-                    holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), -20.0F, 0.5F, 1.0F);
-                    pLevel.addFreshEntity(holyWater);
-                    playerMP.removeMP(50);
+                if (!pPlayer.isSpectator() && !pPlayer.isCreative()) {
+                    PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
+                    if (playerMP.getCurrentMP() >= 50) {
+
+                        playerMP.removeMP(50);
+                    }
                 }
+                HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
+                holyWater.setOwner(pPlayer);
+                holyWater.setItem(throwStack);
+                holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), -20.0F, 0.5F, 1.0F);
+                pLevel.addFreshEntity(holyWater);
             } else {
                 HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
                 holyWater.setItem(throwStack);

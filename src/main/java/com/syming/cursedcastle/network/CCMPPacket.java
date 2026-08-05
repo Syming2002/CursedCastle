@@ -25,12 +25,11 @@ public class CCMPPacket {
     public boolean handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
             ServerPlayer player = ctx.get().getSender();
-            ServerLevel level = player.serverLevel();
+            if (player == null) return;
             PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
 
             if (playerMP.getCurrentMP() < playerMP.getMaxMP()) {
                 player.getCapability(PlayerMPProvider.PLAYER_MP).ifPresent(mp -> {
-//                    mp.addMP(5);
                     CCPacketHandler.sendToPlayer(new CCMPData(mp.getCurrentMP()), player);
                 });
             }

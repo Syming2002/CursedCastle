@@ -8,4 +8,6 @@ public interface IPlayerData {
     boolean isBoltAttackEnabled();
     void setBoltAttackEnabled(boolean enabled);
 
+    double getPlayerYPos();
+    void setPlayerYPos(double pos);
 }

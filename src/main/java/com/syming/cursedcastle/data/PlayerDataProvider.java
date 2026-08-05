@@ -28,6 +28,7 @@ public class PlayerDataProvider implements ICapabilitySerializable<CompoundTag> 
         CompoundTag tag = new CompoundTag();
         tag.putInt("HolyBeamTicks", this.playerData.getHolyBeamTicks());
         tag.putBoolean("AttackBoltEnabled", this.playerData.isBoltAttackEnabled());
+        tag.putDouble("PlayerYPos", this.playerData.getPlayerYPos());
         return tag;
     }
 
@@ -35,5 +36,6 @@ public class PlayerDataProvider implements ICapabilitySerializable<CompoundTag> 
     public void deserializeNBT(CompoundTag nbt) {
         this.playerData.setHolyBeamTicks(nbt.getInt("HolyBeamTicks"));
         this.playerData.setBoltAttackEnabled(nbt.getBoolean("AttackBoltEnabled"));
+        this.playerData.setPlayerYPos(nbt.getDouble("PlayerYPos"));
     }
 }

@@ -32,6 +32,7 @@ public class DaggerItem extends Item {
         super(pProperties);
         this.tier = pTier;
     }
+
     public Tier getTier() {
         return this.tier;
     }
@@ -54,8 +55,12 @@ public class DaggerItem extends Item {
             int loading = getUseDuration(pStack) - pTimeCharged;
             if (loading > 0) {
                 if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, player)) {
-                    PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
-                    if (playerMP.getCurrentMP() >= 60) {
+                    if (!player.isSpectator() && !player.isCreative()) {
+                        PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
+                        if (playerMP.getCurrentMP() >= 60) {
+                            playerMP.removeMP(60);
+                        }
+                    }
                     for (int i = 0; i < 8; i++) {
                         DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
                         if (dagger.isAlive()) {
@@ -76,69 +81,72 @@ public class DaggerItem extends Item {
                             dagger.hasImpulse = true;
                         }
                     }
-                    playerMP.removeMP(60);
-                }
                 } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, player)) {
-                    PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
-                    if (playerMP.getCurrentMP() >= 30) {
-                        Vec3 look = player.getLookAngle().normalize();
+                    if (!player.isSpectator() && !player.isCreative()) {
+                        PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
+                        if (playerMP.getCurrentMP() >= 30) {
 
-                        Vec3 side = new Vec3(-look.z, 0, look.x).normalize();
-
-                        double sideOffset = 1.0D;
-
-                        for (int i = 0; i < 2; i++) {
-
-                            DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
-
-                            if (dagger.isAlive()) {
-                                double direction = (i == 0) ? -1.0D : 1.0D;
-
-                                Vec3 spawnPos = player.position()
-                                        .add(0, player.getEyeHeight() - 0.2D, 0)
-                                        .add(side.scale(direction * sideOffset));
-
-                                dagger.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
-
-                                pLevel.addFreshEntity(dagger);
-
-                                dagger.shoot(
-                                        look.x,
-                                        look.y,
-                                        look.z,
-                                        1.8F,
-                                        0.5F
-                                );
-
-                                dagger.hasImpulse = true;
-                            }
+                            playerMP.removeMP(30);
                         }
-                        playerMP.removeMP(30);
                     }
-                } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.WIND, player)) {
-                    PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
-                    if (playerMP.getCurrentMP() >= 40) {
-                        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-                        for (int i = 0; i < 20; i++) {
-                            DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
+                    Vec3 look = player.getLookAngle().normalize();
 
+                    Vec3 side = new Vec3(-look.z, 0, look.x).normalize();
 
-                            if (dagger.isAlive()) {
-                                executorService.schedule(() -> {
-                                    pLevel.addFreshEntity(dagger);
-                                    dagger.shoot(
-                                            player.getLookAngle().x,
-                                            player.getLookAngle().y,
-                                            player.getLookAngle().z,
-                                            2.5F,
-                                            0.8F
-                                    );
+                    double sideOffset = 1.0D;
 
-                                }, 100 * i, TimeUnit.MILLISECONDS);
-                            }
+                    for (int i = 0; i < 2; i++) {
+
+                        DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
+
+                        if (dagger.isAlive()) {
+                            double direction = (i == 0) ? -1.0D : 1.0D;
+
+                            Vec3 spawnPos = player.position()
+                                    .add(0, player.getEyeHeight() - 0.2D, 0)
+                                    .add(side.scale(direction * sideOffset));
+
+                            dagger.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
+
+                            pLevel.addFreshEntity(dagger);
+
+                            dagger.shoot(
+                                    look.x,
+                                    look.y,
+                                    look.z,
+                                    1.8F,
+                                    0.5F
+                            );
+
                             dagger.hasImpulse = true;
                         }
-                        playerMP.removeMP(40);
+                    }
+                } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.WIND, player)) {
+                    if (!player.isSpectator() && !player.isCreative()) {
+                        PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
+                        if (playerMP.getCurrentMP() >= 40) {
+                            playerMP.removeMP(40);
+                        }
+                    }
+                    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+                    for (int i = 0; i < 20; i++) {
+                        DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
+
+
+                        if (dagger.isAlive()) {
+                            executorService.schedule(() -> {
+                                pLevel.addFreshEntity(dagger);
+                                dagger.shoot(
+                                        player.getLookAngle().x,
+                                        player.getLookAngle().y,
+                                        player.getLookAngle().z,
+                                        2.5F,
+                                        0.8F
+                                );
+
+                            }, 100 * i, TimeUnit.MILLISECONDS);
+                        }
+                        dagger.hasImpulse = true;
                     }
                 } else {
                     if (!pLevel.isClientSide()) {

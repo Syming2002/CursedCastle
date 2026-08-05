@@ -8,7 +8,6 @@ import com.syming.cursedcastle.data.PlayerDataProvider;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.entity.projectile.subweapon.HolyWaterEntity;
 import com.syming.cursedcastle.entity.villager.CCVillager;
-import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.data.mp.PlayerMP;
 import com.syming.cursedcastle.data.mp.PlayerMPProvider;
 import com.syming.cursedcastle.network.CCMPData;
@@ -27,7 +26,6 @@ import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
@@ -81,6 +79,7 @@ public class CCCommonEventForge {
                 event.getEntity().getCapability(PlayerDataProvider.PLAYER_DATA).ifPresent(newData -> {
                     newData.setHolyBeamTicks(oldData.getHolyBeamTicks());
                     newData.setBoltAttackEnabled(oldData.isBoltAttackEnabled());
+                    newData.setPlayerYPos(oldData.getPlayerYPos());
                 });
             });
         }
@@ -90,13 +89,11 @@ public class CCCommonEventForge {
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         Player player = event.player;
 
-        double beamX = player.getX();
-        double beamY = player.getY();
-        double beamZ = player.getZ();
+
 
         if (event.side == LogicalSide.SERVER) {
             player.getCapability(PlayerMPProvider.PLAYER_MP).ifPresent(mp -> {
-                if (mp.getCurrentMP() < mp.getMaxMP() && player.tickCount % 20 == 0) {
+                if (mp.getCurrentMP() < mp.getMaxMP() && player.tickCount % 20 == 0 && (!player.isCreative() && !player.isSpectator())) {
                     if (player.experienceLevel <= 10) {
                         mp.addMP(1);
                     } else if (player.experienceLevel <= 20) {
@@ -114,12 +111,22 @@ public class CCCommonEventForge {
 
             IPlayerData data = player.getCapability(PlayerDataProvider.PLAYER_DATA).orElseGet(PlayerData::new);
 
+
+
             if (data.isBoltAttackEnabled()) {
+
+                double playerX = player.getX();
+                double playerY = data.getPlayerYPos();
+                double playerZ = player.getZ();
+
+                player.setNoGravity(true);
+
                 CCPacketHandler.sendToPlayer(new CCPlayerData(data), (ServerPlayer) player);
 
-                player.setInvulnerable(true);
+                if (player.getY() < playerY) {
+                    ((ServerPlayer) player).teleportTo(playerX, Math.min(player.getY() + 0.25D, playerY), playerZ);
+                }
 
-                ((ServerPlayer) player).teleportTo(beamX, data.getHolyBeamTicks() == 299 ? beamY + 2.0D : beamY, beamZ);
 
                 List<Monster> monsters = player.level().getNearbyEntities(Monster.class, TargetingConditions.DEFAULT, player, player.getBoundingBox().inflate(2.0D));
 
@@ -128,15 +135,16 @@ public class CCCommonEventForge {
                 }
 
                 if (data.getHolyBeamTicks() > 0) {
+                    CCPacketHandler.sendToPlayer(new CCPlayerData(data), (ServerPlayer) player);
                     data.setHolyBeamTicks(data.getHolyBeamTicks() - 1);
                 }
 
                 if (data.getHolyBeamTicks() <= 0) {
+                    player.setNoGravity(false);
                     player.setDeltaMovement(player.getDeltaMovement());
                     data.setBoltAttackEnabled(false);
                     CCPacketHandler.sendToPlayer(new CCPlayerData(data), (ServerPlayer) player);
                     data.setHolyBeamTicks(300);
-                    player.setInvulnerable(false);
                 }
             }
         }

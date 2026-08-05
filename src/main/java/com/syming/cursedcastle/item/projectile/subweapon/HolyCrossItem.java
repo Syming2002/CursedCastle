@@ -52,28 +52,37 @@ public class HolyCrossItem extends CCThrowableItem {
         if (!pLevel.isClientSide()) {
             ItemStack thrownStackCopy = throwStack.copy();
             if (isWearingSpellBook(SpellBookElementType.FIRE, pPlayer)) {
-                PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
-                if (playerMP.getCurrentMP() >= 50) {
-                    FireHolyCrossEntity fireHolyCross = new FireHolyCrossEntity(pLevel, pPlayer);
-                    pLevel.addFreshEntity(fireHolyCross);
-                    playerMP.removeMP(50);
+                if (!pPlayer.isSpectator() && !pPlayer.isCreative()) {
+
+                    PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
+                    if (playerMP.getCurrentMP() >= 50) {
+                        playerMP.removeMP(50);
+                    }
                 }
+                FireHolyCrossEntity fireHolyCross = new FireHolyCrossEntity(pLevel, pPlayer);
+                pLevel.addFreshEntity(fireHolyCross);
             } else if (isWearingSpellBook(SpellBookElementType.ICE, pPlayer)) {
-                PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
-                if (playerMP.getCurrentMP() >= 30) {
-                    IceHolyCrossEntity iceHolyCross = new IceHolyCrossEntity(pLevel, pPlayer);
-                    pLevel.addFreshEntity(iceHolyCross);
-                    playerMP.removeMP(30);
+                if (!pPlayer.isSpectator() && !pPlayer.isCreative()) {
+
+                    PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
+                    if (playerMP.getCurrentMP() >= 30) {
+                        playerMP.removeMP(30);
+                    }
                 }
+                IceHolyCrossEntity iceHolyCross = new IceHolyCrossEntity(pLevel, pPlayer);
+                pLevel.addFreshEntity(iceHolyCross);
             } else if (isWearingSpellBook(SpellBookElementType.BOLT, pPlayer)) {
-                PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
-                if (playerMP.getCurrentMP() >= 60) {
-                    IPlayerData playerData = pPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).orElseGet(PlayerData::new);
-                    playerData.setHolyBeamTicks(300);
-                    playerData.setBoltAttackEnabled(true);
-                    CCPacketHandler.sendToPlayer(new CCPlayerData(playerData), (ServerPlayer) pPlayer);
-                    playerMP.removeMP(60);
+                if (!pPlayer.isSpectator() && !pPlayer.isCreative()) {
+                    PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
+                    if (playerMP.getCurrentMP() >= 60) {
+                        playerMP.removeMP(60);
+                    }
                 }
+                IPlayerData playerData = pPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).orElseGet(PlayerData::new);
+                playerData.setHolyBeamTicks(300);
+                playerData.setBoltAttackEnabled(true);
+                playerData.setPlayerYPos(pPlayer.getY() + 2.0D);
+                CCPacketHandler.sendToPlayer(new CCPlayerData(playerData), (ServerPlayer) pPlayer);
             } else {
                 HolyCrossEntity holyCross = new HolyCrossEntity(pPlayer, pLevel, thrownStackCopy, getTier());
                 pLevel.addFreshEntity(holyCross);

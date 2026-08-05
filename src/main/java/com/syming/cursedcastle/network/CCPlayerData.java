@@ -18,20 +18,24 @@ public class CCPlayerData {
 
     private int holyBeamTicks;
     private boolean isAttackBolt;
+    private double playerYPos;
 
     public CCPlayerData(IPlayerData playerData) {
         this.holyBeamTicks = playerData.getHolyBeamTicks();
         this.isAttackBolt = playerData.isBoltAttackEnabled();
+        this.playerYPos = playerData.getPlayerYPos();
     }
 
     public CCPlayerData(FriendlyByteBuf buffer) {
         this.holyBeamTicks = buffer.readInt();
         this.isAttackBolt = buffer.readBoolean();
+        this.playerYPos = buffer.readDouble();
     }
 
     public void toBytes(FriendlyByteBuf buffer) {
         buffer.writeInt(this.holyBeamTicks);
         buffer.writeBoolean(this.isAttackBolt);
+        buffer.writeDouble(this.playerYPos);
     }
 
     public static void handle(CCPlayerData msg, Supplier<NetworkEvent.Context> ctx) {
@@ -43,7 +47,7 @@ public class CCPlayerData {
 
                 data.setHolyBeamTicks(msg.holyBeamTicks);
                 data.setBoltAttackEnabled(msg.isAttackBolt);
-
+                data.setPlayerYPos(msg.playerYPos);
             }
         });
         ctx.get().setPacketHandled(true);
