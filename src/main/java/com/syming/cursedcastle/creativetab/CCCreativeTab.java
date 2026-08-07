@@ -17,6 +17,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -120,21 +121,23 @@ public class CCCreativeTab {
                         output.accept(CCItem.ANIM_FIRE_HOLY_CROSS.get());
                         output.accept(CCItem.ANIM_ICE_HOLY_CROSS.get());
 
-                        // Bees
-                        for (ILifeStage stage : SpeciesUtil.BEE_TYPE.get().getLifeStages()) {
-                            for (IBeeSpecies species : SpeciesUtil.getAllBeeSpecies()) {
-                                if (species.id().toString().contains("cursedcastle")) {
-                                    System.out.println("Cursed castle found");
-                                    output.accept(species.createStack(stage));
+                        if (ModList.get().isLoaded("forestry")) {
+                            // Bees
+                            for (ILifeStage stage : SpeciesUtil.BEE_TYPE.get().getLifeStages()) {
+                                for (IBeeSpecies species : SpeciesUtil.getAllBeeSpecies()) {
+                                    if (species.id().toString().contains("cursedcastle")) {
+                                        output.accept(species.createStack(stage));
+                                    }
                                 }
                             }
-                        }
 
-                        // Combs
-                        for (CCBeesItemHoneyComb comb : CCBeesApicultureItems.CC_BEES_COMB.getItems()) {
-                            output.accept(comb);
+                            // Combs
+                            for (CCBeesItemHoneyComb comb : CCBeesApicultureItems.CC_BEES_COMB.getItems()) {
+                                output.accept(comb);
+                            }
                         }
                     })
+
                     .build());
 
     public static void register(IEventBus eventBus) {

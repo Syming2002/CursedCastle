@@ -4,6 +4,7 @@ import forestry.api.client.IClientModuleHandler;
 import forestry.api.modules.ForestryModule;
 import forestry.api.modules.IForestryModule;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fml.ModList;
 
 import java.util.function.Consumer;
 
@@ -19,7 +20,9 @@ public class CCBeesModule implements IForestryModule {
 
     @Override
     public void registerClientHandler(Consumer<IClientModuleHandler> registrar) {
-        registrar.accept(new CCBeesCoreClientHandler());
+        if (ModList.get().isLoaded("forestry")) {
+            registrar.accept(new CCBeesCoreClientHandler());
+        }
     }
 
     public static ResourceLocation cursedcastle(String path) {

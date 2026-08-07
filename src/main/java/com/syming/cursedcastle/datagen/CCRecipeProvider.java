@@ -39,6 +39,7 @@ public class CCRecipeProvider extends RecipeProvider {
         buildLeatherWhip(pWriter);
 
         buildHolyCross(pWriter);
+        buildThrowingAxe(pWriter);
     }
 
     private void buildLeatherWhip(Consumer<FinishedRecipe> pWriter) {
@@ -89,6 +90,33 @@ public class CCRecipeProvider extends RecipeProvider {
                         .pattern(" M ")
                         .define('M', material)
                         .unlockedBy(getHasName(CCItem.HOLY_CROSS_ITEM_TYPES.get(tier).get()), has(CCItem.HOLY_CROSS_ITEM_TYPES.get(tier).get()))
+                        .save(pWriter);
+            }
+        }
+    }
+
+    private void buildThrowingAxe(Consumer<FinishedRecipe> pWriter) {
+        for (var entry : MATERIAL_ITEMS.entrySet()) {
+            Tier tier = entry.getKey();
+            TagKey<Item> material = entry.getValue();
+
+            if (tier == Tiers.NETHERITE) {
+                SmithingTransformRecipeBuilder.smithing(
+                                Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                                Ingredient.of(CCItem.THROWING_AXE_ITEM_TYPES.get(Tiers.DIAMOND).get()),
+                                Ingredient.of(Items.NETHERITE_INGOT),
+                                RecipeCategory.COMBAT,
+                                CCItem.THROWING_AXE_ITEM_TYPES.get(Tiers.NETHERITE).get())
+                        .unlocks(getHasName(CCItem.THROWING_AXE_ITEM_TYPES.get(Tiers.DIAMOND).get()), has(material))
+                        .save(pWriter, new ResourceLocation(CursedCastleMod.MOD_ID, "netherite_throwing_axe"));
+            } else {
+                ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, CCItem.THROWING_AXE_ITEM_TYPES.get(tier).get())
+                        .pattern("MMS")
+                        .pattern("MSM")
+                        .pattern("SMM")
+                        .define('M', material)
+                        .define('S', Items.STICK)
+                        .unlockedBy(getHasName(CCItem.THROWING_AXE_ITEM_TYPES.get(tier).get()), has(CCItem.THROWING_AXE_ITEM_TYPES.get(tier).get()))
                         .save(pWriter);
             }
         }

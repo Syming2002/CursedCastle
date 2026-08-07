@@ -10,6 +10,7 @@ import forestry.apiculture.features.ApicultureItems;
 import forestry.apiculture.items.EnumHoneyComb;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.fml.ModList;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -18,16 +19,20 @@ import java.util.function.Supplier;
 public class CCBeesPlugin implements IForestryPlugin {
     @Override
     public void registerGenetics(IGeneticRegistration genetics) {
-        CCBeesTaxonomy.defineTaxa(genetics);
+        if (ModList.get().isLoaded("forestry")) {
+            CCBeesTaxonomy.defineTaxa(genetics);
+        }
     }
 
     @Override
     public void registerApiculture(@SuppressWarnings("null") IApicultureRegistration apiculture) {
-        CCBeesDefinition.defineNewCCBees(apiculture);
+        if (ModList.get().isLoaded("forestry")) {
+            CCBeesDefinition.defineNewCCBees(apiculture);
 
-        apiculture.registerFlowerType(CCBeesFlowerType.BLOOD, new FlowerType(CCTag.Blocks.BLOOD_BLOCKS, true));
-        apiculture.registerFlowerType(CCBeesFlowerType.ICE, new FlowerType(CCTag.Blocks.ICE_BLOCKS, true));
-        apiculture.registerFlowerType(CCBeesFlowerType.FIRE, new FlowerType(CCTag.Blocks.FIRE_BLOCKS, true));
+            apiculture.registerFlowerType(CCBeesFlowerType.BLOOD, new FlowerType(CCTag.Blocks.BLOOD_BLOCKS, true));
+            apiculture.registerFlowerType(CCBeesFlowerType.ICE, new FlowerType(CCTag.Blocks.ICE_BLOCKS, true));
+            apiculture.registerFlowerType(CCBeesFlowerType.FIRE, new FlowerType(CCTag.Blocks.FIRE_BLOCKS, true));
+        }
     }
 
     @Override
@@ -44,7 +49,7 @@ public class CCBeesPlugin implements IForestryPlugin {
         return true;
     }
 
-    private static Supplier<List<ItemStack>> getHoneyComb(CCBeesEnumHoneyComb enumHoneyComb) {
+    private static Supplier<List<ItemStack>> getCCHoneyComb(CCBeesEnumHoneyComb enumHoneyComb) {
         return () -> List.of(CCBeesApicultureItems.CC_BEES_COMB.stack(enumHoneyComb));
     }
 
