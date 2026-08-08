@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "forge:ingots/gold"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "   ",
+    "MMS",
+    "   "
+  ],
+  "result": {
+    "item": "cursedcastle:gold_dagger"
+  },
+  "show_notification": true
+}

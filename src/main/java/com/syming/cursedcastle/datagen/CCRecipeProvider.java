@@ -40,6 +40,7 @@ public class CCRecipeProvider extends RecipeProvider {
 
         buildHolyCross(pWriter);
         buildThrowingAxe(pWriter);
+        buildDagger(pWriter);
     }
 
     private void buildLeatherWhip(Consumer<FinishedRecipe> pWriter) {
@@ -117,6 +118,33 @@ public class CCRecipeProvider extends RecipeProvider {
                         .define('M', material)
                         .define('S', Items.STICK)
                         .unlockedBy(getHasName(CCItem.THROWING_AXE_ITEM_TYPES.get(tier).get()), has(CCItem.THROWING_AXE_ITEM_TYPES.get(tier).get()))
+                        .save(pWriter);
+            }
+        }
+    }
+
+    private void buildDagger(Consumer<FinishedRecipe> pWriter) {
+        for (var entry : MATERIAL_ITEMS.entrySet()) {
+            Tier tier = entry.getKey();
+            TagKey<Item> material = entry.getValue();
+
+            if (tier == Tiers.NETHERITE) {
+                SmithingTransformRecipeBuilder.smithing(
+                                Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                                Ingredient.of(CCItem.DAGGER_ITEM_TYPES.get(Tiers.DIAMOND).get()),
+                                Ingredient.of(Items.NETHERITE_INGOT),
+                                RecipeCategory.COMBAT,
+                                CCItem.DAGGER_ITEM_TYPES.get(Tiers.NETHERITE).get())
+                        .unlocks(getHasName(CCItem.DAGGER_ITEM_TYPES.get(Tiers.DIAMOND).get()), has(material))
+                        .save(pWriter, new ResourceLocation(CursedCastleMod.MOD_ID, "netherite_dagger"));
+            } else {
+                ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, CCItem.DAGGER_ITEM_TYPES.get(tier).get())
+                        .pattern("   ")
+                        .pattern("MMS")
+                        .pattern("   ")
+                        .define('M', material)
+                        .define('S', Items.STICK)
+                        .unlockedBy(getHasName(CCItem.DAGGER_ITEM_TYPES.get(tier).get()), has(CCItem.DAGGER_ITEM_TYPES.get(tier).get()))
                         .save(pWriter);
             }
         }

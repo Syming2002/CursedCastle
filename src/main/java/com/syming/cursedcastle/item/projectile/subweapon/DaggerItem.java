@@ -6,6 +6,8 @@ import com.syming.cursedcastle.data.mp.PlayerMPProvider;
 import com.syming.cursedcastle.sound.CCSound;
 import com.syming.cursedcastle.entity.projectile.subweapon.DaggerEntity;
 import com.syming.cursedcastle.util.SpellBookUtil;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -153,9 +155,8 @@ public class DaggerItem extends Item {
                         DaggerEntity daggerEntity = new DaggerEntity(player, pLevel, pStack, getTier());
                         daggerEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
 
-                        daggerEntity.setItem(pStack);
                         pLevel.addFreshEntity(daggerEntity);
-                        pLevel.playSound((Player) null, daggerEntity, CCSound.DAGGER_THROW.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                        pLevel.playSound((Player) null, daggerEntity, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F);
                         if (!player.getAbilities().instabuild) {
                             pStack.shrink(1);
                         }

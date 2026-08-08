@@ -20,10 +20,10 @@ import net.minecraft.world.item.Tiers;
 
 public class DaggerRenderer extends EntityRenderer<DaggerEntity> {
 
-    public static final ResourceLocation WOODEN_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/wooden_dagger.png");
+    public static final ResourceLocation WOODEN_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/wood_dagger.png");
     public static final ResourceLocation STONE_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/stone_dagger.png");
     public static final ResourceLocation IRON_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/iron_dagger.png");
-    public static final ResourceLocation GOLDEN_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/golden_dagger.png");
+    public static final ResourceLocation GOLDEN_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/gold_dagger.png");
     public static final ResourceLocation DIAMOND_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/diamond_dagger.png");
     public static final ResourceLocation NETHERITE_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/netherite_dagger.png");
 

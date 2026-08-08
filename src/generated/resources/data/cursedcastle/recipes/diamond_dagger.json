@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "forge:gems/diamond"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "   ",
+    "MMS",
+    "   "
+  ],
+  "result": {
+    "item": "cursedcastle:diamond_dagger"
+  },
+  "show_notification": true
+}
