@@ -1,31 +1,34 @@
 package com.syming.cursedcastle.entity.mob.boss;
 
-import com.github.alexthe666.citadel.animation.Animation;
-import com.github.alexthe666.citadel.animation.AnimationHandler;
-import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.goal.RusalkaGoToWaterGoal;
 import com.syming.cursedcastle.entity.goal.RusalkaPathNavigation;
-import com.syming.cursedcastle.entity.goal.RusalkaRandomStrollOnWaterGoal;
 import com.syming.cursedcastle.util.ColorUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.behavior.RandomStroll;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.monster.Monster;
@@ -38,30 +41,40 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.fluids.FluidType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class RusalkaEntity extends CCBossEntity implements IAnimatedEntity {
+public class RusalkaEntity extends CCBossEntity {
+    private static final EntityDataAccessor<Byte> ANIMATION = SynchedEntityData.defineId(RusalkaEntity.class, EntityDataSerializers.BYTE);
 
-    private Animation animation;
+    public static final byte IDLE_ANIMATION = 0;
 
-    public static final Animation MELEE_ATTACK_ANIMATION = Animation.create(40);
-//    public static final Animation HAIR_ATTACK_ANIMATION = Animation.create(35);
-    public static final Animation WATER_ATTACK_ANIMATION = Animation.create(80);
-
+    public static final byte MELEE_ATTACK_ANIMATION = 1;
+    public static final float MELEE_ATTACK_ANIMATION_LENGTH_IN_SECONDS = 2.0F;
+    public static final int MELEE_ATTACK_ANIMATION_LENGTH_IN_TICKS = (int) (MELEE_ATTACK_ANIMATION_LENGTH_IN_SECONDS * 20);
     private int meleeAttackCooldown = 0;
-    public static final int MELEE_ATTACK_COOLDOWN = 100;
-//    private int hairAttackCooldown = 0;
-//    public static final int HAIR_ATTACK_COOLDOWN = 200;
+    public static final int MELEE_ATTACK_COOLDOWN = 60;
+
+    public final AnimationState meleeAttackAnimationState = new AnimationState();
+
+    private int meleeAttackAnimationTick = 0;
+
+    public static final byte WATER_ATTACK_ANIMATION = 2;
+    public static final float WATER_ATTACK_ANIMATION_LENGTH_IN_SECONDS = 4.0F;
+    public static final int WATER_ATTACK_ANIMATION_LENGTH_IN_TICKS = (int) (WATER_ATTACK_ANIMATION_LENGTH_IN_SECONDS * 20);
     private int waterAttackCooldown = 0;
-    public static final int WATER_ATTACK_COOLDOWN = 200;
+    public static final int WATER_ATTACK_COOLDOWN = 150;
 
-    private static final Animation[] ANIMATIONS = {MELEE_ATTACK_ANIMATION, /*HAIR_ATTACK_ANIMATION,*/ WATER_ATTACK_ANIMATION};
+    public final AnimationState waterAttackAnimationState = new AnimationState();
 
-    private int animationTick;
+    private int waterAttackAnimationTick = 0;
+
+    private boolean strafingBackwards;
+    private boolean strafingClockwise;
 
     private final ServerBossEvent bossEvent = new ServerBossEvent(Component.translatable("entity.cursedcastle.rusalka"), BossEvent.BossBarColor.GREEN, BossEvent.BossBarOverlay.PROGRESS);
 
@@ -76,6 +89,8 @@ public class RusalkaEntity extends CCBossEntity implements IAnimatedEntity {
 
     public RusalkaEntity(Level pLevel) {
         super(CCEntity.RUSALKA.get(), pLevel);
+
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -88,13 +103,21 @@ public class RusalkaEntity extends CCBossEntity implements IAnimatedEntity {
     }
 
     @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+
+        this.entityData.define(ANIMATION, IDLE_ANIMATION);
+    }
+
+    @Override
     protected void registerGoals() {
         super.registerGoals();
 
+        this.goalSelector.addGoal(0, new FloatGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, true));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Villager>(this, Villager.class, true));
         this.goalSelector.addGoal(3, new RusalkaGoToWaterGoal(this, 1.2D));
-        this.goalSelector.addGoal(7, new RusalkaRandomStrollOnWaterGoal(this, 0.9D));
+        this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
 
     }
@@ -124,49 +147,89 @@ public class RusalkaEntity extends CCBossEntity implements IAnimatedEntity {
 
     @Override
     public void tick() {
+
+        if (this.level().isClientSide()) {
+            this.meleeAttackAnimationState.animateWhen(getAnimation() == MELEE_ATTACK_ANIMATION, this.tickCount);
+            this.waterAttackAnimationState.animateWhen(getAnimation() == WATER_ATTACK_ANIMATION, this.tickCount);
+        }
+
         super.tick();
 
         LivingEntity target = getTarget();
 
-        if (!isAlive() && target == null) return;
-
         if (target != null) {
-            getLookControl().setLookAt(target, 30.0F, 30.0F);
-            if (getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.75F && this.meleeAttackCooldown <= 0 && distanceToSqr(target) <= getMeleeAttackRangeSqr(target)) {
-                setAnimation(MELEE_ATTACK_ANIMATION);
-                this.meleeAttackCooldown = MELEE_ATTACK_COOLDOWN;
+            lookAt(target, 30.0F, 30.0F);
+
+            if (getAnimation() == IDLE_ANIMATION) {
+                if (this.meleeAttackCooldown > 0) {
+                    this.meleeAttackCooldown--;
+                }
+
+                if (this.waterAttackCooldown > 0) {
+                    this.waterAttackCooldown--;
+                }
             }
-//            if (getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.5F && this.hairAttackCooldown <= 0) {
-//                setAnimation(HAIR_ATTACK_ANIMATION);
-//                this.hairAttackCooldown = HAIR_ATTACK_COOLDOWN;
-//            }
-            if (getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.33F && this.waterAttackCooldown <= 0 && distanceToSqr(target) >= getMeleeAttackRangeSqr(target)) {
+
+            if (getAnimation() == IDLE_ANIMATION && getRandom().nextFloat() > 0.33F && getRandom().nextFloat() <= 0.75F && this.meleeAttackCooldown <= 0) {
+                setAnimation(MELEE_ATTACK_ANIMATION);
+            }
+
+            if (getAnimation() == IDLE_ANIMATION && getRandom().nextFloat() <= 0.33F && this.waterAttackCooldown <= 0 && distanceToSqr(target) >= getMeleeAttackRangeSqr(target)) {
                 setAnimation(WATER_ATTACK_ANIMATION);
-                this.waterAttackCooldown = WATER_ATTACK_COOLDOWN;
             }
 
             if (getAnimation() == RusalkaEntity.MELEE_ATTACK_ANIMATION) {
-                System.out.println("Rusalka Melee Attack Animation is set");
+                this.meleeAttackAnimationTick++;
+
+                if (this.meleeAttackAnimationTick < 15) {
+                    if (distanceTo(target) <= 6.0F) {
+                        Vec3 targetPos = new Vec3(target.getX(), target.getY(), target.getZ());
+                        Vec3 dir = targetPos.subtract(position()).normalize();
+                        setDeltaMovement(dir.scale(0.4D));
+                    }
+                }
+
                 double distToEnemySqr = getPerceivedTargetDistanceSquareForMeleeAttack(target);
                 double attackReachSqr = getMeleeAttackRangeSqr(target);
 
-                if (distToEnemySqr <= attackReachSqr && getAnimationTick() == 15) {
+                if (distToEnemySqr <= attackReachSqr && this.meleeAttackAnimationTick == 15) {
                     doHurtTarget(target);
                 }
-            } /*else if (getAnimation() == RusalkaEntity.HAIR_ATTACK_ANIMATION) {
-                System.out.println("Rusalka Hair Attack Animation is set");
-                double distToEnemy = distanceTo(target);
-                double attackReachSqr = getMeleeAttackRangeSqr(target);
 
-                if (distToEnemy <= attackReachSqr && getAnimationTick() == 20) {
-                    doHurtTarget(target);
+                if (this.meleeAttackAnimationTick >= MELEE_ATTACK_ANIMATION_LENGTH_IN_TICKS) {
+                    setAnimation(IDLE_ANIMATION);
+                    this.meleeAttackAnimationTick = 0;
+                    this.meleeAttackCooldown = MELEE_ATTACK_COOLDOWN;
                 }
-            }*/ else if (getAnimation() == RusalkaEntity.WATER_ATTACK_ANIMATION) {
-                System.out.println("Rusalka Water Attack Animation is set");
-                if (getAnimationTick() == 30) {
+            } else if (getAnimation() == RusalkaEntity.WATER_ATTACK_ANIMATION) {
+                this.waterAttackAnimationTick++;
+
+                if (this.getRandom().nextFloat() < 0.3F) {
+                    this.strafingBackwards = !this.strafingBackwards;
+                }
+
+                if (this.getRandom().nextFloat() < 0.3F) {
+                    this.strafingClockwise = !this.strafingClockwise;
+                }
+
+                getMoveControl().strafe(this.strafingBackwards ? -0.5F : 0.5F, this.strafingClockwise ? 0.5F : -0.5F);
+
+                if (this.waterAttackAnimationTick == 30) {
                     spawnWaterBlock();
                 }
+
+                if (this.waterAttackAnimationTick >= WATER_ATTACK_ANIMATION_LENGTH_IN_TICKS) {
+                    setAnimation(IDLE_ANIMATION);
+                    this.waterAttackAnimationTick = 0;
+                    this.waterAttackCooldown = WATER_ATTACK_COOLDOWN;
+                }
             }
+        } else {
+            setAnimation(IDLE_ANIMATION);
+            this.meleeAttackAnimationTick = 0;
+            this.meleeAttackCooldown = MELEE_ATTACK_COOLDOWN;
+            this.waterAttackAnimationTick = 0;
+            this.waterAttackCooldown = MELEE_ATTACK_COOLDOWN;
         }
 
         if (this.waterTicks > 0) {
@@ -175,21 +238,6 @@ public class RusalkaEntity extends CCBossEntity implements IAnimatedEntity {
                 removeWaterBlock();
             }
         }
-
-
-        if (this.meleeAttackCooldown > 0 && getAnimation() == NO_ANIMATION) {
-            this.meleeAttackCooldown--;
-        }
-
-//        if (this.hairAttackCooldown > 0 && getAnimation() == NO_ANIMATION) {
-//            this.hairAttackCooldown--;
-//        }
-
-        if (this.waterAttackCooldown > 0 && getAnimation() == NO_ANIMATION) {
-            this.waterAttackCooldown--;
-        }
-
-        AnimationHandler.INSTANCE.updateAnimations(this);
 
         shouldDespawnInPeaceful();
 
@@ -223,31 +271,6 @@ public class RusalkaEntity extends CCBossEntity implements IAnimatedEntity {
     @Override
     public boolean canBreatheUnderwater() {
         return true;
-    }
-
-    @Override
-    public int getAnimationTick() {
-        return this.animationTick;
-    }
-
-    @Override
-    public void setAnimationTick(int tick) {
-        this.animationTick = tick;
-    }
-
-    @Override
-    public Animation getAnimation() {
-        return this.animation;
-    }
-
-    @Override
-    public void setAnimation(Animation animation) {
-        this.animation = animation;
-    }
-
-    @Override
-    public Animation[] getAnimations() {
-        return ANIMATIONS;
     }
 
     @Override
@@ -293,6 +316,24 @@ public class RusalkaEntity extends CCBossEntity implements IAnimatedEntity {
         return List.of(Component.translatable("entity.cursedcastle.ice_strength_description").setStyle(Style.EMPTY.withColor(ColorUtil.ICE_COLOR)));
     }
 
+    @Override
+    public @Nullable ResourceLocation getCustomBossBarBackground() {
+        return null;
+    }
+
+    @Override
+    public @Nullable ResourceLocation getCustomBossBar() {
+        return null;
+    }
+
+    public byte getAnimation() {
+        return this.entityData.get(ANIMATION);
+    }
+
+    public void setAnimation(byte pAnimation) {
+        this.entityData.set(ANIMATION, pAnimation);
+    }
+
     private void spawnWaterBlock() {
         if (getTarget() == null) return;
 
@@ -326,15 +367,5 @@ public class RusalkaEntity extends CCBossEntity implements IAnimatedEntity {
                 setDeltaMovement(getDeltaMovement().scale(0.5D).add(0.0D, 0.05D, 0.0D));
             }
         }
-    }
-
-    @Override
-    public @Nullable ResourceLocation getCustomBossBarBackground() {
-        return null;
-    }
-
-    @Override
-    public @Nullable ResourceLocation getCustomBossBar() {
-        return null;
     }
 }

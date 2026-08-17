@@ -137,9 +137,9 @@ public class DaggerEntity extends AbstractArrow {
 
         if (getOwner() != null) {
             if (pResult.getEntity() != getOwner() && pResult.getEntity() instanceof LivingEntity living) {
-                if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, (Player) getOwner())) {
+                if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, (LivingEntity) getOwner())) {
                     living.setSecondsOnFire(5);
-                } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, (Player) getOwner())) {
+                } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, (LivingEntity) getOwner())) {
                     living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1, false, true));
                 }
             }
@@ -263,6 +263,6 @@ public class DaggerEntity extends AbstractArrow {
 
     @Override
     public boolean isNoGravity() {
-        return SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, (Player) getOwner()) || SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, (Player) getOwner());
+        return SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, (LivingEntity) getOwner()) || SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, (LivingEntity) getOwner());
     }
 }

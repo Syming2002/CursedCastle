@@ -1,10 +1,6 @@
 package com.syming.cursedcastle.entity.mob;
 
-import com.github.alexthe666.citadel.animation.Animation;
-import com.github.alexthe666.citadel.animation.AnimationHandler;
-import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.api.IElementalDamage;
-import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
 import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.magic.HarpyFeatherEntity;
 import com.syming.cursedcastle.entity.projectile.subweapon.DaggerEntity;
@@ -23,7 +19,6 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
@@ -36,23 +31,28 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, ILivingEntityStrengthWeakness, RangedAttackMob {
-    private static final EntityDataAccessor<Integer> TARGET_ID = SynchedEntityData.defineId(HarpyEntity.class, EntityDataSerializers.INT);
+public class HarpyEntity extends CCFlyingMonster implements RangedAttackMob {
+    private static final EntityDataAccessor<Byte> ANIMATION = SynchedEntityData.defineId(HarpyEntity.class, EntityDataSerializers.BYTE);
 
+    public static final byte IDLE_ANIMATION = 0;
 
-    protected Animation animation;
+    public static final byte FEATHER_ATTACK_ANIMATION = 1;
+    public static final float FEATHER_ATTACK_ANIMATION_LENGTH_IN_SECONDS = 1.75F;
+    public static final int FEATHER_ATTACK_ANIMATION_LENGTH_IN_TICKS = (int) (FEATHER_ATTACK_ANIMATION_LENGTH_IN_SECONDS * 20);
+    private static final int FEATHER_ATTACK_COOLDOWN = 100;
+    private int featherAttackCooldown = FEATHER_ATTACK_COOLDOWN;
 
-    public static final Animation FEATHER_ATTACK_ANIMATION = Animation.create(35);
-    protected int featherAnimationCooldown = 0;
-    public static final int FEATHER_ATTACK_COOLDOWN = 60;
+    public static final byte DAGGER_ATTACK_ANIMATION = 2;
+    public static final float DAGGER_ATTACK_ANIMATION_LENGTH_IN_SECONDS = 1.6F;
+    public static final int DAGGER_ATTACK_ANIMATION_LENGTH_IN_TICKS = (int) (DAGGER_ATTACK_ANIMATION_LENGTH_IN_SECONDS * 20);
+    private static final int DAGGER_ATTACK_COOLDOWN = 200;
+    private int daggerAttackCooldown = DAGGER_ATTACK_COOLDOWN;
 
-    public static final Animation DAGGER_ATTACK_ANIMATION = Animation.create(32);
-    private int daggerAttackAnimationCooldown = 0;
-    public static final int DAGGER_ATTACK_COOLDOWN = 80;
+    public final AnimationState featherAnimationState = new AnimationState();
+    public final AnimationState daggerAnimationState = new AnimationState();
 
-    protected static final Animation[] ANIMATIONS = {FEATHER_ATTACK_ANIMATION, DAGGER_ATTACK_ANIMATION};
-
-    protected int animationTick;
+    private int featherAnimationTick = 0;
+    private int daggerAnimationTick = 0;
 
     public HarpyEntity(EntityType<? extends FlyingMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -62,7 +62,7 @@ public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, IL
         return PathfinderMob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 52.0D)
                 .add(Attributes.FOLLOW_RANGE, 16.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.4000000059604645D);
+                .add(Attributes.FLYING_SPEED, 0.4000000059604645D);
     }
 
     @Override
@@ -80,72 +80,84 @@ public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, IL
     protected void defineSynchedData() {
         super.defineSynchedData();
 
-        this.entityData.define(TARGET_ID,-1);
-    }
-
-    @Override
-    public void setTarget(@Nullable LivingEntity living) {
-        super.setTarget(living);
-        this.entityData.set(TARGET_ID, living == null ? -1 : living.getId());
-    }
-
-    @Override
-    @Nullable
-    public LivingEntity getTarget() {
-        int id = this.entityData.get(TARGET_ID);
-        Entity entity = this.level().getEntity(id);
-        return (entity instanceof LivingEntity living) ? living : null;
+        this.entityData.define(ANIMATION, IDLE_ANIMATION);
     }
 
     @Override
     public void tick() {
+
+        if (this.level().isClientSide()) {
+            this.featherAnimationState.animateWhen(getAnimation() == FEATHER_ATTACK_ANIMATION, this.tickCount);
+            this.daggerAnimationState.animateWhen(getAnimation() == DAGGER_ATTACK_ANIMATION, this.tickCount);
+        }
+
         super.tick();
 
         LivingEntity target = getTarget();
 
         if (target != null) {
-            getLookControl().setLookAt(target, 30.0F, 30.0F);
-            if (getAnimation() == NO_ANIMATION && this.daggerAttackAnimationCooldown <= 0 && isAlive() && getRandom().nextFloat() <= 0.33F) {
-                setAnimation(DAGGER_ATTACK_ANIMATION);
-                this.daggerAttackAnimationCooldown = DAGGER_ATTACK_COOLDOWN;
-            }
-            if (getAnimation() == NO_ANIMATION && this.featherAnimationCooldown <= 0 && isAlive() && getRandom().nextFloat() <= 0.45F) {
-                setAnimation(FEATHER_ATTACK_ANIMATION);
-                this.featherAnimationCooldown = FEATHER_ATTACK_COOLDOWN;
-            }
-        }
+            lookAt(target, 30.0F, 30.0F);
 
-        if (target != null) {
+            if (getAnimation() == IDLE_ANIMATION) {
+                if (this.featherAttackCooldown > 0) {
+                    this.featherAttackCooldown--;
+                }
+
+                if (this.daggerAttackCooldown > 0) {
+                    this.daggerAttackCooldown--;
+                }
+            }
+
+            if (getAnimation() == IDLE_ANIMATION && this.featherAttackCooldown <= 0 && isAlive() && getRandom().nextFloat() <= 5.0F && getRandom().nextFloat() > 0.2F) {
+                setAnimation(FEATHER_ATTACK_ANIMATION);
+            }
+
+            if (getAnimation() == IDLE_ANIMATION && this.daggerAttackCooldown <= 0 && isAlive() && getRandom().nextFloat() <= 0.2F) {
+                setAnimation(DAGGER_ATTACK_ANIMATION);
+            }
+
             if (getAnimation() == HarpyEntity.DAGGER_ATTACK_ANIMATION) {
-                lookAt(target, 30.0F, 30.0F);
+                this.daggerAnimationTick++;
 
                 Vec3 daggerPos = new Vec3(0.0D, 0.0D, 1.0F);
                 daggerPos = daggerPos.xRot((float) Math.toRadians(this.getXRot()));
                 daggerPos = daggerPos.yRot((float) Math.toRadians(this.getYHeadRot()));
                 daggerPos = daggerPos.add(getX(), getY() + 0.5D, getZ());
 
-                if (getAnimationTick() == 25) {
+                if (this.daggerAnimationTick == 25) {
                     launchDagger(daggerPos.x, daggerPos.y, daggerPos.z, 1.5F);
                 }
-            }
-            if (getAnimation() == HarpyEntity.FEATHER_ATTACK_ANIMATION) {
-                lookAt(target, 30.0F, 30.0F);
+
+                if (this.daggerAnimationTick > DAGGER_ATTACK_ANIMATION_LENGTH_IN_TICKS) {
+                    setAnimation(IDLE_ANIMATION);
+                    this.daggerAnimationTick = 0;
+                    this.daggerAttackCooldown = DAGGER_ATTACK_COOLDOWN;
+                }
+            } else if (getAnimation() == HarpyEntity.FEATHER_ATTACK_ANIMATION) {
+                this.featherAnimationTick++;
 
                 Vec3 featherPos = new Vec3(0.0D, 0.0D, 1.0F);
                 featherPos = featherPos.xRot((float) Math.toRadians(-getXRot()));
                 featherPos = featherPos.yRot((float) Math.toRadians(-getYRot()));
                 featherPos = featherPos.add(getX(),getY() + getEyeHeight() / 1.25F, getZ());
 
-                if (getAnimationTick() == 22) {
+                if (this.featherAnimationTick == 22) {
                     launchHarpyFeather(featherPos, getXRot(), getYRot());
                 }
+
+                if (this.featherAnimationTick > FEATHER_ATTACK_ANIMATION_LENGTH_IN_TICKS) {
+                    setAnimation(IDLE_ANIMATION);
+                    this.featherAnimationTick = 0;
+                    this.featherAttackCooldown = FEATHER_ATTACK_COOLDOWN;
+                }
             }
+        } else {
+            setAnimation(IDLE_ANIMATION);
+            this.featherAnimationTick = 0;
+            this.featherAttackCooldown = FEATHER_ATTACK_COOLDOWN;
+            this.daggerAnimationTick = 0;
+            this.daggerAttackCooldown = DAGGER_ATTACK_COOLDOWN;
         }
-
-        if (this.daggerAttackAnimationCooldown > 0) this.daggerAttackAnimationCooldown--;
-        if (this.featherAnimationCooldown > 0) this.featherAnimationCooldown--;
-
-        AnimationHandler.INSTANCE.updateAnimations(this);
 
         shouldDespawnInPeaceful();
     }
@@ -153,31 +165,6 @@ public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, IL
     @Override
     protected boolean shouldDespawnInPeaceful() {
         return true;
-    }
-
-    @Override
-    public int getAnimationTick() {
-        return this.animationTick;
-    }
-
-    @Override
-    public void setAnimationTick(int tick) {
-        this.animationTick = tick;
-    }
-
-    @Override
-    public Animation getAnimation() {
-        return this.animation;
-    }
-
-    @Override
-    public void setAnimation(Animation animation) {
-        this.animation = animation;
-    }
-
-    @Override
-    public Animation[] getAnimations() {
-        return ANIMATIONS;
     }
 
     @Override
@@ -225,6 +212,14 @@ public class HarpyEntity extends FlyingMob implements Enemy, IAnimatedEntity, IL
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
 
+    }
+
+    public byte getAnimation() {
+        return this.entityData.get(ANIMATION);
+    }
+
+    public void setAnimation(byte pAnimation) {
+        this.entityData.set(ANIMATION, pAnimation);
     }
 
     private void launchDagger(double posX, double posY, double posZ, double speed) {

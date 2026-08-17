@@ -8,10 +8,10 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.resources.ResourceLocation;
 
-public class RusalkaEyesLayer<T extends RusalkaEntity> extends EyesLayer<T, RusalkaModel<T>> {
+public class RusalkaEyesLayer extends EyesLayer<RusalkaEntity, RusalkaModel> {
     private static final RenderType RUSALKA_EYES = RenderType.eyes(new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/rusalka/rusalka_eyes.png"));
 
-    public RusalkaEyesLayer(RenderLayerParent<T, RusalkaModel<T>> pRenderer) {
+    public RusalkaEyesLayer(RenderLayerParent<RusalkaEntity, RusalkaModel> pRenderer) {
         super(pRenderer);
     }
 

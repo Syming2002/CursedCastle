@@ -14,7 +14,7 @@ public class HeatShadeRenderer extends MobRenderer<ShadeEntity, ShadeModel<Shade
     public static final ResourceLocation HEAT_SHADE_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/shade/heatshade/heat_shade.png");
 
     public HeatShadeRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new ShadeModel<>(), 0.5F);
+        super(pContext, new ShadeModel<>(pContext.bakeLayer(ShadeModel.SHADE_LAYER)), 0.5F);
 
         addLayer(new HeatShadeFlameLayer<>(this));
     }

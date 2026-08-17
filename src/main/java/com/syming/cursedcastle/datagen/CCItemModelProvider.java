@@ -120,8 +120,11 @@ public class CCItemModelProvider extends ItemModelProvider {
             }
 
             if (item == CCItem.LEATHER_STRING.get()
+                    || item == CCItem.THROWING_BONE.get()
                     || item == CCItem.BLOOD_BONE.get()
+                    || item == CCItem.BLOOD_THROWING_BONE.get()
                     || item == CCItem.GOLDEN_BONE.get()
+                    || item == CCItem.GOLDEN_THROWING_BONE.get()
                     || item == CCItem.ANIM_ICE_HOLY_CROSS.get()
                     || item == CCItem.ANIM_FIRE_HOLY_CROSS.get()
                     || item == CCItem.ANIM_WOOD_HOLY_CROSS.get()

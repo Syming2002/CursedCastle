@@ -1,24 +1,23 @@
 package com.syming.cursedcastle.entity.mob.skeleton;
 
-import com.github.alexthe666.citadel.animation.Animation;
-import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.enchantment.CCEnchantment;
-import com.syming.cursedcastle.entity.projectile.ThrowingBloodBoneEntity;
-import com.syming.cursedcastle.item.whip.UndeadKillerWhipItem;
 import com.syming.cursedcastle.entity.CCEntity;
+import com.syming.cursedcastle.item.whip.UndeadKillerWhipItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -29,7 +28,7 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
 
     private ItemStack lastHitItem;
 
-    public BloodSkeletonEntity(EntityType<? extends AbstractSkeleton> pEntityType, Level pLevel) {
+    public BloodSkeletonEntity(EntityType<? extends CCSkeletonEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -56,37 +55,11 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
     @Override
     public void tick() {
         super.tick();
-
-        if (this.getTarget() != null) {
-            if (getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.5F && this.throwingBoneCooldown <= 0) {
-                AnimationHandler.INSTANCE.sendAnimationMessage(this, THROWING_BONE_ANIMATION);
-                this.throwingBoneCooldown = THROWING_BONE_COOLDOWN + this.random.nextInt(16);
-            }
-
-            if (getAnimation() == THROWING_BONE_ANIMATION) {
-                if (getAnimationTick() == 32) {
-                    if (!this.level().isClientSide() && this instanceof BloodSkeletonEntity) {
-                        ThrowingBloodBoneEntity throwingBloodBone = new ThrowingBloodBoneEntity(this, this.level());
-                        throwingBloodBone.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 0.5F, 0.2F);
-                        playSound(SoundEvents.SNOWBALL_THROW, 1.0F, 0.5F);
-                        this.level().addFreshEntity(throwingBloodBone);
-                    }
-                }
-            }
-        }
-
-        if (this.throwingBoneCooldown > 0 && getAnimation() == NO_ANIMATION) {
-            this.throwingBoneCooldown--;
-        }
     }
 
     @Override
     public void tickDeath() {
-        ++this.deathTime;
-
-        if (this.deathTime == 1) {
-            AnimationHandler.INSTANCE.sendAnimationMessage(this, DEATH_ANIMATION);
-        }
+        super.tickDeath();
 
         if (this.deathTime == 95 && !this.level().isClientSide()) {
             BloodSkeletonEntity newBloodSkeleton = new BloodSkeletonEntity(this.level());
@@ -136,10 +109,10 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
         return SoundEvents.SKELETON_DEATH;
     }
 
-    @Override
-    protected SoundEvent getStepSound() {
-        return SoundEvents.SKELETON_STEP;
-    }
+//    @Override
+//    protected SoundEvent getStepSound() {
+//        return SoundEvents.SKELETON_STEP;
+//    }
 
     @Override
     public boolean hasWeakness(DamageSource source, float damageAmount) {
@@ -186,30 +159,5 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
 
-    }
-
-    @Override
-    public int getAnimationTick() {
-        return super.getAnimationTick();
-    }
-
-    @Override
-    public void setAnimationTick(int tick) {
-        super.setAnimationTick(tick);
-    }
-
-    @Override
-    public Animation getAnimation() {
-        return super.getAnimation();
-    }
-
-    @Override
-    public void setAnimation(Animation animation) {
-        super.setAnimation(animation);
-    }
-
-    @Override
-    public Animation[] getAnimations() {
-        return super.getAnimations();
     }
 }

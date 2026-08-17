@@ -22,11 +22,11 @@ public class RusalkaPathNavigation extends GroundPathNavigation {
 
     @Override
     protected boolean hasValidPathType(BlockPathTypes pPathType) {
-        return pPathType == BlockPathTypes.WATER;
+        return pPathType != BlockPathTypes.WATER ? super.hasValidPathType(pPathType) : true;
     }
 
     @Override
     public boolean isStableDestination(BlockPos pPos) {
-        return this.level.getBlockState(pPos).is(Blocks.WATER);
+        return this.level.getBlockState(pPos).is(Blocks.WATER) || super.isStableDestination(pPos);
     }
 }

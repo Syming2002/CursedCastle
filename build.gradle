@@ -211,6 +211,9 @@ dependencies {
 
     // Jade
     implementation fg.deobf("curse.maven:jade-${jade_id}")
+    implementation fg.deobf("curse.maven:jade-addons-${jade_addons_id}")
+
+    implementation fg.deobf("curse.maven:torohealth-damage-indicator-reformed-${torohealth_damage_indicator_reformed_id}")
 
     // EMI
 //    compileOnly fg.deobf("dev.emi:emi-forge:${emi_version}:api")
@@ -225,14 +228,8 @@ dependencies {
 //    implementation fg.deobf("curse.maven:emi-loot-${emi_loot_id}")
 
 
-//    implementation fg.deobf("maven.modrinth:jade:${project.jade_version}")
-//    implementation fg.deobf("curse.maven:jade-addons-${jade_addons_id}")
-
-
     // Apply Mixin AP
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-
-    implementation fg.deobf("curse.maven:citadel-331936:7476570")
 
     implementation fg.deobf("curse.maven:attributefix-280510:4911084")
 
@@ -299,9 +296,6 @@ dependencies {
 
     implementation fg.deobf("curse.maven:mob-amputation-reborn-1528056:8081780")
 
-    implementation files("libs/improved-village-placement-1.1.2.jar")
-
-
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
@@ -313,11 +307,11 @@ dependencies {
 // See https://docs.gradle.org/current/dsl/org.gradle.language.jvm.tasks.ProcessResources.html
 tasks.named('processResources', ProcessResources).configure {
     var replaceProperties = [
-            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
-            forge_version: forge_version, forge_version_range: forge_version_range,
+            minecraft_version   : minecraft_version, minecraft_version_range: minecraft_version_range,
+            forge_version       : forge_version, forge_version_range: forge_version_range,
             loader_version_range: loader_version_range,
-            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-            mod_authors: mod_authors, mod_description: mod_description,
+            mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+            mod_authors         : mod_authors, mod_description: mod_description,
     ]
     inputs.properties replaceProperties
 

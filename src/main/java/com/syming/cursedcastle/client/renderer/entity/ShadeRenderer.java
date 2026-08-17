@@ -17,7 +17,7 @@ public class ShadeRenderer extends MobRenderer<ShadeEntity, ShadeModel<ShadeEnti
 
 
     public ShadeRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new ShadeModel(), 0.5F);
+        super(pContext, new ShadeModel<>(pContext.bakeLayer(ShadeModel.SHADE_LAYER)), 0.5F);
     }
 
     @Override

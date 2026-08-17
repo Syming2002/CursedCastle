@@ -1,9 +1,6 @@
 package com.syming.cursedcastle.entity.mob.shade;
 
-import com.github.alexthe666.citadel.animation.Animation;
-import com.github.alexthe666.citadel.animation.AnimationHandler;
-import com.github.alexthe666.citadel.animation.IAnimatedEntity;
-import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
+import com.syming.cursedcastle.entity.mob.CCFlyingMonster;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -17,30 +14,30 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
-import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn;
 
-public abstract class ShadeEntity extends FlyingMob implements IAnimatedEntity, Enemy, ILivingEntityStrengthWeakness, RangedAttackMob {
-    private static final EntityDataAccessor<Integer> TARGET_ID = SynchedEntityData.defineId(ShadeEntity.class, EntityDataSerializers.INT);
+public abstract class ShadeEntity extends CCFlyingMonster implements RangedAttackMob {
 
+    private static final EntityDataAccessor<Byte> ANIMATION = SynchedEntityData.defineId(ShadeEntity.class, EntityDataSerializers.BYTE);
 
-    protected Animation animation;
+    public static final byte IDLE_ANIMATION = 0;
 
-    public static final Animation REPULSE_ATTACK_ANIMATION = Animation.create(180);
-    protected int repulseAnimationCooldown = 0;
-    public static final int REPULSE_ATTACK_COOLDOWN = 150;
+    public static final byte REPULSE_ATTACK_ANIMATION = 1;
+    public static final float REPULSE_ATTACK_ANIMATION_LENGTH_IN_SECONDS = 9.0F;
+    public static final int REPULSE_ATTACK_ANIMATION_LENGTH_IN_TICKS = (int) (REPULSE_ATTACK_ANIMATION_LENGTH_IN_SECONDS * 20);
+    protected static final int REPULSE_ATTACK_COOLDOWN = 150;
+    protected int repulseAttackCooldown = REPULSE_ATTACK_COOLDOWN;
 
-    protected static final Animation[] ANIMATIONS = {REPULSE_ATTACK_ANIMATION};
+    public final AnimationState repulseAttackAnimationState = new AnimationState();
 
-    protected int animationTick;
+    protected int repulseAttackAnimationTick = 0;
 
     protected int healTickCounter = 0;
 
@@ -56,21 +53,7 @@ public abstract class ShadeEntity extends FlyingMob implements IAnimatedEntity, 
     protected void defineSynchedData() {
         super.defineSynchedData();
 
-        this.entityData.define(TARGET_ID,-1);
-    }
-
-    @Override
-    public void setTarget(@Nullable LivingEntity living) {
-        super.setTarget(living);
-        this.entityData.set(TARGET_ID, living == null ? -1 : living.getId());
-    }
-
-    @Override
-    @Nullable
-    public LivingEntity getTarget() {
-        int id = this.entityData.get(TARGET_ID);
-        Entity entity = this.level().getEntity(id);
-        return (entity instanceof LivingEntity living) ? living : null;
+        this.entityData.define(ANIMATION, IDLE_ANIMATION);
     }
 
     @Override
@@ -93,20 +76,38 @@ public abstract class ShadeEntity extends FlyingMob implements IAnimatedEntity, 
 
     @Override
     public void tick() {
+
+        if (this.level().isClientSide()) {
+            this.repulseAttackAnimationState.animateWhen(getAnimation() == REPULSE_ATTACK_ANIMATION, this.tickCount);
+        }
+
         super.tick();
 
         LivingEntity target = getTarget();
 
         if (target != null) {
-            if (this instanceof ThunderShadeEntity ? distanceToSqr(target) <= 2.5F : distanceToSqr(target) <= 6.0F && getAnimation() == NO_ANIMATION && this.repulseAnimationCooldown <= 0 && isAlive()) {
-                setAnimation(REPULSE_ATTACK_ANIMATION);
-                this.repulseAnimationCooldown = REPULSE_ATTACK_COOLDOWN;
+            if (this.repulseAttackCooldown > 0) {
+                this.repulseAttackCooldown--;
             }
+
+            if (this instanceof ThunderShadeEntity ? distanceToSqr(target) <= 2.5F : distanceToSqr(target) <= 6.0F && getAnimation() == IDLE_ANIMATION && this.repulseAttackCooldown <= 0 && isAlive()) {
+                setAnimation(REPULSE_ATTACK_ANIMATION);
+            }
+
+            if (getAnimation() == REPULSE_ATTACK_ANIMATION) {
+                this.repulseAttackAnimationTick++;
+
+                if (this.repulseAttackAnimationTick > REPULSE_ATTACK_ANIMATION_LENGTH_IN_TICKS) {
+                    setAnimation(IDLE_ANIMATION);
+                    this.repulseAttackAnimationTick = 0;
+                    this.repulseAttackCooldown = REPULSE_ATTACK_COOLDOWN;
+                }
+            }
+        } else {
+            setAnimation(IDLE_ANIMATION);
+            this.repulseAttackCooldown = REPULSE_ATTACK_COOLDOWN;
+            this.repulseAttackAnimationTick = 0;
         }
-
-        if (this.repulseAnimationCooldown > 0) this.repulseAnimationCooldown--;
-
-        AnimationHandler.INSTANCE.updateAnimations(this);
 
         shouldDespawnInPeaceful();
     }
@@ -125,33 +126,16 @@ public abstract class ShadeEntity extends FlyingMob implements IAnimatedEntity, 
         return EntityDimensions.scalable(0.5F, 1.875F);
     }
 
-    @Override
-    public int getAnimationTick() {
-        return this.animationTick;
+    public byte getAnimation() {
+        return this.entityData.get(ANIMATION);
     }
 
-    @Override
-    public void setAnimationTick(int tick) {
-        this.animationTick = tick;
-    }
-
-    @Override
-    public Animation getAnimation() {
-        return this.animation;
-    }
-
-    @Override
-    public void setAnimation(Animation animation) {
-        this.animation = animation;
-    }
-
-    @Override
-    public Animation[] getAnimations() {
-        return ANIMATIONS;
+    public void setAnimation(byte pAnimation) {
+        this.entityData.set(ANIMATION, pAnimation);
     }
 
     protected boolean isRepulseAnimation() {
-        return this.animation == REPULSE_ATTACK_ANIMATION;
+        return getAnimation() == REPULSE_ATTACK_ANIMATION;
     }
 
     protected void onShadeHeal(ShadeEntity shade) {

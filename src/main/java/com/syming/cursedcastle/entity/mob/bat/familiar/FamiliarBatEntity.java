@@ -2,7 +2,7 @@ package com.syming.cursedcastle.entity.mob.bat.familiar;
 
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.mob.bat.CCBatEntity;
-import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
+import com.syming.cursedcastle.entity.mob.zombie.friendly.FriendlyZombieEntity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -47,7 +47,7 @@ public class FamiliarBatEntity extends CCBatEntity implements OwnableEntity {
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, true));
         this.goalSelector.addGoal(2, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(2, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 10, true, false, (livingEntity) -> {
-            return !(livingEntity instanceof FamiliarBatEntity) && !(livingEntity instanceof ZombieFriendlyEntity);
+            return !(livingEntity instanceof FamiliarBatEntity) && !(livingEntity instanceof FriendlyZombieEntity);
         }));
     }
 

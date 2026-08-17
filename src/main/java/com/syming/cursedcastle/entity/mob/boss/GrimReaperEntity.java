@@ -1,14 +1,10 @@
 package com.syming.cursedcastle.entity.mob.boss;
 
-import com.github.alexthe666.citadel.animation.Animation;
-import com.github.alexthe666.citadel.animation.AnimationHandler;
-import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.api.ICustomBossBar;
 import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
 import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
 import com.syming.cursedcastle.entity.projectile.ScytheProjectileEntity;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.util.ColorUtil;
@@ -37,8 +33,6 @@ import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
@@ -53,20 +47,6 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class GrimReaperEntity extends CCBossEntity implements ICustomBossBar, ILivingEntityStrengthWeakness, RangedAttackMob {
-//    private Animation animation;
-//
-//    public static final Animation MELEE_ATTACK_ANIMATION = Animation.create(35);
-//    private int meleeAttackCooldownTick = 0;
-//    public static final int MELEE_ATTACK_COOLDOWN = 40;
-//
-//    public static final Animation SCYTHE_ATTACK_ANIMATION = Animation.create(260);
-//    private int scytheAttackCooldownTick = 0;
-//    public static final int SCYTHE_PROJECTILE_ATTACK_COOLDOWN = 100;
-//
-//    private static final Animation[] ANIMATIONS = {MELEE_ATTACK_ANIMATION, SCYTHE_ATTACK_ANIMATION};
-//
-//    private int animationTick;
-
     private static final EntityDataAccessor<Byte> ANIMATION = SynchedEntityData.defineId(GrimReaperEntity.class, EntityDataSerializers.BYTE);
 
     public static final byte IDLE_ANIMATION = 0;

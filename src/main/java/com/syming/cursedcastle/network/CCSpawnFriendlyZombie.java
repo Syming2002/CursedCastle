@@ -1,6 +1,6 @@
 package com.syming.cursedcastle.network;
 
-import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
+import com.syming.cursedcastle.entity.mob.zombie.friendly.FriendlyZombieEntity;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.soul.SoulItem;
@@ -56,7 +56,7 @@ public class CCSpawnFriendlyZombie {
         }
 
         private static void spawnZombie(ServerPlayer player, int maxZombies) {
-            int currentZombies = player.level().getEntitiesOfClass(ZombieFriendlyEntity.class, new AABB(player.blockPosition()).inflate(32)).size();
+            int currentZombies = player.level().getEntitiesOfClass(FriendlyZombieEntity.class, new AABB(player.blockPosition()).inflate(32)).size();
 
             if (currentZombies < maxZombies) {
                 Vec3 dir = player.getLookAngle();
@@ -64,7 +64,7 @@ public class CCSpawnFriendlyZombie {
                 double y = player.getY() + 0.5D;
                 double z = player.getZ() + dir.z * 1.5D;
 
-                ZombieFriendlyEntity zombie = new ZombieFriendlyEntity(player.level());
+                FriendlyZombieEntity zombie = new FriendlyZombieEntity(player.level());
                 zombie.setPos(x, y, z);
                 player.level().addFreshEntity(zombie);
             }

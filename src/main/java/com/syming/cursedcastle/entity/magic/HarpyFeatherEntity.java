@@ -85,7 +85,7 @@ public class HarpyFeatherEntity extends Projectile {
         if (!this.level().isClientSide()) {
             Entity entity = getOwner();
             if (entity instanceof HarpyEntity) {
-                pEntityHitResult.getEntity().hurt(this.damageSources().thorns(this), 5.0F);
+                pEntityHitResult.getEntity().hurt(this.damageSources().thorns(pEntityHitResult.getEntity()), 5.0F);
             }
         }
     }

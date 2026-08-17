@@ -1,7 +1,5 @@
 package com.syming.cursedcastle.entity.mob.zombie;
 
-import com.github.alexthe666.citadel.animation.Animation;
-import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.entity.mob.CCMonster;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -14,7 +12,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class CCZombieEntity extends CCMonster implements IAnimatedEntity {
+public abstract class CCZombieEntity extends CCMonster {
     public CCZombieEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -40,30 +38,5 @@ public abstract class CCZombieEntity extends CCMonster implements IAnimatedEntit
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         return SoundEvents.ZOMBIE_HURT;
-    }
-
-    @Override
-    public int getAnimationTick() {
-        return 0;
-    }
-
-    @Override
-    public void setAnimationTick(int tick) {
-
-    }
-
-    @Override
-    public Animation getAnimation() {
-        return null;
-    }
-
-    @Override
-    public void setAnimation(Animation animation) {
-
-    }
-
-    @Override
-    public Animation[] getAnimations() {
-        return new Animation[0];
     }
 }

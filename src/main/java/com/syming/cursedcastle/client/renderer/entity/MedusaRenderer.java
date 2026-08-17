@@ -13,7 +13,7 @@ public class MedusaRenderer extends MobRenderer<MedusaEntity, MedusaModel> {
     private static final ResourceLocation MEDUSA_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/medusa.png");
 
     public MedusaRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new MedusaModel(), 0.75F);
+        super(pContext, new MedusaModel(pContext.bakeLayer(MedusaModel.MEDUSA_LAYER)), 0.75F);
     }
 
     @Override

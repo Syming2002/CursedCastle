@@ -11,7 +11,7 @@ import com.syming.cursedcastle.entity.mob.skeleton.ClearBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.GoldenSkeleton;
 import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
-import com.syming.cursedcastle.entity.mob.friendly.ZombieFriendlyEntity;
+import com.syming.cursedcastle.entity.mob.zombie.friendly.FriendlyZombieEntity;
 import com.syming.cursedcastle.entity.mob.zombie.FireZombieEntity;
 import com.syming.cursedcastle.entity.mob.zombie.FrostZombieEntity;
 import com.syming.cursedcastle.entity.projectile.*;
@@ -84,7 +84,7 @@ public class CCEntity {
             .updateInterval(1)
             .build("fire_zombie"));
 
-    public static final RegistryObject<EntityType<ZombieFriendlyEntity>> FRIENDLY_ZOMBIE = ENTITY_TYPES.register("friendly_zombie", () -> EntityType.Builder.<ZombieFriendlyEntity>of(ZombieFriendlyEntity::new, MobCategory.CREATURE)
+    public static final RegistryObject<EntityType<FriendlyZombieEntity>> FRIENDLY_ZOMBIE = ENTITY_TYPES.register("friendly_zombie", () -> EntityType.Builder.<FriendlyZombieEntity>of(FriendlyZombieEntity::new, MobCategory.CREATURE)
             .sized(0.6F, 1.95F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
@@ -241,7 +241,7 @@ public class CCEntity {
             () -> EntityType.Builder.<HolyBibleEntity>of(HolyBibleEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
-                    .updateInterval(20)
+                    .updateInterval(1)
                     .setCustomClientFactory(((spawnEntity, level) -> new HolyBibleEntity(level)))
                     .build("holy_bible"));
 
@@ -251,7 +251,7 @@ public class CCEntity {
             () -> EntityType.Builder.<HolyWaterEntity>of(HolyWaterEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
-                    .updateInterval(20)
+                    .updateInterval(1)
                     .setCustomClientFactory(((spawnEntity, level) -> new HolyWaterEntity(level)))
                     .build("holy_water"));
 
@@ -263,7 +263,7 @@ public class CCEntity {
             () -> EntityType.Builder.<ThrowingBoneEntity>of(ThrowingBoneEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
-                    .updateInterval(20)
+                    .updateInterval(1)
                     .setCustomClientFactory(((spawnEntity, level) -> new ThrowingBoneEntity(level)))
                     .build("throwing_bone"));
 
@@ -271,7 +271,7 @@ public class CCEntity {
             () -> EntityType.Builder.<ThrowingBloodBoneEntity>of(ThrowingBloodBoneEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
-                    .updateInterval(20)
+                    .updateInterval(1)
                     .setCustomClientFactory(((spawnEntity, level) -> new ThrowingBloodBoneEntity(level)))
                     .build("blood_throwing_bone"));
 
@@ -279,7 +279,7 @@ public class CCEntity {
             () -> EntityType.Builder.<ThrowingGoldenBoneEntity>of(ThrowingGoldenBoneEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
-                    .updateInterval(20)
+                    .updateInterval(1)
                     .setCustomClientFactory(((spawnEntity, level) -> new ThrowingGoldenBoneEntity(level)))
                     .build("golden_throwing_bone"));
 

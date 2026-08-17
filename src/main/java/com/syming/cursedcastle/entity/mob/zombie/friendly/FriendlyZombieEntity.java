@@ -1,28 +1,29 @@
-package com.syming.cursedcastle.entity.mob.friendly;
+package com.syming.cursedcastle.entity.mob.zombie.friendly;
 
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
+import com.syming.cursedcastle.entity.mob.zombie.CCZombieEntity;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.ai.goal.ZombieAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-import java.util.function.Predicate;
+import java.util.List;
 
-public class ZombieFriendlyEntity extends Zombie {
-    public ZombieFriendlyEntity(EntityType<? extends Zombie> pEntityType, Level pLevel) {
+public class FriendlyZombieEntity extends CCZombieEntity {
+    public FriendlyZombieEntity(EntityType<? extends CCZombieEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    public ZombieFriendlyEntity(Level pLevel) {
+    public FriendlyZombieEntity(Level pLevel) {
         super(CCEntity.FRIENDLY_ZOMBIE.get(), pLevel);
     }
 
@@ -34,15 +35,10 @@ public class ZombieFriendlyEntity extends Zombie {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        addBehaviourGoals();
-    }
-
-    @Override
-    protected void addBehaviourGoals() {
-        this.goalSelector.addGoal(2, new ZombieAttackGoal(this, (double)1.0F, false));
-        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, (double)1.0F));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, (double) 1.0F, false));
+        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, (double) 1.0F));
         this.goalSelector.addGoal(2, new NearestAttackableTargetGoal<Monster>(this, Monster.class, 10, true, false, (livingEntity) -> {
-            return !(livingEntity instanceof ZombieFriendlyEntity) && !(livingEntity instanceof FamiliarBatEntity);
+            return !(livingEntity instanceof FriendlyZombieEntity) && !(livingEntity instanceof FamiliarBatEntity);
         }));
     }
 
@@ -70,5 +66,25 @@ public class ZombieFriendlyEntity extends Zombie {
         if (this.tickCount > 100) {
             discard();
         }
+    }
+
+    @Override
+    public boolean hasWeakness(DamageSource pSource, float pDamageAmount) {
+        return false;
+    }
+
+    @Override
+    public boolean hasStrength(DamageSource pSource, float pDamageAmount) {
+        return false;
+    }
+
+    @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of();
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of();
     }
 }

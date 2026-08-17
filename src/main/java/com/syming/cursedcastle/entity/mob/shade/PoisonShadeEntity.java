@@ -82,7 +82,7 @@ public class PoisonShadeEntity extends ShadeEntity {
         if (target != null) {
             lookAt(target,30.0F,30.0F);
             if (getAnimation() == ShadeEntity.REPULSE_ATTACK_ANIMATION) {
-                if (getAnimationTick() == 95) {
+                if (this.repulseAttackAnimationTick == 95) {
                     if (!this.level().isClientSide()) {
                         Vec3 headPos = this.position().add(0.0D, getEyeHeight(), 0.0D);
                         Vec3 lookVec = getLookAngle().scale(0.5D);

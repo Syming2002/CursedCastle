@@ -1,16 +1,10 @@
 package com.syming.cursedcastle.entity.mob.skeleton;
 
-import com.github.alexthe666.citadel.animation.Animation;
-import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.projectile.ThrowingBoneEntity;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -18,13 +12,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RestrictSunGoal;
-import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements RangedAttackMob {
+public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity {
 
 
     public ThrowingBoneSkeletonEntity(EntityType<? extends CCSkeletonEntity> pEntityType, Level pLevel) {
@@ -43,10 +36,10 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements Rang
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
     }
 
-    @Override
-    protected SoundEvent getStepSound() {
-        return SoundEvents.SKELETON_STEP;
-    }
+//    @Override
+//    protected SoundEvent getStepSound() {
+//        return SoundEvents.SKELETON_STEP;
+//    }
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return PathfinderMob.createMobAttributes()
@@ -107,71 +100,15 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity implements Rang
     @Override
     public void tick() {
         super.tick();
-
-        if (this.getTarget() != null) {
-            if (getAnimation() == NO_ANIMATION && getRandom().nextFloat() < 0.5F && this.throwingBoneCooldown <= 0) {
-                AnimationHandler.INSTANCE.sendAnimationMessage(this, THROWING_BONE_ANIMATION);
-                this.throwingBoneCooldown = THROWING_BONE_COOLDOWN + this.random.nextInt(16);
-            }
-
-            if (getAnimation() == THROWING_BONE_ANIMATION) {
-                if (getAnimationTick() == 32) {
-                    if (!this.level().isClientSide() && this instanceof ThrowingBoneSkeletonEntity) {
-                        ThrowingBoneEntity throwingBone = new ThrowingBoneEntity(this, this.level());
-                        throwingBone.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 0.5F, 0.2F);
-                        playSound(SoundEvents.SNOWBALL_THROW, 1.0F, 0.5F);
-                        this.level().addFreshEntity(throwingBone);
-                    }
-                }
-            }
-        }
-
-        if (this.throwingBoneCooldown > 0 && getAnimation() == NO_ANIMATION) {
-            this.throwingBoneCooldown--;
-        }
     }
 
     @Override
     public void tickDeath() {
-        ++this.deathTime;
-
-        if (this.deathTime == 1) {
-            AnimationHandler.INSTANCE.sendAnimationMessage(this, DEATH_ANIMATION);
-        }
-
-        if (this.deathTime >= 20 && !this.level().isClientSide() && !isRemoved()) {
-            this.level().broadcastEntityEvent(this, (byte)60);
-            this.remove(Entity.RemovalReason.KILLED);
-        }
+        super.tickDeath();
     }
 
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
 
-    }
-
-    @Override
-    public Animation getAnimation() {
-        return super.getAnimation();
-    }
-
-    @Override
-    public void setAnimation(Animation animation) {
-        super.setAnimation(animation);
-    }
-
-    @Override
-    public int getAnimationTick() {
-        return super.getAnimationTick();
-    }
-
-    @Override
-    public void setAnimationTick(int tick) {
-        super.setAnimationTick(tick);
-    }
-
-    @Override
-    public Animation[] getAnimations() {
-        return super.getAnimations();
     }
 }

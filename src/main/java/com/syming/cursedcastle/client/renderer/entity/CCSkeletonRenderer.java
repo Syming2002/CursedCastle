@@ -2,7 +2,7 @@ package com.syming.cursedcastle.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.syming.cursedcastle.client.model.SkeletonModel;
+import com.syming.cursedcastle.client.model.CCSkeletonModel;
 import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.CCSkeletonEntity;
 import com.syming.cursedcastle.entity.mob.skeleton.ClearBoneSkeletonEntity;
@@ -20,13 +20,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import org.jetbrains.annotations.Nullable;
 
-public class SkeletonRenderer extends MobRenderer<CCSkeletonEntity, SkeletonModel> {
+public class CCSkeletonRenderer extends MobRenderer<CCSkeletonEntity, CCSkeletonModel> {
 
     public static final ResourceLocation SKELETON_TEXTURE = new ResourceLocation("textures/entity/skeleton/skeleton.png");
 
 
-    public SkeletonRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new SkeletonModel(), 0.5F);
+    public CCSkeletonRenderer(EntityRendererProvider.Context pContext) {
+        super(pContext, new CCSkeletonModel(pContext.bakeLayer(CCSkeletonModel.CC_SKELETON_LAYER)), 0.5F);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class SkeletonRenderer extends MobRenderer<CCSkeletonEntity, SkeletonMode
             }
 
             if (!pEntity.isSpectator()) {
-                for(RenderLayer<CCSkeletonEntity, SkeletonModel> renderlayer : this.layers) {
+                for(RenderLayer<CCSkeletonEntity, CCSkeletonModel> renderlayer : this.layers) {
                     renderlayer.render(pPoseStack, pBuffer, pPackedLight, pEntity, f5, f8, pPartialTicks, f7, f2, f6);
                 }
             }
@@ -131,7 +131,7 @@ public class SkeletonRenderer extends MobRenderer<CCSkeletonEntity, SkeletonMode
             float f1 = Mth.rotLerp(pPartialTicks, pEntity.yHeadRotO, pEntity.yHeadRot);
             float f2 = f1 - f;
             if (shouldSit && pEntity.getVehicle() instanceof LivingEntity) {
-                LivingEntity livingentity = (LivingEntity)pEntity.getVehicle();
+                LivingEntity livingentity = (LivingEntity) pEntity.getVehicle();
                 f = Mth.rotLerp(pPartialTicks, livingentity.yBodyRotO, livingentity.yBodyRot);
                 f2 = f1 - f;
                 float f3 = Mth.wrapDegrees(f2);
@@ -161,7 +161,7 @@ public class SkeletonRenderer extends MobRenderer<CCSkeletonEntity, SkeletonMode
                 Direction direction = pEntity.getBedOrientation();
                 if (direction != null) {
                     float f4 = pEntity.getEyeHeight(Pose.STANDING) - 0.1F;
-                    pPoseStack.translate((float)(-direction.getStepX()) * f4, 0.0F, (float)(-direction.getStepZ()) * f4);
+                    pPoseStack.translate((float) (-direction.getStepX()) * f4, 0.0F, (float) (-direction.getStepZ()) * f4);
                 }
             }
 
@@ -203,7 +203,7 @@ public class SkeletonRenderer extends MobRenderer<CCSkeletonEntity, SkeletonMode
             }
 
             if (!pEntity.isSpectator()) {
-                for(RenderLayer<CCSkeletonEntity, SkeletonModel> renderlayer : this.layers) {
+                for(RenderLayer<CCSkeletonEntity, CCSkeletonModel> renderlayer : this.layers) {
                     renderlayer.render(pPoseStack, pBuffer, pPackedLight, pEntity, f5, f8, pPartialTicks, f7, f2, f6);
                 }
             }
@@ -250,7 +250,7 @@ public class SkeletonRenderer extends MobRenderer<CCSkeletonEntity, SkeletonMode
                 Direction direction = pEntity.getBedOrientation();
                 if (direction != null) {
                     float f4 = pEntity.getEyeHeight(Pose.STANDING) - 0.1F;
-                    pPoseStack.translate((float)(-direction.getStepX()) * f4, 0.0F, (float)(-direction.getStepZ()) * f4);
+                    pPoseStack.translate((float) (-direction.getStepX()) * f4, 0.0F, (float) (-direction.getStepZ()) * f4);
                 }
             }
 
@@ -292,14 +292,12 @@ public class SkeletonRenderer extends MobRenderer<CCSkeletonEntity, SkeletonMode
             }
 
             if (!pEntity.isSpectator()) {
-                for(RenderLayer<CCSkeletonEntity, SkeletonModel> renderlayer : this.layers) {
+                for (RenderLayer<CCSkeletonEntity, CCSkeletonModel> renderlayer : this.layers) {
                     renderlayer.render(pPoseStack, pBuffer, pPackedLight, pEntity, f5, f8, pPartialTicks, f7, f2, f6);
                 }
             }
 
             pPoseStack.popPose();
-        } else {
-            super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
         }
     }
 

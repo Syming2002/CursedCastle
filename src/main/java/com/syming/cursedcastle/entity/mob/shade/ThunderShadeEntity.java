@@ -1,14 +1,10 @@
 package com.syming.cursedcastle.entity.mob.shade;
 
-import com.github.alexthe666.citadel.animation.Animation;
 import com.syming.cursedcastle.entity.magic.ThunderBreathEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LightningBolt;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,11 +14,16 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class ThunderShadeEntity extends ShadeEntity {
-    public static final Animation LIGHTNING_BOLT_ATTACK_ANIMATION = Animation.create(100);
-    private int lightningBoltAttackCooldown = 0;
-    public static final int LIGHTNING_BOLT_ATTACK_COOLDOWN = 300;
 
-    private static final Animation[] ANIMATIONS = {REPULSE_ATTACK_ANIMATION, LIGHTNING_BOLT_ATTACK_ANIMATION};
+    public static final byte LIGHTNING_BOLT_ATTACK_ANIMATION = 2;
+    public static final float LIGHTNING_BOLT_ATTACK_ANIMATION_LENGTH_IN_SECONDS = 5.0F;
+    public static final int LIGHTNING_BOLT_ATTACK_ANIMATION_LENGTH_IN_TICKS = (int) (LIGHTNING_BOLT_ATTACK_ANIMATION_LENGTH_IN_SECONDS * 20);
+    private static final int LIGHTNING_BOLT_ATTACK_COOLDOWN = 300;
+    private int lightningBoltAttackCooldown = LIGHTNING_BOLT_ATTACK_COOLDOWN;
+
+    public final AnimationState lightningBoltAttackAnimationState = new AnimationState();
+
+    private int lightningBoltAttackAnimationTick = 0;
 
     private ThunderBreathEntity thunderBreath;
 
@@ -80,6 +81,10 @@ public class ThunderShadeEntity extends ShadeEntity {
 
     @Override
     public void tick() {
+        if (this.level().isClientSide()) {
+            this.lightningBoltAttackAnimationState.animateWhen(getAnimation() == LIGHTNING_BOLT_ATTACK_ANIMATION, this.tickCount);
+        }
+
         super.tick();
 
         LivingEntity target = getTarget();
@@ -90,13 +95,16 @@ public class ThunderShadeEntity extends ShadeEntity {
 
         if (target != null) {
             lookAt(target,30.0F,30.0F);
-            if (distanceToSqr(target) > 6.0F && getAnimation() == NO_ANIMATION && this.lightningBoltAttackCooldown <= 0 && isAlive()) {
+
+            if (this.lightningBoltAttackCooldown > 0) this.lightningBoltAttackCooldown--;
+
+            if (distanceToSqr(target) > 6.0F && getAnimation() == IDLE_ANIMATION && this.lightningBoltAttackCooldown <= 0 && isAlive()) {
                 setAnimation(LIGHTNING_BOLT_ATTACK_ANIMATION);
                 this.lightningBoltAttackCooldown = LIGHTNING_BOLT_ATTACK_COOLDOWN;
             }
 
             if (getAnimation() == ShadeEntity.REPULSE_ATTACK_ANIMATION) {
-                if (getAnimationTick() == 95) {
+                if (this.repulseAttackAnimationTick == 95) {
                     if (!this.level().isClientSide()) {
                         Vec3 headPos = this.position().add(0.0D, getEyeHeight(), 0.0D);
                         Vec3 lookVec = getLookAngle().scale(0.5D);
@@ -106,28 +114,36 @@ public class ThunderShadeEntity extends ShadeEntity {
                         this.thunderBreath.setOwner(this);
                         this.thunderBreath.setPos(headPos.x, headPos.y, headPos.z);
                         this.level().addFreshEntity(this.thunderBreath);
-                        System.out.println("Thunder Breath is Launching at " + this.thunderBreath.getX() + " " + this.thunderBreath.getY() + " " + this.thunderBreath.getZ());
                     }
                 }
             } else if (getAnimation() == ThunderShadeEntity.LIGHTNING_BOLT_ATTACK_ANIMATION) {
-                if (getAnimationTick() == 1) {
+                this.lightningBoltAttackAnimationTick++;
+                if (this.lightningBoltAttackAnimationTick == 1) {
                     this.storedTargetPos = target.position();
                 }
-                if (getAnimationTick() == 50) {
+                if (this.lightningBoltAttackAnimationTick == 50) {
                     if (!this.level().isClientSide()) {
                         LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, this.level());
                         lightningBolt.setPos(this.storedTargetPos.x, this.storedTargetPos.y, this.storedTargetPos.z);
                         this.level().addFreshEntity(lightningBolt);
-                        System.out.println("Lightning Bolt is Striking");
                     }
+                }
+
+                if (this.lightningBoltAttackAnimationTick > LIGHTNING_BOLT_ATTACK_ANIMATION_LENGTH_IN_TICKS) {
+                    setAnimation(IDLE_ANIMATION);
+                    this.lightningBoltAttackAnimationTick = 0;
+                    this.lightningBoltAttackCooldown = LIGHTNING_BOLT_ATTACK_COOLDOWN;
                 }
             }
             if (getAnimation() != ThunderShadeEntity.LIGHTNING_BOLT_ATTACK_ANIMATION) {
                 this.storedTargetPos = null;
             }
+        } else {
+            setAnimation(IDLE_ANIMATION);
+            this.lightningBoltAttackCooldown = LIGHTNING_BOLT_ATTACK_COOLDOWN;
+            this.lightningBoltAttackAnimationTick = 0;
         }
 
-        if (this.lightningBoltAttackCooldown > 0) this.lightningBoltAttackCooldown--;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -160,10 +176,5 @@ public class ThunderShadeEntity extends ShadeEntity {
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
 
-    }
-
-    @Override
-    public Animation[] getAnimations() {
-        return ANIMATIONS;
     }
 }

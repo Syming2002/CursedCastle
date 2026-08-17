@@ -11,7 +11,7 @@ public class HarpyRenderer extends MobRenderer<HarpyEntity, HarpyModel> {
     public static final ResourceLocation HARPY_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/harpy.png");
 
     public HarpyRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new HarpyModel(), 0.75F);
+        super(pContext, new HarpyModel(pContext.bakeLayer(HarpyModel.HARPY_LAYER)), 0.25F);
     }
 
     @Override

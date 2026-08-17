@@ -146,7 +146,7 @@ public class FrozenShadeEntity extends ShadeEntity {
         if (target != null) {
             if (getAnimation() == ShadeEntity.REPULSE_ATTACK_ANIMATION) {
                 lookAt(target, 30.0F, 30.0F);
-                if (getAnimationTick() == 95) {
+                if (this.repulseAttackAnimationTick == 95) {
                     if (!this.level().isClientSide()) {
                         Vec3 headPos = this.position().add(0.0D, getEyeHeight(), 0.0D);
                         Vec3 lookVec = getLookAngle().scale(0.5D);
@@ -159,7 +159,7 @@ public class FrozenShadeEntity extends ShadeEntity {
                         System.out.println("Ice Breath is Launching at " + this.iceBreath.getX() + " " + this.iceBreath.getY() + " " + this.iceBreath.getZ());
                     }
                 }
-            } else if (getAnimation() == NO_ANIMATION) {
+            } else if (getAnimation() == IDLE_ANIMATION) {
                 if (this.iceSpikeSpawnTimer > 0) {
                     this.iceSpikeSpawnTimer--;
 

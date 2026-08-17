@@ -25,6 +25,11 @@ public class RusalkaGoToWaterGoal extends MoveToBlockGoal {
     }
 
     @Override
+    protected BlockPos getMoveToTarget() {
+        return this.blockPos;
+    }
+
+    @Override
     public boolean canUse() {
         return !this.rusalka.isInWater() && super.canUse();
     }
@@ -35,8 +40,8 @@ public class RusalkaGoToWaterGoal extends MoveToBlockGoal {
     }
 
     @Override
-    public void start() {
-        super.start();
+    public boolean shouldRecalculatePath() {
+        return this.tryTicks % 20 == 0;
     }
 
     @Override

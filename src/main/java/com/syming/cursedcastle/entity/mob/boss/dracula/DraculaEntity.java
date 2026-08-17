@@ -1,10 +1,6 @@
 package com.syming.cursedcastle.entity.mob.boss.dracula;
 
-import com.github.alexthe666.citadel.animation.Animation;
-import com.github.alexthe666.citadel.animation.AnimationHandler;
-import com.github.alexthe666.citadel.animation.IAnimatedEntity;
 import com.syming.cursedcastle.api.IElementalDamage;
-//import com.syming.cursedcastle.network.CCBossInfoPacket;
 import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.magic.FirePillarEntity;
 import com.syming.cursedcastle.entity.mob.boss.CCBossEntity;
@@ -23,11 +19,14 @@ import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
@@ -47,7 +46,8 @@ import net.minecraftforge.entity.PartEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Random;
+
+//import com.syming.cursedcastle.network.CCBossInfoPacket;
 
 public class DraculaEntity extends CCBossEntity {
 
@@ -68,6 +68,10 @@ public class DraculaEntity extends CCBossEntity {
     public static final byte FIRE_PILLAR_ANIMATION = 3;
     public static final float FIRE_PILLAR_ANIMATION_LENGTH_IN_SECONDS = 3.0F;
     public static final int FIRE_PILLAR_ANIMATION_LENGTH_IN_TICKS = (int) (FIRE_PILLAR_ANIMATION_LENGTH_IN_SECONDS * 20);
+
+    public static final byte BATS_ATTACK_ANIMATION = 4;
+    public static final float BATS_ATTACK_ANIMATION_LENGTH_IN_SECONDS = 2.75F;
+    public static final int BATS_ATTACK_ANIMATION_LENGTH_IN_TICKS = (int) (BATS_ATTACK_ANIMATION_LENGTH_IN_SECONDS * 20);
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState fireballsAnimationState = new AnimationState();
