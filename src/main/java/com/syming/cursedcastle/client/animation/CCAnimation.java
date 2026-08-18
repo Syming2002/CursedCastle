@@ -1,15 +1,13 @@
 package com.syming.cursedcastle.client.animation;
 
-import com.syming.cursedcastle.client.model.CCSkeletonModel;
-import com.syming.cursedcastle.client.model.HarpyModel;
-import com.syming.cursedcastle.entity.mob.HarpyEntity;
-import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
-import com.syming.cursedcastle.entity.mob.boss.MedusaEntity;
-import com.syming.cursedcastle.entity.mob.boss.RusalkaEntity;
-import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
-import com.syming.cursedcastle.entity.mob.shade.ShadeEntity;
-import com.syming.cursedcastle.entity.mob.shade.ThunderShadeEntity;
-import com.syming.cursedcastle.entity.mob.skeleton.CCSkeletonEntity;
+import com.syming.cursedcastle.entity.monster.HarpyEntity;
+import com.syming.cursedcastle.entity.monster.boss.GrimReaperEntity;
+import com.syming.cursedcastle.entity.monster.boss.MedusaEntity;
+import com.syming.cursedcastle.entity.monster.boss.RusalkaEntity;
+import com.syming.cursedcastle.entity.monster.boss.dracula.DraculaEntity;
+import com.syming.cursedcastle.entity.monster.shade.ShadeEntity;
+import com.syming.cursedcastle.entity.monster.shade.ThunderShadeEntity;
+import com.syming.cursedcastle.entity.monster.skeleton.CCSkeletonEntity;
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.Keyframe;

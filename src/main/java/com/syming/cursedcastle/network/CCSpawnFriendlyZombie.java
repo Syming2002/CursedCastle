@@ -1,6 +1,6 @@
 package com.syming.cursedcastle.network;
 
-import com.syming.cursedcastle.entity.mob.zombie.friendly.FriendlyZombieEntity;
+import com.syming.cursedcastle.entity.monster.zombie.friendly.FriendlyZombieEntity;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.soul.SoulItem;

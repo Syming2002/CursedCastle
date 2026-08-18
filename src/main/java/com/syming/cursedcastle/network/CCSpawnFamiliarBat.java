@@ -1,6 +1,6 @@
 package com.syming.cursedcastle.network;
 
-import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
+import com.syming.cursedcastle.entity.monster.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.soul.SoulItem;

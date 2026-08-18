@@ -1,20 +1,12 @@
 package com.syming.cursedcastle.network;
 
-import com.syming.cursedcastle.entity.mob.shade.FrozenShadeEntity;
-import com.syming.cursedcastle.item.CCItem;
-import com.syming.cursedcastle.item.soul.Soul;
-import com.syming.cursedcastle.item.soul.SoulItem;
-import com.syming.cursedcastle.item.whip.IceWhipItem;
+import com.syming.cursedcastle.entity.monster.shade.FrozenShadeEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
-import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.function.Supplier;
 

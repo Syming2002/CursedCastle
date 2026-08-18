@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.entity.magic;
 
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.mob.arachne.ArachneEntity;
+import com.syming.cursedcastle.entity.monster.arachne.ArachneEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,7 +13,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.Vec3;
 
 public class CobwebProjectileEntity extends MagicAttackEntity {
     public CobwebProjectileEntity(EntityType<? extends MagicAttackEntity> pEntityType, Level pLevel) {

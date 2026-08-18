@@ -2,7 +2,7 @@ package com.syming.cursedcastle.client.renderer.entity;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.client.model.VampireBatModel;
-import com.syming.cursedcastle.entity.mob.bat.CCBatEntity;
+import com.syming.cursedcastle.entity.monster.bat.CCBatEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 

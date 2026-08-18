@@ -3,13 +3,11 @@ package com.syming.cursedcastle.client.renderer.entity.rusalka;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.client.model.RusalkaModel;
-import com.syming.cursedcastle.entity.mob.boss.RusalkaEntity;
+import com.syming.cursedcastle.entity.monster.boss.RusalkaEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 
 public class RusalkaRenderer extends MobRenderer<RusalkaEntity, RusalkaModel> {
     public static final ResourceLocation RUSALKA_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/rusalka/rusalka.png");

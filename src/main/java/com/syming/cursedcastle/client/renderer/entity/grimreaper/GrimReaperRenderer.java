@@ -3,10 +3,9 @@ package com.syming.cursedcastle.client.renderer.entity.grimreaper;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.client.model.GrimReaperModel;
 import com.syming.cursedcastle.client.layer.DeathScytheInHandLayer;
-import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
+import com.syming.cursedcastle.entity.monster.boss.GrimReaperEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 
 public class GrimReaperRenderer extends MobRenderer<GrimReaperEntity, GrimReaperModel<GrimReaperEntity>> {

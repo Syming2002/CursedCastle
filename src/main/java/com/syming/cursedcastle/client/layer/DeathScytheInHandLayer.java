@@ -3,7 +3,7 @@ package com.syming.cursedcastle.client.layer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.syming.cursedcastle.client.model.GrimReaperModel;
-import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
+import com.syming.cursedcastle.entity.monster.boss.GrimReaperEntity;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;

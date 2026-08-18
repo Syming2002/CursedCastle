@@ -1,0 +1,126 @@
+package com.syming.cursedcastle.entity.monster.skeleton;
+
+import com.syming.cursedcastle.api.IElementalDamage;
+import com.syming.cursedcastle.damagetype.CCDamageType;
+import com.syming.cursedcastle.entity.CCEntity;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+
+import java.util.List;
+
+public class ClearBoneSkeletonEntity extends CCSkeletonEntity {
+
+    public ClearBoneSkeletonEntity(EntityType<? extends CCSkeletonEntity> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
+    }
+
+    public ClearBoneSkeletonEntity(Level pLevel) {
+        super(CCEntity.CLEAR_BONE_SKELETON.get(), pLevel);
+    }
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false));
+    }
+
+    public static AttributeSupplier.Builder createMobAttributes() {
+        return PathfinderMob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 36.0D)
+                .add(Attributes.FOLLOW_RANGE, 16.0D)
+                .add(Attributes.ATTACK_SPEED, 1.2D)
+                .add(Attributes.MOVEMENT_SPEED, 0.5D)
+                .add(Attributes.ATTACK_DAMAGE, 8.0D);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (this.random.nextFloat() <= 0.05F && this.invulnerableTime <= 0 && !isDeadOrDying()) {
+            setInvulnerable(true);
+            this.invulnerableTime = 100;
+        }
+
+        if (this.invulnerableTime > 0) {
+            --this.invulnerableTime;
+        } else {
+            setInvulnerable(false);
+        }
+
+
+        setNoAi(isInvulnerable());
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.SKELETON_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_33579_) {
+        return SoundEvents.SKELETON_HURT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.SKELETON_DEATH;
+    }
+
+//    @Override
+//    protected SoundEvent getStepSound() {
+//        return SoundEvents.SKELETON_STEP;
+//    }
+
+    @Override
+    public boolean hasWeakness(DamageSource source, float damageAmount) {
+        return false;
+    }
+
+    @Override
+    public boolean hasStrength(DamageSource source, float damageAmount) {
+        LivingEntity attacker = getLastAttacker();
+        LivingEntity target = getTarget();
+        if (attacker != null && target != null) {
+            ItemStack stack = attacker.getMainHandItem();
+            if (stack != null && stack.getItem() instanceof IElementalDamage elementalWeapon) {
+                if (elementalWeapon != null) {
+                    source = elementalWeapon.getElementalDamageSource(stack, target, attacker);
+                    return source.is(CCDamageType.THUNDER);
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public List<Component> getWeaknessDescription() {
+        return List.of();
+    }
+
+    @Override
+    public List<Component> getStrengthDescription() {
+        return List.of();
+    }
+
+    @Override
+    public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
+
+    }
+
+    @Override
+    public boolean isOnFire() {
+        return !isInvulnerable();
+    }
+}

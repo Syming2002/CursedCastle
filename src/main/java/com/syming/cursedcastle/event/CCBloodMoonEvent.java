@@ -2,7 +2,7 @@ package com.syming.cursedcastle.event;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.util.BloodMoonUtil;
-import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
+import com.syming.cursedcastle.entity.monster.boss.dracula.DraculaEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;

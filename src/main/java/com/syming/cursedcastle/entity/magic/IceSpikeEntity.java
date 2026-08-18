@@ -2,7 +2,7 @@ package com.syming.cursedcastle.entity.magic;
 
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.mob.shade.FrozenShadeEntity;
+import com.syming.cursedcastle.entity.monster.shade.FrozenShadeEntity;
 import com.syming.cursedcastle.entity.projectile.subweapon.IceHolyCrossEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -11,7 +11,6 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;

@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.entity.projectile;
 
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.mob.skeleton.GoldenSkeleton;
+import com.syming.cursedcastle.entity.monster.skeleton.GoldenSkeleton;
 import com.syming.cursedcastle.item.CCItem;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;

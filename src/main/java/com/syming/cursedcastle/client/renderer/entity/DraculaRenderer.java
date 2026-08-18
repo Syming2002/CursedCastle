@@ -6,7 +6,7 @@ import com.mojang.math.Axis;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.client.model.DraculaModel;
 import com.syming.cursedcastle.util.BloodMoonUtil;
-import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
+import com.syming.cursedcastle.entity.monster.boss.dracula.DraculaEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

@@ -2,27 +2,28 @@ package com.syming.cursedcastle.entity;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.entity.magic.*;
-import com.syming.cursedcastle.entity.mob.arachne.ArachneEntity;
-import com.syming.cursedcastle.entity.mob.HarpyEntity;
-import com.syming.cursedcastle.entity.mob.boss.GrimReaperEntity;
-import com.syming.cursedcastle.entity.mob.boss.MedusaEntity;
-import com.syming.cursedcastle.entity.mob.boss.RusalkaEntity;
-import com.syming.cursedcastle.entity.mob.skeleton.ClearBoneSkeletonEntity;
-import com.syming.cursedcastle.entity.mob.skeleton.GoldenSkeleton;
-import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
-import com.syming.cursedcastle.entity.mob.bat.familiar.FamiliarBatEntity;
-import com.syming.cursedcastle.entity.mob.zombie.friendly.FriendlyZombieEntity;
-import com.syming.cursedcastle.entity.mob.zombie.FireZombieEntity;
-import com.syming.cursedcastle.entity.mob.zombie.FrostZombieEntity;
+import com.syming.cursedcastle.entity.monster.MedusaSnakeEntity;
+import com.syming.cursedcastle.entity.monster.arachne.ArachneEntity;
+import com.syming.cursedcastle.entity.monster.HarpyEntity;
+import com.syming.cursedcastle.entity.monster.boss.GrimReaperEntity;
+import com.syming.cursedcastle.entity.monster.boss.MedusaEntity;
+import com.syming.cursedcastle.entity.monster.boss.RusalkaEntity;
+import com.syming.cursedcastle.entity.monster.skeleton.ClearBoneSkeletonEntity;
+import com.syming.cursedcastle.entity.monster.skeleton.GoldenSkeleton;
+import com.syming.cursedcastle.entity.monster.skeleton.ThrowingBoneSkeletonEntity;
+import com.syming.cursedcastle.entity.monster.bat.familiar.FamiliarBatEntity;
+import com.syming.cursedcastle.entity.monster.zombie.friendly.FriendlyZombieEntity;
+import com.syming.cursedcastle.entity.monster.zombie.FireZombieEntity;
+import com.syming.cursedcastle.entity.monster.zombie.FrostZombieEntity;
 import com.syming.cursedcastle.entity.projectile.*;
 import com.syming.cursedcastle.entity.projectile.subweapon.*;
-import com.syming.cursedcastle.entity.mob.skeleton.BloodSkeletonEntity;
-import com.syming.cursedcastle.entity.mob.bat.VampireBatEntity;
-import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
-import com.syming.cursedcastle.entity.mob.shade.FrozenShadeEntity;
-import com.syming.cursedcastle.entity.mob.shade.HeatShadeEntity;
-import com.syming.cursedcastle.entity.mob.shade.PoisonShadeEntity;
-import com.syming.cursedcastle.entity.mob.shade.ThunderShadeEntity;
+import com.syming.cursedcastle.entity.monster.skeleton.BloodSkeletonEntity;
+import com.syming.cursedcastle.entity.monster.bat.VampireBatEntity;
+import com.syming.cursedcastle.entity.monster.boss.dracula.DraculaEntity;
+import com.syming.cursedcastle.entity.monster.shade.FrozenShadeEntity;
+import com.syming.cursedcastle.entity.monster.shade.HeatShadeEntity;
+import com.syming.cursedcastle.entity.monster.shade.PoisonShadeEntity;
+import com.syming.cursedcastle.entity.monster.shade.ThunderShadeEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Tier;
@@ -139,6 +140,13 @@ public class CCEntity {
             .setShouldReceiveVelocityUpdates(true)
             .updateInterval(1)
             .build("medusa"));
+
+    public static final RegistryObject<EntityType<MedusaSnakeEntity>> MEDUSA_SNAKE = ENTITY_TYPES.register("medusa_snake", () -> EntityType.Builder.<MedusaSnakeEntity>of(MedusaSnakeEntity::new, MobCategory.MONSTER)
+            .sized(0.125F, 0.0625F)
+            .setTrackingRange(64)
+            .setShouldReceiveVelocityUpdates(true)
+            .updateInterval(1)
+            .build("medusa_snake"));
 
     public static final RegistryObject<EntityType<PoisonShadeEntity>> POISON_SHADE = ENTITY_TYPES.register("poison_shade", () -> EntityType.Builder.<PoisonShadeEntity>of(PoisonShadeEntity::new, MobCategory.MONSTER)
             .sized(0.5F, 1.875F)

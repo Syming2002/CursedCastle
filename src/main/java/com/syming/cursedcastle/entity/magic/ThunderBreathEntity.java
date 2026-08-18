@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.entity.magic;
 
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.mob.shade.ThunderShadeEntity;
+import com.syming.cursedcastle.entity.monster.shade.ThunderShadeEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;

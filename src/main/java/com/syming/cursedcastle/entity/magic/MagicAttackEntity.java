@@ -1,6 +1,6 @@
 package com.syming.cursedcastle.entity.magic;
 
-import com.syming.cursedcastle.entity.mob.shade.ShadeEntity;
+import com.syming.cursedcastle.entity.monster.shade.ShadeEntity;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;

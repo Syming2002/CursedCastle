@@ -2,7 +2,7 @@ package com.syming.cursedcastle.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.syming.cursedcastle.client.model.CCBatModel;
-import com.syming.cursedcastle.entity.mob.bat.CCBatEntity;
+import com.syming.cursedcastle.entity.monster.bat.CCBatEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 

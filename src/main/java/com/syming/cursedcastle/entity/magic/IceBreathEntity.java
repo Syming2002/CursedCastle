@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.entity.magic;
 
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.mob.shade.FrozenShadeEntity;
+import com.syming.cursedcastle.entity.monster.shade.FrozenShadeEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.Level;

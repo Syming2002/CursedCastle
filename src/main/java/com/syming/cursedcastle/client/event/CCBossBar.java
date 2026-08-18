@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.client.event;
 
-import com.syming.cursedcastle.entity.mob.boss.RusalkaEntity;
-import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
+import com.syming.cursedcastle.entity.monster.boss.RusalkaEntity;
+import com.syming.cursedcastle.entity.monster.boss.dracula.DraculaEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.LerpingBossEvent;

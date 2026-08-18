@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.entity.magic;
 
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.mob.shade.PoisonShadeEntity;
+import com.syming.cursedcastle.entity.monster.shade.PoisonShadeEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

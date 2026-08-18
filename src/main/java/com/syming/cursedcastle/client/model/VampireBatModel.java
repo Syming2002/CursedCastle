@@ -3,7 +3,7 @@ package com.syming.cursedcastle.client.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.syming.cursedcastle.CursedCastleMod;
-import com.syming.cursedcastle.entity.mob.bat.CCBatEntity;
+import com.syming.cursedcastle.entity.monster.bat.CCBatEntity;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.*;

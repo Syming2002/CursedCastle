@@ -2,10 +2,10 @@ package com.syming.cursedcastle.client.renderer.entity;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.client.model.CCZombieModel;
-import com.syming.cursedcastle.entity.mob.zombie.CCZombieEntity;
-import com.syming.cursedcastle.entity.mob.zombie.FireZombieEntity;
-import com.syming.cursedcastle.entity.mob.zombie.FrostZombieEntity;
-import com.syming.cursedcastle.entity.mob.zombie.friendly.FriendlyZombieEntity;
+import com.syming.cursedcastle.entity.monster.zombie.CCZombieEntity;
+import com.syming.cursedcastle.entity.monster.zombie.FireZombieEntity;
+import com.syming.cursedcastle.entity.monster.zombie.FrostZombieEntity;
+import com.syming.cursedcastle.entity.monster.zombie.friendly.FriendlyZombieEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

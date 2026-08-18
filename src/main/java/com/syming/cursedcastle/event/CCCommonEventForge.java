@@ -6,7 +6,7 @@ import com.syming.cursedcastle.data.IPlayerData;
 import com.syming.cursedcastle.data.PlayerData;
 import com.syming.cursedcastle.data.PlayerDataProvider;
 import com.syming.cursedcastle.effect.CCEffect;
-import com.syming.cursedcastle.entity.mob.CCFlyingMonster;
+import com.syming.cursedcastle.entity.monster.CCFlyingMonster;
 import com.syming.cursedcastle.entity.projectile.subweapon.HolyWaterEntity;
 import com.syming.cursedcastle.entity.villager.CCVillager;
 import com.syming.cursedcastle.data.mp.PlayerMP;

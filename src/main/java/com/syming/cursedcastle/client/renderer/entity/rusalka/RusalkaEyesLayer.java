@@ -2,7 +2,7 @@ package com.syming.cursedcastle.client.renderer.entity.rusalka;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.client.model.RusalkaModel;
-import com.syming.cursedcastle.entity.mob.boss.RusalkaEntity;
+import com.syming.cursedcastle.entity.monster.boss.RusalkaEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;

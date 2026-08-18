@@ -111,6 +111,7 @@ public class CursedCastleMod {
                 EntityRenderers.register(CCEntity.ICE_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.ICE_SPIKE.get(), IceSpikeRenderer::new);
                 EntityRenderers.register(CCEntity.MEDUSA.get(), MedusaRenderer::new);
+                EntityRenderers.register(CCEntity.MEDUSA_SNAKE.get(), MedusaSnakeRenderer::new);
                 EntityRenderers.register(CCEntity.POISON_BREATH.get(), NoopRenderer::new);
                 EntityRenderers.register(CCEntity.POISON_SHADE.get(), ShadeRenderer::new);
                 EntityRenderers.register(CCEntity.RUSALKA.get(), RusalkaRenderer::new);
@@ -199,6 +200,7 @@ public class CursedCastleMod {
             event.registerLayerDefinition(HarpyModel.HARPY_LAYER, HarpyModel::createBodyLayer);
             event.registerLayerDefinition(HarpyFeatherModel.HARPY_FEATHER_LAYER, HarpyFeatherModel::createBodyLayer);
             event.registerLayerDefinition(MedusaModel.MEDUSA_LAYER, MedusaModel::createBodyLayer);
+            event.registerLayerDefinition(MedusaSnakeModel.MEDUSA_SNAKE_LAYER, MedusaSnakeModel::createBodyLayer);
             event.registerLayerDefinition(ShadeModel.SHADE_LAYER, ShadeModel::createBodyLayer);
             event.registerLayerDefinition(IceSpikeModel.ICE_SPIKE_LAYER, IceSpikeModel::createBodyLayer);
             event.registerLayerDefinition(RusalkaModel.RUSALKA_LAYER, RusalkaModel::createBodyLayer);

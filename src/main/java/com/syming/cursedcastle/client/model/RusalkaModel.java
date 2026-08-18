@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.client.animation.CCAnimation;
-import com.syming.cursedcastle.entity.mob.boss.RusalkaEntity;
+import com.syming.cursedcastle.entity.monster.boss.RusalkaEntity;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

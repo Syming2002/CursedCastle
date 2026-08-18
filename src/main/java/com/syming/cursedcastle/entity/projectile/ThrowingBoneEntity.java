@@ -1,24 +1,19 @@
 package com.syming.cursedcastle.entity.projectile;
 
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.mob.skeleton.ClearBoneSkeletonEntity;
-import com.syming.cursedcastle.entity.mob.skeleton.ThrowingBoneSkeletonEntity;
+import com.syming.cursedcastle.entity.monster.skeleton.ClearBoneSkeletonEntity;
+import com.syming.cursedcastle.entity.monster.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.item.CCItem;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class ThrowingBoneEntity extends CCThrowableWeapon {

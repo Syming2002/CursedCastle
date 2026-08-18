@@ -1,8 +1,6 @@
 package com.syming.cursedcastle.item;
 
 import com.syming.cursedcastle.api.ILivingEntityStrengthWeakness;
-import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.mob.shade.FrozenShadeEntity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;

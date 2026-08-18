@@ -1,8 +1,7 @@
 package com.syming.cursedcastle.mixin.client;
 
 import com.syming.cursedcastle.client.event.CCBossBar;
-import com.syming.cursedcastle.entity.mob.boss.CCBossEntity;
-import com.syming.cursedcastle.entity.mob.boss.dracula.DraculaEntity;
+import com.syming.cursedcastle.entity.monster.boss.CCBossEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.BossHealthOverlay;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;

@@ -3,7 +3,7 @@ package com.syming.cursedcastle.client.renderer.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.client.model.MedusaModel;
-import com.syming.cursedcastle.entity.mob.boss.MedusaEntity;
+import com.syming.cursedcastle.entity.monster.boss.MedusaEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

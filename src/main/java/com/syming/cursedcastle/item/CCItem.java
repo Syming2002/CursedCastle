@@ -384,6 +384,13 @@ public class CCItem {
                     0x4A5B3E,
                     new Item.Properties()));
 
+    public static final RegistryObject<Item> MEDUSA_SNAKE_SPAWN_EGG = ITEMS.register("medusa_snake_spawn_egg",
+            () -> new CCSpawnEggItem(
+                    CCEntity.MEDUSA_SNAKE,
+                    0x404E36,
+                    0x4C5E40,
+                    new Item.Properties()));
+
     public static final RegistryObject<Item> POISON_SHADE_SPAWN_EGG = ITEMS.register("poison_shade_spawn_egg",
             () -> new CCSpawnEggItem(
                     CCEntity.POISON_SHADE,

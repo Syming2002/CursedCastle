@@ -4,17 +4,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.client.model.HarpyFeatherModel;
-import com.syming.cursedcastle.client.model.HarpyModel;
-import com.syming.cursedcastle.client.model.IceSpikeModel;
 import com.syming.cursedcastle.entity.magic.HarpyFeatherEntity;
-import com.syming.cursedcastle.entity.mob.HarpyEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 
 public class HarpyFeatherRenderer extends EntityRenderer<HarpyFeatherEntity> {
     public static final ResourceLocation HARPY_FEATHER_TEXTURE = new ResourceLocation(CursedCastleMod.MOD_ID, "textures/entity/harpy_feather.png");
