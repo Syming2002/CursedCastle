@@ -107,7 +107,6 @@ public class HolyWaterEntity extends CCThrowableWeapon {
                 this.level().playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.SPLASH_POTION_BREAK, SoundSource.NEUTRAL, 1.0F, 1.0F);
             }
         }
-        System.out.println("Entity is Hit");
     }
 
     @Override

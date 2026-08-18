@@ -57,32 +57,43 @@ public class HolyCrossItem extends CCThrowableItem {
                     PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
                     if (playerMP.getCurrentMP() >= 50) {
                         playerMP.removeMP(50);
+                        FireHolyCrossEntity fireHolyCross = new FireHolyCrossEntity(pLevel, pPlayer);
+                        pLevel.addFreshEntity(fireHolyCross);
                     }
+                } else {
+                    FireHolyCrossEntity fireHolyCross = new FireHolyCrossEntity(pLevel, pPlayer);
+                    pLevel.addFreshEntity(fireHolyCross);
                 }
-                FireHolyCrossEntity fireHolyCross = new FireHolyCrossEntity(pLevel, pPlayer);
-                pLevel.addFreshEntity(fireHolyCross);
             } else if (isWearingSpellBook(SpellBookElementType.ICE, pPlayer)) {
                 if (!pPlayer.isSpectator() && !pPlayer.isCreative()) {
-
                     PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
                     if (playerMP.getCurrentMP() >= 30) {
                         playerMP.removeMP(30);
+                        IceHolyCrossEntity iceHolyCross = new IceHolyCrossEntity(pLevel, pPlayer);
+                        pLevel.addFreshEntity(iceHolyCross);
                     }
+                } else {
+                    IceHolyCrossEntity iceHolyCross = new IceHolyCrossEntity(pLevel, pPlayer);
+                    pLevel.addFreshEntity(iceHolyCross);
                 }
-                IceHolyCrossEntity iceHolyCross = new IceHolyCrossEntity(pLevel, pPlayer);
-                pLevel.addFreshEntity(iceHolyCross);
             } else if (isWearingSpellBook(SpellBookElementType.BOLT, pPlayer)) {
+                IPlayerData playerData = pPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).orElseGet(PlayerData::new);
                 if (!pPlayer.isSpectator() && !pPlayer.isCreative()) {
                     PlayerMP playerMP = pPlayer.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
                     if (playerMP.getCurrentMP() >= 60) {
                         playerMP.removeMP(60);
+                        playerData.setHolyBeamTicks(300);
+                        playerData.setBoltAttackEnabled(true);
+                        playerData.setPlayerYPos(pPlayer.getY() + 2.0D);
+                        CCPacketHandler.sendToPlayer(new CCPlayerData(playerData), (ServerPlayer) pPlayer);
                     }
+                } else {
+
+                    playerData.setHolyBeamTicks(300);
+                    playerData.setBoltAttackEnabled(true);
+                    playerData.setPlayerYPos(pPlayer.getY() + 2.0D);
+                    CCPacketHandler.sendToPlayer(new CCPlayerData(playerData), (ServerPlayer) pPlayer);
                 }
-                IPlayerData playerData = pPlayer.getCapability(PlayerDataProvider.PLAYER_DATA).orElseGet(PlayerData::new);
-                playerData.setHolyBeamTicks(300);
-                playerData.setBoltAttackEnabled(true);
-                playerData.setPlayerYPos(pPlayer.getY() + 2.0D);
-                CCPacketHandler.sendToPlayer(new CCPlayerData(playerData), (ServerPlayer) pPlayer);
             } else {
                 HolyCrossEntity holyCross = new HolyCrossEntity(pPlayer, pLevel, thrownStackCopy, getTier());
                 pLevel.addFreshEntity(holyCross);

@@ -58,7 +58,6 @@ public class PoisonBreathEntity extends MagicAttackEntity {
                     if (isYawCheck(entityHit)) {
                         entityHit.hurt(entityHit.damageSources().magic(), 1.0F);
                         entityHit.addEffect(new MobEffectInstance(MobEffects.POISON, 10, 1));
-                        System.out.println("Target is Poisoned");
                     }
                 }
             }

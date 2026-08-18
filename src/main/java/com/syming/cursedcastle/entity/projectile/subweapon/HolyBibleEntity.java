@@ -76,9 +76,7 @@ public class HolyBibleEntity extends CCThrowableWeapon {
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
-        if (!this.level().isClientSide() && getOwner() != null) {
-            System.out.println("Block is Hit");
-        }
+
     }
 
     @Override
@@ -97,7 +95,6 @@ public class HolyBibleEntity extends CCThrowableWeapon {
                 }
             }
         }
-        System.out.println("Entity is Hit");
     }
 
     @Override

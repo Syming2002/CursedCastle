@@ -73,7 +73,6 @@ public class IceHolyCrossEntity extends CCThrowableWeapon {
                             player.getInventory().add(stack);
                             this.level().playSound(player, getX(), getY(), getZ(), SoundEvents.ITEM_PICKUP, SoundSource.MASTER, 0.5F, 1.0F);
                             discard();
-                            System.out.println("Holy Cross is back in inventory");
                         }
                     }
                 } else if (hitEntity instanceof LivingEntity target && hitEntity != getOwner()) {
@@ -97,12 +96,8 @@ public class IceHolyCrossEntity extends CCThrowableWeapon {
 
         if (!stack.isEmpty()) {
             spawnAtLocation(stack, 0.5F);
-//            stack.hurt(1, this.random, getOwner() instanceof ServerPlayer ? (ServerPlayer) getOwner() : null);
+            stack.hurt(1, this.random, getOwner() instanceof ServerPlayer ? (ServerPlayer) getOwner() : null);
             discard();
-            System.out.println("Holy Cross has hit a block");
-
-        } else {
-            System.out.println("Stack is Empty");
         }
     }
 

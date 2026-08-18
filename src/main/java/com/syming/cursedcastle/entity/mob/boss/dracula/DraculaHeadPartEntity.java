@@ -47,10 +47,8 @@ public class DraculaHeadPartEntity extends PartEntity<DraculaEntity> implements 
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (this.level().isClientSide() && this.getParent() != null && !this.getParent().isInvulnerableTo(pSource)) {
             CCPacketHandler.sendToServer(new CCMessageHurtMultiPart(getId(), getParent().getId(), pAmount, pSource.getMsgId()));
-            System.out.println("Send Packet to Server");
         }
         if (!this.level().isClientSide() && this.getParent() != null && !this.getParent().isInvulnerableTo(pSource)) {
-            System.out.println("Hit Head !");
             return this.getParent().hurtHead(this, pSource, pAmount);
         }
         return false;

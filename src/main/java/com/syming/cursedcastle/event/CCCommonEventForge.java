@@ -6,6 +6,7 @@ import com.syming.cursedcastle.data.IPlayerData;
 import com.syming.cursedcastle.data.PlayerData;
 import com.syming.cursedcastle.data.PlayerDataProvider;
 import com.syming.cursedcastle.effect.CCEffect;
+import com.syming.cursedcastle.entity.mob.CCFlyingMonster;
 import com.syming.cursedcastle.entity.projectile.subweapon.HolyWaterEntity;
 import com.syming.cursedcastle.entity.villager.CCVillager;
 import com.syming.cursedcastle.data.mp.PlayerMP;
@@ -128,10 +129,12 @@ public class CCCommonEventForge {
                 }
 
 
-                List<Monster> monsters = player.level().getNearbyEntities(Monster.class, TargetingConditions.DEFAULT, player, player.getBoundingBox().inflate(2.0D));
+                List<LivingEntity> livingEntities = player.level().getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(2.0D), (living) -> living != player);
 
-                for (Monster monster : monsters) {
-                    monster.hurt(CCDamageType.causeThunderDamage(monster), 10.0F);
+                for (LivingEntity living : livingEntities) {
+                    if (living instanceof Monster || living instanceof CCFlyingMonster) {
+                        living.hurt(CCDamageType.causeThunderDamage(living), 10.0F);
+                    }
                 }
 
                 if (data.getHolyBeamTicks() > 0) {

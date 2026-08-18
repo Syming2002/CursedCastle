@@ -118,7 +118,6 @@ public class HeatShadeEntity extends ShadeEntity {
                         this.fireBreath.setOwner(this);
                         this.fireBreath.setPos(headPos.x, headPos.y, headPos.z);
                         this.level().addFreshEntity(this.fireBreath);
-                        System.out.println("Fire Breath is Launching at " + this.fireBreath.getX() + " " + this.fireBreath.getY() + " " + this.fireBreath.getZ());
                     }
                 }
             }
@@ -128,11 +127,9 @@ public class HeatShadeEntity extends ShadeEntity {
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (hasStrength(pSource, pAmount)) {
-            System.out.println("Has Fire Strength");
             return super.hurt(pSource, pAmount / pAmount);
         }
         if (hasWeakness(pSource, pAmount)) {
-            System.out.println("Has Ice Weakness");
             return super.hurt(pSource, pAmount * pAmount);
         }
         return super.hurt(pSource, pAmount);

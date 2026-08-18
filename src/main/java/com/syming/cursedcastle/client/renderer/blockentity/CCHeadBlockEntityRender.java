@@ -78,7 +78,6 @@ public class CCHeadBlockEntityRender implements BlockEntityRenderer<CCHeadBlockE
                     SkullModelBase skullModelBase = this.modelByType.get(type);
                     RenderType renderType = getRenderType(type);
                     renderSkull(direction, rotationInDegrees, animation, pPoseStack, pBuffer, pPackedLight, skullModelBase, renderType);
-                    System.out.println("Render Dracula Head Block");
                 }
             }
         }

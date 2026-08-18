@@ -264,8 +264,6 @@ public class DraculaEntity extends CCBossEntity {
                     launchFireball(underRightArmPosSmallFireballs.x, underRightArmPosSmallFireballs.y, underRightArmPosSmallFireballs.z, directionX, directionY, directionZ, speed);
                     launchFireball(underRightArmPosSmallFireballs.x, underRightArmPosSmallFireballs.y, underRightArmPosSmallFireballs.z, directionX - 0.2F, directionY, directionZ, speed);
 
-
-                    System.out.println("Launching Fireballs");
                 }
             } else if (getAnimation() == DraculaEntity.DARK_INFERNO_ANIMATION) {
                 if (this.darkInfernoAnimationTick == 40) {
@@ -294,7 +292,6 @@ public class DraculaEntity extends CCBossEntity {
                             directionY,
                             directionZ,
                             speed);
-                    System.out.println("First Large Fireball is spawning!");
                 }
                 if (this.darkInfernoAnimationTick == 60) {
                     Vec3 underLeftArmPosSecondLargeFireball = new Vec3(0.5F, 0.6375F, 1.0F);
@@ -323,12 +320,10 @@ public class DraculaEntity extends CCBossEntity {
                             directionZ,
                             speed);
 
-                    System.out.println("Second Large Fireball is spawning!");
                 }
             } else if (getAnimation() == DraculaEntity.FIRE_PILLAR_ANIMATION) {
                 if (this.firePillarAnimationTick == 30) {
                     spawnFirePillar();
-                    System.out.println("Fire Pillar appearing");
                 }
             }
 

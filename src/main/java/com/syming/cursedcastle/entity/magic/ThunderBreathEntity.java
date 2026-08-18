@@ -56,7 +56,6 @@ public class ThunderBreathEntity extends MagicAttackEntity {
                 for (LivingEntity entityHit : entitiesHit) {
                     if (isYawCheck(entityHit)) {
                         entityHit.hurt(entityHit.damageSources().thorns(this), 5.0F);
-                        System.out.println("Target is Thundered");
                     }
                 }
             }

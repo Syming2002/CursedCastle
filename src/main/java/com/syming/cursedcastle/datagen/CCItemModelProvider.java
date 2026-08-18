@@ -138,7 +138,8 @@ public class CCItemModelProvider extends ItemModelProvider {
                     || item == CCItem.ANIM_IRON_THROWING_AXE.get()
                     || item == CCItem.ANIM_GOLD_THROWING_AXE.get()
                     || item == CCItem.ANIM_DIAMOND_THROWING_AXE.get()
-                    || item == CCItem.ANIM_NETHERITE_THROWING_AXE.get()) {
+                    || item == CCItem.ANIM_NETHERITE_THROWING_AXE.get()
+                    || item == CCItem.ANIM_SCYTHE_PROJECTILE_ITEM.get()) {
 
                 String name = itemRegistryObject.getId().getPath();
 
@@ -165,7 +166,7 @@ public class CCItemModelProvider extends ItemModelProvider {
             }
 
             if (item == CCItem.DEATH_SCYTHE.get()) {
-                withExistingParent("item/" +  itemRegistryObject.getId().getPath(), mcLoc("item/generated"))
+                withExistingParent("item/" + itemRegistryObject.getId().getPath(), mcLoc("item/generated"))
                         .texture("layer0", modLoc("item/" + itemRegistryObject.getId().getPath()))
                         .transforms()
                         .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)

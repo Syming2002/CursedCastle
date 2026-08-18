@@ -189,8 +189,6 @@ public class GrimReaperEntity extends CCBossEntity implements ICustomBossBar, IL
         if (getAnimation() == FAST_MELEE_ATTACK_ANIMATION) this.fastMeleeAttackAnimationTick++;
         if (getAnimation() == SCYTHE_PROJECTILE_ATTACK_ANIMATION) this.scytheProjectileAttackAnimationTick++;
 
-        System.out.println("The current animation is: " + getAnimation());
-
         if (target != null) {
 
             getLookControl().setLookAt(target, 30.0F, 30.0F);

@@ -56,7 +56,6 @@ public class IceBreathEntity extends MagicAttackEntity {
                     if (isYawCheck(entityHit)) {
                         entityHit.hurt(entityHit.damageSources().magic(), 1.0F);
                         entityHit.setDeltaMovement(entityHit.getDeltaMovement().multiply(0.125, 1.0, 0.125));
-                        System.out.println("Target is Damaged and Slowed Down");
                     }
                 }
             }

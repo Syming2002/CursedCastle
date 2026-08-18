@@ -129,7 +129,6 @@ public class ThrowingAxeEntity extends CCThrowableWeapon {
             spawnAtLocation(stack, 0.5F);
             stack.hurt(2, this.random, getOwner() instanceof ServerPlayer ? (ServerPlayer) getOwner() : null);
             discard();
-            System.out.println("Block is Hit");
         }
     }
 
@@ -147,7 +146,6 @@ public class ThrowingAxeEntity extends CCThrowableWeapon {
                         livingEntity.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage());
                     }
                     stack.hurt(1, this.random, (ServerPlayer) shooter);
-                    System.out.println("Entity is Hit");
                 }
             }
         }

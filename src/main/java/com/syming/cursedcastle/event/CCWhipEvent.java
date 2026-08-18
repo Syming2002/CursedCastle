@@ -49,7 +49,6 @@ public class CCWhipEvent {
         if (event.getSource().getEntity() instanceof LivingEntity attacker) {
             if (attacker.getMainHandItem().is(CCItem.VAMPIRE_KILLER_ELEMENTAL_WHIP.get(TipType.BLUE).get())) {
                 event.getEntity().addEffect(new MobEffectInstance(CCEffect.FREEZE.get(), 50,1));
-                System.out.println("Entity Living is frozen");
             }
         }
     }

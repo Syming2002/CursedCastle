@@ -35,10 +35,6 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
     @Final
     public ModelPart leftPants;
 
-    static {
-        System.out.println("PlayerModelMixin registered");
-    }
-
     public PlayerModelMixin(ModelPart pRoot) {
         super(pRoot);
     }

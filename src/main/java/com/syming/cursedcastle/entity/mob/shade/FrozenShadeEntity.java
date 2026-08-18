@@ -156,7 +156,6 @@ public class FrozenShadeEntity extends ShadeEntity {
                         this.iceBreath.setOwner(this);
                         this.iceBreath.setPos(headPos.x, headPos.y, headPos.z);
                         this.level().addFreshEntity(this.iceBreath);
-                        System.out.println("Ice Breath is Launching at " + this.iceBreath.getX() + " " + this.iceBreath.getY() + " " + this.iceBreath.getZ());
                     }
                 }
             } else if (getAnimation() == IDLE_ANIMATION) {
@@ -218,7 +217,6 @@ public class FrozenShadeEntity extends ShadeEntity {
                         if (stack.getItem() == CCItem.ICE_WHIP.get()) {
                             if (elementalWeapon != null) {
                                 if (pSource != null) {
-                                    System.out.println(this.getName());
                                     CCPacketHandler.sendToEntity(new CCSpawnParticle(getId()), this);
                                     return super.hurt(pSource, 0);
                                 }
@@ -231,7 +229,6 @@ public class FrozenShadeEntity extends ShadeEntity {
             }
         }
         if (hasWeakness(pSource, pAmount)) {
-            System.out.println("Has Fire Weakness");
             return super.hurt(pSource, pAmount * pAmount);
         }
         return super.hurt(pSource, pAmount);

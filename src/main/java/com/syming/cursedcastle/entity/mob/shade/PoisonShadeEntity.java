@@ -92,7 +92,6 @@ public class PoisonShadeEntity extends ShadeEntity {
                         this.poisonBreath.setOwner(this);
                         this.poisonBreath.setPos(headPos.x, headPos.y, headPos.z);
                         this.level().addFreshEntity(this.poisonBreath);
-                        System.out.println("Poison Breath is Launching at " + this.poisonBreath.getX() + " " + this.poisonBreath.getY() + " " + this.poisonBreath.getZ());
                     }
                 }
             }

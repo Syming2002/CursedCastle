@@ -108,7 +108,6 @@ public class ThrowingBloodBoneEntity extends CCThrowableWeapon {
         if (!this.level().isClientSide() && getOwner() != null) {
             if (target instanceof LivingEntity livingEntity && getOwner() instanceof BloodSkeletonEntity shooter) {
                 livingEntity.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage());
-                System.out.println("Entity is Hit");
             }
         }
     }
@@ -119,7 +118,6 @@ public class ThrowingBloodBoneEntity extends CCThrowableWeapon {
 
         if (!this.level().isClientSide() && getOwner() != null) {
             discard();
-            System.out.println("Block is Hit");
         }
     }
 }

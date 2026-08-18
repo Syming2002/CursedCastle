@@ -71,19 +71,16 @@ public abstract class CCThrowableWeapon extends ThrowableItemProjectile {
             int fireAspect = EnchantmentHelper.getFireAspect(shooter);
             if (fireAspect > 0) {
                 target.setSecondsOnFire(fireAspect);
-                System.out.println("Has Fire Aspect");
             }
 
             int knockback = EnchantmentHelper.getKnockbackBonus(shooter);
             if (knockback > 0) {
                 target.knockback(knockback, -Mth.sin(getYRot() * 0.017453292F), -Mth.cos(getYRot() * 0.017453292F));
-                System.out.println("Has Knockback");
             }
 
             int mobLooting = EnchantmentHelper.getMobLooting(shooter);
             if (mobLooting > 0) {
                 target.hurt(target.damageSources().mobProjectile(this, shooter), getImpactDamage());
-                System.out.println("Has Looting Aspect");
             }
 
 
@@ -95,19 +92,16 @@ public abstract class CCThrowableWeapon extends ThrowableItemProjectile {
             int sharpnessLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.SHARPNESS, shooter);
             if (sharpnessLevel > 0) {
                 target.hurt(target.damageSources().mobProjectile(this, shooter), totalDamage);
-                System.out.println("Has Sharpness");
             }
 
             int smiteLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.SMITE, shooter);
             if (smiteLevel > 0 && target.getMobType() == MobType.UNDEAD) {
                 target.hurt(target.damageSources().mobProjectile(this, shooter), totalDamage);
-                System.out.println("Has Smite");
             }
 
             int arthropodsLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, shooter);
             if (arthropodsLevel > 0 && target.getMobType() == MobType.ARTHROPOD) {
                 target.hurt(target.damageSources().mobProjectile(this, shooter), totalDamage);
-                System.out.println("Has Bane of Arthropods");
             }
         }
     }

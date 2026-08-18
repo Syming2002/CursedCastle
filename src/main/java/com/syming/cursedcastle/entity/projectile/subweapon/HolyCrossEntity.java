@@ -97,7 +97,6 @@ public class HolyCrossEntity extends CCThrowableWeapon {
             spawnAtLocation(stack, 0.5F);
             stack.hurt(2, this.random, getOwner() instanceof ServerPlayer ? (ServerPlayer) getOwner() : null);
             discard();
-            System.out.println("Block is Hit");
         }
     }
 
@@ -117,7 +116,6 @@ public class HolyCrossEntity extends CCThrowableWeapon {
                         level().playSound(player, getX(), getY(), getZ(), SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 0.5F, 1.0F);
 
                         discard();
-                        System.out.println("Thrower is Hit");
                     }
                 } else if (target instanceof LivingEntity livingEntity && getOwner() instanceof LivingEntity shooter) {
                     applyEntityHitEnchantments(livingEntity);
@@ -125,7 +123,6 @@ public class HolyCrossEntity extends CCThrowableWeapon {
                         livingEntity.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage());
                     }
                     stack.hurt(1, this.random, (ServerPlayer) shooter);
-                    System.out.println("Entity is Hit");
                 }
             }
         }

@@ -61,66 +61,120 @@ public class DaggerItem extends Item {
                         PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
                         if (playerMP.getCurrentMP() >= 60) {
                             playerMP.removeMP(60);
+                            for (int i = 0; i < 8; i++) {
+                                DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
+                                if (dagger.isAlive()) {
+                                    double angle = 2 * Math.PI * i / 8;
+
+                                    double dx = Math.cos(angle);
+                                    double dz = Math.sin(angle);
+
+                                    double spawnX = player.getX() + dx;
+                                    double spawnY = player.getY() + player.getEyeHeight();
+                                    double spawnZ = player.getZ() + dz;
+
+                                    pLevel.addFreshEntity(dagger);
+
+                                    dagger.setPos(spawnX, spawnY, spawnZ);
+
+                                    dagger.shoot(dx, 0.0F, dz, 1.5F, 0.2F);
+                                    dagger.hasImpulse = true;
+                                }
+                            }
                         }
-                    }
-                    for (int i = 0; i < 8; i++) {
-                        DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
-                        if (dagger.isAlive()) {
-                            double angle = 2 * Math.PI * i / 8;
+                    } else {
+                        for (int i = 0; i < 8; i++) {
+                            DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
+                            if (dagger.isAlive()) {
+                                double angle = 2 * Math.PI * i / 8;
 
-                            double dx = Math.cos(angle);
-                            double dz = Math.sin(angle);
+                                double dx = Math.cos(angle);
+                                double dz = Math.sin(angle);
 
-                            double spawnX = player.getX() + dx;
-                            double spawnY = player.getY() + player.getEyeHeight();
-                            double spawnZ = player.getZ() + dz;
+                                double spawnX = player.getX() + dx;
+                                double spawnY = player.getY() + player.getEyeHeight();
+                                double spawnZ = player.getZ() + dz;
 
-                            pLevel.addFreshEntity(dagger);
+                                pLevel.addFreshEntity(dagger);
 
-                            dagger.setPos(spawnX, spawnY, spawnZ);
+                                dagger.setPos(spawnX, spawnY, spawnZ);
 
-                            dagger.shoot(dx, 0.0F, dz, 1.5F, 0.2F);
-                            dagger.hasImpulse = true;
+                                dagger.shoot(dx, 0.0F, dz, 1.5F, 0.2F);
+                                dagger.hasImpulse = true;
+                            }
                         }
                     }
                 } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, player)) {
                     if (!player.isSpectator() && !player.isCreative()) {
                         PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
                         if (playerMP.getCurrentMP() >= 30) {
-
                             playerMP.removeMP(30);
+
+                            Vec3 look = player.getLookAngle().normalize();
+
+                            Vec3 side = new Vec3(-look.z, 0, look.x).normalize();
+
+                            double sideOffset = 1.0D;
+
+                            for (int i = 0; i < 2; i++) {
+
+                                DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
+
+                                if (dagger.isAlive()) {
+                                    double direction = (i == 0) ? -1.0D : 1.0D;
+
+                                    Vec3 spawnPos = player.position()
+                                            .add(0, player.getEyeHeight() - 0.2D, 0)
+                                            .add(side.scale(direction * sideOffset));
+
+                                    dagger.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
+
+                                    pLevel.addFreshEntity(dagger);
+
+                                    dagger.shoot(
+                                            look.x,
+                                            look.y,
+                                            look.z,
+                                            1.8F,
+                                            0.5F
+                                    );
+
+                                    dagger.hasImpulse = true;
+                                }
+                            }
                         }
-                    }
-                    Vec3 look = player.getLookAngle().normalize();
+                    } else {
+                        Vec3 look = player.getLookAngle().normalize();
 
-                    Vec3 side = new Vec3(-look.z, 0, look.x).normalize();
+                        Vec3 side = new Vec3(-look.z, 0, look.x).normalize();
 
-                    double sideOffset = 1.0D;
+                        double sideOffset = 1.0D;
 
-                    for (int i = 0; i < 2; i++) {
+                        for (int i = 0; i < 2; i++) {
 
-                        DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
+                            DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
 
-                        if (dagger.isAlive()) {
-                            double direction = (i == 0) ? -1.0D : 1.0D;
+                            if (dagger.isAlive()) {
+                                double direction = (i == 0) ? -1.0D : 1.0D;
 
-                            Vec3 spawnPos = player.position()
-                                    .add(0, player.getEyeHeight() - 0.2D, 0)
-                                    .add(side.scale(direction * sideOffset));
+                                Vec3 spawnPos = player.position()
+                                        .add(0, player.getEyeHeight() - 0.2D, 0)
+                                        .add(side.scale(direction * sideOffset));
 
-                            dagger.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
+                                dagger.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
 
-                            pLevel.addFreshEntity(dagger);
+                                pLevel.addFreshEntity(dagger);
 
-                            dagger.shoot(
-                                    look.x,
-                                    look.y,
-                                    look.z,
-                                    1.8F,
-                                    0.5F
-                            );
+                                dagger.shoot(
+                                        look.x,
+                                        look.y,
+                                        look.z,
+                                        1.8F,
+                                        0.5F
+                                );
 
-                            dagger.hasImpulse = true;
+                                dagger.hasImpulse = true;
+                            }
                         }
                     }
                 } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.WIND, player)) {
@@ -128,28 +182,50 @@ public class DaggerItem extends Item {
                         PlayerMP playerMP = player.getCapability(PlayerMPProvider.PLAYER_MP).orElseGet(PlayerMP::new);
                         if (playerMP.getCurrentMP() >= 40) {
                             playerMP.removeMP(40);
+                            ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+                            for (int i = 0; i < 20; i++) {
+                                DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
+
+
+                                if (dagger.isAlive()) {
+                                    executorService.schedule(() -> {
+                                        pLevel.addFreshEntity(dagger);
+                                        dagger.shoot(
+                                                player.getLookAngle().x,
+                                                player.getLookAngle().y,
+                                                player.getLookAngle().z,
+                                                2.5F,
+                                                0.8F
+                                        );
+
+                                    }, 100 * i, TimeUnit.MILLISECONDS);
+                                }
+                                dagger.hasImpulse = true;
+                            }
+                        }
+                    } else {
+                        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+                        for (int i = 0; i < 20; i++) {
+                            DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
+
+
+                            if (dagger.isAlive()) {
+                                executorService.schedule(() -> {
+                                    pLevel.addFreshEntity(dagger);
+                                    dagger.shoot(
+                                            player.getLookAngle().x,
+                                            player.getLookAngle().y,
+                                            player.getLookAngle().z,
+                                            2.5F,
+                                            0.8F
+                                    );
+
+                                }, 100 * i, TimeUnit.MILLISECONDS);
+                            }
+                            dagger.hasImpulse = true;
                         }
                     }
-                    ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-                    for (int i = 0; i < 20; i++) {
-                        DaggerEntity dagger = new DaggerEntity(pLevel, player, pStack, getTier());
 
-
-                        if (dagger.isAlive()) {
-                            executorService.schedule(() -> {
-                                pLevel.addFreshEntity(dagger);
-                                dagger.shoot(
-                                        player.getLookAngle().x,
-                                        player.getLookAngle().y,
-                                        player.getLookAngle().z,
-                                        2.5F,
-                                        0.8F
-                                );
-
-                            }, 100 * i, TimeUnit.MILLISECONDS);
-                        }
-                        dagger.hasImpulse = true;
-                    }
                 } else {
                     if (!pLevel.isClientSide()) {
                         DaggerEntity daggerEntity = new DaggerEntity(player, pLevel, pStack, getTier());
