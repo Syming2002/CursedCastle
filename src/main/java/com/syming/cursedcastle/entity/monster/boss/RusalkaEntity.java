@@ -181,9 +181,7 @@ public class RusalkaEntity extends CCBossEntity {
 
                 if (this.meleeAttackAnimationTick < 15) {
                     if (distanceTo(target) <= 6.0F) {
-                        Vec3 targetPos = new Vec3(target.getX(), target.getY(), target.getZ());
-                        Vec3 dir = targetPos.subtract(position()).normalize();
-                        setDeltaMovement(dir.scale(0.4D));
+                        this.getNavigation().moveTo(target, 1.6D);
                     }
                 }
 

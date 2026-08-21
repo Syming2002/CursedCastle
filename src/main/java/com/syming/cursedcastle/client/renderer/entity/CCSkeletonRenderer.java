@@ -3,10 +3,7 @@ package com.syming.cursedcastle.client.renderer.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.syming.cursedcastle.client.model.CCSkeletonModel;
-import com.syming.cursedcastle.entity.monster.skeleton.BloodSkeletonEntity;
-import com.syming.cursedcastle.entity.monster.skeleton.CCSkeletonEntity;
-import com.syming.cursedcastle.entity.monster.skeleton.ClearBoneSkeletonEntity;
-import com.syming.cursedcastle.entity.monster.skeleton.GoldenSkeleton;
+import com.syming.cursedcastle.entity.monster.skeleton.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -18,8 +15,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
+@OnlyIn(Dist.CLIENT)
 public class CCSkeletonRenderer extends MobRenderer<CCSkeletonEntity, CCSkeletonModel> {
 
     public static final ResourceLocation SKELETON_TEXTURE = new ResourceLocation("textures/entity/skeleton/skeleton.png");
@@ -209,18 +209,18 @@ public class CCSkeletonRenderer extends MobRenderer<CCSkeletonEntity, CCSkeleton
             }
 
             pPoseStack.popPose();
-        } else if (pEntity instanceof ClearBoneSkeletonEntity) {
+        } else if (pEntity instanceof ClearBoneSkeletonEntity clearBoneSkeleton) {
             pPoseStack.pushPose();
-            this.model.attackTime = this.getAttackAnim(pEntity, pPartialTicks);
+            this.model.attackTime = this.getAttackAnim(clearBoneSkeleton, pPartialTicks);
 
-            boolean shouldSit = pEntity.isPassenger() && (pEntity.getVehicle() != null && pEntity.getVehicle().shouldRiderSit());
+            boolean shouldSit = clearBoneSkeleton.isPassenger() && (clearBoneSkeleton.getVehicle() != null && clearBoneSkeleton.getVehicle().shouldRiderSit());
             this.model.riding = shouldSit;
-            this.model.young = pEntity.isBaby();
-            float f = Mth.rotLerp(pPartialTicks, pEntity.yBodyRotO, pEntity.yBodyRot);
-            float f1 = Mth.rotLerp(pPartialTicks, pEntity.yHeadRotO, pEntity.yHeadRot);
+            this.model.young = clearBoneSkeleton.isBaby();
+            float f = Mth.rotLerp(pPartialTicks, clearBoneSkeleton.yBodyRotO, clearBoneSkeleton.yBodyRot);
+            float f1 = Mth.rotLerp(pPartialTicks, clearBoneSkeleton.yHeadRotO, clearBoneSkeleton.yHeadRot);
             float f2 = f1 - f;
-            if (shouldSit && pEntity.getVehicle() instanceof LivingEntity) {
-                LivingEntity livingentity = (LivingEntity)pEntity.getVehicle();
+            if (shouldSit && clearBoneSkeleton.getVehicle() instanceof LivingEntity) {
+                LivingEntity livingentity = (LivingEntity)clearBoneSkeleton.getVehicle();
                 f = Mth.rotLerp(pPartialTicks, livingentity.yBodyRotO, livingentity.yBodyRot);
                 f2 = f1 - f;
                 float f3 = Mth.wrapDegrees(f2);
@@ -240,31 +240,31 @@ public class CCSkeletonRenderer extends MobRenderer<CCSkeletonEntity, CCSkeleton
                 f2 = f1 - f;
             }
 
-            float f6 = Mth.lerp(pPartialTicks, pEntity.xRotO, pEntity.getXRot());
-            if (isEntityUpsideDown(pEntity)) {
+            float f6 = Mth.lerp(pPartialTicks, clearBoneSkeleton.xRotO, clearBoneSkeleton.getXRot());
+            if (isEntityUpsideDown(clearBoneSkeleton)) {
                 f6 *= -1.0F;
                 f2 *= -1.0F;
             }
 
-            if (pEntity.hasPose(Pose.SLEEPING)) {
-                Direction direction = pEntity.getBedOrientation();
+            if (clearBoneSkeleton.hasPose(Pose.SLEEPING)) {
+                Direction direction = clearBoneSkeleton.getBedOrientation();
                 if (direction != null) {
-                    float f4 = pEntity.getEyeHeight(Pose.STANDING) - 0.1F;
+                    float f4 = clearBoneSkeleton.getEyeHeight(Pose.STANDING) - 0.1F;
                     pPoseStack.translate((float) (-direction.getStepX()) * f4, 0.0F, (float) (-direction.getStepZ()) * f4);
                 }
             }
 
-            float f7 = this.getBob(pEntity, pPartialTicks);
-            this.setupRotations(pEntity, pPoseStack, f7, f, pPartialTicks);
+            float f7 = this.getBob(clearBoneSkeleton, pPartialTicks);
+            this.setupRotations(clearBoneSkeleton, pPoseStack, f7, f, pPartialTicks);
             pPoseStack.scale(-1.0F, -1.0F, 1.0F);
-            this.scale(pEntity, pPoseStack, pPartialTicks);
+            this.scale(clearBoneSkeleton, pPoseStack, pPartialTicks);
             pPoseStack.translate(0.0F, -1.501F, 0.0F);
             float f8 = 0.0F;
             float f5 = 0.0F;
-            if (!shouldSit && pEntity.isAlive()) {
-                f8 = pEntity.walkAnimation.speed(pPartialTicks);
-                f5 = pEntity.walkAnimation.position(pPartialTicks);
-                if (pEntity.isBaby()) {
+            if (!shouldSit && clearBoneSkeleton.isAlive()) {
+                f8 = clearBoneSkeleton.walkAnimation.speed(pPartialTicks);
+                f5 = clearBoneSkeleton.walkAnimation.position(pPartialTicks);
+                if (clearBoneSkeleton.isBaby()) {
                     f5 *= 3.0F;
                 }
 
@@ -273,31 +273,57 @@ public class CCSkeletonRenderer extends MobRenderer<CCSkeletonEntity, CCSkeleton
                 }
             }
 
-            this.model.prepareMobModel(pEntity, f5, f8, pPartialTicks);
-            this.model.setupAnim(pEntity, f5, f8, f7, f2, f6);
+            this.model.prepareMobModel(clearBoneSkeleton, f5, f8, pPartialTicks);
+            this.model.setupAnim(clearBoneSkeleton, f5, f8, f7, f2, f6);
             Minecraft minecraft = Minecraft.getInstance();
-            boolean flag = this.isBodyVisible(pEntity);
-            boolean flag1 = !flag && !pEntity.isInvisibleTo(minecraft.player);
-            boolean flag2 = minecraft.shouldEntityAppearGlowing(pEntity);
-            boolean flag3 = pEntity.isInvulnerable();
-            RenderType rendertype = this.getRenderType(pEntity, flag, flag1, flag2);
-            if (rendertype != null) {
-                VertexConsumer vertexconsumer = pBuffer.getBuffer(rendertype);
-                int i = getOverlayCoords(pEntity, this.getWhiteOverlayProgress(pEntity, pPartialTicks));
-                if (flag1 || flag3) {
-                    this.model.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, i, 1.0F, 1.0F, 1.0F, 0.15F);
-                } else {
-                    this.model.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, i, 1.0F, 1.0F, 1.0F, 1.0F);
-                }
+            boolean flag = this.isBodyVisible(clearBoneSkeleton);
+            boolean flag1 = !flag && !clearBoneSkeleton.isInvisibleTo(minecraft.player);
+            boolean flag2 = minecraft.shouldEntityAppearGlowing(clearBoneSkeleton);
+            boolean flag3 = clearBoneSkeleton.isClearBoneInvulnerable();
+
+            System.out.println("CLIENT RENDER: invulnerable = " + flag3 + " entity = " + clearBoneSkeleton.getId());
+
+            RenderType renderType;
+
+            if (flag3) {
+                renderType = RenderType.entityTranslucent(getTextureLocation(clearBoneSkeleton));
+            } else {
+                renderType = this.getRenderType(
+                        clearBoneSkeleton,
+                        flag,
+                        flag1,
+                        flag2
+                );
             }
 
-            if (!pEntity.isSpectator()) {
+            if (renderType != null) {
+                VertexConsumer vertexConsumer = pBuffer.getBuffer(renderType);
+
+                int overlay = getOverlayCoords(clearBoneSkeleton, this.getWhiteOverlayProgress(clearBoneSkeleton, pPartialTicks));
+
+                float alpha = flag3 ? 0.2F : 1.0F;
+
+                this.model.renderToBuffer(
+                        pPoseStack,
+                        vertexConsumer,
+                        pPackedLight,
+                        overlay,
+                        1.0F,
+                        1.0F,
+                        1.0F,
+                        alpha
+                );
+            }
+
+            if (!clearBoneSkeleton.isSpectator() && !clearBoneSkeleton.isClearBoneInvulnerable()) {
                 for (RenderLayer<CCSkeletonEntity, CCSkeletonModel> renderlayer : this.layers) {
-                    renderlayer.render(pPoseStack, pBuffer, pPackedLight, pEntity, f5, f8, pPartialTicks, f7, f2, f6);
+                    renderlayer.render(pPoseStack, pBuffer, pPackedLight, clearBoneSkeleton, f5, f8, pPartialTicks, f7, f2, f6);
                 }
             }
 
             pPoseStack.popPose();
+        } else if (pEntity instanceof ThrowingBoneSkeletonEntity throwingBoneSkeleton) {
+            super.render(throwingBoneSkeleton, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
         }
     }
 
@@ -309,16 +335,5 @@ public class CCSkeletonRenderer extends MobRenderer<CCSkeletonEntity, CCSkeleton
     @Override
     public ResourceLocation getTextureLocation(CCSkeletonEntity pEntity) {
         return SKELETON_TEXTURE;
-    }
-
-    @Override
-    protected @Nullable RenderType getRenderType(CCSkeletonEntity pLivingEntity, boolean pBodyVisible, boolean pTranslucent, boolean pGlowing) {
-        ResourceLocation texture = getTextureLocation(pLivingEntity);
-
-        if (pLivingEntity.isInvulnerable()) {
-            return RenderType.entityTranslucent(texture);
-        }
-
-        return super.getRenderType(pLivingEntity, pBodyVisible, pTranslucent, pGlowing);
     }
 }

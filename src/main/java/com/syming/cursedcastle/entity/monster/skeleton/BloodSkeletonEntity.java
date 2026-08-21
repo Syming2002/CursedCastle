@@ -19,14 +19,19 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
 public class BloodSkeletonEntity extends CCSkeletonEntity {
 
     private ItemStack lastHitItem;
+    private Entity lastHitProjectile;
 
     public BloodSkeletonEntity(EntityType<? extends CCSkeletonEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -39,8 +44,6 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false));
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -74,6 +77,17 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
                 this.remove(Entity.RemovalReason.KILLED);
             }
         }
+
+        if (this.lastHitItem != null && this.lastHitProjectile != null) {
+            ItemStack heldItem = this.lastHitItem;
+            if (!heldItem.isEmpty() && this.lastHitProjectile instanceof Projectile && heldItem.getEnchantmentLevel(CCEnchantment.BLOOD_SKELETON_KILLER.get()) == 1) {
+
+                if (this.deathTime == 20) {
+                    this.level().broadcastEntityEvent(this, (byte) 60);
+                    this.remove(RemovalReason.KILLED);
+                }
+            }
+        }
     }
 
     @Override
@@ -84,6 +98,23 @@ public class BloodSkeletonEntity extends CCSkeletonEntity {
                 this.lastHitItem = heldItem;
             } else {
                 this.lastHitItem = null;
+            }
+        }
+
+        if (pSource.getDirectEntity() instanceof Projectile projectile) {
+            Entity attacker = pSource.getEntity();
+
+            if (attacker instanceof LivingEntity living) {
+                ItemStack mainHandHeldItem = living.getMainHandItem();
+                ItemStack offHandHeldItem = living.getMainHandItem();
+
+                if ((!mainHandHeldItem.isEmpty() || !offHandHeldItem.isEmpty())
+                        && (mainHandHeldItem.getEnchantmentLevel(CCEnchantment.BLOOD_SKELETON_KILLER.get()) == 1 || offHandHeldItem.getEnchantmentLevel(CCEnchantment.BLOOD_SKELETON_KILLER.get()) == 1)) {
+
+                    this.lastHitItem = mainHandHeldItem.copy();
+                    this.lastHitItem = offHandHeldItem.copy();
+                    this.lastHitProjectile = projectile;
+                }
             }
         }
         return super.hurt(pSource, pAmount);

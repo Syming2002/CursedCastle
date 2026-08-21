@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:cobblestone"
+    },
+    "W": {
+      "item": "minecraft:mangrove_planks"
+    }
+  },
+  "pattern": [
+    " W ",
+    "WWW",
+    " C "
+  ],
+  "result": {
+    "item": "cursedcastle:mangrove_crucifix"
+  },
+  "show_notification": true
+}

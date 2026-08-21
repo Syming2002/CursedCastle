@@ -1,5 +1,7 @@
 package com.syming.cursedcastle.entity.projectile;
 
+import com.syming.cursedcastle.enchantment.CCEnchantment;
+import com.syming.cursedcastle.entity.monster.skeleton.BloodSkeletonEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;

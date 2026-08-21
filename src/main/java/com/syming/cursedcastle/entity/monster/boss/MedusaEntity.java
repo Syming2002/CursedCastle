@@ -11,6 +11,8 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -49,7 +51,7 @@ public class MedusaEntity extends CCBossEntity {
     public static final int STARE_ATTACK_ANIMATION_LENGTH_IN_TICKS = (int) (STARE_ATTACK_ANIMATION_LENGTH_IN_SECONDS * 20);
     private int stareAttackCooldown = 0;
     public static final int STARE_ATTACK_COOLDOWN = 150;
-    private int stareAttackAnimationTick = 0;
+    public int stareAttackAnimationTick = 0;
 
     public final AnimationState stareAttackAnimationState = new AnimationState();
 
@@ -139,9 +141,7 @@ public class MedusaEntity extends CCBossEntity {
 
                 if (this.meleeAttackAnimationTick < 25) {
                     if (distanceTo(target) <= 10.0F) {
-                        Vec3 targetPos = new Vec3(target.getX(), target.getY(), target.getZ());
-                        Vec3 dir = targetPos.subtract(position()).normalize();
-                        setDeltaMovement(dir.scale(0.4D));
+                        this.getNavigation().moveTo(target, 1.6D);
                     }
                 }
 
@@ -169,6 +169,10 @@ public class MedusaEntity extends CCBossEntity {
                 }
 
                 getMoveControl().strafe(this.strafingBackwards ? -0.5F : 0.5F, this.strafingClockwise ? 0.5F : -0.5F);
+
+                if (this.stareAttackAnimationTick == 65) {
+                    stareAttack(target);
+                }
 
                 if (this.stareAttackAnimationTick >= STARE_ATTACK_ANIMATION_LENGTH_IN_TICKS) {
                     setAnimation(IDLE_ANIMATION);
@@ -243,5 +247,22 @@ public class MedusaEntity extends CCBossEntity {
 
     public void setAnimation(byte pAnimation) {
         this.entityData.set(ANIMATION, pAnimation);
+    }
+
+    private void stareAttack(LivingEntity pTarget) {
+        if (isTargetLookingAtMedusa(pTarget)) {
+            pTarget.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 100, false, false));
+            System.out.println("Target look at Medusa");
+        }
+    }
+
+    private boolean isTargetLookingAtMedusa(LivingEntity pTarget) {
+        Vec3 medusaPos = new Vec3(getX() - pTarget.getX(), getY() - pTarget.getY(), getZ() - pTarget.getZ()).normalize();
+        Vec3 targetLookVec = pTarget.getLookAngle().normalize();
+
+        double dotProduct = medusaPos.dot(targetLookVec);
+        double angle = Math.toDegrees(Math.acos(dotProduct));
+
+        return angle < 60.0F;
     }
 }

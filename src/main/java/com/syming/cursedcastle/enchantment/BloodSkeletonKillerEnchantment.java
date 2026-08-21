@@ -23,13 +23,4 @@ public class BloodSkeletonKillerEnchantment extends Enchantment {
     public int getMaxCost(int pLevel) {
         return super.getMinCost(pLevel) + 10;
     }
-    //    @Override
-//    public void doPostAttack(LivingEntity pAttacker, Entity pTarget, int pLevel) {
-//        if (pTarget instanceof LivingEntity livingEntity) {
-//            if (livingEntity instanceof BloodSkeletonEntity bloodSkeleton) {
-//                bloodSkeleton
-//            }
-//        }
-//        super.doPostAttack(pAttacker, pTarget, pLevel);
-//    }
 }

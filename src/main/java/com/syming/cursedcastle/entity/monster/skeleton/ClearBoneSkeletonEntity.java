@@ -4,6 +4,9 @@ import com.syming.cursedcastle.api.IElementalDamage;
 import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.entity.CCEntity;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -15,10 +18,13 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
 public class ClearBoneSkeletonEntity extends CCSkeletonEntity {
+    private static final EntityDataAccessor<Boolean> INVULNERABLE = SynchedEntityData.defineId(ClearBoneSkeletonEntity.class, EntityDataSerializers.BOOLEAN);
+    public int invulnerableTicker;
 
     public ClearBoneSkeletonEntity(EntityType<? extends CCSkeletonEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -29,10 +35,20 @@ public class ClearBoneSkeletonEntity extends CCSkeletonEntity {
     }
 
     @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+
+        this.entityData.define(INVULNERABLE, false);
+    }
+
+    @Override
+    public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
+        super.onSyncedDataUpdated(pKey);
+    }
+
+    @Override
     protected void registerGoals() {
         super.registerGoals();
-
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false));
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -40,27 +56,41 @@ public class ClearBoneSkeletonEntity extends CCSkeletonEntity {
                 .add(Attributes.MAX_HEALTH, 36.0D)
                 .add(Attributes.FOLLOW_RANGE, 16.0D)
                 .add(Attributes.ATTACK_SPEED, 1.2D)
-                .add(Attributes.MOVEMENT_SPEED, 0.5D)
-                .add(Attributes.ATTACK_DAMAGE, 8.0D);
+                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.ATTACK_DAMAGE, 4.0D);
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (this.random.nextFloat() <= 0.05F && this.invulnerableTime <= 0 && !isDeadOrDying()) {
-            setInvulnerable(true);
-            this.invulnerableTime = 100;
+        LivingEntity target = this.getTarget();
+
+        if (!this.level().isClientSide()) {
+            if (target != null && this.random.nextFloat() <= 0.005F && this.invulnerableTicker <= 0 && isAlive() && this.onGround()) {
+                setClearBoneInvulnerable(true);
+                this.invulnerableTicker = 100;
+            }
+
+            if (this.invulnerableTicker > 0) {
+                this.invulnerableTicker--;
+            }
+
+            if (this.invulnerableTicker <= 0) {
+                setClearBoneInvulnerable(false);
+            }
         }
 
-        if (this.invulnerableTime > 0) {
-            --this.invulnerableTime;
+        if (isClearBoneInvulnerable()) {
+            getNavigation().stop();
+            setTarget(null);
+            setNoAi(true);
+            if (getAnimation() != IDLE_ANIMATION) {
+                setAnimation(IDLE_ANIMATION);
+            }
         } else {
-            setInvulnerable(false);
+            setNoAi(false);
         }
-
-
-        setNoAi(isInvulnerable());
     }
 
     @Override
@@ -120,7 +150,15 @@ public class ClearBoneSkeletonEntity extends CCSkeletonEntity {
     }
 
     @Override
-    public boolean isOnFire() {
-        return !isInvulnerable();
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        return !isClearBoneInvulnerable() && super.hurt(pSource, pAmount);
+    }
+
+    public boolean isClearBoneInvulnerable() {
+        return this.entityData.get(INVULNERABLE);
+    }
+
+    public void setClearBoneInvulnerable(boolean pClearBoneInvulnerable) {
+        this.entityData.set(INVULNERABLE, pClearBoneInvulnerable);
     }
 }

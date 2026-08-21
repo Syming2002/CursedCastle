@@ -13,6 +13,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.Villager;
@@ -45,10 +48,11 @@ public abstract class CCSkeletonEntity extends CCMonster implements RangedAttack
 
     protected float fallSideRotation = (this.random.nextFloat() - 0.5F) * 30.0F;
 
+    private boolean strafingBackwards;
+    private boolean strafingClockwise;
+
     public CCSkeletonEntity(EntityType<? extends CCMonster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-
-        refreshDimensions();
     }
 
     @Override
@@ -63,19 +67,19 @@ public abstract class CCSkeletonEntity extends CCMonster implements RangedAttack
         super.registerGoals();
 
         this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<Player>(this, Player.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<Villager>(this, Villager.class, true));
     }
 
     @Override
     public void tick() {
-
         if (this.level().isClientSide()) {
             this.throwingBoneAnimationState.animateWhen(getAnimation() == THROWING_BONE_ANIMATION, this.tickCount);
         }
 
         super.tick();
-
         LivingEntity target = this.getTarget();
 
         if (target != null) {
@@ -92,6 +96,16 @@ public abstract class CCSkeletonEntity extends CCMonster implements RangedAttack
 
             if (getAnimation() == THROWING_BONE_ANIMATION) {
                 this.throwingBoneAnimationTick++;
+
+                if (this.getRandom().nextFloat() < 0.3F) {
+                    this.strafingBackwards = !this.strafingBackwards;
+                }
+
+                if (this.getRandom().nextFloat() < 0.3F) {
+                    this.strafingClockwise = !this.strafingClockwise;
+                }
+
+                getMoveControl().strafe(this.strafingBackwards ? -0.5F : 0.5F, this.strafingClockwise ? 0.5F : -0.5F);
 
                 if (this.throwingBoneAnimationTick == 32) {
 
@@ -116,13 +130,11 @@ public abstract class CCSkeletonEntity extends CCMonster implements RangedAttack
                         this.level().addFreshEntity(throwingGoldenBone);
                     }
 
-                    if (!this.level().isClientSide() && this instanceof ClearBoneSkeletonEntity) {
-                        if (!isInvulnerable()) {
-                            ThrowingBoneEntity throwingBone = new ThrowingBoneEntity(this, this.level());
-                            throwingBone.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 0.5F, 0.0000001F);
-                            playSound(SoundEvents.SNOWBALL_THROW, 1.0F, 0.5F);
-                            this.level().addFreshEntity(throwingBone);
-                        }
+                    if (!this.level().isClientSide() && this instanceof ClearBoneSkeletonEntity clearBoneSkeleton) {
+                        ThrowingBoneEntity throwingBone = new ThrowingBoneEntity(this, this.level());
+                        throwingBone.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 0.5F, 0.0000001F);
+                        playSound(SoundEvents.SNOWBALL_THROW, 1.0F, 0.5F);
+                        this.level().addFreshEntity(throwingBone);
                     }
                 }
 
@@ -151,11 +163,6 @@ public abstract class CCSkeletonEntity extends CCMonster implements RangedAttack
             this.level().broadcastEntityEvent(this, (byte) 60);
             this.remove(Entity.RemovalReason.KILLED);
         }
-    }
-
-    @Override
-    public EntityDimensions getDimensions(Pose pPose) {
-        return EntityDimensions.scalable(0.6F, 1.99F);
     }
 
     @Override

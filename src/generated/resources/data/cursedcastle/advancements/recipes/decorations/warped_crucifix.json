@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cursedcastle:warped_crucifix"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_warped_crucifix": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cursedcastle:warped_crucifix"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_warped_crucifix",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cursedcastle:warped_crucifix"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_acacia_crucifix": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "cursedcastle:acacia_crucifix"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cursedcastle:acacia_crucifix"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_acacia_crucifix",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cursedcastle:acacia_crucifix"
+    ]
+  },
+  "sends_telemetry_event": false
+}

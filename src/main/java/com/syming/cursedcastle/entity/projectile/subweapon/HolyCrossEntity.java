@@ -119,9 +119,7 @@ public class HolyCrossEntity extends CCThrowableWeapon {
                     }
                 } else if (target instanceof LivingEntity livingEntity && getOwner() instanceof LivingEntity shooter) {
                     applyEntityHitEnchantments(livingEntity);
-                    if (!stack.isEnchanted()) {
-                        livingEntity.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage());
-                    }
+                    livingEntity.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage());
                     stack.hurt(1, this.random, (ServerPlayer) shooter);
                 }
             }

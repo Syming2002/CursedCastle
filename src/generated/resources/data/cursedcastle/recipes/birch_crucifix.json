@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:cobblestone"
+    },
+    "W": {
+      "item": "minecraft:birch_planks"
+    }
+  },
+  "pattern": [
+    " W ",
+    "WWW",
+    " C "
+  ],
+  "result": {
+    "item": "cursedcastle:birch_crucifix"
+  },
+  "show_notification": true
+}

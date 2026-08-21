@@ -25,8 +25,6 @@ public class GoldenSkeleton extends CCSkeletonEntity {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false));
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {

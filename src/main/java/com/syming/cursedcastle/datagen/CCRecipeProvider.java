@@ -1,10 +1,12 @@
 package com.syming.cursedcastle.datagen;
 
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.block.CCBlock;
 import com.syming.cursedcastle.item.CCItem;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -12,6 +14,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraftforge.common.Tags;
 
 import java.util.Map;
@@ -28,6 +33,20 @@ public class CCRecipeProvider extends RecipeProvider {
             Tiers.NETHERITE, Tags.Items.INGOTS_NETHERITE
     );
 
+    private static final Map<WoodType, Block> WOOD_BLOCKS = Map.ofEntries(
+            Map.entry(WoodType.OAK, Blocks.OAK_PLANKS),
+            Map.entry(WoodType.SPRUCE, Blocks.SPRUCE_PLANKS),
+            Map.entry(WoodType.BIRCH, Blocks.BIRCH_PLANKS),
+            Map.entry(WoodType.ACACIA, Blocks.ACACIA_PLANKS),
+            Map.entry(WoodType.CHERRY, Blocks.CHERRY_PLANKS),
+            Map.entry(WoodType.JUNGLE, Blocks.JUNGLE_PLANKS),
+            Map.entry(WoodType.DARK_OAK, Blocks.DARK_OAK_PLANKS),
+            Map.entry(WoodType.CRIMSON, Blocks.CRIMSON_PLANKS),
+            Map.entry(WoodType.WARPED, Blocks.WARPED_PLANKS),
+            Map.entry(WoodType.MANGROVE, Blocks.MANGROVE_PLANKS),
+            Map.entry(WoodType.BAMBOO, Blocks.BAMBOO_PLANKS)
+    );
+
     public CCRecipeProvider(PackOutput pOutput) {
         super(pOutput);
     }
@@ -41,6 +60,7 @@ public class CCRecipeProvider extends RecipeProvider {
         buildHolyCross(pWriter);
         buildThrowingAxe(pWriter);
         buildDagger(pWriter);
+        buildCrucifix(pWriter);
     }
 
     private void buildLeatherWhip(Consumer<FinishedRecipe> pWriter) {
@@ -77,11 +97,11 @@ public class CCRecipeProvider extends RecipeProvider {
 
             if (tier == Tiers.NETHERITE) {
                 SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
-                        Ingredient.of(CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.DIAMOND).get()),
-                        Ingredient.of(Items.NETHERITE_INGOT),
-                        RecipeCategory.COMBAT,
-                        CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.NETHERITE).get())
+                                Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                                Ingredient.of(CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.DIAMOND).get()),
+                                Ingredient.of(Items.NETHERITE_INGOT),
+                                RecipeCategory.COMBAT,
+                                CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.NETHERITE).get())
                         .unlocks(getHasName(CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.DIAMOND).get()), has(material))
                         .save(pWriter, new ResourceLocation(CursedCastleMod.MOD_ID, "netherite_holy_cross"));
             } else {
@@ -147,6 +167,23 @@ public class CCRecipeProvider extends RecipeProvider {
                         .unlockedBy(getHasName(CCItem.DAGGER_ITEM_TYPES.get(tier).get()), has(CCItem.DAGGER_ITEM_TYPES.get(tier).get()))
                         .save(pWriter);
             }
+        }
+    }
+
+    private void buildCrucifix(Consumer<FinishedRecipe> pWriter) {
+        for (var entry : WOOD_BLOCKS.entrySet()) {
+            WoodType woodType = entry.getKey();
+            Block blockWood = entry.getValue();
+
+            ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get())
+                    .pattern(" W ")
+                    .pattern("WWW")
+                    .pattern(" C ")
+                    .define('W', blockWood)
+                    .define('C', Blocks.COBBLESTONE)
+                    .unlockedBy(getHasName(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get()), has(CCBlock.CRUCIFIX_BLOCK_TYPES.get(woodType).get()))
+                    .save(pWriter);
+
         }
     }
 }

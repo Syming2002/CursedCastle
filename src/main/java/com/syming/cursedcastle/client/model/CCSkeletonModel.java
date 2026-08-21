@@ -12,6 +12,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import xaero.common.core.XaeroMinimapCore;
 
 public class CCSkeletonModel extends HierarchicalModel<CCSkeletonEntity> {
 
@@ -67,6 +68,7 @@ public class CCSkeletonModel extends HierarchicalModel<CCSkeletonEntity> {
     @Override
     public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
         this.skeleton.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
+        XaeroMinimapCore.onEntityIconsModelRenderDetection(this, pBuffer, pRed, pGreen, pBlue, pAlpha);
     }
 
     @Override
