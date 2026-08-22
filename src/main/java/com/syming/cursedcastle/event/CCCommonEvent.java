@@ -15,7 +15,7 @@ import com.syming.cursedcastle.entity.monster.zombie.friendly.FriendlyZombieEnti
 import com.syming.cursedcastle.entity.monster.shade.ShadeEntity;
 import com.syming.cursedcastle.entity.monster.skeleton.BloodSkeletonEntity;
 import com.syming.cursedcastle.entity.monster.skeleton.ClearBoneSkeletonEntity;
-import com.syming.cursedcastle.entity.monster.skeleton.GoldenSkeleton;
+import com.syming.cursedcastle.entity.monster.skeleton.GoldenSkeletonEntity;
 import com.syming.cursedcastle.entity.monster.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.monster.zombie.CCZombieEntity;
 import com.syming.cursedcastle.network.CCPacketHandler;
@@ -48,7 +48,7 @@ public class CCCommonEvent {
         event.put(CCEntity.FIRE_ZOMBIE.get(), CCZombieEntity.createZombieAttributes().build());
         event.put(CCEntity.FROST_ZOMBIE.get(), CCZombieEntity.createZombieAttributes().build());
         event.put(CCEntity.FROZEN_SHADE.get(), ShadeEntity.createMobAttributes().build());
-        event.put(CCEntity.GOLDEN_SKELETON.get(), GoldenSkeleton.createMobAttributes().build());
+        event.put(CCEntity.GOLDEN_SKELETON.get(), GoldenSkeletonEntity.createMobAttributes().build());
         event.put(CCEntity.FRIENDLY_ZOMBIE.get(), FriendlyZombieEntity.createMobAttributes().build());
         event.put(CCEntity.GRIM_REAPER.get(), GrimReaperEntity.createMobAttributes().build());
         event.put(CCEntity.HARPY.get(), HarpyEntity.createHarpyAttributes().build());

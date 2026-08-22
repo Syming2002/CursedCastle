@@ -108,11 +108,6 @@ public class ClearBoneSkeletonEntity extends CCSkeletonEntity {
         return SoundEvents.SKELETON_DEATH;
     }
 
-//    @Override
-//    protected SoundEvent getStepSound() {
-//        return SoundEvents.SKELETON_STEP;
-//    }
-
     @Override
     public boolean hasWeakness(DamageSource source, float damageAmount) {
         return false;

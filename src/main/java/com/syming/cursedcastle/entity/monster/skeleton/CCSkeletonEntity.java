@@ -14,7 +14,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
@@ -123,7 +122,7 @@ public abstract class CCSkeletonEntity extends CCMonster implements RangedAttack
                         this.level().addFreshEntity(throwingBloodBone);
                     }
 
-                    if (!this.level().isClientSide() && this instanceof GoldenSkeleton) {
+                    if (!this.level().isClientSide() && this instanceof GoldenSkeletonEntity) {
                         ThrowingGoldenBoneEntity throwingGoldenBone = new ThrowingGoldenBoneEntity(this, this.level());
                         throwingGoldenBone.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 0.5F, 0.2F);
                         playSound(SoundEvents.SNOWBALL_THROW, 1.0F, 0.5F);

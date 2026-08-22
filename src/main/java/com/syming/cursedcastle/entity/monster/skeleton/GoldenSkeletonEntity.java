@@ -11,14 +11,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class GoldenSkeleton extends CCSkeletonEntity {
-    public GoldenSkeleton(EntityType<? extends CCSkeletonEntity> pEntityType, Level pLevel) {
+public class GoldenSkeletonEntity extends CCSkeletonEntity {
+    public GoldenSkeletonEntity(EntityType<? extends CCSkeletonEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -35,11 +34,6 @@ public class GoldenSkeleton extends CCSkeletonEntity {
                 .add(Attributes.ATTACK_SPEED, 1.2D)
                 .add(Attributes.ATTACK_DAMAGE, 4.0D);
     }
-
-//    @Override
-//    protected SoundEvent getStepSound() {
-//        return SoundEvents.SKELETON_STEP;
-//    }
 
     @Override
     public void aiStep() {

@@ -35,11 +35,6 @@ public class ThrowingBoneSkeletonEntity extends CCSkeletonEntity {
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
     }
 
-//    @Override
-//    protected SoundEvent getStepSound() {
-//        return SoundEvents.SKELETON_STEP;
-//    }
-
     public static AttributeSupplier.Builder createMobAttributes() {
         return PathfinderMob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 20.0D)

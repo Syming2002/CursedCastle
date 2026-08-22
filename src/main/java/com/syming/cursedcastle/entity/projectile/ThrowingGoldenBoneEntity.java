@@ -1,7 +1,7 @@
 package com.syming.cursedcastle.entity.projectile;
 
 import com.syming.cursedcastle.entity.CCEntity;
-import com.syming.cursedcastle.entity.monster.skeleton.GoldenSkeleton;
+import com.syming.cursedcastle.entity.monster.skeleton.GoldenSkeletonEntity;
 import com.syming.cursedcastle.item.CCItem;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -105,7 +105,7 @@ public class ThrowingGoldenBoneEntity extends CCThrowableWeapon {
         Entity target = pResult.getEntity();
 
         if (!this.level().isClientSide() && getOwner() != null) {
-            if (target instanceof LivingEntity livingEntity && getOwner() instanceof GoldenSkeleton shooter) {
+            if (target instanceof LivingEntity livingEntity && getOwner() instanceof GoldenSkeletonEntity shooter) {
                 livingEntity.hurt(this.damageSources().mobProjectile(this, shooter), getImpactDamage());
 
             }

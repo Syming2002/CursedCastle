@@ -9,7 +9,7 @@ import com.syming.cursedcastle.entity.monster.boss.GrimReaperEntity;
 import com.syming.cursedcastle.entity.monster.boss.MedusaEntity;
 import com.syming.cursedcastle.entity.monster.boss.RusalkaEntity;
 import com.syming.cursedcastle.entity.monster.skeleton.ClearBoneSkeletonEntity;
-import com.syming.cursedcastle.entity.monster.skeleton.GoldenSkeleton;
+import com.syming.cursedcastle.entity.monster.skeleton.GoldenSkeletonEntity;
 import com.syming.cursedcastle.entity.monster.skeleton.ThrowingBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.monster.bat.familiar.FamiliarBatEntity;
 import com.syming.cursedcastle.entity.monster.zombie.friendly.FriendlyZombieEntity;
@@ -106,7 +106,7 @@ public class CCEntity {
             .updateInterval(1)
             .build("frozen_shade"));
 
-    public static final RegistryObject<EntityType<GoldenSkeleton>> GOLDEN_SKELETON = ENTITY_TYPES.register("golden_skeleton", () -> EntityType.Builder.<GoldenSkeleton>of(GoldenSkeleton::new, MobCategory.MONSTER)
+    public static final RegistryObject<EntityType<GoldenSkeletonEntity>> GOLDEN_SKELETON = ENTITY_TYPES.register("golden_skeleton", () -> EntityType.Builder.<GoldenSkeletonEntity>of(GoldenSkeletonEntity::new, MobCategory.MONSTER)
             .sized(0.5F, 1.99F)
             .setTrackingRange(64)
             .setShouldReceiveVelocityUpdates(true)
