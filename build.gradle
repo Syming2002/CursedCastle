@@ -19,6 +19,47 @@ group = mod_group_id
 
 repositories {
     // Add here additional repositories if required by some of the dependencies below.
+
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // EMI
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
+    maven {
+        name 'Curseforge Maven'
+        url "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
+    }
+
+    maven { url = "https://api.modrinth.com/maven" }
+
+    maven {
+        url = "https://nexus.resourcefulbees.com/repository/telepathicgrunt/"
+    }
+    maven {
+        name = 'ModKit'
+        url = 'https://jitpack.io'
+        content {
+            includeGroup 'com.github.thedarkcolour'
+            includeGroup 'com.github.rtyley'
+        }
+    }
 }
 
 base {
@@ -38,7 +79,9 @@ neoForge {
     }
 
     // This line is optional. Access Transformers are automatically detected
-    // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformers {
+        file('src/main/resources/META-INF/accesstransformer.cfg')
+    }
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
@@ -109,6 +152,17 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 // "optional", meaning it will not be pulled by dependents of this mod.
 configurations {
     runtimeClasspath.extendsFrom localRuntime
+
+    // ModKit, dev only. It reaches the production compile classpaths because the data providers
+    // now live beside the code they generate for, and every jar task excludes those packages. What
+    // keeps it out of a shipped jar is checkJarPartition, which reads the built artifact.
+    //
+    // It must go on the *runtime* classpath rather than an MDG additionalRuntimeClasspath, because
+    // the latter loads outside the game layer and ModKit extends net.minecraft.data.tags.TagsProvider.
+    // compileOnly keeps it out of the published POM, which strips dependencies anyway
+    modkit
+    runtimeOnly.extendsFrom modkit
+    compileOnly.extendsFrom modkit
 }
 
 dependencies {
@@ -133,6 +187,82 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+    implementation "curse.maven:architectury-api-${architectury_api_id}"
+    implementation "curse.maven:cloth-config-${cloth_config_id}"
+
+    // compile against the JEI API but do not include it at runtime
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+    // at runtime, use the full JEI jar for Forge
+    runtimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+
+    // JER
+    implementation "curse.maven:just-enough-resources-jer-${just_enough_resources_jer_id}"
+
+    // Jade
+    implementation "curse.maven:jade-${jade_id}"
+    implementation "curse.maven:jade-addons-${jade_addons_id}"
+
+    // Apply Mixin AP
+//    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+//    implementation "curse.maven:attributefix-280510:4911084"
+
+    implementation "curse.maven:corgilib-693313:7773534"
+    implementation "curse.maven:data-anchor-1203668:8925499"
+    implementation "curse.maven:enhanced-celestials-2-default-lunar-events-1621820:8798105"
+    implementation "curse.maven:enhanced-celestials-2-core-1621796:8827906"
+//    implementation "curse.maven:enhanced-celestials-2-shader-support-1621851:8798107"
+
+    implementation "curse.maven:productivebees-377897:8022994"
+
+
+    implementation "curse.maven:building-wands-${building_wands_id}"
+
+//    implementation ("curse.maven:p1nero-better-structure-block-${p1nero_better_structure_block_id}")
+
+    // Repurposed Structures
+    implementation "curse.maven:repurposed-structures-${repurposed_structures_id}"
+
+    // Lithostitched
+    implementation "curse.maven:lithostitched-${lithostitched_id}"
+
+    // CTOV
+    implementation "curse.maven:choicetheorems-overhauled-village-${ctov_id}"
+
+//    // ModKit DEV ONLY
+//    modkit 'com.github.thedarkcolour:ModKit:c0c491b35bf7c5785b933b27966a9c0b9dee4163'
+//
+//    // Patchouli
+//    compileOnly "curse.maven:patchouli-${patchouli_id}"
+//
+//    // Forestry Community Edition
+//    compileOnly "curse.maven:forestry-community-edition-${forestry_community_edition}"
+
+    // Torcherino Unofficial
+//    implementation ("curse.maven:torcherino-unofficial-${torcherino_unofficial_id}")
+
+
+    // Curios
+    // Compile against only the API artifact
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    // Use the full Curios API jar at runtime
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+
+    // Xaeros's Minimap
+    implementation "curse.maven:xaeros-minimap-263420:8849842"
+
+    // Ferrite Core
+    implementation "curse.maven:ferritecore-429235:7524151"
+
+    // Modern Fix
+    implementation "curse.maven:modernfix-790626:8774737"
+
+    // Embeddium
+    implementation "curse.maven:embeddium-908741:6118392"
+
+    // Oculus
+    implementation "curse.maven:neoculus-1200907:6787071"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
