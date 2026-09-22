@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gold_holy_cross": {
+      "conditions": {
+        "items": [
+          {
+            "items": "cursedcastle:gold_holy_cross"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cursedcastle:gold_holy_cross"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gold_holy_cross"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cursedcastle:gold_holy_cross"
+    ]
+  }
+}

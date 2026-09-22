@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "c:cobblestones"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "MMS",
+    "MSM",
+    "SMM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cursedcastle:stone_throwing_axe"
+  }
+}

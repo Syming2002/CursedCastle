@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "cursedcastle:leader_priest_poi",
+      "required": false
+    },
+    {
+      "id": "cursedcastle:high_priest_poi",
+      "required": false
+    }
+  ]
+}

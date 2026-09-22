@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "c:cobblestones"
+    }
+  },
+  "pattern": [
+    " M ",
+    "MMM",
+    " M "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cursedcastle:stone_holy_cross"
+  }
+}

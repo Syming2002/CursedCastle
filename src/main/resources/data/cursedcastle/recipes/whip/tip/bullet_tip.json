@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "cursedcastle:vampire_killer_bullet_tip_whip"
+    }
+  ],
+  "result": {
+    "item": "cursedcastle:bullet_tip"
+  }
+}

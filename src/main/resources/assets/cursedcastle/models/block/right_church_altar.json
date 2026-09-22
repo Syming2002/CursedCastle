@@ -1,0 +1,35 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"pillar": "minecraft:block/quartz_pillar",
+		"pillar_top": "minecraft:block/quartz_pillar_top",
+		"particle": "minecraft:block/quartz_pillar"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [31, 0, 0]},
+			"color": 2,
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#pillar"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#pillar"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#pillar"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#pillar"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#pillar_top"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#pillar_top"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "right_side",
+			"origin": [0, 0, 0],
+			"scope": 0,
+			"color": 0,
+			"children": [0]
+		}
+	]
+}

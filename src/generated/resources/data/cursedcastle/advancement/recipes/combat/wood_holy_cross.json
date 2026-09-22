@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cursedcastle:wood_holy_cross"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wood_holy_cross": {
+      "conditions": {
+        "items": [
+          {
+            "items": "cursedcastle:wood_holy_cross"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_wood_holy_cross"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cursedcastle:wood_holy_cross"
+    ]
+  }
+}

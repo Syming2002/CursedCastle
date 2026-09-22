@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "c:ingots/gold"
+    }
+  },
+  "pattern": [
+    " M ",
+    "MMM",
+    " M "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cursedcastle:gold_holy_cross"
+  }
+}

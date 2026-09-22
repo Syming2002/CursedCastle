@@ -1,0 +1,104 @@
+package com.syming.cursedcastle.fluid;
+
+import com.mojang.blaze3d.shaders.FogShape;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Camera;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.fluids.FluidType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
+
+import java.util.function.Consumer;
+
+public class BloodFluidType extends FluidType {
+
+    private final ResourceLocation stillTexture;
+    private final ResourceLocation flowingTexture;
+    private final ResourceLocation overlayTexture;
+    private final int tintColor;
+    private final Vector3f fogColor;
+
+    /**
+     * Default constructor.
+     *
+     * @param properties the general properties of the fluid type
+     */
+    public BloodFluidType(Properties properties, ResourceLocation stillTexture, ResourceLocation flowingTexture, ResourceLocation overlayTexture, int tintColor, Vector3f fogColor) {
+        super(properties);
+        this.stillTexture = stillTexture;
+        this.flowingTexture = flowingTexture;
+        this.overlayTexture = overlayTexture;
+        this.tintColor = tintColor;
+        this.fogColor = fogColor;
+    }
+
+    @Override
+    public int getDensity() {
+        return 16;
+    }
+
+    @Override
+    public int getViscosity() {
+        return 4;
+    }
+
+    public ResourceLocation getStillTexture() {
+        return this.stillTexture;
+    }
+
+    public ResourceLocation getFlowingTexture() {
+        return this.flowingTexture;
+    }
+
+    public int getTintColor() {
+        return this.tintColor;
+    }
+
+    public ResourceLocation getOverlayTexture() {
+        return this.overlayTexture;
+    }
+
+    public Vector3f getFogColor() {
+        return this.fogColor;
+    }
+
+    @Override
+    public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+        consumer.accept(new IClientFluidTypeExtensions() {
+            @Override
+            public int getTintColor() {
+                return tintColor;
+            }
+
+            @Override
+            public ResourceLocation getStillTexture() {
+                return stillTexture;
+            }
+
+            @Override
+            public ResourceLocation getFlowingTexture() {
+                return flowingTexture;
+            }
+
+            @Override
+            public @Nullable ResourceLocation getOverlayTexture() {
+                return overlayTexture;
+            }
+
+            @Override
+            public @NotNull Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
+                return fogColor;
+            }
+
+            @Override
+            public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick, float nearDistance, float farDistance, FogShape shape) {
+                RenderSystem.setShaderFogStart(1.0F);
+                RenderSystem.setShaderFogEnd(6.0F);
+            }
+        });
+    }
+}

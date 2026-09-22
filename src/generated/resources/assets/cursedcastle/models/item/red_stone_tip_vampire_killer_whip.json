@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "cursedcastle:item/whip/red_stone_tip_vampire_killer_whip"
+  }
+}

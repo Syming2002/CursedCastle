@@ -1,0 +1,47 @@
+{
+  "dagger_throw": {
+    "subtitle": "cursedcastle.subtitle.dagger_throw",
+    "sounds": [
+      {
+        "name": "cursedcastle:dagger_throw",
+        "stream": true
+      }
+    ]
+  },
+  "holy_cross_throw": {
+    "subtitle": "cursedcastle.subtitle.holy_cross_throw",
+    "sounds": [
+      {
+        "name": "cursedcastle:holy_cross_throw",
+        "stream": true
+      }
+    ]
+  },
+  "holy_water_impact": {
+    "subtitle": "cursedcastle.subtitle.holy_water_impact",
+    "sounds": [
+      {
+        "name": "cursedcastle:holy_water_impact",
+        "stream": true
+      }
+    ]
+  },
+  "whip_impact": {
+    "subtitle": "cursedcastle.subtitle.whip_impact",
+    "sounds": [
+      {
+        "name": "cursedcastle:whip_impact",
+        "stream": true
+      }
+    ]
+  },
+  "throwing_axe_throw": {
+    "subtitle": "cursedcastle.subtitle.throwing_axe_throw",
+    "sounds": [
+      {
+        "name": "cursedcastle:throwing_axe_throw",
+        "stream": true
+      }
+    ]
+  }
+}

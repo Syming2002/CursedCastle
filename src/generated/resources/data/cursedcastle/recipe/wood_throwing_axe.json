@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "MMS",
+    "MSM",
+    "SMM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cursedcastle:wood_throwing_axe"
+  }
+}

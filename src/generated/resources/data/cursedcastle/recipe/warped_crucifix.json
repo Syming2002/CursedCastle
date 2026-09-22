@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:cobblestone"
+    },
+    "W": {
+      "item": "minecraft:warped_planks"
+    }
+  },
+  "pattern": [
+    " W ",
+    "WWW",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cursedcastle:warped_crucifix"
+  }
+}

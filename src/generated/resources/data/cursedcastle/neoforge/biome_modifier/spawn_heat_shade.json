@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#c:is_hot/nether",
+  "spawners": {
+    "type": "cursedcastle:heat_shade",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 60
+  }
+}

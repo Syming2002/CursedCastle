@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "cursedcastle:diamond_holy_cross"
+  },
+  "result": {
+    "count": 1,
+    "id": "cursedcastle:netherite_holy_cross"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
+}

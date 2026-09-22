@@ -1,0 +1,6 @@
+{
+  "variants" : {
+    "cursedcastle:textures/entity/dracula_bloodmoon.png": "sprite:cursedcastle/dracula_bloodmoon.png",
+    "default": "sprite:cursedcastle/dracula.png"
+  }
+}

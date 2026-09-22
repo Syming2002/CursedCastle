@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": ["cursedcastle:fire_spell_book",
+    "cursedcastle:frozen_heart",
+    "cursedcastle:ice_spell_book",
+    "cursedcastle:bolt_spell_book",
+    "cursedcastle:wind_spell_book",
+    "cursedcastle:summoning_spell_book"]
+}

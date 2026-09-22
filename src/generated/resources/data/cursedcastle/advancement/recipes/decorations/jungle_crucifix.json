@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_jungle_crucifix": {
+      "conditions": {
+        "items": [
+          {
+            "items": "cursedcastle:jungle_crucifix"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cursedcastle:jungle_crucifix"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_jungle_crucifix"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cursedcastle:jungle_crucifix"
+    ]
+  }
+}

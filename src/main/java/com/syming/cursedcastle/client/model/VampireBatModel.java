@@ -1,0 +1,38 @@
+package com.syming.cursedcastle.client.model;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.entity.monster.bat.CCBatEntity;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
+
+public class VampireBatModel extends CCBatModel {
+    // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
+    public static final ModelLayerLocation VAMPIRE_BAT_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(CursedCastleMod.MOD_ID, "vampire_bat"), "main");
+
+    public VampireBatModel(ModelPart root) {
+        super(root);
+    }
+
+    public static LayerDefinition createBodyLayer() {
+        return CCBatModel.createBodyLayer();
+    }
+
+    @Override
+    public void setupAnim(CCBatEntity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+        super.setupAnim(pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+        super.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+    }
+
+    @Override
+    public ModelPart root() {
+        return super.root();
+    }
+}

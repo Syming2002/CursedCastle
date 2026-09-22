@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cursedcastle:item/anim_wood_throwing_axe"
+  }
+}

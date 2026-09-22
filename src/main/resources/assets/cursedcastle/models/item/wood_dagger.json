@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "cursedcastle:item/wood_dagger_2d"
+  },
+  "perspectives": {
+    "thirdperson_righthand":{
+      "parent": "cursedcastle:item/wood_dagger_3d"
+    },
+    "thirdperson_lefthand": {
+      "parent": "cursedcastle:item/wood_dagger_3d"
+    },
+    "firstperson_righthand": {
+      "parent": "cursedcastle:item/wood_dagger_3d"
+    },
+    "firstperson_lefthand": {
+      "parent": "cursedcastle:item/wood_dagger_3d"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+// 1.21.1	2026-09-20T19:59:23.2532246	Tags for minecraft:block mod id cursedcastle
+27aaa61bbe63072b491c76705d3e3d9035451454 data/cursedcastle/tags/block/all_blocks.json
+10a741090d9289e00ddd5c9b952479567757b002 data/cursedcastle/tags/block/blood.json
+ea104a5526d160e9fa1eceb6381f0ba428d483f9 data/cursedcastle/tags/block/crucifix.json
+f1334275f873c9074739aeb3e8c48b14ce3746b5 data/cursedcastle/tags/block/fire.json
+9022898ec4fb4c66e1b94f639a5a62061cc1579c data/cursedcastle/tags/block/ice.json
+ea104a5526d160e9fa1eceb6381f0ba428d483f9 data/minecraft/tags/block/mineable/axe.json
+1038b9d1a94dae8c58745e7458ec8226a73ed8f5 data/minecraft/tags/block/mineable/pickaxe.json
+1038b9d1a94dae8c58745e7458ec8226a73ed8f5 data/minecraft/tags/block/needs_stone_tool.json
