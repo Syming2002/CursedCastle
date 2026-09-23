@@ -148,8 +148,6 @@ public class CursedCastleMod {
 
 
                 for (DeferredHolder<EntityType<?>, ? extends EntityType<?>> entityThrownItem : CCEntity.ENTITY_TYPES.getEntries()) {
-
-
                     for (Tiers tier : Tiers.values()) {
                         if (entityThrownItem.get() == CCEntity.DAGGER_TYPES.get(tier).get()) {
                             EntityRenderers.register(CCEntity.DAGGER_TYPES.get(tier).get(), DaggerRenderer::new);

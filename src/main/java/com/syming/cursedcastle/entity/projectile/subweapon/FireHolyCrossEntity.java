@@ -69,7 +69,7 @@ public class FireHolyCrossEntity extends CCThrowableWeapon {
                         }
                     }
                 } else if (hitEntity instanceof LivingEntity target && hitEntity != getOwner()) {
-                    target.setRemainingFireTicks(5);
+                    target.setRemainingFireTicks(100);
                     stack.hurtAndBreak(1, shooter, LivingEntity.getSlotForHand(shooter.getUsedItemHand()));
                 }
             }

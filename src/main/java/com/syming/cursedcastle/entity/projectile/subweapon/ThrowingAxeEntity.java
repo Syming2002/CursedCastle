@@ -1,6 +1,7 @@
 package com.syming.cursedcastle.entity.projectile.subweapon;
 
 import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.item.projectile.subweapon.HolyCrossItem;
 import com.syming.cursedcastle.item.projectile.subweapon.ThrowingAxeItem;
 import com.syming.cursedcastle.entity.CCEntity;
 import com.syming.cursedcastle.entity.projectile.CCThrowableWeapon;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import org.jetbrains.annotations.Nullable;
 
 public class ThrowingAxeEntity extends CCThrowableWeapon {
 
@@ -45,27 +47,48 @@ public class ThrowingAxeEntity extends CCThrowableWeapon {
         return this.tier.getAttackDamageBonus() + 10.0F;
     }
 
-//    @Override
-//    public ItemStack getItem() {
-//        ItemStack stack = super.getItem();
-//        if (stack.getItem() instanceof ThrowingAxeItem throwingAxeItem) {
-//            Tier throwingAxeItemTier = throwingAxeItem.getTier();
-//            if (throwingAxeItemTier == Tiers.WOOD) {
-//                return new ItemStack(CCItem.ANIM_WOOD_THROWING_AXE.get());
-//            } else if (throwingAxeItemTier == Tiers.STONE) {
-//                return new ItemStack(CCItem.ANIM_STONE_THROWING_AXE.get());
-//            } else if (throwingAxeItemTier == Tiers.IRON) {
-//                return new ItemStack(CCItem.ANIM_IRON_THROWING_AXE.get());
-//            } else if (throwingAxeItemTier == Tiers.GOLD) {
-//                return new ItemStack(CCItem.ANIM_GOLD_THROWING_AXE.get());
-//            } else if (throwingAxeItemTier == Tiers.DIAMOND) {
-//                return new ItemStack(CCItem.ANIM_DIAMOND_THROWING_AXE.get());
-//            } else if (throwingAxeItemTier == Tiers.NETHERITE) {
-//                return new ItemStack(CCItem.ANIM_NETHERITE_THROWING_AXE.get());
-//            }
-//        }
-//        return new ItemStack(CCItem.ANIM_WOOD_THROWING_AXE.get());
-//    }
+    @Override
+    public ItemStack getItem() {
+        if (getOwner() != null) {
+
+            Tier tier = getTier();
+            if (tier == Tiers.WOOD) {
+                return new ItemStack(CCItem.ANIM_WOOD_THROWING_AXE.get());
+            } else if (tier == Tiers.STONE) {
+                return new ItemStack(CCItem.ANIM_STONE_THROWING_AXE.get());
+            } else if (tier == Tiers.IRON) {
+                return new ItemStack(CCItem.ANIM_IRON_THROWING_AXE.get());
+            } else if (tier == Tiers.GOLD) {
+                return new ItemStack(CCItem.ANIM_GOLD_THROWING_AXE.get());
+            } else if (tier == Tiers.DIAMOND) {
+                return new ItemStack(CCItem.ANIM_DIAMOND_THROWING_AXE.get());
+            } else if (tier == Tiers.NETHERITE) {
+                return new ItemStack(CCItem.ANIM_NETHERITE_THROWING_AXE.get());
+            }
+        }
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public @Nullable ItemStack getPickResult() {
+        if (getOwner() != null) {
+            Tier tier = getTier();
+            if (tier == Tiers.WOOD) {
+                return new ItemStack(CCItem.THROWING_AXE_ITEM_TYPES.get(Tiers.WOOD).get());
+            } else if (tier == Tiers.STONE) {
+                return new ItemStack(CCItem.THROWING_AXE_ITEM_TYPES.get(Tiers.STONE).get());
+            } else if (tier == Tiers.IRON) {
+                return new ItemStack(CCItem.THROWING_AXE_ITEM_TYPES.get(Tiers.IRON).get());
+            } else if (tier == Tiers.GOLD) {
+                return new ItemStack(CCItem.THROWING_AXE_ITEM_TYPES.get(Tiers.GOLD).get());
+            } else if (tier == Tiers.DIAMOND) {
+                return new ItemStack(CCItem.THROWING_AXE_ITEM_TYPES.get(Tiers.DIAMOND).get());
+            } else if (tier == Tiers.NETHERITE) {
+                return new ItemStack(CCItem.THROWING_AXE_ITEM_TYPES.get(Tiers.NETHERITE).get());
+            }
+        }
+        return ItemStack.EMPTY;
+    }
 
     @Override
     protected Item getDefaultItem() {
@@ -73,7 +96,7 @@ public class ThrowingAxeEntity extends CCThrowableWeapon {
         if (stack.isEmpty()) {
             if (stack.getItem() instanceof ThrowingAxeItem) {
                 for (Tier tier : Tiers.values()) {
-                    CCItem.THROWING_AXE_ITEM_TYPES.get(tier).get();
+                    return CCItem.THROWING_AXE_ITEM_TYPES.get(tier).get();
                 }
             }
         }
@@ -87,9 +110,9 @@ public class ThrowingAxeEntity extends CCThrowableWeapon {
         y /= length;
         z /= length;
 
-        x += this.random.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
-        y += this.random.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
-        z += this.random.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
+        x += this.random.nextGaussian() * 0.007499999832361937D * (double) inaccuracy;
+        y += this.random.nextGaussian() * 0.007499999832361937D * (double) inaccuracy;
+        z += this.random.nextGaussian() * 0.007499999832361937D * (double) inaccuracy;
 
         x *= velocity;
         y *= velocity;
@@ -109,7 +132,7 @@ public class ThrowingAxeEntity extends CCThrowableWeapon {
 
         float f1 = Mth.sqrt((float) (x * x + z * z));
         setYRot((float) (Mth.atan2(x, z) * (180D / Math.PI)));
-        setXRot((float) (Mth.atan2(y, (double)f1) * (180D / Math.PI)));
+        setXRot((float) (Mth.atan2(y, (double) f1) * (180D / Math.PI)));
     }
 
     @Override
@@ -124,7 +147,7 @@ public class ThrowingAxeEntity extends CCThrowableWeapon {
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
-        ItemStack stack = getItem();
+        ItemStack stack = getPickResult();
         if (!this.level().isClientSide() && getOwner() != null && getOwner() instanceof LivingEntity shooter) {
             spawnAtLocation(stack, 0.5F);
             stack.hurtAndBreak(2, shooter, LivingEntity.getSlotForHand(shooter.getUsedItemHand()));
@@ -135,11 +158,11 @@ public class ThrowingAxeEntity extends CCThrowableWeapon {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         super.onHitEntity(pResult);
-        ItemStack stack = getItem();
+        ItemStack stack = getPickResult();
         Entity target = pResult.getEntity();
 
         if (!this.level().isClientSide() && getOwner() != null) {
-            if (!stack.isEmpty()) {
+            if (stack != null && !stack.isEmpty()) {
                 if (target instanceof LivingEntity livingEntity && getOwner() instanceof LivingEntity shooter) {
                     applyEntityHitEnchantments(livingEntity);
                     if (!stack.isEnchanted()) {

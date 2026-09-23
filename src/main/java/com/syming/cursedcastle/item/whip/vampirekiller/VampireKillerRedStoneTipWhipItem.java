@@ -26,7 +26,7 @@ public class VampireKillerRedStoneTipWhipItem extends VampireKillerWhipItem impl
 
     @Override
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
-        pTarget.setRemainingFireTicks(5);
+        pTarget.setRemainingFireTicks(100);
         getElementalDamageSource(pStack, pTarget, pAttacker);
         return super.hurtEnemy(pStack, pTarget, pAttacker);
     }

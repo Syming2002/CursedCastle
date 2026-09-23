@@ -2,7 +2,6 @@ package com.syming.cursedcastle.item;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.block.CCBlock;
-import com.syming.cursedcastle.entity.projectile.subweapon.HolyCrossEntity;
 import com.syming.cursedcastle.fluid.CCFluid;
 import com.syming.cursedcastle.item.head.CCHeadItem;
 import com.syming.cursedcastle.item.projectile.ScytheProjectileItem;
@@ -19,8 +18,6 @@ import com.syming.cursedcastle.item.whip.vampirekiller.*;
 import com.syming.cursedcastle.item.whip.vampirekiller.tip.*;
 import com.syming.cursedcastle.entity.CCEntity;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;

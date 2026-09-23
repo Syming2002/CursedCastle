@@ -31,9 +31,13 @@ public class CCPlayerMPHUDOverlay {
 
         int x = screenWidth / 2 - barWidth / 2;
 
-        int y = screenHeight - 48;
+        int y = screenHeight - 68;
 
         if (player.getArmorValue() > 0) {
+            y -= 10;
+        }
+
+        if (player.getAbsorptionAmount() > 0) {
             y -= 10;
         }
 

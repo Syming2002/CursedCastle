@@ -305,7 +305,7 @@ public class CCEntity {
                                     MobCategory.MISC)
                             .sized(0.5F, 0.5F)
                             .clientTrackingRange(4)
-                            .updateInterval(20)
+                            .updateInterval(1)
                             .build(tier.name().toLowerCase(Locale.ROOT) + '_' + "holy_cross"))
             );
         }

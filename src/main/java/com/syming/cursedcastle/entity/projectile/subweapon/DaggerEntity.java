@@ -133,7 +133,7 @@ public class DaggerEntity extends AbstractArrow {
         if (getOwner() != null) {
             if (pResult.getEntity() != getOwner() && pResult.getEntity() instanceof LivingEntity living) {
                 if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.FIRE, (LivingEntity) getOwner())) {
-                    living.setRemainingFireTicks(5);
+                    living.setRemainingFireTicks(100);
                 } else if (SpellBookUtil.isWearingSpellBook(SpellBookElementType.ICE, (LivingEntity) getOwner())) {
                     living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1, false, true));
                 }

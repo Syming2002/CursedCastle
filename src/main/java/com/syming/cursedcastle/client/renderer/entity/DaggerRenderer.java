@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
@@ -45,8 +46,9 @@ public class DaggerRenderer extends EntityRenderer<DaggerEntity> {
 
         VertexConsumer vertexConsumer = ItemRenderer.getFoilBufferDirect(pBuffer, this.model.renderType(getTextureLocation(daggerEntity)), false, false);
 
+        int i = FastColor.ARGB32.color(255, 255, 255, 255);
 
-        this.model.renderToBuffer(pPoseStack, vertexConsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1);
+        this.model.renderToBuffer(pPoseStack, vertexConsumer, pPackedLight, OverlayTexture.NO_OVERLAY, i);
         pPoseStack.popPose();
         super.render(daggerEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
 

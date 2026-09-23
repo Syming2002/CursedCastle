@@ -68,11 +68,9 @@ public class FirePillarEntity extends AreaEffectCloud {
     }
 
     private void applyFireDamage() {
-        float damage = 5.0F;
-
         for (Entity entity : this.level().getEntities(this, getBoundingBox())) {
             if (entity instanceof LivingEntity living) {
-                living.setRemainingFireTicks(10);
+                living.setRemainingFireTicks(200);
             }
         }
     }

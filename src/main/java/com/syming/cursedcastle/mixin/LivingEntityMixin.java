@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.theillusivec4.curios.api.CuriosApi;
 
-@Mixin(LivingEntity.class)
+@Mixin(value = LivingEntity.class, remap = false)
 public abstract class LivingEntityMixin {
 
     @Inject(method = "onClimbable", at = @At("HEAD"), cancellable = true)

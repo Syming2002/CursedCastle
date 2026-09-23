@@ -59,7 +59,7 @@ public class FireBreathEntity extends MagicAttackEntity {
                 for (LivingEntity entityHit : entitiesHit) {
                     if (isYawCheck(entityHit)) {
                         entityHit.hurt(entityHit.damageSources().onFire(), 1.0F);
-                        entityHit.setRemainingFireTicks(4);
+                        entityHit.setRemainingFireTicks(80);
                     }
                 }
             }

@@ -8,6 +8,7 @@ import com.syming.cursedcastle.enchantment.CCEnchantmentEffectEntity;
 import com.syming.cursedcastle.entity.villager.CCVillager;
 import com.syming.cursedcastle.fluid.CCFluidType;
 import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.potion.CCPotion;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
@@ -16,14 +17,12 @@ import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import static net.minecraft.network.protocol.game.DebugEntityNameGenerator.getEntityName;
 
@@ -110,8 +109,20 @@ public class CCLangENProvider extends LanguageProvider {
 //        }
 
         for (DeferredHolder<Item, ? extends Item> item : CCItem.ITEMS.getEntries()) {
-            if (item.getKey().registry() != null) {
+            if (item.getId() != null) {
                 addItem(item, getItemDisplayName(item));
+            }
+        }
+
+        for (DeferredHolder<Potion, ? extends Potion> potion : CCPotion.POTIONS.getEntries()) {
+            for (Item item : BuiltInRegistries.ITEM) {
+                if (item instanceof PotionItem potionItem) {
+                    add("item.minecraft." + potionItem.toString().replace("minecraft:", "") + ".effect" + '.' + potion.getId().getPath(), getPotionDisplayName(potionItem, potion.getId()));
+                }
+
+                if (item instanceof TippedArrowItem tippedArrowItem) {
+                    add("item.minecraft.tipped_arrow.effect" + '.' + potion.getId().getPath(), getPotionDisplayName(tippedArrowItem, potion.getId()));
+                }
             }
         }
 
@@ -121,6 +132,8 @@ public class CCLangENProvider extends LanguageProvider {
         add("throwing_axe.damageSmite", "Deals %s damage to undead mob");
         add("throwing_axe.knockback", "Deals %s knockback");
         add("throwing_axe.fireAspect", "Deals %s seconds of fire to mob");
+
+        add("tooltip.cursedcastle.potion.holy", "May the God be with you !");
     }
 
     private String getResourceLocationDisplayName(ResourceLocation id) {
@@ -171,6 +184,28 @@ public class CCLangENProvider extends LanguageProvider {
         StringBuilder builder = new StringBuilder();
 
         for (String part : parts) {
+            if (!builder.isEmpty()) builder.append(' ');
+            builder.append(Character.toUpperCase(part.charAt(0)))
+                    .append(part.substring(1));
+        }
+
+        return builder.toString();
+    }
+
+    private String getPotionDisplayName(Item item, ResourceLocation effect) {
+        String itemRaw = item.toString().replace("minecraft:", "");
+        String[] itemPart = itemRaw.split("_");
+        String effectRaw = effect.toString().replace(CursedCastleMod.MOD_ID + ':', "");
+        String[] effectPart = effectRaw.split("_");
+        StringBuilder builder = new StringBuilder();
+
+        for (String part : itemPart) {
+            if (!builder.isEmpty()) builder.append(' ');
+            builder.append(Character.toUpperCase(part.charAt(0)))
+                    .append(part.substring(1));
+        }
+
+        for (String part : effectPart) {
             if (!builder.isEmpty()) builder.append(' ');
             builder.append(Character.toUpperCase(part.charAt(0)))
                     .append(part.substring(1));

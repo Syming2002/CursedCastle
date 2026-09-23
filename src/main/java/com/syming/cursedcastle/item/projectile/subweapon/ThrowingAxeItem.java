@@ -1,10 +1,13 @@
 package com.syming.cursedcastle.item.projectile.subweapon;
 
+import com.syming.cursedcastle.entity.projectile.subweapon.HolyCrossEntity;
 import com.syming.cursedcastle.item.CCThrowableItem;
 import com.syming.cursedcastle.sound.CCSound;
 import com.syming.cursedcastle.entity.projectile.subweapon.ThrowingAxeEntity;
 import com.syming.cursedcastle.util.ThrowingAxeUtil;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Position;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,6 +17,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
@@ -96,5 +100,12 @@ public class ThrowingAxeItem extends CCThrowableItem {
     @Override
     public boolean isEnchantable(ItemStack pStack) {
         return true;
+    }
+
+    @Override
+    public Projectile asProjectile(Level level, Position position, ItemStack itemStack, Direction direction) {
+        ThrowingAxeEntity throwingAxe = new ThrowingAxeEntity(position.x(), position.y(), position.z(), level, getTier());
+        throwingAxe.setItem(itemStack);
+        return throwingAxe;
     }
 }

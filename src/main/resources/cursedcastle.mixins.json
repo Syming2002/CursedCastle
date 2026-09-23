@@ -3,24 +3,18 @@
   "package": "com.syming.cursedcastle.mixin",
   "plugin": "com.syming.cursedcastle.mixin.CursedCastleMixinPlugin",
   "minVersion": "0.8",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "refmap": "cursedcastle.refmap.json",
   "mixins": [
     "client.BossHealthOverlayMixin",
-    "client.PotionItemMixin",
-    "client.LingeringPotionItemMixin",
     "client.PlayerModelMixin",
     "client.PlayerRendererMixin",
-    "client.TippedArrowItemMixin",
     "LivingEntityMixin"
   ],
   "client": [
     "client.BossHealthOverlayMixin",
-    "client.PotionItemMixin",
-    "client.LingeringPotionItemMixin",
     "client.PlayerModelMixin",
-    "client.PlayerRendererMixin",
-    "client.TippedArrowItemMixin"
+    "client.PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

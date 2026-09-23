@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(PlayerModel.class)
+@Mixin(value = PlayerModel.class, remap = false)
 public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidModel<T> {
 
     @Shadow

@@ -27,7 +27,7 @@ public class FlameWhipItem extends WhipItem implements IElementalDamage {
     @Override
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
         super.hurtEnemy(pStack, pTarget, pAttacker);
-        pTarget.setRemainingFireTicks(3);
+        pTarget.setRemainingFireTicks(60);
         getElementalDamageSource(pStack, pTarget, pAttacker);
         return true;
     }

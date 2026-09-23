@@ -77,6 +77,11 @@ public abstract class CCThrowableWeapon extends ThrowableItemProjectile {
     }
 
     @Override
+    public ItemStack getItem() {
+        return super.getItem();
+    }
+
+    @Override
     protected void onHitBlock(BlockHitResult pResult) {
         super.onHitBlock(pResult);
     }
@@ -95,19 +100,19 @@ public abstract class CCThrowableWeapon extends ThrowableItemProjectile {
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
 
-        tag.putDouble("ThrowerX", getThrowerPosX());
-        tag.putDouble("ThrowerY", getThrowerPosY());
-        tag.putDouble("ThrowerZ", getThrowerPosZ());
+        tag.putDouble("throwerX", getThrowerPosX());
+        tag.putDouble("throwerY", getThrowerPosY());
+        tag.putDouble("throwerZ", getThrowerPosZ());
 
-        tag.putFloat("ThrowerYaw", this.entityData.get(THROWER_YAW));
+        tag.putFloat("throwerYaw", this.entityData.get(THROWER_YAW));
     }
 
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        setCoordinates(tag.getDouble("ThrowerX"), tag.getDouble("ThrowerY"), tag.getDouble("ThrowerZ"));
-        this.entityData.set(THROWER_YAW, tag.getFloat("ThrowerYaw"));
+        setCoordinates(tag.getDouble("throwerX"), tag.getDouble("throwerY"), tag.getDouble("throwerZ"));
+        this.entityData.set(THROWER_YAW, tag.getFloat("throwerYaw"));
     }
 
     public abstract float getImpactDamage();

@@ -11,6 +11,8 @@ import com.syming.cursedcastle.network.CCPlayerData;
 import com.syming.cursedcastle.sound.CCSound;
 import com.syming.cursedcastle.util.HolyCrossUtil;
 import com.syming.cursedcastle.entity.projectile.subweapon.HolyCrossEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Position;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -19,6 +21,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -90,7 +93,8 @@ public class HolyCrossItem extends CCThrowableItem {
                         }
                     }
                 } else {
-                    HolyCrossEntity holyCross = new HolyCrossEntity(pPlayer, pLevel, thrownStackCopy, getTier());
+                    HolyCrossEntity holyCross = new HolyCrossEntity(pPlayer, pLevel, getTier());
+                    holyCross.setItem(thrownStackCopy);
                     pLevel.addFreshEntity(holyCross);
                     throwStack.shrink(1);
                 }
@@ -141,5 +145,12 @@ public class HolyCrossItem extends CCThrowableItem {
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 100;
+    }
+
+    @Override
+    public Projectile asProjectile(Level level, Position position, ItemStack itemStack, Direction direction) {
+        HolyCrossEntity holyCross = new HolyCrossEntity(position.x(), position.y(), position.z(), level, getTier());
+        holyCross.setItem(itemStack);
+        return holyCross;
     }
 }

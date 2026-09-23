@@ -203,7 +203,7 @@ public class DraculaEntity extends CCBossEntity {
             float lightness = getLightLevelDependentMagicValue();
 
             if (lightness > 0.5F && this.random.nextFloat() * 30.0F < (lightness - 0.4F) * 2.0F && this.level().canSeeSky(new BlockPos((int) getX(), (int) (getY() + (double) getEyeHeight()), (int) getZ()))) {
-                setRemainingFireTicks(10);
+                setRemainingFireTicks(200);
             }
         }
 

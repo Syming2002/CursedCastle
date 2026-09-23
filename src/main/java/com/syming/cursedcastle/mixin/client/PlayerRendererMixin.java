@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(PlayerRenderer.class)
+@Mixin(value = PlayerRenderer.class, remap = false)
 public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
 
     private static final ResourceLocation HOLY_BEAM_APPEAR = ResourceLocation.fromNamespaceAndPath(CursedCastleMod.MOD_ID, "textures/block/holy_beam_appear.png");

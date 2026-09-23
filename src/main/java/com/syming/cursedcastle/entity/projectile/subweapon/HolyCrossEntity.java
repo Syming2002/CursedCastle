@@ -42,15 +42,14 @@ public class HolyCrossEntity extends CCThrowableWeapon {
         this.tier = pTier;
     }
 
-    public HolyCrossEntity(LivingEntity pShooter, Level pLevel, ItemStack pStack, Tier pTier) {
+    public HolyCrossEntity(LivingEntity pShooter, Level pLevel, Tier pTier) {
         super(CCEntity.HOLY_CROSS_TYPES.get(pTier).get(), pShooter, pLevel);
         this.tier = pTier;
         pShooter = (LivingEntity) getOwner();
         if (pShooter != null) {
             setCoordinates(pShooter.getX(), pShooter.getY() + pShooter.getEyeHeight(), pShooter.getZ());
+            setOwner(pShooter);
         }
-        setOwner(pShooter);
-        setItem(pStack);
     }
 
     public Tier getTier() {
@@ -64,22 +63,24 @@ public class HolyCrossEntity extends CCThrowableWeapon {
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
-        ItemStack stack = getItem();
+        ItemStack stack = getPickResult();
         if (!this.level().isClientSide() && getOwner() != null && getOwner() instanceof Player player) {
-            spawnAtLocation(stack, 0.5F);
-            stack.hurtAndBreak(2, player, LivingEntity.getSlotForHand(player.getUsedItemHand()));
-            discard();
+            if (stack != null) {
+                spawnAtLocation(stack, 0.5F);
+                stack.hurtAndBreak(2, player, LivingEntity.getSlotForHand(player.getUsedItemHand()));
+                discard();
+            }
         }
     }
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         super.onHitEntity(pResult);
-        ItemStack stack = getItem();
+        ItemStack stack = getPickResult();
         Entity target = pResult.getEntity();
 
         if (!this.level().isClientSide() && getOwner() != null) {
-            if (!stack.isEmpty()) {
+            if (stack != null && !stack.isEmpty()) {
                 if (target == getOwner()) {
                     if (getOwner() instanceof Player player) {
 
@@ -97,28 +98,6 @@ public class HolyCrossEntity extends CCThrowableWeapon {
             }
         }
 
-    }
-
-    @Override
-    public void playerTouch(Player player) {
-        if (!this.level().isClientSide() && getOwner() == player) {
-            ItemStack stack = getPickResult();
-            if (stack != null) {
-                if (stack.isEmpty()) {
-                    return;
-                }
-
-                if (player.getInventory().add(stack)) {
-                    this.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 0.5F, 1.0F);
-
-                    player.take(this, 1);
-
-                    discard();
-                    return;
-                }
-            }
-        }
-        super.playerTouch(player);
     }
 
     @Override
@@ -175,7 +154,6 @@ public class HolyCrossEntity extends CCThrowableWeapon {
         }
     }
 
-
     @Override
     public boolean isNoGravity() {
         return true;
@@ -187,10 +165,57 @@ public class HolyCrossEntity extends CCThrowableWeapon {
     }
 
     @Override
-    protected Item getDefaultItem() {
-        for (Tier tier : Tiers.values()) {
-            return CCItem.HOLY_CROSS_ITEM_TYPES.get(tier).get();
+    public ItemStack getItem() {
+        if (getOwner() != null) {
+            Tier tier = getTier();
+            if (tier == Tiers.WOOD) {
+                return new ItemStack(CCItem.ANIM_WOOD_HOLY_CROSS.get());
+            } else if (tier == Tiers.STONE) {
+                return new ItemStack(CCItem.ANIM_STONE_HOLY_CROSS.get());
+            } else if (tier == Tiers.IRON) {
+                return new ItemStack(CCItem.ANIM_IRON_HOLY_CROSS.get());
+            } else if (tier == Tiers.GOLD) {
+                return new ItemStack(CCItem.ANIM_GOLD_HOLY_CROSS.get());
+            } else if (tier == Tiers.DIAMOND) {
+                return new ItemStack(CCItem.ANIM_DIAMOND_HOLY_CROSS.get());
+            } else if (tier == Tiers.NETHERITE) {
+                return new ItemStack(CCItem.ANIM_NETHERITE_HOLY_CROSS.get());
+            }
         }
-        return ItemStack.EMPTY.getItem();
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public @Nullable ItemStack getPickResult() {
+        if (getOwner() != null) {
+            Tier tier = getTier();
+            if (tier == Tiers.WOOD) {
+                return new ItemStack(CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.WOOD).get());
+            } else if (tier == Tiers.STONE) {
+                return new ItemStack(CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.STONE).get());
+            } else if (tier == Tiers.IRON) {
+                return new ItemStack(CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.IRON).get());
+            } else if (tier == Tiers.GOLD) {
+                return new ItemStack(CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.GOLD).get());
+            } else if (tier == Tiers.DIAMOND) {
+                return new ItemStack(CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.DIAMOND).get());
+            } else if (tier == Tiers.NETHERITE) {
+                return new ItemStack(CCItem.HOLY_CROSS_ITEM_TYPES.get(Tiers.NETHERITE).get());
+            }
+        }
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    protected Item getDefaultItem() {
+        ItemStack stack = this.getItem();
+        if (stack.isEmpty()) {
+            if (stack.getItem() instanceof HolyCrossItem) {
+                for (Tier tier : Tiers.values()) {
+                    return CCItem.HOLY_CROSS_ITEM_TYPES.get(tier).get();
+                }
+            }
+        }
+        return stack.getItem();
     }
 }

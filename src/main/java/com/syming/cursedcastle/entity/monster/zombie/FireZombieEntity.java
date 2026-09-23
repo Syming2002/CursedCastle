@@ -45,7 +45,7 @@ public class FireZombieEntity extends CCZombieEntity {
 
     @Override
     public boolean doHurtTarget(Entity pEntity) {
-        pEntity.setRemainingFireTicks(5);
+        pEntity.setRemainingFireTicks(100);
         return super.doHurtTarget(pEntity);
     }
 
