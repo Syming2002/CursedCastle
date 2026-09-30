@@ -1,0 +1,43 @@
+{
+  "authority": "Syming",
+  "genome": {
+    "forestry:activity": {
+      "value": "forestry:activity_nocturnal"
+    },
+    "forestry:fertility": {
+      "value": "forestry:3"
+    },
+    "forestry:humidity_tolerance": {
+      "value": "BOTH_1"
+    },
+    "forestry:temperature_tolerance": {
+      "value": "DOWN_5"
+    },
+    "forestry:tolerates_rain": {
+      "value": true
+    },
+    "forestry:bee_effect": {
+      "value": "forestry:bee_effect_glacial"
+    },
+    "forestry:flower_type": {
+      "value": "cursedcastle:flower_type_ice"
+    }
+  },
+  "genus": "shade",
+  "glint": false,
+  "outline": 16777215,
+  "body": 10205389,
+  "products": [
+    {
+      "chance": 0.3,
+      "item": "forestry:frozen_comb"
+    },
+    {
+      "chance": 0.15,
+      "item": "cursedcastle:bee_comb_frozen"
+    }
+  ],
+  "species": "frozen_shade",
+  "temperature": "icy",
+  "humidity": "normal"
+}

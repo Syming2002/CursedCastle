@@ -2,6 +2,10 @@ package com.syming.cursedcastle.datagen;
 
 import com.mojang.serialization.MapCodec;
 import com.syming.cursedcastle.CursedCastleMod;
+import com.syming.cursedcastle.block.CCBlock;
+import com.syming.cursedcastle.compat.forestry.CCBeesApicultureItems;
+import com.syming.cursedcastle.compat.forestry.CCBeesEnumHoneyComb;
+import com.syming.cursedcastle.compat.forestry.CCBeesItemHoneyComb;
 import com.syming.cursedcastle.damagetype.CCDamageType;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.enchantment.CCEnchantmentEffectEntity;
@@ -9,6 +13,8 @@ import com.syming.cursedcastle.entity.villager.CCVillager;
 import com.syming.cursedcastle.fluid.CCFluidType;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.potion.CCPotion;
+import forestry.api.apiculture.genetics.IBeeSpecies;
+import forestry.core.platform.util.SpeciesUtil;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
@@ -20,6 +26,7 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -45,15 +52,20 @@ public class CCLangENProvider extends LanguageProvider {
         add("advancements.cursedcastle.leatherWhip.title", "A leather weapon");
         add("advancements.cursedcastle.leatherWhip.description", "Get a leather whip");
 
-//        for (IBeeSpecies beeSpecies : SpeciesUtil.getAllBeeSpecies()) {
-//            if (beeSpecies.id().toString().contains("cursedcastle")) {
-//                add("allele.forestry.bee_species.cursedcastle" + '.' + beeSpecies.id().getPath(), beeSpecies.getSpeciesName());
-//            }
-//        }
+        add("allele.forestry.bee_species.cursedcastle.dracula", "Dracula");
+        add("allele.forestry.bee_species.cursedcastle.frozen_shade", "Frozen Shade");
+        add("allele.forestry.bee_species.cursedcastle.heat_shade", "Heat Shade");
+        add("allele.forestry.bee_species.cursedcastle.vampire", "Vampire");
 
         add("allele.forestry.flower_type.cursedcastle.flower_type_blood", "Blood");
         add("allele.forestry.flower_type.cursedcastle.flower_type_fire", "Fire");
         add("allele.forestry.flower_type.cursedcastle.flower_type_ice", "Ice");
+
+//        for (DeferredHolder<Block, ? extends Block> block : CCBlock.BLOCKS.getEntries()) {
+//            if (block != CCBlock.DRACULA_HEAD && block != CCBlock.DRACULA_WALL_HEAD) {
+//                addBlock(block, getResourceLocationDisplayName(block.getId()));
+//            }
+//        }
 
         add("creativetab.cursedcastle_tab", "Cursed Castle");
 
@@ -93,7 +105,7 @@ public class CCLangENProvider extends LanguageProvider {
 
         for (DeferredHolder<FluidType, ? extends FluidType> fluidType : CCFluidType.FLUID_TYPES.getEntries()) {
             if (fluidType.getId() != null) {
-                add("fluid" + '_' + "type" + '.' + CursedCastleMod.MOD_ID + '.' + fluidType.getId().getPath(), getFluidTypeDisplayName(fluidType));
+                add("fluid" + '_' + "type" + '.' + CursedCastleMod.MOD_ID + '.' + fluidType.getId().getPath(), getResourceLocationDisplayName(fluidType.getId()));
             }
         }
 
@@ -104,14 +116,12 @@ public class CCLangENProvider extends LanguageProvider {
         add("holy_cross.knockback", "Deals %s knockback");
         add("holy_cross.fireAspect", "Deals %s seconds of fire to mob");
 
-//        for (CCBeesItemHoneyComb ccBeesItemHoneyComb : CCBeesApicultureItems.CC_BEES_COMB.getItems()) {
-//            addItem(ccBeesItemHoneyComb::asItem, getCCHoneyCombDisplayName(ccBeesItemHoneyComb.getEnumHoneyComb()) + ' ' + "Comb");
-//        }
+        for (CCBeesItemHoneyComb ccBeesItemHoneyComb : CCBeesApicultureItems.CC_BEES_COMB.getItems()) {
+            addItem(ccBeesItemHoneyComb::asItem, getCCHoneyCombDisplayName(ccBeesItemHoneyComb.getEnumHoneyComb()) + ' ' + "Comb");
+        }
 
         for (DeferredHolder<Item, ? extends Item> item : CCItem.ITEMS.getEntries()) {
-            if (item.getId() != null) {
-                addItem(item, getItemDisplayName(item));
-            }
+            addItem(item, getResourceLocationDisplayName(item.getId()));
         }
 
         for (DeferredHolder<Potion, ? extends Potion> potion : CCPotion.POTIONS.getEntries()) {
@@ -126,7 +136,7 @@ public class CCLangENProvider extends LanguageProvider {
             }
         }
 
-        add("throwing_axe.damage" , "Deals %s damage to other mob");
+        add("throwing_axe.damage", "Deals %s damage to other mob");
         add("throwing_axe.damageArthropods", "Deals %s damage to arthropods mob");
         add("throwing_axe.damageSharpness", "Deals %s damage");
         add("throwing_axe.damageSmite", "Deals %s damage to undead mob");
@@ -150,22 +160,8 @@ public class CCLangENProvider extends LanguageProvider {
         return builder.toString();
     }
 
-    private String getFluidTypeDisplayName(DeferredHolder<FluidType, ? extends FluidType> fluidType) {
-        String raw = fluidType.getKey().registry().getPath();
-        String[] parts = raw.split("_");
-        StringBuilder builder = new StringBuilder();
-
-        for (String part : parts) {
-            if (!builder.isEmpty()) builder.append(' ');
-            builder.append(Character.toUpperCase(part.charAt(0)))
-                    .append(part.substring(1));
-        }
-
-        return builder.toString();
-    }
-
-//    private String getCCHoneyCombDisplayName(CCBeesEnumHoneyComb ccBeesEnumHoneyComb) {
-//        String raw = ccBeesEnumHoneyComb.getSerializedName();
+//    private String getFluidTypeDisplayName(DeferredHolder<FluidType, ? extends FluidType> fluidType) {
+//        String raw = fluidType.getId().getPath();
 //        String[] parts = raw.split("_");
 //        StringBuilder builder = new StringBuilder();
 //
@@ -178,8 +174,8 @@ public class CCLangENProvider extends LanguageProvider {
 //        return builder.toString();
 //    }
 
-    private String getItemDisplayName(DeferredHolder<Item, ? extends Item> item) {
-        String raw = item.getId().getPath();
+    private String getCCHoneyCombDisplayName(CCBeesEnumHoneyComb ccBeesEnumHoneyComb) {
+        String raw = ccBeesEnumHoneyComb.getSerializedName();
         String[] parts = raw.split("_");
         StringBuilder builder = new StringBuilder();
 
@@ -191,6 +187,20 @@ public class CCLangENProvider extends LanguageProvider {
 
         return builder.toString();
     }
+
+//    private String getItemDisplayName(DeferredHolder<Item, ? extends Item> item) {
+//        String raw = item.getId().getPath();
+//        String[] parts = raw.split("_");
+//        StringBuilder builder = new StringBuilder();
+//
+//        for (String part : parts) {
+//            if (!builder.isEmpty()) builder.append(' ');
+//            builder.append(Character.toUpperCase(part.charAt(0)))
+//                    .append(part.substring(1));
+//        }
+//
+//        return builder.toString();
+//    }
 
     private String getPotionDisplayName(Item item, ResourceLocation effect) {
         String itemRaw = item.toString().replace("minecraft:", "");
@@ -216,20 +226,6 @@ public class CCLangENProvider extends LanguageProvider {
 
     private String getVillagerProfessionName(DeferredHolder<VillagerProfession, ? extends VillagerProfession> villagerProfession) {
         String raw = villagerProfession.getId().getPath();
-        String[] parts = raw.split("_");
-        StringBuilder builder = new StringBuilder();
-
-        for (String part : parts) {
-            if (!builder.isEmpty()) builder.append(' ');
-            builder.append(Character.toUpperCase(part.charAt(0)))
-                    .append(part.substring(1));
-        }
-
-        return builder.toString();
-    }
-
-    private String getEffectName(ResourceKey<MobEffect> mobEffect) {
-        String raw = mobEffect.registry().getPath();
         String[] parts = raw.split("_");
         StringBuilder builder = new StringBuilder();
 

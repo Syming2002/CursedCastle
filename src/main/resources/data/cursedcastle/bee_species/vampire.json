@@ -1,0 +1,37 @@
+{
+  "authority": "Syming",
+  "genome": {
+    "forestry:activity": {
+      "value": "forestry:activity_nocturnal"
+    },
+    "forestry:fertility": {
+      "value": "forestry:1"
+    },
+    "forestry:tolerates_rain": {
+      "value": true
+    },
+    "forestry:bee_effect": {
+      "value": "forestry:bee_effect_aggressive"
+    },
+    "forestry:flower_type": {
+      "value": "cursedcastle:flower_type_blood"
+    }
+  },
+  "genus": "undead",
+  "glint": false,
+  "outline": 789263,
+  "body": 9313574,
+  "products": [
+    {
+      "chance": 0.3,
+      "item": "forestry:honey_comb"
+    },
+    {
+      "chance": 0.15,
+      "item": "cursedcastle:bee_comb_blood"
+    }
+  ],
+  "species": "vampire",
+  "temperature": "hellish",
+  "humidity": "arid"
+}

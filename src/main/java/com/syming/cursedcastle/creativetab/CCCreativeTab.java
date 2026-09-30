@@ -2,11 +2,14 @@ package com.syming.cursedcastle.creativetab;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.block.CCBlock;
+import com.syming.cursedcastle.compat.forestry.CCBeesApicultureItems;
+import com.syming.cursedcastle.compat.forestry.CCBeesItemHoneyComb;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.CCSpawnEggItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
 import com.syming.cursedcastle.item.whip.vampirekiller.tip.TipType;
+import forestry.api.ForestryConstants;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -119,7 +122,7 @@ public class CCCreativeTab {
                         output.accept(CCItem.ANIM_FIRE_HOLY_CROSS.get());
                         output.accept(CCItem.ANIM_ICE_HOLY_CROSS.get());
 
-                        if (ModList.get().isLoaded("forestry")) {
+                        if (ModList.get().isLoaded(ForestryConstants.MOD_ID)) {
                             // Bees
 //                            for (ILifeStage stage : SpeciesUtil.BEE_TYPE.get().getLifeStages()) {
 //                                for (IBeeSpecies species : SpeciesUtil.getAllBeeSpecies()) {
@@ -130,9 +133,9 @@ public class CCCreativeTab {
 //                            }
 
                             // Combs
-//                            for (CCBeesItemHoneyComb comb : CCBeesApicultureItems.CC_BEES_COMB.getItems()) {
-//                                output.accept(comb);
-//                            }
+                            for (CCBeesItemHoneyComb comb : CCBeesApicultureItems.CC_BEES_COMB.getItems()) {
+                                output.accept(comb);
+                            }
                         }
                     })
 

@@ -230,14 +230,14 @@ dependencies {
     // CTOV
     implementation "curse.maven:choicetheorems-overhauled-village-${ctov_id}"
 
-//    // ModKit DEV ONLY
-//    modkit 'com.github.thedarkcolour:ModKit:c0c491b35bf7c5785b933b27966a9c0b9dee4163'
-//
-//    // Patchouli
-//    compileOnly "curse.maven:patchouli-${patchouli_id}"
-//
-//    // Forestry Community Edition
-//    compileOnly "curse.maven:forestry-community-edition-${forestry_community_edition}"
+    // ModKit DEV ONLY
+    modkit 'com.github.thedarkcolour:ModKit:c0c491b35bf7c5785b933b27966a9c0b9dee4163'
+
+    // Patchouli
+    implementation "curse.maven:patchouli-${patchouli_id}"
+
+    // Forestry Community Edition
+    implementation "curse.maven:forestry-community-edition-${forestry_community_edition}"
 
     // Torcherino Unofficial
 //    implementation ("curse.maven:torcherino-unofficial-${torcherino_unofficial_id}")

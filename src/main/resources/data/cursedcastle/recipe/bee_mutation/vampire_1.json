@@ -1,0 +1,28 @@
+{
+  "type": "forestry:bee_mutation",
+  "chance": 0.05,
+  "conditions": [
+    {
+      "type": "forestry:requires_resource",
+      "blocks": [
+        {
+          "Name": "cursedcastle:blood_block"
+        }
+      ]
+    },
+    {
+      "type": "forestry:temperature",
+      "max": "hellish",
+      "min": "hellish"
+    },
+    {
+      "type": "forestry:humidity",
+      "max": "arid",
+      "min": "arid"
+    }
+  ],
+  "first": "forestry:demonic",
+  "id": "cursedcastle:bee_mutation/vampire_1",
+  "result": "cursedcastle:vampire",
+  "second": "forestry:sinister"
+}

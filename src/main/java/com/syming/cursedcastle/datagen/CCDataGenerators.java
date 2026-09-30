@@ -50,6 +50,6 @@ public class CCDataGenerators {
 
         // Advancements
         packGenerator.addProvider(output -> new CCAdvancementProvider(output, lookupProvider, existingFileHelper));
-//        generator.addProvider(event.includeServer(), new CCGlobalLootModifiersProvider(packOutput));
+        generator.addProvider(event.includeServer(), new CCLootTablesProvider(packOutput, lookupProvider));
     }
 }

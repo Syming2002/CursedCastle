@@ -1,0 +1,28 @@
+{
+  "type": "forestry:bee_mutation",
+  "chance": 0.15,
+  "conditions": [
+    {
+      "type": "forestry:requires_resource",
+      "blocks": [
+        {
+          "Name": "minecraft:packed_ice"
+        }
+      ]
+    },
+    {
+      "type": "forestry:temperature",
+      "max": "icy",
+      "min": "icy"
+    },
+    {
+      "type": "forestry:humidity",
+      "max": "normal",
+      "min": "normal"
+    }
+  ],
+  "first": "forestry:glacial",
+  "id": "cursedcastle:bee_mutation/frozen_shade_1",
+  "result": "cursedcastle:frozen_shade",
+  "second": "forestry:demonic"
+}

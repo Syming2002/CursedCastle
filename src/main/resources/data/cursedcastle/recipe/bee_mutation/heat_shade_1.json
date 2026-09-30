@@ -1,0 +1,28 @@
+{
+  "type": "forestry:bee_mutation",
+  "chance": 0.15,
+  "conditions": [
+    {
+      "type": "forestry:requires_resource",
+      "blocks": [
+        {
+          "Name": "minecraft:lava"
+        }
+      ]
+    },
+    {
+      "type": "forestry:temperature",
+      "max": "hellish",
+      "min": "hellish"
+    },
+    {
+      "type": "forestry:humidity",
+      "max": "arid",
+      "min": "arid"
+    }
+  ],
+  "first": "forestry:sinister",
+  "id": "cursedcastle:bee_mutation/heat_shade_1",
+  "result": "cursedcastle:heat_shade",
+  "second": "forestry:demonic"
+}
