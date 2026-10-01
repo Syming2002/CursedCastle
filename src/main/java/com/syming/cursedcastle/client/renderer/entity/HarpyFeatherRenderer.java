@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 
 public class HarpyFeatherRenderer extends EntityRenderer<HarpyFeatherEntity> {
     public static final ResourceLocation HARPY_FEATHER_TEXTURE = ResourceLocation.fromNamespaceAndPath(CursedCastleMod.MOD_ID, "textures/entity/harpy_feather.png");
@@ -29,7 +30,8 @@ public class HarpyFeatherRenderer extends EntityRenderer<HarpyFeatherEntity> {
         float f1 = pEntity.getXRot();
         VertexConsumer vertexconsumer = pBuffer.getBuffer(this.harpyFeatherModel.renderType(getTextureLocation(pEntity)));
         this.harpyFeatherModel.setupAnim(pEntity, 0.0F, 0.0F, 0.0F, f, f1);
-        this.harpyFeatherModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1);
+        int i = FastColor.ARGB32.color(255, 255, 255, 255);
+        this.harpyFeatherModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, i);
         pPoseStack.popPose();
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
     }

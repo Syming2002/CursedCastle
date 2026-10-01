@@ -24,6 +24,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.level.block.AbstractSkullBlock;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.WallSkullBlock;
@@ -99,10 +100,11 @@ public class CCHeadBlockEntityRender implements BlockEntityRenderer<CCHeadBlockE
         pPoseStack.scale(-1.0F, -1.0F, 1.0F);
         VertexConsumer vertexconsumer = pBuffer.getBuffer(pRenderType);
         pSkullModel.setupAnim(pAnimation, pRotation, 0.0F);
+        int i = FastColor.ARGB32.color(255, 255, 255, 255);
         if (pSkullModel instanceof DraculaHeadModel draculaHeadModel) {
-            draculaHeadModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1);
+            draculaHeadModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, i);
         } else {
-            pSkullModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1);
+            pSkullModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY);
         }
         pPoseStack.popPose();
     }
