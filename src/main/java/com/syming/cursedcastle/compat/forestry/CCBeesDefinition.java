@@ -16,8 +16,8 @@ import net.minecraft.world.level.block.Blocks;
 public class CCBeesDefinition {
 
     public static void defineNewCCBees(IApicultureRegistration apiculture) {
-        apiculture.registerSpecies(CCBeesSpecies.FROZEN_SHADE, CCTaxa.GENUS_SHADE, CCTaxa.FROZEN_SHADE, true, TextColor.fromRgb(0x1298FF))
-                .setBody(TextColor.fromRgb(0x044FB0))
+        apiculture.registerSpecies(CCBeesSpecies.FROZEN_SHADE, CCTaxa.GENUS_SHADE, CCTaxa.FROZEN_SHADE, true, TextColor.fromRgb(0xFFFFFF))
+                .setBody(TextColor.fromRgb(0x9BB8CD))
                 .addProduct(ApicultureItems.BEE_COMBS.stack(EnumHoneyComb.FROZEN), 0.3F)
                 .addProduct(CCBeesApicultureItems.CC_BEES_COMB.stack(CCBeesEnumHoneyComb.FROZEN), 0.15F)
                 .setGenome(iGenomeBuilder -> {
@@ -35,14 +35,14 @@ public class CCBeesDefinition {
                 .setHumidity(HumidityType.NORMAL)
                 .setAuthority("Syming");
 
-        apiculture.registerSpecies(CCBeesSpecies.HEAT_SHADE, CCTaxa.GENUS_SHADE, CCTaxa.HEAT_SHADE, true, TextColor.fromRgb(0xF44211))
-                .setBody(TextColor.fromRgb(0xC41105))
+        apiculture.registerSpecies(CCBeesSpecies.HEAT_SHADE, CCTaxa.GENUS_SHADE, CCTaxa.HEAT_SHADE, true, TextColor.fromRgb(0xF24A18))
+                .setBody(TextColor.fromRgb(0x360908))
                 .addProduct(ApicultureItems.BEE_COMBS.stack(EnumHoneyComb.SIMMERING), 0.3F)
                 .addProduct(CCBeesApicultureItems.CC_BEES_COMB.stack(CCBeesEnumHoneyComb.WARMED), 0.15F)
                 .setGenome(iGenomeBuilder -> {
                     iGenomeBuilder.set(BeeChromosomes.FLOWER_TYPE, CCBeesAlleles.FLOWER_TYPE_FIRE);
                     iGenomeBuilder.set(BeeChromosomes.TEMPERATURE_TOLERANCE, ForestryAlleles.TOLERANCE_UP_5);
-                    iGenomeBuilder.set(BeeChromosomes.HUMIDITY_TOLERANCE, ForestryAlleles.TOLERANCE_BOTH_1);
+                    iGenomeBuilder.set(BeeChromosomes.HUMIDITY_TOLERANCE, ForestryAlleles.TOLERANCE_DOWN_5);
                     iGenomeBuilder.set(BeeChromosomes.TOLERATES_RAIN, ForestryAlleles.FALSE);
                     iGenomeBuilder.set(BeeChromosomes.EFFECT, ForestryAlleles.EFFECT_IGNITION);
 

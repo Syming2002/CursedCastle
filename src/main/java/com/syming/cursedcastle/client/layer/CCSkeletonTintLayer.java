@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
 import xaero.common.core.XaeroMinimapCore;
 
 public class CCSkeletonTintLayer extends RenderLayer<CCSkeletonEntity, CCSkeletonModel> {

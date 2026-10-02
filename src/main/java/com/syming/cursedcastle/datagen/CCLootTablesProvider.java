@@ -4,25 +4,26 @@ import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.item.CCItem;
 import com.syming.cursedcastle.item.soul.Soul;
 import com.syming.cursedcastle.loot.AddSoulModifier;
+import com.syming.cursedcastle.loot.CCLootTable;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithLootingCondition;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.common.loot.LootTableIdCondition;
 
-public class CCGlobalLootModifiersProvider extends GlobalLootModifierProvider {
-    public CCGlobalLootModifiersProvider(PackOutput output) {
-        super(output, CursedCastleMod.MOD_ID);
-    }
+import java.util.List;
+import java.util.Set;
 
-    @Override
-    protected void start() {
-        add("zombie_soul_from_zombie", new AddSoulModifier(new LootItemCondition[] {
-                new LootTableIdCondition.Builder(new ResourceLocation("entities/zombie")).build(),
-                LootItemKilledByPlayerCondition.killedByPlayer().build(),
-                LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(1.0F, 0.33F).build()
-        }, CCItem.SOUL_TYPES.get(Soul.ZOMBIE).get()));
+public class CCLootTablesProvider extends LootTableProvider {
+
+    public CCLootTablesProvider(PackOutput pOutput) {
+        super(pOutput, CCLootTable.getCcLootTables(), List.of(
+                new SubProviderEntry(CCEntityLootSubProvider::new, LootContextParamSets.ENTITY)
+        ));
     }
 }
