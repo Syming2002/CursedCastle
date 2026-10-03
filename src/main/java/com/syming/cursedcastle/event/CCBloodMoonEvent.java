@@ -18,10 +18,9 @@ public class CCBloodMoonEvent {
 
     @SubscribeEvent
     public static void changeMobAttributes(LivingEvent.LivingTickEvent event) {
-        Level level = event.getEntity().level();
         Entity entity = event.getEntity();
         if (entity instanceof DraculaEntity dracula) {
-            if (BloodMoonUtil.isBloodMoon(level)) {
+            if (BloodMoonUtil.isBloodMoon(dracula.level())) {
                 setAttribute(dracula, Attributes.FOLLOW_RANGE, 200.0D);
                 setAttribute(dracula, Attributes.ATTACK_SPEED, 2.4D);
                 setAttribute(dracula, Attributes.ATTACK_DAMAGE, 20.0D);

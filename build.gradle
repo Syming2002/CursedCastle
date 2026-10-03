@@ -233,12 +233,14 @@ dependencies {
 
     implementation fg.deobf("curse.maven:attributefix-280510:4911084")
 
-    implementation fg.deobf("curse.maven:corgilib-${corgilib_id}")
-//    runtimeOnly(fg.deobf("curse.maven:data-anchor-${data_anchor_id}"))
-    implementation fg.deobf("curse.maven:enhanced-celestials-${enhanced_celestials_id}")
+    compileOnly fg.deobf("curse.maven:corgilib-${corgilib_id}")
+    compileOnly fg.deobf("curse.maven:data-anchor-${data_anchor_id}")
+    compileOnly fg.deobf("curse.maven:enhanced-celestials-2-core-${enhanced_celestials_2_id}")
+    compileOnly fg.deobf("curse.maven:enhanced-celestials-2-default-lunar-events-${enhanced_celestials_2_default_lunar_events_id}")
+
     implementation fg.deobf("curse.maven:productivebees-${productivebees_id}")
 
-    implementation fg.deobf("curse.maven:enhanced-celestials-shader-support-${enhanced_celestials_shader_support_id}")
+//    implementation fg.deobf("curse.maven:enhanced-celestials-2-shader-support-${enhanced_celestials_2_shader_support_id}")
 
 
     implementation fg.deobf("curse.maven:building-wands-${building_wands_id}")
@@ -281,13 +283,13 @@ dependencies {
     implementation fg.deobf("curse.maven:ferritecore-429235:4810975")
 
     // Modern Fix
-    implementation fg.deobf("curse.maven:modernfix-790626:6837713")
+    implementation fg.deobf("curse.maven:modernfix-790626:9032601")
 
     // Embeddium
     implementation fg.deobf("curse.maven:embeddium-908741:5681725")
 
     // Oculus
-    implementation fg.deobf("curse.maven:oculus-581495:6020952")
+    implementation fg.deobf("curse.maven:oculus-unofficial-1476003:8569407")
 
     // Euphoria Patches
     implementation fg.deobf("curse.maven:euphoria-patches-915902:6987509")

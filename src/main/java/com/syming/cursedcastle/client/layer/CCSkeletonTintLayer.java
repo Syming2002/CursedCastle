@@ -9,6 +9,7 @@ import com.syming.cursedcastle.entity.monster.skeleton.ClearBoneSkeletonEntity;
 import com.syming.cursedcastle.entity.monster.skeleton.GoldenSkeletonEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -43,7 +44,7 @@ public class CCSkeletonTintLayer extends RenderLayer<CCSkeletonEntity, CCSkeleto
                     pPoseStack,
                     vertexConsumer,
                     pPackedLight,
-                    OverlayTexture.NO_OVERLAY,
+                    LivingEntityRenderer.getOverlayCoords(pLivingEntity, 0.0F),
                     red, green, blue, 1.0F
             );
 
@@ -57,7 +58,7 @@ public class CCSkeletonTintLayer extends RenderLayer<CCSkeletonEntity, CCSkeleto
                     pPoseStack,
                     vertexConsumer,
                     pPackedLight,
-                    OverlayTexture.NO_OVERLAY,
+                    LivingEntityRenderer.getOverlayCoords(pLivingEntity, 0.0F),
                     red, green, blue, 1.0F
             );
             XaeroMinimapCore.onEntityIconsModelRenderDetection(this.getParentModel(), vertexConsumer, red, green, blue, 1.0F);
@@ -66,7 +67,7 @@ public class CCSkeletonTintLayer extends RenderLayer<CCSkeletonEntity, CCSkeleto
                     pPoseStack,
                     clearBoneSkeleton.isClearBoneInvulnerable() ? transparentVertexConsumer : vertexConsumer,
                     pPackedLight,
-                    OverlayTexture.NO_OVERLAY,
+                    LivingEntityRenderer.getOverlayCoords(pLivingEntity, 0.0F),
                     1.0F, 1.0F, 1.0F, clearBoneSkeleton.isClearBoneInvulnerable() ? 0.5F : 1.0F
             );
             XaeroMinimapCore.onEntityIconsModelRenderDetection(this.getParentModel(), clearBoneSkeleton.isClearBoneInvulnerable() ? transparentVertexConsumer : vertexConsumer,1.0F, 1.0F, 1.0F, clearBoneSkeleton.isClearBoneInvulnerable() ? 0.5F : 1.0F);
@@ -75,7 +76,7 @@ public class CCSkeletonTintLayer extends RenderLayer<CCSkeletonEntity, CCSkeleto
                     pPoseStack,
                     vertexConsumer,
                     pPackedLight,
-                    OverlayTexture.NO_OVERLAY,
+                    LivingEntityRenderer.getOverlayCoords(pLivingEntity, 0.0F),
                     1.0F, 1.0F, 1.0F, 1.0F
             );
             XaeroMinimapCore.onEntityIconsModelRenderDetection(this.getParentModel(), vertexConsumer, 1.0F, 1.0F, 1.0F, 1.0F);

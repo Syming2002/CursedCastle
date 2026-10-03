@@ -1,26 +1,36 @@
 package com.syming.cursedcastle.util;
 
-import corgitaco.enhancedcelestials.EnhancedCelestialsWorldData;
-import corgitaco.enhancedcelestials.api.lunarevent.LunarEvent;
-import corgitaco.enhancedcelestials.core.EnhancedCelestialsContext;
-import corgitaco.enhancedcelestials.lunarevent.LunarForecast;
+
+import dev.corgitaco.enhancedcelestials2core.EnhancedCelestials;
+import dev.corgitaco.enhancedcelestials2core.api.EnhancedCelestialsRegistry;
+import dev.corgitaco.enhancedcelestials2core.api.lunarevent.LunarEvent;
+import dev.corgitaco.enhancedcelestials2core.api.lunarevent.LunarForecast;
+import dev.corgitaco.enhancedcelestials2defaultlunarevents.core.lunarevent.StandardLunarEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.Level;
-
-import static corgitaco.enhancedcelestials.api.EnhancedCelestialsRegistry.LUNAR_EVENT_KEY;
-import static corgitaco.enhancedcelestials.api.lunarevent.DefaultLunarEvents.BLOOD_MOON;
+import net.minecraftforge.fml.ModList;
 
 public class BloodMoonUtil {
 
     public static boolean isBloodMoon(Level level) {
-        EnhancedCelestialsContext enhancedCelestialsContext = ((EnhancedCelestialsWorldData) level).getLunarContext();
-        LunarForecast lunarForecast = enhancedCelestialsContext.getLunarForecast();
-        LunarEvent currentEvent = (LunarEvent)lunarForecast.getCurrentEvent(level.getRainLevel(1.0F) < 1.0F).get();
-        Registry<LunarEvent> bloodMoonRegistry = level.registryAccess()
-                .registry(LUNAR_EVENT_KEY).orElseThrow();
-        LunarEvent bloodMoon = bloodMoonRegistry.get(BLOOD_MOON);
+        if (ModList.get().isLoaded("enhancedcelestials2defaultlunarevents") && ModList.get().isLoaded("enhancedcelestials2core")) {
+            if (EnhancedCelestials.lunarForecastWorldData(level).isPresent()) {
+                LunarForecast lunarForecast = EnhancedCelestials.lunarForecastWorldData(level).get();
+                LunarEvent currentEvent = lunarForecast.currentLunarEvent();
 
-        return currentEvent == bloodMoon;
+                Registry<LunarEvent> lunarEventRegistry = level.registryAccess()
+                        .registry(EnhancedCelestialsRegistry.LUNAR_EVENT_KEY).orElseThrow();
+                LunarEvent bloodMoon = lunarEventRegistry.get(StandardLunarEvents.BLOOD_MOON);
+
+                LunarEvent superBloodMoon = lunarEventRegistry.get(StandardLunarEvents.SUPER_BLOOD_MOON);
+
+                return currentEvent == bloodMoon || currentEvent == superBloodMoon;
+            } else {
+                return false;
+            }
+        }
+
+        return false;
     }
 
 }

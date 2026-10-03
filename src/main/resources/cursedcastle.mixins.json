@@ -7,20 +7,14 @@
   "refmap": "cursedcastle.refmap.json",
   "mixins": [
     "client.BossHealthOverlayMixin",
-    "client.PotionItemMixin",
-    "client.LingeringPotionItemMixin",
     "client.PlayerModelMixin",
     "client.PlayerRendererMixin",
-    "client.TippedArrowItemMixin",
     "LivingEntityMixin"
   ],
   "client": [
     "client.BossHealthOverlayMixin",
-    "client.PotionItemMixin",
-    "client.LingeringPotionItemMixin",
     "client.PlayerModelMixin",
-    "client.PlayerRendererMixin",
-    "client.TippedArrowItemMixin"
+    "client.PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

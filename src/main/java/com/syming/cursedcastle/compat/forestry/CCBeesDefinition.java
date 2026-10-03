@@ -1,6 +1,8 @@
 package com.syming.cursedcastle.compat.forestry;
 
 import com.syming.cursedcastle.block.CCBlock;
+import com.syming.cursedcastle.fluid.CCFluid;
+import com.syming.cursedcastle.tag.CCTag;
 import forestry.api.apiculture.ForestryBeeEffects;
 import forestry.api.apiculture.ForestryBeeSpecies;
 import forestry.api.core.HumidityType;
@@ -42,7 +44,7 @@ public class CCBeesDefinition {
                 .setGenome(iGenomeBuilder -> {
                     iGenomeBuilder.set(BeeChromosomes.FLOWER_TYPE, CCBeesAlleles.FLOWER_TYPE_FIRE);
                     iGenomeBuilder.set(BeeChromosomes.TEMPERATURE_TOLERANCE, ForestryAlleles.TOLERANCE_UP_5);
-                    iGenomeBuilder.set(BeeChromosomes.HUMIDITY_TOLERANCE, ForestryAlleles.TOLERANCE_DOWN_5);
+                    iGenomeBuilder.set(BeeChromosomes.HUMIDITY_TOLERANCE, ForestryAlleles.TOLERANCE_BOTH_1);
                     iGenomeBuilder.set(BeeChromosomes.TOLERATES_RAIN, ForestryAlleles.FALSE);
                     iGenomeBuilder.set(BeeChromosomes.EFFECT, ForestryAlleles.EFFECT_IGNITION);
 
