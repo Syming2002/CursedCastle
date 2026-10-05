@@ -36,12 +36,6 @@ public class CCPacketHandler {
                 .consumerMainThread(CCBossInfoPacket.Remove::handle)
                 .add();
 
-        INSTANCE.messageBuilder(CCMessageHurtMultiPart.class, id++)
-                .encoder(CCMessageHurtMultiPart::write)
-                .decoder(CCMessageHurtMultiPart::read)
-                .consumerMainThread(CCMessageHurtMultiPart::handle)
-                .add();
-
         INSTANCE.messageBuilder(CCSpawnFriendlyZombie.class, id++)
                 .encoder(CCSpawnFriendlyZombie::encode)
                 .decoder(CCSpawnFriendlyZombie::decode)

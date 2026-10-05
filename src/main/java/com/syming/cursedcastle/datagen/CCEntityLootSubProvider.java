@@ -165,9 +165,8 @@ public class CCEntityLootSubProvider extends EntityLootSubProvider {
                                 .setRolls(ConstantValue.exactly(1))
                                 .add(LootItem.lootTableItem(CCItem.SOUL_TYPES.get(Soul.BAT).get())
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
-                                        .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))
-                                                .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.028F, 0.0F))
-                                                .when(LootItemKilledByPlayerCondition.killedByPlayer())))));
+                                        .when(LootItemKilledByPlayerCondition.killedByPlayer())
+                                        .when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.028F, 0.075F)))));
     }
 
     @Override

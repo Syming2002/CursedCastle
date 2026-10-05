@@ -143,6 +143,10 @@ public class CCLangENProvider extends LanguageProvider {
             }
         }
 
+        add("key.categories." + CursedCastleMod.MOD_ID, "Cursed Castle");
+        add("key." + CursedCastleMod.MOD_ID + ".bullet_soul_key", "Use Bullet Type Soul");
+        add("key." + CursedCastleMod.MOD_ID + ".guardian_soul_key", "Use Guardian Type Soul");
+
         add("throwing_axe.damage" , "Deals %s damage to other mob");
         add("throwing_axe.damageArthropods", "Deals %s damage to arthropods mob");
         add("throwing_axe.damageSharpness", "Deals %s damage");

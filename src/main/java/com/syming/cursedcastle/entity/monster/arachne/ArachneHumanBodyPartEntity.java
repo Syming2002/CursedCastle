@@ -1,7 +1,5 @@
 package com.syming.cursedcastle.entity.monster.arachne;
 
-import com.syming.cursedcastle.api.ISyncHurtMultipart;
-import com.syming.cursedcastle.network.CCMessageHurtMultiPart;
 import com.syming.cursedcastle.network.CCPacketHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -17,7 +15,7 @@ import net.minecraftforge.entity.PartEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ArachneHumanBodyPartEntity extends PartEntity<ArachneEntity> implements ISyncHurtMultipart {
+public class ArachneHumanBodyPartEntity extends PartEntity<ArachneEntity> {
 
     public final String name;
     private final EntityDimensions size;
@@ -45,9 +43,6 @@ public class ArachneHumanBodyPartEntity extends PartEntity<ArachneEntity> implem
      */
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (this.level().isClientSide() && this.getParent() != null && !this.getParent().isInvulnerableTo(pSource)) {
-            CCPacketHandler.sendToServer(new CCMessageHurtMultiPart(getId(), getParent().getId(), pAmount, pSource.getMsgId()));
-        }
         if (!this.level().isClientSide() && this.getParent() != null && !this.getParent().isInvulnerableTo(pSource)) {
             return this.getParent().hurtHumanBody(this, pSource, pAmount);
         }
@@ -111,12 +106,4 @@ public class ArachneHumanBodyPartEntity extends PartEntity<ArachneEntity> implem
     public ItemStack getPickResult() {
         return this.getParent().getPickResult();
     }
-
-    @Override
-    public void onServerMultipartAttack(LivingEntity parent, DamageSource damageSource, float damage) {
-        if (parent instanceof ArachneEntity arachne) {
-            arachne.hurtHumanBody(this, damageSource, damage);
-        }
-    }
-
 }

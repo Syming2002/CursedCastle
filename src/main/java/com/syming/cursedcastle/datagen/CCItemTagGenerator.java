@@ -24,8 +24,17 @@ public class CCItemTagGenerator extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(CCTag.Items.BULLET_SOULS)
+                .add(CCItem.SOUL_TYPES.get(Soul.BLAZE).get());
+        tag(CCTag.Items.BULLET_SOULS)
                 .add(CCItem.SOUL_TYPES.get(Soul.ZOMBIE).get());
+
+        tag(CCTag.Items.ENCHANTED_SOULS)
+                .add(CCItem.SOUL_TYPES.get(Soul.GHOST_DANCER).get());
+
         tag(CCTag.Items.GUARDIAN_SOULS)
                 .add(CCItem.SOUL_TYPES.get(Soul.BAT).get());
+        tag(CCTag.Items.GUARDIAN_SOULS)
+                .add(CCItem.SOUL_TYPES.get(Soul.ENDERMAN).get());
+
     }
 }

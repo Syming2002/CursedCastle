@@ -24,6 +24,7 @@ public class CCTag {
 
     public static class Items {
         public static final TagKey<Item> BULLET_SOULS = tag("bullet_souls");
+        public static final TagKey<Item> ENCHANTED_SOULS = tag("enchanted_souls");
         public static final TagKey<Item> GUARDIAN_SOULS = tag("guardian_souls");
 
         private static TagKey<Item> tag(String name) {

@@ -1,7 +1,5 @@
 package com.syming.cursedcastle.entity.monster.boss.dracula;
 
-import com.syming.cursedcastle.api.ISyncHurtMultipart;
-import com.syming.cursedcastle.network.CCMessageHurtMultiPart;
 import com.syming.cursedcastle.network.CCPacketHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -17,7 +15,7 @@ import net.minecraftforge.entity.PartEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class DraculaHeadPartEntity extends PartEntity<DraculaEntity> implements ISyncHurtMultipart {
+public class DraculaHeadPartEntity extends PartEntity<DraculaEntity> {
 
     public final String name;
     private final EntityDimensions size;
@@ -45,9 +43,6 @@ public class DraculaHeadPartEntity extends PartEntity<DraculaEntity> implements 
      */
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (this.level().isClientSide() && this.getParent() != null && !this.getParent().isInvulnerableTo(pSource)) {
-            CCPacketHandler.sendToServer(new CCMessageHurtMultiPart(getId(), getParent().getId(), pAmount, pSource.getMsgId()));
-        }
         if (!this.level().isClientSide() && this.getParent() != null && !this.getParent().isInvulnerableTo(pSource)) {
             return this.getParent().hurtHead(this, pSource, pAmount);
         }
@@ -110,12 +105,5 @@ public class DraculaHeadPartEntity extends PartEntity<DraculaEntity> implements 
     @Nullable
     public ItemStack getPickResult() {
         return this.getParent().getPickResult();
-    }
-
-    @Override
-    public void onServerMultipartAttack(LivingEntity parent, DamageSource damageSource, float damage) {
-        if (parent instanceof DraculaEntity dracula) {
-            dracula.hurtHead(this, damageSource, damage);
-        }
     }
 }
