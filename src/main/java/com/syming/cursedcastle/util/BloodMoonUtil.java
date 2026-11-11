@@ -12,11 +12,11 @@ import static dev.corgitaco.enhancedcelestials2defaultlunarevents.core.lunareven
 
 public class BloodMoonUtil {
 
-    public static boolean isBloodMoon(Level pLevel) {
-        if (EnhancedCelestials.lunarForecastWorldData(pLevel).isPresent()) {
-            LunarForecast lunarForecast = EnhancedCelestials.lunarForecastWorldData(pLevel).get();
+    public static boolean isBloodMoon(Level level) {
+        if (EnhancedCelestials.lunarForecastWorldData(level).isPresent()) {
+            LunarForecast lunarForecast = EnhancedCelestials.lunarForecastWorldData(level).get();
             LunarEvent currentEvent = lunarForecast.currentLunarEvent();
-            Registry<LunarEvent> bloodMoonRegistry = pLevel.registryAccess()
+            Registry<LunarEvent> bloodMoonRegistry = level.registryAccess()
                     .registry(LUNAR_EVENT_KEY).orElseThrow();
             LunarEvent bloodMoon = bloodMoonRegistry.get(BLOOD_MOON);
 

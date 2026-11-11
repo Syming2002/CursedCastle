@@ -9,6 +9,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
+import java.util.function.Supplier;
+
 public class CrucifixBlockEntity extends BlockEntity {
 
     private WoodType woodType;
@@ -17,12 +19,6 @@ public class CrucifixBlockEntity extends BlockEntity {
         super(CCBlockEntity.CRUCIFIX_BLOCK_ENTITY_TYPES.get(pWoodType).get(), pPos, pBlockState);
 
         this.woodType = pWoodType;
-    }
-
-    @Override
-    public BlockEntityType<?> getType() {
-        if (this.woodType == null) return null;
-        return CCBlockEntity.CRUCIFIX_BLOCK_ENTITY_TYPES.get(this.woodType).get();
     }
 
     public <T extends BlockEntity> void tick(Level pLevel, BlockPos pPos, BlockState pState, T pBlockEntityType) {

@@ -41,7 +41,9 @@ public class CrucifixBlock extends Block implements EntityBlock {
 
         this.woodType = pWoodType;
 
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(HALF, DoubleBlockHalf.LOWER));
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(HALF, DoubleBlockHalf.LOWER));
     }
 
     @Override

@@ -1,10 +1,10 @@
 package com.syming.cursedcastle.compat.forestry;
 
-import forestry.core.platform.item.IColoredItem;
+import forestry.core.platform.item.ITintedItem;
 import forestry.core.platform.item.ItemForestry;
 import net.minecraft.world.item.ItemStack;
 
-public class CCBeesItemHoneyComb extends ItemForestry implements IColoredItem {
+public class CCBeesItemHoneyComb extends ItemForestry implements ITintedItem {
     private final CCBeesEnumHoneyComb enumHoneyComb;
 
     public CCBeesItemHoneyComb(CCBeesEnumHoneyComb enumHoneyComb) {

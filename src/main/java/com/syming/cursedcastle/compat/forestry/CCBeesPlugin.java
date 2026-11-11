@@ -24,7 +24,6 @@ public class CCBeesPlugin implements IForestryPlugin {
 
     @Override
     public void registerApiculture(@SuppressWarnings("null") IApicultureRegistration apiculture) {
-
     }
 
     @Override

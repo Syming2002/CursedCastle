@@ -2,7 +2,10 @@ package com.syming.cursedcastle.datagen;
 
 import com.syming.cursedcastle.CursedCastleMod;
 import com.syming.cursedcastle.compat.curios.CCCuriosDataProvider;
+import com.syming.cursedcastle.compat.forestry.CCBeesDefinition;
 import com.syming.cursedcastle.damagetype.CCDamageType;
+import forestry.apiculture.bees.genetics.BeeSpeciesProvider;
+import forestry.core.platform.util.SpeciesUtil;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -44,9 +47,7 @@ public class CCDataGenerators {
 
         generator.addProvider(event.includeServer(), new CCRecipeProvider(packOutput, lookupProvider));
 
-//        generator.addProvider(event.includeServer(), new CCTaxonProvider(packOutput));
-//        generator.addProvider(event.includeServer(), new CCFlowerTypeProvider(packOutput));
-//        generator.addProvider(event.includeServer(), new CCMutationProvider(packOutput, lookupProvider));
+//        generator.addProvider(event.includeServer(), new BeeSpeciesProvider(packOutput, lookupProvider, SpeciesUtil.BEE_TYPE.get(), CCBeesDefinition::defineNewCCBees));
 
         // Advancements
         packGenerator.addProvider(output -> new CCAdvancementProvider(output, lookupProvider, existingFileHelper));
