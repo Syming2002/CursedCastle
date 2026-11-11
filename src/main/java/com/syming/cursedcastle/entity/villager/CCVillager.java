@@ -8,6 +8,7 @@ import com.syming.cursedcastle.block.CrucifixBlock;
 import com.syming.cursedcastle.block.TripleBlockPart;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -54,8 +55,8 @@ public class CCVillager {
             VILLAGER_PROFESSIONS.register("high_priest",
                     () -> new VillagerProfession(
                             "high_priest",
-                            holder -> holder == HIGH_PRIEST_POI,
-                            holder -> holder == HIGH_PRIEST_POI,
+                            holder -> holder.value() == HIGH_PRIEST_POI.value(),
+                            holder -> holder.value() == HIGH_PRIEST_POI.value(),
                             ImmutableSet.of(),
                             ImmutableSet.of(),
                             SoundEvents.VILLAGER_WORK_CLERIC
@@ -65,8 +66,8 @@ public class CCVillager {
             VILLAGER_PROFESSIONS.register("leader_priest",
                     () -> new VillagerProfession(
                             "leader_priest",
-                            holder -> holder == LEADER_PRIEST_POI,
-                            holder -> holder == LEADER_PRIEST_POI,
+                            holder -> holder.value() == LEADER_PRIEST_POI.value(),
+                            holder -> holder.value() == LEADER_PRIEST_POI.value(),
                             ImmutableSet.of(),
                             ImmutableSet.of(),
                             SoundEvents.VILLAGER_WORK_CLERIC

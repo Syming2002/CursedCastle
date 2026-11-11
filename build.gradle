@@ -199,6 +199,8 @@ dependencies {
     // JER
     implementation "curse.maven:just-enough-resources-jer-${just_enough_resources_jer_id}"
 
+    implementation "curse.maven:just-enough-professions-jep-417645:7966681"
+
     // Jade
     implementation "curse.maven:jade-${jade_id}"
     implementation "curse.maven:jade-addons-${jade_addons_id}"
