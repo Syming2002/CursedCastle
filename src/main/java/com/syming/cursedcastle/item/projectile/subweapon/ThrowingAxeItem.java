@@ -48,7 +48,7 @@ public class ThrowingAxeItem extends CCThrowableItem {
         if (pLivingEntity instanceof Player player) {
             int loading = getUseDuration(pStack, pLivingEntity) - pTimeCharged;
             if (loading > 10) {
-                if (!pLevel.isClientSide) {
+                if (!pLevel.isClientSide()) {
                     ThrowingAxeEntity throwingAxeEntity = new ThrowingAxeEntity(player, pLevel, pStack, getTier());
                     throwingAxeEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
 

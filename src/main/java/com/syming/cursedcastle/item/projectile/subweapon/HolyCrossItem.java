@@ -92,14 +92,13 @@ public class HolyCrossItem extends CCThrowableItem {
                             PacketDistributor.sendToPlayer((ServerPlayer) pPlayer, new CCPlayerData(playerData.getHolyBeamTicks(), playerData.isBoltAttackEnabled(), playerData.getPlayerYPos()));
                         }
                     }
-                } else {
-                    HolyCrossEntity holyCross = new HolyCrossEntity(pPlayer, pLevel, getTier());
-                    holyCross.setItem(thrownStackCopy);
-                    pLevel.addFreshEntity(holyCross);
-                    throwStack.shrink(1);
                 }
             }
         }
+        HolyCrossEntity holyCross = new HolyCrossEntity(pPlayer, pLevel, getTier());
+        holyCross.setItem(thrownStackCopy);
+        pLevel.addFreshEntity(holyCross);
+        throwStack.shrink(1);
         return InteractionResultHolder.sidedSuccess(throwStack, pLevel.isClientSide());
     }
 

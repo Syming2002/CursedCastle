@@ -354,7 +354,7 @@ public class CCEntity {
     // Misc
     public static final Supplier<EntityType<HolyFireEntity>> HOLY_FIRE = ENTITY_TYPES.register("holy_fire",
             () -> EntityType.Builder.<HolyFireEntity>of(HolyFireEntity::new, MobCategory.MISC)
-                    .setTrackingRange(64)
+                    .setTrackingRange(16)
                     .clientTrackingRange(4)
                     .setShouldReceiveVelocityUpdates(true)
                     .updateInterval(1)

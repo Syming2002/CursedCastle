@@ -3,6 +3,8 @@ package com.syming.cursedcastle.entity.projectile.subweapon;
 import com.syming.cursedcastle.effect.CCEffect;
 import com.syming.cursedcastle.entity.magic.HolyFireEntity;
 import com.syming.cursedcastle.item.CCItem;
+import com.syming.cursedcastle.item.projectile.subweapon.HolyCrossItem;
+import com.syming.cursedcastle.item.projectile.subweapon.HolyWaterItem;
 import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
 import com.syming.cursedcastle.sound.CCSound;
 import com.syming.cursedcastle.entity.CCEntity;
@@ -20,6 +22,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -42,7 +46,7 @@ public class HolyWaterEntity extends CCThrowableWeapon {
         super(CCEntity.HOLY_WATER.get(), pX, pY, pZ, pLevel);
     }
 
-    public HolyWaterEntity(LivingEntity pShooter, Level pLevel, ItemStack pStack) {
+    public HolyWaterEntity(LivingEntity pShooter, Level pLevel) {
         super(CCEntity.HOLY_WATER.get(), pShooter, pLevel);
     }
 
@@ -73,7 +77,7 @@ public class HolyWaterEntity extends CCThrowableWeapon {
     protected void onHitBlock(BlockHitResult pResult) {
         super.onHitBlock(pResult);
         if (getOwner() != null) {
-            if (getOwner() instanceof Player player) {
+            if (getOwner() instanceof Player) {
                 if (!this.level().isClientSide()) {
                     HolyFireEntity holyFire = new HolyFireEntity(this.level(), this.getX(), this.getY(), this.getZ());
                     this.level().addFreshEntity(holyFire);
@@ -115,8 +119,22 @@ public class HolyWaterEntity extends CCThrowableWeapon {
     }
 
     @Override
+    public ItemStack getItem() {
+        if (getOwner() != null) {
+            return new ItemStack(CCItem.HOLY_WATER.get());
+        }
+        return ItemStack.EMPTY;
+    }
+
+    @Override
     protected Item getDefaultItem() {
-        return CCItem.HOLY_WATER.get();
+        ItemStack stack = this.getItem();
+        if (stack.isEmpty()) {
+            if (stack.getItem() instanceof HolyWaterItem) {
+                return CCItem.HOLY_WATER.get();
+            }
+        }
+        return stack.getItem();
     }
 
     @Override

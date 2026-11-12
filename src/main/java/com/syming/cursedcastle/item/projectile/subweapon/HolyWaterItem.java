@@ -3,19 +3,24 @@ package com.syming.cursedcastle.item.projectile.subweapon;
 import com.syming.cursedcastle.capability.CCCapabilities;
 import com.syming.cursedcastle.capability.data.mp.PlayerMP;
 import com.syming.cursedcastle.entity.projectile.subweapon.HolyWaterEntity;
+import com.syming.cursedcastle.entity.projectile.subweapon.ThrowingAxeEntity;
 import com.syming.cursedcastle.item.spellbook.SpellBookElementType;
 import com.syming.cursedcastle.util.SpellBookUtil;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Position;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 
-public class HolyWaterItem extends Item {
+public class HolyWaterItem extends Item implements ProjectileItem {
     public HolyWaterItem(Properties pProperties) {
         super(pProperties);
     }
@@ -33,32 +38,38 @@ public class HolyWaterItem extends Item {
                     if (!pPlayer.isSpectator() && !pPlayer.isCreative()) {
                         if (playerMP.getCurrentMP() >= 50) {
                             playerMP.removeMP(50);
-                            HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
+                            HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel);
                             holyWater.setOwner(pPlayer);
                             holyWater.setItem(throwStack);
                             holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), -20.0F, 0.5F, 1.0F);
                             pLevel.addFreshEntity(holyWater);
                         }
                     } else {
-                        HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
+                        HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel);
                         holyWater.setOwner(pPlayer);
                         holyWater.setItem(throwStack);
                         holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), -20.0F, 0.5F, 1.0F);
                         pLevel.addFreshEntity(holyWater);
                     }
                 }
-            } else {
-                HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel, throwStack);
-                holyWater.setItem(throwStack);
-                holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), -20.0F, 0.5F, 1.0F);
-                pLevel.addFreshEntity(holyWater);
-                pPlayer.getCooldowns().addCooldown(this, 40);
             }
+            HolyWaterEntity holyWater = new HolyWaterEntity(pPlayer, pLevel);
+            holyWater.setItem(throwStack);
+            holyWater.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), -20.0F, 0.5F, 1.0F);
+            pLevel.addFreshEntity(holyWater);
+            pPlayer.getCooldowns().addCooldown(this, 40);
         }
         pPlayer.awardStat(Stats.ITEM_USED.get(this));
         if (!pPlayer.getAbilities().instabuild) {
             throwStack.shrink(1);
         }
         return InteractionResultHolder.sidedSuccess(throwStack, pLevel.isClientSide());
+    }
+
+    @Override
+    public Projectile asProjectile(Level level, Position position, ItemStack itemStack, Direction direction) {
+        HolyWaterEntity holyWater = new HolyWaterEntity(position.x(), position.y(), position.z(), level);
+        holyWater.setItem(itemStack);
+        return holyWater;
     }
 }
