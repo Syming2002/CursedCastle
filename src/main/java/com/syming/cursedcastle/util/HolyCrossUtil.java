@@ -20,7 +20,7 @@ import java.util.List;
 
 public class HolyCrossUtil {
 
-    public static void addHolyCrossTooltip(Level pLevel, ItemStack pStack, List<Component> pTooltips) {
+    public static void addHolyCrossTooltip(Level pLevel, ItemStack pStack, List<Component> pTooltips, Tier tier) {
         Registry<Enchantment> enchantmentRegistryLookup = pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
         Holder<Enchantment> sharpnessHolder = pLevel.holderOrThrow(Enchantments.SHARPNESS);
         Holder<Enchantment> smiteHolder = pLevel.holderOrThrow(Enchantments.SMITE);
@@ -36,7 +36,162 @@ public class HolyCrossUtil {
         int fireAspect = EnchantmentHelper.getItemEnchantmentLevel(fireAspectHolder, pStack);
 
 
-        for (Tier tier : Tiers.values()) {
+        if (tier == Tiers.WOOD) {
+            if (pStack.isEnchanted()) {
+                for (Holder<Enchantment> enchantment : pStack.getAllEnchantments(enchantmentRegistryLookup.asLookup()).keySet()) {
+                    if (enchantment == sharpnessHolder) {
+                        if (sharpness > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageSharpness", tier.getAttackDamageBonus() + sharpness + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == smiteHolder) {
+                        if (smite > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageSmite", tier.getAttackDamageBonus() + smite + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == arthropodsHolder) {
+                        if (arthropods > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageArthropods", tier.getAttackDamageBonus() + arthropods + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+
+                    if (enchantment == knockbackHolder) {
+                        if (knockback > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.knockback", knockback).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                    if (enchantment == fireAspectHolder) {
+                        if (fireAspect > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                }
+            } else {
+                pTooltips.add(Component.translatable("holy_cross.damage", tier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+            }
+        } else if (tier == Tiers.STONE) {
+            if (pStack.isEnchanted()) {
+                for (Holder<Enchantment> enchantment : pStack.getAllEnchantments(enchantmentRegistryLookup.asLookup()).keySet()) {
+                    if (enchantment == sharpnessHolder) {
+                        if (sharpness > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageSharpness", tier.getAttackDamageBonus() + sharpness + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == smiteHolder) {
+                        if (smite > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageSmite", tier.getAttackDamageBonus() + smite + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == arthropodsHolder) {
+                        if (arthropods > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageArthropods", tier.getAttackDamageBonus() + arthropods + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+
+                    if (enchantment == knockbackHolder) {
+                        if (knockback > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.knockback", knockback).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                    if (enchantment == fireAspectHolder) {
+                        if (fireAspect > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                }
+            } else {
+                pTooltips.add(Component.translatable("holy_cross.damage", tier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+            }
+        } else if (tier == Tiers.IRON) {
+            if (pStack.isEnchanted()) {
+                for (Holder<Enchantment> enchantment : pStack.getAllEnchantments(enchantmentRegistryLookup.asLookup()).keySet()) {
+                    if (enchantment == sharpnessHolder) {
+                        if (sharpness > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageSharpness", tier.getAttackDamageBonus() + sharpness + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == smiteHolder) {
+                        if (smite > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageSmite", tier.getAttackDamageBonus() + smite + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == arthropodsHolder) {
+                        if (arthropods > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageArthropods", tier.getAttackDamageBonus() + arthropods + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+
+                    if (enchantment == knockbackHolder) {
+                        if (knockback > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.knockback", knockback).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                    if (enchantment == fireAspectHolder) {
+                        if (fireAspect > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                }
+            } else {
+                pTooltips.add(Component.translatable("holy_cross.damage", tier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+            }
+        } else if (tier == Tiers.GOLD) {
+            if (pStack.isEnchanted()) {
+                for (Holder<Enchantment> enchantment : pStack.getAllEnchantments(enchantmentRegistryLookup.asLookup()).keySet()) {
+                    if (enchantment == sharpnessHolder) {
+                        if (sharpness > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageSharpness", tier.getAttackDamageBonus() + sharpness + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == smiteHolder) {
+                        if (smite > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageSmite", tier.getAttackDamageBonus() + smite + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == arthropodsHolder) {
+                        if (arthropods > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageArthropods", tier.getAttackDamageBonus() + arthropods + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+
+                    if (enchantment == knockbackHolder) {
+                        if (knockback > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.knockback", knockback).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                    if (enchantment == fireAspectHolder) {
+                        if (fireAspect > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                }
+            } else {
+                pTooltips.add(Component.translatable("holy_cross.damage", tier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+            }
+        } else if (tier == Tiers.DIAMOND) {
+            if (pStack.isEnchanted()) {
+                for (Holder<Enchantment> enchantment : pStack.getAllEnchantments(enchantmentRegistryLookup.asLookup()).keySet()) {
+                    if (enchantment == sharpnessHolder) {
+                        if (sharpness > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageSharpness", tier.getAttackDamageBonus() + sharpness + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == smiteHolder) {
+                        if (smite > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageSmite", tier.getAttackDamageBonus() + smite + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == arthropodsHolder) {
+                        if (arthropods > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.damageArthropods", tier.getAttackDamageBonus() + arthropods + 2.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+
+                    if (enchantment == knockbackHolder) {
+                        if (knockback > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.knockback", knockback).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                    if (enchantment == fireAspectHolder) {
+                        if (fireAspect > 0) {
+                            pTooltips.add(Component.translatable("holy_cross.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                }
+            } else {
+                pTooltips.add(Component.translatable("holy_cross.damage", tier.getAttackDamageBonus() + 2.0F).withStyle(ChatFormatting.GOLD));
+            }
+        } else if (tier == Tiers.NETHERITE) {
             if (pStack.isEnchanted()) {
                 for (Holder<Enchantment> enchantment : pStack.getAllEnchantments(enchantmentRegistryLookup.asLookup()).keySet()) {
                     if (enchantment == sharpnessHolder) {
@@ -69,5 +224,4 @@ public class HolyCrossUtil {
             }
         }
     }
-
 }

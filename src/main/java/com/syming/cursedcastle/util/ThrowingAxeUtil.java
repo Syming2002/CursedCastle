@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ThrowingAxeUtil {
 
-    public static void addThrowingAxeTooltip(Level pLevel, ItemStack pStack, List<Component> pTooltips) {
+    public static void addThrowingAxeTooltip(Level pLevel, ItemStack pStack, List<Component> pTooltips, Tier tier) {
         Registry<Enchantment> enchantmentRegistryLookup = pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
         Holder<Enchantment> sharpnessHolder = pLevel.holderOrThrow(Enchantments.SHARPNESS);
         Holder<Enchantment> smiteHolder = pLevel.holderOrThrow(Enchantments.SMITE);
@@ -33,7 +33,162 @@ public class ThrowingAxeUtil {
         int fireAspect = EnchantmentHelper.getItemEnchantmentLevel(fireAspectHolder, pStack);
 
 
-        for (Tier tier : Tiers.values()) {
+        if (tier == Tiers.WOOD) {
+            if (pStack.isEnchanted()) {
+                for (Holder<Enchantment> enchantment : pStack.getAllEnchantments(enchantmentRegistryLookup.asLookup()).keySet()) {
+                    if (enchantment == sharpnessHolder) {
+                        if (sharpness > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageSharpness", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + sharpness + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == smiteHolder) {
+                        if (smite > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageSmite", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + smite + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == arthropodsHolder) {
+                        if (arthropods > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageArthropods", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + arthropods + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+
+                    if (enchantment == knockbackHolder) {
+                        if (knockback > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.knockback", knockback).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                    if (enchantment == fireAspectHolder) {
+                        if (fireAspect > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                }
+            } else {
+                pTooltips.add(Component.translatable("throwing_axe.damage", tier.getAttackDamageBonus() + 10.0F).withStyle(ChatFormatting.GOLD));
+            }
+        } else if (tier == Tiers.STONE) {
+            if (pStack.isEnchanted()) {
+                for (Holder<Enchantment> enchantment : pStack.getAllEnchantments(enchantmentRegistryLookup.asLookup()).keySet()) {
+                    if (enchantment == sharpnessHolder) {
+                        if (sharpness > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageSharpness", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + sharpness + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == smiteHolder) {
+                        if (smite > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageSmite", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + smite + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == arthropodsHolder) {
+                        if (arthropods > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageArthropods", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + arthropods + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+
+                    if (enchantment == knockbackHolder) {
+                        if (knockback > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.knockback", knockback).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                    if (enchantment == fireAspectHolder) {
+                        if (fireAspect > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                }
+            } else {
+                pTooltips.add(Component.translatable("throwing_axe.damage", tier.getAttackDamageBonus() + 10.0F).withStyle(ChatFormatting.GOLD));
+            }
+        } else if (tier == Tiers.IRON) {
+            if (pStack.isEnchanted()) {
+                for (Holder<Enchantment> enchantment : pStack.getAllEnchantments(enchantmentRegistryLookup.asLookup()).keySet()) {
+                    if (enchantment == sharpnessHolder) {
+                        if (sharpness > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageSharpness", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + sharpness + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == smiteHolder) {
+                        if (smite > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageSmite", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + smite + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == arthropodsHolder) {
+                        if (arthropods > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageArthropods", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + arthropods + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+
+                    if (enchantment == knockbackHolder) {
+                        if (knockback > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.knockback", knockback).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                    if (enchantment == fireAspectHolder) {
+                        if (fireAspect > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                }
+            } else {
+                pTooltips.add(Component.translatable("throwing_axe.damage", tier.getAttackDamageBonus() + 10.0F).withStyle(ChatFormatting.GOLD));
+            }
+        } else if (tier == Tiers.GOLD) {
+            if (pStack.isEnchanted()) {
+                for (Holder<Enchantment> enchantment : pStack.getAllEnchantments(enchantmentRegistryLookup.asLookup()).keySet()) {
+                    if (enchantment == sharpnessHolder) {
+                        if (sharpness > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageSharpness", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + sharpness + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == smiteHolder) {
+                        if (smite > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageSmite", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + smite + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == arthropodsHolder) {
+                        if (arthropods > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageArthropods", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + arthropods + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+
+                    if (enchantment == knockbackHolder) {
+                        if (knockback > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.knockback", knockback).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                    if (enchantment == fireAspectHolder) {
+                        if (fireAspect > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                }
+            } else {
+                pTooltips.add(Component.translatable("throwing_axe.damage", tier.getAttackDamageBonus() + 10.0F).withStyle(ChatFormatting.GOLD));
+            }
+        } else if (tier == Tiers.DIAMOND) {
+            if (pStack.isEnchanted()) {
+                for (Holder<Enchantment> enchantment : pStack.getAllEnchantments(enchantmentRegistryLookup.asLookup()).keySet()) {
+                    if (enchantment == sharpnessHolder) {
+                        if (sharpness > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageSharpness", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + sharpness + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == smiteHolder) {
+                        if (smite > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageSmite", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + smite + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    } else if (enchantment == arthropodsHolder) {
+                        if (arthropods > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.damageArthropods", tier.getAttackDamageBonus() + tier.getAttackDamageBonus() + arthropods + 10.0F).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+
+                    if (enchantment == knockbackHolder) {
+                        if (knockback > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.knockback", knockback).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                    if (enchantment == fireAspectHolder) {
+                        if (fireAspect > 0) {
+                            pTooltips.add(Component.translatable("throwing_axe.fireAspect", fireAspect).withStyle(ChatFormatting.GOLD));
+                        }
+                    }
+                }
+            } else {
+                pTooltips.add(Component.translatable("throwing_axe.damage", tier.getAttackDamageBonus() + 10.0F).withStyle(ChatFormatting.GOLD));
+            }
+        } else if (tier == Tiers.NETHERITE) {
             if (pStack.isEnchanted()) {
                 for (Holder<Enchantment> enchantment : pStack.getAllEnchantments(enchantmentRegistryLookup.asLookup()).keySet()) {
                     if (enchantment == sharpnessHolder) {

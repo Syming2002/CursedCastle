@@ -122,7 +122,7 @@ public class HolyCrossItem extends CCThrowableItem {
         Level level = context.level();
 
         if (level != null) {
-            HolyCrossUtil.addHolyCrossTooltip(level, stack, tooltipComponents);
+            HolyCrossUtil.addHolyCrossTooltip(level, stack, tooltipComponents, getTier());
         }
     }
 

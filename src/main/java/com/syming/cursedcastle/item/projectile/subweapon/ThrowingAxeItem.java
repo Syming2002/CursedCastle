@@ -85,7 +85,7 @@ public class ThrowingAxeItem extends CCThrowableItem {
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         Level level = context.level();
         if (level != null) {
-            ThrowingAxeUtil.addThrowingAxeTooltip(level, stack, tooltipComponents);
+            ThrowingAxeUtil.addThrowingAxeTooltip(level, stack, tooltipComponents, getTier());
         }
     }
 
